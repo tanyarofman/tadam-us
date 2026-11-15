@@ -1,0 +1,118 @@
+---
+/**
+ * The brand's hero object: a red game-show buzzer.
+ * Pure SVG. Animate with CSS var --glow (0..1) and the .buzzer-cap / .buzzer-rays groups.
+ */
+interface Props {
+  id: string;
+  class?: string;
+  rays?: boolean;
+  label?: string;
+}
+const { id, class: cls = "", rays = false, label } = Astro.props;
+---
+
+<svg
+  class:list={["buzzer", cls]}
+  viewBox="0 0 240 170"
+  role={label ? "img" : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : "true"}
+  focusable="false"
+  data-buzzer
+>
+  <defs>
+    <radialGradient id={`${id}-dome`} cx="36%" cy="28%" r="80%">
+      <stop offset="0" stop-color="#ff9a8e"></stop>
+      <stop offset="0.42" stop-color="#e74138"></stop>
+      <stop offset="1" stop-color="#b3221a"></stop>
+    </radialGradient>
+    <radialGradient id={`${id}-glow`}>
+      <stop offset="0" stop-color="#ff5a4e" stop-opacity="0.85"></stop>
+      <stop offset="0.55" stop-color="#e836a1" stop-opacity="0.25"></stop>
+      <stop offset="1" stop-color="#e836a1" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id={`${id}-base`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a62d0"></stop>
+      <stop offset="1" stop-color="#4b2a85"></stop>
+    </linearGradient>
+  </defs>
+
+  <circle class="buzzer-glow" cx="120" cy="92" r="120" fill={`url(#${id}-glow)`}></circle>
+
+  {
+    rays && (
+      <g class="buzzer-rays" stroke="#330768" stroke-width="6" stroke-linejoin="round">
+        <g class="ray-set ray-top" fill="#F7D94A">
+          <path d="M108 -52 L132 -52 L127 14 L113 14 Z" />
+          <path d="M48 -26 L68 -38 L92 18 L80 26 Z" transform="rotate(-6 70 0)" />
+          <path d="M172 -38 L192 -26 L160 26 L148 18 Z" transform="rotate(6 170 0)" />
+        </g>
+        <g class="ray-set ray-side" fill="#64D8F7">
+          <path d="M-16 64 L-12 46 L34 70 L30 82 Z" />
+          <path d="M256 46 L260 64 L210 82 L206 70 Z" />
+        </g>
+        <g class="ray-set ray-low" fill="#E836A1">
+          <path d="M-8 118 L-4 102 L30 108 L30 120 Z" />
+          <path d="M248 102 L252 118 L210 120 L210 108 Z" />
+        </g>
+      </g>
+    )
+  }
+
+  <g class="buzzer-body">
+    <path
+      class="buzzer-base"
+      d="M26 126 Q26 110 42 110 H198 Q214 110 214 126 V144 Q214 162 196 162 H44 Q26 162 26 144 Z"
+      fill={`url(#${id}-base)`}
+      stroke="#330768"
+      stroke-width="7"
+      stroke-linejoin="round"></path>
+    <ellipse cx="120" cy="116" rx="86" ry="11" fill="#9b78db" stroke="#330768" stroke-width="5"></ellipse>
+    <g class="buzzer-cap">
+      <path
+        d="M46 118 C46 58 80 30 120 30 C160 30 194 58 194 118 Z"
+        fill={`url(#${id}-dome)`}
+        stroke="#330768"
+        stroke-width="7"
+        stroke-linejoin="round"></path>
+      <ellipse cx="90" cy="60" rx="24" ry="11" fill="#fff" opacity="0.75" transform="rotate(-24 90 60)"></ellipse>
+      <circle cx="122" cy="48" r="5" fill="#fff" opacity="0.55"></circle>
+      <path
+        class="buzzer-dim"
+        d="M46 118 C46 58 80 30 120 30 C160 30 194 58 194 118 Z"
+        fill="#1a0638"
+        stroke="#330768"
+        stroke-width="7"
+        stroke-linejoin="round"></path>
+    </g>
+  </g>
+</svg>
+
+<style>
+  .buzzer {
+    --glow: 1;
+    overflow: visible;
+    width: 100%;
+    height: auto;
+  }
+  .buzzer-glow {
+    opacity: calc(var(--glow) * 0.9);
+  }
+  .buzzer-cap {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  .buzzer-dim {
+    opacity: calc((1 - var(--glow)) * 0.6);
+    pointer-events: none;
+  }
+  .buzzer-rays .ray-set {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  .buzzer-rays .ray-side,
+  .buzzer-rays .ray-low {
+    transform-origin: 50% 50%;
+  }
+</style>

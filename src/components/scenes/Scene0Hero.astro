@@ -1,0 +1,139 @@
+---
+import { COPY } from "../../content/copy.he";
+import LogoAssemble from "../LogoAssemble.astro";
+import SplitHeading from "../SplitHeading.astro";
+import StageBackdrop from "../StageBackdrop.astro";
+import Buzzer from "../Buzzer.astro";
+const c = COPY.hero;
+---
+
+<section class="scene hero intro-pending" id="top" data-scene="hero" aria-labelledby="hero-title">
+  <StageBackdrop />
+  <div class="hero-burst" aria-hidden="true"></div>
+
+  <div class="hero-inner container">
+    <div class="hero-loading" role="status" aria-live="polite">
+      <span class="sr-only">{c.loading}</span>
+    </div>
+
+    <LogoAssemble class="hero-logo" />
+
+    <SplitHeading as="h1" id="hero-title" class="h-hero hero-title" text={c.headline} highlight="יזכרו" />
+
+    <p class="lead hero-sub" data-hero-fade>{c.sub}</p>
+
+    <div class="hero-ctas" data-hero-fade>
+      <button type="button" class="btn btn-buzzer" data-open-demo data-source="hero">
+        <span class="btn-dot" aria-hidden="true"></span>
+        {c.ctaPrimary}
+      </button>
+      <a class="btn btn-ghost" href="#scene-1" data-scroll-to="#scene-1" data-track="cta_how_it_works_click">
+        {c.ctaSecondary}
+      </a>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#scene-1" data-scroll-to="#scene-1" data-hero-fade>
+    <span class="scroll-hint__buzzer"><Buzzer id="hint-buzzer" /></span>
+    <span class="scroll-hint__text">{c.scrollHint}</span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding-block: clamp(40px, 7vh, 96px) clamp(84px, 12vh, 120px);
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(12px, 2.4vh, 24px);
+  }
+  :global(.logo-assemble.hero-logo) {
+    width: min(540px, 84vw, 62svh);
+    margin-bottom: clamp(0px, 1vh, 12px);
+  }
+  :global(.hero-title) {
+    max-width: 14ch;
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .hero-sub {
+    max-width: 40ch;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 20px;
+    margin-top: 6px;
+  }
+  .hero-burst {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-conic-gradient(
+      from 0deg at 50% 32%,
+      rgba(247, 217, 74, 0.1) 0deg 6deg,
+      transparent 6deg 18deg
+    );
+    mask-image: radial-gradient(closest-side at 50% 32%, black 20%, transparent 100%);
+    opacity: 0;
+    will-change: opacity;
+  }
+  :global(html.js) .hero:not(.intro-pending) .hero-burst,
+  :global(html.no-js) .hero-burst {
+    opacity: 1;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    inset-inline: 0;
+    margin-inline: auto;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .scroll-hint__buzzer {
+    width: 40px;
+    animation: hint-pulse 1.6s var(--ease-out) infinite;
+  }
+  @keyframes hint-pulse {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(5px) scale(0.92);
+    }
+  }
+
+  /* Hidden until the intro plays (JS only) */
+  :global(html.js .intro-pending .hero-title .word-in),
+  :global(html.js) .intro-pending [data-hero-fade] {
+    opacity: 0;
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas {
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero-ctas .btn-buzzer {
+      width: 100%;
+    }
+  }
+</style>

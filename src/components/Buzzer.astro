@@ -76,8 +76,10 @@ const { id, class: cls = "", rays = false, label } = Astro.props;
         stroke="#330768"
         stroke-width="7"
         stroke-linejoin="round"></path>
-      <ellipse cx="90" cy="60" rx="24" ry="11" fill="#fff" opacity="0.75" transform="rotate(-24 90 60)"></ellipse>
-      <circle cx="122" cy="48" r="5" fill="#fff" opacity="0.55"></circle>
+      <g class="buzzer-shine">
+        <ellipse cx="90" cy="60" rx="24" ry="11" fill="#fff" opacity="0.75" transform="rotate(-24 90 60)"></ellipse>
+        <circle cx="122" cy="48" r="5" fill="#fff" opacity="0.55"></circle>
+      </g>
       <path
         class="buzzer-dim"
         d="M46 118 C46 58 80 30 120 30 C160 30 194 58 194 118 Z"

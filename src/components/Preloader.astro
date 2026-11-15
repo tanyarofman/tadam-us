@@ -9,7 +9,6 @@ import Buzzer from "./Buzzer.astro";
 
 <div class="preloader" data-preloader aria-hidden="true">
   <div class="pre-bg"></div>
-  <div class="pre-ring"></div>
   <div class="pre-buzzer" data-pre-buzzer>
     <Buzzer id="pre-buzzer" rays />
   </div>
@@ -34,14 +33,6 @@ import Buzzer from "./Buzzer.astro";
       radial-gradient(40% 35% at 50% 50%, rgba(231, 65, 56, 0.18), transparent 70%),
       radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 60%);
     background-color: var(--bg-0);
-  }
-  .pre-ring {
-    position: absolute;
-    width: min(420px, 80vw);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 4px solid var(--sun-yellow);
-    opacity: 0;
   }
   .pre-buzzer {
     position: relative;

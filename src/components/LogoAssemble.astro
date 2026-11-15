@@ -60,7 +60,8 @@ const { class: cls = "" } = Astro.props;
     decoding="async"
     style={`clip-path: inset(${BOTTOM}% 0% 0% 0%)`}
   />
-  <div class="logo-buzzer">
+  <!-- invisible landing spot for the loading-screen buzzer -->
+  <div class="logo-buzzer" aria-hidden="true">
     <Buzzer id="hero-buzzer" rays />
   </div>
 </div>
@@ -108,8 +109,5 @@ const { class: cls = "" } = Astro.props;
   /* Before JS runs the assembled logo is shown; JS hides pieces and plays the intro. */
   :global(html.js .intro-pending) .logo-piece {
     opacity: 0;
-  }
-  :global(html.js .intro-pending) .logo-buzzer {
-    opacity: 1;
   }
 </style>

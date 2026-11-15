@@ -1,9 +1,10 @@
 /**
- * Scene 0: preloader + hero.
- * The buzzer lights up with real loading progress (logo image + fonts),
- * then presses itself, the rays burst, and the logo assembles around it.
+ * Scene 0: loading screen + hero.
+ * 1. The buzzer sits alone in the middle of the screen and blinks while the site loads.
+ * 2. When ready it gets pressed (or the visitor taps it), the rays burst and the stage opens.
+ * 3. The buzzer shrinks and flies up into its place on the logo, and the logo assembles around it.
  */
-import { gsap, prefersReducedMotion } from "../lib/scroll";
+import { gsap, prefersReducedMotion, lockScroll } from "../lib/scroll";
 import { animateWords } from "./motion";
 
 function waitForImage(img: HTMLImageElement) {
@@ -16,12 +17,10 @@ function waitForImage(img: HTMLImageElement) {
 
 export function initHero(onDone?: () => void) {
   const hero = document.querySelector<HTMLElement>("[data-scene='hero']");
+  const pre = document.querySelector<HTMLElement>("[data-preloader]");
   if (!hero) return;
   const logo = hero.querySelector<HTMLElement>("[data-logo]")!;
-  const buzzerWrap = logo.querySelector<HTMLElement>(".logo-buzzer")!;
-  const buzzer = buzzerWrap.querySelector<SVGSVGElement>("svg")!;
-  const cap = buzzer.querySelector(".buzzer-cap");
-  const rays = buzzer.querySelectorAll(".ray-set");
+  const target = logo.querySelector<HTMLElement>(".logo-buzzer svg")!; // where the buzzer lands
   const top = logo.querySelector(".piece-top");
   const letters = logo.querySelectorAll(".piece-letter");
   const swoosh = logo.querySelector<HTMLElement>(".piece-swoosh");
@@ -31,12 +30,13 @@ export function initHero(onDone?: () => void) {
 
   const finish = () => {
     hero.classList.remove("intro-pending", "intro-playing");
-    gsap.set(buzzerWrap, { opacity: 0 });
+    pre?.remove();
+    lockScroll(false);
     onDone?.();
   };
 
-  if (prefersReducedMotion()) {
-    gsap.set(buzzerWrap, { opacity: 0 });
+  if (prefersReducedMotion() || !pre) {
+    pre?.remove();
     hero.classList.remove("intro-pending");
     gsap.from(hero.querySelectorAll(".logo-full, .hero-title .word-in, [data-hero-fade]"), {
       opacity: 0,
@@ -46,60 +46,80 @@ export function initHero(onDone?: () => void) {
     return;
   }
 
-  // ---- Preloader: buzzer glows with progress ----
+  lockScroll(true);
+  const bg = pre.querySelector(".pre-bg");
+  const ring = pre.querySelector(".pre-ring");
+  const wrap = pre.querySelector<HTMLElement>("[data-pre-buzzer]")!;
+  const buzzer = wrap.querySelector<SVGSVGElement>("svg")!;
+  const cap = buzzer.querySelector(".buzzer-cap");
+  const rays = buzzer.querySelectorAll(".ray-set");
+  const dim = buzzer.querySelector(".buzzer-dim");
+  const halo = buzzer.querySelector(".buzzer-glow");
+
   gsap.set(rays, { scale: 0, opacity: 0 });
-  gsap.set(buzzer, { "--glow": 0 });
-  gsap.set(buzzerWrap, { scale: 1.6, transformOrigin: "50% 60%" });
-  gsap.set(top, { opacity: 0, scale: 0.85, transformOrigin: "50% 40%" });
+  gsap.set(buzzer, { "--glow": 1 }); // glow is driven per layer below (cheaper than a CSS var per frame)
+  gsap.set(dim, { opacity: 0.5 });
+  gsap.set(halo, { opacity: 0.15 });
+  gsap.set(top, { opacity: 0, scale: 0.9, transformOrigin: "50% 40%" });
   gsap.set(letters, { opacity: 0, yPercent: -40 });
   gsap.set(swoosh, { opacity: 1, clipPath: "inset(80% 0% 0% 100%)" });
 
-  const progress = { v: 0 };
-  const setGlow = () => gsap.set(buzzer, { "--glow": progress.v });
-  const glowTo = (v: number, d = 0.5) =>
-    gsap.to(progress, { v, duration: d, ease: "power1.out", onUpdate: setGlow });
+  // 1. blink while loading
+  const blink = gsap
+    .timeline({ repeat: -1 })
+    .to(dim, { opacity: 0, duration: 0.32, ease: "power2.out" })
+    .to(halo, { opacity: 0.9, duration: 0.32, ease: "power2.out" }, "<")
+    .to(wrap, { scale: 1.06, duration: 0.32, ease: "power2.out" }, "<")
+    .to(dim, { opacity: 0.5, duration: 0.42, ease: "power2.in" })
+    .to(halo, { opacity: 0.15, duration: 0.42, ease: "power2.in" }, "<")
+    .to(wrap, { scale: 1, duration: 0.42, ease: "power2.in" }, "<");
 
-  // Breathing while loading
-  const breathe = gsap.to(buzzerWrap, { scale: 1.52, yoyo: true, repeat: -1, duration: 0.7, ease: "sine.inOut" });
-
+  // ready = logo image + fonts + a short beat (so the blink is seen), capped; a tap skips ahead
+  let skip: () => void = () => {};
+  const skipped = new Promise<void>((r) => (skip = r));
+  wrap.addEventListener("click", () => skip(), { once: true });
   const img = logo.querySelector<HTMLImageElement>(".piece-top")!;
-  const tasks = [
-    waitForImage(img).then(() => glowTo(Math.max(progress.v, 0.55))),
-    (document.fonts?.ready ?? Promise.resolve()).then(() => glowTo(Math.max(progress.v, 0.8))),
-    new Promise((r) => setTimeout(r, 400)),
-  ];
-  const timeout = new Promise((r) => setTimeout(r, 2500));
-  glowTo(0.3, 0.6);
+  const ready = Promise.all([
+    waitForImage(img),
+    document.fonts?.ready ?? Promise.resolve(),
+    new Promise((r) => setTimeout(r, 750)),
+  ]);
+  const cap2500 = new Promise((r) => setTimeout(r, 2500));
 
-  Promise.race([Promise.all(tasks), timeout]).then(() => {
-    breathe.kill();
+  Promise.race([ready, cap2500, skipped]).then(() => {
+    blink.kill();
     hero.classList.add("intro-playing");
+    window.scrollTo(0, 0);
+
+    // where to land: the buzzer's spot on the logo
+    const from = buzzer.getBoundingClientRect();
+    const to = target.getBoundingClientRect();
+    const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+    const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+    const s = to.width / from.width;
+
     const tl = gsap.timeline({ onComplete: finish });
-    tl.to(progress, { v: 1, duration: 0.25, onUpdate: setGlow })
-      .to(buzzerWrap, { scale: 1.6, duration: 0.2, ease: "power2.out" }, "<")
-      // the press
-      .to(cap, { scaleY: 0.72, y: 6, duration: 0.09, ease: "power2.in" })
+    // 2. the press
+    tl.to(wrap, { scale: 1, duration: 0.12 })
+      .to(dim, { opacity: 0, duration: 0.12 }, "<")
+      .to(halo, { opacity: 0.9, duration: 0.12 }, "<")
+      .to(cap, { scaleY: 0.7, y: 7, duration: 0.1, ease: "power2.in" })
       .to(cap, { scaleY: 1, y: 0, duration: 0.45, ease: "elastic.out(1.2, 0.4)" })
-      .to(rays, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(3)", stagger: 0.05 }, "<")
+      .to(rays, { scale: 1.15, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.04 }, "<")
+      .fromTo(ring, { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 1.6, duration: 0.6, ease: "power2.out" }, "<")
+      // the stage opens
+      .to(bg, { opacity: 0, duration: 0.6, ease: "power2.inOut" }, "<0.2")
       .to(burst, { opacity: 1, duration: 0.6 }, "<")
-      // buzzer settles into its place on the logo
-      .to(buzzerWrap, { scale: 1, duration: 0.55, ease: "back.out(1.6)" }, "<0.1")
-      .to(top, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, "<0.25")
-      .to(buzzerWrap, { opacity: 0, duration: 0.3 }, "<0.15")
-      // letters drop in, right to left (ט first)
-      .to(
-        letters,
-        { opacity: 1, yPercent: 0, duration: 0.6, ease: "bounce.out", stagger: 0.09 },
-        "<-0.05",
-      )
-      // swoosh draws in, right to left
-      .to(swoosh, { clipPath: "inset(80% 0% 0% 0%)", duration: 0.55, ease: "power2.inOut" }, "<0.3")
-      .add(animateWords(title), "<0.15")
-      .fromTo(
-        fades,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" },
-        "<0.35",
-      );
+      // 3. the buzzer shrinks and flies into the logo
+      .to(rays, { opacity: 0, scale: 0.6, duration: 0.3 }, "<0.1")
+      .to(wrap, { x: dx, y: dy, scale: s, duration: 0.7, ease: "power3.inOut" }, "<")
+      .to(top, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, ">-0.15")
+      .to(wrap, { opacity: 0, duration: 0.2 }, "<0.1")
+      .set(pre, { pointerEvents: "none" }, "<")
+      // the logo assembles around it: letters right to left (ט first), then the swoosh
+      .to(letters, { opacity: 1, yPercent: 0, duration: 0.6, ease: "bounce.out", stagger: 0.08 }, "<-0.1")
+      .to(swoosh, { clipPath: "inset(80% 0% 0% 0%)", duration: 0.5, ease: "power2.inOut" }, "<0.3")
+      .add(animateWords(title), "<0.1")
+      .fromTo(fades, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "<0.35");
   });
 }

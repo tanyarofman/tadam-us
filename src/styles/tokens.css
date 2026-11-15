@@ -1,0 +1,89 @@
+/* =========================================================
+   טדאם! design tokens
+   Brand colors are fixed. Theme colors switch with
+   <html data-theme="night|stage">  (?theme=night / ?theme=stage)
+   ========================================================= */
+
+:root {
+  /* Brand (sampled from the logo) */
+  --purple-ink: #330768;
+  --purple-mid: #614098;
+  --buzzer-red: #e74138;
+  --buzzer-red-deep: #d62e20;
+  --magenta: #e836a1;
+  --sun-yellow: #f7d94a;
+  --sky-cyan: #64d8f7;
+  --white: #ffffff;
+
+  /* The 4 answer colors */
+  --answer-1: var(--buzzer-red);
+  --answer-2: var(--sun-yellow);
+  --answer-3: var(--sky-cyan);
+  --answer-4: var(--magenta);
+
+  /* Type */
+  --font-display: "Fredoka", "Rubik", system-ui, sans-serif;
+  --font-body: "Rubik", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --fs-hero: clamp(2.4rem, 7.4vw, 5.4rem);
+  --fs-h2: clamp(2rem, 6.4vw, 4.4rem);
+  --fs-h3: clamp(1.35rem, 3.6vw, 2rem);
+  --fs-lead: clamp(1.05rem, 2.4vw, 1.35rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* Shape + space */
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-l: 32px;
+  --stroke: 4px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max-w: 1200px;
+
+  /* Motion */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Theme A: Purple Night (default) ---------- */
+:root,
+:root[data-theme="night"] {
+  --bg-0: #1a0638;
+  --bg-1: #330768;
+  --bg-2: #4a1a86;
+  --surface: rgba(97, 64, 152, 0.35);
+  --surface-solid: #2a0a55;
+  --surface-border: rgba(255, 255, 255, 0.14);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.72);
+  --spot: rgba(247, 217, 74, 0.28);
+  --spot-2: rgba(232, 54, 161, 0.18);
+  --floor-glow: rgba(247, 217, 74, 0.0);
+  --screen-bg: #12032a;
+  --screen-glow: rgba(100, 216, 247, 0.35);
+  --hall-wall: #22084a;
+  --hall-floor: #160430;
+  --page-gradient: radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 60%);
+  color-scheme: dark;
+}
+
+/* ---------- Theme B: Game Stage ---------- */
+:root[data-theme="stage"] {
+  --bg-0: #0a1a6b;
+  --bg-1: #1e4fe0;
+  --bg-2: #2c63ff;
+  --surface: rgba(10, 26, 107, 0.55);
+  --surface-solid: #0d2387;
+  --surface-border: rgba(100, 216, 247, 0.3);
+  --text: #ffffff;
+  --text-muted: rgba(225, 238, 255, 0.8);
+  --spot: rgba(100, 216, 247, 0.3);
+  --spot-2: rgba(255, 255, 255, 0.14);
+  --floor-glow: rgba(100, 216, 247, 0.9);
+  --screen-bg: #071457;
+  --screen-glow: rgba(100, 216, 247, 0.55);
+  --hall-wall: #0c2185;
+  --hall-floor: #061150;
+  --page-gradient: radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 65%);
+  color-scheme: dark;
+}

@@ -1,0 +1,374 @@
+@import "./tokens.css";
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg-0);
+  background-image: var(--page-gradient);
+  background-attachment: fixed;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+img {
+  height: auto;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+a {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+:focus-visible {
+  outline: 3px solid var(--sun-yellow);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  top: 12px;
+  inset-inline-start: 12px;
+  z-index: 1000;
+  padding: 10px 16px;
+  background: var(--sun-yellow);
+  color: var(--purple-ink);
+  font-weight: 700;
+  border-radius: 999px;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ---------- Type ---------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.h-hero {
+  font-size: var(--fs-hero);
+}
+.h-scene {
+  font-size: var(--fs-h2);
+  text-wrap: balance;
+}
+.h-card {
+  font-size: var(--fs-h3);
+}
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+/* outlined "logo style" type */
+.logo-type {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--white);
+  -webkit-text-stroke: 0.16em var(--purple-ink);
+  paint-order: stroke fill;
+  text-shadow: 0 0.08em 0 var(--purple-ink);
+}
+/* split text */
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.scene {
+  position: relative;
+  isolation: isolate;
+}
+.scene-pin {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  overflow: hidden;
+}
+.scene-copy {
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+}
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+  color: var(--sun-yellow);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  margin-bottom: 18px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: var(--buzzer-red);
+  --btn-shadow: var(--buzzer-red-deep);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 14px 30px 16px;
+  border: var(--stroke) solid var(--purple-ink);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.6vw, 1.4rem); /* >= 18.66px bold = "large text" for contrast on red */
+  line-height: 1.1;
+  color: var(--white);
+  text-decoration: none;
+  background: var(--btn-bg);
+  box-shadow:
+    0 7px 0 var(--purple-ink),
+    inset 0 -6px 0 var(--btn-shadow),
+    inset 0 4px 0 rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition:
+    transform 0.12s var(--ease-out),
+    box-shadow 0.12s var(--ease-out),
+    background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover {
+  background: color-mix(in srgb, var(--btn-bg) 92%, white);
+}
+.btn:active,
+.btn.is-pressed {
+  transform: translateY(6px);
+  box-shadow:
+    0 1px 0 var(--purple-ink),
+    inset 0 -3px 0 var(--btn-shadow),
+    inset 0 3px 0 rgba(255, 255, 255, 0.25);
+  background: var(--buzzer-red-deep);
+}
+.btn-buzzer .btn-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9b8f 0 18%, var(--buzzer-red) 40%, var(--buzzer-red-deep) 100%);
+  border: 3px solid var(--purple-ink);
+  box-shadow: 0 0 0 3px var(--white);
+  flex: none;
+}
+.btn-ghost {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  min-height: 48px;
+  padding: 10px 14px;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--magenta);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+}
+.btn-ghost:hover {
+  background: transparent;
+  color: var(--sun-yellow);
+}
+.btn-ghost:active {
+  transform: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* ---------- Stage backdrop (shared by hero + CTA) ---------- */
+.stage-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  contain: strict;
+  overflow: hidden;
+  pointer-events: none;
+}
+.stage-backdrop .spot {
+  position: absolute;
+  top: -10%;
+  width: 46vmax;
+  height: 120%;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 40%, var(--spot) 50%, transparent 60%);
+  transform-origin: 50% 0;
+  opacity: 0.9;
+}
+.stage-backdrop .spot-a {
+  inset-inline-start: -8%;
+  transform: rotate(-18deg);
+}
+.stage-backdrop .spot-b {
+  inset-inline-end: -8%;
+  transform: rotate(18deg);
+}
+.stage-backdrop .spot-c {
+  left: 50%;
+  margin-left: -23vmax;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 44%, var(--spot-2) 50%, transparent 56%);
+}
+.stage-backdrop .floor {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 30%;
+  background: radial-gradient(60% 100% at 50% 100%, var(--spot) 0%, transparent 70%);
+}
+.stage-backdrop .floor-strip {
+  position: absolute;
+  inset-inline: 6%;
+  bottom: 9%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, transparent, var(--floor-glow), var(--white), var(--floor-glow), transparent);
+  box-shadow: 0 0 24px 6px var(--floor-glow);
+  opacity: 0;
+}
+:root[data-theme="stage"] .stage-backdrop .floor-strip {
+  opacity: 1;
+}
+.stage-backdrop .dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1.5px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(70% 60% at 50% 40%, black, transparent);
+  opacity: 0.25;
+}
+
+/* ---------- Scroll progress (buzzer motif) ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  height: 5px;
+  z-index: 90;
+  pointer-events: none;
+}
+.scroll-progress__bar {
+  height: 100%;
+  background: linear-gradient(270deg, var(--buzzer-red), var(--magenta), var(--sun-yellow));
+  transform-origin: right center; /* RTL: grows from the right */
+  transform: scaleX(0);
+}
+
+/* ---------- Reveal (used by reduced-motion + simple fades) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Theme switcher (for live comparison) ---------- */
+.theme-switch {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 95;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 12px;
+}
+.theme-switch button {
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: transparent;
+  cursor: pointer;
+  color: #fff;
+}
+.theme-switch button[aria-pressed="true"] {
+  background: #fff;
+  color: #111;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.25s !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    transform: none;
+  }
+}
+

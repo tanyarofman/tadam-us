@@ -1,0 +1,59 @@
+---
+import "@fontsource/fredoka/hebrew-700.css";
+import "@fontsource/fredoka/latin-700.css";
+import "@fontsource/rubik/hebrew-400.css";
+import "@fontsource/rubik/hebrew-500.css";
+import "@fontsource/rubik/hebrew-800.css";
+import "@fontsource/rubik/latin-400.css";
+import "@fontsource/rubik/latin-500.css";
+import "../styles/global.css";
+import { COPY } from "../content/copy.he";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/brand/tadam-logo.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="he" dir="rtl" class="no-js" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#1A0638" />
+    <link rel="icon" type="image/png" href="/brand/tadam-logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="image" href="/brand/tadam-logo.png" fetchpriority="high" />
+    <!-- Theme: ?theme=night (default) | ?theme=stage. Runs before paint to avoid a flash. -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove("no-js");
+        d.classList.add("js");
+        var t = new URLSearchParams(location.search).get("theme");
+        d.setAttribute("data-theme", t === "stage" ? "stage" : "night");
+        if (t === "stage") {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute("content", "#0A1A6B");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

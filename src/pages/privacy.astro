@@ -1,0 +1,32 @@
+---
+// TODO: replace with the full privacy policy before launch.
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+import { COPY } from "../content/copy.he";
+const c = COPY.privacyPage;
+---
+
+<Base title={`${c.title} | טדאם!`} noindex>
+  <main class="container privacy">
+    <a href="/" class="privacy-logo"><img src="/brand/tadam-logo.png" alt="טדאם!" width="736" height="407" /></a>
+    <h1 class="display h-scene">{c.title}</h1>
+    <p class="lead">{c.body}</p>
+    <a class="btn btn-buzzer" href="/">{c.back}</a>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .privacy {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-block: 64px;
+    max-width: 760px;
+  }
+  .privacy-logo img {
+    width: 160px;
+  }
+</style>

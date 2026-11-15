@@ -1,7 +1,7 @@
 /* =========================================================
    טדאם! design tokens
-   Brand colors are fixed. Theme colors switch with
-   <html data-theme="night|stage">  (?theme=night / ?theme=stage)
+   Brand colors are fixed. Theme colors: Game Stage
+   (electric blue stage + glowing floor strip).
    ========================================================= */
 
 :root {
@@ -45,30 +45,8 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---------- Theme A: Purple Night (default) ---------- */
-:root,
-:root[data-theme="night"] {
-  --bg-0: #1a0638;
-  --bg-1: #330768;
-  --bg-2: #4a1a86;
-  --surface: rgba(97, 64, 152, 0.35);
-  --surface-solid: #2a0a55;
-  --surface-border: rgba(255, 255, 255, 0.14);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.72);
-  --spot: rgba(247, 217, 74, 0.28);
-  --spot-2: rgba(232, 54, 161, 0.18);
-  --floor-glow: rgba(247, 217, 74, 0.0);
-  --screen-bg: #12032a;
-  --screen-glow: rgba(100, 216, 247, 0.35);
-  --hall-wall: #22084a;
-  --hall-floor: #160430;
-  --page-gradient: radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 60%);
-  color-scheme: dark;
-}
-
-/* ---------- Theme B: Game Stage ---------- */
-:root[data-theme="stage"] {
+/* ---------- Theme: Game Stage ---------- */
+:root {
   --bg-0: #0a1a6b;
   --bg-1: #1e4fe0;
   --bg-2: #2c63ff;

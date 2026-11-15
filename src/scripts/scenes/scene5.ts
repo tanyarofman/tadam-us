@@ -89,39 +89,31 @@ export function init({ reduced }: { reduced: boolean }) {
   if (reduced) {
     crowd.draw(1);
     canvas.style.opacity = "0.45";
+    s.querySelector(".bigscreen")?.classList.add("is-revealed");
     return;
   }
 
   const q = <T extends Element = HTMLElement>(sel: string) => s.querySelector<T>(sel)!;
   const split = q(".s5-split");
-  const fills = s.querySelectorAll<HTMLElement>(".bs-fill");
-  const pcts = s.querySelectorAll<HTMLElement>(".bs-pct-n");
-  const count = q(".bs-count-n");
+  const screen = q(".bigscreen");
+  const answered = q(".bs-answered-n");
   const timer = q(".bs-timer-n");
   const finger = q(".finger");
   const picked = q(".phone-btn[data-i='1']");
   const sent = q(".phone-sent");
+  const result = q(".phone-result");
   const title = q(".s5-title");
 
-  // Percent of the room on each answer at each stage: start, others answer, our tap lands, final.
-  // Bars and numbers show these values directly, so they grow together.
-  const stages = [
-    [0, 0, 0, 0],
-    [9, 21, 5, 11],
-    [12, 40, 8, 16],
-    [14, 58, 9, 19],
-  ];
-  const state = { a: 0, b: 0, c: 0, d: 0, n: 5, t: 15, crowd: 0 };
+  // Like the real game: while guests answer, the big screen shows only the options,
+  // a countdown and how many have answered. Nothing is revealed until the answer is in.
+  const TOTAL = 214;
+  const state = { n: 0, t: 15, crowd: 0 };
   const render = () => {
-    [state.a, state.b, state.c, state.d].forEach((v, i) => {
-      fills[i].style.width = `${v}%`;
-      pcts[i].textContent = String(Math.round(v));
-    });
-    count.textContent = String(Math.round(state.n));
+    answered.textContent = String(Math.round(state.n));
     timer.textContent = String(Math.max(0, Math.round(state.t)));
     crowd.draw(state.crowd);
   };
-  const toStage = (i: number) => ({ a: stages[i][0], b: stages[i][1], c: stages[i][2], d: stages[i][3] });
+  const setRevealed = (on: boolean) => screen.classList.toggle("is-revealed", on);
 
   gsap.set(title.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
   render();
@@ -139,21 +131,25 @@ export function init({ reduced }: { reduced: boolean }) {
   });
 
   tl.fromTo(split, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 })
-    // live answers start coming in
-    .to(state, { ...toStage(1), n: 48, t: 9, duration: 2, onUpdate: render })
+    // answers start coming in (count only)
+    .to(state, { n: 61, t: 10, duration: 1.6, onUpdate: render })
     // the finger taps
-    .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<1.2")
+    .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<1")
     .to(finger, { scale: 0.85, duration: 0.1 })
     .to(picked, { scale: 0.92, y: 4, duration: 0.1 }, "<")
-    .call(() => picked.classList.add("is-picked"))
+    .addLabel("tap")
     .to(finger, { scale: 1, duration: 0.1 })
     .to(picked, { scale: 1, y: 0, duration: 0.1 }, "<")
-    .fromTo(sent, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" })
+    .fromTo(sent, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" })
     .to(finger, { opacity: 0, y: 40, duration: 0.25 }, "<")
-    // our bar grows
-    .to(state, { ...toStage(2), n: 132, t: 4, duration: 1.4, onUpdate: render })
-    .to(state, { ...toStage(3), n: 214, t: 0, duration: 1.2, onUpdate: render })
-    .to({}, { duration: 0.6 })
+    // the rest of the room answers
+    .to(state, { n: TOTAL, t: 0, duration: 1.6, onUpdate: render })
+    // reveal: the right answer lights up on the screen, the phone says if you got it
+    .addLabel("reveal")
+    .fromTo(q(".bs-a.is-correct"), { scale: 1 }, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1 })
+    .to(sent, { opacity: 0, duration: 0.15 }, "<")
+    .fromTo(result, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(3)" }, "<")
+    .to({}, { duration: 0.8 })
     // camera pulls back: the whole hall lights up
     .to(split, { scale: isMobile() ? 0.5 : 0.42, y: "-12%", opacity: 0, duration: 1, ease: "power2.in" })
     .to(state, { crowd: 1, duration: 1.4, onUpdate: render }, "<0.2")
@@ -161,7 +157,12 @@ export function init({ reduced }: { reduced: boolean }) {
     .to({}, { duration: 0.4 });
 
   // reset the tap if the user scrolls back up
+  // keep the class-based states in sync when scrubbing back and forth
+  const tapTime = tl.labels.tap;
+  const revealTime = tl.labels.reveal;
   tl.eventCallback("onUpdate", () => {
-    if (tl.progress() < 0.4) picked.classList.remove("is-picked");
+    const t = tl.time();
+    picked.classList.toggle("is-picked", t >= tapTime);
+    setRevealed(t >= revealTime);
   });
 }

@@ -40,8 +40,8 @@ export const COPY = {
   scene3: {
     burst: "טדאם!",
     headline: "ואז האורות יורדים, המסך מתעורר, והמנחה עולה לבמה.",
-    headline2: "מי זה? מי שהילד.ה הכי אוהב.ת.",
-    hostMessage: "המנחה של המשחק? מי שהילד.ה הכי אוהב.ת.",
+    headline2: "מי המנחה? הילד.ה בוחר.ת את המנחה.",
+    hostMessage: "מי המנחה של המשחק? הילד.ה בוחר.ת את המנחה.",
     hostTypes: [
       { key: "singer", label: "הזמר.ת שהיא הכי אוהבת" },
       { key: "athlete", label: "השחקן שהוא מעריץ" },
@@ -92,6 +92,13 @@ export const COPY = {
     scanHint: "סרקו ושחקו",
     timer: "שנ׳",
     questionNo: "שאלה 4 מתוך 12",
+    answered: "ענו",
+    correctIndex: 1,
+    correctTag: "התשובה הנכונה",
+    phoneSent: "התשובה נשלחה",
+    phoneWaiting: "מחכים לכולם...",
+    phoneCorrect: "צדקת!",
+    phonePoints: "+850",
   },
 
   scene6: {
@@ -178,11 +185,6 @@ export const COPY = {
     back: "חזרה לדף הבית",
   },
 
-  themeSwitch: {
-    label: "ערכת עיצוב",
-    night: "Purple Night",
-    stage: "Game Stage",
-  },
 } as const;
 
 export type Copy = typeof COPY;

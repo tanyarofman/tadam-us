@@ -53,9 +53,13 @@ export function initHero(onDone?: () => void) {
   const buzzer = wrap.querySelector<SVGSVGElement>("svg")!;
   const cap = buzzer.querySelector(".buzzer-cap");
   const rays = buzzer.querySelectorAll(".ray-set");
+  const dim = buzzer.querySelector(".buzzer-dim");
+  const halo = buzzer.querySelector(".buzzer-glow");
 
   gsap.set(rays, { scale: 0, opacity: 0 });
-  gsap.set(buzzer, { "--glow": 0.2 });
+  gsap.set(buzzer, { "--glow": 1 }); // glow is driven per layer below (cheaper than a CSS var per frame)
+  gsap.set(dim, { opacity: 0.5 });
+  gsap.set(halo, { opacity: 0.15 });
   gsap.set(top, { opacity: 0, scale: 0.9, transformOrigin: "50% 40%" });
   gsap.set(letters, { opacity: 0, yPercent: -40 });
   gsap.set(swoosh, { opacity: 1, clipPath: "inset(80% 0% 0% 100%)" });
@@ -63,9 +67,11 @@ export function initHero(onDone?: () => void) {
   // 1. blink while loading
   const blink = gsap
     .timeline({ repeat: -1 })
-    .to(buzzer, { "--glow": 1, duration: 0.32, ease: "power2.out" })
+    .to(dim, { opacity: 0, duration: 0.32, ease: "power2.out" })
+    .to(halo, { opacity: 0.9, duration: 0.32, ease: "power2.out" }, "<")
     .to(wrap, { scale: 1.06, duration: 0.32, ease: "power2.out" }, "<")
-    .to(buzzer, { "--glow": 0.2, duration: 0.42, ease: "power2.in" })
+    .to(dim, { opacity: 0.5, duration: 0.42, ease: "power2.in" })
+    .to(halo, { opacity: 0.15, duration: 0.42, ease: "power2.in" }, "<")
     .to(wrap, { scale: 1, duration: 0.42, ease: "power2.in" }, "<");
 
   // ready = logo image + fonts + a short beat (so the blink is seen), capped; a tap skips ahead
@@ -76,7 +82,7 @@ export function initHero(onDone?: () => void) {
   const ready = Promise.all([
     waitForImage(img),
     document.fonts?.ready ?? Promise.resolve(),
-    new Promise((r) => setTimeout(r, 900)),
+    new Promise((r) => setTimeout(r, 750)),
   ]);
   const cap2500 = new Promise((r) => setTimeout(r, 2500));
 
@@ -95,7 +101,8 @@ export function initHero(onDone?: () => void) {
     const tl = gsap.timeline({ onComplete: finish });
     // 2. the press
     tl.to(wrap, { scale: 1, duration: 0.12 })
-      .to(buzzer, { "--glow": 1, duration: 0.12 }, "<")
+      .to(dim, { opacity: 0, duration: 0.12 }, "<")
+      .to(halo, { opacity: 0.9, duration: 0.12 }, "<")
       .to(cap, { scaleY: 0.7, y: 7, duration: 0.1, ease: "power2.in" })
       .to(cap, { scaleY: 1, y: 0, duration: 0.45, ease: "elastic.out(1.2, 0.4)" })
       .to(rays, { scale: 1.15, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.04 }, "<")

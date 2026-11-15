@@ -1,0 +1,77 @@
+---
+import { COPY } from "../../content/copy.he";
+import { whatsappLink } from "../../config/site";
+import SplitHeading from "../SplitHeading.astro";
+import StageBackdrop from "../StageBackdrop.astro";
+import Buzzer from "../Buzzer.astro";
+const c = COPY.scene7;
+---
+
+<section class="scene s7" id="scene-7" data-scene="7" aria-labelledby="s7-title">
+  <StageBackdrop />
+  <div class="s7-inner container">
+    <button type="button" class="big-buzzer" data-open-demo data-source="cta-buzzer" aria-label={c.buzzerLabel}>
+      <Buzzer id="cta-buzzer" rays />
+    </button>
+    <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight="בעצמכם" />
+    <button type="button" class="btn btn-buzzer s7-btn" data-open-demo data-source="cta">
+      <span class="btn-dot" aria-hidden="true"></span>
+      {c.cta}
+    </button>
+    <a class="s7-contact" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
+      {c.contact}
+    </a>
+  </div>
+</section>
+
+<style>
+  .s7 {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding-block: clamp(80px, 12vh, 140px);
+    overflow: hidden;
+  }
+  .s7-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(18px, 3vh, 30px);
+  }
+  .big-buzzer {
+    width: min(300px, 62vw);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: 40%;
+    -webkit-tap-highlight-color: transparent;
+    filter: drop-shadow(0 20px 40px rgba(231, 65, 56, 0.35));
+  }
+  .big-buzzer :global(.buzzer-cap) {
+    transition: transform 0.12s var(--ease-out);
+  }
+  .big-buzzer:hover :global(.buzzer-cap) {
+    transform: translateY(2px) scaleY(0.96);
+  }
+  .big-buzzer:active :global(.buzzer-cap),
+  .big-buzzer.is-pressed :global(.buzzer-cap) {
+    transform: translateY(6px) scaleY(0.75);
+  }
+  :global(.s7-title) {
+    max-width: 14ch;
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .s7-contact {
+    color: var(--text-muted);
+    text-underline-offset: 6px;
+    text-decoration-color: var(--sky-cyan);
+    font-size: 1rem;
+    padding: 8px;
+  }
+  .s7-contact:hover {
+    color: var(--text);
+  }
+</style>

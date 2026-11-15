@@ -1,0 +1,217 @@
+---
+import { COPY } from "../../content/copy.he";
+import SplitHeading from "../SplitHeading.astro";
+import KidOnStage from "../art/KidOnStage.astro";
+const c = COPY.scene6;
+const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", "var(--buzzer-red)", "#8a62d0"];
+---
+
+<section class="scene s6" id="scene-6" data-scene="6" aria-labelledby="s6-title">
+  <div class="scene-pin s6-pin">
+    <canvas class="confetti" aria-hidden="true"></canvas>
+    <div class="container s6-inner">
+      <span class="eyebrow s6-eyebrow">{c.eyebrow}</span>
+
+      <div class="s6-grid">
+        <div class="board-panel">
+          <div class="board-head">
+            <span class="display">{c.leaderboardTitle}</span>
+            <span class="drumroll" aria-hidden="true">{c.drumroll}</span>
+          </div>
+          <ol class="lb" role="list" style={`--rows:${c.players.length}`}>
+            {
+              c.players.map((p, i) => (
+                <li class:list={["lb-row", { "is-winner": "winner" in p && p.winner }]} data-i={i}>
+                  <span class="lb-rank">{i + 1}</span>
+                  <span class="lb-avatar" style={`--c:${avatarColors[i]}`} aria-hidden="true">
+                    {p.name.charAt(0)}
+                  </span>
+                  <span class="lb-name">{p.name}</span>
+                  <span class="lb-score">{p.score.toLocaleString("he-IL")}</span>
+                  {"winner" in p && p.winner && <svg class="lb-crown" viewBox="0 0 40 30" aria-hidden="true"><path d="M4 26 L2 6 L12 14 L20 2 L28 14 L38 6 L36 26 Z" fill="#F7D94A" stroke="#330768" stroke-width="3.5" stroke-linejoin="round" /></svg>}
+                </li>
+              ))
+            }
+          </ol>
+          <p class="winner-tag">{c.winnerTag}</p>
+        </div>
+
+        <div class="kid-wrap">
+          <KidOnStage />
+        </div>
+      </div>
+
+      <div class="s6-copy">
+        <SplitHeading as="h2" id="s6-title" class="h-scene s6-title" text={c.headline} />
+        <p class="lead s6-keepsake">{c.keepsake}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .s6-pin {
+    padding-block: clamp(56px, 8vh, 90px) 32px;
+  }
+  .confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .s6-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(14px, 2.6vh, 28px);
+  }
+  .s6-eyebrow {
+    margin: 0;
+  }
+  .s6-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: clamp(16px, 4vw, 56px);
+  }
+  .board-panel {
+    position: relative;
+    padding: clamp(16px, 2.4vw, 26px);
+    border-radius: var(--radius-l);
+    background: var(--screen-bg);
+    border: 6px solid var(--purple-ink);
+    box-shadow: 0 0 60px 4px var(--screen-glow);
+  }
+  .board-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  }
+  .drumroll {
+    font-size: var(--fs-small);
+    color: var(--sun-yellow);
+    opacity: 0;
+  }
+  .lb {
+    --row: clamp(48px, 7vh, 60px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: grid;
+    gap: 8px;
+  }
+  .lb-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px 38px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    height: var(--row);
+    padding: 0 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 2px solid transparent;
+    font-weight: 500;
+  }
+  .lb-rank {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .lb-avatar {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--c);
+    color: var(--purple-ink);
+    border: 3px solid var(--purple-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+  .lb-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lb-score {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--sky-cyan);
+  }
+  .lb-row.is-winner {
+    background: linear-gradient(90deg, rgba(247, 217, 74, 0.15), rgba(247, 217, 74, 0.35));
+    border-color: var(--sun-yellow);
+    box-shadow: 0 0 30px rgba(247, 217, 74, 0.35);
+  }
+  .lb-crown {
+    position: absolute;
+    top: -18px;
+    inset-inline-start: 4px;
+    width: 34px;
+    transform: rotate(18deg);
+  }
+  .winner-tag {
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    color: var(--sun-yellow);
+  }
+  .kid-wrap {
+    max-width: 320px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .s6-copy {
+    text-align: center;
+  }
+  :global(.s6-title) {
+    font-size: clamp(1.6rem, 4.6vw, 3.2rem);
+    max-width: 20ch;
+    margin-inline: auto;
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .s6-keepsake {
+    margin-top: 10px;
+  }
+  @media (max-width: 767px) {
+    .s6-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .kid-wrap {
+      order: -1;
+      max-width: 150px;
+      margin-bottom: -18px;
+      position: relative;
+      z-index: 1;
+    }
+    .lb {
+      --row: 44px;
+      gap: 6px;
+    }
+    .lb-row {
+      grid-template-columns: 20px 32px 1fr auto;
+      font-size: 0.9rem;
+      padding: 0 10px;
+    }
+    .lb-avatar {
+      width: 32px;
+      height: 32px;
+    }
+    .winner-tag {
+      margin-top: 8px;
+    }
+  }
+</style>

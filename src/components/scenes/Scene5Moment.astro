@@ -1,0 +1,374 @@
+---
+import { COPY } from "../../content/copy.he";
+import SplitHeading from "../SplitHeading.astro";
+const c = COPY.scene5;
+const colors = ["var(--answer-1)", "var(--answer-2)", "var(--answer-3)", "var(--answer-4)"];
+const shapes = ["▲", "◆", "●", "■"];
+// Final (static) results, used for reduced motion and as the end state of the scrub
+const finalPct = [14, 58, 9, 19];
+// Decorative QR pattern (not scannable on purpose)
+const qr = Array.from({ length: 121 }, (_, i) => {
+  const x = i % 11;
+  const y = Math.floor(i / 11);
+  const finder = (x < 3 && y < 3) || (x > 7 && y < 3) || (x < 3 && y > 7);
+  return finder || (x * 7 + y * 13 + x * y) % 5 < 2;
+});
+---
+
+<section class="scene s5" id="scene-5" data-scene="5" aria-labelledby="s5-title">
+  <div class="scene-pin s5-pin">
+    <canvas class="s5-crowd" aria-hidden="true"></canvas>
+
+    <div class="s5-head container">
+      <span class="eyebrow">{c.eyebrow}</span>
+    </div>
+
+    <div class="s5-split container">
+      {/* Big projector screen */}
+      <figure class="bigscreen" aria-label="המסך הגדול באולם">
+        <div class="bs-top">
+          <span class="bs-qno">{c.questionNo}</span>
+          <span class="bs-timer"><b class="bs-timer-n">12</b> {c.timer}</span>
+        </div>
+        <p class="bs-q display">{c.question}</p>
+        <ul class="bs-answers" role="list">
+          {
+            c.answers.map((a, i) => (
+              <li class="bs-a" style={`--c:${colors[i]}`} data-i={i}>
+                <span class="bs-shape" aria-hidden="true">{shapes[i]}</span>
+                <span class="bs-label">{a}</span>
+                <span class="bs-bar">
+                  <span class="bs-fill" style={`transform: scaleX(${finalPct[i] / 100})`} />
+                </span>
+                <span class="bs-pct">
+                  <span class="bs-pct-n">{finalPct[i]}</span>%
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="bs-foot">
+          <div class="bs-qr" aria-hidden="true">
+            {qr.map((on) => <i class:list={{ on }} />)}
+          </div>
+          <div class="bs-join">
+            <span>{c.scanHint}</span>
+            <span class="bs-count">
+              <b class="bs-count-n">214</b> {c.connected}
+            </span>
+          </div>
+        </div>
+      </figure>
+
+      {/* Guest phone */}
+      <div class="phone" aria-label="הטלפון של אורח">
+        <div class="phone-notch" aria-hidden="true"></div>
+        <p class="phone-q">{c.question}</p>
+        <div class="phone-grid">
+          {
+            c.answers.map((a, i) => (
+              <span class="phone-btn" style={`--c:${colors[i]}`} data-i={i}>
+                <span aria-hidden="true">{shapes[i]}</span>
+                {a}
+              </span>
+            ))
+          }
+        </div>
+        <div class="phone-sent" aria-hidden="true">✓</div>
+        <svg class="finger" viewBox="0 0 60 80" aria-hidden="true">
+          <path
+            d="M22 6 Q30 0 34 8 L36 36 Q48 30 54 40 L54 60 Q52 76 36 78 L24 78 Q12 76 8 62 L6 46 Q4 38 12 40 L18 48 L18 12 Q18 8 22 6 Z"
+            fill="#f2c6a0"
+            stroke="#330768"
+            stroke-width="4"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="s5-copy container">
+      <SplitHeading as="h2" id="s5-title" class="h-scene s5-title" text={c.headline} highlight="ביחד" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .s5-pin {
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+    padding-block: clamp(56px, 8vh, 90px) clamp(28px, 6vh, 64px);
+    background: radial-gradient(70% 60% at 50% 40%, var(--bg-1), var(--bg-0));
+  }
+  .s5-crowd {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 0;
+  }
+  .s5-head,
+  .s5-split,
+  .s5-copy {
+    position: relative;
+    z-index: 1;
+  }
+  .s5-head {
+    text-align: center;
+  }
+  .s5-head .eyebrow {
+    margin: 0;
+  }
+  .s5-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(20px, 4vw, 56px);
+    transform-origin: 50% 50%;
+  }
+  .s5-copy {
+    text-align: center;
+  }
+  :global(.s5-title) {
+    max-width: 18ch;
+    margin-inline: auto;
+    text-shadow: 0 4px 0 var(--purple-ink), 0 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  /* big screen */
+  .bigscreen {
+    margin: 0;
+    padding: clamp(14px, 2.4vw, 28px);
+    border-radius: 18px;
+    background: var(--screen-bg);
+    border: 8px solid var(--purple-ink);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.08),
+      0 0 70px 6px var(--screen-glow);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.6vh, 16px);
+  }
+  .bs-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .bs-timer {
+    font-weight: 500;
+    color: var(--sun-yellow);
+  }
+  .bs-q {
+    font-size: clamp(1.15rem, 2.6vw, 2.1rem);
+    text-align: center;
+  }
+  .bs-answers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(6px, 1.2vh, 10px);
+  }
+  .bs-a {
+    display: grid;
+    grid-template-columns: 34px minmax(70px, 9em) 1fr 3.2em;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  }
+  .bs-shape {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--c);
+    color: var(--purple-ink);
+    border: 3px solid var(--purple-ink);
+    font-size: 0.8rem;
+  }
+  .bs-bar {
+    height: 22px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  .bs-fill {
+    display: block;
+    height: 100%;
+    background: var(--c);
+    border-radius: inherit;
+    transform-origin: right center; /* RTL */
+  }
+  .bs-pct {
+    text-align: start;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+  }
+  .bs-foot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .bs-qr {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    width: clamp(56px, 7vw, 84px);
+    aspect-ratio: 1;
+    padding: 5px;
+    background: #fff;
+    border-radius: 8px;
+  }
+  .bs-qr i.on {
+    background: #111;
+  }
+  .bs-join {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .bs-count {
+    color: var(--sky-cyan);
+    font-weight: 500;
+  }
+  .bs-count b {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* phone */
+  .phone {
+    position: relative;
+    width: clamp(190px, 22vw, 270px);
+    aspect-ratio: 9 / 18.5;
+    padding: 34px 12px 16px;
+    border-radius: 36px;
+    background: #10052a;
+    border: 8px solid var(--purple-ink);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.12),
+      0 20px 50px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 70px;
+    height: 16px;
+    margin-left: -35px;
+    border-radius: 999px;
+    background: var(--purple-ink);
+  }
+  .phone-q {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-align: center;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.3;
+    padding-inline: 4px;
+  }
+  .phone-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .phone-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 16px;
+    background: var(--c);
+    color: var(--purple-ink);
+    border: 3px solid var(--purple-ink);
+    box-shadow: 0 5px 0 var(--purple-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    text-align: center;
+    padding: 4px;
+  }
+  .phone-btn.is-picked {
+    outline: 4px solid #fff;
+    outline-offset: 2px;
+  }
+  .phone-sent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--magenta);
+    border: 4px solid var(--purple-ink);
+    font-size: 2rem;
+    font-weight: 800;
+    opacity: 0;
+  }
+  .finger {
+    position: absolute;
+    width: 54px;
+    bottom: 12%;
+    left: 6%;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.4));
+  }
+
+  @media (max-width: 767px) {
+    .s5-split {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 14px;
+    }
+    .bigscreen {
+      width: 100%;
+      border-width: 5px;
+    }
+    .bs-a {
+      grid-template-columns: 26px minmax(54px, 6em) 1fr 2.8em;
+      gap: 6px;
+    }
+    .bs-shape {
+      width: 26px;
+      height: 26px;
+      border-width: 2px;
+    }
+    .bs-bar {
+      height: 14px;
+    }
+    .phone {
+      position: absolute;
+      bottom: -46%;
+      left: 4%;
+      width: 132px;
+      padding: 24px 8px 10px;
+      border-width: 5px;
+      border-radius: 24px;
+      gap: 6px;
+    }
+    .phone-q {
+      font-size: 0.68rem;
+    }
+    .phone-btn {
+      font-size: 0.66rem;
+      border-radius: 10px;
+      border-width: 2px;
+      box-shadow: 0 3px 0 var(--purple-ink);
+    }
+    .finger {
+      width: 36px;
+    }
+  }
+</style>

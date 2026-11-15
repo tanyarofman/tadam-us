@@ -1,7 +1,8 @@
 ---
 /**
- * The host slot: spotlight, an empty mic stand, and GENERIC silhouettes by type.
- * Never a real person or a recognizable character. Shapes are deliberately generic.
+ * The host slot: spotlight, an empty mic stand, and one photo per host type.
+ * Photos are AI-generated, fictional people / an original creature (public/hosts/*.webp):
+ * never a real person or a recognizable character. Faces stay in shadow or turned away.
  */
 import { COPY } from "../../content/copy.he";
 const types = COPY.scene3.hostTypes;
@@ -39,51 +40,17 @@ const INK = "#1a0638";
     </g>
 
     <g class="host-sils" fill="url(#host-sil)" stroke="#64D8F7" stroke-width="3" stroke-linejoin="round">
-      {/* singer: generic figure, long hair, mic raised */}
-      <g class="sil" data-type="singer">
-        <path d="M160 330 Q150 250 170 230 Q200 214 230 230 Q250 250 240 330 Z"></path>
-        <path d="M176 186 Q172 130 200 128 Q228 130 224 186 Q232 214 226 236 L174 236 Q168 214 176 186 Z"></path>
-        <path d="M228 240 Q262 214 270 160" fill="none" stroke-width="14" stroke="#64D8F7"></path>
-        <path d="M228 240 Q262 214 270 160" fill="none" stroke-width="9" stroke="#2a0d58"></path>
-        <rect x="262" y="132" width="18" height="30" rx="9"></rect>
-        <path d="M172 248 Q150 270 178 288" fill="none" stroke-width="14" stroke="#64D8F7"></path>
-        <path d="M172 248 Q150 270 178 288" fill="none" stroke-width="9" stroke="#2a0d58"></path>
-      </g>
-      {/* athlete: generic figure with a ball */}
-      <g class="sil" data-type="athlete">
-        <path d="M156 330 Q148 248 172 230 Q200 218 228 230 Q252 248 244 330 Z"></path>
-        <circle cx="200" cy="184" r="34"></circle>
-        <path d="M168 176 Q200 160 232 176" fill="none" stroke-width="8" stroke="#E836A1"></path>
-        <circle cx="266" cy="266" r="30"></circle>
-        <path d="M240 254 Q266 266 292 254 M266 236 V296" fill="none" stroke-width="3"></path>
-      </g>
-      {/* character: a generic, made-up cartoon creature */}
-      <g class="sil" data-type="character">
-        <path d="M128 318 Q120 210 200 196 Q280 210 272 318 Q200 340 128 318 Z"></path>
-        <path d="M168 204 L150 150 M232 204 L250 150" fill="none" stroke-width="6"></path>
-        <circle cx="150" cy="146" r="12"></circle>
-        <circle cx="250" cy="146" r="12"></circle>
-        <circle cx="176" cy="252" r="16" fill="#fff" stroke="none"></circle>
-        <circle cx="224" cy="252" r="16" fill="#fff" stroke="none"></circle>
-        <circle cx="180" cy="256" r="7" fill="#1a0638" stroke="none"></circle>
-        <circle cx="220" cy="256" r="7" fill="#1a0638" stroke="none"></circle>
-        <path d="M180 290 Q200 304 220 290" fill="none" stroke-width="5"></path>
-      </g>
-      {/* influencer: generic figure, phone up, ring light */}
-      <g class="sil" data-type="influencer">
-        <circle cx="262" cy="150" r="46" fill="none" stroke="#F7D94A" stroke-width="10"></circle>
-        <path d="M150 330 Q142 250 166 232 Q196 218 226 232 Q250 250 242 330 Z"></path>
-        <path d="M168 192 Q162 140 196 138 Q230 140 224 192 Q224 230 196 232 Q168 230 168 192 Z"></path>
-        <path d="M226 246 Q254 220 258 182" fill="none" stroke-width="14" stroke="#64D8F7"></path>
-        <path d="M226 246 Q254 220 258 182" fill="none" stroke-width="9" stroke="#2a0d58"></path>
-        <rect x="246" y="150" width="24" height="40" rx="5"></rect>
-      </g>
       {/* question mark */}
       <g class="sil sil-q" data-type="mystery">
         <circle cx="200" cy="230" r="86" fill="#F7D94A" fill-opacity="0.12" stroke="#F7D94A" stroke-width="4"></circle>
       </g>
     </g>
   </svg>
+  {
+    types.map((t) => (
+      <img class="sil host-photo" data-type={t.key} src={`/hosts/${t.key}.webp`} alt="" width="600" height="800" loading="lazy" decoding="async" />
+    ))
+  }
   <span class="host-q display" aria-hidden="true">?</span>
 
   <ul class="host-labels" role="list">
@@ -108,6 +75,26 @@ const INK = "#1a0638";
   }
   .sil {
     opacity: 0;
+  }
+  .host-photo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    translate: -50% 0;
+    object-fit: cover;
+    /* melt the photo's dark backdrop into the screen */
+    mask-image: radial-gradient(closest-side at 50% 52%, #000 62%, transparent 100%);
+    -webkit-mask-image: radial-gradient(closest-side at 50% 52%, #000 62%, transparent 100%);
+    pointer-events: none;
+  }
+  .host-labels {
+    z-index: 2;
+  }
+  .host-q {
+    z-index: 2;
   }
   .sil-q {
     opacity: 1;

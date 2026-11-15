@@ -1,5 +1,5 @@
 ---
-/** Illustrated kid (fictional "נועה") laughing on stage with a mic. Not a photo. */
+/** The winner, סבתא רחל (fictional), laughing on stage with a mic and a crown. Same look as the grandma in Scene 2. Not a photo. */
 const INK = "#330768";
 ---
 
@@ -13,34 +13,47 @@ const INK = "#330768";
   <ellipse cx="150" cy="270" rx="130" ry="30" fill="url(#kid-spot)"></ellipse>
   <rect x="30" y="262" width="240" height="26" rx="10" fill="#614098" stroke={INK} stroke-width="6"></rect>
   <g class="kid">
-    <!-- hair back -->
-    <path d="M100 96 Q92 180 108 196 L192 196 Q208 180 200 96 Z" fill="#7a3d1c" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
     <!-- dress -->
     <path d="M104 262 Q96 200 120 180 Q150 166 180 180 Q204 200 196 262 Z" fill="#E836A1" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
-    <path d="M118 210 Q150 222 182 210" fill="none" stroke="#F7D94A" stroke-width="6" stroke-linecap="round"></path>
+    <!-- cardigan opening + pearl necklace -->
+    <path d="M150 176 V262" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
+    <circle cx="140" cy="236" r="3.5" fill={INK}></circle>
+    <circle cx="160" cy="236" r="3.5" fill={INK}></circle>
+    <path d="M128 178 Q150 200 172 178" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.1 9"></path>
     <!-- arm with mic -->
     <path d="M182 196 Q214 190 214 152" fill="none" stroke={INK} stroke-width="20" stroke-linecap="round"></path>
     <path d="M182 196 Q214 190 214 152" fill="none" stroke="#E836A1" stroke-width="10" stroke-linecap="round"></path>
-    <circle cx="214" cy="146" r="11" fill="#f2c6a0" stroke={INK} stroke-width="5"></circle>
+    <circle cx="214" cy="146" r="11" fill="#f5d2b5" stroke={INK} stroke-width="5"></circle>
     <rect x="207" y="104" width="16" height="36" rx="8" fill="#E74138" stroke={INK} stroke-width="5" transform="rotate(14 215 122)"></rect>
     <!-- other arm, laughing -->
     <path d="M118 196 Q88 186 92 160" fill="none" stroke={INK} stroke-width="20" stroke-linecap="round"></path>
     <path d="M118 196 Q88 186 92 160" fill="none" stroke="#E836A1" stroke-width="10" stroke-linecap="round"></path>
-    <circle cx="92" cy="154" r="11" fill="#f2c6a0" stroke={INK} stroke-width="5"></circle>
+    <circle cx="92" cy="154" r="11" fill="#f5d2b5" stroke={INK} stroke-width="5"></circle>
     <!-- head -->
     <g class="kid-head">
-      <circle cx="150" cy="118" r="44" fill="#f2c6a0" stroke={INK} stroke-width="6"></circle>
-      <path d="M106 112 Q104 70 150 68 Q196 70 194 112 Q178 88 150 90 Q122 88 106 112 Z" fill="#7a3d1c" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
-      <!-- happy closed eyes -->
-      <path d="M126 116 Q134 106 142 116" fill="none" stroke={INK} stroke-width="5" stroke-linecap="round"></path>
-      <path d="M158 116 Q166 106 174 116" fill="none" stroke={INK} stroke-width="5" stroke-linecap="round"></path>
+      <!-- gray bun -->
+      <circle cx="150" cy="66" r="20" fill="#d8d2cc" stroke={INK} stroke-width="6"></circle>
+      <circle cx="150" cy="118" r="44" fill="#f5d2b5" stroke={INK} stroke-width="6"></circle>
+      <!-- short gray curls framing the face -->
+      <path d="M106 118 Q98 96 112 84 Q118 70 136 74 Q150 66 164 74 Q182 70 188 84 Q202 96 194 118 Q184 96 166 92 Q150 86 134 92 Q116 96 106 118 Z" fill="#d8d2cc" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
+      <circle cx="106" cy="122" r="9" fill="#d8d2cc" stroke={INK} stroke-width="5"></circle>
+      <circle cx="194" cy="122" r="9" fill="#d8d2cc" stroke={INK} stroke-width="5"></circle>
+      <!-- round glasses + happy closed eyes -->
+      <circle cx="133" cy="114" r="14" fill="#fff" fill-opacity="0.35" stroke={INK} stroke-width="5"></circle>
+      <circle cx="167" cy="114" r="14" fill="#fff" fill-opacity="0.35" stroke={INK} stroke-width="5"></circle>
+      <path d="M147 112 H153" stroke={INK} stroke-width="5" stroke-linecap="round"></path>
+      <path d="M126 117 Q133 109 140 117" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
+      <path d="M160 117 Q167 109 174 117" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
+      <!-- laugh lines -->
+      <path d="M116 112 L110 108 M116 118 L109 119 M184 112 L190 108 M184 118 L191 119" stroke={INK} stroke-width="2.5" stroke-linecap="round"></path>
+      <path d="M124 136 Q122 142 126 146 M176 136 Q178 142 174 146" fill="none" stroke={INK} stroke-width="2.5" stroke-linecap="round"></path>
       <!-- big laugh -->
-      <path d="M130 132 Q150 160 170 132 Z" fill={INK} stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
-      <path d="M140 146 Q150 154 160 146" fill="#E74138"></path>
-      <circle cx="122" cy="132" r="7" fill="#E836A1" opacity="0.4"></circle>
-      <circle cx="178" cy="132" r="7" fill="#E836A1" opacity="0.4"></circle>
-      <!-- tiara -->
-      <path d="M128 72 L136 56 L150 68 L164 56 L172 72 Z" fill="#F7D94A" stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
+      <path d="M132 134 Q150 160 168 134 Z" fill={INK} stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
+      <path d="M141 147 Q150 154 159 147" fill="#E74138"></path>
+      <circle cx="120" cy="134" r="6" fill="#E836A1" opacity="0.4"></circle>
+      <circle cx="180" cy="134" r="6" fill="#E836A1" opacity="0.4"></circle>
+      <!-- winner crown -->
+      <path d="M130 52 L136 34 L150 46 L164 34 L170 52 Z" fill="#F7D94A" stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
     </g>
   </g>
   <g class="kid-ha" fill="#fff" font-family="Fredoka, Rubik, sans-serif" font-weight="700" stroke={INK} stroke-width="3" paint-order="stroke">

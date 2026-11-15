@@ -5,7 +5,7 @@ import { animateWords } from "../motion";
 export function init({ reduced }: { reduced: boolean }) {
   const s = document.querySelector<HTMLElement>("[data-scene='1']");
   if (!s) return;
-  const art = s.querySelector(".s1-art");
+  const art = s.querySelector(".s1-stage");
   const title = s.querySelector(".s1-title");
   const kids = s.querySelector(".kids");
 

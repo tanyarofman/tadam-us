@@ -19,10 +19,6 @@ const qr = Array.from({ length: 121 }, (_, i) => {
   <div class="scene-pin s5-pin">
     <canvas class="s5-crowd" aria-hidden="true"></canvas>
 
-    <div class="s5-head container">
-      <span class="eyebrow">{c.eyebrow}</span>
-    </div>
-
     <div class="s5-split container">
       {/* Big projector screen */}
       <figure class="bigscreen" aria-label="המסך הגדול באולם">
@@ -38,7 +34,7 @@ const qr = Array.from({ length: 121 }, (_, i) => {
                 <span class="bs-shape" aria-hidden="true">{shapes[i]}</span>
                 <span class="bs-label">{a}</span>
                 <span class="bs-bar">
-                  <span class="bs-fill" style={`transform: scaleX(${finalPct[i] / 100})`} />
+                  <span class="bs-fill" style={`width: ${finalPct[i]}%`} />
                 </span>
                 <span class="bs-pct">
                   <span class="bs-pct-n">{finalPct[i]}</span>%
@@ -94,7 +90,7 @@ const qr = Array.from({ length: 121 }, (_, i) => {
 
 <style>
   .s5-pin {
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto;
     align-items: center;
     padding-block: clamp(56px, 8vh, 90px) clamp(28px, 6vh, 64px);
     background: radial-gradient(70% 60% at 50% 40%, var(--bg-1), var(--bg-0));
@@ -107,17 +103,10 @@ const qr = Array.from({ length: 121 }, (_, i) => {
     opacity: 1;
     z-index: 0;
   }
-  .s5-head,
   .s5-split,
   .s5-copy {
     position: relative;
     z-index: 1;
-  }
-  .s5-head {
-    text-align: center;
-  }
-  .s5-head .eyebrow {
-    margin: 0;
   }
   .s5-split {
     display: grid;
@@ -194,13 +183,13 @@ const qr = Array.from({ length: 121 }, (_, i) => {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
     overflow: hidden;
+    direction: ltr; /* bars fill from left to right */
   }
   .bs-fill {
     display: block;
     height: 100%;
     background: var(--c);
     border-radius: inherit;
-    transform-origin: right center; /* RTL */
   }
   .bs-pct {
     text-align: start;

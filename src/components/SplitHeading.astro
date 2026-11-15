@@ -37,7 +37,10 @@ const hlWords = highlight ? highlight.split(/\s+/) : [];
     display: inline-block;
     will-change: transform;
   }
-  .word-hl::after {
+  .word-hl .word-in {
+    position: relative;
+  }
+  .word-hl .word-in::after {
     content: "";
     position: absolute;
     inset-inline: -0.06em;

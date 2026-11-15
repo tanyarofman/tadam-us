@@ -14,9 +14,9 @@ const tiles = [
 ---
 
 <section class="scene s4" id="scene-4" data-scene="4" aria-labelledby="s4-title">
+  <div class="s4-pin">
   <div class="container s4-inner">
     <div class="s4-head">
-      <span class="eyebrow reveal">{c.eyebrow}</span>
       <SplitHeading as="h2" id="s4-title" class="h-scene s4-title" text={c.headline} />
     </div>
 
@@ -103,15 +103,24 @@ const tiles = [
       <p>{c.privacy}</p>
     </aside>
   </div>
+  </div>
 </section>
 
 <style>
-  .s4 {
-    padding-block: clamp(80px, 14vh, 160px);
+  .s4-pin {
+    padding-block: clamp(64px, 10vh, 120px);
   }
   .s4-head {
     text-align: center;
-    margin-bottom: clamp(36px, 6vh, 64px);
+    margin-bottom: clamp(24px, 4vh, 56px);
+  }
+  /* Pinned + animated mode (set by JS): fit the whole step sequence in one screen */
+  :global(.s4.is-pinned) .s4-pin {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: clamp(24px, 5vh, 64px);
   }
   :global(.s4-title) {
     text-shadow: 0 4px 0 var(--purple-ink);
@@ -353,19 +362,26 @@ const tiles = [
   .privacy-strip {
     display: flex;
     align-items: center;
-    gap: 18px;
-    max-width: 820px;
-    margin: clamp(40px, 7vh, 72px) auto 0;
-    padding: 20px 24px;
+    gap: 14px;
+    width: fit-content;
+    max-width: 100%;
+    margin: clamp(24px, 5vh, 56px) auto 0;
+    padding: 14px 22px;
     border-radius: var(--radius-m);
     background: rgba(255, 255, 255, 0.06);
     border: 2px solid var(--surface-border);
-    color: var(--text-muted);
-    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    color: var(--text);
+    font-size: clamp(0.92rem, 1.15vw, 1rem);
   }
   .privacy-icon {
-    width: 44px;
+    width: 36px;
     flex: none;
+  }
+  /* one sentence, one line, on wide screens */
+  @media (min-width: 1180px) {
+    .privacy-strip p {
+      white-space: nowrap;
+    }
   }
 
   @media (max-width: 899px) {
@@ -373,6 +389,19 @@ const tiles = [
       grid-template-columns: 1fr;
       max-width: 460px;
       margin-inline: auto;
+    }
+    /* phones, animated: the cards take the stage one at a time */
+    :global(.s4.is-pinned) .s4-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    :global(.s4.is-pinned) .step-card {
+      grid-area: 1 / 1;
+    }
+    :global(.s4.is-pinned) .step-visual {
+      height: 220px;
+    }
+    :global(.s4.is-pinned) .step-text {
+      padding: 16px 20px 20px;
     }
   }
 </style>

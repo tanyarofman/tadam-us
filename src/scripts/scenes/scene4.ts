@@ -1,75 +1,96 @@
-/** Scene 4: three "making-of" cards flip in, each with its own little animation. */
-import { gsap, ScrollTrigger } from "../../lib/scroll";
+/**
+ * Scene 4: the "making-of". Pinned and scroll-driven so there is time to read:
+ * the cards arrive one at a time (desktop: they build up in a row; phones: each takes the stage),
+ * each plays its little animation, then the privacy sentence slides in on one line.
+ */
+import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
 
 export function init({ reduced }: { reduced: boolean }) {
   const s = document.querySelector<HTMLElement>("[data-scene='4']");
   if (!s) return;
-  const cards = s.querySelectorAll<HTMLElement>(".step-card");
+  const cards = Array.from(s.querySelectorAll<HTMLElement>(".step-card"));
   const title = s.querySelector(".s4-title");
-  const rows = s.querySelectorAll<HTMLElement>(".approve-row");
+  const rows = Array.from(s.querySelectorAll<HTMLElement>(".approve-row"));
   const tiles = s.querySelectorAll<HTMLElement>(".board-tile");
   const pings = s.querySelectorAll<HTMLElement>(".ping");
   const bubble = s.querySelector<HTMLElement>(".chat-bubble");
-
-  const finalStates = () => {
-    rows[0]?.classList.add("is-yes");
-    rows[1]?.classList.add("is-yes");
-  };
+  const privacy = s.querySelector<HTMLElement>(".privacy-strip")!;
 
   if (reduced) {
     cards.forEach((c) => c.classList.add("reveal"));
-    finalStates();
+    rows.forEach((r) => r.classList.add("is-yes"));
     return;
   }
 
-  gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
-  ScrollTrigger.create({ trigger: title, start: "top 85%", once: true, onEnter: () => animateWords(title) });
+  privacy.classList.remove("reveal");
+  s.classList.add("is-pinned");
 
-  gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
-  gsap.set(tiles, { opacity: 0 });
-  gsap.set(bubble, { opacity: 0, y: 20, scale: 0.9 });
-  gsap.set(pings, { scale: 0 });
+  const mm = gsap.matchMedia();
+  mm.add({ phone: "(max-width: 899px)", wide: "(min-width: 900px)" }, (ctx) => {
+    const phone = !!ctx.conditions?.phone;
 
-  ScrollTrigger.batch(cards, {
-    start: "top 82%",
-    once: true,
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        rotateY: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "back.out(1.4)",
-        stagger: 0.18,
-        onComplete: undefined,
-      });
-      batch.forEach((card, i) => playCard(card as HTMLElement, 0.5 + i * 0.18));
-    },
+    gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
+    gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
+    gsap.set(bubble, { opacity: 0, y: 20, scale: 0.9 });
+    gsap.set(pings, { scale: 0 });
+    gsap.set(tiles, { opacity: 0 });
+    gsap.set(privacy, { clipPath: "inset(0% 0% 0% 100%)", opacity: 0 });
+    rows.forEach((r) => r.classList.remove("is-yes"));
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: s,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * (phone ? 4.2 : 3.6),
+        pin: s.querySelector(".s4-pin"),
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      },
+    });
+    const fwd = () => tl.scrollTrigger?.direction !== -1;
+
+    tl.add(animateWords(title, { duration: 0.4, stagger: 0.05 }));
+
+    cards.forEach((card, i) => {
+      // on phones, the previous card steps back as the next one arrives
+      if (phone && i > 0) {
+        tl.to(cards[i - 1], { opacity: 0, scale: 0.9, y: -20, duration: 0.35, ease: "power1.in" });
+      }
+      tl.to(card, { rotateY: 0, opacity: 1, duration: 0.6, ease: "back.out(1.2)" }, phone && i > 0 ? "<0.15" : ">");
+
+      const step = card.dataset.step;
+      if (step === "1") {
+        tl.to(bubble, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" })
+          .to(pings, { scale: 1, duration: 0.3, ease: "back.out(3)", stagger: 0.12 });
+      }
+      if (step === "2") {
+        rows.forEach((r) => {
+          tl.call(() => r.classList.toggle("is-yes", fwd()));
+          tl.to({}, { duration: 0.3 });
+        });
+      }
+      if (step === "3") {
+        tiles.forEach((t, j) => {
+          const fromX = (j % 2 ? -1 : 1) * (120 + j * 20);
+          tl.fromTo(
+            t,
+            { opacity: 0, x: fromX, y: -160, rotate: (j % 2 ? -1 : 1) * 40, scale: 0.6 },
+            { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 0.4, ease: "back.out(1.6)" },
+            j === 0 ? ">" : "<0.1",
+          );
+        });
+      }
+      // time to read
+      tl.to({}, { duration: 0.6 });
+    });
+
+    // the privacy promise: one sentence, sliding in along its line (right to left)
+    tl.to(privacy, { opacity: 1, duration: 0.15 })
+      .to(privacy, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power1.inOut" }, "<")
+      .to({}, { duration: 0.8 });
+
+    return () => rows.forEach((r) => r.classList.remove("is-yes"));
   });
-
-  function playCard(card: HTMLElement, delay: number) {
-    const step = card.dataset.step;
-    if (step === "1") {
-      gsap.timeline({ delay })
-        .to(bubble, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2)" })
-        .to(pings, { scale: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.2 })
-        .to(pings, { scale: 1.25, yoyo: true, repeat: 3, duration: 0.3 });
-    }
-    if (step === "2") {
-      const tl = gsap.timeline({ delay: delay + 0.3 });
-      tl.call(() => rows[0]?.classList.add("is-yes"))
-        .call(() => rows[1]?.classList.add("is-yes"), [], "+=0.6")
-        .call(() => rows[2]?.classList.add("is-yes"), [], "+=0.6");
-    }
-    if (step === "3") {
-      tiles.forEach((t, i) => {
-        const fromX = (i % 2 ? -1 : 1) * (120 + i * 20);
-        gsap.fromTo(
-          t,
-          { opacity: 0, x: fromX, y: -160, rotate: (i % 2 ? -1 : 1) * 40, scale: 0.6 },
-          { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 0.7, ease: "back.out(1.6)", delay: delay + 0.3 + i * 0.12 },
-        );
-      });
-    }
-  }
 }

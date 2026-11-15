@@ -37,7 +37,7 @@ const ogImage = new URL("/brand/tadam-logo.png", Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preload" as="image" href="/brand/tadam-logo.png" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo.webp" fetchpriority="high" />
     <!-- Theme: ?theme=night (default) | ?theme=stage. Runs before paint to avoid a flash. -->
     <script is:inline>
       (function () {

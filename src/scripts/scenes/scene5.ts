@@ -103,21 +103,19 @@ export function init({ reduced }: { reduced: boolean }) {
   const sent = q(".phone-sent");
   const title = q(".s5-title");
 
-  // Answer percentages at each stage: start, others answer, our tap lands, final
+  // Percent of the room on each answer at each stage: start, others answer, our tap lands, final.
+  // Bars and numbers show these values directly, so they grow together.
   const stages = [
     [0, 0, 0, 0],
-    [12, 22, 8, 14],
-    [14, 40, 9, 18],
+    [9, 21, 5, 11],
+    [12, 40, 8, 16],
     [14, 58, 9, 19],
   ];
   const state = { a: 0, b: 0, c: 0, d: 0, n: 5, t: 15, crowd: 0 };
   const render = () => {
-    const vals = [state.a, state.b, state.c, state.d];
-    const total = Math.max(1, vals.reduce((x, y) => x + y, 0));
-    vals.forEach((v, i) => {
-      const pct = Math.round((v / total) * 100);
-      fills[i].style.transform = `scaleX(${v === 0 ? 0 : pct / 100})`;
-      pcts[i].textContent = String(v === 0 ? 0 : pct);
+    [state.a, state.b, state.c, state.d].forEach((v, i) => {
+      fills[i].style.width = `${v}%`;
+      pcts[i].textContent = String(Math.round(v));
     });
     count.textContent = String(Math.round(state.n));
     timer.textContent = String(Math.max(0, Math.round(state.t)));
@@ -133,7 +131,7 @@ export function init({ reduced }: { reduced: boolean }) {
     scrollTrigger: {
       trigger: s,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 3.2 : 3.6),
+      end: () => "+=" + window.innerHeight * (isMobile() ? 4.4 : 5),
       pin: s.querySelector(".scene-pin"),
       scrub: 0.6,
       invalidateOnRefresh: true,
@@ -142,9 +140,9 @@ export function init({ reduced }: { reduced: boolean }) {
 
   tl.fromTo(split, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 })
     // live answers start coming in
-    .to(state, { ...toStage(1), n: 48, t: 9, duration: 1, onUpdate: render })
+    .to(state, { ...toStage(1), n: 48, t: 9, duration: 2, onUpdate: render })
     // the finger taps
-    .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<0.4")
+    .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<1.2")
     .to(finger, { scale: 0.85, duration: 0.1 })
     .to(picked, { scale: 0.92, y: 4, duration: 0.1 }, "<")
     .call(() => picked.classList.add("is-picked"))
@@ -153,9 +151,9 @@ export function init({ reduced }: { reduced: boolean }) {
     .fromTo(sent, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" })
     .to(finger, { opacity: 0, y: 40, duration: 0.25 }, "<")
     // our bar grows
-    .to(state, { ...toStage(2), n: 132, t: 4, duration: 0.6, onUpdate: render })
-    .to(state, { ...toStage(3), n: 214, t: 0, duration: 0.5, onUpdate: render })
-    .to({}, { duration: 0.3 })
+    .to(state, { ...toStage(2), n: 132, t: 4, duration: 1.4, onUpdate: render })
+    .to(state, { ...toStage(3), n: 214, t: 0, duration: 1.2, onUpdate: render })
+    .to({}, { duration: 0.6 })
     // camera pulls back: the whole hall lights up
     .to(split, { scale: isMobile() ? 0.5 : 0.42, y: "-12%", opacity: 0, duration: 1, ease: "power2.in" })
     .to(state, { crowd: 1, duration: 1.4, onUpdate: render }, "<0.2")
@@ -164,6 +162,6 @@ export function init({ reduced }: { reduced: boolean }) {
 
   // reset the tap if the user scrolls back up
   tl.eventCallback("onUpdate", () => {
-    if (tl.progress() < 0.3) picked.classList.remove("is-picked");
+    if (tl.progress() < 0.4) picked.classList.remove("is-picked");
   });
 }

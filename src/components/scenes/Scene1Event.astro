@@ -1,0 +1,51 @@
+---
+import { COPY } from "../../content/copy.he";
+import SplitHeading from "../SplitHeading.astro";
+import HallArt from "../art/HallArt.astro";
+const c = COPY.scene1;
+---
+
+<section class="scene s1" id="scene-1" data-scene="1" aria-labelledby="s1-title">
+  <div class="scene-pin s1-pin">
+    <div class="s1-art" role="img" aria-label={c.hallLabel}>
+      <HallArt />
+    </div>
+    <div class="s1-shade" aria-hidden="true"></div>
+    <div class="s1-copy container">
+      <span class="eyebrow reveal">{c.eyebrow}</span>
+      <SplitHeading as="h2" id="s1-title" class="h-scene s1-title" text={c.headline} highlight="מחכים" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .s1-pin {
+    align-items: start;
+  }
+  .s1-art {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 70%;
+  }
+  .s1-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--bg-0) 0%, transparent 38%, transparent 80%, var(--bg-0) 100%);
+    pointer-events: none;
+  }
+  .s1-copy {
+    position: relative;
+    text-align: center;
+    padding-top: clamp(72px, 12vh, 120px);
+  }
+  :global(.s1-title) {
+    max-width: 16ch;
+    margin-inline: auto;
+    text-shadow: 0 4px 0 var(--purple-ink), 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+  @media (max-width: 767px) {
+    .s1-copy {
+      padding-top: 64px;
+    }
+  }
+</style>

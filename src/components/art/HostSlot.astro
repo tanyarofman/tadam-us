@@ -1,0 +1,159 @@
+---
+/**
+ * The host slot: spotlight, an empty mic stand, and GENERIC silhouettes by type.
+ * Never a real person or a recognizable character. Shapes are deliberately generic.
+ */
+import { COPY } from "../../content/copy.he";
+const types = COPY.scene3.hostTypes;
+const INK = "#1a0638";
+---
+
+<div class="host-slot">
+  <svg class="host-svg" viewBox="0 0 400 360" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="host-spot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff8d6" stop-opacity="0.85"></stop>
+        <stop offset="1" stop-color="#F7D94A" stop-opacity="0.05"></stop>
+      </linearGradient>
+      <radialGradient id="host-pool">
+        <stop offset="0" stop-color="#F7D94A" stop-opacity="0.7"></stop>
+        <stop offset="1" stop-color="#F7D94A" stop-opacity="0"></stop>
+      </radialGradient>
+      <linearGradient id="host-sil" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a1670"></stop>
+        <stop offset="1" stop-color="#1a0638"></stop>
+      </linearGradient>
+    </defs>
+
+    <g class="host-spot">
+      <path d="M170 0 L230 0 L330 330 L70 330 Z" fill="url(#host-spot)"></path>
+      <ellipse cx="200" cy="330" rx="140" ry="26" fill="url(#host-pool)"></ellipse>
+    </g>
+
+    {/* empty mic stand */}
+    <g class="host-mic" stroke={INK} stroke-linecap="round" stroke-linejoin="round">
+      <path d="M200 330 V200" stroke-width="8"></path>
+      <path d="M170 332 L200 316 L230 332" stroke-width="8" fill="none"></path>
+      <path d="M200 205 L214 178" stroke-width="6"></path>
+      <rect x="203" y="150" width="24" height="36" rx="12" transform="rotate(25 215 168)" fill="#614098" stroke-width="5"></rect>
+    </g>
+
+    <g class="host-sils" fill="url(#host-sil)" stroke="#64D8F7" stroke-width="3" stroke-linejoin="round">
+      {/* singer: generic figure, long hair, mic raised */}
+      <g class="sil" data-type="singer">
+        <path d="M160 330 Q150 250 170 230 Q200 214 230 230 Q250 250 240 330 Z"></path>
+        <path d="M176 186 Q172 130 200 128 Q228 130 224 186 Q232 214 226 236 L174 236 Q168 214 176 186 Z"></path>
+        <path d="M228 240 Q262 214 270 160" fill="none" stroke-width="14" stroke="#64D8F7"></path>
+        <path d="M228 240 Q262 214 270 160" fill="none" stroke-width="9" stroke="#2a0d58"></path>
+        <rect x="262" y="132" width="18" height="30" rx="9"></rect>
+        <path d="M172 248 Q150 270 178 288" fill="none" stroke-width="14" stroke="#64D8F7"></path>
+        <path d="M172 248 Q150 270 178 288" fill="none" stroke-width="9" stroke="#2a0d58"></path>
+      </g>
+      {/* athlete: generic figure with a ball */}
+      <g class="sil" data-type="athlete">
+        <path d="M156 330 Q148 248 172 230 Q200 218 228 230 Q252 248 244 330 Z"></path>
+        <circle cx="200" cy="184" r="34"></circle>
+        <path d="M168 176 Q200 160 232 176" fill="none" stroke-width="8" stroke="#E836A1"></path>
+        <circle cx="266" cy="266" r="30"></circle>
+        <path d="M240 254 Q266 266 292 254 M266 236 V296" fill="none" stroke-width="3"></path>
+      </g>
+      {/* character: a generic, made-up cartoon creature */}
+      <g class="sil" data-type="character">
+        <path d="M128 318 Q120 210 200 196 Q280 210 272 318 Q200 340 128 318 Z"></path>
+        <path d="M168 204 L150 150 M232 204 L250 150" fill="none" stroke-width="6"></path>
+        <circle cx="150" cy="146" r="12"></circle>
+        <circle cx="250" cy="146" r="12"></circle>
+        <circle cx="176" cy="252" r="16" fill="#fff" stroke="none"></circle>
+        <circle cx="224" cy="252" r="16" fill="#fff" stroke="none"></circle>
+        <circle cx="180" cy="256" r="7" fill="#1a0638" stroke="none"></circle>
+        <circle cx="220" cy="256" r="7" fill="#1a0638" stroke="none"></circle>
+        <path d="M180 290 Q200 304 220 290" fill="none" stroke-width="5"></path>
+      </g>
+      {/* influencer: generic figure, phone up, ring light */}
+      <g class="sil" data-type="influencer">
+        <circle cx="262" cy="150" r="46" fill="none" stroke="#F7D94A" stroke-width="10"></circle>
+        <path d="M150 330 Q142 250 166 232 Q196 218 226 232 Q250 250 242 330 Z"></path>
+        <path d="M168 192 Q162 140 196 138 Q230 140 224 192 Q224 230 196 232 Q168 230 168 192 Z"></path>
+        <path d="M226 246 Q254 220 258 182" fill="none" stroke-width="14" stroke="#64D8F7"></path>
+        <path d="M226 246 Q254 220 258 182" fill="none" stroke-width="9" stroke="#2a0d58"></path>
+        <rect x="246" y="150" width="24" height="40" rx="5"></rect>
+      </g>
+      {/* question mark */}
+      <g class="sil sil-q" data-type="mystery">
+        <circle cx="200" cy="230" r="86" fill="#F7D94A" fill-opacity="0.12" stroke="#F7D94A" stroke-width="4"></circle>
+      </g>
+    </g>
+  </svg>
+  <span class="host-q display" aria-hidden="true">?</span>
+
+  <ul class="host-labels" role="list">
+    {types.map((t) => <li class="host-label" data-type={t.key}>{t.label}</li>)}
+  </ul>
+</div>
+
+<style>
+  .host-slot {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
+  .host-svg {
+    align-self: end;
+    width: auto;
+    height: 80%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .sil {
+    opacity: 0;
+  }
+  .sil-q {
+    opacity: 1;
+  }
+  .host-slot.anim .sil-q,
+  .host-slot.anim .host-q,
+  .host-slot.anim .host-label {
+    opacity: 0;
+  }
+  .host-q {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -62%);
+    font-size: clamp(3rem, 12vw, 8rem);
+    color: var(--sun-yellow);
+    -webkit-text-stroke: 6px var(--purple-ink);
+    paint-order: stroke fill;
+    text-shadow: 0 0 30px rgba(247, 217, 74, 0.9);
+  }
+  .host-labels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 5%;
+    inset-inline: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  .host-slot.anim .host-labels {
+    display: grid;
+    place-items: center;
+  }
+  .host-label {
+    grid-area: 1 / 1;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: var(--sun-yellow);
+    color: var(--purple-ink);
+    border: 3px solid var(--purple-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.8rem, 2vw, 1.15rem);
+    white-space: nowrap;
+  }
+</style>

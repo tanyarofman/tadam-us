@@ -1,0 +1,185 @@
+---
+import { COPY } from "../../content/copy.he";
+import Buzzer from "../Buzzer.astro";
+import HostSlot from "../art/HostSlot.astro";
+const c = COPY.scene3;
+const crowd = Array.from({ length: 22 }, (_, i) => i);
+---
+
+<section class="scene s3" id="scene-3" data-scene="3" aria-labelledby="s3-title">
+  <div class="scene-pin s3-pin">
+    <div class="s3-crowd" aria-hidden="true">
+      {crowd.map((i) => <span style={`transform: translateY(${(Math.sin(i * 1.7) * 18 + 18).toFixed(1)}px) scale(${1 + (i % 3) * 0.08})`} />)}
+    </div>
+    <div class="s3-dark" aria-hidden="true"></div>
+
+    <div class="s3-stage container">
+      <span class="eyebrow s3-eyebrow">{c.eyebrow}</span>
+
+      <div class="s3-screen" aria-hidden="true">
+        <div class="s3-screen-inner">
+          <div class="s3-burst">
+            <div class="s3-rays"></div>
+            <div class="s3-buzzer"><Buzzer id="s3-buzzer" rays /></div>
+            <div class="s3-tadam logo-type">{c.burst}</div>
+          </div>
+          <div class="s3-host">
+            <HostSlot />
+          </div>
+        </div>
+        <div class="s3-scan" aria-hidden="true"></div>
+      </div>
+
+      <h2 id="s3-title" class="display s3-title">
+        <span class="s3-line s3-line-1">{c.headline}</span>
+        <span class="s3-line s3-line-2">{c.headline2}</span>
+      </h2>
+      <p class="sr-only">{c.hostMessage} {c.hostTypes.map((t) => t.label).join(", ")}.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .s3-pin {
+    background: radial-gradient(80% 60% at 50% 40%, var(--bg-1), var(--bg-0));
+  }
+  .s3-crowd {
+    position: absolute;
+    inset-inline: -4%;
+    bottom: -30px;
+    height: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .s3-crowd span {
+    width: calc(100% / 18);
+    min-width: 46px;
+    aspect-ratio: 1 / 1.25;
+    border-radius: 50% 50% 18% 18%;
+    background: #0d0220;
+    box-shadow: inset 0 6px 0 rgba(100, 216, 247, 0.12);
+  }
+  .s3-dark {
+    position: absolute;
+    inset: 0;
+    background: #07010f;
+    opacity: 0.55;
+    z-index: 0;
+  }
+  .s3-stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(12px, 2.5vh, 24px);
+    text-align: center;
+  }
+  .s3-eyebrow {
+    margin: 0;
+  }
+  .s3-screen {
+    position: relative;
+    width: min(980px, 100%, calc((100svh - 300px) * 1.78));
+    aspect-ratio: 16 / 9;
+    border-radius: 18px;
+    border: 8px solid var(--purple-ink);
+    background: var(--screen-bg);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.08),
+      0 0 80px 10px var(--screen-glow);
+    overflow: hidden;
+  }
+  .s3-screen-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  }
+  .s3-burst,
+  .s3-host {
+    grid-area: 1 / 1;
+    position: relative;
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  .s3-burst {
+    opacity: 0;
+  }
+  .s3-rays {
+    position: absolute;
+    inset: -50%;
+    background: repeating-conic-gradient(
+      from 0deg,
+      var(--sun-yellow) 0deg 8deg,
+      transparent 8deg 22deg,
+      var(--sky-cyan) 22deg 30deg,
+      transparent 30deg 45deg
+    );
+    mask-image: radial-gradient(closest-side, black 20%, transparent 90%);
+    opacity: 0.35;
+  }
+  .s3-buzzer {
+    position: absolute;
+    width: 26%;
+    top: 22%;
+  }
+  .s3-tadam {
+    position: relative;
+    font-size: clamp(3rem, 13vw, 10rem);
+    line-height: 1;
+    margin-top: 28%;
+    opacity: 0;
+  }
+  .s3-scan {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 5px);
+    pointer-events: none;
+  }
+  .s3-title {
+    font-size: clamp(1.4rem, 3.6vw, 2.6rem);
+    max-width: 30ch;
+    text-wrap: balance;
+    text-shadow: 0 3px 0 var(--purple-ink);
+    min-height: 2.4em;
+    display: grid;
+  }
+  .s3-line {
+    grid-area: 1 / 1;
+  }
+  .s3-line-2 {
+    color: var(--sun-yellow);
+  }
+  /* Static (reduced motion / no JS): show both lines stacked */
+  :global(html:not(.s3-animated)) .s3-title {
+    display: block;
+  }
+  :global(html:not(.s3-animated)) .s3-line {
+    display: block;
+  }
+  :global(html:not(.s3-animated)) .s3-burst {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .s3-screen {
+      width: 100%;
+      aspect-ratio: 4 / 3.4;
+      border-width: 6px;
+    }
+    .s3-buzzer {
+      width: 40%;
+      top: 18%;
+    }
+    .s3-tadam {
+      margin-top: 40%;
+    }
+  }
+</style>

@@ -32,6 +32,14 @@ const { id, class: cls = "", rays = false, label } = Astro.props;
       <stop offset="0.55" stop-color="#e836a1" stop-opacity="0.25"></stop>
       <stop offset="1" stop-color="#e836a1" stop-opacity="0"></stop>
     </radialGradient>
+    <linearGradient id={`${id}-sheen`} x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.85"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+    <clipPath id={`${id}-domeclip`}>
+      <path d="M46 118 C46 58 80 30 120 30 C160 30 194 58 194 118 Z"></path>
+    </clipPath>
     <linearGradient id={`${id}-base`} x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#8a62d0"></stop>
       <stop offset="1" stop-color="#4b2a85"></stop>
@@ -80,6 +88,11 @@ const { id, class: cls = "", rays = false, label } = Astro.props;
         <ellipse cx="90" cy="60" rx="24" ry="11" fill="#fff" opacity="0.75" transform="rotate(-24 90 60)"></ellipse>
         <circle cx="122" cy="48" r="5" fill="#fff" opacity="0.55"></circle>
       </g>
+      <g class="buzzer-sheen" clip-path={`url(#${id}-domeclip)`}>
+        <g class="buzzer-sheen-bar">
+          <rect x="10" y="28" width="46" height="92" fill={`url(#${id}-sheen)`} transform="skewX(-22)"></rect>
+        </g>
+      </g>
       <path
         class="buzzer-dim"
         d="M46 118 C46 58 80 30 120 30 C160 30 194 58 194 118 Z"
@@ -104,6 +117,10 @@ const { id, class: cls = "", rays = false, label } = Astro.props;
   .buzzer-cap {
     transform-box: fill-box;
     transform-origin: 50% 100%;
+  }
+  .buzzer-sheen {
+    opacity: 0; /* only the loading screen turns the light sweep on */
+    pointer-events: none;
   }
   .buzzer-dim {
     opacity: calc((1 - var(--glow)) * 0.6);

@@ -11,11 +11,13 @@ import Scene7Cta from "../components/scenes/Scene7Cta.astro";
 import Faq from "../components/Faq.astro";
 import Footer from "../components/Footer.astro";
 import DemoModal from "../components/DemoModal.astro";
+import Preloader from "../components/Preloader.astro";
 import { COPY } from "../content/copy.he";
 import { SITE } from "../config/site";
 ---
 
 <Base>
+  <Preloader />
   <a class="skip-link" href="#scene-1">{COPY.nav.skip}</a>
   <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
 

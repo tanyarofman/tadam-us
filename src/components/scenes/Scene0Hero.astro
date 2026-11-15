@@ -64,7 +64,14 @@ const c = COPY.hero;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .hero-sub {
-    max-width: 40ch;
+    max-width: 64ch; /* two lines on desktop */
+    text-wrap: balance;
+  }
+  @media (max-width: 600px) {
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
   }
   .hero-ctas {
     display: flex;

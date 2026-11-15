@@ -1,4 +1,4 @@
-# טדאם! landing page
+# טדאם! (tadam)
 
 Marketing landing page for **טדאם!**, a personalized live trivia game for bar and bat mitzvahs.
 Astro (static) + TypeScript, GSAP + ScrollTrigger, Lenis smooth scroll, plain CSS custom properties.
@@ -13,6 +13,12 @@ npm run preview    # serve the production build
 ```
 
 Deploy: Netlify picks up `netlify.toml` (build `npm run build`, publish `dist`).
+Netlify site: `tadam-game` (https://tadam-game.netlify.app). `tadam.netlify.app` was already taken.
+
+```bash
+netlify deploy --dir dist          # draft preview
+netlify deploy --dir dist --prod   # publish to tadam-game.netlify.app
+```
 
 ## Switch themes
 

@@ -1,5 +1,5 @@
 {
-  "name": "tadam-landing",
+  "name": "tadam",
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",

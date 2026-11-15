@@ -103,6 +103,7 @@ export function init({ reduced }: { reduced: boolean }) {
   const sent = q(".phone-sent");
   const result = q(".phone-result");
   const title = q(".s5-title");
+  q(".s5-pin").classList.add("is-animated");
 
   // Like the real game: while guests answer, the big screen shows only the options,
   // a countdown and how many have answered. Nothing is revealed until the answer is in.
@@ -151,9 +152,11 @@ export function init({ reduced }: { reduced: boolean }) {
     .fromTo(result, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(3)" }, "<")
     .to({}, { duration: 0.8 })
     // camera pulls back: the whole hall lights up
+    .addLabel("pullback")
     .to(split, { scale: isMobile() ? 0.5 : 0.42, y: "-12%", opacity: 0, duration: 1, ease: "power2.in" })
     .to(state, { crowd: 1, duration: 1.4, onUpdate: render }, "<0.2")
-    .add(animateWords(title, { duration: 0.35, stagger: 0.05 }), "<0.5")
+    // the headline sits where the screen was, so it waits until the screen is gone
+    .add(animateWords(title, { duration: 0.35, stagger: 0.05 }), "pullback+=0.95")
     .to({}, { duration: 0.4 });
 
   // reset the tap if the user scrolls back up

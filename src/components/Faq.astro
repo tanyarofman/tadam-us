@@ -1,0 +1,118 @@
+---
+import { COPY } from "../content/copy.he";
+const c = COPY.faq;
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-inner">
+    <h2 id="faq-title" class="display h-scene faq-title reveal">{c.title}</h2>
+    <div class="faq-list">
+      {
+        c.items.map((it) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{it.q}</span>
+              <span class="faq-icon" aria-hidden="true" />
+            </summary>
+            <div class="faq-a">
+              <p>{it.a}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { track } from "../lib/analytics";
+  document.querySelectorAll<HTMLDetailsElement>(".faq-item").forEach((d) =>
+    d.addEventListener("toggle", () => {
+      if (d.open) track("faq_open", { q: d.querySelector("summary span")?.textContent });
+    }),
+  );
+</script>
+
+<style>
+  .faq {
+    padding-block: clamp(72px, 12vh, 140px);
+  }
+  .faq-inner {
+    max-width: 820px;
+  }
+  .faq-title {
+    text-align: center;
+    margin-bottom: clamp(28px, 5vh, 48px);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+  .faq-list {
+    display: grid;
+    gap: 12px;
+  }
+  .faq-item {
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+    overflow: hidden;
+  }
+  .faq-item[open] {
+    border-color: var(--magenta);
+  }
+  summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+    padding: 16px 22px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.02rem, 2vw, 1.2rem);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    position: relative;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--buzzer-red);
+    border: 3px solid var(--purple-ink);
+    transition: transform 0.3s var(--ease-bounce);
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 3px;
+    margin: -1.5px 0 0 -6px;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .faq-icon::after {
+    transform: rotate(90deg);
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    padding: 0 22px 20px;
+    color: var(--text-muted);
+  }
+  .faq-item[open] .faq-a {
+    animation: faq-in 0.35s var(--ease-out);
+  }
+  @keyframes faq-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+</style>

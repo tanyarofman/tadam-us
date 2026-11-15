@@ -92,6 +92,13 @@ export const COPY = {
     scanHint: "סרקו ושחקו",
     timer: "שנ׳",
     questionNo: "שאלה 4 מתוך 12",
+    answered: "ענו",
+    correctIndex: 1,
+    correctTag: "התשובה הנכונה",
+    phoneSent: "התשובה נשלחה",
+    phoneWaiting: "מחכים לכולם...",
+    phoneCorrect: "צדקת!",
+    phonePoints: "+850",
   },
 
   scene6: {

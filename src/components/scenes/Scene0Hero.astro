@@ -122,6 +122,13 @@ const c = COPY.hero;
   }
 
   /* Hidden until the intro plays (JS only) */
+  :global(.hero-title .word-hl)::after {
+    transition: opacity 0.5s 0.6s;
+  }
+  :global(html.js .intro-pending .hero-title .word-hl)::after {
+    opacity: 0;
+    transition: none;
+  }
   :global(html.js .intro-pending .hero-title .word-in),
   :global(html.js) .intro-pending [data-hero-fade] {
     opacity: 0;

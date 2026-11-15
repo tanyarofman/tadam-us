@@ -48,31 +48,40 @@ export function initHero(onDone?: () => void) {
 
   lockScroll(true);
   const bg = pre.querySelector(".pre-bg");
-  const ring = pre.querySelector(".pre-ring");
   const wrap = pre.querySelector<HTMLElement>("[data-pre-buzzer]")!;
   const buzzer = wrap.querySelector<SVGSVGElement>("svg")!;
   const cap = buzzer.querySelector(".buzzer-cap");
   const rays = buzzer.querySelectorAll(".ray-set");
   const dim = buzzer.querySelector(".buzzer-dim");
   const halo = buzzer.querySelector(".buzzer-glow");
+  const shine = buzzer.querySelector(".buzzer-shine");
+  const sheen = buzzer.querySelector(".buzzer-sheen");
+  const sheenBar = buzzer.querySelector(".buzzer-sheen-bar");
 
   gsap.set(rays, { scale: 0, opacity: 0 });
   gsap.set(buzzer, { "--glow": 1 }); // glow is driven per layer below (cheaper than a CSS var per frame)
-  gsap.set(dim, { opacity: 0.5 });
-  gsap.set(halo, { opacity: 0.15 });
+  gsap.set(dim, { opacity: 0.12 });
+  gsap.set(halo, { opacity: 0.2 });
+  gsap.set(shine, { opacity: 0.35, transformOrigin: "50% 50%" });
+  gsap.set(sheen, { opacity: 1 });
+  gsap.set(cap, { svgOrigin: "120 118" }); // squash the dome toward the rim it sits on, never into the base
+  gsap.set(sheenBar, { x: -60 }); // starts off the dome on the left
   gsap.set(top, { opacity: 0, scale: 0.9, transformOrigin: "50% 40%" });
   gsap.set(letters, { opacity: 0, yPercent: -40 });
   gsap.set(swoosh, { opacity: 1, clipPath: "inset(80% 0% 0% 100%)" });
 
-  // 1. blink while loading
+  // 1. while loading: a band of light sweeps across the dome, the white shine lights up as it passes
+  //    and the dome glows with it, like a stage light passing over the buzzer
   const blink = gsap
-    .timeline({ repeat: -1 })
-    .to(dim, { opacity: 0, duration: 0.32, ease: "power2.out" })
-    .to(halo, { opacity: 0.9, duration: 0.32, ease: "power2.out" }, "<")
-    .to(wrap, { scale: 1.06, duration: 0.32, ease: "power2.out" }, "<")
-    .to(dim, { opacity: 0.5, duration: 0.42, ease: "power2.in" })
-    .to(halo, { opacity: 0.15, duration: 0.42, ease: "power2.in" }, "<")
-    .to(wrap, { scale: 1, duration: 0.42, ease: "power2.in" }, "<");
+    .timeline({ repeat: -1, repeatDelay: 0.25 })
+    .to(sheenBar, { x: 200, duration: 1.1, ease: "power1.inOut" })
+    .to(dim, { opacity: 0, duration: 0.4, ease: "power2.out" }, "<0.1")
+    .to(halo, { opacity: 0.65, duration: 0.4, ease: "power2.out" }, "<")
+    .to(shine, { opacity: 1, scale: 1.15, duration: 0.3, ease: "power2.out" }, "<0.15")
+    .to(shine, { opacity: 0.35, scale: 1, duration: 0.5, ease: "power2.in" }, ">0.05")
+    .to(dim, { opacity: 0.12, duration: 0.5, ease: "power2.in" }, "<0.1")
+    .to(halo, { opacity: 0.2, duration: 0.5, ease: "power2.in" }, "<")
+    .set(sheenBar, { x: -60 });
 
   // ready = logo image + fonts + a short beat (so the blink is seen), capped; a tap skips ahead
   let skip: () => void = () => {};
@@ -82,11 +91,11 @@ export function initHero(onDone?: () => void) {
   const ready = Promise.all([
     waitForImage(img),
     document.fonts?.ready ?? Promise.resolve(),
-    new Promise((r) => setTimeout(r, 750)),
+    new Promise((r) => setTimeout(r, 1900)),
   ]);
-  const cap2500 = new Promise((r) => setTimeout(r, 2500));
+  const capWait = new Promise((r) => setTimeout(r, 3800));
 
-  Promise.race([ready, cap2500, skipped]).then(() => {
+  Promise.race([ready, capWait, skipped]).then(() => {
     blink.kill();
     hero.classList.add("intro-playing");
     window.scrollTo(0, 0);
@@ -99,20 +108,30 @@ export function initHero(onDone?: () => void) {
     const s = to.width / from.width;
 
     const tl = gsap.timeline({ onComplete: finish });
-    // 2. the press
-    tl.to(wrap, { scale: 1, duration: 0.12 })
-      .to(dim, { opacity: 0, duration: 0.12 }, "<")
-      .to(halo, { opacity: 0.9, duration: 0.12 }, "<")
-      .to(cap, { scaleY: 0.7, y: 7, duration: 0.1, ease: "power2.in" })
-      .to(cap, { scaleY: 1, y: 0, duration: 0.45, ease: "elastic.out(1.2, 0.4)" })
-      .to(rays, { scale: 1.15, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.04 }, "<")
-      .fromTo(ring, { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 1.6, duration: 0.6, ease: "power2.out" }, "<")
+    // 2. the press: a short wind-up, the dome is pushed all the way down and held, then it pops back
+    tl.to(shine, { opacity: 0.35, scale: 1, duration: 0.15 })
+      .to(sheen, { opacity: 0, duration: 0.15 }, "<")
+      .to(dim, { opacity: 0, duration: 0.15 }, "<")
+      .to(halo, { opacity: 0.3, duration: 0.15 }, "<")
+      .to(wrap, { scale: 1.05, duration: 0.18, ease: "power2.out" }, "<")
+      .to(cap, { scaleY: 0.78, scaleX: 1.03, duration: 0.11, ease: "power3.in" })
+      .to(wrap, { scaleX: 1.06, scaleY: 0.93, duration: 0.11, ease: "power3.in" }, "<")
+      .to(dim, { opacity: 0.3, duration: 0.11 }, "<")
+      .to({}, { duration: 0.18 }) // hold it down, so the press reads
+      .to(cap, { scaleY: 1, scaleX: 1, duration: 0.55, ease: "elastic.out(1.2, 0.4)" })
+      .to(wrap, { scale: 1, duration: 0.3, ease: "back.out(2)" }, "<")
+      .to(dim, { opacity: 0, duration: 0.1 }, "<")
+      .to(halo, { opacity: 1, duration: 0.12 }, "<")
+      .fromTo(shine, { opacity: 1, scale: 1.3 }, { scale: 1, duration: 0.4, ease: "power2.out" }, "<")
+      .to(rays, { scale: 1.15, opacity: 1, duration: 0.5, ease: "back.out(3)", stagger: 0.06 }, "<")
+      // the rays stay out and wiggle for a moment so they are really seen
+      .to(rays, { scale: 1.05, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 1 }, ">")
       // the stage opens
       .to(bg, { opacity: 0, duration: 0.6, ease: "power2.inOut" }, "<0.2")
       .to(burst, { opacity: 1, duration: 0.6 }, "<")
       // 3. the buzzer shrinks and flies into the logo
-      .to(rays, { opacity: 0, scale: 0.6, duration: 0.3 }, "<0.1")
-      .to(wrap, { x: dx, y: dy, scale: s, duration: 0.7, ease: "power3.inOut" }, "<")
+      .to(wrap, { x: dx, y: dy, scale: s, duration: 0.7, ease: "power3.inOut" }, ">-0.2")
+      .to(rays, { opacity: 0, scale: 0.6, duration: 0.5, ease: "power2.in" }, "<0.15")
       .to(top, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, ">-0.15")
       .to(wrap, { opacity: 0, duration: 0.2 }, "<0.1")
       .set(pre, { pointerEvents: "none" }, "<")

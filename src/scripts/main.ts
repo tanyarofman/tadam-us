@@ -17,24 +17,6 @@ function initScrollProgress() {
   });
 }
 
-function initThemeSwitch() {
-  const root = document.documentElement;
-  document.querySelectorAll<HTMLButtonElement>("[data-theme-btn]").forEach((btn) => {
-    const sync = () => btn.setAttribute("aria-pressed", String(root.dataset.theme === btn.dataset.themeBtn));
-    sync();
-    btn.addEventListener("click", () => {
-      const t = btn.dataset.themeBtn!;
-      root.dataset.theme = t;
-      const url = new URL(location.href);
-      url.searchParams.set("theme", t);
-      history.replaceState(null, "", url);
-      document.querySelectorAll<HTMLButtonElement>("[data-theme-btn]").forEach((b) =>
-        b.setAttribute("aria-pressed", String(root.dataset.theme === b.dataset.themeBtn)),
-      );
-    });
-  });
-}
-
 function initLinks() {
   document.addEventListener("click", (e) => {
     const a = (e.target as HTMLElement).closest<HTMLElement>("[data-scroll-to]");
@@ -63,7 +45,6 @@ async function initScenes(loading: Promise<Array<{ init: (o: { reduced: boolean 
 
 function boot() {
   initScroll();
-  initThemeSwitch();
   initLinks();
   initDemoModal();
   initScrollProgress();

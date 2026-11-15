@@ -20,17 +20,10 @@ netlify deploy --dir dist          # draft preview
 netlify deploy --dir dist --prod   # publish to tadam-game.netlify.app
 ```
 
-## Switch themes
+## Theme
 
-Two themes, both driven by CSS variables in `src/styles/tokens.css`:
-
-| URL | Theme |
-|---|---|
-| `/?theme=night` (default) | **Purple Night**: deep purple, warm yellow spotlights |
-| `/?theme=stage` | **Game Stage**: electric blue stage + glowing floor strip, matches the game screens |
-
-There is also a small floating **Purple Night / Game Stage** switch (top-left) for comparing live.
-Hide it before launch: `showThemeSwitch: false` in `src/config/site.ts`.
+One theme, **Game Stage** (electric blue stage + glowing floor strip, matches the game screens),
+driven by CSS variables in `src/styles/tokens.css`.
 
 ## Where to edit things
 
@@ -38,8 +31,8 @@ Hide it before launch: `showThemeSwitch: false` in `src/config/site.ts`.
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
 | Demo links to the Base44 game | `src/config/demo.ts` |
-| WhatsApp number + message, theme switch toggle | `src/config/site.ts` |
-| Colors / type scale / both themes | `src/styles/tokens.css` |
+| WhatsApp number + message | `src/config/site.ts` |
+| Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` |
 

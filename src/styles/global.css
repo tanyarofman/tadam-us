@@ -282,10 +282,6 @@ p {
   border-radius: 4px;
   background: linear-gradient(90deg, transparent, var(--floor-glow), var(--white), var(--floor-glow), transparent);
   box-shadow: 0 0 24px 6px var(--floor-glow);
-  opacity: 0;
-}
-:root[data-theme="stage"] .stage-backdrop .floor-strip {
-  opacity: 1;
 }
 .stage-backdrop .dots {
   position: absolute;
@@ -329,33 +325,6 @@ p {
   transform: none;
 }
 
-/* ---------- Theme switcher (for live comparison) ---------- */
-.theme-switch {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  z-index: 95;
-  display: flex;
-  gap: 4px;
-  padding: 4px;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  font-size: 12px;
-}
-.theme-switch button {
-  border: 0;
-  border-radius: 999px;
-  padding: 6px 12px;
-  background: transparent;
-  cursor: pointer;
-  color: #fff;
-}
-.theme-switch button[aria-pressed="true"] {
-  background: #fff;
-  color: #111;
-}
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

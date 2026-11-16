@@ -45,7 +45,7 @@ const c = COPY.hero;
     min-height: 100svh;
     display: grid;
     place-items: center;
-    padding-block: clamp(40px, 7vh, 96px) clamp(84px, 12vh, 120px);
+    padding-block: clamp(40px, 7vh, 96px) clamp(110px, 17vh, 170px);
     overflow: hidden;
   }
   .hero-inner {
@@ -61,7 +61,6 @@ const c = COPY.hero;
   }
   :global(.hero-title) {
     max-width: 14ch;
-    text-shadow: 0 4px 0 var(--purple-ink);
   }
   .hero-sub {
     max-width: 64ch; /* two lines on desktop */
@@ -69,8 +68,8 @@ const c = COPY.hero;
   }
   @media (max-width: 600px) {
     .hero-sub {
-      font-size: 1rem;
-      line-height: 1.55;
+      font-size: 1.15rem;
+      line-height: 1.45;
     }
   }
   .hero-ctas {
@@ -93,6 +92,7 @@ const c = COPY.hero;
     );
     mask-image: radial-gradient(closest-side at 50% 32%, black 20%, transparent 100%);
     opacity: 0;
+    display: none; /* the game stage has no sunburst */
     will-change: opacity;
   }
   :global(html.js) .hero:not(.intro-pending) .hero-burst,

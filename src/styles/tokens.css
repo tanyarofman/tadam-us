@@ -20,39 +20,54 @@
 }
 
 :root {
-  /* Brand (sampled from the logo) */
-  --purple-ink: #330768;
-  --purple-mid: #614098;
-  --buzzer-red: #e74138;
-  --buzzer-red-deep: #d62e20;
-  --magenta: #e836a1;
-  --sun-yellow: #f7d94a;
+  /* Game palette (sampled from the live game: host screen + phone view) */
+  --stage-blue: #0047f2; /* beam centre */
+  --stage-blue-2: #0251fd; /* brightest beam */
+  --stage-blue-3: #003ede; /* between beams */
+  --stage-navy: #001670; /* dark edges */
+  --stage-navy-deep: #030e3f; /* host shell background */
+  --floor-blue: #0d2696;
+  --game-yellow: #ffe600; /* question text, CTA pills */
+  --pill-white: #ffffff; /* answer pills */
+  --pill-ink: #080808;
+  --ink: #00176a; /* text on white / yellow */
+  --answer-correct: #34c759; /* correct result bar */
+  --answer-wrong: #ff7ab8; /* wrong result bar */
+  --magenta: #e836a1; /* logo underline swoosh */
   --sky-cyan: #64d8f7;
   --white: #ffffff;
 
-  /* The 4 answer colors */
-  --answer-1: var(--buzzer-red);
-  --answer-2: var(--sun-yellow);
-  --answer-3: var(--sky-cyan);
-  --answer-4: var(--magenta);
+  /* Legacy names kept so scene CSS keeps working. Outlines are now navy, not purple. */
+  --purple-ink: var(--stage-navy);
+  --purple-mid: #1a3fb8;
+  --sun-yellow: var(--game-yellow);
+  --buzzer-red: #e74138; /* only the buzzer illustration uses red */
+  --buzzer-red-deep: #d62e20;
 
-  /* Type */
-  /* Same typeface as the game (Almoni Tzar AAA), so the page and the game speak one language */
+  /* Answer colors: the game has white pills, so they all map to white-ish.
+     Scenes that still use the 4 colors (3, 5) get the new palette. */
+  --answer-1: var(--pill-white);
+  --answer-2: var(--game-yellow);
+  --answer-3: var(--pill-white);
+  --answer-4: var(--pill-white);
+
+  /* Type: Almoni Tzar AAA, the game font. Narrow, so sizes run a notch larger than Latin fonts. */
   --font-display: "Almoni", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --font-body: "Almoni", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
-  --fs-hero: clamp(2.4rem, 7.4vw, 5.4rem);
-  --fs-h2: clamp(2rem, 6.4vw, 4.4rem);
-  --fs-h3: clamp(1.35rem, 3.6vw, 2rem);
-  --fs-lead: clamp(1.05rem, 2.4vw, 1.35rem);
-  --fs-body: 1rem;
-  --fs-small: 0.875rem;
+  --fs-hero: clamp(3.1rem, 9.6vw, 6.6rem);
+  --fs-h2: clamp(2.6rem, 8vw, 5.2rem);
+  --fs-h3: clamp(1.7rem, 4.4vw, 2.4rem);
+  --fs-lead: clamp(1.3rem, 2.8vw, 1.7rem);
+  --fs-body: 1.1875rem; /* 19px: Almoni at 16px reads like ~14px Latin */
+  --fs-small: 1rem;
+  --fs-btn: clamp(1.35rem, 3vw, 1.6rem);
 
   /* Shape + space */
   --radius-s: 12px;
   --radius-m: 20px;
   --radius-l: 32px;
-  --stroke: 4px;
+  --stroke: 0px; /* the game has no outlines */
   --gutter: clamp(16px, 4vw, 48px);
   --max-w: 1200px;
 
@@ -63,21 +78,29 @@
 
 /* ---------- Theme: Game Stage ---------- */
 :root {
-  --bg-0: #0a1a6b;
-  --bg-1: #1e4fe0;
-  --bg-2: #2c63ff;
-  --surface: rgba(10, 26, 107, 0.55);
-  --surface-solid: #0d2387;
-  --surface-border: rgba(100, 216, 247, 0.3);
+  --bg-0: var(--stage-navy);
+  --bg-1: var(--stage-blue);
+  --bg-2: var(--stage-blue-2);
+  --surface: rgba(0, 22, 112, 0.6);
+  --surface-solid: #00208f;
+  --surface-border: rgba(255, 255, 255, 0.16);
   --text: #ffffff;
-  --text-muted: rgba(225, 238, 255, 0.8);
-  --spot: rgba(100, 216, 247, 0.3);
-  --spot-2: rgba(255, 255, 255, 0.14);
-  --floor-glow: rgba(100, 216, 247, 0.9);
-  --screen-bg: #071457;
-  --screen-glow: rgba(100, 216, 247, 0.55);
-  --hall-wall: #0c2185;
-  --hall-floor: #061150;
-  --page-gradient: radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 65%);
+  --text-muted: rgba(232, 240, 255, 0.86);
+  --spot: rgba(60, 120, 255, 0.45);
+  --spot-2: rgba(255, 255, 255, 0.1);
+  --floor-glow: rgba(255, 244, 225, 0.95);
+  --screen-bg: #00176a;
+  --screen-glow: rgba(60, 120, 255, 0.55);
+  --hall-wall: #002ab0;
+  --hall-floor: #001670;
+
+  /* The stage itself: dark navy edges, vertical light beams, darker top, soft floor glow. */
+  --stage-bg:
+    linear-gradient(90deg, var(--stage-navy) 0%, rgba(0, 22, 112, 0.55) 7%, transparent 22%, transparent 78%, rgba(0, 22, 112, 0.55) 93%, var(--stage-navy) 100%),
+    linear-gradient(180deg, rgba(0, 18, 100, 0.85) 0%, rgba(0, 18, 100, 0) 32%),
+    linear-gradient(0deg, rgba(0, 24, 120, 0.7) 0%, transparent 22%),
+    repeating-linear-gradient(90deg, rgba(20, 90, 255, 0) 0, rgba(25, 100, 255, 0.42) clamp(70px, 8vw, 120px), rgba(20, 90, 255, 0) clamp(140px, 16vw, 240px)),
+    var(--stage-blue-3);
+  --page-gradient: var(--stage-bg);
   color-scheme: dark;
 }

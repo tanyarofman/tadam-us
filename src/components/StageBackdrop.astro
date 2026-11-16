@@ -1,4 +1,9 @@
 ---
+/**
+ * The game stage rebuilt in CSS (see .stage-backdrop in global.css):
+ * vertical light beams, dark navy edges, a back-wall shadow, a floor with beam
+ * reflections and the glowing white strip. Used behind the hero and the closing CTA.
+ */
 interface Props {
   class?: string;
 }
@@ -6,10 +11,10 @@ const { class: cls = "" } = Astro.props;
 ---
 
 <div class:list={["stage-backdrop", cls]} aria-hidden="true">
-  <div class="dots"></div>
-  <div class="spot spot-a"></div>
-  <div class="spot spot-c"></div>
-  <div class="spot spot-b"></div>
+  <div class="beams"></div>
+  <div class="edges"></div>
+  <div class="wall-base"></div>
   <div class="floor"></div>
+  <div class="reflections"></div>
   <div class="floor-strip"></div>
 </div>

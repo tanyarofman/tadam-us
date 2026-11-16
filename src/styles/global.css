@@ -22,9 +22,9 @@ body {
   min-height: 100vh;
   font-family: var(--font-body);
   font-size: var(--fs-body);
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text);
-  background: var(--bg-0);
+  background: var(--stage-navy);
   background-image: var(--page-gradient);
   background-attachment: fixed;
   overflow-x: clip;
@@ -53,7 +53,7 @@ p {
   margin: 0;
 }
 :focus-visible {
-  outline: 3px solid var(--sun-yellow);
+  outline: 3px solid var(--game-yellow);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -75,8 +75,8 @@ p {
   inset-inline-start: 12px;
   z-index: 1000;
   padding: 10px 16px;
-  background: var(--sun-yellow);
-  color: var(--purple-ink);
+  background: var(--game-yellow);
+  color: var(--stage-navy);
   font-weight: 700;
   border-radius: 999px;
   transform: translateY(-200%);
@@ -86,11 +86,18 @@ p {
 }
 
 /* ---------- Type ---------- */
+/* Game headlines: heavy, condensed, yellow, tight leading, right-aligned in RTL. */
 .display {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+.h-hero,
+.h-scene,
+.h-card {
+  color: var(--game-yellow);
+  text-shadow: 0 2px 0 rgba(0, 12, 80, 0.55), 0 6px 28px rgba(0, 10, 70, 0.55);
 }
 .h-hero {
   font-size: var(--fs-hero);
@@ -104,18 +111,18 @@ p {
 }
 .lead {
   font-size: var(--fs-lead);
-  color: var(--text-muted);
-  line-height: 1.65;
+  color: var(--text);
+  line-height: 1.45;
   text-wrap: pretty;
 }
-/* outlined "logo style" type */
+/* Logo-style type: white fill on the game's navy, no purple */
 .logo-type {
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--white);
-  -webkit-text-stroke: 0.16em var(--purple-ink);
+  -webkit-text-stroke: 0.14em var(--stage-navy);
   paint-order: stroke fill;
-  text-shadow: 0 0.08em 0 var(--purple-ink);
+  text-shadow: 0 0.06em 0 var(--stage-navy);
 }
 /* split text */
 .word {
@@ -145,7 +152,7 @@ p {
 }
 .scene-copy {
   text-align: center;
-  max-width: 22ch;
+  max-width: 24ch;
   margin-inline: auto;
 }
 .eyebrow {
@@ -153,38 +160,36 @@ p {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--fs-small);
-  letter-spacing: 0.04em;
-  color: var(--sun-yellow);
-  padding: 6px 14px;
+  letter-spacing: 0.02em;
+  color: var(--stage-navy);
+  background: var(--game-yellow);
+  padding: 4px 16px 6px;
   border-radius: 999px;
-  border: 2px solid currentColor;
   margin-bottom: 18px;
 }
 
 /* ---------- Buttons ---------- */
+/* Same pill as the game: fully rounded, flat, no outline. Yellow = primary (like Ilan's CTA), white = answer pill. */
 .btn {
-  --btn-bg: var(--buzzer-red);
-  --btn-shadow: var(--buzzer-red-deep);
+  --btn-bg: var(--game-yellow);
+  --btn-fg: var(--pill-ink);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   min-height: 56px;
-  padding: 14px 30px 16px;
-  border: var(--stroke) solid var(--purple-ink);
+  padding: 10px 34px 12px;
+  border: 0;
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.2rem, 2.6vw, 1.4rem); /* >= 18.66px bold = "large text" for contrast on red */
+  font-size: var(--fs-btn);
   line-height: 1.1;
-  color: var(--white);
+  color: var(--btn-fg);
   text-decoration: none;
   background: var(--btn-bg);
-  box-shadow:
-    0 7px 0 var(--purple-ink),
-    inset 0 -6px 0 var(--btn-shadow),
-    inset 0 4px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 22px rgba(0, 10, 80, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   cursor: pointer;
   transition:
     transform 0.12s var(--ease-out),
@@ -193,24 +198,24 @@ p {
   -webkit-tap-highlight-color: transparent;
 }
 .btn:hover {
-  background: color-mix(in srgb, var(--btn-bg) 92%, white);
+  background: color-mix(in srgb, var(--btn-bg) 90%, white);
+  transform: translateY(-2px);
 }
 .btn:active,
 .btn.is-pressed {
-  transform: translateY(6px);
-  box-shadow:
-    0 1px 0 var(--purple-ink),
-    inset 0 -3px 0 var(--btn-shadow),
-    inset 0 3px 0 rgba(255, 255, 255, 0.25);
-  background: var(--buzzer-red-deep);
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 10, 80, 0.5);
+  background: color-mix(in srgb, var(--btn-bg) 88%, black);
+}
+.btn-white {
+  --btn-bg: var(--pill-white);
 }
 .btn-buzzer .btn-dot {
   width: 22px;
   height: 22px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff9b8f 0 18%, var(--buzzer-red) 40%, var(--buzzer-red-deep) 100%);
-  border: 3px solid var(--purple-ink);
-  box-shadow: 0 0 0 3px var(--white);
+  box-shadow: 0 0 0 3px rgba(0, 22, 112, 0.18);
   flex: none;
 }
 .btn-ghost {
@@ -219,16 +224,17 @@ p {
   box-shadow: none;
   min-height: 48px;
   padding: 10px 14px;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   color: var(--text);
   text-decoration: underline;
-  text-decoration-color: var(--magenta);
+  text-decoration-color: var(--game-yellow);
   text-decoration-thickness: 3px;
   text-underline-offset: 8px;
 }
 .btn-ghost:hover {
   background: transparent;
-  color: var(--sun-yellow);
+  color: var(--game-yellow);
+  transform: none;
 }
 .btn-ghost:active {
   transform: none;
@@ -236,7 +242,10 @@ p {
   background: transparent;
 }
 
-/* ---------- Stage backdrop (shared by hero + CTA) ---------- */
+/* ---------- Stage backdrop (hero + CTA): the game stage, rebuilt in CSS ----------
+   Reference values from the game host screen (1440x810):
+   beams #0251fd -> #003ede, edges #001670, floor #0d2696,
+   floor strip = curved white arc (#f8ffff centre, warm #ffecd8 ends) with vertical light reflections. */
 .stage-backdrop {
   position: absolute;
   inset: 0;
@@ -245,51 +254,71 @@ p {
   overflow: hidden;
   pointer-events: none;
 }
-.stage-backdrop .spot {
+.stage-backdrop .beams {
   position: absolute;
-  top: -10%;
-  width: 46vmax;
-  height: 120%;
-  background: conic-gradient(from 180deg at 50% 0%, transparent 40%, var(--spot) 50%, transparent 60%);
-  transform-origin: 50% 0;
-  opacity: 0.9;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(40, 110, 255, 0) 0,
+    rgba(60, 130, 255, 0.5) clamp(60px, 7vw, 110px),
+    rgba(40, 110, 255, 0) clamp(130px, 15vw, 220px)
+  );
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 45%, black 80%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, black 45%, black 80%, transparent 100%);
 }
-.stage-backdrop .spot-a {
-  inset-inline-start: -8%;
-  transform: rotate(-18deg);
+.stage-backdrop .edges {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--stage-navy) 0%, rgba(0, 22, 112, 0.5) 8%, transparent 24%, transparent 76%, rgba(0, 22, 112, 0.5) 92%, var(--stage-navy) 100%),
+    linear-gradient(180deg, rgba(0, 18, 100, 0.8) 0%, transparent 35%);
 }
-.stage-backdrop .spot-b {
-  inset-inline-end: -8%;
-  transform: rotate(18deg);
-}
-.stage-backdrop .spot-c {
-  left: 50%;
-  margin-left: -23vmax;
-  background: conic-gradient(from 180deg at 50% 0%, transparent 44%, var(--spot-2) 50%, transparent 56%);
+/* back wall meets floor: dark band just above the strip */
+.stage-backdrop .wall-base {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 12%;
+  height: 6%;
+  background: linear-gradient(180deg, transparent, rgba(0, 10, 70, 0.75));
 }
 .stage-backdrop .floor {
   position: absolute;
   inset-inline: 0;
   bottom: 0;
-  height: 30%;
-  background: radial-gradient(60% 100% at 50% 100%, var(--spot) 0%, transparent 70%);
+  height: 12%;
+  background:
+    radial-gradient(70% 140% at 50% 0%, rgba(120, 160, 255, 0.35), transparent 70%),
+    linear-gradient(180deg, #0a2290 0%, var(--floor-blue) 40%, #0a2a9e 100%);
 }
+/* vertical reflections of the light beams on the floor */
+.stage-backdrop .reflections {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 12%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    rgba(255, 255, 255, 0.35) 3px,
+    transparent 9px,
+    transparent clamp(120px, 14vw, 200px)
+  );
+  -webkit-mask-image: linear-gradient(180deg, black, transparent);
+  mask-image: linear-gradient(180deg, black, transparent);
+  opacity: 0.8;
+}
+/* the glowing strip: a shallow arc, brightest in the middle */
 .stage-backdrop .floor-strip {
   position: absolute;
-  inset-inline: 6%;
-  bottom: 9%;
-  height: 4px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, transparent, var(--floor-glow), var(--white), var(--floor-glow), transparent);
-  box-shadow: 0 0 24px 6px var(--floor-glow);
-}
-.stage-backdrop .dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1.5px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(70% 60% at 50% 40%, black, transparent);
-  opacity: 0.25;
+  inset-inline: -4%;
+  bottom: calc(12% - 5px);
+  height: 12px;
+  border-radius: 50% / 100%;
+  background: linear-gradient(90deg, #ffe9d2, #fff 22%, #f8ffff 50%, #fff 78%, #ffe9d2);
+  box-shadow:
+    0 0 14px 3px rgba(255, 255, 255, 0.85),
+    0 0 46px 12px rgba(150, 190, 255, 0.55),
+    0 14px 40px 10px rgba(255, 255, 255, 0.18);
 }
 
 /* ---------- Scroll progress (buzzer motif) ---------- */
@@ -303,7 +332,7 @@ p {
 }
 .scroll-progress__bar {
   height: 100%;
-  background: linear-gradient(270deg, var(--buzzer-red), var(--magenta), var(--sun-yellow));
+  background: linear-gradient(270deg, var(--magenta), var(--game-yellow));
   transform-origin: right center; /* RTL: grows from the right */
   transform: scaleX(0);
 }

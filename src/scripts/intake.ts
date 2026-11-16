@@ -32,7 +32,7 @@ interface State {
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
   approved: boolean[];
-  own: { q: string; answers: string[]; correct: number }[];
+  own: { q: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
   checks: boolean[];
   code: string;
 }
@@ -115,6 +115,7 @@ function init(root: HTMLElement, data: Data) {
       if (len >= m.minChars) n += Math.min(m.maxPerPrompt, Math.max(1, Math.round(len / m.charsPerQuestion)));
     }
     n += state.photos.filter((p) => p.caption.trim().length > 3).length * m.perPhoto;
+    n += state.own.length;
     return Math.min(target(), n);
   }
 
@@ -260,6 +261,7 @@ function init(root: HTMLElement, data: Data) {
       setupMic(box, p.id);
     }
     renderPhotos();
+    renderOwnList();
     renderMeter();
     const share = $<HTMLAnchorElement>("[data-share]");
     if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
@@ -498,7 +500,7 @@ function init(root: HTMLElement, data: Data) {
   });
 
   // ---------- 6: review (mock questions, real sources) ----------
-  type Q = { snippet: string; own?: { q: string; answers: string[]; correct: number } };
+  type Q = { snippet: string; own?: State["own"][number] };
   /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
   function questions(): Q[] {
     const m = data.material;
@@ -510,7 +512,7 @@ function init(root: HTMLElement, data: Data) {
       for (let i = 0; i < n; i++) list.push({ snippet: text });
     }
     state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => list.push({ snippet: p.caption.trim() }));
-    const generated = list.slice(0, target());
+    const generated = list.slice(0, Math.max(0, target() - state.own.length));
     return [...generated, ...state.own.map((o) => ({ snippet: "", own: o }))];
   }
   let reviewIndex = 0;
@@ -528,7 +530,11 @@ function init(root: HTMLElement, data: Data) {
     const body = s.own
       ? `<p class="in-qcard__source">${c.stage5.ownMark}</p>
          <p class="in-sample__q">${esc(s.own.q)}</p>
-         <ul class="in-qcard__answers">${s.own.answers.map((t, i) => `<li data-correct="${i === s.own!.correct}">${esc(t)}</li>`).join("")}</ul>`
+         <ul class="in-qcard__answers">${
+           s.own.type === "free"
+             ? `<li data-correct="true">${esc(s.own.free)}</li>`
+             : s.own.answers.map((t, i) => `<li data-correct="${i === s.own!.correct}">${esc(t)}</li>`).join("")
+         }</ul>`
       : `<p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
          <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>`;
     el.innerHTML = `<article class="in-qcard" data-approved="${ok}">
@@ -550,10 +556,38 @@ function init(root: HTMLElement, data: Data) {
   const ownForm = $<HTMLFormElement>("[data-own-form]")!;
   const ownOpen = $<HTMLElement>("[data-own-open]")!;
   const ownErr = $<HTMLElement>("[data-own-err]")!;
+  const ownList = $<HTMLElement>("[data-own-list]")!;
+  const ownFree = $<HTMLElement>("[data-own-free]")!;
+  const ownChoice = $<HTMLElement>("[data-own-choice]")!;
+  const ownType = () => (ownForm.querySelector<HTMLInputElement>('input[name="own-type"]:checked')?.value || "free") as "free" | "choice";
+  function syncOwnType() {
+    ownFree.hidden = ownType() !== "free";
+    ownChoice.hidden = ownType() !== "choice";
+  }
+  ownForm.addEventListener("change", (e) => {
+    if ((e.target as HTMLInputElement).name === "own-type") syncOwnType();
+  });
+  function renderOwnList() {
+    ownList.innerHTML = state.own
+      .map(
+        (o, i) => `<li><span>${esc(o.q)}<small>${o.type === "free" ? c.stage5.ownTypeFree : c.stage5.ownTypeChoice}</small></span>
+          <button type="button" class="btn btn-ghost" data-own-remove="${i}">${c.stage5.ownRemove}</button></li>`,
+      )
+      .join("");
+  }
+  ownList.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-own-remove]");
+    if (!b) return;
+    state.own.splice(Number(b.dataset.ownRemove), 1);
+    renderOwnList();
+    renderMeter();
+    save();
+  });
   function closeOwn() {
     ownForm.hidden = true;
     ownOpen.hidden = false;
     ownForm.reset();
+    syncOwnType();
     ownErr.hidden = true;
   }
   ownOpen.addEventListener("click", () => {
@@ -565,17 +599,22 @@ function init(root: HTMLElement, data: Data) {
   ownForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const q = ownForm.querySelector<HTMLInputElement>("#own-q")!.value.trim();
+    const type = ownType();
+    const free = ownForm.querySelector<HTMLInputElement>("#own-free")!.value.trim();
     const answers = [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
     const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
-    if (!q || answers.some((a) => !a) || !picked) {
+    const bad = !q || (type === "free" ? !free : answers.some((a) => !a) || !picked);
+    if (bad) {
+      ownErr.textContent = type === "free" ? c.stage5.ownNeed : c.stage5.ownNeedChoice;
       ownErr.hidden = false;
       return;
     }
-    state.own.push({ q, answers, correct: Number(picked.value) });
+    state.own.push({ q, type, free: type === "free" ? free : "", answers: type === "choice" ? answers : [], correct: type === "choice" ? Number(picked!.value) : 0 });
     closeOwn();
-    reviewIndex = questions().length - 1; // jump to the new question
-    renderReview();
+    renderOwnList();
+    renderMeter();
     save();
+    ownOpen.focus();
   });
   function updateReviewGate() {
     const all = state.approved.length > 0 && state.approved.every(Boolean) && state.checks.every(Boolean);

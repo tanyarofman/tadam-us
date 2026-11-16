@@ -59,11 +59,11 @@ Common rules: one question per screen, labels above fields, optional fields say 
 | 1 | איזה אירוע? | Taps one of 12 tiles | One tap moves on. Tiles are a radio group. Changing the event later keeps the typed answers |
 | 2 | על מי המשחק? | Types a name (required), one optional word, can edit the prefilled game title | Empty name shows an inline error next to the field and focuses it. The title follows the name until the creator edits it. A sample question with their name appears at once (labelled "דוגמה בלבד") as the early reward, with no AI |
 | 3 | ספרו לנו על {name} | Opens a prompt card, types or records an answer, skips what does not fit. Adds up to 5 photos with a caption | One card open at a time. An answer counts at 20 characters. The meter reads "יש לנו חומר ל N מתוך T שאלות". "המשך" unlocks at 3 answered prompts and until then says how many are missing. Mic: a pulsing red bar above the field ("מקליטים עכשיו"), a timer, a red glow on the field, live text of what was heard where the browser provides it, permission error and "no speech" shown next to the button, hidden where the browser has no speech recognition. Photos: consent line beside the upload, caption hint with an example |
+| 3a | יש לכם שאלה משלכם? | After the last story prompt and before the photos: adds any number of own questions. Each is either **free text** (question plus the correct answer, guests type theirs) or **four options** (four answers, one marked correct) | Required fields depend on the type. Each own question counts toward the meter and the 12, and is approved in the review like the rest |
 | 3b | מישהו אחר מכיר יותר טוב? | Shares the draft link by WhatsApp | MVP shares the draft only. The real contributor link (friends add, parent approves) is a later add-on |
 | 4 | כמה פרטים על האירוע | Optional: date, guests, screen type, WhatsApp or email | "דלגו" is always available. Contact is asked late, with the reason. The date drives the advice "start a few days before" |
 | 5 | בונים את המשחק | Waits, picks a host meanwhile ("תבחרו בשבילי" is the default) | Mock in the prototype. Real: about 4 minutes, progress meter, "your work is saved" on failure |
 | 6 | בודקים ומאשרים | One question at a time (12 generated, then any of the creator's own) ("שאלה 3 מתוך 12"), sees which story each came from, approves or asks for another wording, ticks a 3-point checklist | "לאישור והזמנה" unlocks only when every question is approved and every box is ticked. A read-only share link for the second parent. Questions are placeholders in the prototype, the source stories are real |
-| 6b | + הוסיפו שאלה משלכם | Writes a question, four answers, and marks the correct one. It is added after the generated questions and approved like the rest | All four answers and a correct mark are required. It counts as a question in the order summary |
 | 7 | הזמנה | Reads a summary, orders | Payment after approval and before production. The price is shown before the click (the page hides prices for now, per Tanya). Provider is not decided |
 | 8 | Launchpad | Gets a QR, a short code, a copy-link button, a pre-event test list, the note that the private link is the edit key | Players need no app and no account. Duplicate and edit shortcuts belong here in the real app |
 
@@ -81,7 +81,10 @@ Common rules: one question per screen, labels above fields, optional fields say 
   "host": "auto",
   "questionCount": 12,
   "materialReady": 12,
-  "ownQuestions": [{ "q": "...", "answers": ["..", "..", "..", ".."], "correct": 2 }],
+  "ownQuestions": [
+    { "q": "...", "type": "free", "free": "..." },
+    { "q": "...", "type": "choice", "answers": ["..", "..", "..", ".."], "correct": 2 }
+  ],
   "consent": { "photos": true }
 }
 ```

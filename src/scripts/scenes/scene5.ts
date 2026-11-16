@@ -9,7 +9,14 @@ import { animateWords, isMobile, seeded } from "../motion";
 const TOKENS = ["--white", "--sun-yellow", "--sky-cyan", "--magenta"];
 const readColors = () => {
   const cs = getComputedStyle(document.documentElement);
-  return TOKENS.map((t) => cs.getPropertyValue(t).trim() || "#ffffff");
+  const norm = document.createElement("canvas").getContext("2d")!;
+  return TOKENS.map((t) => {
+    // Normalize any CSS color ("#fff", "#ffffff", "rgb(...)") to "#rrggbb" so "88" / "00" alpha suffixes stay valid
+    norm.fillStyle = "#ffffff";
+    norm.fillStyle = cs.getPropertyValue(t).trim() || "#ffffff";
+    const v = String(norm.fillStyle);
+    return /^#[0-9a-f]{6}$/i.test(v) ? v : "#ffffff";
+  });
 };
 
 type Phone = { x: number; y: number; s: number; c: number; t: number };

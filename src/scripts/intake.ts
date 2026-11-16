@@ -184,9 +184,17 @@ function init(root: HTMLElement, data: Data) {
     extraIn.placeholder = shape().extraPlaceholder;
     nameIn.value = state.name;
     extraIn.value = state.extra;
-    if (!state.titleEdited) state.title = fill(shape().title, { name: state.name.trim() || "..." });
-    titleIn.value = state.title;
+    syncTitle();
     renderSample();
+  }
+  /** The default title is only a placeholder (grey, behind the field). The field holds text only if the creator typed one. */
+  function defaultTitle() {
+    return fill(shape().title, { name: state.name.trim() || "..." });
+  }
+  function syncTitle() {
+    titleIn.placeholder = defaultTitle();
+    titleIn.value = state.titleEdited ? state.title : "";
+    if (!state.titleEdited) state.title = defaultTitle();
   }
   function renderSample() {
     const sc = shape();
@@ -198,10 +206,7 @@ function init(root: HTMLElement, data: Data) {
   }
   nameIn.addEventListener("input", () => {
     state.name = nameIn.value;
-    if (!state.titleEdited) {
-      state.title = fill(shape().title, { name: state.name.trim() || "..." });
-      titleIn.value = state.title;
-    }
+    syncTitle();
     nameIn.removeAttribute("aria-invalid");
     $("#f-name-err")!.hidden = true;
     renderSample();
@@ -211,12 +216,9 @@ function init(root: HTMLElement, data: Data) {
     state.extra = extraIn.value;
     save();
   });
-  titleIn.addEventListener("focus", () => {
-    if (!state.titleEdited) titleIn.select(); // typing replaces the prefilled title instead of mixing with it
-  });
   titleIn.addEventListener("input", () => {
-    state.title = titleIn.value;
-    state.titleEdited = true;
+    state.titleEdited = titleIn.value.trim() !== "";
+    state.title = state.titleEdited ? titleIn.value : defaultTitle(); // emptied field falls back to the default
     save();
   });
 

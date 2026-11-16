@@ -6,12 +6,12 @@ const c = COPY.scene2;
 
 // A row of guests. `bubble` = index into c.bubbles.
 const guests = [
-  { role: "סבתא", shirt: "#E836A1", skin: "#f5d2b5", hair: "#d8d2cc", hairStyle: "bun", glasses: true, bubble: 0 },
-  { role: "הדודה", shirt: "#2bb3a3", skin: "#d9a37a", hair: "#3b2318", hairStyle: "long" },
-  { role: "החברה הכי טובה", shirt: "#F7D94A", skin: "#f2c6a0", hair: "#7a3d1c", hairStyle: "long", bubble: 1 },
-  { role: "בן הדוד", shirt: "#64D8F7", skin: "#a8714a", hair: "#1f1410", hairStyle: "curly" },
-  { role: "אבא", shirt: "#E74138", skin: "#f2c6a0", hair: "#3b2318", hairStyle: "short", bubble: 2 },
-  { role: "המורה", shirt: "#8a62d0", skin: "#d9a37a", hair: "#c98b3c", hairStyle: "bun", glasses: true },
+  { role: "סבתא", name: "guest-grandma", alt: "סבתא בשיער אפור מתולתל ומשקפיים, מציצה בטלפון בחיוך רחב", bubble: 0 },
+  { role: "הדודה", name: "guest-aunt", alt: "דודה בחולצה ירוקה צוחקת תוך כדי דיבור, יד אחת מניפה ובשנייה טלפון" },
+  { role: "החברה הכי טובה", name: "guest-bestfriend", alt: "נערה בהודי מחזיקה טלפון גבוה בשתי ידיים וצוחקת בהתלהבות", bubble: 1 },
+  { role: "בן הדוד", name: "guest-cousin", alt: "נער עם שיער מתולתל וחולצה אפורה רחבה, חצי חיוך ומחזיק טלפון בשתי ידיים" },
+  { role: "אבא", name: "guest-dad", alt: "אבא עם זקן קצר, מכסה את הפה ביד וצוחק במבוכה ובחיבה", bubble: 2 },
+  { role: "המורה", name: "guest-teacher", alt: "מורה עם זקן ומשקפיים, בחולצה כחולה ושרוולים מופשלים, מחייך בחביבות עם טלפון ביד" },
 ] as const;
 ---
 
@@ -34,16 +34,9 @@ const guests = [
                     <footer>{b.who}</footer>
                   </blockquote>
                 )}
-                <svg viewBox="-60 -130 120 135" class="s2-figure" aria-hidden="true">
-                  <Guest
-                    shirt={g.shirt}
-                    skin={g.skin}
-                    hair={g.hair}
-                    hairStyle={g.hairStyle}
-                    glasses={"glasses" in g ? g.glasses : false}
-                    pose={b ? "talk" : "stand"}
-                  />
-                </svg>
+                <div class="s2-figure">
+                  <Guest name={g.name} alt={g.alt} />
+                </div>
                 {!b && <span class="s2-role">{g.role}</span>}
               </li>
             );
@@ -95,7 +88,9 @@ const guests = [
   }
   .s2-figure {
     width: 100%;
-    overflow: visible;
+    border-radius: var(--radius-m);
+    box-shadow: 0 0 36px 2px var(--screen-glow), 0 0 0 3px var(--stage-navy);
+    overflow: hidden;
   }
   .s2-role {
     margin-top: 6px;

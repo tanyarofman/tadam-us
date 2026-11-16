@@ -10,6 +10,8 @@ export type TrackEvent =
   | "demo_play_on_phone"
   | "demo_send_to_desktop"
   | "demo_iframe_fallback"
+  | "cta_create_click"
+  | "pricing_view"
   | "cta_whatsapp_click"
   | "cta_how_it_works_click"
   | "faq_open";

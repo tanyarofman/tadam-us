@@ -1,0 +1,311 @@
+---
+import { COPY } from "../content/copy.he";
+import { whatsappLink } from "../config/site";
+import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
+import StageBackdrop from "./StageBackdrop.astro";
+const c = COPY.pricing;
+const cur = PRICING.currency;
+const host = PRICING.personalHost;
+---
+
+<section class="scene pricing" id="pricing" data-scene="pricing" aria-labelledby="pricing-title">
+  <StageBackdrop />
+  <div class="container pricing-inner">
+    <h2 id="pricing-title" class="display h-scene pricing-title reveal">{c.title}</h2>
+    <p class="lead pricing-sub reveal">{c.sub}</p>
+
+    <ul class="cards" role="list" aria-label={c.cardsLabel}>
+      <li class="card card--main reveal">
+        <h3 class="card-name">{c.cards.base.name}</h3>
+        <p class="price"><span class="num">{PRICING.base}</span><span class="cur" aria-label="שקלים">{cur}</span></p>
+        <ul class="perks" role="list">
+          {c.cards.base.perks.map((p) => <li class="pill">{fillPrices(p)}</li>)}
+        </ul>
+        <a class="btn btn-buzzer card-cta" href={CREATE_URL} data-track="cta_create_click" data-source="pricing">
+          <span class="btn-dot" aria-hidden="true"></span>
+          {c.cards.base.cta}
+        </a>
+      </li>
+
+      <li class="card reveal">
+        <h3 class="card-name">{c.cards.edit.name}</h3>
+        <p class="price"><span class="num">{PRICING.edit}</span><span class="cur" aria-label="שקלים">{cur}</span></p>
+        <p class="card-text">{c.cards.edit.text}</p>
+        <p class="card-note">{c.cards.edit.note}</p>
+      </li>
+
+      <li class="card reveal">
+        <h3 class="card-name">{c.cards.custom.name}</h3>
+        <p class="price price--text">{c.cards.custom.headline}</p>
+        <p class="card-text">{c.cards.custom.text}</p>
+        <a class="btn btn-ghost card-link" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="pricing-custom">
+          {c.cards.custom.cta}
+        </a>
+      </li>
+    </ul>
+
+    <h3 class="addons-title display reveal">{c.addonsTitle}</h3>
+    <ul class="addons" role="list">
+      <li class="addon reveal">
+        <div class="addon-body">
+          <p class="addon-name">{c.addons.contributorLink.title}</p>
+          <p class="addon-text">{c.addons.contributorLink.text}</p>
+        </div>
+        <p class="addon-price"><span class="num">{PRICING.contributorLink}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
+      </li>
+      <li class="addon reveal">
+        <div class="addon-body">
+          <p class="addon-name">{c.addons.personalHost.title}</p>
+          <p class="addon-text">{fillPrices(c.addons.personalHost.text)}</p>
+        </div>
+        <p class="addon-price addon-price--range">
+          <span><span class="num">{host.from}</span><span class="cur" aria-label="שקלים">{cur}</span></span>
+          <span class="join">{c.addons.personalHost.rangeJoin}</span>
+          <span><span class="num">{host.to}</span><span class="cur" aria-label="שקלים">{cur}</span></span>
+        </p>
+      </li>
+    </ul>
+    <p class="pricing-note">{c.note}</p>
+  </div>
+</section>
+
+<script>
+  import { track } from "../lib/analytics";
+  const el = document.getElementById("pricing");
+  if (el && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          track("pricing_view");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+  }
+</script>
+
+<style>
+  .pricing {
+    padding-block: clamp(72px, 11vh, 130px) clamp(150px, 20vh, 220px);
+    overflow: hidden;
+  }
+  .pricing-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(14px, 2.4vh, 22px);
+  }
+  .pricing-title {
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .pricing-sub {
+    max-width: 46ch;
+    margin-bottom: clamp(12px, 3vh, 28px);
+  }
+
+  /* ---- 3 cards (mobile first: stacked) ---- */
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 28px 22px 26px;
+    border-radius: var(--radius-l);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+    backdrop-filter: blur(6px);
+  }
+  .card--main {
+    border-color: var(--sun-yellow);
+    box-shadow: 0 0 0 4px rgba(247, 217, 74, 0.18), 0 18px 50px rgba(0, 0, 20, 0.35);
+    background: var(--surface-solid);
+  }
+  .card-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+  }
+
+  /* yellow numbers like the game */
+  .price {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    color: var(--sun-yellow);
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .price .num {
+    font-size: clamp(4rem, 14vw, 5.5rem);
+  }
+  .price .cur {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+  }
+  .price--text {
+    font-size: clamp(1.6rem, 4.6vw, 2.1rem);
+    line-height: 1.2;
+    min-height: 2.4em;
+    display: grid;
+    place-items: center;
+  }
+  .card-text {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .card-note {
+    margin: auto 0 0;
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+    opacity: 0.85;
+  }
+
+  /* white answer pills */
+  .perks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    gap: 10px;
+  }
+  .pill {
+    padding: 11px 18px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--bg-0);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.25;
+    text-align: right;
+    text-wrap: balance;
+  }
+  .card-cta {
+    margin-top: 8px;
+    width: 100%;
+  }
+  .card-link {
+    margin-top: auto;
+  }
+
+  /* ---- add-ons ---- */
+  .addons-title {
+    margin: clamp(22px, 4vh, 40px) 0 0;
+    font-size: var(--fs-h3);
+    color: var(--sun-yellow);
+  }
+  .addons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 880px;
+    display: grid;
+    gap: 12px;
+  }
+  /* answer pill: text on the right, value on the left */
+  .addon {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 18px 20px;
+    border-radius: 28px;
+    background: var(--white);
+    color: var(--bg-0);
+    text-align: right;
+  }
+  .addon-body {
+    min-width: 0;
+  }
+  .addon-name {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+  .addon-text {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--bg-0) 78%, white);
+  }
+  .addon-price {
+    margin: 0;
+    flex: none;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 18px 9px;
+    border-radius: 999px;
+    background: var(--bg-0);
+    color: var(--sun-yellow);
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .addon-price .num {
+    font-size: 1.9rem;
+  }
+  .addon-price .cur {
+    font-size: 1.15rem;
+    margin-inline-start: 2px;
+  }
+  .addon-price .plus {
+    font-size: 1.4rem;
+  }
+  .addon-price .join {
+    font-size: 1.05rem;
+    color: var(--white);
+  }
+  .pricing-note {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+
+  @media (min-width: 640px) {
+    .addon {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 26px;
+      border-radius: 999px;
+    }
+    .addon-price {
+      align-self: center;
+    }
+  }
+  @media (min-width: 960px) {
+    .cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 20px;
+    }
+  }
+</style>

@@ -1,8 +1,12 @@
 ---
 import { COPY } from "../content/copy.he";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
+import { whatsappLink } from "../config/site";
 import StageBackdrop from "./StageBackdrop.astro";
+import Person from "./art/Person.astro";
 const c = COPY.pricing;
+const h = c.addons.personalHost.showcase;
+const hostPhotos = ["host-classic", "host-friendly", "host-animated"];
 const cur = PRICING.currency;
 ---
 
@@ -43,14 +47,38 @@ const cur = PRICING.currency;
         </div>
         <p class="addon-price"><span class="num">{PRICING.contributorLink}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
       </li>
-      <li class="addon reveal">
-        <div class="addon-body">
-          <p class="addon-name">{c.addons.personalHost.title}</p>
-          <p class="addon-text">{fillPrices(c.addons.personalHost.text)}</p>
-        </div>
-        <p class="addon-price"><span class="num">{PRICING.personalHost}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
-      </li>
     </ul>
+    <div class="hosts reveal" aria-labelledby="hosts-title">
+      <div class="hosts-top">
+        <div class="hosts-photos" role="list" aria-label={h.photosLabel}>
+          {hostPhotos.map((name, i) => (
+            <Person name={name} alt={h.readyAlts[i]} width={480} height={640} class={`host-photo host-photo--${i + 1}`} />
+          ))}
+        </div>
+        <div class="hosts-head">
+          <span class="spark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h4 id="hosts-title" class="display hosts-title">
+            <span>{h.titleLine1}</span>
+            <span class="hl">{h.titleLine2}</span>
+          </h4>
+          <p class="hosts-sub">{h.sub}</p>
+        </div>
+      </div>
+
+      <div class="hosts-personal">
+        <div class="hosts-personal-copy">
+          <p class="hosts-ptitle display">
+            <span>{h.personalTitle1}</span> <span class="hl">{h.personalTitle2}</span>
+          </p>
+          <p class="hosts-ptext">{h.personalText}</p>
+          <p class="hosts-pnote">{fillPrices(c.addons.personalHost.text)} {h.personalNote}</p>
+          <a class="hosts-cta" href={whatsappLink(h.ctaMessage)} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="personal_host">
+            <span aria-hidden="true">←</span> {h.cta}
+          </a>
+        </div>
+        <p class="addon-price hosts-price"><span class="num">{PRICING.personalHost}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
+      </div>
+    </div>
     <p class="pricing-note">{c.note}</p>
   </div>
 </section>
@@ -267,6 +295,145 @@ const cur = PRICING.currency;
   .addon-price .join {
     font-size: 1.05rem;
     color: var(--white);
+  }
+
+  /* ---- hosts showcase ---- */
+  .hosts {
+    width: 100%;
+    max-width: 880px;
+    margin-top: clamp(14px, 3vh, 28px);
+    padding: clamp(22px, 4vw, 40px);
+    border-radius: var(--radius-l);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+    backdrop-filter: blur(6px);
+    display: grid;
+    gap: clamp(22px, 4vh, 36px);
+    text-align: right;
+  }
+  .hosts-top {
+    display: grid;
+    gap: 22px;
+    align-items: center;
+  }
+  .hosts-photos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(8px, 2vw, 18px);
+    direction: ltr; /* order as in the design: classic, friendly, animated */
+  }
+  .host-photo {
+    border-radius: 18px;
+    transform: skewX(-4deg);
+    box-shadow: 0 14px 30px rgba(0, 0, 20, 0.4);
+  }
+  .host-photo--2 {
+    transform: skewX(-4deg) translateY(-8px);
+  }
+  .hosts-head {
+    position: relative;
+    display: grid;
+    gap: 10px;
+  }
+  .spark {
+    position: absolute;
+    inset-block-start: -6px;
+    inset-inline-end: 4px;
+    width: 46px;
+    height: 24px;
+  }
+  .spark i {
+    position: absolute;
+    width: 5px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--sun-yellow);
+    inset-block-start: 4px;
+  }
+  .spark i:nth-child(1) { inset-inline-end: 0; transform: rotate(35deg); }
+  .spark i:nth-child(2) { inset-inline-end: 20px; inset-block-start: 0; }
+  .spark i:nth-child(3) { inset-inline-end: 40px; transform: rotate(-35deg); }
+  .hosts-title {
+    margin: 0;
+    display: grid;
+    font-size: clamp(2.6rem, 8vw, 4rem);
+    line-height: 1.02;
+  }
+  .hl {
+    color: var(--sun-yellow);
+  }
+  .hosts-title .hl {
+    position: relative;
+    width: fit-content;
+    padding-bottom: 12px;
+  }
+  .hosts-title .hl::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 6px;
+    border-radius: 6px;
+    background: var(--magenta);
+    transform: rotate(-1deg);
+  }
+  .hosts-sub {
+    margin: 0;
+    font-size: var(--fs-lead);
+    line-height: 1.35;
+    color: var(--white);
+  }
+  .hosts-personal {
+    display: grid;
+    gap: 18px;
+    padding-top: clamp(18px, 3vh, 28px);
+    border-top: 1px solid var(--surface-border);
+    align-items: start;
+  }
+  .hosts-ptitle {
+    margin: 0 0 12px;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.1;
+  }
+  .hosts-ptext {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    max-width: 58ch;
+  }
+  .hosts-pnote {
+    margin: 0 0 16px;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+  .hosts-cta {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+  .hosts-cta:hover,
+  .hosts-cta:focus-visible {
+    color: var(--sun-yellow);
+  }
+  .hosts-price {
+    justify-self: start;
+  }
+  @media (min-width: 760px) {
+    .hosts-top {
+      grid-template-columns: 1.25fr 1fr;
+    }
+    .hosts-personal {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+    }
   }
   .pricing-note {
     margin: 6px 0 0;

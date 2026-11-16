@@ -24,7 +24,7 @@ One question per H2 · one answer in 2 sentences under it · one source per clai
 | DataWise "People also ask" (depth 3) | DataForSEO: `python3 tools/seo/research.py questions --kw "<keyword>"`. Hebrew PAA is rare in Google Israel, so autocomplete with question words (איך, מה, כמה, האם…) is the main source. |
 | Cite-Me prompt, phase 1 (research: top pages, real questions, gaps, sources) | `research.py serp` for the top pages and AI Overview sources, `questions` for the questions, web search for sources. Note the gaps (example: nobody answers "האם משלמים על יום גיבוש"). |
 | Phase 2 (H1, question H2s, where the table/FAQ/experience go) | Planned in the conversation, approved by Tanya before writing. |
-| Ask for first-hand experience | Ask Tanya. Until she answers, put a hidden marker where the story goes: `[//]: # "חוויה אישית: ..."` (Markdown comment, never reaches the HTML). **Never invent one.** |
+| Ask for first-hand experience | Ask Tanya. **Never invent a story or a quote and present it as real.** Until a real story exists, use a short scenario in a quote block labeled `**תרחיש לדוגמה (לא אירוע אמיתי):**`, plus a hidden marker `[//]: # "להחליף בסיפור אמיתי..."` (Markdown comment, never reaches the HTML). When the real story arrives, it replaces the scenario. |
 | Phase 3 draft in ChatGPT Canvas | Written directly as `src/content/blog/<slug>.md`, reviewed in the PR's Netlify preview. |
 | Capsule technique | Under each H2: a 2-sentence answer (max 50 words), then 2 to 4 paragraphs or a list. |
 | Inline links, no sources list | Markdown links on the phrase. External links open in a new tab automatically (`src/scripts/blog.ts`). Log every source in `docs/seo/sources.md`. |

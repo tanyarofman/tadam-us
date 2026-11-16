@@ -20,5 +20,5 @@ See README.md for how to run, switch themes and edit copy.
 - Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). Plan and findings: `docs/seo/keyword-research-2026-11.md`. How to write: `docs/seo/content-playbook.md`. Sources: `docs/seo/sources.md`.
 - Writing rules: every H2 is the question people search, followed by a 2-sentence answer; one table; 3 to 5 internal links (other articles, `/#demo`, `/`); 4 FAQ items in the frontmatter; `seoTitle` max 60 and `description` max 155 characters (the build enforces it); no prices in articles.
 - Link only sources you verified, inline on the phrase, never a sources list at the end. Log each one in `docs/seo/sources.md`.
-- Never invent first-hand experience. Leave a hidden `[//]: # "חוויה אישית: ..."` marker and ask Tanya for the real story.
+- Never invent first-hand experience or quotes. Ask Tanya for real stories. Until one exists, a short example scenario is allowed only as a quote block labeled **"תרחיש לדוגמה (לא אירוע אמיתי):"**, never presented as real. A hidden `[//]: # "להחליף בסיפור אמיתי..."` marker shows where the real story goes.
 - Keyword research: DataForSEO via `tools/seo/research.py` (the API login is a network secret in the cloud environment). Israel = `location_code 2376`; see `docs/seo/how-to-research.md`. Ask before spending more than a few dollars.

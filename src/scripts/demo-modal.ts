@@ -124,4 +124,10 @@ export function initDemoModal() {
       window.setTimeout(() => open(t.dataset.source), 200);
     } else open(t.dataset.source);
   });
+
+  // Blog articles link to "/#demo" so readers land straight in the demo.
+  if (location.hash === "#demo") {
+    history.replaceState(null, "", location.pathname + location.search);
+    open("link");
+  }
 }

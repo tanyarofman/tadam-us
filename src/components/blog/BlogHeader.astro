@@ -1,0 +1,45 @@
+---
+/** Slim header for blog pages: logo home, link to the blog index, demo CTA. */
+---
+
+<header class="blog-header">
+  <div class="container blog-header-inner">
+    <a href="/" class="blog-header-logo" aria-label="טדאם! דף הבית">
+      <img src="/brand/tadam-logo.webp" alt="טדאם!" width="736" height="407" />
+    </a>
+    <nav class="blog-header-nav" aria-label="ניווט">
+      <a href="/blog/">הבלוג</a>
+      <a class="btn btn-buzzer blog-header-cta" href="/#demo" data-track="blog_demo_click" data-source="blog-header">דמו</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .blog-header {
+    padding-block: 16px;
+    border-bottom: 2px solid var(--surface-border);
+  }
+  .blog-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .blog-header-logo img {
+    width: 110px;
+  }
+  .blog-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .blog-header-nav > a:not(.btn) {
+    color: var(--text-muted);
+    text-underline-offset: 5px;
+  }
+  .blog-header-cta {
+    min-height: 44px;
+    padding: 6px 22px 8px;
+    font-size: 1.15rem;
+  }
+</style>

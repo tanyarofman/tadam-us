@@ -140,13 +140,15 @@ export const MATERIAL = {
   minPrompts: 3,
 };
 
+/** Ilan's ready hosts (names, lines and photos copied from his /create step 2). Photos: public/intake/hosts. */
 export const HOSTS = [
-  { id: "auto", name: "תבחרו בשבילי", line: "נתאים מנחה לאירוע" },
-  { id: "ido", name: "עידו", line: "קלאסי, כמו בגמר" },
-  { id: "noa", name: "נועה", line: "חמה וקלילה" },
-  { id: "lian", name: "ליאן", line: "אנרגטית ומצחיקה" },
-  { id: "roi", name: "רועי", line: "רגוע ובטוח בעצמו" },
-  { id: "menachem", name: "מנחם", line: "ותיק ומנוסה" },
+  { id: "auto", name: "תבחרו בשבילי", line: "נתאים מנחה לאירוע", image: "" },
+  { id: "ido", name: "עידו", line: "המנחה הקלאסי, באולפן הכחול", image: "/intake/hosts/ido.webp" },
+  { id: "cartoon", name: "גולי", line: "דמות מצוירת עם המון אופי", image: "/intake/hosts/cartoon.webp" },
+  { id: "noa", name: "נועה", line: "צעירה, קלילה ובקצב שלכם", image: "/intake/hosts/noa.webp" },
+  { id: "lian", name: "ליאן", line: "סטייל של יוצרת תוכן, באולפן הכתום", image: "/intake/hosts/lian.webp" },
+  { id: "football", name: "רועי", line: "אנרגיה של גמר, באולפן הירוק", image: "/intake/hosts/football.webp" },
+  { id: "menachem", name: "מנחם", line: "חיוך חם, באולפן הבורדו", image: "/intake/hosts/menachem.webp" },
 ];
 
 export const INTAKE = {

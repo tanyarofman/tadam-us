@@ -671,27 +671,70 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     gap: 10px;
   }
   .in-host {
-    min-height: 72px;
-    padding: 10px;
+    padding: 0;
     background: var(--in-card);
     border: 2px solid var(--in-line);
     border-radius: var(--radius-m);
     cursor: pointer;
     text-align: start;
     display: grid;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .in-host img,
+  .in-host__ph {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: grid;
+    place-items: center;
+    font-size: 3rem;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .in-host__info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px 12px;
+  }
+  .in-host__info > span:last-child {
+    display: grid;
     gap: 2px;
   }
   .in-host strong {
     font-family: var(--font-display);
     font-size: 1.3rem;
+    line-height: 1.1;
   }
-  .in-host span {
+  .in-host__info span span {
     font-size: var(--fs-small);
     color: var(--text-muted);
+    line-height: 1.25;
+  }
+  .in-host__tick {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    border-radius: 50%;
+    border: 2px solid var(--in-line);
+    display: grid;
+    place-items: center;
   }
   .in-host[aria-checked="true"] {
     border-color: var(--game-yellow);
-    background: rgba(255, 230, 0, 0.14);
+    box-shadow: 0 0 0 2px var(--game-yellow);
+  }
+  .in-host[aria-checked="true"] .in-host__tick {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+  }
+  .in-host[aria-checked="true"] .in-host__tick::after {
+    content: "✓";
+    color: var(--pill-ink);
+    font-weight: 700;
+    line-height: 1;
   }
   .in-review {
     display: grid;

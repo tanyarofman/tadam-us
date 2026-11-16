@@ -117,7 +117,7 @@ Completion rate (start to order), time from start to "המשך" on screen 3, med
 - Real: screens 0 to 4 (the whole input), validation, the meter, autosave and resume, photo captions, the mic where supported, the brief and the text version.
 - Mock: screens 5 to 8 (generation, host picker, review questions, order, launchpad). The review shows real source snippets next to placeholder questions. The QR encodes a sample link.
 - Nothing is sent anywhere. Answers stay in this browser. Photos are kept in memory only and never stored or uploaded.
-- The hosts list in `HOSTS` is a placeholder copied from Ilan's app (5 versus 6 is still open).
+- The hosts list in `HOSTS` (names, lines and photos) is copied from Ilan's step 2, photos in `public/intake/hosts/` (resized). 6 hosts like his app; the plan says 5 ready hosts, so 5 versus 6 (the cartoon host גולי) is still open.
 
 Run it: `npm run dev`, then open `/start`. A shared preview: `npm run build && netlify deploy --dir dist` gives a draft URL.
 

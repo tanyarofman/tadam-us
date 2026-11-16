@@ -11,6 +11,7 @@ interface Host {
   id: string;
   name: string;
   line: string;
+  image: string;
 }
 interface Data {
   events: EventTile[];
@@ -592,7 +593,12 @@ function init(root: HTMLElement, data: Data) {
     const next = $<HTMLElement>("[data-gen-next]")!;
     const hostsEl = $<HTMLElement>("[data-hosts]")!;
     hostsEl.innerHTML = data.hosts
-      .map((h) => `<button type="button" class="in-host" role="radio" aria-checked="${state.host === h.id}" data-host="${h.id}"><strong>${esc(h.name)}</strong><span>${esc(h.line)}</span></button>`)
+      .map(
+        (h) => `<button type="button" class="in-host" role="radio" aria-checked="${state.host === h.id}" data-host="${h.id}">
+          ${h.image ? `<img src="${h.image}" alt="" width="520" height="650" loading="lazy" />` : `<span class="in-host__ph" aria-hidden="true">🎲</span>`}
+          <span class="in-host__info"><span class="in-host__tick" aria-hidden="true"></span><span><strong>${esc(h.name)}</strong><span>${esc(h.line)}</span></span></span>
+        </button>`,
+      )
       .join("");
     window.clearInterval(genTimer);
     let pct = 0;

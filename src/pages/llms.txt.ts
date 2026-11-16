@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 > טדאם! הוא משחק טריוויה חי ומותאם אישית לאירועים בישראל. המשחק נבנה מהסיפורים, השאלות והתמונות של המשפחה, החברים או הצוות, רץ על המסך הגדול באירוע, וכל האורחים עונים מהטלפון בלי להוריד אפליקציה. משחק טיפוסי לוקח 10 עד 15 דקות.
 
-Tadam is a personalized live trivia game for events in Israel (Hebrew). Family, friends or colleagues send stories, questions and photos through a link, the organizers approve every item, and Tadam turns them into a hosted game shown on the venue screen. Guests scan a QR code and answer from their phones in the browser.
+Tadam is a personalized live trivia game for events in Israel (Hebrew). Family, friends or colleagues send stories, questions and photos through a link, the organizers prepare the content, and Tadam turns them into a hosted game shown on the venue screen. Guests scan a QR code and answer from their phones in the browser.
 
 ## למי זה מתאים
 - ${COPY.eventsStrip.items.join(", ")}

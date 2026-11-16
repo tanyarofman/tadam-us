@@ -1,6 +1,9 @@
 ---
 import { COPY } from "../content/copy.he";
+import { fillPrices } from "../config/pricing";
 const c = COPY.faq;
+// Price and add-on questions come first (they live in the `pricing` copy block).
+const items = [...COPY.pricing.faq, ...c.items].map((it) => ({ q: it.q, a: fillPrices(it.a) }));
 ---
 
 <section class="faq" id="faq" aria-labelledby="faq-title">
@@ -8,7 +11,7 @@ const c = COPY.faq;
     <h2 id="faq-title" class="display h-scene faq-title reveal">{c.title}</h2>
     <div class="faq-list">
       {
-        c.items.map((it) => (
+        items.map((it) => (
           <details class="faq-item reveal">
             <summary>
               <span>{it.q}</span>

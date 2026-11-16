@@ -1,8 +1,8 @@
 ---
 import { COPY } from "../../content/copy.he";
 import Buzzer from "../Buzzer.astro";
-import HostSlot from "../art/HostSlot.astro";
 const c = COPY.scene3;
+const d = c.demo;
 const crowd = Array.from({ length: 22 }, (_, i) => i);
 ---
 
@@ -15,24 +15,51 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
 
     <div class="s3-stage container">
 
-      <div class="s3-screen" aria-hidden="true">
+      <div class="s3-screen">
         <div class="s3-screen-inner">
-          <div class="s3-burst">
+          <div class="s3-burst" aria-hidden="true">
             <div class="s3-rays"></div>
             <div class="s3-buzzer"><Buzzer id="s3-buzzer" rays /></div>
             <div class="s3-tadam logo-type">{c.burst}</div>
           </div>
-          <div class="s3-host">
-            <HostSlot />
+          <div class="s3-video" data-state="idle">
+            <video
+              class="s3-vid"
+              poster="/demo/tadam-demo-poster.webp"
+              width="1252"
+              height="720"
+              preload="none"
+              playsinline
+              muted
+              controls
+              aria-label={d.label}
+            >
+              <source src="/demo/tadam-demo.mp4" type="video/mp4" />
+            </video>
+            <button type="button" class="s3-big" data-act="toggle" aria-label={d.play}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"></path></svg>
+            </button>
+            <div class="s3-bar">
+              <button type="button" class="s3-btn" data-act="toggle" aria-label={d.pause}>
+                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z" fill="currentColor"></path></svg>
+                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"></path></svg>
+              </button>
+              <button type="button" class="s3-btn s3-sound" data-act="sound" aria-label={d.unmute} aria-pressed="false">
+                <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm12.5 1.4L18 12l-1.5 1.6 1 1 1.5-1.6 1.6 1.6 1-1-1.6-1.6L22 10.4l-1-1-1.5 1.6-1.6-1.6z" fill="currentColor"></path></svg>
+                <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm11.5 3a4 4 0 0 0-2-3.5v7a4 4 0 0 0 2-3.5zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" fill="currentColor"></path></svg>
+                <span class="s3-sound-text">{d.unmute}</span>
+              </button>
+              <button type="button" class="s3-btn s3-fs" data-act="fs" aria-label={d.fullscreen}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v2H7v3H5zm9 0h5v5h-2V7h-3zM5 14h2v3h3v2H5zm12 0h2v5h-5v-2h3z" fill="currentColor"></path></svg>
+                <span class="s3-fs-text">{d.fullscreen}</span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="s3-scan" aria-hidden="true"></div>
       </div>
 
-      <h2 id="s3-title" class="display s3-title">
-        <span class="s3-line s3-line-1">{c.headline}</span>
-        <span class="s3-line s3-line-2" aria-hidden="true"></span>
-      </h2>
+      <h2 id="s3-title" class="display s3-title">{c.headline}</h2>
     </div>
   </div>
 </section>
@@ -79,7 +106,7 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
   .s3-screen {
     position: relative;
     width: min(980px, 100%, calc((100svh - 300px) * 1.78));
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 1252 / 720;
     border-radius: 18px;
     border: 8px solid var(--purple-ink);
     background: var(--screen-bg);
@@ -95,7 +122,7 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   }
   .s3-burst,
-  .s3-host {
+  .s3-video {
     grid-area: 1 / 1;
     position: relative;
     display: grid;
@@ -104,6 +131,138 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     min-height: 0;
     height: 100%;
     overflow: hidden;
+  }
+  .s3-burst {
+    pointer-events: none;
+    z-index: 2;
+  }
+  .s3-video {
+    background: #020b2e;
+    place-items: stretch;
+  }
+  .s3-vid {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #020b2e;
+  }
+  /* custom controls replace the native ones once JS runs */
+  :global(html.s3-js) .s3-vid::-webkit-media-controls {
+    display: none !important;
+  }
+  .s3-big,
+  .s3-bar {
+    display: none;
+  }
+  :global(html.s3-js) .s3-big {
+    grid-area: 1 / 1;
+    place-self: center;
+    display: grid;
+    place-items: center;
+    width: clamp(56px, 11%, 96px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 4px solid var(--purple-ink);
+    background: var(--sun-yellow);
+    color: var(--purple-ink);
+    cursor: pointer;
+    box-shadow: 0 0 40px rgba(247, 217, 74, 0.6);
+    transition: transform 0.2s var(--ease-bounce), opacity 0.2s;
+  }
+  .s3-big svg {
+    width: 48%;
+    translate: 6% 0;
+  }
+  .s3-big:hover {
+    transform: scale(1.08);
+  }
+  :global(html.s3-js) .s3-video:not([data-state="paused"]):not([data-state="idle"]):not([data-state="ended"]) .s3-big {
+    opacity: 0;
+    pointer-events: none;
+  }
+  :global(html.s3-js) .s3-bar {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 12px;
+    background: linear-gradient(to top, rgba(2, 11, 46, 0.85), transparent);
+    z-index: 3;
+  }
+  .s3-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    justify-content: center;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    background: rgba(2, 11, 46, 0.7);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .s3-btn svg {
+    width: 22px;
+    height: 22px;
+    flex: none;
+  }
+  .s3-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .s3-btn:focus-visible,
+  .s3-big:focus-visible {
+    outline: 3px solid var(--sky-cyan);
+    outline-offset: 3px;
+  }
+  .s3-sound {
+    margin-inline-start: auto;
+  }
+  .s3-sound[aria-pressed="false"] {
+    background: var(--sun-yellow);
+    color: var(--purple-ink);
+    border-color: var(--purple-ink);
+    animation: s3-nudge 2.2s ease-in-out infinite;
+  }
+  .s3-sound[aria-pressed="true"] .s3-sound-text {
+    display: none;
+  }
+  .s3-sound .i-on,
+  .s3-sound[aria-pressed="true"] .i-off {
+    display: none;
+  }
+  .s3-sound[aria-pressed="true"] .i-on {
+    display: block;
+  }
+  .s3-video:not([data-state="playing"]) .i-pause,
+  .s3-video[data-state="playing"] .i-play {
+    display: none;
+  }
+  @keyframes s3-nudge {
+    0%, 70%, 100% { transform: scale(1); }
+    80% { transform: scale(1.07); }
+    90% { transform: scale(0.98); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .s3-sound[aria-pressed="false"] { animation: none; }
+  }
+  /* fullscreen: the whole screen box goes fullscreen so the controls come along */
+  .s3-screen:fullscreen {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    background: #000;
   }
   .s3-burst {
     opacity: 0;
@@ -144,30 +303,21 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     max-width: 30ch;
     text-wrap: balance;
     text-shadow: 0 3px 0 var(--purple-ink);
-    min-height: 2.4em;
-    display: grid;
-  }
-  .s3-line {
-    grid-area: 1 / 1;
-  }
-  .s3-line-2 {
-    color: var(--sun-yellow);
-  }
-  /* Static (reduced motion / no JS): show both lines stacked */
-  :global(html:not(.s3-animated)) .s3-title {
-    display: block;
-  }
-  :global(html:not(.s3-animated)) .s3-line {
-    display: block;
   }
   :global(html:not(.s3-animated)) .s3-burst {
     display: none;
   }
   @media (max-width: 767px) {
+    /* edge to edge so the 16:9 picture gets every pixel of the phone width */
     .s3-screen {
-      width: 100%;
-      aspect-ratio: 4 / 3.4;
-      border-width: 6px;
+      width: 100vw;
+      margin-inline: calc(50% - 50vw);
+      border-width: 3px 0;
+      border-radius: 0;
+    }
+    .s3-fs-text,
+    .s3-sound-text {
+      font-size: 0.9rem;
     }
     .s3-buzzer {
       width: 40%;

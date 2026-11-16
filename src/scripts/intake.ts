@@ -32,6 +32,7 @@ interface State {
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
   approved: boolean[];
+  own: { q: string; answers: string[]; correct: number }[];
   checks: boolean[];
   code: string;
 }
@@ -61,6 +62,7 @@ function init(root: HTMLElement, data: Data) {
     details: { date: "", guests: "", screen: "", contact: "" },
     host: "auto",
     approved: [],
+    own: [],
     checks: [false, false, false],
     code: String(1000 + Math.floor(Math.random() * 9000)),
   });
@@ -192,7 +194,7 @@ function init(root: HTMLElement, data: Data) {
     const q = $("[data-sample-q]");
     const a = $("[data-sample-a]");
     if (q) q.textContent = fill(sc.sampleQuestion, { name });
-    if (a) a.innerHTML = sc.sampleAnswers.map((t) => `<li>${esc(t)}</li>`).join("");
+    if (a) a.innerHTML = sc.sampleAnswers.map((t, i) => `<li data-correct="${i === sc.sampleCorrect}">${esc(t)}</li>`).join("");
   }
   nameIn.addEventListener("input", () => {
     state.name = nameIn.value;
@@ -208,6 +210,9 @@ function init(root: HTMLElement, data: Data) {
   extraIn.addEventListener("input", () => {
     state.extra = extraIn.value;
     save();
+  });
+  titleIn.addEventListener("focus", () => {
+    if (!state.titleEdited) titleIn.select(); // typing replaces the prefilled title instead of mixing with it
   });
   titleIn.addEventListener("input", () => {
     state.title = titleIn.value;
@@ -235,12 +240,18 @@ function init(root: HTMLElement, data: Data) {
         </button>
         <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
           <label class="in-help" for="pt-${p.id}">${esc(fill(p.hint, { name: subjectName() }))}</label>
+          <div class="in-rec" data-rec="${p.id}" role="status" hidden>
+            <span class="in-rec__dot" aria-hidden="true"></span>
+            <span>${c.stories.recording}</span>
+            <span class="in-rec__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="in-rec__time" data-mic-time="${p.id}">0:00</span>
+          </div>
           <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>
           <div class="in-prompt__row">
             <button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>
-            <span class="in-help" data-mic-time="${p.id}"></span>
             <button type="button" class="btn btn-ghost" data-skip="${p.id}">${c.stories.skip}</button>
           </div>
+          <p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
           <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>
         </div>`;
       promptsEl.append(box);
@@ -309,6 +320,8 @@ function init(root: HTMLElement, data: Data) {
   function setupMic(box: HTMLElement, id: string) {
     const btn = box.querySelector<HTMLButtonElement>(`[data-mic="${id}"]`)!;
     const timeEl = box.querySelector<HTMLElement>(`[data-mic-time="${id}"]`)!;
+    const recEl = box.querySelector<HTMLElement>(`[data-rec="${id}"]`)!;
+    const heardEl = box.querySelector<HTMLElement>(`[data-mic-heard="${id}"]`)!;
     const errEl = box.querySelector<HTMLElement>(`[data-mic-err="${id}"]`)!;
     const ta = box.querySelector<HTMLTextAreaElement>("textarea")!;
     btn.textContent = "🎤 " + c.stories.mic;
@@ -324,14 +337,20 @@ function init(root: HTMLElement, data: Data) {
       }
       const rec = new SR();
       rec.lang = "he-IL";
-      rec.interimResults = false;
+      rec.interimResults = true;
       rec.continuous = true;
       const base = ta.value;
       let finalText = "";
       let secs = 0;
       heard = false;
       rec.onresult = (e: any) => {
-        for (let i = e.resultIndex; i < e.results.length; i++) if (e.results[i].isFinal) finalText += e.results[i][0].transcript + " ";
+        let interim = "";
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          if (e.results[i].isFinal) finalText += e.results[i][0].transcript + " ";
+          else interim += e.results[i][0].transcript;
+        }
+        heardEl.textContent = interim ? `${c.stories.heard} ${interim}` : "";
+        if (interim) heard = true;
         if (finalText.trim()) {
           heard = true;
           ta.value = (base ? base.trimEnd() + " " : "") + finalText.trim();
@@ -347,7 +366,9 @@ function init(root: HTMLElement, data: Data) {
         window.clearInterval(timer);
         btn.setAttribute("aria-pressed", "false");
         btn.textContent = "🎤 " + c.stories.mic;
-        timeEl.textContent = "";
+        recEl.hidden = true;
+        heardEl.textContent = "";
+        ta.removeAttribute("data-recording");
         if (!heard && errEl.hidden) showErr(c.stories.micEmpty);
         activeRec = null;
       };
@@ -364,9 +385,12 @@ function init(root: HTMLElement, data: Data) {
       activeRec = rec;
       btn.setAttribute("aria-pressed", "true");
       btn.textContent = "■ " + c.stories.micStop;
+      recEl.hidden = false;
+      ta.dataset.recording = "true";
+      timeEl.textContent = "0:00";
       timer = window.setInterval(() => {
         secs += 1;
-        timeEl.textContent = `0:${String(secs).padStart(2, "0")}`;
+        timeEl.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`;
       }, 1000);
     });
   }
@@ -379,7 +403,7 @@ function init(root: HTMLElement, data: Data) {
     state.photos.forEach((p, i) => {
       const li = document.createElement("li");
       const url = photoFiles.get(i);
-      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<span aria-hidden="true">🖼️</span>`}
+      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<span class="in-photo-ph" aria-hidden="true">🖼️</span>`}
         <input class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosCaption)}" aria-label="${esc(c.stories.photosCaption)} ${i + 1}" data-caption="${i}" />
         <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>`;
       photoList.append(li);
@@ -472,18 +496,24 @@ function init(root: HTMLElement, data: Data) {
   });
 
   // ---------- 6: review (mock questions, real sources) ----------
-  type Source = { label: string; snippet: string };
-  function sources(): Source[] {
-    const list: Source[] = answeredPrompts().map((p) => ({
-      label: fill(p.label, { name: subjectName() }),
-      snippet: (state.answers[p.id] || "").trim(),
-    }));
-    state.photos.filter((p) => p.caption.trim()).forEach((p) => list.push({ label: c.stories.photosTitle, snippet: p.caption.trim() }));
-    return list;
+  type Q = { snippet: string; own?: { q: string; answers: string[]; correct: number } };
+  /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
+  function questions(): Q[] {
+    const m = data.material;
+    const list: Q[] = [];
+    for (const p of shape().prompts) {
+      const text = (state.answers[p.id] || "").trim();
+      if (text.length < m.minChars) continue;
+      const n = Math.min(m.maxPerPrompt, Math.max(1, Math.round(text.length / m.charsPerQuestion)));
+      for (let i = 0; i < n; i++) list.push({ snippet: text });
+    }
+    state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => list.push({ snippet: p.caption.trim() }));
+    const generated = list.slice(0, target());
+    return [...generated, ...state.own.map((o) => ({ snippet: "", own: o }))];
   }
   let reviewIndex = 0;
   function renderReview() {
-    const list = sources();
+    const list = questions();
     if (state.approved.length !== list.length) state.approved = list.map((_, i) => !!state.approved[i]);
     reviewIndex = Math.min(reviewIndex, Math.max(0, list.length - 1));
     const el = $<HTMLElement>("[data-review]")!;
@@ -493,13 +523,18 @@ function init(root: HTMLElement, data: Data) {
       return;
     }
     const ok = state.approved[reviewIndex];
+    const body = s.own
+      ? `<p class="in-qcard__source">${c.stage5.ownMark}</p>
+         <p class="in-sample__q">${esc(s.own.q)}</p>
+         <ul class="in-qcard__answers">${s.own.answers.map((t, i) => `<li data-correct="${i === s.own!.correct}">${esc(t)}</li>`).join("")}</ul>`
+      : `<p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
+         <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>`;
     el.innerHTML = `<article class="in-qcard" data-approved="${ok}">
         <h3 class="in-sub">${fill(c.stage5.questionOf, { i: reviewIndex + 1, n: list.length })}</h3>
-        <p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
-        <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>
+        ${body}
         <div class="in-qcard__actions">
           <button type="button" class="btn btn-buzzer" data-approve>${ok ? "✓ " + c.stage5.approved : c.stage5.approve}</button>
-          <button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>
+          ${s.own ? "" : `<button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>`}
           <button type="button" class="btn btn-ghost" data-rv="-1" ${reviewIndex === 0 ? "disabled" : ""}>${c.back}</button>
           <button type="button" class="btn btn-ghost" data-rv="1" ${reviewIndex >= list.length - 1 ? "disabled" : ""}>${c.next}</button>
         </div>
@@ -509,6 +544,37 @@ function init(root: HTMLElement, data: Data) {
     if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
     updateReviewGate();
   }
+  // own question form: a question, four answers, one marked correct
+  const ownForm = $<HTMLFormElement>("[data-own-form]")!;
+  const ownOpen = $<HTMLElement>("[data-own-open]")!;
+  const ownErr = $<HTMLElement>("[data-own-err]")!;
+  function closeOwn() {
+    ownForm.hidden = true;
+    ownOpen.hidden = false;
+    ownForm.reset();
+    ownErr.hidden = true;
+  }
+  ownOpen.addEventListener("click", () => {
+    ownForm.hidden = false;
+    ownOpen.hidden = true;
+    ownForm.querySelector<HTMLInputElement>("#own-q")?.focus();
+  });
+  $<HTMLElement>("[data-own-cancel]")!.addEventListener("click", closeOwn);
+  ownForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = ownForm.querySelector<HTMLInputElement>("#own-q")!.value.trim();
+    const answers = [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
+    const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
+    if (!q || answers.some((a) => !a) || !picked) {
+      ownErr.hidden = false;
+      return;
+    }
+    state.own.push({ q, answers, correct: Number(picked.value) });
+    closeOwn();
+    reviewIndex = questions().length - 1; // jump to the new question
+    renderReview();
+    save();
+  });
   function updateReviewGate() {
     const all = state.approved.length > 0 && state.approved.every(Boolean) && state.checks.every(Boolean);
     $<HTMLElement>('[data-next="6"]')?.setAttribute("aria-disabled", String(!all));
@@ -545,7 +611,7 @@ function init(root: HTMLElement, data: Data) {
       ["על מי", subjectName()],
       ["שם המשחק", state.title],
       ["מנחה", hostName],
-      ["שאלות", String(questionsReady())],
+      ["שאלות", String(questions().length)],
     ];
     if (d.guests) rows.push(["אורחים", d.guests]);
     $("[data-summary]")!.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
@@ -570,6 +636,7 @@ function init(root: HTMLElement, data: Data) {
       photos: state.photos.map((p) => ({ file: p.name, caption: p.caption.trim() })),
       logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null, contact: d.contact || null },
       host: state.host,
+      ownQuestions: state.own,
       questionCount: target(),
       materialReady: questionsReady(),
       consent: { photos: state.photos.length > 0 },

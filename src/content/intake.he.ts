@@ -37,24 +37,26 @@ export interface ShapeConfig {
   title: string;
   sampleQuestion: string;
   sampleAnswers: string[];
+  /** Index of the correct sample answer (shown in green). */
+  sampleCorrect: number;
   storiesTitle: string;
   storiesLead: string;
   prompts: Prompt[];
 }
 
 export const EVENTS: EventTile[] = [
-  { id: "birthday", label: "יום הולדת", shape: "person", icon: "🎂", target: 9 },
-  { id: "round-birthday", label: "יום הולדת עגול", shape: "person", icon: "🎈", target: 9 },
-  { id: "bar-bat", label: "בר או בת מצווה", shape: "person", icon: "✡️", target: 9 },
-  { id: "farewell", label: "מסיבת פרידה או פרישה", shape: "person", icon: "👋", target: 9 },
-  { id: "bachelor", label: "מסיבת רווקים או רווקות", shape: "person", icon: "🥂", target: 9 },
+  { id: "birthday", label: "יום הולדת", shape: "person", icon: "🎂", target: 12 },
+  { id: "round-birthday", label: "יום הולדת עגול", shape: "person", icon: "🎈", target: 12 },
+  { id: "bar-bat", label: "בר או בת מצווה", shape: "person", icon: "✡️", target: 12 },
+  { id: "farewell", label: "מסיבת פרידה או פרישה", shape: "person", icon: "👋", target: 12 },
+  { id: "bachelor", label: "מסיבת רווקים או רווקות", shape: "person", icon: "🥂", target: 12 },
   { id: "wedding", label: "חתונה", shape: "couple", icon: "💍", target: 12 },
-  { id: "henna", label: "חינה", shape: "couple", icon: "🪔", target: 9 },
-  { id: "anniversary", label: "יום נישואין", shape: "couple", icon: "💞", target: 9 },
-  { id: "family", label: "אירוע משפחתי", shape: "group", icon: "👨‍👩‍👧‍👦", target: 9 },
-  { id: "reunion", label: "פגישת מחזור", shape: "group", icon: "🎓", target: 9 },
-  { id: "teambuilding", label: "יום גיבוש", shape: "group", icon: "🤝", target: 9 },
-  { id: "toast", label: "הרמת כוסית", shape: "group", icon: "🍾", target: 9 },
+  { id: "henna", label: "חינה", shape: "couple", icon: "🪔", target: 12 },
+  { id: "anniversary", label: "יום נישואין", shape: "couple", icon: "💞", target: 12 },
+  { id: "family", label: "אירוע משפחתי", shape: "group", icon: "👨‍👩‍👧‍👦", target: 12 },
+  { id: "reunion", label: "פגישת מחזור", shape: "group", icon: "🎓", target: 12 },
+  { id: "teambuilding", label: "יום גיבוש", shape: "group", icon: "🤝", target: 12 },
+  { id: "toast", label: "הרמת כוסית", shape: "group", icon: "🍾", target: 12 },
 ];
 
 export const SHAPES: Record<Shape, ShapeConfig> = {
@@ -67,6 +69,7 @@ export const SHAPES: Record<Shape, ShapeConfig> = {
     title: "כמה אתם מכירים את {name}?",
     sampleQuestion: "מה האוכל האהוב על {name}?",
     sampleAnswers: ["פיצה", "סושי", "שווארמה", "גלידה"],
+    sampleCorrect: 0,
     storiesTitle: "ספרו לנו על {name}",
     storiesLead: "כמו שמספרים לחבר. כל תשובה הופכת לשאלה אחת או יותר. אפשר לדלג על מה שלא מתאים.",
     prompts: [
@@ -87,6 +90,7 @@ export const SHAPES: Record<Shape, ShapeConfig> = {
     title: "כמה אתם מכירים את {name}?",
     sampleQuestion: "איפה {name} נפגשו לראשונה?",
     sampleAnswers: ["בצבא", "בעבודה", "דרך חברים", "באוניברסיטה"],
+    sampleCorrect: 2,
     storiesTitle: "ספרו לנו על {name}",
     storiesLead: "כמו שמספרים לחבר. כל תשובה הופכת לשאלה אחת או יותר. אפשר לדלג על מה שלא מתאים.",
     prompts: [
@@ -107,6 +111,7 @@ export const SHAPES: Record<Shape, ShapeConfig> = {
     title: "כמה אתם יודעים על {name}?",
     sampleQuestion: "מה {name} עושים הכי טוב ביחד?",
     sampleAnswers: ["מתארגנים", "אוכלים", "מתווכחים", "צוחקים"],
+    sampleCorrect: 3,
     storiesTitle: "ספרו לנו על {name}",
     storiesLead: "כמו שמספרים לחבר. אפשר גם לשלוח את הקישור למי שמכיר יותר ולבקש שיוסיף. אפשר לדלג על מה שלא מתאים.",
     prompts: [
@@ -162,7 +167,7 @@ export const INTAKE = {
   start: {
     eyebrow: "בלי הרשמה ובלי כרטיס אשראי",
     title: "בונים את המשחק של האירוע שלכם",
-    lead: "מספרים לנו על האירוע בעשר דקות בערך. אנחנו בונים מזה משחק טריוויה אישי, ואתם מאשרים כל שאלה לפני שהוא עולה למסך.",
+    lead: "מספרים לנו על האירוע בעשר דקות בערך. אנחנו בונים מזה משחק טריוויה אישי.",
     bullets: [
       "אפשר לעצור ולחזור בדיוק מאיפה שהפסקתם. הכול נשמר.",
       "האורחים משחקים מהטלפון בסריקת קוד אחד, בלי אפליקציה ובלי חשבון.",
@@ -181,7 +186,7 @@ export const INTAKE = {
     titleLabel: "שם המשחק",
     titleHelp: "הכנו שם. אפשר לשנות אותו עכשיו או בהמשך.",
     sampleBadge: "דוגמה בלבד",
-    sampleNote: "ככה ייראו השאלות, בתשובות אמיתיות מהסיפורים שלכם.",
+    sampleNote: "ככה ייראו השאלות, בתשובות אמיתיות מהסיפורים שלכם. התשובה הנכונה בירוק.",
     required: "כתבו שם כדי להמשיך",
   },
 
@@ -196,6 +201,8 @@ export const INTAKE = {
     typeHere: "כתבו כאן",
     mic: "אפשר גם להקליט",
     micStop: "סיום הקלטה",
+    recording: "מקליטים עכשיו, אפשר לדבר",
+    heard: "מה ששמענו:",
     micDenied: "כדי להקליט צריך לאפשר גישה למיקרופון. אם פתחתם מוואטסאפ או מאינסטגרם, נסו לפתוח בכרום או בספארי.",
     micEmpty: "לא שמענו כלום, נסו שוב.",
     micUnsupported: "ההקלטה לא נתמכת בדפדפן הזה. אפשר לכתוב.",
@@ -238,6 +245,18 @@ export const INTAKE = {
     reviewTitle: "בודקים ומאשרים",
     reviewLead: "עוברים על כל שאלה. שום דבר לא עולה למסך בלי האישור שלכם.",
     questionOf: "שאלה {i} מתוך {n}",
+    own: "שאלה משלכם",
+    ownAdd: "הוסיפו שאלה משלכם",
+    ownTitle: "שאלה משלכם",
+    ownHelp: "כתבו שאלה, ארבע תשובות, וסמנו איזו מהן נכונה.",
+    ownQuestion: "השאלה",
+    ownAnswer: "תשובה",
+    ownCorrect: "זו התשובה הנכונה",
+    ownSave: "הוספה לרשימה",
+    ownCancel: "ביטול",
+    ownNeed: "כתבו שאלה וארבע תשובות, וסמנו את הנכונה",
+    ownMark: "שאלה שלכם",
+    ownEdited: "ממתינה לאישור",
     source: "נבנתה מהסיפור שלכם",
     placeholderQuestion: "כאן תופיע השאלה עם ארבע תשובות, ותוכלו לערוך או לבקש ניסוח אחר.",
     approve: "מאשרים",

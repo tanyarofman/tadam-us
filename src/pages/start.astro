@@ -179,6 +179,31 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <h2 class="display h-card" id="h6" tabindex="-1">{c.stage5.reviewTitle}</h2>
       <p class="lead">{c.stage5.reviewLead}</p>
       <div class="in-review" data-review></div>
+      <button class="btn btn-white in-own-open" type="button" data-own-open>+ {c.stage5.ownAdd}</button>
+      <form class="in-own" data-own-form hidden novalidate>
+        <h3 class="in-sub">{c.stage5.ownTitle}</h3>
+        <p class="in-help">{c.stage5.ownHelp}</p>
+        <div class="in-field">
+          <label for="own-q">{c.stage5.ownQuestion}</label>
+          <input id="own-q" class="in-input" type="text" maxlength="120" />
+        </div>
+        <fieldset class="in-own-answers">
+          <legend class="sr-only">{c.stage5.ownCorrect}</legend>
+          {
+            [0, 1, 2, 3].map((i) => (
+              <div class="in-own-row">
+                <input class="in-input" type="text" maxlength="60" data-own-a={i} aria-label={`${c.stage5.ownAnswer} ${i + 1}`} placeholder={`${c.stage5.ownAnswer} ${i + 1}`} />
+                <label class="in-own-correct"><input type="radio" name="own-correct" value={i} /><span>{c.stage5.ownCorrect}</span></label>
+              </div>
+            ))
+          }
+        </fieldset>
+        <p class="in-err" role="alert" data-own-err hidden>{c.stage5.ownNeed}</p>
+        <div class="in-nav">
+          <button class="btn btn-ghost" type="button" data-own-cancel>{c.stage5.ownCancel}</button>
+          <button class="btn btn-buzzer" type="submit">{c.stage5.ownSave}</button>
+        </div>
+      </form>
       <fieldset class="in-checks">
         {
           c.stage5.checklist.map((t, i) => (
@@ -774,6 +799,176 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   }
   .in-dev h4 {
     margin: 12px 0 6px;
+  }
+
+  .in-sample__a li[data-correct="true"] {
+    background: var(--answer-correct);
+    color: #fff;
+  }
+  .in-sample__a li[data-correct="true"]::before {
+    content: "✓ ";
+  }
+  .in-textarea[data-recording="true"] {
+    border-color: var(--buzzer-red);
+    box-shadow: 0 0 0 4px rgba(231, 65, 56, 0.35);
+    animation: in-rec-glow 1.2s ease-in-out infinite;
+  }
+  @keyframes in-rec-glow {
+    50% {
+      box-shadow: 0 0 0 8px rgba(231, 65, 56, 0.12);
+    }
+  }
+  .in-rec {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: var(--radius-s);
+    background: rgba(231, 65, 56, 0.22);
+    border: 1px solid var(--buzzer-red);
+    font-weight: 700;
+  }
+  .in-rec__dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--buzzer-red);
+    animation: in-rec-pulse 1s ease-in-out infinite;
+    flex: none;
+  }
+  @keyframes in-rec-pulse {
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+  }
+  .in-rec__bars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 22px;
+  }
+  .in-rec__bars i {
+    width: 4px;
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    animation: in-rec-bar 0.9s ease-in-out infinite;
+  }
+  .in-rec__bars i:nth-child(2) { animation-delay: 0.15s; }
+  .in-rec__bars i:nth-child(3) { animation-delay: 0.3s; }
+  .in-rec__bars i:nth-child(4) { animation-delay: 0.45s; }
+  .in-rec__bars i:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes in-rec-bar {
+    0%, 100% { transform: scaleY(0.25); }
+    50% { transform: scaleY(1); }
+  }
+  .in-rec__time {
+    margin-inline-start: auto;
+    font-variant-numeric: tabular-nums;
+  }
+  .in-rec__heard {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    min-height: 1.4em;
+  }
+  .in-photo-list {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  .in-photo-list li {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 0 0 10px;
+    overflow: hidden;
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-m);
+  }
+  .in-photo-list li:focus-within {
+    border-color: var(--game-yellow);
+  }
+  .in-photo-list img,
+  .in-photo-list .in-photo-ph {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .in-photo-list .in-input {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+  }
+  .in-photo-list .btn-ghost {
+    justify-self: center;
+    min-height: 44px;
+    font-size: 1.1rem;
+  }
+  .in-own {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    background: var(--in-card);
+    border: 2px solid var(--game-yellow);
+    border-radius: var(--radius-m);
+  }
+  .in-own-answers {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .in-own-row {
+    display: grid;
+    gap: 6px;
+  }
+  .in-own-correct {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    cursor: pointer;
+    font-size: var(--fs-small);
+  }
+  .in-own-correct input {
+    width: 24px;
+    height: 24px;
+    accent-color: var(--answer-correct);
+  }
+  .in-own-open {
+    justify-self: start;
+  }
+  .in-qcard__answers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .in-qcard__answers li {
+    background: var(--pill-white);
+    color: var(--pill-ink);
+    border-radius: 999px;
+    padding: 6px 14px 8px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .in-qcard__answers li[data-correct="true"] {
+    background: var(--answer-correct);
+    color: #fff;
+  }
+  .in-qcard__answers li[data-correct="true"]::before {
+    content: "✓ ";
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-rec__dot, .in-rec__bars i, .in-textarea[data-recording="true"] { animation: none; }
   }
   @media (min-width: 720px) {
     .in-tiles {

@@ -1,22 +1,149 @@
 /**
- * Scene 3 (WOW #1, scroll-scrubbed): lights down, the screen flickers on,
- * the buzzer gets pressed by the scroll, "טדאם!" bursts, then the host slot lights up
- * and generic silhouettes cycle through it by type.
+ * Scene 3 (WOW #1): lights down, the screen flickers on, the buzzer gets pressed by the scroll,
+ * "טדאם!" bursts, then the big screen "turns on" with the demo video.
+ *
+ * Video: muted autoplay only while the screen is on and in view, pauses out of view,
+ * never autoplays with sound, no autoplay at all with prefers-reduced-motion (poster + play button).
+ * The mp4 is only requested once the scene is near the viewport (preload stays "none" until then).
  */
 import { gsap } from "../../lib/scroll";
 import { isMobile } from "../motion";
+import { COPY } from "../../content/copy.he";
+
+type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+type FsEl = HTMLElement & { webkitRequestFullscreen?: () => Promise<void> };
+
+function initVideo(s: HTMLElement, reduced: boolean) {
+  const d = COPY.scene3.demo;
+  const box = s.querySelector<HTMLElement>(".s3-video")!;
+  const screen = s.querySelector<FsEl>(".s3-screen")!;
+  const video = box.querySelector<FsVideo>("video")!;
+  const sound = box.querySelector<HTMLButtonElement>(".s3-sound")!;
+  const toggles = box.querySelectorAll<HTMLButtonElement>("[data-act='toggle']");
+  const fs = box.querySelector<HTMLButtonElement>(".s3-fs")!;
+
+  document.documentElement.classList.add("s3-js");
+  video.controls = false;
+  video.muted = true;
+  video.defaultMuted = true;
+
+  let screenOn = reduced; // with the animation the video only counts once the screen has turned on
+  let inView = false;
+  let userPaused = false;
+  let state: "idle" | "playing" | "paused" | "ended" = "idle";
+
+  const setState = (v: typeof state) => {
+    state = v;
+    box.dataset.state = v;
+    toggles.forEach((b) => b.setAttribute("aria-label", v === "playing" ? d.pause : v === "ended" ? d.replay : d.play));
+  };
+  const syncSound = () => {
+    const on = !video.muted;
+    sound.setAttribute("aria-pressed", String(on));
+    sound.setAttribute("aria-label", on ? d.mute : d.unmute);
+  };
+  syncSound();
+
+  // Lazy load: nothing is fetched until the scene is within ~1.5 screens
+  let loaded = false;
+  const load = () => {
+    if (loaded) return;
+    loaded = true;
+    video.preload = "metadata";
+    video.load();
+  };
+  new IntersectionObserver(
+    (e) => {
+      if (e.some((x) => x.isIntersecting)) {
+        load();
+      }
+    },
+    { rootMargin: "150% 0px" },
+  ).observe(s);
+
+  const tryPlay = () => {
+    if (reduced || userPaused || !screenOn || !inView || state === "ended") return;
+    load();
+    video.play().catch(() => setState("paused")); // autoplay blocked (data saver etc.): poster + play button
+  };
+  const stop = () => {
+    if (!video.paused) video.pause();
+  };
+
+  video.addEventListener("play", () => setState("playing"));
+  video.addEventListener("pause", () => {
+    if (!video.ended) setState("paused");
+  });
+  video.addEventListener("ended", () => setState("ended"));
+  video.addEventListener("volumechange", syncSound);
+
+  new IntersectionObserver(
+    ([e]) => {
+      inView = e.isIntersecting;
+      if (inView) tryPlay();
+      else stop();
+    },
+    { threshold: 0.4 },
+  ).observe(screen);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else tryPlay();
+  });
+
+  toggles.forEach((b) =>
+    b.addEventListener("click", () => {
+      if (state === "playing") {
+        userPaused = true;
+        video.pause();
+      } else {
+        userPaused = false;
+        if (state === "ended") video.currentTime = 0;
+        load();
+        video.play().catch(() => {});
+      }
+    }),
+  );
+  video.addEventListener("click", () => toggles[0].click());
+
+  sound.addEventListener("click", () => {
+    video.muted = !video.muted;
+    if (!video.muted && video.paused && !userPaused) video.play().catch(() => {});
+  });
+
+  fs.addEventListener("click", () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (screen.requestFullscreen) {
+      screen.requestFullscreen().catch(() => {});
+    } else if (screen.webkitRequestFullscreen) {
+      screen.webkitRequestFullscreen();
+    } else if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen(); // iPhone Safari
+    }
+  });
+
+  if (reduced) setState("paused");
+  return {
+    screenOn(on: boolean) {
+      if (on === screenOn) return;
+      screenOn = on;
+      if (on) tryPlay();
+      else stop();
+    },
+  };
+}
 
 export function init({ reduced }: { reduced: boolean }) {
   const s = document.querySelector<HTMLElement>("[data-scene='3']");
   if (!s) return;
+
+  const vid = initVideo(s, reduced);
   if (reduced) return;
 
   document.documentElement.classList.add("s3-animated");
   const q = <T extends Element = HTMLElement>(sel: string) => s.querySelector<T>(sel)!;
   const qa = (sel: string) => s.querySelectorAll(sel);
-
-  const slot = q(".host-slot");
-  slot.classList.add("anim");
 
   const dark = q(".s3-dark");
   const screen = q(".s3-screen");
@@ -26,14 +153,8 @@ export function init({ reduced }: { reduced: boolean }) {
   const cap = q(".s3-buzzer .buzzer-cap");
   const buzzerRays = qa(".s3-buzzer .ray-set");
   const tadam = q(".s3-tadam");
-  const host = q(".s3-host");
-  const spot = q(".host-spot");
-  const mic = q(".host-mic");
-  const line1 = q(".s3-line-1");
-  const line2 = q(".s3-line-2");
-  const hostQ = q(".host-q");
-  const silQ = q(".sil-q");
-  const types = ["singer", "athlete", "character", "influencer"];
+  const video = q(".s3-video");
+  const line1 = q(".s3-title");
 
   gsap.set(dark, { opacity: 0.15 });
   gsap.set(screen, { filter: "brightness(0.15) saturate(0)" });
@@ -42,21 +163,21 @@ export function init({ reduced }: { reduced: boolean }) {
   gsap.set(buzzerRays, { scale: 0, opacity: 0 });
   gsap.set(tadam, { scale: 0.2, opacity: 0, rotate: -8 });
   gsap.set(rays, { scale: 0.4, opacity: 0 });
-  gsap.set(host, { opacity: 0 });
-  gsap.set([spot, mic], { opacity: 0 });
+  gsap.set(video, { opacity: 0 });
   gsap.set(line1, { opacity: 0, y: 20 });
-  gsap.set(line2, { opacity: 0, y: 20 });
-  gsap.set(hostQ, { x: 0, y: 0, xPercent: -50, yPercent: -62 });
 
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     scrollTrigger: {
       trigger: s,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 3.6 : 4),
+      end: () => "+=" + window.innerHeight * (isMobile() ? 2.4 : 2.8),
       pin: s.querySelector(".scene-pin"),
       scrub: 0.7,
       invalidateOnRefresh: true,
+    },
+    onUpdate() {
+      vid.screenOn(tl.time() >= tl.labels.video);
     },
   });
 
@@ -80,30 +201,14 @@ export function init({ reduced }: { reduced: boolean }) {
     .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.35, ease: "back.out(2.5)" }, "<0.05")
     .to(buzzerWrap, { y: "-30%", scale: 0.8, duration: 0.35 }, "<")
     .to({}, { duration: 0.5 })
-    // 5. clear for the host
+    // 5. the burst clears and the big screen wakes up with the demo
+    .addLabel("video")
     .to(burst, { opacity: 0, scale: 1.2, duration: 0.35 })
-    .to(line1, { opacity: 0, y: -20, duration: 0.3 }, "<")
-    .to(host, { opacity: 1, duration: 0.1 }, "<0.15")
-    .to(spot, { opacity: 1, duration: 0.3 })
-    .from(spot, { scaleX: 0.2, transformOrigin: "50% 0%", duration: 0.3 }, "<")
-    .to(mic, { opacity: 1, duration: 0.25 }, "<0.1")
-    .to(line2, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<");
-
-  // 6. silhouettes cycle through the slot, each with its type label
-  types.forEach((t, i) => {
-    const sil = q(`.sil[data-type='${t}']`);
-    const label = q(`.host-label[data-type='${t}']`);
-    const at = i === 0 ? ">0.1" : ">-0.1";
-    tl.fromTo(sil, { opacity: 0, y: 30, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: "power2.out", transformOrigin: "50% 100%" }, at)
-      .fromTo(label, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.2 }, "<");
-    if (i === 0) tl.to(mic, { opacity: 0, duration: 0.15 }, "<");
-    tl.to({}, { duration: 0.35 })
-      .to(sil, { opacity: 0, y: -10, duration: 0.2 })
-      .to(label, { opacity: 0, duration: 0.15 }, "<");
-  });
-
-  // 7. the mystery: who will it be?
-  tl.to(silQ, { opacity: 1, duration: 0.25 })
-    .fromTo(hostQ, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(3)" }, "<")
-    .to({}, { duration: 0.4 });
+    .fromTo(
+      video,
+      { opacity: 0, scaleY: 0.02, filter: "brightness(3)" },
+      { opacity: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
+      "<0.1",
+    )
+    .to({}, { duration: 0.6 });
 }

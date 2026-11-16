@@ -5,12 +5,23 @@ DataForSEO Labs keyword suggestions (Hebrew), and 22 live Google Israel mobile S
 (organic results, People Also Ask, AI Overviews). Full keyword list: [`keywords-il.csv`](./keywords-il.csv)
 (volume = average monthly Google searches; kd = DataForSEO keyword difficulty 0 to 100; cpc in USD).
 
-How to write each article (rules for the blog):
-- Hebrew, parents/teams addressed as אתם, no em-dashes or en-dashes, generic host only, no real people.
-- Frontmatter `answer`: 2 to 3 sentences that answer the search directly. It is shown in a box at the top and is what AI Overviews and chatbots quote.
-- Numbered lists, H2 per section, an FAQ in the frontmatter (rendered + `FAQPage` structured data).
-- One honest Tadam section near the end, link to `/#demo` (opens the demo modal). No prices in articles; prices live only in `src/config/pricing.ts`.
-- Link to 1 or 2 other articles.
+How to write each article (the "AI-rewarded content" rules):
+- **Question headings.** H1 contains the target keyword (a question where it reads naturally). Every H2 is the exact question people type (take them from autocomplete / People also ask, see below).
+- **Capsule answer.** Right under each H2: a 2-sentence answer (max 50 words), then the details. The frontmatter `answer` is the short answer to the whole article, shown in a box at the top.
+- **Inline sources.** Every factual claim links to a high-quality source on the phrase itself, in the same paragraph. No "sources" list at the end, no footnotes. Never link a source that wasn't checked.
+- **First-hand experience.** At least one real story per article (a real event, a real result). Until it arrives, a hidden `<!-- חוויה אישית: ... -->` marker shows where it goes. Never invent one.
+- **One or two tables.**
+- **3 to 5 internal links**: other articles, `/#demo` (opens the demo modal), the home page.
+- **FAQ**: 4 questions in the frontmatter, 2-sentence answers (rendered + `FAQPage` structured data).
+- **Title tag** (`seoTitle`) 60 characters max, keyword first; **description** 155 max. The build fails if they're longer.
+- Hebrew, parents/teams addressed as אתם, no em-dashes or en-dashes, generic host only, no real people. No prices in articles (they live only in `src/config/pricing.ts`).
+- No padding: length follows the topic, not a word count.
+
+### Questions people ask (DataForSEO autocomplete, Google Israel, 2026-11-16)
+Google Israel rarely shows "People also ask" in Hebrew, so autocomplete is the main question source.
+- יום גיבוש: האם משלמים על יום גיבוש · האם חובה להגיע · מס הכנסה · מע״מ · הוצאה מוכרת · בחורף · לצוות קטן
+- חידון חנוכה: עם תשובות · לילדים / לכיתה · מאתגר · מצחיק · אינטראקטיבי / אונליין / משחק · הוא והיא
+- אטרקציות לבר מצווה: באולם · בבית
 
 ## What the data says
 1. **Volumes are small but the competition is almost zero.** Keyword difficulty is 0 to 15 on nearly every relevant term. Page 1 today is small vendor blogs, forums and the Karamel portal. A new site with good articles can rank.

@@ -10,9 +10,12 @@ import { z } from "astro/zod";
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
+    /** The H1. Contains the target keyword; a question where it reads naturally. */
     title: z.string(),
-    /** Meta description, about 140 to 160 characters. */
-    description: z.string(),
+    /** The <title> tag when the H1 is too long: 60 characters max, keyword first. */
+    seoTitle: z.string().max(60).optional(),
+    /** Meta description: 155 characters max, keyword + an action. */
+    description: z.string().max(155),
     /** The search phrase this article is written for (docs/seo/keyword-research-2026-11.md). */
     targetKeyword: z.string(),
     /** Short direct answer shown at the top. This is what Google AI Overviews and chatbots quote. */

@@ -15,6 +15,8 @@ const { Content, headings } = await render(post);
 const d = post.data;
 const url = new URL(`/blog/${post.id}/`, Astro.site).href;
 const fmt = (date: Date) => date.toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" });
+const suffixed = `${d.seoTitle ?? d.title} | טדאם!`;
+const pageTitle = suffixed.length <= 60 ? suffixed : (d.seoTitle ?? d.title);
 const isTeam = d.category === "חברות וצוותים";
 const cta = isTeam
   ? {
@@ -76,7 +78,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={`${d.title} | טדאם!`} description={d.description} ogType="article">
+<Base title={pageTitle} description={d.description} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <meta slot="head" property="article:published_time" content={d.date.toISOString()} />
   <BlogHeader />

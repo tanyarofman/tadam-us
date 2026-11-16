@@ -5,13 +5,13 @@ Last updated: 2026-11-16. Work is on branch `claude/gifted-edison-r7zran`, pull 
 ## Published on the branch
 | Article | Target keyword | Status |
 |---|---|---|
-| `hanukkah-quiz` | חידון חנוכה | Written, playbook applied, waiting for experience |
-| `office-holiday-toast` | הרמת כוסית לחג | Written, playbook applied, waiting for experience |
-| `bar-mitzvah-attractions` | אטרקציות לבר מצווה | Written, playbook applied, waiting for experience |
-| `team-building-day-ideas` | יום גיבוש לעובדים | Written, playbook applied, waiting for experience |
+| `hanukkah-quiz` | חידון חנוכה | Written, playbook applied, labeled example scenario until a real story arrives |
+| `office-holiday-toast` | הרמת כוסית לחג | Written, playbook applied, labeled example scenario until a real story arrives |
+| `bar-mitzvah-attractions` | אטרקציות לבר מצווה | Written, playbook applied, labeled example scenario until a real story arrives |
+| `team-building-day-ideas` | יום גיבוש לעובדים | Written, playbook applied, labeled example scenario until a real story arrives |
 
 ## Waiting for Tanya: real stories (never invent them)
-Each article has hidden markers `[//]: # "חוויה אישית: ..."` where the story goes (find them with `grep -n "חוויה אישית" src/content/blog/*.md`). 2 or 3 sentences each:
+Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
 1. **Family / Hanukkah:** a family event where Tadam was played. Who won, which question got the biggest laugh.
 2. **Bar/bat mitzvah:** a real moment (for example the grandmother beat the classmates), plus a quote from a parent or guest.
 3. **Company / team:** team size and which team question worked best, plus a quote from a manager or employee.

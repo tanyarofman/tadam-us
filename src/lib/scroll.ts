@@ -8,6 +8,20 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ScrollTrigger's own resize refresh re-inserts pinned elements into their spacers. Entering fullscreen
+// resizes the viewport, so that refresh detached the fullscreen element and the browser instantly
+// exited fullscreen. Own the resize refresh instead: skip it while fullscreen, run it once on exit.
+ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" });
+let refreshTimer = 0;
+const refreshSoon = () => {
+  clearTimeout(refreshTimer);
+  refreshTimer = window.setTimeout(() => {
+    if (!document.fullscreenElement) ScrollTrigger.refresh();
+  }, 250);
+};
+window.addEventListener("resize", refreshSoon);
+document.addEventListener("fullscreenchange", refreshSoon);
+
 export const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

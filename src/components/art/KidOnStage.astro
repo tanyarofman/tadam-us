@@ -1,95 +1,45 @@
 ---
-/** The winner, סבתא רחל (fictional), laughing on stage with a mic and a crown. Same look as the grandma in Scene 2. Not a photo. */
-const INK = "#330768";
+/**
+ * Scene 6 winner (matches "סבתא רחל" on the leaderboard). Photo: public/people/grandma-winning.webp.
+ * variant "celebrant" uses public/people/celebrant-stage.webp (laughing celebrant with mic and tiara).
+ * Scene 6 toggles `.is-laughing` on the parent `.kid-wrap`; the photo gets a small bounce from that.
+ */
+import Person from "./Person.astro";
+interface Props {
+  variant?: "grandma" | "celebrant";
+}
+const { variant = "grandma" } = Astro.props;
+const v =
+  variant === "celebrant"
+    ? { name: "celebrant-stage", w: 600, h: 800, alt: "נערה צוחקת על במה עם מיקרופון ועטרה קטנה, קונפטי באוויר" }
+    : { name: "grandma-winning", w: 640, h: 640, alt: "סבתא צוחקת על במה עם מיקרופון, כתר זהב קטן ואגרוף מורם בניצחון, קונפטי סביבה" };
 ---
 
-<svg class="kid-svg" viewBox="0 0 300 300" aria-hidden="true" focusable="false">
-  <defs>
-    <radialGradient id="kid-spot" cx="50%" cy="100%" r="70%">
-      <stop offset="0" stop-color="#F7D94A" stop-opacity="0.55"></stop>
-      <stop offset="1" stop-color="#F7D94A" stop-opacity="0"></stop>
-    </radialGradient>
-  </defs>
-  <ellipse cx="150" cy="270" rx="130" ry="30" fill="url(#kid-spot)"></ellipse>
-  <rect x="30" y="262" width="240" height="26" rx="10" fill="#614098" stroke={INK} stroke-width="6"></rect>
-  <g class="kid">
-    <!-- dress -->
-    <path d="M104 262 Q96 200 120 180 Q150 166 180 180 Q204 200 196 262 Z" fill="#E836A1" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
-    <!-- cardigan opening + pearl necklace -->
-    <path d="M150 176 V262" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
-    <circle cx="140" cy="236" r="3.5" fill={INK}></circle>
-    <circle cx="160" cy="236" r="3.5" fill={INK}></circle>
-    <path d="M128 178 Q150 200 172 178" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.1 9"></path>
-    <!-- arm with mic -->
-    <path d="M182 196 Q214 190 214 152" fill="none" stroke={INK} stroke-width="20" stroke-linecap="round"></path>
-    <path d="M182 196 Q214 190 214 152" fill="none" stroke="#E836A1" stroke-width="10" stroke-linecap="round"></path>
-    <circle cx="214" cy="146" r="11" fill="#f5d2b5" stroke={INK} stroke-width="5"></circle>
-    <rect x="207" y="104" width="16" height="36" rx="8" fill="#E74138" stroke={INK} stroke-width="5" transform="rotate(14 215 122)"></rect>
-    <!-- other arm, laughing -->
-    <path d="M118 196 Q88 186 92 160" fill="none" stroke={INK} stroke-width="20" stroke-linecap="round"></path>
-    <path d="M118 196 Q88 186 92 160" fill="none" stroke="#E836A1" stroke-width="10" stroke-linecap="round"></path>
-    <circle cx="92" cy="154" r="11" fill="#f5d2b5" stroke={INK} stroke-width="5"></circle>
-    <!-- head -->
-    <g class="kid-head">
-      <!-- gray bun -->
-      <circle cx="150" cy="66" r="20" fill="#d8d2cc" stroke={INK} stroke-width="6"></circle>
-      <circle cx="150" cy="118" r="44" fill="#f5d2b5" stroke={INK} stroke-width="6"></circle>
-      <!-- short gray curls framing the face -->
-      <path d="M106 118 Q98 96 112 84 Q118 70 136 74 Q150 66 164 74 Q182 70 188 84 Q202 96 194 118 Q184 96 166 92 Q150 86 134 92 Q116 96 106 118 Z" fill="#d8d2cc" stroke={INK} stroke-width="6" stroke-linejoin="round"></path>
-      <circle cx="106" cy="122" r="9" fill="#d8d2cc" stroke={INK} stroke-width="5"></circle>
-      <circle cx="194" cy="122" r="9" fill="#d8d2cc" stroke={INK} stroke-width="5"></circle>
-      <!-- round glasses + happy closed eyes -->
-      <circle cx="133" cy="114" r="14" fill="#fff" fill-opacity="0.35" stroke={INK} stroke-width="5"></circle>
-      <circle cx="167" cy="114" r="14" fill="#fff" fill-opacity="0.35" stroke={INK} stroke-width="5"></circle>
-      <path d="M147 112 H153" stroke={INK} stroke-width="5" stroke-linecap="round"></path>
-      <path d="M126 117 Q133 109 140 117" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
-      <path d="M160 117 Q167 109 174 117" fill="none" stroke={INK} stroke-width="4" stroke-linecap="round"></path>
-      <!-- laugh lines -->
-      <path d="M116 112 L110 108 M116 118 L109 119 M184 112 L190 108 M184 118 L191 119" stroke={INK} stroke-width="2.5" stroke-linecap="round"></path>
-      <path d="M124 136 Q122 142 126 146 M176 136 Q178 142 174 146" fill="none" stroke={INK} stroke-width="2.5" stroke-linecap="round"></path>
-      <!-- big laugh -->
-      <path d="M132 134 Q150 160 168 134 Z" fill={INK} stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
-      <path d="M141 147 Q150 154 159 147" fill="#E74138"></path>
-      <circle cx="120" cy="134" r="6" fill="#E836A1" opacity="0.4"></circle>
-      <circle cx="180" cy="134" r="6" fill="#E836A1" opacity="0.4"></circle>
-      <!-- winner crown -->
-      <path d="M130 52 L136 34 L150 46 L164 34 L170 52 Z" fill="#F7D94A" stroke={INK} stroke-width="4" stroke-linejoin="round"></path>
-    </g>
-  </g>
-  <g class="kid-ha" fill="#fff" font-family="Fredoka, Rubik, sans-serif" font-weight="700" stroke={INK} stroke-width="3" paint-order="stroke">
-    <text x="236" y="70" font-size="26">חה</text>
-    <text x="30" y="96" font-size="22">חה!</text>
-  </g>
-</svg>
+<div class="kid">
+  <Person class="kid-photo" name={v.name} alt={v.alt} width={v.w} height={v.h} />
+</div>
 
 <style>
-  .kid-svg {
+  .kid {
     width: 100%;
-    height: auto;
-    overflow: visible;
+    border-radius: var(--radius-l);
+    box-shadow: 0 0 50px 4px var(--screen-glow), 0 0 0 4px var(--stage-navy);
+    overflow: hidden;
   }
-  .kid-head {
-    transform-box: fill-box;
-    transform-origin: 50% 90%;
+  :global(.is-laughing) .kid {
+    animation: bounce 0.45s ease-in-out infinite alternate;
   }
-  :global(.is-laughing) .kid-head {
-    animation: laugh 0.35s ease-in-out infinite alternate;
-  }
-  :global(.is-laughing) .kid-ha {
-    animation: ha 0.7s ease-in-out infinite alternate;
-  }
-  @keyframes laugh {
+  @keyframes bounce {
     from {
-      transform: rotate(-4deg);
+      transform: rotate(-1.2deg);
     }
     to {
-      transform: rotate(4deg) translateY(-3px);
+      transform: rotate(1.2deg) translateY(-3px);
     }
   }
-  @keyframes ha {
-    to {
-      transform: translateY(-6px);
-      opacity: 0.6;
+  @media (prefers-reduced-motion: reduce) {
+    :global(.is-laughing) .kid {
+      animation: none;
     }
   }
 </style>

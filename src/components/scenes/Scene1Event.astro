@@ -8,7 +8,7 @@ const c = COPY.scene1;
 <section class="scene s1" id="scene-1" data-scene="1" aria-labelledby="s1-title">
   <div class="scene-pin s1-pin">
     <div class="s1-stage">
-      <div class="s1-art" role="img" aria-label={c.hallLabel}>
+      <div class="s1-art">
         <HallArt />
       </div>
       <div class="s1-shade" aria-hidden="true"></div>
@@ -50,28 +50,10 @@ const c = COPY.scene1;
     margin-inline: auto;
     text-shadow: 0 4px 0 var(--purple-ink), 0 10px 30px rgba(0, 0, 0, 0.45);
   }
-  /*
-   * Mobile: put the headline inside the hall's big screen.
-   * HallArt is a 1200x760 viewBox drawn with "xMidYMax slice", so its scale is
-   * max(width/1200, height/760), it is centred horizontally and bottom-aligned.
-   * The screen's inner panel is 348x182 at (426,126) in viewBox units.
-   */
+  /* Photo background: the headline sits near the top, over the shaded part of the photo. */
   @media (max-width: 767px) {
-    .s1-copy {
-      --s: max(100cqw / 1200, 100cqh / 760);
-      position: absolute;
-      left: 50%;
-      top: calc(100cqh - (760 - 126) * var(--s));
-      width: min(calc(348 * var(--s)), 100cqw - 2 * var(--gutter));
-      height: calc(182 * var(--s));
-      transform: translateX(-50%);
-      padding: 0 8px;
-      display: grid;
-      place-items: center;
-    }
     :global(.s1-title) {
-      font-size: min(var(--fs-h2), calc(182 * var(--s) / 4.4));
-      max-width: none;
+      font-size: var(--fs-h2);
     }
   }
 </style>

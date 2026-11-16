@@ -1,0 +1,87 @@
+---
+/**
+ * One photo slot. Drop `public/people/<name>.webp` and it shows, no code change.
+ * Until the file exists, a soft blue gradient silhouette is shown (the <img> hides itself on error).
+ * `alt` is passed by the caller (Hebrew, independent of copy.he.ts). Use alt="" for purely decorative photos.
+ */
+interface Props {
+  name: string;
+  alt: string;
+  width: number;
+  height: number;
+  kind?: "person" | "crowd";
+  eager?: boolean;
+  class?: string;
+}
+const { name, alt, width, height, kind = "person", eager = false, class: cls = "" } = Astro.props;
+---
+
+<span class:list={["person", `person--${kind}`, cls]} style={`aspect-ratio:${width}/${height}`}>
+  <span class="person-ph" aria-hidden="true">
+    {
+      kind === "person" ? (
+        <svg viewBox="0 0 120 160" preserveAspectRatio="xMidYMax slice" focusable="false">
+          <circle cx="60" cy="58" r="26" />
+          <path d="M8 160 C8 112 34 98 60 98 C86 98 112 112 112 160 Z" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMax slice" focusable="false">
+          <rect x="52" y="14" width="56" height="28" rx="3" class="ph-screen" />
+          {[18, 40, 62, 84, 106, 128, 146].map((x, i) => (
+            <g>
+              <circle cx={x} cy={78 - (i % 2) * 6} r="7" />
+              <path d={`M${x - 12} 92 C${x - 12} 80 ${x - 6} 80 ${x} 80 C${x + 6} 80 ${x + 12} 80 ${x + 12} 92 Z`} />
+            </g>
+          ))}
+        </svg>
+      )
+    }
+  </span>
+  <img
+    class="person-img"
+    src={`/people/${name}.webp`}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+    onload="this.parentNode.classList.add('is-loaded')"
+    onerror="this.hidden=true"
+  />
+</span>
+
+<style>
+  .person {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+    background: radial-gradient(80% 70% at 50% 35%, #1d4fd0 0%, #0a2a96 55%, #030e3f 100%);
+  }
+  .person-ph {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.4s;
+  }
+  .person-ph svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: rgba(100, 216, 247, 0.22);
+  }
+  .person-ph .ph-screen {
+    fill: rgba(100, 216, 247, 0.45);
+  }
+  .person-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .person.is-loaded .person-ph {
+    opacity: 0;
+  }
+</style>

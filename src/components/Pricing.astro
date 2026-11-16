@@ -2,7 +2,10 @@
 import { COPY } from "../content/copy.he";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
 import StageBackdrop from "./StageBackdrop.astro";
+import Person from "./art/Person.astro";
 const c = COPY.pricing;
+const h = c.addons.personalHost.showcase;
+const hostPhotos = ["host-classic", "host-friendly", "host-animated"];
 const cur = PRICING.currency;
 ---
 
@@ -35,6 +38,34 @@ const cur = PRICING.currency;
     </ul>
 
     <h3 class="addons-title display reveal">{c.addonsTitle}</h3>
+    <div class="hosts reveal" aria-labelledby="hosts-title">
+      <div class="hosts-top">
+        <div class="hosts-photos" role="list" aria-label={h.photosLabel}>
+          {hostPhotos.map((name, i) => (
+            <Person name={name} alt={h.readyAlts[i]} width={480} height={640} class={`host-photo host-photo--${i + 1}`} />
+          ))}
+        </div>
+        <div class="hosts-head">
+          <span class="spark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h4 id="hosts-title" class="display hosts-title">
+            <span>{h.titleLine1}</span>
+            <span class="hl">{h.titleLine2}</span>
+          </h4>
+          <p class="hosts-sub">{h.sub}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <ul class="addons addons--host" role="list">
+      <li class="addon reveal">
+        <div class="addon-body">
+          <p class="addon-name">{c.addons.personalHost.title}</p>
+          <p class="addon-text">{h.personalText}</p>
+        </div>
+        <p class="addon-price"><span class="num">{PRICING.personalHost}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
+      </li>
+    </ul>
     <ul class="addons" role="list">
       <li class="addon reveal">
         <div class="addon-body">
@@ -42,13 +73,6 @@ const cur = PRICING.currency;
           <p class="addon-text">{c.addons.contributorLink.text}</p>
         </div>
         <p class="addon-price"><span class="num">{PRICING.contributorLink}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
-      </li>
-      <li class="addon reveal">
-        <div class="addon-body">
-          <p class="addon-name">{c.addons.personalHost.title}</p>
-          <p class="addon-text">{fillPrices(c.addons.personalHost.text)}</p>
-        </div>
-        <p class="addon-price"><span class="num">{PRICING.personalHost}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
       </li>
     </ul>
     <p class="pricing-note">{c.note}</p>
@@ -267,6 +291,99 @@ const cur = PRICING.currency;
   .addon-price .join {
     font-size: 1.05rem;
     color: var(--white);
+  }
+
+  /* ---- hosts showcase ---- */
+  .hosts {
+    width: 100%;
+    max-width: 880px;
+    margin-top: clamp(14px, 3vh, 28px);
+    display: grid;
+    gap: 22px;
+    text-align: right;
+  }
+  .hosts-top {
+    display: grid;
+    gap: 22px;
+    align-items: center;
+  }
+  .hosts-photos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(8px, 2vw, 18px);
+    direction: ltr; /* order as in the design: classic, friendly, animated */
+  }
+  .host-photo {
+    border-radius: 18px;
+    transform: skewX(-4deg);
+    box-shadow: 0 14px 30px rgba(0, 0, 20, 0.4);
+  }
+  .host-photo--2 {
+    transform: skewX(-4deg) translateY(-8px);
+  }
+  .hosts-head {
+    position: relative;
+    display: grid;
+    gap: 10px;
+  }
+  .spark {
+    position: absolute;
+    inset-block-start: -6px;
+    inset-inline-end: 4px;
+    width: 46px;
+    height: 24px;
+  }
+  .spark i {
+    position: absolute;
+    width: 5px;
+    height: 16px;
+    border-radius: 3px;
+    background: var(--sun-yellow);
+    inset-block-start: 4px;
+  }
+  .spark i:nth-child(1) { inset-inline-end: 0; transform: rotate(35deg); }
+  .spark i:nth-child(2) { inset-inline-end: 20px; inset-block-start: 0; }
+  .spark i:nth-child(3) { inset-inline-end: 40px; transform: rotate(-35deg); }
+  .hosts-title {
+    margin: 0;
+    display: grid;
+    font-size: clamp(2.6rem, 8vw, 4rem);
+    line-height: 1.02;
+  }
+  .hl {
+    color: var(--sun-yellow);
+  }
+  .hosts-title .hl {
+    position: relative;
+    width: fit-content;
+    padding-bottom: 12px;
+  }
+  .hosts-title .hl::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 6px;
+    border-radius: 6px;
+    background: var(--magenta);
+    transform: rotate(-1deg);
+  }
+  .hosts-sub {
+    margin: 0;
+    font-size: var(--fs-lead);
+    line-height: 1.35;
+    color: var(--white);
+  }
+  @media (min-width: 760px) {
+    .hosts-top {
+      grid-template-columns: 1.25fr 1fr;
+    }
+  }
+  .addons--host {
+    margin-top: -6px;
+  }
+  .addons--host + .addons {
+    margin-top: 0;
   }
   .pricing-note {
     margin: 6px 0 0;

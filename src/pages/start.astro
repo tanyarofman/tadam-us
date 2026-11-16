@@ -11,6 +11,22 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
 ---
 
 <Base title={c.meta.title} description={c.meta.description} noindex>
+  <style slot="head" is:inline>
+    /* No flash of the fallback font: the page appears once Almoni is loaded (or after 2.5 s at most). */
+    .js:not(.fonts-ready) .intake { opacity: 0; }
+    .js .intake { transition: opacity 0.25s ease; }
+  </style>
+  <script slot="head" is:inline>
+    (function () {
+      var d = document.documentElement;
+      var done = function () { d.classList.add("fonts-ready"); };
+      var t = setTimeout(done, 2500);
+      if (document.fonts && document.fonts.load) {
+        Promise.all([document.fonts.load("400 1em Almoni"), document.fonts.load("700 1em Almoni")])
+          .then(function () { clearTimeout(t); done(); }, done);
+      } else done();
+    })();
+  </script>
   <a class="skip-link" href="#in-main">דלגו לתוכן</a>
   <div class="intake" id="in-main" data-intake>
     <header class="in-top">
@@ -291,7 +307,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .intake {
     --in-card: rgba(0, 22, 112, 0.72);
     --in-line: rgba(255, 255, 255, 0.22);
-    max-width: 680px;
+    max-width: 1280px;
     margin-inline: auto;
     padding: 16px var(--gutter) 120px;
     display: grid;
@@ -1125,6 +1141,101 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-hosts {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Desktop: use the full width ---------- */
+  .in-step > .lead {
+    max-width: 62ch;
+  }
+  @media (min-width: 720px) {
+    .intake {
+      gap: 28px;
+    }
+    .in-photo-list {
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+    .in-own-answers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .in-tiles {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .in-tile {
+      min-height: 120px;
+    }
+    .in-step[data-step="0"] {
+      text-align: center;
+      justify-items: center;
+      max-width: 860px;
+      margin-inline: auto;
+      padding-block: 24px;
+    }
+    .in-step[data-step="0"] .in-bullets {
+      text-align: start;
+    }
+    /* step 2: fields on one side, the live sample on the other */
+    .in-step[data-step="2"] {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 48px;
+    }
+    .in-step[data-step="2"] > h2,
+    .in-step[data-step="2"] > .in-nav {
+      grid-column: 1 / -1;
+    }
+    .in-step[data-step="2"] > .in-field {
+      grid-column: 1;
+    }
+    .in-step[data-step="2"] > .in-sample {
+      grid-column: 2;
+      grid-row: 2 / span 3;
+      align-self: start;
+      position: sticky;
+      top: 16px;
+    }
+    /* step 3: stories two per row, the open one takes the full row */
+    .in-prompts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+    .in-prompt:has(.in-prompt__body:not([hidden])) {
+      grid-column: 1 / -1;
+    }
+    .in-own-answers {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .in-photo-list {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    /* step 4: two columns of fields */
+    .in-step[data-step="4"] {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 48px;
+    }
+    .in-step[data-step="4"] > h2,
+    .in-step[data-step="4"] > .lead,
+    .in-step[data-step="4"] > .in-nav {
+      grid-column: 1 / -1;
+    }
+    /* steps 6 and 7: readable column in the middle */
+    .in-step[data-step="6"],
+    .in-step[data-step="7"] {
+      max-width: 900px;
+      width: 100%;
+      margin-inline: auto;
+    }
+  }
+  @media (min-width: 1100px) {
+    .in-hosts {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .in-host strong {
+      font-size: 1.15rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {

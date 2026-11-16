@@ -888,7 +888,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     min-height: 1.4em;
   }
   .in-photo-list {
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: 1fr;
   }
   .in-photo-list li {
     display: grid;
@@ -915,9 +915,10 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     place-items: center;
     background: rgba(255, 255, 255, 0.08);
   }
-  .in-photo-list .in-input {
-    width: calc(100% - 20px);
-    margin-inline: 10px;
+  .in-photo-body {
+    display: grid;
+    gap: 8px;
+    padding: 0 12px;
   }
   .in-photo-list .btn-ghost {
     justify-self: center;

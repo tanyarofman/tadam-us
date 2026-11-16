@@ -28,7 +28,7 @@ interface State {
   title: string;
   titleEdited: boolean;
   answers: Record<string, string>;
-  photos: { name: string; caption: string }[];
+  photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
   approved: boolean[];
@@ -76,7 +76,11 @@ function init(root: HTMLElement, data: Data) {
       const raw = localStorage.getItem(KEY);
       if (raw) {
         const s = JSON.parse(raw) as State;
-        if (s && s.v === 1) return { ...blank(), ...s };
+        if (s && s.v === 1) {
+          const st = { ...blank(), ...s };
+          st.photos = (st.photos || []).map((p) => ({ type: "free" as const, free: "", answers: ["", "", "", ""], correct: -1, ...p }));
+          return st;
+        }
       }
     } catch {
       /* private mode or blocked storage: the prototype still works, it just does not resume */
@@ -407,9 +411,29 @@ function init(root: HTMLElement, data: Data) {
     state.photos.forEach((p, i) => {
       const li = document.createElement("li");
       const url = photoFiles.get(i);
+      const choice = p.type === "choice";
+      li.dataset.photo = String(i);
       li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<span class="in-photo-ph" aria-hidden="true">🖼️</span>`}
-        <input class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosCaption)}" aria-label="${esc(c.stories.photosCaption)} ${i + 1}" data-caption="${i}" />
-        <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>`;
+        <div class="in-photo-body">
+          <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
+          <input id="pq-${i}" class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosPlaceholder)}" data-caption="${i}" />
+          <div class="in-chips" role="radiogroup" aria-label="${esc(c.stage5.ownType)}">
+            <label class="in-chip"><input type="radio" name="pt-${i}" value="free" data-ptype="${i}" ${choice ? "" : "checked"} /><span>${c.stage5.ownTypeFree}</span></label>
+            <label class="in-chip"><input type="radio" name="pt-${i}" value="choice" data-ptype="${i}" ${choice ? "checked" : ""} /><span>${c.stage5.ownTypeChoice}</span></label>
+          </div>
+          ${
+            choice
+              ? [0, 1, 2, 3]
+                  .map(
+                    (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(p.answers[k] || "")}" data-pans="${i}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
+                      <label class="in-own-correct"><input type="radio" name="pc-${i}" value="${k}" data-pcorrect="${i}" ${p.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrect}</span></label></div>`,
+                  )
+                  .join("")
+              : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
+                 <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" data-pfree="${i}" />`
+          }
+          <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>
+        </div>`;
       photoList.append(li);
     });
     const add = $<HTMLElement>("[data-photo-add]");
@@ -419,7 +443,7 @@ function init(root: HTMLElement, data: Data) {
     const f = photoInput.files?.[0];
     if (!f || state.photos.length >= data.material.maxPhotos) return;
     photoFiles.set(state.photos.length, URL.createObjectURL(f));
-    state.photos.push({ name: f.name, caption: "" });
+    state.photos.push({ name: f.name, caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
     photoInput.value = "";
     renderPhotos();
     renderMeter();
@@ -428,9 +452,23 @@ function init(root: HTMLElement, data: Data) {
   });
   photoList.addEventListener("input", (e) => {
     const t = e.target as HTMLInputElement;
-    if (t.dataset.caption === undefined) return;
-    state.photos[Number(t.dataset.caption)].caption = t.value;
+    if (t.dataset.caption !== undefined) state.photos[Number(t.dataset.caption)].caption = t.value;
+    else if (t.dataset.pfree !== undefined) state.photos[Number(t.dataset.pfree)].free = t.value;
+    else if (t.dataset.pans !== undefined) {
+      const [i, k] = t.dataset.pans.split(":").map(Number);
+      state.photos[i].answers[k] = t.value;
+    } else return;
     renderMeter();
+    save();
+  });
+  photoList.addEventListener("change", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.ptype !== undefined) {
+      state.photos[Number(t.dataset.ptype)].type = t.value as "free" | "choice";
+      renderPhotos();
+      photoList.querySelector<HTMLInputElement>(`[data-ptype="${t.dataset.ptype}"][value="${t.value}"]`)?.focus();
+    } else if (t.dataset.pcorrect !== undefined) state.photos[Number(t.dataset.pcorrect)].correct = Number(t.value);
+    else return;
     save();
   });
   photoList.addEventListener("click", (e) => {
@@ -500,7 +538,7 @@ function init(root: HTMLElement, data: Data) {
   });
 
   // ---------- 6: review (mock questions, real sources) ----------
-  type Q = { snippet: string; own?: State["own"][number] };
+  type Q = { snippet: string; own?: State["own"][number]; photo?: State["own"][number] };
   /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
   function questions(): Q[] {
     const m = data.material;
@@ -511,7 +549,10 @@ function init(root: HTMLElement, data: Data) {
       const n = Math.min(m.maxPerPrompt, Math.max(1, Math.round(text.length / m.charsPerQuestion)));
       for (let i = 0; i < n; i++) list.push({ snippet: text });
     }
-    state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => list.push({ snippet: p.caption.trim() }));
+    state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => {
+      const complete = p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0;
+      list.push({ snippet: p.caption.trim(), photo: complete ? { q: p.caption.trim(), type: p.type, free: p.free.trim(), answers: p.answers.map((a) => a.trim()), correct: p.correct } : undefined });
+    });
     const generated = list.slice(0, Math.max(0, target() - state.own.length));
     return [...generated, ...state.own.map((o) => ({ snippet: "", own: o }))];
   }
@@ -527,13 +568,14 @@ function init(root: HTMLElement, data: Data) {
       return;
     }
     const ok = state.approved[reviewIndex];
-    const body = s.own
-      ? `<p class="in-qcard__source">${c.stage5.ownMark}</p>
-         <p class="in-sample__q">${esc(s.own.q)}</p>
+    const q = s.own || s.photo;
+    const body = q
+      ? `<p class="in-qcard__source">${s.own ? c.stage5.ownMark : c.stage5.photoMark}</p>
+         <p class="in-sample__q">${esc(q.q)}</p>
          <ul class="in-qcard__answers">${
-           s.own.type === "free"
-             ? `<li data-correct="true">${esc(s.own.free)}</li>`
-             : s.own.answers.map((t, i) => `<li data-correct="${i === s.own!.correct}">${esc(t)}</li>`).join("")
+           q.type === "free"
+             ? `<li data-correct="true">${esc(q.free)}</li>`
+             : q.answers.map((t, i) => `<li data-correct="${i === q.correct}">${esc(t)}</li>`).join("")
          }</ul>`
       : `<p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
          <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>`;
@@ -542,7 +584,7 @@ function init(root: HTMLElement, data: Data) {
         ${body}
         <div class="in-qcard__actions">
           <button type="button" class="btn btn-buzzer" data-approve>${ok ? "✓ " + c.stage5.approved : c.stage5.approve}</button>
-          ${s.own ? "" : `<button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>`}
+          ${q ? "" : `<button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>`}
           <button type="button" class="btn btn-ghost" data-rv="-1" ${reviewIndex === 0 ? "disabled" : ""}>${c.back}</button>
           <button type="button" class="btn btn-ghost" data-rv="1" ${reviewIndex >= list.length - 1 ? "disabled" : ""}>${c.next}</button>
         </div>
@@ -674,7 +716,7 @@ function init(root: HTMLElement, data: Data) {
       stories: shape().prompts
         .filter((p) => (state.answers[p.id] || "").trim())
         .map((p) => ({ promptId: p.id, prompt: fill(p.label, { name: subjectName() }), text: state.answers[p.id].trim() })),
-      photos: state.photos.map((p) => ({ file: p.name, caption: p.caption.trim() })),
+      photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
       logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null, contact: d.contact || null },
       host: state.host,
       ownQuestions: state.own,
@@ -689,7 +731,7 @@ function init(root: HTMLElement, data: Data) {
     b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.text}`));
     if (b.photos.length) {
       lines.push("", "תמונות (כיתובים):");
-      b.photos.forEach((p) => lines.push(`- ${p.caption || p.file}`));
+      b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));
     }
     const l = b.logistics;
     const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`, l.screen && `מסך: ${l.screen}`].filter(Boolean);

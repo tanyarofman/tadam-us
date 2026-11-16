@@ -46,10 +46,10 @@ The phone status bar in the video shows a `base44.app` demo URL; fine for now, m
 under "אתם מביאים את הסיפורים. אנחנו את השואו.", a host section ("יש מנחה לכל חגיגה", realistic faces), a "famous hosts for special
 events" block (we do NOT do this, it conflicts with our brief), **pricing**, 7 FAQ items, closing CTA "אז, למי עושים טדאם?".
 Alternating dark-blue and cream bands, yellow pill CTAs, magenta swoosh under key words, small spark marks around headlines.
-**Pricing on Ilan's page (real numbers):**
-- משחק אישי לאירוע: **250 ILS** (your stories, a host of your choice, a game every guest plays)
-- עריכת משחק קיים: **50 ILS** per extra edit of an already produced game (via the game's edit link)
-- משחק בהתאמה מיוחדת: custom, talk to us
+**Pricing (decided by Tanya, 2026-11-16; source of truth is `src/config/pricing.ts`):**
+- משחק אישי לאירוע: **750 ILS** (your stories, one of 5 ready-made hosts, a game every guest plays)
+- Every extra is **50 ILS**: an edit of an already produced game (via the game's edit link), the contributor link for friends and kids, a personal host.
+- Ilan's page and the live checkout popup still show the old **250 / 50**; the app must be aligned to the numbers above (the payment screen is also still a simulation, see `docs/onboarding-flow.md`).
 
 **Onboarding flow** (`/create`, wizard, mobile first): 1 פרטי האירוע (free text or voice recording about the celebrants, up to 5 photos,
 number of questions with +/- stepper, recommended 9, "each extra question is about a minute") -> 2 בחירת מנחה -> 3 בחירת קול -> 4 יצירת המשחק.
@@ -72,7 +72,7 @@ Keep changes inside your files so PRs merge cleanly. If you must touch another s
 
 ## Open items for Tanya
 
-- Add-on prices are **proposals** until confirmed (see `src/config/pricing.ts`). Only 250 / 50 are real numbers.
+- Prices are set (750 base, 50 per extra, see `src/config/pricing.ts`); the `// TODO confirm` marks there are still to be cleared by Tanya. Ilan must update the checkout popup (it hard-codes 250 / 50) and add a real payment step.
 - Almoni font license.
 - Demo video: the phone bar shows a `base44.app` URL; and ideally a purpose-made demo (no cartoon / family media) is recorded later.
 - Photoreal people use image-generation credits (Magnific). Confirm before the imagery session runs.

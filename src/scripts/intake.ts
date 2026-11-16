@@ -29,6 +29,8 @@ interface State {
   title: string;
   titleEdited: boolean;
   answers: Record<string, string>;
+  modes: Record<string, "free" | "choice">;
+  choices: Record<string, { q: string; answers: string[]; correct: number }>;
   photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
@@ -59,6 +61,8 @@ function init(root: HTMLElement, data: Data) {
     title: "",
     titleEdited: false,
     answers: {},
+    modes: {},
+    choices: {},
     photos: [],
     details: { date: "", guests: "", screen: "", contact: "" },
     host: "auto",
@@ -79,7 +83,7 @@ function init(root: HTMLElement, data: Data) {
         const s = JSON.parse(raw) as State;
         if (s && s.v === 1) {
           const st = { ...blank(), ...s };
-          st.photos = (st.photos || []).map((p) => ({ type: "free" as const, free: "", answers: ["", "", "", ""], correct: -1, ...p }));
+          st.photos = (st.photos || []).map((p) => ({ ...p, type: p.type ?? "free", free: p.free ?? "", answers: p.answers ?? ["", "", "", ""], correct: p.correct ?? -1 }));
           return st;
         }
       }
@@ -104,18 +108,30 @@ function init(root: HTMLElement, data: Data) {
   }
 
   const event = () => data.events.find((e) => e.id === state.eventId);
-  const shape = (): ShapeConfig => data.shapes[event()?.shape ?? "person"];
+  const shape = (): ShapeConfig => ({ ...data.shapes[event()?.shape ?? "person"], ...(event()?.override || {}) });
   const subjectName = () => state.name.trim() || "החוגג.ת";
   const target = () => event()?.target ?? 9;
 
   // ---------- material meter ----------
+  const modeOf = (id: string) => state.modes[id] || "free";
+  const choiceDone = (id: string) => {
+    const ch = state.choices[id];
+    return !!ch && !!ch.q.trim() && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
+  };
+  /** A story is usable when it has text (free mode) or a complete question with four answers (choice mode). */
+  const isDone = (id: string) =>
+    modeOf(id) === "choice" ? choiceDone(id) : (state.answers[id] || "").trim().length >= data.material.minChars;
   function answeredPrompts(): Prompt[] {
-    return shape().prompts.filter((p) => (state.answers[p.id] || "").trim().length >= data.material.minChars);
+    return shape().prompts.filter((p) => isDone(p.id));
   }
   function questionsReady(): number {
     const m = data.material;
     let n = 0;
     for (const p of shape().prompts) {
+      if (modeOf(p.id) === "choice") {
+        if (choiceDone(p.id)) n += 1;
+        continue;
+      }
       const len = (state.answers[p.id] || "").trim().length;
       if (len >= m.minChars) n += Math.min(m.maxPerPrompt, Math.max(1, Math.round(len / m.charsPerQuestion)));
     }
@@ -235,7 +251,7 @@ function init(root: HTMLElement, data: Data) {
   // The text itself is autosaved on every keystroke.
   const committed = new Set<string>();
   let committedInit = false;
-  const hasText = (id: string) => (state.answers[id] || "").trim().length >= data.material.minChars;
+  const hasText = (id: string) => isDone(id);
   function commit(id: string) {
     if (!hasText(id)) {
       committed.delete(id);
@@ -258,7 +274,7 @@ function init(root: HTMLElement, data: Data) {
       shape().prompts.forEach((p) => hasText(p.id) && committed.add(p.id));
       committedInit = true;
     }
-    if (!openPrompt) openPrompt = shape().prompts.find((p) => !state.answers[p.id])?.id || shape().prompts[0].id;
+    if (!openPrompt) openPrompt = shape().prompts.find((p) => !isDone(p.id))?.id || shape().prompts[0].id;
     promptsEl.innerHTML = "";
     for (const p of shape().prompts) {
       const answered = committed.has(p.id);
@@ -268,30 +284,48 @@ function init(root: HTMLElement, data: Data) {
       box.dataset.answered = String(answered);
       box.dataset.prompt = p.id;
       const label = fill(p.label, { name: subjectName() });
+      const choice = modeOf(p.id) === "choice";
+      const cv = state.choices[p.id] || { q: label, answers: ["", "", "", ""], correct: -1 };
       box.innerHTML = `
         <button type="button" class="in-prompt__head" aria-expanded="${open}" aria-controls="pb-${p.id}">
           <span>${esc(label)}</span><span class="in-prompt__mark">${answered ? "✓ " + c.stories.answered : ""}</span>
         </button>
         <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
           <label class="in-help" for="pt-${p.id}">${esc(fill(p.hint, { name: subjectName() }))}</label>
-          <div class="in-rec" data-rec="${p.id}" role="status" hidden>
+          <div class="in-chips" role="radiogroup" aria-label="${esc(label)}">
+            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="free" data-pmode="${p.id}" ${choice ? "" : "checked"} /><span>${c.stories.modeFree}</span></label>
+            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="choice" data-pmode="${p.id}" ${choice ? "checked" : ""} /><span>${c.stories.modeChoice}</span></label>
+          </div>
+          ${
+            choice
+              ? `<label class="in-help" for="cq-${p.id}">${c.stories.choiceQuestion}</label>
+                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(cv.q)}" data-cq="${p.id}" />
+                 <p class="in-help">${c.stories.choiceHelp}</p>
+                 <div class="in-own-answers">${[0, 1, 2, 3]
+                   .map(
+                     (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(cv.answers[k] || "")}" data-cans="${p.id}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
+                       <label class="in-own-correct"><input type="radio" name="pcor-${p.id}" value="${k}" data-ccor="${p.id}" ${cv.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrectShort}</span></label></div>`,
+                   )
+                   .join("")}</div>`
+              : `<div class="in-rec" data-rec="${p.id}" role="status" hidden>
             <span class="in-rec__dot" aria-hidden="true"></span>
             <span>${c.stories.recording}</span>
             <span class="in-rec__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
             <span class="in-rec__time" data-mic-time="${p.id}">0:00</span>
           </div>
-          <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>
+          <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>`
+          }
           <div class="in-prompt__row">
-            <button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>
+            ${choice ? "" : `<button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>`}
             <button type="button" class="btn btn-white in-save-btn" data-save-prompt="${p.id}">${c.stories.save}</button>
             <button type="button" class="btn btn-ghost" data-skip="${p.id}">${c.stories.skip}</button>
             <span class="in-saved" data-saved-msg="${p.id}" role="status" hidden>✓ ${c.stories.savedMsg}</span>
           </div>
-          <p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
-          <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>
+          ${choice ? "" : `<p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
+          <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>`}
         </div>`;
       promptsEl.append(box);
-      setupMic(box, p.id);
+      if (!choice) setupMic(box, p.id);
     }
     renderPhotos();
     renderOwnList();
@@ -331,6 +365,37 @@ function init(root: HTMLElement, data: Data) {
       renderStories();
     }
   });
+  // choice mode: mode switch, question, four answers, correct mark
+  const ensureChoice = (id: string) => (state.choices[id] ||= { q: fill(shape().prompts.find((p) => p.id === id)!.label, { name: subjectName() }), answers: ["", "", "", ""], correct: -1 });
+  promptsEl.addEventListener("change", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.pmode !== undefined) {
+      const id = t.dataset.pmode;
+      state.modes[id] = t.value as "free" | "choice";
+      if (t.value === "choice") ensureChoice(id);
+      commit(id);
+      openPrompt = id;
+      renderStories();
+      save();
+    } else if (t.dataset.ccor !== undefined) {
+      ensureChoice(t.dataset.ccor).correct = Number(t.value);
+      if (isDone(t.dataset.ccor)) commit(t.dataset.ccor);
+      renderMeter();
+      save();
+    }
+  });
+  promptsEl.addEventListener("input", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.cq !== undefined) ensureChoice(t.dataset.cq).q = t.value;
+    else if (t.dataset.cans !== undefined) {
+      const [id, k] = t.dataset.cans.split(":");
+      ensureChoice(id).answers[Number(k)] = t.value;
+    } else return;
+    const id = (t.dataset.cq ?? t.dataset.cans!.split(":")[0]) as string;
+    if (!isDone(id) && committed.has(id)) commit(id);
+    renderMeter();
+    save();
+  });
   promptsEl.addEventListener("input", (e) => {
     const ta = e.target as HTMLTextAreaElement;
     if (!ta.id.startsWith("pt-")) return;
@@ -343,8 +408,9 @@ function init(root: HTMLElement, data: Data) {
   // leaving the box saves it and marks the story as answered
   promptsEl.addEventListener("focusout", (e) => {
     const ta = e.target as HTMLTextAreaElement;
-    if (!ta.id || !ta.id.startsWith("pt-")) return;
-    const id = ta.id.slice(3);
+    const cid = (ta as HTMLElement).dataset?.cq ?? (ta as HTMLElement).dataset?.cans?.split(":")[0];
+    const id = cid ?? (ta.id && ta.id.startsWith("pt-") ? ta.id.slice(3) : "");
+    if (!id) return;
     if (hasText(id) && !committed.has(id)) {
       commit(id);
       renderMeter();
@@ -626,12 +692,19 @@ function init(root: HTMLElement, data: Data) {
   });
 
   // ---------- 6: review (mock questions, real sources) ----------
-  type Q = { snippet: string; own?: State["own"][number]; photo?: State["own"][number] };
+  type Q = { snippet: string; own?: State["own"][number]; photo?: State["own"][number]; choice?: State["own"][number] };
   /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
   function questions(): Q[] {
     const m = data.material;
     const list: Q[] = [];
     for (const p of shape().prompts) {
+      if (modeOf(p.id) === "choice") {
+        if (choiceDone(p.id)) {
+          const ch = state.choices[p.id];
+          list.push({ snippet: "", choice: { q: ch.q.trim(), type: "choice", free: "", answers: ch.answers.map((a) => a.trim()), correct: ch.correct } });
+        }
+        continue;
+      }
       const text = (state.answers[p.id] || "").trim();
       if (text.length < m.minChars) continue;
       const n = Math.min(m.maxPerPrompt, Math.max(1, Math.round(text.length / m.charsPerQuestion)));
@@ -656,9 +729,9 @@ function init(root: HTMLElement, data: Data) {
       return;
     }
     const ok = state.approved[reviewIndex];
-    const q = s.own || s.photo;
+    const q = s.own || s.photo || s.choice;
     const body = q
-      ? `<p class="in-qcard__source">${s.own ? c.stage5.ownMark : c.stage5.photoMark}</p>
+      ? `<p class="in-qcard__source">${s.own ? c.stage5.ownMark : s.photo ? c.stage5.photoMark : c.stage5.tplMark}</p>
          <p class="in-sample__q">${esc(q.q)}</p>
          <ul class="in-qcard__answers">${
            q.type === "free"
@@ -800,8 +873,12 @@ function init(root: HTMLElement, data: Data) {
       subject: { name: state.name.trim(), ageOrRole: state.extra.trim() },
       title: state.title,
       stories: shape().prompts
-        .filter((p) => (state.answers[p.id] || "").trim())
-        .map((p) => ({ promptId: p.id, prompt: fill(p.label, { name: subjectName() }), text: state.answers[p.id].trim() })),
+        .filter((p) => (modeOf(p.id) === "choice" ? choiceDone(p.id) : (state.answers[p.id] || "").trim()))
+        .map((p) =>
+          modeOf(p.id) === "choice"
+            ? { promptId: p.id, prompt: state.choices[p.id].q.trim(), type: "choice", answers: state.choices[p.id].answers.map((a) => a.trim()), correct: state.choices[p.id].correct }
+            : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
+        ),
       photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
       logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null, contact: d.contact || null },
       host: state.host,
@@ -814,7 +891,7 @@ function init(root: HTMLElement, data: Data) {
   function briefText(): string {
     const b = brief();
     const lines = [`אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
-    b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.text}`));
+    b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.type === "choice" ? (s.answers || []).map((a, i) => (i === s.correct ? "*" : "") + a).join(" / ") : s.text}`));
     if (b.photos.length) {
       lines.push("", "תמונות (כיתובים):");
       b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));

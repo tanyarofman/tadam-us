@@ -42,7 +42,7 @@ The 12 landing-marquee events group by who the game is about:
 | couple | חתונה, חינה, יום נישואין | both names, how long together (optional) | how they met, the proposal, who is who, a trip, shared taste, an inside joke |
 | group | אירוע משפחתי, פגישת מחזור, יום גיבוש, הרמת כוסית | group or company name, size (optional) | a shared memory, a running joke, who is who, how it started, a tradition, a place |
 
-Same screens and same order for all. The config decides three things: the wording of screens 2 and 3, the prompt list, and the question target (12 for every event).
+Same screens and same order for all. An event can also override its shape's wording and prompts: today "הרמת כוסית" does, with workplace examples and prompts (milestone, running jokes, who is who, how it started, rituals, a legendary mishap) for companies, tech teams and organizations. The config decides three things: the wording of screens 2 and 3, the prompt list, and the question target (12 for every event).
 
 Differences to keep in mind, none needed in the MVP:
 - **Company and group events:** the person filling the form often does not hold the stories. The "someone else knows more" link (screen 3) matters most here, and the contributor link add-on grows out of it. Logo and branding come later.

@@ -18,6 +18,8 @@ export interface EventTile {
   icon: string;
   /** How many questions the game aims for. Weddings and big groups get more. */
   target: number;
+  /** Wording and prompts that replace the shape's own (for an event that needs a different flavor). */
+  override?: Partial<ShapeConfig>;
 }
 
 export interface Prompt {
@@ -44,6 +46,27 @@ export interface ShapeConfig {
   prompts: Prompt[];
 }
 
+/** Company, tech and team toasts: workplace examples and prompts instead of the family-and-friends ones. No real brands. */
+const COMPANY: Partial<ShapeConfig> = {
+  nameLabel: "איך קוראים לחברה או לצוות?",
+  namePlaceholder: "לדוגמה: צוות הפיתוח או חברת אלפא",
+  nameHelp: "השם יופיע במשחק. אפשר שם של חברה, מחלקה או צוות.",
+  extraLabel: "בערך כמה עובדים? (לא חובה)",
+  extraPlaceholder: "לדוגמה: 80",
+  sampleQuestion: "מה קורה בכל יום חמישי אצל {name}?",
+  sampleAnswers: ["ישיבת צוות", "ארוחה משותפת", "עדכון גרסה", "הצבעה על פיצה"],
+  sampleCorrect: 1,
+  storiesLead: "כמו שמספרים לחבר, בכמה משפטים. אפשר לשלוח את הקישור לעמיתים שמכירים יותר ולבקש שיוסיפו. אפשר לדלג על מה שלא מתאים, ואפשר גם להוסיף שאלות ותשובות משלכם.",
+  prompts: [
+    { id: "c-milestone", label: "ההישג שמחגגים", hint: "השקה, סבב גיוס, יעד שנסגר, שנה שלמה ביחד", placeholder: "לדוגמה: סגרנו את הגרסה הראשונה אחרי שלושה חודשים של לילות ארוכים" },
+    { id: "c-culture", label: "בדיחה או משפט שחוזרים בצוות", hint: "משהו שכל העובדים מכירים, מהפגישות ומהצ'אט", placeholder: "לדוגמה: 'זה עובד אצלי' אחרי כל באג" },
+    { id: "c-who", label: "מי זה מי בצוות?", hint: "תפקידים, כינויים, ומי שתמיד עושה את אותו הדבר", placeholder: "לדוגמה: דנה תמיד מביאה עוגה לדמו, ואורי היחיד שזוכר איך המערכת עובדת" },
+    { id: "c-history", label: "איך הכול התחיל?", hint: "הרגע הראשון של החברה או של הצוות, המשרד הראשון, הלקוח הראשון", placeholder: "לדוגמה: התחלנו בשלושה אנשים וחדר אחד, והלקוח הראשון הגיע מחבר" },
+    { id: "c-ritual", label: "מסורת או טקס קבוע", hint: "ארוחת צהריים, האקתון, ישיבת בוקר, מצגת סוף שבוע", placeholder: "לדוגמה: כל יום חמישי אוכלים ביחד, ומי שמאחר קונה קפה לכולם" },
+    { id: "c-legend", label: "תקלה או סיפור שאפשר לצחוק עליו היום", hint: "משהו שהפך לאגדה בארגון, בלי לפגוע באף אחד", placeholder: "לדוגמה: הדמו ללקוח שבו המערכת נפלה ברגע הכי לא נכון" },
+  ],
+};
+
 export const EVENTS: EventTile[] = [
   { id: "birthday", label: "יום הולדת", shape: "person", icon: "🎂", target: 12 },
   { id: "round-birthday", label: "יום הולדת עגול", shape: "person", icon: "🎈", target: 12 },
@@ -56,7 +79,7 @@ export const EVENTS: EventTile[] = [
   { id: "family", label: "אירוע משפחתי", shape: "group", icon: "👨‍👩‍👧‍👦", target: 12 },
   { id: "reunion", label: "פגישת מחזור", shape: "group", icon: "🎓", target: 12 },
   { id: "teambuilding", label: "יום גיבוש", shape: "group", icon: "🤝", target: 12 },
-  { id: "toast", label: "הרמת כוסית", shape: "group", icon: "🍾", target: 12 },
+  { id: "toast", label: "הרמת כוסית", shape: "group", icon: "🍾", target: 12, override: COMPANY },
 ];
 
 export const SHAPES: Record<Shape, ShapeConfig> = {
@@ -195,6 +218,10 @@ export const INTAKE = {
   stories: {
     answered: "נענתה",
     save: "שמירה",
+    modeFree: "סיפור חופשי",
+    modeChoice: "ארבע אפשרויות",
+    choiceQuestion: "השאלה",
+    choiceHelp: "כתבו ארבע תשובות וסמנו איזו מהן נכונה. האורחים יבחרו אחת.",
     savedMsg: "נשמר",
     photoNeed: "כתבו שאלה ותשובה כדי לשמור",
     photoSaved: "נשמרה",
@@ -275,6 +302,7 @@ export const INTAKE = {
     ownNeedChoice: "כתבו שאלה וארבע תשובות, וסמנו את הנכונה",
     ownMark: "שאלה שלכם",
     photoMark: "שאלה על תמונה",
+    tplMark: "שאלה מהרשימה",
     ownEdited: "ממתינה לאישור",
     source: "נבנתה מהסיפור שלכם",
     placeholderQuestion: "כאן תופיע השאלה עם ארבע תשובות, ותוכלו לערוך או לבקש ניסוח אחר.",

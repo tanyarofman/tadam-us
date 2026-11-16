@@ -1,8 +1,8 @@
 /**
  * Scene 0: loading screen + hero.
- * 1. The name "טדאם" sits alone in the middle of the screen and pulses while the site loads.
- * 2. When ready (or the visitor taps it) it fades out and the stage opens.
- * 3. The logo assembles in the hero: top, letters, swoosh.
+ * 1. The logo sits alone in the middle of the screen and pulses while the site loads.
+ * 2. When ready (or the visitor taps it) the stage opens and the logo flies up into its place in the hero.
+ * 3. The headline and the rest of the hero come in.
  */
 import { gsap, prefersReducedMotion, lockScroll } from "../lib/scroll";
 import { animateWords } from "./motion";
@@ -20,9 +20,6 @@ export function initHero(onDone?: () => void) {
   const pre = document.querySelector<HTMLElement>("[data-preloader]");
   if (!hero) return;
   const logo = hero.querySelector<HTMLElement>("[data-logo]")!;
-  const top = logo.querySelector(".piece-top");
-  const letters = logo.querySelectorAll(".piece-letter");
-  const swoosh = logo.querySelector<HTMLElement>(".piece-swoosh");
   const title = hero.querySelector(".hero-title");
   const fades = hero.querySelectorAll("[data-hero-fade]");
   const burst = hero.querySelector(".hero-burst");
@@ -47,18 +44,18 @@ export function initHero(onDone?: () => void) {
 
   lockScroll(true);
   const bg = pre.querySelector(".pre-bg");
-  const name = pre.querySelector<HTMLElement>("[data-pre-name]")!;
+  const name = pre.querySelector<HTMLElement>("[data-pre-logo]")!;
+  const pieces = logo.querySelectorAll<HTMLElement>(".logo-piece");
 
-  gsap.set(top, { opacity: 0, scale: 0.9, transformOrigin: "50% 40%" });
-  gsap.set(letters, { opacity: 0, yPercent: -40 });
-  gsap.set(swoosh, { opacity: 1, clipPath: "inset(80% 0% 0% 100%)" });
+  // the hero logo stays hidden until the loading-screen logo has landed on it
+  gsap.set(pieces, { opacity: 0 });
 
-  // 1. while loading: the name pulses softly in the middle of the screen
+  // 1. while loading: the logo pulses softly in the middle of the screen
   const pulse = gsap
     .timeline({ repeat: -1, yoyo: true })
-    .fromTo(name, { opacity: 0.55, scale: 0.97 }, { opacity: 1, scale: 1.03, duration: 0.8, ease: "sine.inOut" });
+    .fromTo(name, { opacity: 0.7, scale: 0.97 }, { opacity: 1, scale: 1.03, duration: 0.8, ease: "sine.inOut" });
 
-  // ready = logo image + fonts + a short beat (so the name is seen), capped; a tap skips ahead
+  // ready = logo image + fonts + a short beat (so the logo is seen), capped; a tap skips ahead
   let skip: () => void = () => {};
   const skipped = new Promise<void>((r) => (skip = r));
   name.addEventListener("click", () => skip(), { once: true });
@@ -74,18 +71,25 @@ export function initHero(onDone?: () => void) {
     pulse.kill();
     hero.classList.add("intro-playing");
     window.scrollTo(0, 0);
+    gsap.set(name, { scale: 1, opacity: 1 });
+
+    // where to land: the logo's spot in the hero
+    const from = name.getBoundingClientRect();
+    const to = logo.getBoundingClientRect();
+    const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+    const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+    const s = to.width / from.width;
 
     const tl = gsap.timeline({ onComplete: finish });
-    // 2. the name lifts away and the stage opens
-    tl.to(name, { opacity: 0, scale: 1.12, duration: 0.35, ease: "power2.in" })
-      .to(bg, { opacity: 0, duration: 0.6, ease: "power2.inOut" }, "<0.15")
+    // 2. the stage opens and the logo flies into place
+    tl.to(bg, { opacity: 0, duration: 0.6, ease: "power2.inOut" })
       .to(burst, { opacity: 1, duration: 0.6 }, "<")
-      .set(pre, { pointerEvents: "none" }, "<")
-      // 3. the logo assembles: the top, letters right to left (ט first), then the swoosh
-      .to(top, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, "<0.1")
-      .to(letters, { opacity: 1, yPercent: 0, duration: 0.6, ease: "bounce.out", stagger: 0.08 }, "<0.1")
-      .to(swoosh, { clipPath: "inset(80% 0% 0% 0%)", duration: 0.5, ease: "power2.inOut" }, "<0.3")
-      .add(animateWords(title), "<0.1")
-      .fromTo(fades, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "<0.35");
+      .to(name, { x: dx, y: dy, scale: s, duration: 0.8, ease: "power3.inOut" }, "<0.1")
+      .set(pieces, { opacity: 1 })
+      .set(name, { opacity: 0 })
+      .set(pre, { pointerEvents: "none" })
+      // 3. the headline and the rest come in
+      .add(animateWords(title), "<")
+      .fromTo(fades, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "<0.2");
   });
 }

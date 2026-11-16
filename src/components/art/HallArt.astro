@@ -1,197 +1,57 @@
 ---
 /**
- * Stylized bat mitzvah hall: wall, string lights, the (still dark) big screen,
- * DJ booth with pulsing lights, round tables with guests, and bored kids on phones in the corner.
+ * Scene 1 imagery, all photos in public/people/:
+ *  - hall-crowd.webp   (16:9, full-bleed background, faces not identifiable)
+ *  - kids-playing.webp  (1:1, corner; wrapper keeps the `.kids` hook scene1.ts fades in)
+ * Until the files exist: stage-blue gradient with a placeholder crowd silhouette.
  */
-import Guest from "./Guest.astro";
-const INK = "#330768";
-const bulbs = Array.from({ length: 26 }, (_, i) => i);
-const bulbColors = ["#F7D94A", "#E836A1", "#64D8F7", "#E74138"];
-const tables = [
-  { x: 190, y: 600 },
-  { x: 1010, y: 600 },
-  { x: 380, y: 690 },
-  { x: 830, y: 690 },
-];
-const shirts = ["#E836A1", "#64D8F7", "#F7D94A", "#E74138", "#8a62d0", "#2bb3a3"];
-const hairs = ["#3b2318", "#1f1410", "#c98b3c", "#7a3d1c", "#b9b0a8"];
-const skins = ["#f2c6a0", "#d9a37a", "#a8714a", "#f5d2b5"];
+import Person from "./Person.astro";
 ---
 
-<svg class="hall-art" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-  <defs>
-    <linearGradient id="hall-wall" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="var(--bg-0)"></stop>
-      <stop offset="1" stop-color="var(--hall-wall)"></stop>
-    </linearGradient>
-    <linearGradient id="hall-beam" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity="0.55"></stop>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
-    </linearGradient>
-  </defs>
-
-  <rect width="1200" height="760" fill="url(#hall-wall)"></rect>
-  {/* curtains */}
-  <g opacity="0.35" fill="none" stroke="var(--bg-2)" stroke-width="10">
-    {Array.from({ length: 16 }, (_, i) => <path d={`M${i * 80 + 20} 0 Q${i * 80 + 40} 230 ${i * 80 + 20} 470`} />)}
-  </g>
-
-  {/* string lights */}
-  <path d="M0 40 Q300 140 600 60 Q900 140 1200 40" fill="none" stroke={INK} stroke-width="3"></path>
-  <g class="bulbs">
-    {
-      bulbs.map((i) => {
-        const t = i / (bulbs.length - 1);
-        const x = t * 1200;
-        const local = t < 0.5 ? t * 2 : (t - 0.5) * 2;
-        const yBase = t < 0.5 ? 40 : 60;
-        const y = (1 - local) * (1 - local) * yBase + 2 * (1 - local) * local * 140 + local * local * (t < 0.5 ? 60 : 40);
-        return <circle class="bulb" cx={x} cy={y + 8} r="7" fill={bulbColors[i % 4]} stroke={INK} stroke-width="3" style={`--d:${(i % 5) * 0.3}s`} />;
-      })
-    }
-  </g>
-
-  {/* the big screen (off) */}
-  <g class="hall-screen">
-    <rect x="410" y="110" width="380" height="214" rx="14" fill="#0b0220" stroke={INK} stroke-width="8"></rect>
-    <rect x="426" y="126" width="348" height="182" rx="6" fill="#120530"></rect>
-    <path d="M440 140 L520 140" stroke="#ffffff" stroke-opacity="0.08" stroke-width="10" stroke-linecap="round"></path>
-  </g>
-
-  {/* floor */}
-  <rect y="470" width="1200" height="290" fill="var(--hall-floor)"></rect>
-  <g opacity="0.25" stroke="var(--bg-2)" stroke-width="2">
-    {Array.from({ length: 9 }, (_, i) => <path d={`M${600 + (i - 4) * 70} 470 L${600 + (i - 4) * 260} 760`} />)}
-    <path d="M0 540 H1200 M0 630 H1200"></path>
-  </g>
-
-  {/* DJ light beams */}
-  <g class="dj-beams" style="mix-blend-mode: screen">
-    <path class="beam beam-1" d="M560 430 L380 0 L470 0 Z" fill="#E836A1" opacity="0.35"></path>
-    <path class="beam beam-2" d="M640 430 L820 0 L730 0 Z" fill="#64D8F7" opacity="0.35"></path>
-    <path class="beam beam-3" d="M585 430 L560 0 L640 0 Z" fill="#F7D94A" opacity="0.3"></path>
-    <path class="beam beam-4" d="M615 430 L900 120 L960 170 Z" fill="#E74138" opacity="0.3"></path>
-  </g>
-
-  {/* DJ booth */}
-  <g class="dj">
-    <rect x="452" y="388" width="70" height="104" rx="10" fill="#2a0a55" stroke={INK} stroke-width="6"></rect>
-    <circle cx="487" cy="420" r="16" fill="#120530" stroke={INK} stroke-width="5"></circle>
-    <circle cx="487" cy="462" r="11" fill="#120530" stroke={INK} stroke-width="5"></circle>
-    <rect x="678" y="388" width="70" height="104" rx="10" fill="#2a0a55" stroke={INK} stroke-width="6"></rect>
-    <circle cx="713" cy="420" r="16" fill="#120530" stroke={INK} stroke-width="5"></circle>
-    <circle cx="713" cy="462" r="11" fill="#120530" stroke={INK} stroke-width="5"></circle>
-    <Guest x={600} y={445} s={1.05} shirt="#120530" skin="#d9a37a" hair="#1f1410" hairStyle="short" pose="stand" />
-    <path d="M578 357 Q600 326 622 357" fill="none" stroke={INK} stroke-width="7"></path>
-    <rect x="570" y="350" width="12" height="20" rx="5" fill="#E74138" stroke={INK} stroke-width="4"></rect>
-    <rect x="618" y="350" width="12" height="20" rx="5" fill="#E74138" stroke={INK} stroke-width="4"></rect>
-    <rect x="530" y="420" width="140" height="78" rx="10" fill="#614098" stroke={INK} stroke-width="6"></rect>
-    <rect x="522" y="408" width="156" height="18" rx="6" fill="#4b2a85" stroke={INK} stroke-width="5"></rect>
-    <circle cx="566" cy="417" r="12" fill="#120530" stroke={INK} stroke-width="4"></circle>
-    <circle cx="634" cy="417" r="12" fill="#120530" stroke={INK} stroke-width="4"></circle>
-    <g class="dj-leds">
-      <circle class="led" cx="560" cy="460" r="7" fill="#E74138"></circle>
-      <circle class="led" cx="586" cy="460" r="7" fill="#F7D94A"></circle>
-      <circle class="led" cx="614" cy="460" r="7" fill="#64D8F7"></circle>
-      <circle class="led" cx="640" cy="460" r="7" fill="#E836A1"></circle>
-    </g>
-  </g>
-
-  {/* tables with guests */}
-  {
-    tables.map((t, ti) => (
-      <g class="table">
-        <Guest x={t.x - 70} y={t.y - 10} s={0.8} shirt={shirts[(ti + 1) % 6]} skin={skins[ti % 4]} hair={hairs[ti % 5]} hairStyle={ti % 2 ? "long" : "short"} pose={ti === 1 ? "talk" : "stand"} />
-        <Guest x={t.x + 70} y={t.y - 10} s={0.8} shirt={shirts[(ti + 3) % 6]} skin={skins[(ti + 1) % 4]} hair={hairs[(ti + 2) % 5]} hairStyle={ti % 2 ? "bun" : "curly"} flip />
-        <Guest x={t.x} y={t.y - 26} s={0.72} shirt={shirts[(ti + 4) % 6]} skin={skins[(ti + 2) % 4]} hair={hairs[(ti + 4) % 5]} hairStyle={ti === 2 ? "bald" : "short"} glasses={ti === 0} />
-        <ellipse cx={t.x} cy={t.y} rx="96" ry="26" fill="#ffffff" stroke={INK} stroke-width="5" />
-        <path d={`M${t.x - 96} ${t.y} Q${t.x - 92} ${t.y + 46} ${t.x - 60} ${t.y + 52} H${t.x + 60} Q${t.x + 92} ${t.y + 46} ${t.x + 96} ${t.y}`} fill="#efe7ff" stroke={INK} stroke-width="5" />
-        <path d={`M${t.x} ${t.y - 4} V${t.y - 62}`} stroke={INK} stroke-width="3" />
-        <circle cx={t.x - 10} cy={t.y - 70} r="13" fill={bulbColors[ti % 4]} stroke={INK} stroke-width="4" />
-        <circle cx={t.x + 12} cy={t.y - 78} r="13" fill={bulbColors[(ti + 2) % 4]} stroke={INK} stroke-width="4" />
-      </g>
-    ))
-  }
-
-</svg>
-
-<svg class="kids-corner" viewBox="0 0 320 210" aria-hidden="true" focusable="false">
-    <g class="kids">
-    <Guest x={60} y={208} s={0.95} shirt="#2bb3a3" skin="#f2c6a0" hair="#c98b3c" hairStyle="long" pose="phone" />
-    <Guest x={140} y={210} s={0.9} shirt="#E74138" skin="#a8714a" hair="#1f1410" hairStyle="curly" pose="phone" />
-    <Guest x={218} y={208} s={0.92} shirt="#8a62d0" skin="#d9a37a" hair="#3b2318" hairStyle="short" pose="phone" />
-    <g class="zzz" fill="#fff" font-family="Rubik, sans-serif" font-weight="800" opacity="0.8">
-      <text x="240" y="64" font-size="22">z</text>
-      <text x="258" y="44" font-size="28">z</text>
-      <text x="280" y="22" font-size="34">z</text>
-    </g>
-  </g>
-</svg>
+<div class="hall-art">
+  <Person
+    class="hall-photo"
+    kind="crowd"
+    name="hall-crowd"
+    width={1280}
+    height={720}
+    eager
+    alt="אולם אירועים מוצף באור כחול, אורחים מכל הגילאים עם טלפונים מוארים ומסך גדול בקצה האולם"
+  />
+</div>
+<div class="kids-corner">
+  <div class="kids">
+    <Person
+      class="kids-photo"
+      name="kids-playing"
+      width={800}
+      height={800}
+      alt="שלושה ילדים עומדים בפינת האולם, צוחקים ומחזיקים את הטלפונים באוויר, מוכנים להצטרף למשחק"
+    />
+  </div>
+</div>
 
 <style>
   .hall-art {
-    width: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .hall-art :global(.hall-photo) {
     height: 100%;
+    aspect-ratio: auto !important;
+    border-radius: 0;
+  }
+  .hall-art :global(.person-img) {
+    object-position: 50% 60%;
   }
   .kids-corner {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: clamp(170px, 26vw, 330px);
-    overflow: visible;
+    inset-inline-start: clamp(8px, 2vw, 28px);
+    bottom: clamp(8px, 3vh, 28px);
+    width: clamp(150px, 24vw, 320px);
   }
-  .bulb {
-    animation: twinkle 2.4s ease-in-out infinite;
-    animation-delay: var(--d);
-  }
-  @keyframes twinkle {
-    50% {
-      opacity: 0.45;
-    }
-  }
-  .beam {
-    transform-box: fill-box;
-    transform-origin: 50% 100%;
-    animation: beat 0.95s ease-in-out infinite;
-  }
-  .beam-2 {
-    animation-delay: 0.24s;
-  }
-  .beam-3 {
-    animation-delay: 0.48s;
-  }
-  .beam-4 {
-    animation-delay: 0.71s;
-  }
-  @keyframes beat {
-    0%,
-    100% {
-      opacity: 0.12;
-    }
-    40% {
-      opacity: 0.42;
-    }
-  }
-  .led {
-    animation: led 0.475s steps(2, jump-none) infinite alternate;
-  }
-  .led:nth-child(2n) {
-    animation-delay: 0.24s;
-  }
-  @keyframes led {
-    from {
-      opacity: 0.35;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  :global(.phone-glow) {
-    animation: glow 3s ease-in-out infinite;
-  }
-  @keyframes glow {
-    50% {
-      opacity: 0.45;
-    }
+  .kids-corner :global(.kids-photo) {
+    border-radius: var(--radius-m);
+    box-shadow: 0 0 30px 2px var(--screen-glow), 0 0 0 3px var(--stage-navy);
   }
 </style>

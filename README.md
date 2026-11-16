@@ -64,7 +64,7 @@ then the scenes in page order (after the intro, one per task, so the main thread
   If the partner allows framing (`Content-Security-Policy: frame-ancestors https://<landing-domain>`), flip it to `true`;
   a load timeout still falls back to the button.
 - Until `joinUrl` is set, the QR box shows a "coming soon" placeholder.
-- Mobile: "שחקו על הטלפון הזה" opens `soloUrl`, else `joinUrl`, else `hostUrl`; "שלחו לי לינק למחשב" opens a WhatsApp share.
+- Mobile: "צפו בדמו בטלפון הזה" opens `soloUrl`, else `joinUrl`, else `hostUrl`; "שלחו לי לינק למחשב" opens a WhatsApp share.
 - Closes on Esc, click outside, and the close button. Focus is trapped inside while open.
 
 ## Accessibility & motion

@@ -18,6 +18,7 @@ const c = COPY.scene7;
       <span class="btn-dot" aria-hidden="true"></span>
       {c.cta}
     </button>
+    <p class="s7-note">{c.demoNote}</p>
     <a class="s7-contact" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
       {c.contact}
     </a>
@@ -30,7 +31,7 @@ const c = COPY.scene7;
     min-height: 100svh;
     display: grid;
     place-items: center;
-    padding-block: clamp(80px, 12vh, 140px);
+    padding-block: clamp(80px, 12vh, 140px) clamp(120px, 18vh, 180px);
     overflow: hidden;
   }
   .s7-inner {
@@ -63,6 +64,11 @@ const c = COPY.scene7;
   :global(.s7-title) {
     max-width: 14ch;
     text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .s7-note {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 36ch;
   }
   .s7-contact {
     color: var(--text-muted);

@@ -284,7 +284,6 @@ export const INTAKE = {
       "העובדות נכונות",
       "יש לנו רשות להשתמש בתמונות",
     ],
-    shareReview: "שלחו להורה השני לבדיקה",
     toOrder: "לאישור והזמנה",
     orderTitle: "הזמנה",
     orderSummary: "סיכום",

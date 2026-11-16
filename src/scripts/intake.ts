@@ -672,8 +672,6 @@ function init(root: HTMLElement, data: Data) {
         </div>
       </article>`;
     $$<HTMLInputElement>("[data-check]").forEach((cb) => (cb.checked = !!state.checks[Number(cb.dataset.check)]));
-    const share = $<HTMLAnchorElement>("[data-share-review]");
-    if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
     updateReviewGate();
   }
   // own question form: a question, four answers, one marked correct

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: switch to the custom domain together with `site` in astro.config.mjs
+Sitemap: https://tadam-game.netlify.app/sitemap-index.xml

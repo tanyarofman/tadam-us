@@ -34,7 +34,10 @@ driven by CSS variables in `src/styles/tokens.css`.
 | WhatsApp number + message | `src/config/site.ts` |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
-| Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` |
+| Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` (also `public/robots.txt`) |
+| Blog articles (one Markdown file each) | `src/content/blog/*.md`, schema in `src/content.config.ts` |
+| Blog status, plan, playbook, sources | `docs/seo/` (start with `status.md`) |
+| Keyword research script (DataForSEO) | `tools/seo/research.py` |
 
 FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 
@@ -50,6 +53,7 @@ Scene 5  WOW #2: the moment   Scene5Moment.astro                          script
 Scene 6  Leaderboard payoff   Scene6Payoff.astro                          scripts/scenes/scene6.ts
 Scene 7  CTA                  Scene7Cta.astro                             scripts/scenes/scene7.ts
 FAQ, Footer, DemoModal        src/components/
+Blog                          src/pages/blog/ (index + [slug]), src/components/blog/, /llms.txt from src/pages/llms.txt.ts
 Illustrations (SVG)           src/components/art/
 ```
 

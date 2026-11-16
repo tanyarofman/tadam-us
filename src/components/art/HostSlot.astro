@@ -4,8 +4,8 @@
  * Photos are AI-generated, fictional people / an original creature (public/hosts/*.webp):
  * never a real person or a recognizable character. Faces stay in shadow or turned away.
  */
-import { COPY } from "../../content/copy.he";
-const types = COPY.scene3.hostTypes;
+// Labels removed from the copy (host is no longer chosen by the child); session C deletes this component.
+const types = ["singer", "athlete", "character", "influencer"].map((key) => ({ key }));
 const INK = "#1a0638";
 ---
 
@@ -52,10 +52,6 @@ const INK = "#1a0638";
     ))
   }
   <span class="host-q display" aria-hidden="true">?</span>
-
-  <ul class="host-labels" role="list">
-    {types.map((t) => <li class="host-label" data-type={t.key}>{t.label}</li>)}
-  </ul>
 </div>
 
 <style>

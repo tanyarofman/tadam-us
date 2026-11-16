@@ -1,14 +1,14 @@
 ---
 /**
- * Loading screen: the name "טדאם" alone, centered, pulsing while the site loads.
- * Then it fades out and the logo assembles in the hero (see scripts/hero.ts).
+ * Loading screen: the logo alone, centered, pulsing while the site loads.
+ * Then it flies up into its place in the hero (see scripts/hero.ts).
  * Hidden without JS. Decorative only; it never blocks keyboard or screen-reader users for long.
  */
 ---
 
 <div class="preloader" data-preloader aria-hidden="true">
   <div class="pre-bg"></div>
-  <div class="pre-name" data-pre-name>טדאם</div>
+  <img class="pre-logo" data-pre-logo src="/brand/tadam-logo-v3.webp" alt="" width="736" height="332" decoding="async" />
 </div>
 
 <style>
@@ -28,13 +28,10 @@
     inset: 0;
     background: var(--stage-bg);
   }
-  .pre-name {
+  .pre-logo {
     position: relative;
-    font-family: var(--font-display, inherit);
-    font-weight: 900;
-    font-size: clamp(56px, 16vw, 120px);
-    line-height: 1;
-    color: #fff;
+    width: min(420px, 72vw);
+    height: auto;
     cursor: pointer;
     will-change: transform, opacity;
   }

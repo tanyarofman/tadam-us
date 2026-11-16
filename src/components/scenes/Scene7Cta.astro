@@ -18,8 +18,7 @@ const c = COPY.scene7;
       <span class="btn-dot" aria-hidden="true"></span>
       {c.cta}
     </button>
-    <p class="s7-note">{c.demoNote}</p>
-    <a class="s7-contact" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
+    <a class="btn btn-white s7-contact" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
       {c.contact}
     </a>
   </div>
@@ -65,19 +64,8 @@ const c = COPY.scene7;
     max-width: 14ch;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
-  .s7-note {
-    color: var(--text-muted);
-    font-size: 1rem;
-    max-width: 36ch;
-  }
+  /* the WhatsApp button sits right under the demo button, a step quieter */
   .s7-contact {
-    color: var(--text-muted);
-    text-underline-offset: 6px;
-    text-decoration-color: var(--sky-cyan);
-    font-size: 1rem;
-    padding: 8px;
-  }
-  .s7-contact:hover {
-    color: var(--text);
+    margin-top: calc(-1 * clamp(6px, 1.2vh, 14px));
   }
 </style>

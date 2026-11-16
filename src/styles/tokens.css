@@ -4,6 +4,21 @@
    (electric blue stage + glowing floor strip).
    ========================================================= */
 
+@font-face {
+  font-family: "Almoni";
+  src: url("/fonts/almoni-tzar-regular-aaa.otf") format("opentype");
+  font-weight: 100 599;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Almoni";
+  src: url("/fonts/almoni-tzar-bold-aaa.otf") format("opentype");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Brand (sampled from the logo) */
   --purple-ink: #330768;
@@ -22,8 +37,9 @@
   --answer-4: var(--magenta);
 
   /* Type */
-  --font-display: "Fredoka", "Rubik", system-ui, sans-serif;
-  --font-body: "Rubik", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  /* Same typeface as the game (Almoni Tzar AAA), so the page and the game speak one language */
+  --font-display: "Almoni", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-body: "Almoni", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   --fs-hero: clamp(2.4rem, 7.4vw, 5.4rem);
   --fs-h2: clamp(2rem, 6.4vw, 4.4rem);

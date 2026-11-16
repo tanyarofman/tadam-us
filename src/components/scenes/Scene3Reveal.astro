@@ -31,9 +31,8 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
 
       <h2 id="s3-title" class="display s3-title">
         <span class="s3-line s3-line-1">{c.headline}</span>
-        <span class="s3-line s3-line-2">{c.headline2}</span>
+        <span class="s3-line s3-line-2" aria-hidden="true"></span>
       </h2>
-      <p class="sr-only">{c.hostMessage} {c.hostTypes.map((t) => t.label).join(", ")}.</p>
     </div>
   </div>
 </section>

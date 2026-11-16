@@ -1,11 +1,4 @@
 ---
-import "@fontsource/fredoka/hebrew-700.css";
-import "@fontsource/fredoka/latin-700.css";
-import "@fontsource/rubik/hebrew-400.css";
-import "@fontsource/rubik/hebrew-500.css";
-import "@fontsource/rubik/hebrew-800.css";
-import "@fontsource/rubik/latin-400.css";
-import "@fontsource/rubik/latin-500.css";
 import "../styles/global.css";
 import { COPY } from "../content/copy.he";
 
@@ -37,6 +30,8 @@ const ogImage = new URL("/brand/tadam-logo.png", Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
+    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
     <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo.webp" fetchpriority="high" />
     <script is:inline>
       (function () {

@@ -44,7 +44,7 @@ FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 Scene 0  Hero + preloader     src/components/scenes/Scene0Hero.astro      scripts/hero.ts
 Scene 1  The event (hall)     Scene1Event.astro                           scripts/scenes/scene1.ts
 Scene 2  Memories (bubbles)   Scene2Insight.astro                         scripts/scenes/scene2.ts
-Scene 3  WOW #1: buzzer+host  Scene3Reveal.astro                          scripts/scenes/scene3.ts
+Scene 3  WOW #1: buzzer+demo  Scene3Reveal.astro                          scripts/scenes/scene3.ts
 Scene 4  How it's built       Scene4HowItWorks.astro (+ privacy strip)    scripts/scenes/scene4.ts
 Scene 5  WOW #2: the moment   Scene5Moment.astro                          scripts/scenes/scene5.ts
 Scene 6  Leaderboard payoff   Scene6Payoff.astro                          scripts/scenes/scene6.ts
@@ -70,7 +70,7 @@ then the scenes in page order (after the intro, one per task, so the main thread
 ## Accessibility & motion
 
 - `prefers-reduced-motion`: no smooth scroll, no pinning or scrubbing; every scene renders its final "story" state with simple fades.
-- All copy is real DOM text. Sound: none (nothing autoplays).
+- All copy is real DOM text. Scene 3 demo video (`public/demo/`): muted autoplay only while on screen, never with sound, no autoplay with reduced motion (poster + play button); the mp4 is requested only when the scene is near the viewport. Buttons: play/pause, sound, full screen.
 - Hebrew, RTL from the root (`<html lang="he" dir="rtl">`).
 
 ## Performance notes

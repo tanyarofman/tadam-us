@@ -262,7 +262,11 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     aspect-ratio: auto;
     border: 0;
     border-radius: 0;
-    background: #000;
+    background: #020b2e;
+  }
+  /* show the whole frame (phone mockup included) on any screen ratio, letterboxed instead of cropped */
+  .s3-screen:fullscreen .s3-vid {
+    object-fit: contain;
   }
   .s3-burst {
     opacity: 0;

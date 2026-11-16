@@ -5,7 +5,12 @@
 import { gsap } from "../../lib/scroll";
 import { animateWords, isMobile, seeded } from "../motion";
 
-const COLORS = ["#E74138", "#F7D94A", "#64D8F7", "#E836A1"];
+// Crowd lights use the brand tokens (read at runtime, so a theme change in tokens.css carries over)
+const TOKENS = ["--white", "--sun-yellow", "--sky-cyan", "--magenta"];
+const readColors = () => {
+  const cs = getComputedStyle(document.documentElement);
+  return TOKENS.map((t) => cs.getPropertyValue(t).trim() || "#ffffff");
+};
 
 type Phone = { x: number; y: number; s: number; c: number; t: number };
 
@@ -16,7 +21,7 @@ function makeCrowd(canvas: HTMLCanvasElement) {
   let w = 0;
   let h = 0;
   let progress = 0;
-  const sprites = COLORS.map((c) => {
+  const sprites = readColors().map((c) => {
     const sp = document.createElement("canvas");
     sp.width = sp.height = 64;
     const g = sp.getContext("2d")!;
@@ -49,7 +54,7 @@ function makeCrowd(canvas: HTMLCanvasElement) {
         x: rand() * w,
         y: h * (0.3 + depth * 0.72),
         s: 10 + depth * 30,
-        c: Math.floor(rand() * 4),
+        c: Math.floor(rand() * TOKENS.length),
         t: rand() * 0.85,
       });
     }
@@ -85,87 +90,120 @@ export function init({ reduced }: { reduced: boolean }) {
   if (!s) return;
   const canvas = s.querySelector<HTMLCanvasElement>(".s5-crowd")!;
   const crowd = makeCrowd(canvas);
+  const phone = s.querySelector<HTMLElement>(".phone")!;
+  const screen = s.querySelector<HTMLElement>(".bigscreen")!;
 
+  // Final state: results shown, the answer is yellow-then-green. Used for reduced motion.
+  const setReveal = (on: boolean) => {
+    phone.classList.toggle("is-picked", on);
+    phone.classList.toggle("is-revealed", on);
+    screen.classList.toggle("is-revealed", on);
+  };
   if (reduced) {
     crowd.draw(1);
     canvas.style.opacity = "0.45";
-    s.querySelector(".bigscreen")?.classList.add("is-revealed");
+    setReveal(true);
     return;
   }
 
   const q = <T extends Element = HTMLElement>(sel: string) => s.querySelector<T>(sel)!;
   const split = q(".s5-split");
-  const screen = q(".bigscreen");
-  const answered = q(".bs-answered-n");
-  const timer = q(".bs-timer-n");
   const finger = q(".finger");
-  const picked = q(".phone-btn[data-i='1']");
-  const sent = q(".phone-sent");
-  const result = q(".phone-result");
   const title = q(".s5-title");
+  const count = q(".bs-count-n");
+  const rings = [q(".bs-ring"), q(".phone-ring")];
+  const ringNs = rings.map((r) => r.querySelector<HTMLElement>(".ring-n")!);
   q(".s5-pin").classList.add("is-animated");
 
-  // Like the real game: while guests answer, the big screen shows only the options,
-  // a countdown and how many have answered. Nothing is revealed until the answer is in.
-  const TOTAL = 214;
-  const state = { n: 0, t: 15, crowd: 0 };
+  const TOTAL = Number(count.textContent) || 0;
+  const SECONDS = Number(ringNs[0].textContent) || 15;
+  const state = { n: 0, t: SECONDS, crowd: 0 };
+  // Like the real game: while guests answer, only the options + a countdown + who is connected.
+  // Results (bars, counts, green) exist only after the reveal.
   const render = () => {
-    answered.textContent = String(Math.round(state.n));
-    timer.textContent = String(Math.max(0, Math.round(state.t)));
+    count.textContent = String(Math.round(state.n));
+    const secs = Math.max(0, Math.ceil(state.t));
+    rings.forEach((r, i) => {
+      r.style.setProperty("--ring", String(Math.max(0, state.t / SECONDS)));
+      ringNs[i].textContent = String(secs);
+    });
     crowd.draw(state.crowd);
   };
-  const setRevealed = (on: boolean) => screen.classList.toggle("is-revealed", on);
 
   gsap.set(title.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
   render();
 
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: s,
-      start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 4.4 : 5),
-      pin: s.querySelector(".scene-pin"),
-      scrub: 0.6,
-      invalidateOnRefresh: true,
-    },
-  });
+  const mm = gsap.matchMedia();
+  mm.add({ mobile: "(max-width: 767px)", desktop: "(min-width: 768px)" }, (ctx) => {
+    const mobile = !!ctx.conditions?.mobile;
+    const pickedPill = q(".phone .pill.is-picked");
 
-  tl.fromTo(split, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 })
-    // answers start coming in (count only)
-    .to(state, { n: 61, t: 10, duration: 1.6, onUpdate: render })
-    // the finger taps
-    .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<1")
-    .to(finger, { scale: 0.85, duration: 0.1 })
-    .to(picked, { scale: 0.92, y: 4, duration: 0.1 }, "<")
-    .addLabel("tap")
-    .to(finger, { scale: 1, duration: 0.1 })
-    .to(picked, { scale: 1, y: 0, duration: 0.1 }, "<")
-    .fromTo(sent, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" })
-    .to(finger, { opacity: 0, y: 40, duration: 0.25 }, "<")
-    // the rest of the room answers
-    .to(state, { n: TOTAL, t: 0, duration: 1.6, onUpdate: render })
-    // reveal: the right answer lights up on the screen, the phone says if you got it
-    .addLabel("reveal")
-    .fromTo(q(".bs-a.is-correct"), { scale: 1 }, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1 })
-    .to(sent, { opacity: 0, duration: 0.15 }, "<")
-    .fromTo(result, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(3)" }, "<")
-    .to({}, { duration: 0.8 })
-    // camera pulls back: the whole hall lights up
-    .addLabel("pullback")
-    .to(split, { scale: isMobile() ? 0.5 : 0.42, y: "-12%", opacity: 0, duration: 1, ease: "power2.in" })
-    .to(state, { crowd: 1, duration: 1.4, onUpdate: render }, "<0.2")
-    // the headline sits where the screen was, so it waits until the screen is gone
-    .add(animateWords(title, { duration: 0.35, stagger: 0.05 }), "pullback+=0.95")
-    .to({}, { duration: 0.4 });
+    // mobile: the phone plays first; the big screen card is hidden until the reveal
+    if (mobile) gsap.set(screen, { autoAlpha: 0, y: 24 });
 
-  // reset the tap if the user scrolls back up
-  // keep the class-based states in sync when scrubbing back and forth
-  const tapTime = tl.labels.tap;
-  const revealTime = tl.labels.reveal;
-  tl.eventCallback("onUpdate", () => {
-    const t = tl.time();
-    picked.classList.toggle("is-picked", t >= tapTime);
-    setRevealed(t >= revealTime);
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: s,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * (mobile ? 4.6 : 5),
+        pin: s.querySelector(".scene-pin"),
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    tl.fromTo(split, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 })
+      // guests join and the countdown runs (no results)
+      .to(state, { n: Math.round(TOTAL * 0.6), t: SECONDS * 0.6, duration: 1.6, onUpdate: render })
+      // the finger taps an answer, it turns yellow
+      .fromTo(finger, { opacity: 0, x: 40, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out" }, "<1")
+      .to(finger, { scale: 0.85, duration: 0.1 })
+      .to(pickedPill, { scale: 0.97, duration: 0.1 }, "<")
+      .addLabel("tap")
+      .to(finger, { scale: 1, duration: 0.1 })
+      .to(pickedPill, { scale: 1, duration: 0.1 }, "<")
+      .to(finger, { opacity: 0, y: 40, duration: 0.25 })
+      // the rest of the room answers, countdown ends
+      .to(state, { n: TOTAL, t: 0, duration: 1.4, onUpdate: render })
+      // reveal: the green bar fills on the phone and on the big screen
+      .addLabel("reveal")
+      .to({}, { duration: 1.4 });
+
+    if (mobile) {
+      // hand over from the phone to the big-screen card
+      tl.to(phone, { autoAlpha: 0, scale: 0.94, y: -20, duration: 0.4 })
+        .to(screen, { autoAlpha: 1, y: 0, duration: 0.4 }, "<0.1")
+        .to({}, { duration: 1.2 });
+    } else {
+      tl.to({}, { duration: 0.6 });
+    }
+
+    tl
+      // camera pulls back: the whole hall lights up
+      .addLabel("pullback")
+      .to(split, { scale: mobile ? 0.5 : 0.42, y: "-12%", opacity: 0, duration: 1, ease: "power2.in" })
+      .to(state, { crowd: 1, duration: 1.4, onUpdate: render }, "<0.2")
+      // the headline sits where the screen was, so it waits until the screen is gone
+      .add(animateWords(title, { duration: 0.35, stagger: 0.05 }), "pullback+=0.95")
+      .to({}, { duration: 0.4 });
+
+    // keep class-based states in sync when scrubbing back and forth
+    const tapTime = tl.labels.tap;
+    const revealTime = tl.labels.reveal;
+    tl.eventCallback("onUpdate", () => {
+      const t = tl.time();
+      phone.classList.toggle("is-picked", t >= tapTime);
+      phone.classList.toggle("is-revealed", t >= revealTime);
+      screen.classList.toggle("is-revealed", t >= revealTime);
+    });
+
+    return () => {
+      setReveal(false);
+      state.n = 0;
+      state.t = SECONDS;
+      state.crowd = 0;
+      render();
+    };
   });
 }

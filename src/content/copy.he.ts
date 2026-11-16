@@ -78,19 +78,25 @@ export const COPY = {
 
   scene5: {
     headline: "סורקים, משחקים, וכל האולם עונה ביחד.",
-    question: "מה נועה הכי לא מסוגלת לאכול?",
-    answers: ["פטריות", "חציל", "טונה", "גבינה כחולה"],
-    connected: "מחוברים",
-    scanHint: "סרקו ושחקו",
-    timer: "שנ׳",
-    questionNo: "שאלה 4 מתוך 12",
-    answered: "ענו",
+    // Placeholder celebrant name (session B decides the final one; keep it consistent with docs/PLAN.md).
+    celebrant: "נועה",
+    question: "מה נועה הכי אוהבת לאכול?",
+    // votes are demo numbers; they only show on the reveal, like in the real game
+    answers: [
+      { text: "פיצה", votes: 14 },
+      { text: "שניצל ופירה", votes: 52 },
+      { text: "סושי", votes: 19 },
+      { text: "פסטה", votes: 7 },
+    ],
     correctIndex: 1,
-    correctTag: "התשובה הנכונה",
-    phoneSent: "התשובה נשלחה",
-    phoneWaiting: "מחכים לכולם...",
-    phoneCorrect: "צדקת!",
-    phonePoints: "+850",
+    pickedIndex: 1,
+    questionLabel: "שאלה ראשונה",
+    connected: "מחוברים",
+    connectedCount: 92,
+    phoneNext: "יאללה, בואו נתקדם",
+    bigScreenLabel: "המסך הגדול באולם",
+    phoneLabel: "הטלפון של אורח",
+    ringSeconds: 15,
   },
 
   scene6: {

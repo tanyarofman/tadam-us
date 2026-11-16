@@ -6,8 +6,10 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** "article" on blog posts. */
+  ogType?: "website" | "article";
 }
-const { title = COPY.meta.title, description = COPY.meta.description, noindex = false } = Astro.props;
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
 ---
@@ -23,7 +25,7 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
     <link rel="icon" type="image/png" href="/brand/tadam-logo-v2.png" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="he_IL" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -40,6 +42,7 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
     <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo-v2.webp" fetchpriority="high" />
+    <slot name="head" />
     <script is:inline>
       (function () {
         var d = document.documentElement;

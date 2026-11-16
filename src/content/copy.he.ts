@@ -259,6 +259,7 @@ export const COPY = {
   footer: {
     contact: "דברו איתנו בוואטסאפ",
     privacy: "מדיניות פרטיות",
+    blog: "בלוג",
     copyright: "© טדאם!",
   },
 

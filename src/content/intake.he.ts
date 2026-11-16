@@ -128,7 +128,7 @@ export const SHAPES: Record<Shape, ShapeConfig> = {
 /** How much written material counts as one question (starting heuristic, tune with the generator). */
 export const MATERIAL = {
   /** An answer shorter than this does not count as answered. */
-  minChars: 20,
+  minChars: 2,
   /** Characters of story that make one question. */
   charsPerQuestion: 60,
   /** One prompt cannot feed more than this many questions, so one long story is not enough alone. */
@@ -192,6 +192,10 @@ export const INTAKE = {
 
   stories: {
     answered: "נענתה",
+    save: "שמירה",
+    savedMsg: "נשמר",
+    photoNeed: "כתבו שאלה ותשובה כדי לשמור",
+    photoSaved: "נשמרה",
     skip: "דלגו",
     counter: "{n} מתוך {total} שאלות",
     meterLabel: "יש לנו חומר ל",

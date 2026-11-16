@@ -28,7 +28,7 @@ interface State {
   title: string;
   titleEdited: boolean;
   answers: Record<string, string>;
-  photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
+  photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
   approved: boolean[];
@@ -230,11 +230,37 @@ function init(root: HTMLElement, data: Data) {
   // ---------- 3: stories ----------
   const promptsEl = $<HTMLElement>("[data-prompts]")!;
   let openPrompt = "";
+  // A story counts as "answered" (the green mark) once the creator leaves the box or presses save.
+  // The text itself is autosaved on every keystroke.
+  const committed = new Set<string>();
+  let committedInit = false;
+  const hasText = (id: string) => (state.answers[id] || "").trim().length >= data.material.minChars;
+  function commit(id: string) {
+    if (!hasText(id)) {
+      committed.delete(id);
+    } else {
+      committed.add(id);
+      if (!tracked.has(id)) {
+        tracked.add(id);
+        track("intake_prompt_answered", { prompt: id, event: state.eventId });
+      }
+    }
+    const box = promptsEl.querySelector<HTMLElement>(`[data-prompt="${id}"]`);
+    if (box) {
+      box.dataset.answered = String(committed.has(id));
+      const mark = box.querySelector(".in-prompt__mark");
+      if (mark) mark.textContent = committed.has(id) ? "✓ " + c.stories.answered : "";
+    }
+  }
   function renderStories() {
+    if (!committedInit) {
+      shape().prompts.forEach((p) => hasText(p.id) && committed.add(p.id));
+      committedInit = true;
+    }
     if (!openPrompt) openPrompt = shape().prompts.find((p) => !state.answers[p.id])?.id || shape().prompts[0].id;
     promptsEl.innerHTML = "";
     for (const p of shape().prompts) {
-      const answered = (state.answers[p.id] || "").trim().length >= data.material.minChars;
+      const answered = committed.has(p.id);
       const open = openPrompt === p.id;
       const box = document.createElement("div");
       box.className = "in-prompt";
@@ -256,7 +282,9 @@ function init(root: HTMLElement, data: Data) {
           <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>
           <div class="in-prompt__row">
             <button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>
+            <button type="button" class="btn btn-white in-save-btn" data-save-prompt="${p.id}">${c.stories.save}</button>
             <button type="button" class="btn btn-ghost" data-skip="${p.id}">${c.stories.skip}</button>
+            <span class="in-saved" data-saved-msg="${p.id}" role="status" hidden>✓ ${c.stories.savedMsg}</span>
           </div>
           <p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
           <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>
@@ -279,6 +307,21 @@ function init(root: HTMLElement, data: Data) {
       renderStories();
       return;
     }
+    const sv = t.closest<HTMLElement>("[data-save-prompt]");
+    if (sv) {
+      const id = sv.dataset.savePrompt!;
+      if (!hasText(id)) {
+        promptsEl.querySelector<HTMLTextAreaElement>(`#pt-${id}`)?.focus();
+        return;
+      }
+      commit(id);
+      renderMeter();
+      const ps = shape().prompts;
+      const i = ps.findIndex((p) => p.id === id);
+      openPrompt = ps.slice(i + 1).find((p) => !committed.has(p.id))?.id || "";
+      renderStories();
+      return;
+    }
     const skip = t.closest<HTMLElement>("[data-skip]");
     if (skip) {
       const ps = shape().prompts;
@@ -292,19 +335,20 @@ function init(root: HTMLElement, data: Data) {
     if (!ta.id.startsWith("pt-")) return;
     const id = ta.id.slice(3);
     state.answers[id] = ta.value;
-    const done = ta.value.trim().length >= data.material.minChars;
-    const box = ta.closest<HTMLElement>("[data-prompt]");
-    if (box) {
-      box.dataset.answered = String(done);
-      const mark = box.querySelector(".in-prompt__mark");
-      if (mark) mark.textContent = done ? "✓ " + c.stories.answered : "";
-    }
-    if (done && !tracked.has(id)) {
-      tracked.add(id);
-      track("intake_prompt_answered", { prompt: id, event: state.eventId });
-    }
+    if (!hasText(id) && committed.has(id)) commit(id); // emptied: no longer answered
     renderMeter();
     save();
+  });
+  // leaving the box saves it and marks the story as answered
+  promptsEl.addEventListener("focusout", (e) => {
+    const ta = e.target as HTMLTextAreaElement;
+    if (!ta.id || !ta.id.startsWith("pt-")) return;
+    const id = ta.id.slice(3);
+    if (hasText(id) && !committed.has(id)) {
+      commit(id);
+      renderMeter();
+      save();
+    }
   });
 
   function renderMeter() {
@@ -432,13 +476,37 @@ function init(root: HTMLElement, data: Data) {
               : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
                  <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" data-pfree="${i}" />`
           }
-          <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>
+          <p class="in-err" role="alert" data-photo-err="${i}" hidden>${c.stories.photoNeed}</p>
+          <div class="in-photo-actions">
+            <button type="button" class="btn btn-white in-save-btn" data-photo-save="${i}">${c.stories.save}</button>
+            <span class="in-saved" data-photo-badge="${i}" role="status" ${p.saved ? "" : "hidden"}>✓ ${c.stories.photoSaved}</span>
+            <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>
+          </div>
         </div>`;
       photoList.append(li);
     });
     const add = $<HTMLElement>("[data-photo-add]");
     if (add) add.hidden = state.photos.length >= data.material.maxPhotos;
   }
+  const photoComplete = (p: State["photos"][number]) =>
+    p.caption.trim().length > 3 && (p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0);
+  function markPhoto(i: number, ok: boolean) {
+    state.photos[i].saved = ok;
+    const badge = photoList.querySelector<HTMLElement>(`[data-photo-badge="${i}"]`);
+    if (badge) badge.hidden = !ok;
+    const err = photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`);
+    if (err && ok) err.hidden = true;
+  }
+  photoList.addEventListener("focusout", (e) => {
+    const t = e.target as HTMLInputElement;
+    const li = t.closest<HTMLElement>("[data-photo]");
+    if (!li || t.type === "radio") return;
+    const i = Number(li.dataset.photo);
+    if (photoComplete(state.photos[i]) && !state.photos[i].saved) {
+      markPhoto(i, true);
+      save();
+    }
+  });
   photoInput.addEventListener("change", () => {
     const f = photoInput.files?.[0];
     if (!f || state.photos.length >= data.material.maxPhotos) return;
@@ -458,6 +526,11 @@ function init(root: HTMLElement, data: Data) {
       const [i, k] = t.dataset.pans.split(":").map(Number);
       state.photos[i].answers[k] = t.value;
     } else return;
+    const li = t.closest<HTMLElement>("[data-photo]");
+    if (li) {
+      const i = Number(li.dataset.photo);
+      if (state.photos[i].saved && !photoComplete(state.photos[i])) markPhoto(i, false);
+    }
     renderMeter();
     save();
   });
@@ -472,6 +545,15 @@ function init(root: HTMLElement, data: Data) {
     save();
   });
   photoList.addEventListener("click", (e) => {
+    const sb = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-save]");
+    if (sb) {
+      const i = Number(sb.dataset.photoSave);
+      if (photoComplete(state.photos[i])) {
+        markPhoto(i, true);
+        save();
+      } else photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`)!.hidden = false;
+      return;
+    }
     const b = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-remove]");
     if (!b) return;
     const i = Number(b.dataset.photoRemove);

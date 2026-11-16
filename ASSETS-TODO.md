@@ -12,8 +12,8 @@ Each one has a clearly named component, so it can be swapped without touching th
 | 4 | Scene 3, the demo video (DONE: `public/demo/tadam-demo.mp4` + poster, replaces the host carousel) | `src/components/scenes/Scene3Reveal.astro` | Ideally a purpose-made demo recording later: no `base44.app` URL in the phone status bar, no cartoon or family media. Keep 16:9 (1252x720) so the frame does not shift. |
 | 5 | Scene 5, crowd of phones | canvas in `scripts/scenes/scene5.ts` | Optional: a short dark video loop of a real hall from above with phones lighting up (no identifiable faces), to sit behind the canvas. |
 | 6 | Scene 6, the winner on stage (DONE: `grandma-winning.webp`; spare `celebrant-stage.webp`) | `src/components/art/KidOnStage.astro` | Photo of the fictional winner (סבתא רחל) with mic and crown. |
-| 7 | Social share image | `og:image` in `src/layouts/Base.astro` (done: `public/brand/og-image.png`, regenerate with `node tools/og/render.cjs`) | 1200x630 OG image: logo + headline on the Purple Night stage. |
-| 8 | Favicon | `src/layouts/Base.astro` (done: `public/brand/og-image.png`, regenerate with `node tools/og/render.cjs`) | Square icon: the red buzzer alone, 512x512 PNG + SVG. |
+| 7 | Social share image | `og:image` in `src/layouts/Base.astro` (done: `public/brand/og-image-v2.png`, regenerate with `node tools/og/render.cjs`) | 1200x630 OG image: logo + headline on the Purple Night stage. |
+| 8 | Favicon | `src/layouts/Base.astro` (done: `public/brand/og-image-v2.png`, regenerate with `node tools/og/render.cjs`) | Square icon: the red buzzer alone, 512x512 PNG + SVG. |
 | 9 | Optional 3D buzzer | `src/components/Buzzer.astro` | The spec allows a Three.js buzzer if under ~250 KB. Current SVG buzzer keeps the page fast; a pre-rendered short video/WebP sequence of the buzzer press could be a lighter "3D" upgrade. |
 
 ## Photo slots

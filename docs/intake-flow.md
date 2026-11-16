@@ -121,6 +121,13 @@ Completion rate (start to order), time from start to "המשך" on screen 3, med
 
 Run it: `npm run dev`, then open `/start`. A shared preview: `npm run build && netlify deploy --dir dist` gives a draft URL.
 
+## 10b. Copy principles for the stories screen (from the research)
+
+- **Say what to do and how much effort it takes** in the first line ("כמו שמספרים לחבר, בכמה משפטים"). The docx and Mobbin both tie tone and effort to the first screens.
+- **Say what is optional, once, in plain words**: skipping is fine, and adding your own questions is allowed (Baymard: mark optional fields, do not leave it unclear).
+- **Explain why we ask, but out of the way.** Growth.Design warns that asking creates an expectation, so the promise has to be true and specific: every answer becomes a question, nothing is invented. The explanation sits behind a short "למה שואלים?" link (the docx suggests this link for parents) instead of a permanent paragraph, so the screen shows only the essentials (NN/g progressive disclosure).
+- **Prefer the benefit over the rule.** The old line ("אם לא כתבתם, לא נשאל על זה") read like a policy. The new one says the questions come from their own words.
+
 ## 11. Open questions
 
 **For Ilan**

@@ -90,7 +90,10 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     <section class="in-step" data-step="3" aria-labelledby="h3" hidden>
       <h2 class="display h-card" id="h3" tabindex="-1" data-t="storiesTitle"></h2>
       <p class="lead" data-t="storiesLead"></p>
-      <p class="in-help">{c.stories.help}</p>
+      <details class="in-why">
+        <summary>{c.stories.helpTitle}</summary>
+        <p class="in-help">{c.stories.help}</p>
+      </details>
       <div class="in-prompts" data-prompts></div>
 
       <div class="in-own-wrap">
@@ -986,6 +989,20 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-own-list small {
     display: block;
     color: var(--text-muted);
+  }
+  .in-why summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--game-yellow);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+  .in-why .in-help {
+    padding: 4px 0 8px;
   }
   .in-own-open {
     justify-self: start;

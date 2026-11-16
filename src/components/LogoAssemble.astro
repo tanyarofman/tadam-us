@@ -1,16 +1,14 @@
 ---
 /**
  * The logo, sliced into pieces with clip-path so it can "assemble" in the preloader:
- * the buzzer + rays band, 5 letter columns (ט ד א ם !), and the swoosh band.
+ * the top band, 5 letter columns (ט ד א ם !), and the swoosh band.
  * All pieces are the same cached PNG, so once assembled it is pixel-identical to the logo.
- * An SVG buzzer sits exactly over the PNG buzzer for the "loading / press" moment.
  */
-import Buzzer from "./Buzzer.astro";
 
-const SRC = "/brand/tadam-logo-v2.webp";
+const SRC = "/brand/tadam-logo-v3.webp";
 // Bands (percent of image height)
-const TOP = 42;
-const BOTTOM = 80;
+const TOP = 29;
+const BOTTOM = 75;
 // Letter columns from the right (RTL order: ט, ד, א, ם, !), as [left%, right%]
 const cols: [number, number][] = [
   [77, 100],
@@ -26,13 +24,13 @@ const { class: cls = "" } = Astro.props;
 ---
 
 <div class:list={["logo-assemble", cls]} role="img" aria-label="טדאם!" data-logo>
-  <img class="logo-full" src={SRC} alt="" width="736" height="407" decoding="async" />
+  <img class="logo-full" src={SRC} alt="" width="736" height="332" decoding="async" />
   <img
     class="logo-piece piece-top"
     src={SRC}
     alt=""
     width="736"
-    height="407"
+    height="332"
     fetchpriority="high"
     decoding="async"
     style={`clip-path: inset(0% 0% ${100 - TOP}% 0%)`}
@@ -45,7 +43,7 @@ const { class: cls = "" } = Astro.props;
         src={SRC}
         alt=""
         width="736"
-        height="407"
+        height="332"
         decoding="async"
         style={`clip-path: inset(${TOP}% ${100 - r}% ${100 - BOTTOM}% ${l}%)`}
       />
@@ -56,21 +54,17 @@ const { class: cls = "" } = Astro.props;
     src={SRC}
     alt=""
     width="736"
-    height="407"
+    height="332"
     decoding="async"
     style={`clip-path: inset(${BOTTOM}% 0% 0% 0%)`}
   />
-  <!-- invisible landing spot for the loading-screen buzzer -->
-  <div class="logo-buzzer" aria-hidden="true">
-    <Buzzer id="hero-buzzer" rays />
-  </div>
 </div>
 
 <style>
   .logo-assemble {
     position: relative;
     width: 100%;
-    aspect-ratio: 736 / 407;
+    aspect-ratio: 736 / 332;
   }
   .logo-full {
     position: absolute;
@@ -97,14 +91,6 @@ const { class: cls = "" } = Astro.props;
     height: 100%;
     user-select: none;
     -webkit-user-drag: none;
-  }
-  .logo-buzzer {
-    position: absolute;
-    left: 32.6%;
-    top: 19.2%;
-    width: 34.8%;
-    pointer-events: none;
-    opacity: 0;
   }
   /* Before JS runs the assembled logo is shown; JS hides pieces and plays the intro. */
   :global(html.js .intro-pending) .logo-piece {

@@ -1,17 +1,14 @@
 ---
 /**
- * Loading screen: the buzzer alone, centered, blinking while the site loads.
- * Then it gets pressed, the stage opens, and it flies into its place on the logo (see scripts/hero.ts).
+ * Loading screen: the name "טדאם" alone, centered, pulsing while the site loads.
+ * Then it fades out and the logo assembles in the hero (see scripts/hero.ts).
  * Hidden without JS. Decorative only; it never blocks keyboard or screen-reader users for long.
  */
-import Buzzer from "./Buzzer.astro";
 ---
 
 <div class="preloader" data-preloader aria-hidden="true">
   <div class="pre-bg"></div>
-  <div class="pre-buzzer" data-pre-buzzer>
-    <Buzzer id="pre-buzzer" rays />
-  </div>
+  <div class="pre-name" data-pre-name>טדאם</div>
 </div>
 
 <style>
@@ -31,10 +28,14 @@ import Buzzer from "./Buzzer.astro";
     inset: 0;
     background: var(--stage-bg);
   }
-  .pre-buzzer {
+  .pre-name {
     position: relative;
-    width: min(240px, 50vw);
+    font-family: var(--font-display, inherit);
+    font-weight: 900;
+    font-size: clamp(56px, 16vw, 120px);
+    line-height: 1;
+    color: #fff;
     cursor: pointer;
-    will-change: transform;
+    will-change: transform, opacity;
   }
 </style>

@@ -44,7 +44,7 @@ FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 ## Page structure
 
 ```
-Scene 0  Hero + preloader     src/components/scenes/Scene0Hero.astro      scripts/hero.ts
+Scene 0  Hero + preloader (name)    src/components/scenes/Scene0Hero.astro      scripts/hero.ts
 Scene 1  The event (hall)     Scene1Event.astro                           scripts/scenes/scene1.ts
 Scene 2  Memories (bubbles)   Scene2Insight.astro                         scripts/scenes/scene2.ts
 Scene 3  WOW #1: buzzer+demo  Scene3Reveal.astro                          scripts/scenes/scene3.ts

@@ -7,8 +7,8 @@ Screenshots: `docs/onboarding-flow/*.webp` (about 330 KB in total). The private 
 ## 0. TL;DR
 
 1. The wizard itself is **short and clear** (4 steps, autosave, resumes where you left). It is not the headache.
-2. The headache is **what the parent is never told**: step 1 is a blank box, "המשך" silently starts an AI generation (about 4 minutes), the real "create" button leads to an email + payment popup, and then the game arrives **by email "within a few hours"** after a manual review by the team. None of this is on the landing page.
-3. **Payment is not real today.** The payment popup ("צעד אחרון ודי", ₪250) has no card form and no payment provider in the code, and the site's own terms say: "בשלב הנוכחי מסך התשלום הוא הדמיה ואינו מחייב אמצעי תשלום". So the 250 ILS is not collected anywhere in the app yet.
+2. (Re-checked on 2026-11-16 against the live app and `main`: the wizard, checkout and terms code on tadam.base44.app is unchanged since the audit, only the game screen bundle was redeployed.) The headache is **what the parent is never told**: step 1 is a blank box, "המשך" silently starts an AI generation (about 4 minutes), the real "create" button leads to an email + payment popup, and then the game arrives **by email "within a few hours"** after a manual review by the team. None of this is on the landing page.
+3. **Payment is not real today, and the price in the app is out of date.** The payment popup ("צעד אחרון ודי") has no card form and no payment provider in the code, and the site's own terms say: "בשלב הנוכחי מסך התשלום הוא הדמיה ואינו מחייב אמצעי תשלום". Also, the popup still has **₪250 / ₪50 hard-coded**, while Tanya's current decision (in `src/config/pricing.ts` on `main`) is **750 for the game and 50 for every extra** (edit, contributor link, personal host; 5 ready hosts included). Ilan's app must be changed to match. The numbers 250 and 50 in older sections below describe what the app shows today, not what we will charge.
 4. **Missing entirely**: a contributor link for friends and kids, a parent approval step separate from the editor, a keepsake after the event, deletion, add-ons (personal host, contributor link), a host preview.
 5. A real "after create" screen exists in code (progress, "ready", email with the private link, "copy private link"), but I could not see it live (see section 5).
 
@@ -112,18 +112,18 @@ flowchart TD
   P --> Q["Event day ✅<br/>/host on the big screen, QR, /play on phones"]
   Q --> R["After the event ❌<br/>keepsake: results, podium, photo of the screen, link to replay"]
   R --> S["Deletion ❌<br/>on request, auto after N days"]
-  R --> T["Edit, 50 ILS ✅ (price in code,<br/>charge is a simulation 🟡)"]
+  R --> T["Extras, 50 ILS each 🟡 (edit exists,<br/>contributor link and personal host ❌,<br/>charge is a simulation)"]
 ```
 
-### Where the 250 ILS happens
+### Where the payment happens
 
-In the app it **does not happen**. The checkout popup (email, then "צעד אחרון ודי", "התשלום עבור המשחק הוא חד פעמי וכולל את כל מה שאתם צריכים", price ₪250 for a new game, ₪50 when the game was already published, button "המשיכו לתשלום") calls a backend `checkout` action directly. The client code has no card fields, no redirect and no payment provider. The terms confirm "מסך התשלום הוא הדמיה". What the server does with `checkout` I could not see; the draft state then becomes "awaiting review". I did not click it.
+In the app it **does not happen** (price decision: 750 base, 50 per extra, see section 0). The checkout popup (email, then "צעד אחרון ודי", "התשלום עבור המשחק הוא חד פעמי וכולל את כל מה שאתם צריכים", price hard-coded in the client as ₪250 for a new game and ₪50 when the game was already published (so it does not match the 750 decision), button "המשיכו לתשלום") calls a backend `checkout` action directly. The client code has no card fields, no redirect and no payment provider. The terms confirm "מסך התשלום הוא הדמיה". What the server does with `checkout` I could not see; the draft state then becomes "awaiting review". I did not click it.
 
 Recommendation: collect payment **after the parent approves the script and before production** (that is where the real cost starts: voice and video). Show the price from the landing page on, and do not ask for payment in step 1 (too early, the parent has not seen any value).
 
 ### Proposed flow in words (what the parent sees)
 
-1. **Landing.** Sees what it is, a demo, the price (250 ILS), and how long it takes.
+1. **Landing.** Sees what it is, a demo, the price (from `pricing.ts`: 750), the included 5 hosts, and how long it takes.
 2. **Create.** Step 1 with guided prompts, then host, voice, script review. Every step says "נשמר" and how to come back.
 3. **Optional add-on: contributor link.** A link to send to friends and kids to add stories and photos. They never see the answers.
 4. **Parent approval.** One read-only screen with the whole game, shareable to a second parent, with a short checklist.
@@ -131,7 +131,7 @@ Recommendation: collect payment **after the parent approves the script and befor
 6. **Payment.** Real payment (provider to be chosen by Tanya) after approval, then a confirmation email with an ETA.
 7. **We produce.** Status page, email when ready, deadline tied to the event date.
 8. **Event day.** Test screen the day before, then big screen, QR, phones.
-9. **After.** Keepsake page, deletion on request, edit for 50 ILS through the private link.
+9. **After.** Keepsake page, deletion on request, edit for 50 ILS (as decided) through the private link.
 
 ## 4. Landing page UX copy (Hebrew, plural, no em-dashes, event-neutral)
 
@@ -142,11 +142,11 @@ Recommendation: collect payment **after the parent approves the script and befor
 5. `אתם עוברים על כל שאלה לפני שהמשחק מופק. שום דבר לא עולה למסך בלי אישור שלכם.`
 6. `המשחק מגיע אליכם במייל, ומפעילים אותו מהמחשב. בלי אפליקציה ובלי הורדות.`
 7. `האורחים מצטרפים מהטלפון בסריקת קוד אחד.`
-8. `מחיר אחד ברור: 250 ₪ למשחק. עריכה אחרי הפקה: 50 ₪.`
+8. `מחיר אחד ברור: {base} למשחק, עם מנחה מבין {readyMadeHosts} המנחים המוכנים. כל תוספת או עריכה: {edit}.`
 9. `כדאי להתחיל כמה ימים לפני האירוע, כדי שיהיה זמן לבדוק את המסך והסאונד.`
 10. `מעלים רק תמונות שיש לכם רשות להשתמש בהן. אפשר לבקש מחיקה בכל שלב.`
 
-Note for B and E: line 8 uses the real numbers only. Line 9 depends on a promised production time that is not defined yet ("תוך שעות ספורות" is what the app says). Line 5 is true today only for the parent's own review; the team review comes after payment. Line 10 promises deletion on request; the terms say no automatic deletion, so keep "על פי בקשה" and align the terms.
+Note for B and E: line 8 uses the `{placeholders}` from `src/config/pricing.ts` (the page rule is that copy never contains a number), so it follows the 750 / 50 decision. Line 9 depends on a promised production time that is not defined yet ("תוך שעות ספורות" is what the app says). Line 5 is true today only for the parent's own review; the team review comes after payment. Line 10 promises deletion on request; the terms say no automatic deletion, so keep "על פי בקשה" and align the terms.
 
 ## 5. What I could not verify, and what I touched
 
@@ -162,6 +162,8 @@ Note for B and E: line 8 uses the real numbers only. Line 9 depends on a promise
 - **The draft now contains the text "בדיקה" and a placeholder script**, so Tanya may prefer "משחק חדש" for a clean start.
 
 ## 6. Suggested next steps (for Tanya's decision)
+
+0. Tell Ilan to align the checkout popup with `pricing.ts` (750, extras 50). `docs/PLAN.md` on `main` still says 250 / 50 are the real numbers; it is stale.
 
 1. Decide the real payment point and provider (a paid service, so not mine to choose) and whether the team review stays manual.
 2. Decide the delivery promise (hours or a fixed deadline) so the landing copy can state it.

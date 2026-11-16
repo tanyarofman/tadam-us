@@ -1,6 +1,6 @@
 # Cleans the logo cutout: removes the white fringe from background removal,
 # smooths the jagged edge and exports a 2x PNG + WebP.
-# usage: python tools/clean-logo.py assets-src/tadam-logo-original.png public/brand/tadam-logo-v2.png public/brand/tadam-logo-v2.webp  (needs pillow + numpy)
+# usage: python tools/clean-logo.py assets-src/tadam-logo-original.png public/brand/tadam-logo-v3.png public/brand/tadam-logo-v3.webp  (needs pillow + numpy)
 
 import sys
 from PIL import Image, ImageFilter

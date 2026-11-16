@@ -116,6 +116,7 @@ export function init({ reduced }: { reduced: boolean }) {
   const q = <T extends Element = HTMLElement>(sel: string) => s.querySelector<T>(sel)!;
   const split = q(".s5-split");
   const finger = q(".finger");
+  const tapRing = q(".tap-ring");
   const title = q(".s5-title");
   const count = q(".bs-count-n");
   const rings = [q(".bs-ring"), q(".phone-ring")];
@@ -144,6 +145,21 @@ export function init({ reduced }: { reduced: boolean }) {
   mm.add({ mobile: "(max-width: 767px)", desktop: "(min-width: 768px)" }, (ctx) => {
     const mobile = !!ctx.conditions?.mobile;
     const pickedPill = q(".phone .pill.is-picked");
+    // put the fingertip (≈ 37% across, 4% down the svg) right on the picked answer
+    const placeFinger = () => {
+      const pr = phone.getBoundingClientRect();
+      const r = pickedPill.getBoundingClientRect();
+      const fw = finger.getBoundingClientRect().width || 64;
+      const fh = fw * (104 / 80);
+      const x = r.left - pr.left + r.width * 0.4;
+      const y = r.top - pr.top + r.height * 0.55;
+      finger.style.left = `${x - fw * 0.375}px`;
+      finger.style.top = `${y - fh * 0.04}px`;
+      tapRing.style.left = `${x}px`;
+      tapRing.style.top = `${y}px`;
+    };
+    placeFinger();
+    window.addEventListener("resize", placeFinger);
 
     // mobile: the phone plays first; the big screen card is hidden until the reveal
     if (mobile) gsap.set(screen, { autoAlpha: 0, y: 24 });
@@ -168,6 +184,7 @@ export function init({ reduced }: { reduced: boolean }) {
       .to(finger, { scale: 0.85, duration: 0.1 })
       .to(pickedPill, { scale: 0.97, duration: 0.1 }, "<")
       .addLabel("tap")
+      .fromTo(tapRing, { opacity: 1, scale: 0.3 }, { opacity: 0, scale: 1.6, duration: 0.35, ease: "power2.out", immediateRender: false }, "tap")
       .to(finger, { scale: 1, duration: 0.1 })
       .to(pickedPill, { scale: 1, duration: 0.1 }, "<")
       .to(finger, { opacity: 0, y: 40, duration: 0.25 })
@@ -206,6 +223,7 @@ export function init({ reduced }: { reduced: boolean }) {
     });
 
     return () => {
+      window.removeEventListener("resize", placeFinger);
       setReveal(false);
       state.n = 0;
       state.t = SECONDS;

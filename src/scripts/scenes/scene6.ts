@@ -35,6 +35,9 @@ export function init({ reduced }: { reduced: boolean }) {
   const keepsake = q(".s6-keepsake");
   const canvas = q<HTMLCanvasElement>(".confetti");
 
+  // the living photo only animates while it is on screen
+  new IntersectionObserver(([e]) => kid.classList.toggle("is-offscreen", !e.isIntersecting)).observe(kid);
+
   if (reduced) {
     kid.classList.add("is-laughing");
     return;

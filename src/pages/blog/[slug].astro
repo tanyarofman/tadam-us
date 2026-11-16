@@ -44,13 +44,13 @@ const jsonLd = [
     dateModified: (d.updated ?? d.date).toISOString(),
     mainEntityOfPage: url,
     url,
-    image: new URL("/brand/og-image.png", Astro.site).href,
+    image: new URL("/brand/og-image-v2.png", Astro.site).href,
     keywords: d.targetKeyword,
     author: { "@type": "Organization", name: "טדאם!", url: new URL("/", Astro.site).href },
     publisher: {
       "@type": "Organization",
       name: "טדאם!",
-      logo: { "@type": "ImageObject", url: new URL("/brand/tadam-logo.png", Astro.site).href },
+      logo: { "@type": "ImageObject", url: new URL("/brand/tadam-logo-v2.png", Astro.site).href },
     },
   },
   {

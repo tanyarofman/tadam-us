@@ -40,7 +40,7 @@ const qr = Array.from({ length: N * N }, (_, i) => {
       <div class="phone" role="img" aria-label={c.phoneLabel}>
         <div class="phone-notch" aria-hidden="true"></div>
         <div class="phone-screen stage-bg" aria-hidden="true">
-          <img class="g-logo" src="/brand/tadam-logo.webp" alt="" width="1472" height="814" />
+          <img class="g-logo" src="/brand/tadam-logo-v2.webp" alt="" width="1472" height="814" />
           <p class="g-label">{c.questionLabel}</p>
           <div class="phone-qwrap">
             <p class="g-q phone-q q-ask">{c.question}</p>
@@ -69,13 +69,33 @@ const qr = Array.from({ length: N * N }, (_, i) => {
             <b class="ring-n">{c.ringSeconds}</b>
           </div>
         </div>
-        <svg class="finger" viewBox="0 0 60 80" aria-hidden="true">
-          <path
-            d="M22 6 Q30 0 34 8 L36 36 Q48 30 54 40 L54 60 Q52 76 36 78 L24 78 Q12 76 8 62 L6 46 Q4 38 12 40 L18 48 L18 12 Q18 8 22 6 Z"
-            fill="#f2c6a0"
-            stroke="var(--purple-ink)"
-            stroke-width="4"
-            stroke-linejoin="round"></path>
+        <span class="tap-ring" aria-hidden="true"></span>
+        <svg class="finger" viewBox="0 0 80 104" aria-hidden="true">
+          <defs>
+            <linearGradient id="fg-skin" x1="0" y1="0" x2="1" y2="0.3">
+              <stop offset="0" stop-color="#ffe0c2"></stop>
+              <stop offset="1" stop-color="#f3b488"></stop>
+            </linearGradient>
+            <linearGradient id="fg-cuff" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffe600"></stop>
+              <stop offset="1" stop-color="#ffc400"></stop>
+            </linearGradient>
+          </defs>
+          <g transform="rotate(-8 40 90)">
+            <rect x="40" y="44" width="15" height="26" rx="7.5" fill="#eaa77a"></rect>
+            <rect x="54" y="53" width="14" height="22" rx="7" fill="#eaa77a"></rect>
+            <path d="M22 50 Q22 44 30 44 L56 50 Q66 52 66 62 L66 74 Q66 88 52 90 L36 90 Q22 89 20 76 Z" fill="url(#fg-skin)"></path>
+            <rect x="36" y="46" width="14" height="24" rx="7" fill="url(#fg-skin)"></rect>
+            <rect x="47" y="50" width="13" height="22" rx="6.5" fill="url(#fg-skin)"></rect>
+            <rect x="56" y="55" width="11" height="19" rx="5.5" fill="url(#fg-skin)"></rect>
+            <path d="M38.5 50 v16 M49 53 v15 M58 58 v12" stroke="#e39c6e" stroke-width="2" stroke-linecap="round" opacity=".8"></path>
+            <rect x="22" y="4" width="17" height="60" rx="8.5" fill="url(#fg-skin)"></rect>
+            <path d="M26 30 h9" stroke="#d98f62" stroke-width="2" stroke-linecap="round"></path>
+            <rect x="25.5" y="7" width="10" height="9" rx="4.5" fill="#fff" opacity=".55"></rect>
+            <path d="M24 60 Q14 56 10 63 Q8 69 16 73 L30 80 Q38 82 38 74 Q38 68 32 64 Z" fill="#f7c29b"></path>
+            <rect x="18" y="86" width="52" height="16" rx="6" fill="url(#fg-cuff)"></rect>
+            <rect x="18" y="86" width="52" height="4" rx="2" fill="#fff" opacity=".45"></rect>
+          </g>
         </svg>
       </div>
 
@@ -83,7 +103,7 @@ const qr = Array.from({ length: N * N }, (_, i) => {
       <figure class="bigscreen" role="img" aria-label={c.bigScreenLabel}>
         <div class="bs-stage stage-bg" aria-hidden="true">
           <div class="bs-floor"></div>
-          <img class="g-logo bs-logo" src="/brand/tadam-logo.webp" alt="" width="1472" height="814" />
+          <img class="g-logo bs-logo" src="/brand/tadam-logo-v2.webp" alt="" width="1472" height="814" />
           <img class="bs-host" src="/scene5/host.webp" alt="" width="360" height="710" loading="lazy" decoding="async" />
 
           <div class="bs-main">
@@ -586,12 +606,29 @@ const qr = Array.from({ length: N * N }, (_, i) => {
   .finger {
     position: absolute;
     z-index: 4;
-    width: 50px;
+    width: 64px;
     top: 50%;
     left: 34%;
     opacity: 0;
+    overflow: visible;
     pointer-events: none;
-    filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.4));
+    transform-origin: 38% 10%;
+    filter: drop-shadow(0 8px 10px rgba(0, 10, 60, 0.45));
+  }
+  /* white ring that pops where the fingertip lands */
+  .tap-ring {
+    position: absolute;
+    z-index: 3;
+    width: 46px;
+    height: 46px;
+    margin: -23px 0 0 -23px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow:
+      0 0 14px rgba(255, 255, 255, 0.8),
+      inset 0 0 10px rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* ---------- mobile: phone first and large, the big screen is a compact card ---------- */

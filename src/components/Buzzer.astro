@@ -51,11 +51,6 @@ const { id, class: cls = "", rays = false, label } = Astro.props;
   {
     rays && (
       <g class="buzzer-rays" stroke="#330768" stroke-width="6" stroke-linejoin="round">
-        <g class="ray-set ray-top" fill="#F7D94A">
-          <path d="M108 -52 L132 -52 L127 14 L113 14 Z" />
-          <path d="M48 -26 L68 -38 L92 18 L80 26 Z" transform="rotate(-6 70 0)" />
-          <path d="M172 -38 L192 -26 L160 26 L148 18 Z" transform="rotate(6 170 0)" />
-        </g>
         <g class="ray-set ray-side" fill="#64D8F7">
           <path d="M-16 64 L-12 46 L34 70 L30 82 Z" />
           <path d="M256 46 L260 64 L210 82 L206 70 Z" />

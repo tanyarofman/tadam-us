@@ -23,6 +23,22 @@ const group = [...c.items, ...c.items];
   </div>
 </section>
 
+<script>
+  // Hold the loop at its first item until the strip scrolls into view, so every visitor
+  // sees the list from the start. Without JS the strip just runs as before.
+  const strip = document.querySelector<HTMLElement>(".events-strip");
+  if (strip && "IntersectionObserver" in window) {
+    strip.classList.add("is-waiting");
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        strip.classList.remove("is-waiting");
+        io.disconnect();
+      }
+    }, { threshold: 0.6 });
+    io.observe(strip);
+  }
+</script>
+
 <style>
   .events-strip {
     position: relative;
@@ -40,8 +56,9 @@ const group = [...c.items, ...c.items];
   .events-strip__track {
     display: flex;
     width: max-content;
-    animation: events-marquee 38s linear infinite;
+    animation: events-marquee 64s linear infinite;
   }
+  .events-strip.is-waiting .events-strip__track,
   .events-strip:hover .events-strip__track,
   .events-strip:focus-within .events-strip__track {
     animation-play-state: paused;
@@ -56,8 +73,10 @@ const group = [...c.items, ...c.items];
   .events-strip__item {
     display: inline-flex;
     align-items: center;
-    gap: clamp(10px, 1.6vw, 16px);
-    padding-inline: clamp(24px, 4.5vw, 64px);
+    /* Spacing in em so it scales with the text. Space between items (1.6em) is about
+       four times the dot-to-text gap (0.4em), so each dot clearly belongs to its own word. */
+    gap: 0.4em;
+    padding-inline: 0.8em;
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(1.5rem, 3.4vw, 2.1rem);

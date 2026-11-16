@@ -13,6 +13,12 @@
 export const CREATE_URL = "https://tadam.base44.app/create";
 
 export const PRICING = {
+  /**
+   * Prices are hidden on the page for now (Tanya, 2026-11-16): the section shows "what's included"
+   * without numbers, and the price FAQ is skipped. Flip to true to bring every price back.
+   */
+  showPrices: false,
+
   currency: "₪",
 
   /** Personal game for an event. (Ilan's page shows 250.) */

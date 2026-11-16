@@ -423,12 +423,12 @@ function init(root: HTMLElement, data: Data) {
           </div>
           ${
             choice
-              ? [0, 1, 2, 3]
+              ? `<div class="in-own-answers">` + [0, 1, 2, 3]
                   .map(
                     (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(p.answers[k] || "")}" data-pans="${i}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
-                      <label class="in-own-correct"><input type="radio" name="pc-${i}" value="${k}" data-pcorrect="${i}" ${p.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrect}</span></label></div>`,
+                      <label class="in-own-correct"><input type="radio" name="pc-${i}" value="${k}" data-pcorrect="${i}" ${p.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrectShort}</span></label></div>`,
                   )
-                  .join("")
+                  .join("") + `</div>`
               : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
                  <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" data-pfree="${i}" />`
           }

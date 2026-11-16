@@ -262,6 +262,7 @@ export const INTAKE = {
     ownQuestion: "השאלה",
     ownAnswer: "תשובה",
     ownCorrect: "זו התשובה הנכונה",
+    ownCorrectShort: "נכונה",
     ownSave: "הוספה לרשימה",
     ownCancel: "ביטול",
     ownNeed: "כתבו את השאלה והתשובה הנכונה",

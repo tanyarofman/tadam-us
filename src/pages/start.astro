@@ -123,7 +123,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
               [0, 1, 2, 3].map((i) => (
                 <div class="in-own-row">
                   <input class="in-input" type="text" maxlength="60" data-own-a={i} aria-label={`${c.stage5.ownAnswer} ${i + 1}`} placeholder={`${c.stage5.ownAnswer} ${i + 1}`} />
-                  <label class="in-own-correct"><input type="radio" name="own-correct" value={i} /><span>{c.stage5.ownCorrect}</span></label>
+                  <label class="in-own-correct"><input type="radio" name="own-correct" value={i} /><span>{c.stage5.ownCorrectShort}</span></label>
                 </div>
               ))
             }
@@ -941,24 +941,53 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
+  .in-own-answers > legend {
+    grid-column: 1 / -1;
+    padding: 0 0 4px;
+  }
+  /* One answer = one box: the field on top, its "correct" mark attached underneath. */
   .in-own-row {
     display: grid;
-    gap: 6px;
+    gap: 0;
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-s);
+    overflow: hidden;
+  }
+  .in-own-row .in-input {
+    border: 0;
+    border-radius: 0;
+    min-height: 52px;
+    padding-inline: 12px;
   }
   .in-own-correct {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 8px;
     min-height: 44px;
+    padding: 0 10px;
     cursor: pointer;
     font-size: var(--fs-small);
+    font-weight: 700;
+    border-top: 1px solid var(--in-line);
   }
   .in-own-correct input {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     accent-color: var(--answer-correct);
+    flex: none;
+  }
+  .in-own-row:has(input[type="radio"]:checked) {
+    border-color: var(--answer-correct);
+  }
+  .in-own-row:has(input[type="radio"]:checked) .in-own-correct {
+    background: var(--answer-correct);
+    color: #fff;
+    border-top-color: var(--answer-correct);
   }
   .in-own-wrap {
     display: grid;

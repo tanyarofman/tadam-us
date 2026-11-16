@@ -36,7 +36,8 @@ driven by CSS variables in `src/styles/tokens.css`.
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` (also `public/robots.txt`) |
 | Blog articles (one Markdown file each) | `src/content/blog/*.md`, schema in `src/content.config.ts` |
-| Blog keyword research + article plan | `docs/seo/keyword-research-2026-11.md`, `docs/seo/keywords-il.csv` |
+| Blog status, plan, playbook, sources | `docs/seo/` (start with `status.md`) |
+| Keyword research script (DataForSEO) | `tools/seo/research.py` |
 
 FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 

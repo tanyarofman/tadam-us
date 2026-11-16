@@ -1,0 +1,793 @@
+---
+/**
+ * Intake prototype: how a creator asks for a game. Not linked from the site (noindex).
+ * Frontend only: nothing is sent anywhere. Answers stay in this browser (localStorage).
+ * Spec: docs/intake-flow.md. Copy and event config: src/content/intake.he.ts.
+ */
+import Base from "../layouts/Base.astro";
+import { EVENTS, SHAPES, HOSTS, MATERIAL, INTAKE as c } from "../content/intake.he";
+
+const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL, copy: c };
+---
+
+<Base title={c.meta.title} description={c.meta.description} noindex>
+  <a class="skip-link" href="#in-main">דלגו לתוכן</a>
+  <div class="intake" id="in-main" data-intake>
+    <header class="in-top">
+      <a href="/" class="in-logo" aria-label="טדאם!, לדף הבית">
+        <img src="/brand/tadam-logo-v2.webp" alt="טדאם!" width="736" height="407" />
+      </a>
+      <span class="in-badge">{c.prototypeBadge}</span>
+      <span class="in-save" data-save role="status" aria-live="polite"></span>
+    </header>
+
+    <nav class="in-progress" data-progress aria-label="התקדמות" hidden>
+      <p class="in-progress__text" data-progress-text></p>
+      <div class="in-progress__bar" aria-hidden="true"><i data-progress-bar></i></div>
+      <ol class="in-progress__stages">
+        {c.stages.map((s, i) => <li data-stage={i + 1}>{s}</li>)}
+      </ol>
+    </nav>
+
+    <!-- 0: start -->
+    <section class="in-step" data-step="0" aria-labelledby="h0">
+      <span class="eyebrow">{c.start.eyebrow}</span>
+      <h1 class="display h-scene" id="h0" tabindex="-1">{c.start.title}</h1>
+      <p class="lead">{c.start.lead}</p>
+      <ul class="in-bullets">
+        {c.start.bullets.map((b) => <li>{b}</li>)}
+      </ul>
+      <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
+    </section>
+
+    <!-- 1: event -->
+    <section class="in-step" data-step="1" aria-labelledby="h1" hidden>
+      <h2 class="display h-card" id="h1" tabindex="-1">{c.event.title}</h2>
+      <p class="lead">{c.event.lead}</p>
+      <div class="in-tiles" role="radiogroup" aria-labelledby="h1">
+        {
+          EVENTS.map((e) => (
+            <button class="in-tile" type="button" role="radio" aria-checked="false" data-event={e.id}>
+              <span class="in-tile__icon" aria-hidden="true">{e.icon}</span>
+              <span class="in-tile__label">{e.label}</span>
+            </button>
+          ))
+        }
+      </div>
+      <div class="in-nav"><button class="btn btn-ghost" type="button" data-go="0">{c.back}</button></div>
+    </section>
+
+    <!-- 2: who -->
+    <section class="in-step" data-step="2" aria-labelledby="h2" hidden>
+      <h2 class="display h-card" id="h2" tabindex="-1">{c.who.title}</h2>
+      <div class="in-field">
+        <label for="f-name" data-t="nameLabel"></label>
+        <input id="f-name" class="in-input" type="text" autocomplete="off" maxlength="48" aria-describedby="f-name-help f-name-err" />
+        <p class="in-help" id="f-name-help" data-t="nameHelp"></p>
+        <p class="in-err" id="f-name-err" role="alert" hidden>{c.who.required}</p>
+      </div>
+      <div class="in-field">
+        <label for="f-extra" data-t="extraLabel"></label>
+        <input id="f-extra" class="in-input" type="text" autocomplete="off" maxlength="48" />
+      </div>
+      <div class="in-field">
+        <label for="f-title">{c.who.titleLabel}</label>
+        <input id="f-title" class="in-input" type="text" autocomplete="off" maxlength="80" aria-describedby="f-title-help" />
+        <p class="in-help" id="f-title-help">{c.who.titleHelp}</p>
+      </div>
+      <figure class="in-sample" aria-live="polite">
+        <figcaption><span class="in-sample__badge">{c.who.sampleBadge}</span> {c.who.sampleNote}</figcaption>
+        <p class="in-sample__q" data-sample-q></p>
+        <ul class="in-sample__a" data-sample-a></ul>
+      </figure>
+      <div class="in-nav">
+        <button class="btn btn-ghost" type="button" data-go="1">{c.back}</button>
+        <button class="btn btn-buzzer" type="button" data-next="2">{c.next}</button>
+      </div>
+    </section>
+
+    <!-- 3: stories -->
+    <section class="in-step" data-step="3" aria-labelledby="h3" hidden>
+      <h2 class="display h-card" id="h3" tabindex="-1" data-t="storiesTitle"></h2>
+      <p class="lead" data-t="storiesLead"></p>
+      <p class="in-help">{c.stories.help}</p>
+      <div class="in-prompts" data-prompts></div>
+
+      <div class="in-photos">
+        <h3 class="in-sub">{c.stories.photosTitle}</h3>
+        <p class="in-help">{c.stories.photosHelp}</p>
+        <ul class="in-photo-list" data-photos></ul>
+        <label class="btn btn-white in-photo-add" data-photo-add>
+          {c.stories.photosAdd}
+          <input type="file" accept="image/*" data-photo-input class="sr-only" />
+        </label>
+        <p class="in-help">{c.stories.photosConsent}</p>
+      </div>
+
+      <div class="in-share">
+        <h3 class="in-sub">{c.stories.share}</h3>
+        <p class="in-help">{c.stories.shareHelp}</p>
+        <a class="btn btn-white" data-share target="_blank" rel="noopener">{c.stories.shareBtn}</a>
+      </div>
+
+      <div class="in-dock">
+        <div class="in-meter" role="status" aria-live="polite">
+          <p class="in-meter__text"><span>{c.stories.meterLabel}</span> <strong data-meter-text></strong></p>
+          <div class="in-meter__bar" aria-hidden="true"><i data-meter-bar></i></div>
+          <p class="in-help" data-meter-help>{c.stories.meterHelp}</p>
+        </div>
+        <div class="in-nav">
+          <button class="btn btn-ghost" type="button" data-go="2">{c.back}</button>
+          <button class="btn btn-buzzer" type="button" data-next="3" aria-disabled="true">{c.next}</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4: details -->
+    <section class="in-step" data-step="4" aria-labelledby="h4" hidden>
+      <h2 class="display h-card" id="h4" tabindex="-1">{c.details.title}</h2>
+      <p class="lead">{c.details.lead}</p>
+      <div class="in-field">
+        <label for="d-date">{c.details.date}</label>
+        <input id="d-date" class="in-input" type="date" data-detail="date" aria-describedby="d-date-help" />
+        <p class="in-help" id="d-date-help">{c.details.dateHelp}</p>
+      </div>
+      <div class="in-field">
+        <label for="d-guests">{c.details.guests}</label>
+        <input id="d-guests" class="in-input" type="number" inputmode="numeric" min="1" max="2000" data-detail="guests" />
+      </div>
+      <fieldset class="in-field in-chips">
+        <legend>{c.details.screen}</legend>
+        {
+          c.details.screens.map((s) => (
+            <label class="in-chip"><input type="radio" name="screen" value={s} data-detail="screen" /><span>{s}</span></label>
+          ))
+        }
+      </fieldset>
+      <div class="in-field">
+        <label for="d-contact">{c.details.contact}</label>
+        <input id="d-contact" class="in-input" type="text" inputmode="email" autocomplete="email" placeholder={c.details.contactPlaceholder} data-detail="contact" aria-describedby="d-contact-help" />
+        <p class="in-help" id="d-contact-help">{c.details.contactHelp}</p>
+      </div>
+      <div class="in-nav">
+        <button class="btn btn-ghost" type="button" data-go="3">{c.back}</button>
+        <button class="btn btn-ghost" type="button" data-next="4">{c.details.skip}</button>
+        <button class="btn btn-buzzer" type="button" data-next="4">{c.details.cta}</button>
+      </div>
+    </section>
+
+    <!-- 5: generating + host -->
+    <section class="in-step" data-step="5" aria-labelledby="h5" hidden>
+      <p class="in-proto-note">{c.stage5.note}</p>
+      <h2 class="display h-card" id="h5" tabindex="-1" data-gen-title></h2>
+      <div class="in-meter">
+        <div class="in-meter__bar" aria-hidden="true"><i data-gen-bar></i></div>
+        <p class="in-help" role="status" aria-live="polite" data-gen-label></p>
+      </div>
+      <h3 class="in-sub">{c.stage5.hostTitle}</h3>
+      <p class="in-help">{c.stage5.hostHelp} {c.stage5.waitHint}</p>
+      <div class="in-hosts" role="radiogroup" aria-label={c.stage5.hostTitle} data-hosts></div>
+      <div class="in-nav">
+        <button class="btn btn-ghost" type="button" data-go="4">{c.back}</button>
+        <button class="btn btn-buzzer" type="button" data-next="5" aria-disabled="true" data-gen-next>{c.stage5.reviewTitle}</button>
+      </div>
+    </section>
+
+    <!-- 6: review -->
+    <section class="in-step" data-step="6" aria-labelledby="h6" hidden>
+      <p class="in-proto-note">{c.stage5.note}</p>
+      <h2 class="display h-card" id="h6" tabindex="-1">{c.stage5.reviewTitle}</h2>
+      <p class="lead">{c.stage5.reviewLead}</p>
+      <div class="in-review" data-review></div>
+      <fieldset class="in-checks">
+        {
+          c.stage5.checklist.map((t, i) => (
+            <label class="in-check"><input type="checkbox" data-check={i} /><span>{t}</span></label>
+          ))
+        }
+      </fieldset>
+      <a class="btn btn-white" data-share-review target="_blank" rel="noopener">{c.stage5.shareReview}</a>
+      <div class="in-nav">
+        <button class="btn btn-ghost" type="button" data-go="5">{c.back}</button>
+        <button class="btn btn-buzzer" type="button" data-next="6" aria-disabled="true">{c.stage5.toOrder}</button>
+      </div>
+    </section>
+
+    <!-- 7: order -->
+    <section class="in-step" data-step="7" aria-labelledby="h7" hidden>
+      <p class="in-proto-note">{c.stage5.note}</p>
+      <h2 class="display h-card" id="h7" tabindex="-1">{c.stage5.orderTitle}</h2>
+      <h3 class="in-sub">{c.stage5.orderSummary}</h3>
+      <dl class="in-summary" data-summary></dl>
+      <p class="in-help">{c.stage5.orderPrice}</p>
+      <p class="in-help">{c.stage5.orderEta}</p>
+      <p class="in-help" data-order-date hidden></p>
+      <div class="in-nav">
+        <button class="btn btn-ghost" type="button" data-go="6">{c.back}</button>
+        <button class="btn btn-buzzer" type="button" data-next="7">{c.stage5.orderCta}</button>
+      </div>
+    </section>
+
+    <!-- 8: launchpad -->
+    <section class="in-step" data-step="8" aria-labelledby="h8" hidden>
+      <p class="in-proto-note">{c.stage5.note}</p>
+      <h2 class="display h-scene" id="h8" tabindex="-1" data-launch-title></h2>
+      <p class="lead">{c.stage5.launchLead}</p>
+      <div class="in-launch">
+        <div class="in-qr" data-qr role="img" aria-label="קוד QR לדוגמה"></div>
+        <div>
+          <p class="in-help">{c.stage5.codeLabel}</p>
+          <p class="in-code display" data-code></p>
+          <button class="btn btn-white" type="button" data-copy-link>{c.stage5.copyLink}</button>
+        </div>
+      </div>
+      <h3 class="in-sub">{c.stage5.testTitle}</h3>
+      <fieldset class="in-checks">
+        {c.stage5.test.map((t) => <label class="in-check"><input type="checkbox" /><span>{t}</span></label>)}
+      </fieldset>
+      <p class="in-help">{c.stage5.editNote}</p>
+      <details class="in-dev">
+        <summary>{c.stage5.devTitle}</summary>
+        <h4>{c.stage5.devJson}</h4>
+        <pre data-dev-json dir="ltr"></pre>
+        <button class="btn btn-white" type="button" data-copy="json">{c.stage5.devCopy}</button>
+        <h4>{c.stage5.devText}</h4>
+        <pre data-dev-text></pre>
+        <button class="btn btn-white" type="button" data-copy="text">{c.stage5.devCopy}</button>
+      </details>
+      <div class="in-nav"><button class="btn btn-ghost" type="button" data-restart>{c.restart}</button></div>
+    </section>
+  </div>
+
+  <script id="intake-data" type="application/json" set:html={JSON.stringify(data)} />
+  <script>
+    import "../scripts/intake";
+  </script>
+</Base>
+
+<style is:global>
+  .intake {
+    --in-card: rgba(0, 22, 112, 0.72);
+    --in-line: rgba(255, 255, 255, 0.22);
+    max-width: 680px;
+    margin-inline: auto;
+    padding: 16px var(--gutter) 120px;
+    display: grid;
+    gap: 22px;
+  }
+  .in-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .in-logo img {
+    width: 84px;
+  }
+  .in-badge {
+    font-size: var(--fs-small);
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    padding: 2px 12px 4px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .in-save {
+    margin-inline-start: auto;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    min-height: 1.5em;
+  }
+  .in-progress__text {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .in-progress__bar,
+  .in-meter__bar {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+  }
+  .in-progress__bar i,
+  .in-meter__bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--game-yellow);
+    border-radius: 999px;
+    transition: width 0.4s var(--ease-out);
+  }
+  .in-progress__stages {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .in-progress__stages li[aria-current="step"] {
+    color: var(--game-yellow);
+    font-weight: 700;
+  }
+  .in-step {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+    scroll-margin-top: 12px;
+  }
+  .in-step[hidden],
+  .intake [hidden] {
+    display: none !important;
+  }
+  .in-step h1:focus,
+  .in-step h2:focus {
+    outline: none;
+  }
+  .in-bullets {
+    margin: 0;
+    padding: 0 20px 0 0;
+    display: grid;
+    gap: 8px;
+  }
+  .in-proto-note {
+    font-size: var(--fs-small);
+    background: rgba(255, 230, 0, 0.14);
+    border: 1px dashed var(--game-yellow);
+    border-radius: var(--radius-s);
+    padding: 8px 12px;
+  }
+  .in-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .in-tile {
+    min-height: 88px;
+    display: grid;
+    gap: 4px;
+    justify-items: center;
+    align-content: center;
+    padding: 12px 8px;
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-m);
+    cursor: pointer;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.12s var(--ease-out), border-color 0.12s;
+  }
+  .in-tile:hover,
+  .in-tile[aria-checked="true"] {
+    border-color: var(--game-yellow);
+    transform: translateY(-2px);
+  }
+  .in-tile__icon {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .in-tile__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.15;
+  }
+  .in-field {
+    display: grid;
+    gap: 6px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .in-field label,
+  .in-field legend {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0;
+  }
+  .in-input,
+  .in-textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 10px 16px;
+    border-radius: var(--radius-s);
+    border: 2px solid var(--in-line);
+    background: var(--pill-white);
+    color: var(--pill-ink);
+    font: inherit;
+    font-size: 1.2rem;
+  }
+  .in-textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.4;
+  }
+  .in-input[aria-invalid="true"] {
+    border-color: var(--answer-wrong);
+  }
+  .in-help {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .in-err {
+    font-size: var(--fs-small);
+    color: #ffd1e6;
+    font-weight: 700;
+  }
+  .in-sub {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  .in-sample {
+    margin: 0;
+    padding: 16px;
+    background: var(--in-card);
+    border-radius: var(--radius-m);
+    border: 1px dashed var(--in-line);
+    display: grid;
+    gap: 10px;
+  }
+  .in-sample figcaption {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .in-sample__badge {
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    border-radius: 999px;
+    padding: 0 10px 2px;
+    font-weight: 700;
+  }
+  .in-sample__q {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--game-yellow);
+    line-height: 1.15;
+  }
+  .in-sample__a {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .in-sample__a li {
+    background: var(--pill-white);
+    color: var(--pill-ink);
+    border-radius: 999px;
+    padding: 6px 14px 8px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .in-prompts {
+    display: grid;
+    gap: 10px;
+  }
+  .in-prompt {
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+  }
+  .in-prompt[data-answered="true"] {
+    border-color: var(--answer-correct);
+  }
+  .in-prompt__head {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .in-prompt__mark {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--answer-correct);
+    white-space: nowrap;
+  }
+  .in-prompt__body {
+    padding: 0 16px 16px;
+    display: grid;
+    gap: 8px;
+  }
+  .in-prompt__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .in-mic {
+    min-height: 44px;
+    padding: 6px 16px 8px;
+    border-radius: 999px;
+    border: 2px solid var(--in-line);
+    background: transparent;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .in-mic[aria-pressed="true"] {
+    border-color: var(--buzzer-red);
+    background: rgba(231, 65, 56, 0.25);
+  }
+  .in-photo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .in-photo-list li {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    background: var(--in-card);
+    padding: 8px;
+    border-radius: var(--radius-s);
+  }
+  .in-photo-list img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .in-photo-add {
+    justify-self: start;
+    cursor: pointer;
+  }
+  .in-photo-add:focus-within {
+    outline: 3px solid var(--game-yellow);
+    outline-offset: 3px;
+  }
+  .in-photos,
+  .in-share {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+  }
+  .in-dock {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+    background: var(--stage-navy);
+    border-top: 1px solid var(--in-line);
+    display: grid;
+    gap: 10px;
+  }
+  .in-meter__text strong {
+    color: var(--game-yellow);
+  }
+  .in-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .in-nav .btn-buzzer {
+    margin-inline-start: auto;
+  }
+  .btn[aria-disabled="true"] {
+    opacity: 0.55;
+  }
+  .in-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .in-chips legend {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  .in-chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .in-chip span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 6px 18px 8px;
+    border-radius: 999px;
+    border: 2px solid var(--in-line);
+    background: var(--in-card);
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .in-chip input:checked + span {
+    background: var(--game-yellow);
+    color: var(--pill-ink);
+    border-color: var(--game-yellow);
+  }
+  .in-chip input:focus-visible + span {
+    outline: 3px solid var(--game-yellow);
+    outline-offset: 3px;
+  }
+  .in-hosts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .in-host {
+    min-height: 72px;
+    padding: 10px;
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-m);
+    cursor: pointer;
+    text-align: start;
+    display: grid;
+    gap: 2px;
+  }
+  .in-host strong {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+  .in-host span {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .in-host[aria-checked="true"] {
+    border-color: var(--game-yellow);
+    background: rgba(255, 230, 0, 0.14);
+  }
+  .in-review {
+    display: grid;
+    gap: 12px;
+  }
+  .in-qcard {
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: var(--radius-m);
+    padding: 16px;
+    display: grid;
+    gap: 10px;
+  }
+  .in-qcard[data-approved="true"] {
+    border-color: var(--answer-correct);
+  }
+  .in-qcard__source {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .in-qcard__ph {
+    border: 2px dashed var(--in-line);
+    border-radius: var(--radius-s);
+    padding: 12px;
+    color: var(--text-muted);
+  }
+  .in-qcard__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .in-qcard__actions .btn {
+    min-height: 48px;
+    font-size: 1.2rem;
+    padding-inline: 22px;
+  }
+  .in-checks {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .in-check {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    cursor: pointer;
+  }
+  .in-check input {
+    width: 26px;
+    height: 26px;
+    accent-color: var(--game-yellow);
+    flex: none;
+  }
+  .in-summary {
+    margin: 0;
+    display: grid;
+    gap: 6px;
+    background: var(--in-card);
+    border-radius: var(--radius-m);
+    padding: 14px 16px;
+  }
+  .in-summary div {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .in-summary dt {
+    color: var(--text-muted);
+  }
+  .in-summary dd {
+    margin: 0;
+    font-weight: 700;
+  }
+  .in-launch {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .in-qr {
+    width: 168px;
+    height: 168px;
+    padding: 10px;
+    background: #fff;
+    border-radius: var(--radius-s);
+  }
+  .in-qr svg {
+    width: 100%;
+    height: 100%;
+  }
+  .in-code {
+    font-size: 3rem;
+    color: var(--game-yellow);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .in-dev {
+    background: var(--in-card);
+    border-radius: var(--radius-s);
+    padding: 10px 14px;
+  }
+  .in-dev summary {
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+  }
+  .in-dev pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+    max-height: 260px;
+    overflow: auto;
+    text-align: start;
+  }
+  .in-dev h4 {
+    margin: 12px 0 6px;
+  }
+  @media (min-width: 720px) {
+    .in-tiles {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .in-hosts {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-progress__bar i,
+    .in-meter__bar i,
+    .in-tile {
+      transition: none;
+    }
+  }
+</style>

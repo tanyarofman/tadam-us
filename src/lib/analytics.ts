@@ -16,7 +16,11 @@ export type TrackEvent =
   | "cta_how_it_works_click"
   | "faq_open"
   | "blog_demo_click"
-  | "blog_whatsapp_click";
+  | "blog_whatsapp_click"
+  | "intake_start"
+  | "intake_step"
+  | "intake_prompt_answered"
+  | "intake_complete";
 
 declare global {
   interface Window {

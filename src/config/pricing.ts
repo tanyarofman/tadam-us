@@ -3,8 +3,7 @@
  * Markup and copy never contain a price: copy.he.ts uses {placeholders} (see `fillPrices`),
  * the Pricing component reads the numbers below. Changing a price is a one-line edit here.
  *
- * "real" = taken from Ilan's page (https://tadam.base44.app/, checked 2026-11-16).
- * "proposal" = Tanya's idea, not confirmed yet.
+ * Set by Tanya on 2026-11-16: base 750, every extra (edit, contributor link, personal host) 50.
  */
 
 /**
@@ -16,15 +15,15 @@ export const CREATE_URL = "https://tadam.base44.app/create";
 export const PRICING = {
   currency: "₪",
 
-  /** Personal game for an event. real */
-  base: 250,
-  /** Each extra edit of an already produced game. real */
+  /** Personal game for an event. (Ilan's page shows 250.) */
+  base: 750, // TODO confirm
+  /** Each extra edit of an already produced game. */
   edit: 50,
 
   /** Add-on: friends/kids also get a contributor link (parents still approve every item). */
-  contributorLink: 50, // TODO confirm (proposal)
+  contributorLink: 50, // TODO confirm
   /** Add-on: a personal custom host made for the event (one of the ready-made hosts is included). */
-  personalHost: { from: 100, to: 300 }, // TODO confirm (proposal, range)
+  personalHost: 50, // TODO confirm
   /** Ready-made hosts included in the base price. */
   readyMadeHosts: 5, // TODO confirm
 };
@@ -37,11 +36,10 @@ const tokens: Record<string, string> = {
   base: money(PRICING.base),
   edit: money(PRICING.edit),
   contributorLink: money(PRICING.contributorLink),
-  hostFrom: money(PRICING.personalHost.from),
-  hostTo: money(PRICING.personalHost.to),
+  personalHost: money(PRICING.personalHost),
   readyMadeHosts: String(PRICING.readyMadeHosts),
 };
 
-/** Replaces {base}, {edit}, {contributorLink}, {hostFrom}, {hostTo}, {readyMadeHosts} in copy. */
+/** Replaces {base}, {edit}, {contributorLink}, {personalHost}, {readyMadeHosts} in copy. */
 export const fillPrices = (text: string) =>
   text.replace(/\{(\w+)\}/g, (m, k: string) => tokens[k] ?? m);

@@ -1,139 +1,226 @@
 ---
+/**
+ * Scene 0: the hero (concept 4, chosen 2026-11-17).
+ * A top bar (logo, links, contact) + the headline on the right and a TV on the left playing a short muted loop
+ * of a real game. The preloader logo flies into the logo in the top bar (see scripts/hero.ts, [data-logo]).
+ */
 import { COPY } from "../../content/copy.he";
+import { whatsappLink } from "../../config/site";
 import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
 import StageBackdrop from "../StageBackdrop.astro";
-import Buzzer from "../Buzzer.astro";
 const c = COPY.hero;
+const wa = whatsappLink();
 ---
 
 <section class="scene hero intro-pending" id="top" data-scene="hero" aria-labelledby="hero-title">
   <StageBackdrop />
   <div class="hero-burst" aria-hidden="true"></div>
+  <div class="hero-loading sr-only" role="status" aria-live="polite">{c.loading}</div>
+
+  <header class="hero-bar container">
+    <a href="#top" class="hero-home" aria-label="טדאם!">
+      <LogoAssemble class="hero-logo" />
+    </a>
+    <nav class="hero-nav" aria-label={c.navLabel} data-hero-fade>
+      <ul role="list">
+        {c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="btn hero-bar-cta" href={wa} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="hero-nav" data-hero-fade>
+      {c.navCta}
+    </a>
+  </header>
 
   <div class="hero-inner container">
-    <div class="hero-loading" role="status" aria-live="polite">
-      <span class="sr-only">{c.loading}</span>
+    <div class="hero-copy">
+      <SplitHeading as="h1" id="hero-title" class="h-hero hero-title" text={c.headline} highlight="יזכרו" breakAfter={3} />
+      <p class="lead hero-sub" data-hero-fade>{c.sub}</p>
+      <div class="hero-ctas" data-hero-fade>
+        <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="hero">
+          <span class="btn-dot" aria-hidden="true"></span>
+          {c.ctaPrimary}
+        </a>
+        <a class="btn btn-ghost" href="#scene-3" data-scroll-to="#scene-3" data-scroll-offset="2.55" data-track="cta_how_it_works_click">
+          {c.ctaSecondary}
+        </a>
+      </div>
     </div>
 
-    <LogoAssemble class="hero-logo" />
-
-    <SplitHeading as="h1" id="hero-title" class="h-hero hero-title" text={c.headline} highlight="יזכרו" />
-
-    <p class="lead hero-sub">{c.sub}</p>
-
-    <div class="hero-ctas">
-      <button type="button" class="btn btn-buzzer" data-open-demo data-source="hero">
-        <span class="btn-dot" aria-hidden="true"></span>
-        {c.ctaPrimary}
-      </button>
-      <a class="btn btn-ghost" href="#scene-1" data-scroll-to="#scene-1" data-track="cta_how_it_works_click">
-        {c.ctaSecondary}
-      </a>
-    </div>
+    <figure class="hero-tv" data-hero-fade>
+      <div class="hero-tv-screen">
+        <video
+          class="hero-loop"
+          src="/demo/tadam-hero-loop.mp4"
+          poster="/demo/tadam-hero-loop-poster.webp"
+          width="960"
+          height="540"
+          muted
+          loop
+          playsinline
+          autoplay
+          preload="metadata"
+          aria-label={c.loopLabel}></video>
+      </div>
+      <figcaption>{c.loopCaption}</figcaption>
+    </figure>
   </div>
-
-  <a class="scroll-hint" href="#scene-1" data-scroll-to="#scene-1" data-hero-fade>
-    <span class="scroll-hint__buzzer"><Buzzer id="hint-buzzer" /></span>
-    <span class="scroll-hint__text">{c.scrollHint}</span>
-  </a>
 </section>
+
+<script>
+  // The loop is decoration: never with reduced motion, and only while the hero is on screen.
+  const v = document.querySelector<HTMLVideoElement>(".hero-loop");
+  if (v) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      v.removeAttribute("autoplay");
+      v.pause();
+    } else if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause())).observe(v);
+    }
+  }
+</script>
 
 <style>
   .hero {
     min-height: 100vh;
     min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding-block: clamp(40px, 7vh, 96px) clamp(110px, 17vh, 170px);
-    overflow: hidden;
-  }
-  .hero-inner {
     display: flex;
     flex-direction: column;
+    padding-bottom: clamp(70px, 12vh, 130px); /* clear the glowing floor strip */
+    overflow: hidden;
+  }
+
+  /* ---- top bar ---- */
+  .hero-bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
     align-items: center;
-    text-align: center;
-    gap: clamp(12px, 2.4vh, 24px);
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: clamp(14px, 2.4vh, 24px);
+  }
+  .hero-home {
+    display: block;
+    line-height: 0;
   }
   :global(.logo-assemble.hero-logo) {
-    width: min(540px, 84vw, 62svh);
-    margin-bottom: clamp(0px, 1vh, 12px);
+    width: clamp(118px, 12vw, 172px);
+  }
+  .hero-nav ul {
+    display: flex;
+    gap: clamp(18px, 3vw, 44px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .hero-nav a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .hero-nav a:hover {
+    color: var(--game-yellow);
+  }
+  .hero-bar-cta {
+    min-height: 46px;
+    padding: 8px 24px 10px;
+    font-size: 1.15rem;
+  }
+  @media (max-width: 900px) {
+    .hero-nav {
+      display: none;
+    }
+  }
+
+  /* ---- copy + TV ---- */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: clamp(28px, 4.5vw, 72px);
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(14px, 2.4vh, 24px);
   }
   :global(.hero-title) {
-    max-width: 14ch;
+    font-size: clamp(2.6rem, 4.9vw, 5rem);
+    line-height: 1.05;
+    text-shadow: 0 4px 0 var(--purple-ink);
   }
   .hero-sub {
-    max-width: 64ch; /* two lines on desktop */
-    text-wrap: balance;
-  }
-  @media (max-width: 600px) {
-    .hero-sub {
-      font-size: 1.15rem;
-      line-height: 1.45;
-    }
+    max-width: 46ch;
   }
   .hero-ctas {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    gap: 14px 20px;
-    margin-top: 6px;
-  }
-  .hero-burst {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: repeating-conic-gradient(
-      from 0deg at 50% 32%,
-      rgba(247, 217, 74, 0.1) 0deg 6deg,
-      transparent 6deg 18deg
-    );
-    mask-image: radial-gradient(closest-side at 50% 32%, black 20%, transparent 100%);
-    opacity: 0;
-    display: none; /* the game stage has no sunburst */
-    will-change: opacity;
-  }
-  :global(html.js) .hero:not(.intro-pending) .hero-burst,
-  :global(html.no-js) .hero-burst {
-    opacity: 1;
+    gap: 14px 22px;
+    margin-top: 4px;
   }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: max(18px, env(safe-area-inset-bottom));
-    inset-inline: 0;
-    margin-inline: auto;
-    width: max-content;
+  .hero-tv {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    text-decoration: none;
+    gap: 14px;
+  }
+  .hero-tv-screen {
+    width: 100%;
+    border: 12px solid #0b0f24;
+    border-radius: 18px;
+    overflow: hidden;
+    line-height: 0;
+    background: #0b0f24;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 80px 6px var(--screen-glow),
+      0 30px 60px rgba(0, 0, 20, 0.45);
+  }
+  .hero-loop {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .hero-tv figcaption {
     font-size: var(--fs-small);
     color: var(--text-muted);
   }
-  .scroll-hint__buzzer {
-    width: 40px;
-    animation: hint-pulse 1.6s var(--ease-out) infinite;
-  }
-  @keyframes hint-pulse {
-    0%,
-    100% {
-      transform: translateY(0) scale(1);
-    }
-    50% {
-      transform: translateY(5px) scale(0.92);
-    }
-  }
 
-  /* Hidden until the intro plays (JS only) */
-  :global(html.js .intro-pending .hero-title .word-in),
-  :global(html.js) .intro-pending [data-hero-fade] {
-    opacity: 0;
+  /* phones and tablets: stacked, centered, the TV under the buttons */
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: clamp(8px, 3vh, 28px);
+      text-align: center;
+    }
+    .hero-copy {
+      align-items: center;
+    }
+    :global(.hero-title) {
+      font-size: clamp(2.4rem, 10.5vw, 4rem);
+    }
+    :global(.hero-title .split-br) {
+      display: none;
+    }
+    .hero-ctas {
+      justify-content: center;
+    }
+    .hero-tv {
+      width: min(560px, 100%);
+      justify-self: center;
+    }
   }
-
   @media (max-width: 480px) {
     .hero-ctas {
       flex-direction: column;
@@ -142,5 +229,20 @@ const c = COPY.hero;
     .hero-ctas .btn-buzzer {
       width: 100%;
     }
+    .hero-bar-cta {
+      min-height: 42px;
+      padding: 6px 18px 8px;
+      font-size: 1.05rem;
+    }
+  }
+
+  .hero-burst {
+    display: none; /* the game stage has no sunburst; kept for scripts/hero.ts */
+  }
+
+  /* Hidden until the intro plays (JS only) */
+  :global(html.js .intro-pending .hero-title .word-in),
+  :global(html.js) .intro-pending [data-hero-fade] {
+    opacity: 0;
   }
 </style>

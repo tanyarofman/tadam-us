@@ -20,13 +20,13 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
           <div class="s3-burst" aria-hidden="true">
             <div class="s3-rays"></div>
             <div class="s3-buzzer"><Buzzer id="s3-buzzer" rays /></div>
-            <div class="s3-tadam logo-type">{c.burst}</div>
+            <img class="s3-tadam" src="/brand/tadam-logo-v4.webp" alt={c.burst} width="736" height="332" decoding="async" />
           </div>
           <div class="s3-video" data-state="idle">
             <video
               class="s3-vid"
               poster="/demo/tadam-demo-poster.webp"
-              width="1252"
+              width="1280"
               height="720"
               preload="none"
               playsinline
@@ -106,7 +106,7 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
   .s3-screen {
     position: relative;
     width: min(980px, 100%, calc((100svh - 300px) * 1.78));
-    aspect-ratio: 1252 / 720;
+    aspect-ratio: 16 / 9;
     border-radius: 18px;
     border: 8px solid var(--purple-ink);
     background: var(--screen-bg);
@@ -291,9 +291,11 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
   }
   .s3-tadam {
     position: relative;
-    font-size: clamp(3rem, 13vw, 10rem);
-    line-height: 1;
+    display: block;
+    width: clamp(200px, 52%, 620px);
+    height: auto;
     margin-top: 28%;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 30, 0.55));
     opacity: 0;
   }
   .s3-scan {

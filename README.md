@@ -31,7 +31,10 @@ driven by CSS variables in `src/styles/tokens.css`.
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
 | Demo links to the Base44 game | `src/config/demo.ts` |
-| WhatsApp number + message | `src/config/site.ts` |
+| WhatsApp number + message | `src/config/site.ts` (now Ilan's number, temporary) |
+| Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
+| Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
+| Drafts for review (noindex, not linked, blocked in robots.txt) | `src/pages/drafts/` (WhatsApp flow sample) |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` (also `public/robots.txt`) |
@@ -44,7 +47,7 @@ FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 ## Page structure
 
 ```
-Scene 0  Hero + preloader (name)    src/components/scenes/Scene0Hero.astro      scripts/hero.ts
+Scene 0  Hero (top bar + TV loop)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts
 Scene 1  The event (hall)     Scene1Event.astro                           scripts/scenes/scene1.ts
 Scene 2  Memories (bubbles)   Scene2Insight.astro                         scripts/scenes/scene2.ts
 Scene 3  WOW #1: buzzer+demo  Scene3Reveal.astro                          scripts/scenes/scene3.ts

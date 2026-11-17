@@ -10,8 +10,10 @@ interface Props {
   class?: string;
   highlight?: string;
   id?: string;
+  /** force a line break after this many words (wide screens only, see .split-br) */
+  breakAfter?: number;
 }
-const { text, as: Tag = "h2", class: cls = "", highlight, id } = Astro.props;
+const { text, as: Tag = "h2", class: cls = "", highlight, id, breakAfter } = Astro.props;
 const words = text.split(/\s+/).filter(Boolean);
 const hlWords = highlight ? highlight.split(/\s+/) : [];
 ---
@@ -21,9 +23,10 @@ const hlWords = highlight ? highlight.split(/\s+/) : [];
     words.map((w, i) => (
       <>
         <span class:list={["word", { "word-hl": hlWords.includes(w.replace(/[.,?!]/g, "")) }]}>
-          <span class="word-in">{w}</span>
+          <span class:list={["word-in", { swoosh: hlWords.includes(w.replace(/[.,?!]/g, "")) }]}>{w}</span>
         </span>
         {i < words.length - 1 ? " " : ""}
+        {breakAfter === i + 1 && <br class="split-br" />}
       </>
     ))
   }
@@ -40,15 +43,11 @@ const hlWords = highlight ? highlight.split(/\s+/) : [];
   .word-hl .word-in {
     position: relative;
   }
+  /* shape and color: .swoosh in global.css */
   .word-hl .word-in::after {
-    content: "";
-    position: absolute;
-    inset-inline: -0.06em;
-    bottom: -0.04em;
-    height: 0.14em;
-    border-radius: 999px;
-    background: var(--magenta);
+    inset-inline: -0.08em;
+    bottom: -0.14em;
+    height: 0.24em;
     z-index: -1;
-    transform: rotate(-1.5deg);
   }
 </style>

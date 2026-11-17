@@ -1,0 +1,437 @@
+---
+/**
+ * DRAFT: what happens after "דברו איתנו". A WhatsApp mock (prefilled message + automatic greeting + quick replies)
+ * and the texts to paste into WhatsApp Business. Not linked from the site, noindex, not in the sitemap.
+ */
+import Base from "../../layouts/Base.astro";
+import { SITE, whatsappLink } from "../../config/site";
+
+const prefill = "היי טדאם! 🎉 אשמח לשמוע איך יוצרים משחק לאירוע שלנו";
+const greeting = [
+  "היי, כיף שהגעתם! 🎉",
+  "אנחנו טדאם!, משחק טריוויה חי שנבנה מהסיפורים, מהתמונות ומהבדיחות הפנימיות שלכם. מנחה על המסך הגדול, וכל האורחים משחקים מהטלפון, בלי אפליקציה.",
+  "ספרו לנו, איזה אירוע אתם מתכננים?",
+];
+const quick = ["יום הולדת", "בר / בת מצווה", "אירוע חברה", "משהו אחר"];
+const followUp = [
+  "מזל טוב! ✨ עוד שלושה פרטים קטנים ונתחיל:",
+  "1. מתי האירוע?\n2. בערך כמה אורחים?\n3. איך קוראים לחוגג.ת?",
+  "בינתיים, ככה זה נראה באירוע אמיתי 👇",
+];
+const steps = [
+  { t: "לוחצים על ״דברו איתנו!״", d: "נפתח וואטסאפ (בטלפון באפליקציה, במחשב ב-WhatsApp Web) עם הודעה מוכנה. רק לשלוח." },
+  { t: "הודעת פתיחה אוטומטית", d: "תוך שנייה מגיעה הודעת ״היי, כיף שהגעתם!״ עם הסבר של משפט אחד ושאלה פשוטה." },
+  { t: "כפתורי תשובה מהירה", d: "בוחרים סוג אירוע בלחיצה. כך אנחנו יודעים מה לשאול הלאה, והשיחה לא נתקעת." },
+  { t: "שלושה פרטים ודמו", d: "תאריך, כמות אורחים ושם החוגג.ת, ולינק לדמו. מכאן ממשיכים איתם אישית." },
+];
+const waDemo = whatsappLink(prefill);
+---
+
+<Base title="טדאם! | דוגמה: מה קורה בלחיצה על דברו איתנו (טיוטה)" noindex>
+  <main class="wa-page container">
+    <header class="wa-head">
+      <a href="/" class="back">חזרה לדף הבית</a>
+      <h1 class="display">מה קורה כשלוחצים על ״דברו איתנו!״</h1>
+      <p class="lead">דוגמה לשיחה. הטקסטים כאן לעריכה, ובסוף העמוד הם מוכנים להעתקה לוואטסאפ ביזנס.</p>
+    </header>
+
+    <div class="wa-grid">
+      <ol class="steps" role="list">
+        {
+          steps.map((s, i) => (
+            <li style={`--d:${i}`}>
+              <span class="n">{i + 1}</span>
+              <div>
+                <h2 class="display">{s.t}</h2>
+                <p>{s.d}</p>
+              </div>
+            </li>
+          ))
+        }
+        <li class="try">
+          <a class="btn btn-buzzer" href={waDemo} target="_blank" rel="noopener"><span class="btn-dot" aria-hidden="true"></span>לנסות באמת (נפתח וואטסאפ)</a>
+          <small>שולח ל-{SITE.whatsappNumber.replace(/^972/, "0")} (המספר של אילן, זמנית). הודעת הפתיחה תעבוד רק אחרי שמגדירים אותה בוואטסאפ ביזנס.</small>
+        </li>
+      </ol>
+
+      <div class="phone" aria-label="דוגמה לשיחת וואטסאפ עם טדאם!">
+        <div class="wa-bar">
+          <span class="wa-back" aria-hidden="true">›</span>
+          <span class="wa-avatar"><img src="/brand/tadam-logo-v4.webp" alt="" width="736" height="332" /></span>
+          <span class="wa-who">
+            <b>טדאם! <i class="verified" aria-hidden="true">✓</i></b>
+            <small>חשבון עסקי</small>
+          </span>
+        </div>
+        <div class="wa-chat" id="chat">
+          <p class="day">היום</p>
+          <div class="msg out" style="--t:0.4s">{prefill}<time>20:14 ✓✓</time></div>
+          <div class="msg in" style="--t:1.6s">
+            {greeting.map((g) => <p>{g}</p>)}
+            <time>20:14</time>
+          </div>
+          <div class="quick" style="--t:2.6s">
+            {quick.map((q) => <span>{q}</span>)}
+          </div>
+          <div class="msg out" style="--t:4s">בר / בת מצווה<time>20:15 ✓✓</time></div>
+          <div class="msg in" style="--t:5.2s">
+            {followUp.map((g) => <p>{g}</p>)}
+            <a class="link-card" href="/#scene-3">
+              <img src="/demo/tadam-demo-poster.webp" alt="" width="1280" height="720" />
+              <span><b>ככה זה נראה: הדמו של טדאם!</b><small>tadam-game.netlify.app</small></span>
+            </a>
+            <time>20:15</time>
+          </div>
+        </div>
+        <div class="wa-input" aria-hidden="true"><span>הודעה</span><i>🎤</i></div>
+        <button type="button" class="replay" id="replay">להריץ שוב</button>
+      </div>
+    </div>
+
+    <section class="copy-texts">
+      <h2 class="display">הטקסטים להעתקה</h2>
+      <div class="ct">
+        <h3>ההודעה המוכנה (נשלחת מהלקוח, מוגדרת אצלנו באתר)</h3>
+        <pre>{prefill}</pre>
+      </div>
+      <div class="ct">
+        <h3>הודעת פתיחה אוטומטית (וואטסאפ ביזנס, כלים לעסקים, הודעת פתיחה)</h3>
+        <pre>{greeting.join("\n\n")}</pre>
+      </div>
+      <div class="ct">
+        <h3>תשובה אחרי שבחרו סוג אירוע (״תשובה מהירה״ שאתם שולחים בלחיצה)</h3>
+        <pre>{followUp.join("\n")}</pre>
+      </div>
+      <p class="note">
+        שימו לב: באפליקציית וואטסאפ ביזנס הרגילה (חינם) אפשר הודעת פתיחה ותשובות מהירות, אבל בלי כפתורים ללחיצה. כפתורים כמו בדוגמה
+        דורשים את WhatsApp Business Platform (בתשלום, דרך ספק). אפשר להתחיל בלי כפתורים: ״ספרו לנו, איזה אירוע אתם מתכננים?״ עובד גם כשאלה פתוחה.
+      </p>
+    </section>
+  </main>
+</Base>
+
+<script>
+  const chat = document.getElementById("chat");
+  document.getElementById("replay")?.addEventListener("click", () => {
+    if (!chat) return;
+    chat.classList.remove("play");
+    void chat.offsetWidth;
+    chat.scrollTop = 0;
+    chat.classList.add("play");
+    follow();
+  });
+  // keep the newest message in view while they arrive
+  const follow = () =>
+    [2.8, 4.3, 5.6, 6.2].forEach((t) =>
+      setTimeout(() => chat?.scrollTo({ top: chat.scrollHeight, behavior: "smooth" }), t * 1000),
+    );
+  chat?.classList.add("play");
+  follow();
+</script>
+
+<style>
+  .wa-page {
+    padding-block: 32px 64px;
+  }
+  .back {
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+  .wa-head h1 {
+    margin: 10px 0 8px;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--game-yellow);
+  }
+  .wa-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(24px, 5vw, 72px);
+    align-items: start;
+    margin-top: 32px;
+  }
+  @media (max-width: 860px) {
+    .wa-grid {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+    }
+    .phone {
+      order: -1;
+    }
+  }
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .steps li {
+    display: flex;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+  }
+  .steps h2 {
+    margin: 0 0 4px;
+    font-size: 1.35rem;
+  }
+  .steps p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--buzzer-red);
+    border: 3px solid var(--purple-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+  .steps .try {
+    flex-direction: column;
+    align-items: flex-start;
+    background: none;
+    border: 0;
+    padding-inline: 0;
+  }
+  .try small {
+    color: var(--text-muted);
+  }
+
+  /* ---------- the phone ---------- */
+  .phone {
+    position: relative;
+    width: min(360px, 92vw);
+    height: 720px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    border: 10px solid #050816;
+    overflow: hidden;
+    background: #efe7de;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    color: #111b21;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  .wa-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 30px 12px 10px;
+    background: #075e54;
+    color: #fff;
+  }
+  .wa-back {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .wa-avatar {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #0a1a6b;
+    overflow: hidden;
+  }
+  .wa-avatar img {
+    width: 34px;
+    height: auto;
+  }
+  .wa-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .wa-who small {
+    opacity: 0.8;
+    font-size: 0.75rem;
+  }
+  .verified {
+    display: inline-grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #25d366;
+    color: #fff;
+    font-size: 0.6rem;
+    font-style: normal;
+  }
+  .wa-chat {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 10px 14px;
+    background-color: #efe7de;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  .day {
+    align-self: center;
+    margin: 4px 0 6px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 0.72rem;
+    color: #54656f;
+  }
+  .msg {
+    position: relative;
+    max-width: 84%;
+    padding: 7px 9px 18px;
+    border-radius: 9px;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+    white-space: pre-line;
+  }
+  .msg p {
+    margin: 0 0 6px;
+  }
+  .msg time {
+    position: absolute;
+    left: 8px;
+    bottom: 3px;
+    font-size: 0.65rem;
+    color: #667781;
+  }
+  /* Hebrew WhatsApp is mirrored: your own messages on the left (end), the business on the right (start) */
+  .out {
+    align-self: flex-end;
+    background: #d9fdd3;
+    border-start-end-radius: 0;
+  }
+  .in {
+    align-self: flex-start;
+    background: #fff;
+    border-start-start-radius: 0;
+  }
+  .quick {
+    align-self: flex-start;
+    width: 84%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .quick span {
+    padding: 8px;
+    border-radius: 8px;
+    background: #fff;
+    color: #027eb5;
+    text-align: center;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  }
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #f0f2f5;
+    color: inherit;
+    text-decoration: none;
+  }
+  .link-card img {
+    width: 100%;
+    height: auto;
+  }
+  .link-card span {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  .link-card small {
+    color: #667781;
+  }
+  .wa-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 8px 12px;
+    padding: 10px 16px;
+    border-radius: 24px;
+    background: #fff;
+    color: #8696a0;
+    font-size: 0.9rem;
+  }
+  .wa-input i {
+    font-style: normal;
+  }
+  .replay {
+    position: absolute;
+    top: 34px;
+    left: 10px;
+    padding: 4px 10px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  /* messages arrive one by one */
+  .wa-chat.play .msg,
+  .wa-chat.play .quick {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: pop 0.35s var(--t) forwards;
+  }
+  @keyframes pop {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-chat.play .msg,
+    .wa-chat.play .quick {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ---------- copy texts ---------- */
+  .copy-texts {
+    margin-top: 56px;
+    max-width: 760px;
+  }
+  .copy-texts h2 {
+    color: var(--game-yellow);
+  }
+  .ct h3 {
+    margin: 20px 0 6px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .ct pre {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--surface-border);
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .note {
+    margin-top: 20px;
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+</style>

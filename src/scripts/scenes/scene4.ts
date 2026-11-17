@@ -13,8 +13,7 @@ export function init({ reduced }: { reduced: boolean }) {
   const title = s.querySelector(".s4-title");
   const rows = Array.from(s.querySelectorAll<HTMLElement>(".approve-row"));
   const tiles = s.querySelectorAll<HTMLElement>(".board-tile");
-  const pings = s.querySelectorAll<HTMLElement>(".ping");
-  const bubble = s.querySelector<HTMLElement>(".chat-bubble");
+  const bubbles = s.querySelectorAll<HTMLElement>(".chat-bubble");
   const privacy = s.querySelector<HTMLElement>(".privacy-strip")!;
 
   if (reduced) {
@@ -32,8 +31,7 @@ export function init({ reduced }: { reduced: boolean }) {
 
     gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
     gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
-    gsap.set(bubble, { opacity: 0, y: 20, scale: 0.9 });
-    gsap.set(pings, { scale: 0 });
+    gsap.set(bubbles, { opacity: 0, y: 20, scale: 0.9 });
     gsap.set(tiles, { opacity: 0 });
     gsap.set(privacy, { clipPath: "inset(0% 0% 0% 100%)", opacity: 0 });
     rows.forEach((r) => r.classList.remove("is-yes"));
@@ -62,8 +60,7 @@ export function init({ reduced }: { reduced: boolean }) {
 
       const step = card.dataset.step;
       if (step === "1") {
-        tl.to(bubble, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" })
-          .to(pings, { scale: 1, duration: 0.3, ease: "back.out(3)", stagger: 0.12 });
+        tl.to(bubbles, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.3 });
       }
       if (step === "2") {
         rows.forEach((r) => {

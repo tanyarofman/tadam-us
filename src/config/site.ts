@@ -1,6 +1,6 @@
 export const SITE = {
-  // TODO: replace with the real WhatsApp number (international format, digits only)
-  whatsappNumber: "972500000000",
+  // International format, digits only. Temporary: Ilan's number (054-2428362) until there is a business line.
+  whatsappNumber: "972542428362",
   whatsappMessage: "היי! אשמח לשמוע על טדאם! לאירוע שלנו",
 };
 

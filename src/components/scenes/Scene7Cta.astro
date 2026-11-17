@@ -14,13 +14,13 @@ const c = COPY.scene7;
       <Buzzer id="cta-buzzer" rays />
     </button>
     <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight="בעצמכם" />
-    <button type="button" class="btn btn-buzzer s7-btn" data-open-demo data-source="cta">
+    <a class="btn btn-buzzer s7-btn" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
       <span class="btn-dot" aria-hidden="true"></span>
-      {c.cta}
-    </button>
-    <a class="btn btn-white s7-contact" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="cta">
       {c.contact}
     </a>
+    <button type="button" class="btn btn-white s7-demo" data-open-demo data-source="cta">
+      {c.cta}
+    </button>
   </div>
 </section>
 
@@ -64,8 +64,8 @@ const c = COPY.scene7;
     max-width: 14ch;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
-  /* the WhatsApp button sits right under the demo button, a step quieter */
-  .s7-contact {
+  /* the demo button sits right under the WhatsApp button, a step quieter */
+  .s7-demo {
     margin-top: calc(-1 * clamp(6px, 1.2vh, 14px));
   }
 </style>

@@ -21,19 +21,19 @@ const tiles = [
     </div>
 
     <ol class="s4-steps" role="list">
-      {/* Step 1: the link */}
+      {/* Step 1: a WhatsApp chat with us */}
       <li class="step-card" data-step="1">
         <div class="step-visual v-link" aria-hidden="true">
-          <div class="mini-phone mp-back mp-1"><span class="ping"></span></div>
-          <div class="mini-phone mp-back mp-2"><span class="ping"></span></div>
           <div class="mini-phone mp-main">
-            <div class="chat-head">{m.chatFrom}</div>
-            <div class="chat-bubble">
+            <div class="chat-head">
+              <span class="chat-head-logo">!</span>
+              {m.chatFrom}
+            </div>
+            <div class="chat-bubble chat-out">
               <p>{m.chatText}</p>
-              <div class="chat-link">
-                <span class="chat-link-logo">!</span>
-                <span>{m.chatLink}</span>
-              </div>
+            </div>
+            <div class="chat-bubble chat-in">
+              <p>{m.chatReply}</p>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ const tiles = [
         </div>
       </li>
 
-      {/* Step 2: the family fills in and prepares the game */}
+      {/* Step 2: they send us the stories, photos and details */}
       <li class="step-card" data-step="2">
         <div class="step-visual v-approve" aria-hidden="true">
           <div class="approve-title">{m.approveTitle}</div>
@@ -190,64 +190,41 @@ const tiles = [
     padding: 12px 10px;
     color: var(--purple-ink);
   }
-  .mp-back {
-    width: 28%;
-    height: 120px;
-    bottom: 40px;
-    background: #ded4f6;
-  }
-  .mp-1 {
-    right: 4%;
-    transform: rotate(10deg);
-  }
-  .mp-2 {
-    left: 4%;
-    transform: rotate(-10deg);
-  }
-  .ping {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--buzzer-red);
-    border: 3px solid var(--purple-ink);
-  }
   .chat-head {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 4px 8px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 2px 6px 8px;
     border-bottom: 1px solid #d8cdf3;
     margin-bottom: 10px;
   }
   .chat-bubble {
-    background: #d9fdd3;
-    border-radius: 14px 4px 14px 14px;
-    padding: 8px 10px;
+    width: fit-content;
+    max-width: 88%;
+    margin-bottom: 8px;
+    padding: 7px 10px;
     font-size: 0.8rem;
     line-height: 1.4;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   }
-  .chat-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    padding: 6px 8px;
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.06);
-    font-size: 0.75rem;
-    direction: ltr;
-    justify-content: flex-end;
-    color: #0b6e4f;
+  /* RTL: the parent's message on the right (start), our reply on the left (end) */
+  .chat-out {
+    background: #d9fdd3;
+    border-radius: 14px 4px 14px 14px;
   }
-  .chat-link-logo {
+  .chat-in {
+    margin-inline-start: auto;
+    background: #fff;
+    border-radius: 4px 14px 14px 14px;
+  }
+  .chat-head-logo {
     display: grid;
     place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
     background: var(--buzzer-red);
     color: #fff;
     font-weight: 800;

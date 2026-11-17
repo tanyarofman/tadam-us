@@ -209,15 +209,15 @@ const tiles = [
     line-height: 1.4;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   }
-  /* RTL: the parent's message on the right (start), our reply on the left (end) */
+  /* Hebrew WhatsApp is mirrored: the parent's own message on the left (end), our reply on the right (start) */
   .chat-out {
+    margin-inline-start: auto;
     background: #d9fdd3;
-    border-radius: 14px 4px 14px 14px;
+    border-radius: 14px 14px 14px 4px;
   }
   .chat-in {
-    margin-inline-start: auto;
     background: #fff;
-    border-radius: 4px 14px 14px 14px;
+    border-radius: 14px 4px 14px 14px;
   }
   .chat-head-logo {
     display: grid;

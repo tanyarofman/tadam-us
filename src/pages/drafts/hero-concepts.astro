@@ -1,0 +1,435 @@
+---
+/**
+ * DRAFT: four hero concepts side by side, for Tanya and Ilan to compare. Not linked from the site, noindex,
+ * not in the sitemap. Delete this page (and src/components/drafts/) once a concept is chosen.
+ */
+import Base from "../../layouts/Base.astro";
+import StageBackdrop from "../../components/StageBackdrop.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
+import GameMock from "../../components/drafts/GameMock.astro";
+import { COPY } from "../../content/copy.he";
+import { whatsappLink } from "../../config/site";
+const h = COPY.hero;
+const wa = whatsappLink();
+const concepts = [
+  { id: "c1", n: 1, name: "מסך מפוצל", note: "הכי קרוב לגרסה של אילן. המוצר נראה מהשנייה הראשונה, הלוגו עובר לסרגל עליון." },
+  { id: "c2", n: 2, name: "במה + המסך עולה מלמטה", note: "ההירו שלנו נשאר כמו שהוא, והמסך והטלפון מציצים מהרצפה המוארת ומזמינים לגלול." },
+  { id: "c3", n: 3, name: "ההירו הוא שאלה במשחק", note: "הכותרת מוצגת כשאלה על המסך הגדול, ו״טדאם!״ מנצחת. מסביר את הפורמט על ידי משחק." },
+  { id: "c4", n: 4, name: "הדמו האמיתי בהירו", note: "כמו 1, אבל משמאל רץ הסרטון האמיתי בלופ, בלי סאונד, בתוך מסגרת של טלוויזיה." },
+];
+const answers = [
+  { t: "האוכל", v: 12 },
+  { t: "הדי ג'יי", v: 18 },
+  { t: "השמלה", v: 9 },
+  { t: "טדאם!", v: 61, win: true },
+];
+---
+
+<Base title="טדאם! | קונספטים להירו (טיוטה)" noindex>
+  <nav class="jump" aria-label="קונספטים">
+    {concepts.map((c) => <a href={`#${c.id}`}>{c.n}. {c.name}</a>)}
+    <a href="/drafts/whatsapp">דוגמת וואטסאפ</a>
+  </nav>
+
+  {/* ---------- 1: split ---------- */}
+  <section class="concept split-hero" id="c1">
+    <StageBackdrop />
+    <header class="topnav container">
+      <img class="topnav-logo" src="/brand/tadam-logo-v3.webp" alt="טדאם!" width="736" height="332" />
+      <ul class="topnav-links">
+        <li><a href="#">איך זה עובד</a></li>
+        <li><a href="#">המנחים שלנו</a></li>
+        <li><a href="#">שאלות נפוצות</a></li>
+      </ul>
+      <a class="btn topnav-cta" href={wa} target="_blank" rel="noopener">דברו איתנו</a>
+    </header>
+    <div class="split-grid container">
+      <div class="split-copy">
+        <SplitHeading as="h1" class="h-hero split-title" text={h.headline} highlight="יזכרו" />
+        <p class="lead">{h.sub}</p>
+        <div class="ctas">
+          <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener"><span class="btn-dot" aria-hidden="true"></span>דברו איתנו!</a>
+          <a class="btn btn-ghost" href="#">צפו בדמו</a>
+        </div>
+      </div>
+      <div class="split-visual">
+        <GameMock />
+        <p class="visual-caption">מצטרפים מהטלפון, בלי להוריד אפליקציה</p>
+      </div>
+    </div>
+    <p class="tag"><b>קונספט 1:</b> {concepts[0].note}</p>
+  </section>
+
+  {/* ---------- 2: stage + screen rising ---------- */}
+  <section class="concept rise-hero" id="c2">
+    <StageBackdrop />
+    <div class="rise-inner container">
+      <img class="rise-logo" src="/brand/tadam-logo-v3.webp" alt="טדאם!" width="736" height="332" />
+      <SplitHeading as="h2" class="h-hero rise-title" text={h.headline} highlight="יזכרו" />
+      <p class="lead rise-sub">{h.sub}</p>
+      <div class="ctas">
+        <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener"><span class="btn-dot" aria-hidden="true"></span>דברו איתנו!</a>
+        <a class="btn btn-ghost" href="#">צפו בדמו</a>
+      </div>
+      <div class="rise-visual">
+        <GameMock />
+      </div>
+    </div>
+    <p class="tag"><b>קונספט 2:</b> {concepts[1].note}</p>
+  </section>
+
+  {/* ---------- 3: the hero is a game question ---------- */}
+  <section class="concept quiz-hero" id="c3">
+    <StageBackdrop />
+    <div class="quiz-inner container">
+      <div class="quiz-screen">
+        <div class="quiz-top">
+          <img src="/brand/tadam-logo-v3.webp" alt="טדאם!" width="736" height="332" />
+          <span class="quiz-label">שאלה ראשונה</span>
+        </div>
+        <h2 class="display quiz-q">מה כולם יזכרו מהאירוע שלכם?</h2>
+        <ul class="quiz-pills" role="list">
+          {
+            answers.map((a) => (
+              <li class:list={["qp", { "qp-win": a.win }]} style={`--p:${(a.v / 61).toFixed(2)}`}>
+                <span class="qp-bar" />
+                <span class="qp-t">{a.t}</span>
+                <span class="qp-n">{a.v}%</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <p class="lead quiz-sub">{h.sub}</p>
+      <div class="ctas">
+        <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener"><span class="btn-dot" aria-hidden="true"></span>דברו איתנו!</a>
+        <a class="btn btn-ghost" href="#">צפו בדמו</a>
+      </div>
+    </div>
+    <p class="tag"><b>קונספט 3:</b> {concepts[2].note}</p>
+  </section>
+
+  {/* ---------- 4: the real demo video ---------- */}
+  <section class="concept split-hero" id="c4">
+    <StageBackdrop />
+    <header class="topnav container">
+      <img class="topnav-logo" src="/brand/tadam-logo-v3.webp" alt="טדאם!" width="736" height="332" />
+      <ul class="topnav-links">
+        <li><a href="#">איך זה עובד</a></li>
+        <li><a href="#">המנחים שלנו</a></li>
+        <li><a href="#">שאלות נפוצות</a></li>
+      </ul>
+      <a class="btn topnav-cta" href={wa} target="_blank" rel="noopener">דברו איתנו</a>
+    </header>
+    <div class="split-grid container">
+      <div class="split-copy">
+        <SplitHeading as="h2" class="h-hero split-title" text={h.headline} highlight="יזכרו" />
+        <p class="lead">{h.sub}</p>
+        <div class="ctas">
+          <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener"><span class="btn-dot" aria-hidden="true"></span>דברו איתנו!</a>
+          <a class="btn btn-ghost" href="#">לסרטון המלא</a>
+        </div>
+      </div>
+      <div class="split-visual">
+        <div class="tv">
+          <video src="/demo/tadam-demo.mp4#t=20" poster="/demo/tadam-demo-poster.webp" muted autoplay loop playsinline preload="metadata" width="1280" height="720"></video>
+        </div>
+        <p class="visual-caption">הקלטה של משחק אמיתי</p>
+      </div>
+    </div>
+    <p class="tag"><b>קונספט 4:</b> {concepts[3].note}</p>
+  </section>
+</Base>
+
+<style>
+  .jump {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 18px;
+    padding: 10px 16px;
+    background: rgba(0, 10, 50, 0.92);
+    backdrop-filter: blur(8px);
+    font-size: 0.95rem;
+  }
+  .jump a {
+    color: var(--white);
+  }
+  .concept {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    border-bottom: 6px solid var(--magenta);
+    scroll-margin-top: 44px;
+  }
+  @media (max-width: 600px) {
+    .concept {
+      scroll-margin-top: 76px;
+    }
+    padding-bottom: 72px;
+  }
+  .tag {
+    position: absolute;
+    z-index: 5;
+    inset-inline: 16px;
+    bottom: 14px;
+    margin: 0 auto;
+    max-width: 760px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--purple-ink);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+  :global(.h-hero) {
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+
+  /* --- top nav (1, 4) --- */
+  .topnav {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 18px;
+  }
+  .topnav-logo {
+    width: clamp(110px, 12vw, 160px);
+    height: auto;
+  }
+  .topnav-links {
+    display: flex;
+    gap: clamp(16px, 3vw, 40px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .topnav-links a {
+    color: var(--white);
+    text-decoration: none;
+  }
+  .topnav-cta {
+    min-height: 46px;
+    padding: 8px 24px 10px;
+  }
+  @media (max-width: 860px) {
+    .topnav-links {
+      display: none;
+    }
+  }
+
+  /* --- 1 + 4: split --- */
+  .split-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 64px);
+    min-height: calc(100svh - 180px);
+    padding-block: 20px 60px;
+  }
+  .split-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  :global(.split-title) {
+    font-size: clamp(2.8rem, 6vw, 5.4rem);
+    max-width: 11ch;
+  }
+  .split-visual {
+    padding-inline-end: 6%; /* room for the phone on the left */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .visual-caption {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  @media (max-width: 900px) {
+    .split-grid {
+      grid-template-columns: minmax(0, 1fr);
+      text-align: center;
+    }
+    .split-copy {
+      align-items: center;
+    }
+    .split-visual {
+      padding-inline: 6%;
+      margin-bottom: 40px;
+    }
+  }
+
+  /* --- 2: rise --- */
+  .rise-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(10px, 2vh, 20px);
+    padding-top: clamp(28px, 5vh, 60px);
+  }
+  .rise-logo {
+    width: min(360px, 60vw);
+    height: auto;
+  }
+  :global(.rise-title) {
+    font-size: clamp(2.6rem, 6.4vw, 5rem);
+    max-width: 14ch;
+  }
+  .rise-sub {
+    max-width: 60ch;
+  }
+  .rise-inner .ctas {
+    justify-content: center;
+  }
+  .rise-visual {
+    width: min(760px, 88vw);
+    margin-top: clamp(24px, 5vh, 48px);
+    margin-bottom: -22vh; /* cut by the section's bottom: half the TV peeks out */
+  }
+
+  /* --- 3: quiz --- */
+  .quiz-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+    padding-top: clamp(28px, 6vh, 70px);
+  }
+  .quiz-screen {
+    width: min(880px, 100%);
+    padding: clamp(18px, 3vw, 34px);
+    border-radius: 22px;
+    border: 10px solid #0b0f24;
+    background:
+      radial-gradient(60% 50% at 50% 110%, var(--spot), transparent 70%),
+      linear-gradient(180deg, var(--bg-0), var(--bg-2) 60%, var(--bg-1));
+    box-shadow: 0 0 80px 8px var(--screen-glow);
+  }
+  .quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .quiz-top img {
+    width: clamp(80px, 10vw, 120px);
+    height: auto;
+  }
+  .quiz-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .quiz-q {
+    margin: 10px 0 20px;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.1;
+    color: var(--game-yellow);
+  }
+  .quiz-pills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .qp {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    min-height: 54px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--white);
+    color: #14102b;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+  .qp-t,
+  .qp-n {
+    position: relative;
+  }
+  .qp-n {
+    opacity: 0;
+    font-weight: 500;
+    animation: qp-show 0.4s 2.2s forwards;
+  }
+  .qp-bar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: calc(var(--p) * 100%);
+    background: rgba(20, 16, 43, 0.12);
+    transform: scaleX(0);
+    transform-origin: right center;
+    animation: qp-grow 0.8s 2s forwards;
+  }
+  .qp-win .qp-bar {
+    background: #4cc09d;
+  }
+  @keyframes qp-grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes qp-show {
+    to {
+      opacity: 1;
+    }
+  }
+  .quiz-sub {
+    max-width: 62ch;
+  }
+  .quiz-inner .ctas {
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .quiz-pills {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* --- 4: TV with the video --- */
+  .tv {
+    width: 100%;
+    border: 12px solid #0b0f24;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 70px 6px var(--screen-glow);
+    line-height: 0;
+  }
+  .tv video {
+    width: 100%;
+    height: auto;
+  }
+</style>

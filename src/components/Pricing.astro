@@ -108,8 +108,13 @@ const icons: Record<string, string> = {
 </script>
 
 <style>
+  /* desktop: the whole section (what's included + hosts) fits in one screen, sizes follow the screen height */
   .pricing {
-    padding-block: clamp(72px, 11vh, 130px) clamp(150px, 20vh, 220px);
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: clamp(24px, 4vh, 48px) clamp(96px, 14vh, 140px);
     overflow: hidden;
   }
   .pricing-inner {
@@ -117,14 +122,16 @@ const icons: Record<string, string> = {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: clamp(14px, 2.4vh, 22px);
+    gap: clamp(8px, 1.6vh, 16px);
   }
   .pricing-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 7vh, 4rem);
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .pricing-sub {
     max-width: 46ch;
-    margin-bottom: clamp(12px, 3vh, 28px);
+    margin: 0 0 clamp(4px, 1.2vh, 14px);
   }
 
   /* ---- 3 cards (mobile first: stacked) ---- */
@@ -247,10 +254,10 @@ const icons: Record<string, string> = {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas: "icon title" "icon text";
-    column-gap: 16px;
-    row-gap: 4px;
-    align-items: start;
-    padding: 22px 22px 24px;
+    column-gap: 14px;
+    row-gap: 2px;
+    align-items: center;
+    padding: clamp(12px, 1.8vh, 20px) 20px;
     border-radius: 8px 30px 8px 30px; /* the slanted-card look of the host photos */
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
     border: 2px solid var(--surface-border);
@@ -271,9 +278,9 @@ const icons: Record<string, string> = {
     grid-area: icon;
     display: grid;
     place-items: center;
-    width: 54px;
-    height: 54px;
-    border-radius: 16px;
+    width: clamp(42px, 5.6vh, 52px);
+    height: clamp(42px, 5.6vh, 52px);
+    border-radius: 14px;
     background: var(--c);
     color: var(--purple-ink);
     border: 3px solid var(--purple-ink);
@@ -281,13 +288,13 @@ const icons: Record<string, string> = {
     transform: rotate(-4deg);
   }
   .inc-icon svg {
-    width: 30px;
-    height: 30px;
+    width: 60%;
+    height: 60%;
   }
   .inc-title {
     grid-area: title;
     margin: 0;
-    font-size: clamp(1.3rem, 1.9vw, 1.55rem);
+    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
     line-height: 1.15;
     color: var(--white);
   }
@@ -313,7 +320,7 @@ const icons: Record<string, string> = {
   .hosts {
     width: 100%;
     max-width: 1080px;
-    margin-top: clamp(14px, 3vh, 28px);
+    margin-top: clamp(6px, 1.5vh, 16px);
     display: grid;
     gap: 22px;
     text-align: right;
@@ -330,6 +337,7 @@ const icons: Record<string, string> = {
     direction: ltr; /* order as in the design: classic, friendly, animated */
   }
   /* Ilan's host cards: slanted sides, one big rounded corner, stepping up from left to right */
+  /* photo height follows the screen height so the section fits in one screen */
   .hosts-photos {
     align-items: end;
     padding-top: 28px;
@@ -375,7 +383,7 @@ const icons: Record<string, string> = {
   .hosts-title {
     margin: 0;
     display: grid;
-    font-size: clamp(2.6rem, 8vw, 4rem);
+    font-size: clamp(2.2rem, 6.4vh, 3.6rem);
     line-height: 1.02;
   }
   .hl {
@@ -402,6 +410,11 @@ const icons: Record<string, string> = {
   @media (min-width: 760px) {
     .hosts-top {
       grid-template-columns: 1.25fr 1fr;
+    }
+    .hosts-photos {
+      --ph: clamp(150px, 27vh, 280px);
+      grid-template-columns: repeat(3, calc(var(--ph) * 0.652));
+      justify-content: start;
     }
   }
   .pricing-note {

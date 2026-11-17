@@ -1,6 +1,6 @@
 # Blog status and to-dos
 
-Last updated: 2026-11-16. Work is on branch `claude/gifted-edison-r7zran`, pull request [tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30) (not merged; merge only when Tanya asks). Netlify also builds a deploy preview for the PR automatically.
+Last updated: 2026-11-17. Work is on branch `claude/gifted-edison-r7zran`, pull request [tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30) (not merged; merge only when Tanya asks). Netlify also builds a deploy preview for the PR automatically.
 
 ## Published on the branch
 | Article | Target keyword | Status |
@@ -17,7 +17,7 @@ Each article now has one clearly labeled example scenario ("תרחיש לדוג�
 3. **Company / team:** team size and which team question worked best, plus a quote from a manager or employee.
 
 ## Decisions for Tanya
-- **Custom domain: done (2026-11-17).** The site is on https://heytadam.com (`site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` updated). Next: add heytadam.com to Google Search Console and submit the sitemap.
+- **Custom domain: done (2026-11-17).** The site is on https://heytadam.com (`site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` updated). Google Search Console: heytadam.com verified as a Domain property on 2026-11-17 (TXT `google-site-verification=…` in Netlify DNS; never delete it, or verification is lost). Next: submit `sitemap-index.xml` there.
 - **Business page** (`/לחברות` or `/business`) with its own copy and pricing. Until then, company articles point to the demo and Messenger.
 - **English version** for global teams and the US market (bigger volumes, harder competition, outside the Hebrew-only brief).
 - **Feature images:** none for now (her choice).

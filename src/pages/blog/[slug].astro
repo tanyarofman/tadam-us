@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import BlogHeader from "../../components/blog/BlogHeader.astro";
 import Footer from "../../components/Footer.astro";
-import { whatsappLink } from "../../config/site";
+import { contactLink } from "../../config/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", (p) => !p.data.draft);
@@ -131,11 +131,11 @@ const jsonLd = [
           </a>
           <a
             class="article-cta-wa"
-            href={whatsappLink(`היי! קראתי את "${d.title}" ואשמח לשמוע על טדאם!`)}
+            href={contactLink(`article-${post.id}`)}
             target="_blank"
             rel="noopener"
-            data-track="blog_whatsapp_click"
-            data-source={`article:${post.id}`}>דברו איתנו בוואטסאפ</a
+            data-track="blog_contact_click"
+            data-source={`article:${post.id}`}>דברו איתנו במסנג'ר</a
           >
         </div>
       </aside>

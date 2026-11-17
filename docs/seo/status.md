@@ -18,7 +18,7 @@ Each article now has one clearly labeled example scenario ("תרחיש לדוג�
 
 ## Decisions for Tanya
 - **Custom domain** before publishing (update `site` in `astro.config.mjs` and the sitemap line in `public/robots.txt`). Articles on `tadam-game.netlify.app` build authority on a temporary address.
-- **Business page** (`/לחברות` or `/business`) with its own copy and pricing. Until then, company articles point to the demo and WhatsApp.
+- **Business page** (`/לחברות` or `/business`) with its own copy and pricing. Until then, company articles point to the demo and Messenger.
 - **English version** for global teams and the US market (bigger volumes, harder competition, outside the Hebrew-only brief).
 - **Feature images:** none for now (her choice).
 - **Directory listings** (karamel.co.il, mesibonet.co.il): AI Overviews quote them. Free listings first; a paid listing needs her OK.

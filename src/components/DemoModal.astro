@@ -1,10 +1,10 @@
 ---
 /**
- * Demo modal: the full recording of a real game (Eyal's birthday) with sound, and a WhatsApp CTA under it.
+ * Demo modal: the full recording of a real game (Eyal's birthday) with sound, and a Messenger CTA under it.
  * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
  */
 import { COPY } from "../content/copy.he";
-import { whatsappLink } from "../config/site";
+import { contactLink } from "../config/site";
 const c = COPY.modal;
 ---
 
@@ -32,7 +32,7 @@ const c = COPY.modal;
     </div>
     <p class="dm-caption">{c.caption}</p>
 
-    <a class="btn btn-buzzer dm-cta" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="demo-modal">
+    <a class="btn btn-buzzer dm-cta" href={contactLink("demo-modal")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="demo-modal">
       <span class="btn-dot" aria-hidden="true"></span>
       {c.cta}
     </a>

@@ -6,7 +6,7 @@
  * With JS the form posts in the background and shows a thank-you in place; without JS it posts normally.
  */
 import { COPY } from "../content/copy.he";
-import { whatsappLink } from "../config/site";
+import { contactLink } from "../config/site";
 const c = COPY.lead;
 ---
 
@@ -51,7 +51,7 @@ const c = COPY.lead;
 
       <p class="lead-status" role="status" aria-live="polite" data-status hidden></p>
       <p class="lead-error" role="alert" data-error hidden>
-        {c.error} <a href={whatsappLink()} target="_blank" rel="noopener">{c.errorWhatsapp}</a>
+        {c.error} <a href={contactLink("lead-error")} target="_blank" rel="noopener">{c.errorMessenger}</a>
       </p>
     </form>
 

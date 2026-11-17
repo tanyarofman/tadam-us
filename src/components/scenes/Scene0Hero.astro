@@ -5,13 +5,12 @@
  * of a real game. The preloader logo flies into the logo in the top bar (see scripts/hero.ts, [data-logo]).
  */
 import { COPY } from "../../content/copy.he";
-import { whatsappLink } from "../../config/site";
+import { contactLink } from "../../config/site";
 import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
 import StageBackdrop from "../StageBackdrop.astro";
 const c = COPY.hero;
 const d = COPY.scene3.demo;
-const wa = whatsappLink();
 ---
 
 <section class="scene hero intro-pending" id="top" data-scene="hero" aria-labelledby="hero-title">
@@ -28,7 +27,7 @@ const wa = whatsappLink();
         {c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}
       </ul>
     </nav>
-    <a class="btn hero-bar-cta" href={wa} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="hero-nav" data-hero-fade>
+    <a class="btn hero-bar-cta" href={contactLink("hero-nav")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="hero-nav" data-hero-fade>
       {c.navCta}
     </a>
   </header>
@@ -38,7 +37,7 @@ const wa = whatsappLink();
       <SplitHeading as="h1" id="hero-title" class="h-hero hero-title" text={c.headline} highlight="יזכרו" breakAfter={3} />
       <p class="lead hero-sub" data-hero-fade>{c.sub}</p>
       <div class="hero-ctas" data-hero-fade>
-        <a class="btn btn-buzzer" href={wa} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="hero">
+        <a class="btn btn-buzzer" href={contactLink("hero")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="hero">
           <span class="btn-dot" aria-hidden="true"></span>
           {c.ctaPrimary}
         </a>

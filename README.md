@@ -13,11 +13,11 @@ npm run preview    # serve the production build
 ```
 
 Deploy: Netlify picks up `netlify.toml` (build `npm run build`, publish `dist`).
-Netlify site: `tadam-game` (https://tadam-game.netlify.app). `tadam.netlify.app` was already taken.
+Netlify site: `heytadam` (formerly `tadam-game`), custom domain https://heytadam.com.
 
 ```bash
 netlify deploy --dir dist          # draft preview
-netlify deploy --dir dist --prod   # publish to tadam-game.netlify.app
+netlify deploy --dir dist --prod   # publish to heytadam.com
 ```
 
 ## Theme
@@ -30,10 +30,9 @@ driven by CSS variables in `src/styles/tokens.css`.
 | What | File |
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
-| WhatsApp number + message | `src/config/site.ts` (now Ilan's number, temporary) |
+| Contact link (Messenger, heytadam Facebook page) + Facebook page + contact emails | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
-| Drafts for review (noindex, not linked, blocked in robots.txt) | `src/pages/drafts/` (WhatsApp flow sample) |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | "Leave details" form (Netlify Forms, form name `lead`) | `src/components/LeadForm.astro`; submissions in Netlify → Forms; email alerts in Netlify → Forms → Form notifications |
@@ -65,7 +64,7 @@ then the scenes in page order (after the intro, one per task, so the main thread
 ## The demo modal
 
 - Opened by the buzzer and the "בואו לראות דמו" button at the end of the page, and by `/#demo` links (blog).
-- Shows the full recording of a real game (`public/demo/tadam-demo.mp4`, Eyal's birthday) with native controls, playing with sound when opened by a click (muted if the browser blocks sound), and a "דברו איתנו!" WhatsApp button under it.
+- Shows the full recording of a real game (`public/demo/tadam-demo.mp4`, Eyal's birthday) with native controls, playing with sound when opened by a click (muted if the browser blocks sound), and a "דברו איתנו!" Messenger button under it.
 - Closes on Esc, click outside, and the close button (the video pauses). Focus is trapped inside while open.
 
 ## Accessibility & motion

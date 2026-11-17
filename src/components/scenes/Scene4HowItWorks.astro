@@ -21,7 +21,7 @@ const tiles = [
     </div>
 
     <ol class="s4-steps" role="list">
-      {/* Step 1: a WhatsApp chat with us */}
+      {/* Step 1: a Messenger chat with our Facebook page */}
       <li class="step-card" data-step="1">
         <div class="step-visual v-link" aria-hidden="true">
           <div class="mini-phone mp-main">
@@ -209,15 +209,16 @@ const tiles = [
     line-height: 1.4;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   }
-  /* Hebrew WhatsApp is mirrored: the parent's own message on the left (end), our reply on the right (start) */
+  /* Messenger, mirrored for Hebrew: the parent's own message on the left (end, blue), our reply on the right (start, gray) */
   .chat-out {
     margin-inline-start: auto;
-    background: #d9fdd3;
-    border-radius: 14px 14px 14px 4px;
+    background: linear-gradient(135deg, #0a7cff, #7a3cf5);
+    color: #fff;
+    border-radius: 18px 18px 18px 4px;
   }
   .chat-in {
-    background: #fff;
-    border-radius: 14px 4px 14px 14px;
+    background: #eceef3;
+    border-radius: 18px 4px 18px 18px;
   }
   .chat-head-logo {
     display: grid;

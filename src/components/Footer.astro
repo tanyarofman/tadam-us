@@ -1,6 +1,6 @@
 ---
 import { COPY } from "../content/copy.he";
-import { whatsappLink } from "../config/site";
+import { SITE, contactLink } from "../config/site";
 const c = COPY.footer;
 ---
 
@@ -10,10 +10,17 @@ const c = COPY.footer;
       <img src="/brand/tadam-logo-v4.webp" alt="טדאם!" width="736" height="332" loading="lazy" decoding="async" />
     </a>
     <nav class="footer-links" aria-label="קישורים">
-      <a href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="footer">{c.contact}</a>
+      <a href={contactLink("footer")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="footer">{c.contact}</a>
       <a href="/blog/">{c.blog}</a>
       <a href="/privacy">{c.privacy}</a>
     </nav>
+    <ul class="footer-social" role="list">
+      <li>
+        <a class="social-icon" href={SITE.facebookUrl} target="_blank" rel="noopener" aria-label={c.facebook} data-track="social_click" data-source="facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"></path></svg>
+        </a>
+      </li>
+    </ul>
     <p class="footer-copy">{c.copyright} {new Date().getFullYear()}</p>
   </div>
 </footer>
@@ -46,6 +53,31 @@ const c = COPY.footer;
   }
   .footer-links a:hover {
     color: var(--text);
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .social-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--stage-navy);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .social-icon:hover {
+    background: var(--game-yellow);
+    transform: translateY(-2px);
+  }
+  .social-icon svg {
+    width: 24px;
+    height: 24px;
   }
   .footer-copy {
     color: var(--text-muted);

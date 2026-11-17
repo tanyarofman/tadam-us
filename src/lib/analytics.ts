@@ -12,11 +12,12 @@ export type TrackEvent =
   | "demo_iframe_fallback"
   | "cta_create_click"
   | "pricing_view"
-  | "cta_whatsapp_click"
+  | "cta_contact_click"
+  | "social_click"
   | "cta_how_it_works_click"
   | "faq_open"
   | "blog_demo_click"
-  | "blog_whatsapp_click"
+  | "blog_contact_click"
   | "lead_submit"
   | "lead_error";
 

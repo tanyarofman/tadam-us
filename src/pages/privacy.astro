@@ -1,6 +1,6 @@
 ---
 /**
- * Privacy policy. Written 2026-11-17 from how the product works today (lead form on Netlify Forms, WhatsApp,
+ * Privacy policy. Written 2026-11-17 from how the product works today (lead form on Netlify Forms, Messenger,
  * materials sent for the game, the game itself on the game platform). Not legal advice: have a lawyer review it.
  * Lines marked TODO confirm are commitments the team still needs to confirm (they match the FAQ).
  * When adding analytics, ads pixels or cookies, update the "מידע טכני" and "ספקים" sections.
@@ -8,7 +8,7 @@
 import Base from "../layouts/Base.astro";
 import Footer from "../components/Footer.astro";
 import { COPY } from "../content/copy.he";
-import { SITE, whatsappLink } from "../config/site";
+import { SITE, contactLink } from "../config/site";
 const c = COPY.privacyPage;
 const updated = "17 בנובמבר 2026";
 const [mailTanya, mailIlan] = SITE.contactEmails;
@@ -43,7 +43,7 @@ const [mailTanya, mailIlan] = SITE.contactEmails;
       <h2 class="display">1. איזה מידע אנחנו אוספים</h2>
       <ul>
         <li><strong>כשאתם משאירים פרטים באתר:</strong> שם, מספר טלפון, סוג האירוע ומועד משוער, אם מילאתם אותו.</li>
-        <li><strong>כשאתם פונים אלינו בוואטסאפ או במייל:</strong> מספר הטלפון או כתובת המייל שלכם ותוכן ההודעות.</li>
+        <li><strong>כשאתם פונים אלינו במסנג'ר או במייל:</strong> השם ופרופיל הפייסבוק שלכם או כתובת המייל שלכם, ותוכן ההודעות.</li>
         <li>
           <strong>החומרים למשחק:</strong> סיפורים, שאלות, תמונות ופרטים על החוגגים ועל האורחים, שאתם בוחרים לשלוח לנו כדי
           שנבנה את המשחק.
@@ -81,7 +81,7 @@ const [mailTanya, mailIlan] = SITE.contactEmails;
       </p>
       <ul>
         <li><strong>Netlify:</strong> אחסון האתר וקבלת הטפסים שאתם ממלאים בו.</li>
-        <li><strong>WhatsApp ו-Google (Gmail):</strong> השיחות וההתכתבויות איתכם.</li>
+        <li><strong>Meta (פייסבוק ומסנג'ר) ו-Google (Gmail):</strong> השיחות וההתכתבויות איתכם.</li>
         <li><strong>פלטפורמת המשחק:</strong> השירות שבו המשחק נבנה ורץ באירוע, כולל השאלות והתמונות שבו.</li>
       </ul>
       <p>
@@ -137,7 +137,7 @@ const [mailTanya, mailIlan] = SITE.contactEmails;
       <ul class="contact">
         <li><a href={`mailto:${mailTanya}`} dir="ltr">{mailTanya}</a></li>
         <li><a href={`mailto:${mailIlan}`} dir="ltr">{mailIlan}</a></li>
-        <li>וואטסאפ: <a href={whatsappLink()} target="_blank" rel="noopener" dir="ltr">{SITE.whatsappDisplay}</a></li>
+        <li>מסנג'ר: <a href={contactLink("privacy")} target="_blank" rel="noopener">דף הפייסבוק של טדאם!</a></li>
       </ul>
     </section>
 

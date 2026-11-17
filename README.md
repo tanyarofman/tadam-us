@@ -30,7 +30,6 @@ driven by CSS variables in `src/styles/tokens.css`.
 | What | File |
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
-| Demo links to the Base44 game | `src/config/demo.ts` |
 | WhatsApp number + message | `src/config/site.ts` (now Ilan's number, temporary) |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
@@ -64,14 +63,9 @@ then the scenes in page order (after the intro, one per task, so the main thread
 
 ## The demo modal
 
-- Desktop: QR code of `DEMO.joinUrl` (generated client-side) + the big-screen view.
-- **The Base44 host page currently sends `X-Frame-Options: DENY`**, so it cannot be shown in an iframe.
-  While `DEMO.hostEmbeddable` is `false`, the modal shows a "פתחו את המסך הגדול בלשונית חדשה" button instead.
-  If the partner allows framing (`Content-Security-Policy: frame-ancestors https://<landing-domain>`), flip it to `true`;
-  a load timeout still falls back to the button.
-- Until `joinUrl` is set, the QR box shows a "coming soon" placeholder.
-- Mobile: "צפו בדמו בטלפון הזה" opens `soloUrl`, else `joinUrl`, else `hostUrl`; "שלחו לי לינק למחשב" opens a WhatsApp share.
-- Closes on Esc, click outside, and the close button. Focus is trapped inside while open.
+- Opened by the buzzer and the "בואו לראות דמו" button at the end of the page, and by `/#demo` links (blog).
+- Shows the full recording of a real game (`public/demo/tadam-demo.mp4`, Eyal's birthday) with native controls, playing with sound when opened by a click (muted if the browser blocks sound), and a "דברו איתנו!" WhatsApp button under it.
+- Closes on Esc, click outside, and the close button (the video pauses). Focus is trapped inside while open.
 
 ## Accessibility & motion
 

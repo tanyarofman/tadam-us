@@ -1,5 +1,10 @@
 ---
+/**
+ * Demo modal: the full recording of a real game (Eyal's birthday) with sound, and a WhatsApp CTA under it.
+ * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
+ */
 import { COPY } from "../content/copy.he";
+import { whatsappLink } from "../config/site";
 const c = COPY.modal;
 ---
 
@@ -10,41 +15,27 @@ const c = COPY.modal;
     </button>
     <h2 id="demo-title" class="display dm-title">{c.title}</h2>
 
-    <!-- Desktop: QR (start/right) + big screen (left) -->
-    <div class="dm-desktop">
-      <div class="dm-qr-col">
-        <div class="dm-qr" data-qr>
-          <p class="dm-qr-pending">{c.qrPending}</p>
-        </div>
-        <p class="dm-qr-text display">{c.scan}</p>
-      </div>
-      <div class="dm-screen-col">
-        <div class="dm-screen" data-screen>
-          <div class="dm-fallback" data-fallback>
-            <div class="dm-fallback-art" aria-hidden="true">
-              <span class="dm-fallback-q"></span>
-              <span class="dm-fallback-bars"><i></i><i></i><i></i><i></i></span>
-            </div>
-            <p>{c.bigScreenNote}</p>
-            <a class="btn btn-buzzer" data-host-link target="_blank" rel="noopener">
-              <span class="btn-dot" aria-hidden="true"></span>
-              {c.openBigScreen}
-            </a>
-          </div>
-        </div>
-        <p class="dm-caption">{c.bigScreen}</p>
-      </div>
+    <div class="dm-tv">
+      <video
+        class="dm-video"
+        data-demo-video
+        poster="/demo/tadam-demo-poster.webp"
+        width="1280"
+        height="720"
+        preload="none"
+        controls
+        playsinline
+        aria-label={c.videoLabel}
+      >
+        <source src="/demo/tadam-demo.mp4" type="video/mp4" />
+      </video>
     </div>
+    <p class="dm-caption">{c.caption}</p>
 
-    <!-- Mobile: play on this phone + send link to desktop -->
-    <div class="dm-mobile">
-      <p class="lead">{c.mobileIntro}</p>
-      <a class="btn btn-buzzer dm-play" data-play-link target="_blank" rel="noopener">
-        <span class="btn-dot" aria-hidden="true"></span>
-        {c.playHere}
-      </a>
-      <a class="btn btn-ghost" data-share-link target="_blank" rel="noopener">{c.sendToDesktop}</a>
-    </div>
+    <a class="btn btn-buzzer dm-cta" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="demo-modal">
+      <span class="btn-dot" aria-hidden="true"></span>
+      {c.cta}
+    </a>
   </div>
 </dialog>
 
@@ -61,7 +52,7 @@ const c = COPY.modal;
     overflow: visible;
   }
   .demo-modal::backdrop {
-    background: radial-gradient(70% 70% at 50% 40%, rgba(51, 7, 104, 0.75), rgba(7, 1, 15, 0.92));
+    background: radial-gradient(70% 70% at 50% 40%, rgba(0, 22, 112, 0.8), rgba(3, 14, 63, 0.94));
     backdrop-filter: blur(6px);
   }
   .demo-modal[open] {
@@ -77,13 +68,18 @@ const c = COPY.modal;
     position: relative;
     max-height: calc(100dvh - 32px);
     overflow: auto;
-    padding: clamp(22px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(12px, 2vh, 20px);
+    padding: clamp(18px, 3vw, 32px);
     border-radius: var(--radius-l);
     background: var(--surface-solid);
     border: var(--stroke) solid var(--purple-ink);
     box-shadow:
       0 10px 0 var(--purple-ink),
       0 30px 80px rgba(0, 0, 0, 0.5);
+    text-align: center;
   }
   .dm-close {
     position: absolute;
@@ -101,137 +97,34 @@ const c = COPY.modal;
     z-index: 2;
   }
   .dm-title {
+    margin: 0;
     font-size: clamp(1.6rem, 3.4vw, 2.4rem);
-    margin-bottom: 20px;
-    padding-inline-end: 56px;
+    padding-inline: 56px;
   }
-  .dm-desktop {
-    display: grid;
-    grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.6fr);
-    gap: 28px;
-    align-items: start;
-  }
-  .dm-qr-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    text-align: center;
-  }
-  .dm-qr {
+  /* the TV: same frame as the hero */
+  .dm-tv {
     width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1;
-    display: grid;
-    place-items: center;
-    padding: 16px;
-    border-radius: var(--radius-m);
-    background: #fff;
-    border: var(--stroke) solid var(--purple-ink);
-    box-shadow: 0 6px 0 var(--purple-ink);
-    color: var(--purple-ink);
-  }
-  .dm-qr :global(svg) {
-    width: 100%;
-    height: 100%;
-  }
-  .dm-qr-pending {
-    font-size: var(--fs-small);
-    padding: 16px;
-    border: 2px dashed currentColor;
-    border-radius: 12px;
-  }
-  .dm-qr-text {
-    font-size: 1.3rem;
-  }
-  .dm-screen {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    border-radius: 14px;
-    border: 6px solid var(--purple-ink);
-    background: var(--screen-bg);
-    box-shadow: 0 0 40px var(--screen-glow);
+    /* keep the whole modal inside the screen: the video never gets taller than ~62% of it */
+    max-width: calc((100dvh - 290px) * 16 / 9);
+    border: 10px solid #0b0f24;
+    border-radius: 16px;
     overflow: hidden;
+    line-height: 0;
+    background: #0b0f24;
+    box-shadow: 0 0 60px 4px var(--screen-glow);
   }
-  .dm-screen :global(iframe) {
-    position: absolute;
-    inset: 0;
+  .dm-video {
     width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .dm-fallback {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 20px;
-    text-align: center;
-    color: var(--text-muted);
-  }
-  .dm-fallback[hidden] {
-    display: none;
-  }
-  .dm-fallback-art {
-    width: 60%;
-    display: grid;
-    gap: 10px;
-    opacity: 0.6;
-  }
-  .dm-fallback-q {
-    height: 14px;
-    width: 70%;
-    margin-inline: auto;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.4);
-  }
-  .dm-fallback-bars {
-    display: grid;
-    gap: 6px;
-  }
-  .dm-fallback-bars i {
-    height: 10px;
-    border-radius: 6px;
-    background: var(--answer-1);
-    width: 40%;
-  }
-  .dm-fallback-bars i:nth-child(2) {
-    background: var(--answer-2);
-    width: 80%;
-  }
-  .dm-fallback-bars i:nth-child(3) {
-    background: var(--answer-3);
-    width: 25%;
-  }
-  .dm-fallback-bars i:nth-child(4) {
-    background: var(--answer-4);
-    width: 55%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #0b0f24;
   }
   .dm-caption {
-    margin-top: 10px;
-    text-align: center;
-    color: var(--text-muted);
+    margin: 0;
     font-size: var(--fs-small);
+    color: var(--text-muted);
   }
-  .dm-mobile {
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-    text-align: center;
-  }
-  .demo-modal.is-mobile .dm-desktop {
-    display: none;
-  }
-  .demo-modal.is-mobile .dm-mobile {
-    display: flex;
-  }
-  @media (max-width: 860px) {
-    .dm-desktop {
-      grid-template-columns: 1fr;
-    }
+  .dm-cta {
+    min-width: min(320px, 100%);
   }
 </style>

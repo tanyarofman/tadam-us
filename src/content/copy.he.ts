@@ -222,6 +222,26 @@ export const COPY = {
     ],
   },
 
+  /** "Leave details" form (Netlify Forms, see LeadForm.astro). */
+  lead: {
+    title: "השאירו פרטים ונחזור אליכם",
+    sub: "ספרו לנו בכמה מילים על האירוע, ונחזור אליכם עם כל מה שצריך לדעת.",
+    name: "שם",
+    phone: "טלפון",
+    eventType: "איזה אירוע?",
+    eventTypePlaceholder: "בחרו סוג אירוע",
+    eventTypes: ["יום הולדת", "בר / בת מצווה", "חתונה", "הרמת כוסית או אירוע חברה", "משהו אחר"],
+    when: "מתי בערך? (לא חובה)",
+    whenPlaceholder: "למשל: מרץ 2027",
+    submit: "שלחו",
+    sending: "שולחים...",
+    privacy: "נשתמש בפרטים רק כדי לחזור אליכם.",
+    privacyLink: "מדיניות פרטיות",
+    success: "תודה! קיבלנו את הפרטים ונחזור אליכם בקרוב.",
+    error: "משהו השתבש בשליחה. נסו שוב, או כתבו לנו בוואטסאפ.",
+    errorWhatsapp: "לוואטסאפ",
+  },
+
   faq: {
     title: "שאלות ששואלים אותנו",
     items: [

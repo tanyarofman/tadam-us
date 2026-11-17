@@ -1,8 +1,8 @@
 # Blog status and to-dos
 
-Last updated: 2026-11-17. Work is on branch `claude/gifted-edison-r7zran`, pull request [tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30) (not merged; merge only when Tanya asks). Netlify also builds a deploy preview for the PR automatically.
+Last updated: 2026-11-17. The blog ([tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30)) was merged on 2026-11-16 and is live on https://heytadam.com/blog/. New articles go on a branch with their own pull request; merge only when Tanya asks.
 
-## Published on the branch
+## Published (live on heytadam.com)
 | Article | Target keyword | Status |
 |---|---|---|
 | `hanukkah-quiz` | חידון חנוכה | Written, playbook applied, labeled example scenario until a real story arrives |
@@ -17,7 +17,7 @@ Each article now has one clearly labeled example scenario ("תרחיש לדוג�
 3. **Company / team:** team size and which team question worked best, plus a quote from a manager or employee.
 
 ## Decisions for Tanya
-- **Custom domain: done (2026-11-17).** The site is on https://heytadam.com (`site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` updated). Google Search Console: heytadam.com verified as a Domain property on 2026-11-17 (TXT `google-site-verification=…` in Netlify DNS; never delete it, or verification is lost). Next: submit `sitemap-index.xml` there.
+- **Custom domain: done (2026-11-17).** The site is on https://heytadam.com (`site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` updated). Google Search Console: heytadam.com verified as a Domain property on 2026-11-17 (TXT `google-site-verification=…` in Netlify DNS; never delete it, or verification is lost). Sitemap `https://heytadam.com/sitemap-index.xml` submitted and the home page sent for indexing the same day (a Domain property needs the full sitemap URL, not just the file name).
 - **Business page** (`/לחברות` or `/business`) with its own copy and pricing. Until then, company articles point to the demo and Messenger.
 - **English version** for global teams and the US market (bigger volumes, harder competition, outside the Hebrew-only brief).
 - **Feature images:** none for now (her choice).
@@ -32,7 +32,8 @@ Seasonal deadlines (publish 3 to 4 weeks before):
 - Rosh Hashanah toast (הרמת כוסית לראש השנה): publish in August
 
 ## After publishing on the real domain
-- Submit `sitemap-index.xml` in Google Search Console.
+- Done 2026-11-17: sitemap submitted in Google Search Console. After each new article is live, request indexing for its URL in URL inspection.
+- Check Search Console (Pages, Performance) about a week after 2026-11-17 for indexing problems.
 - Re-check rankings and AI Overview sources for the target keywords at 4 and 8 weeks: `python3 tools/seo/research.py serp --file <keywords>` (about $0.002 per keyword) and compare with `docs/seo/data/serp-2026-11-16.csv`.
 - Answer the forum and Facebook threads that rank (stips.co.il, Facebook groups and Reddit all show up on page 1 for event questions).
 

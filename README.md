@@ -13,11 +13,11 @@ npm run preview    # serve the production build
 ```
 
 Deploy: Netlify picks up `netlify.toml` (build `npm run build`, publish `dist`).
-Netlify site: `tadam-game` (https://tadam-game.netlify.app). `tadam.netlify.app` was already taken.
+Netlify site: `heytadam` (formerly `tadam-game`), custom domain https://heytadam.com.
 
 ```bash
 netlify deploy --dir dist          # draft preview
-netlify deploy --dir dist --prod   # publish to tadam-game.netlify.app
+netlify deploy --dir dist --prod   # publish to heytadam.com
 ```
 
 ## Theme

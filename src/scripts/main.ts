@@ -58,7 +58,6 @@ function boot() {
     import("./scenes/scene2"),
     import("./scenes/scene3"),
     import("./scenes/scene4"),
-    import("./scenes/scene5"),
     import("./scenes/scene6"),
     import("./scenes/scene7"),
   ]);

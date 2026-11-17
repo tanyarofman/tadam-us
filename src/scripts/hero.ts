@@ -63,7 +63,7 @@ export function initHero(onDone?: () => void) {
   const ready = Promise.all([
     waitForImage(img),
     document.fonts?.ready ?? Promise.resolve(),
-    new Promise((r) => setTimeout(r, 1600)),
+    new Promise((r) => setTimeout(r, 900)),
   ]);
   const capWait = new Promise((r) => setTimeout(r, 3800));
 

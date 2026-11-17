@@ -37,7 +37,8 @@ const c = COPY.scene1;
   .s1-shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, var(--bg-0) 0%, transparent 38%, transparent 80%, var(--bg-0) 100%);
+    /* no navy bands: the photo itself fades into the page background (HallArt.astro) */
+    background: none;
     pointer-events: none;
   }
   .s1-copy {

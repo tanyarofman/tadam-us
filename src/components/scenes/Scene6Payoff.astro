@@ -3,13 +3,21 @@ import { COPY } from "../../content/copy.he";
 import SplitHeading from "../SplitHeading.astro";
 import KidOnStage from "../art/KidOnStage.astro";
 const c = COPY.scene6;
+const lights = COPY.scene5;
 const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", "var(--buzzer-red)", "#8a62d0"];
 ---
 
+<!-- Scenes 5 + 6 in one: the room lights up ("everyone answers together"), the leaderboard climbs, the winner. -->
 <section class="scene s6" id="scene-6" data-scene="6" aria-labelledby="s6-title">
   <div class="scene-pin s6-pin">
+    <div class="s6-glow" aria-hidden="true"></div>
+    <canvas class="s6-crowd" aria-hidden="true"></canvas>
     <canvas class="confetti" aria-hidden="true"></canvas>
     <div class="container s6-inner">
+      <div class="s6-heads">
+        <SplitHeading as="h2" id="s6-title" class="h-scene s6-title s6-title-a" text={lights.headline} highlight="ביחד" />
+        <SplitHeading as="p" class="h-scene s6-title s6-title-b" text={c.headline} />
+      </div>
 
       <div class="s6-grid">
         <div class="board-panel">
@@ -40,10 +48,7 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
         </div>
       </div>
 
-      <div class="s6-copy">
-        <SplitHeading as="h2" id="s6-title" class="h-scene s6-title" text={c.headline} />
-        <p class="lead s6-keepsake">{c.keepsake}</p>
-      </div>
+      <p class="lead s6-keepsake">{c.keepsake}</p>
     </div>
   </div>
 </section>
@@ -51,6 +56,33 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
 <style>
   .s6-pin {
     padding-block: clamp(56px, 8vh, 90px) 32px;
+  }
+  /* the lit phones of the whole room, behind the leaderboard */
+  .s6-crowd,
+  .s6-glow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .s6-glow {
+    background:
+      radial-gradient(45% 30% at 50% 22%, rgba(120, 190, 255, 0.22), transparent 70%),
+      radial-gradient(70% 40% at 50% 100%, rgba(0, 10, 60, 0.7), transparent 75%);
+  }
+  .s6-inner {
+    position: relative;
+    z-index: 1;
+  }
+  /* the two headlines share one spot: "everyone answers together" first, then the payoff */
+  .s6-heads {
+    display: grid;
+    text-align: center;
+  }
+  .s6-heads > :global(*) {
+    grid-area: 1 / 1;
+    align-self: center;
   }
   .confetti {
     position: absolute;
@@ -169,17 +201,16 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
     width: 100%;
     margin-inline: auto;
   }
-  .s6-copy {
-    text-align: center;
-  }
   :global(.s6-title) {
-    font-size: clamp(1.6rem, 4.6vw, 3.2rem);
+    margin: 0;
+    font-size: clamp(1.6rem, 4vw, 3rem);
     max-width: 20ch;
     margin-inline: auto;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .s6-keepsake {
-    margin-top: 10px;
+    margin: 0;
+    text-align: center;
   }
   @media (max-width: 767px) {
     .s6-grid {

@@ -1,11 +1,10 @@
 /**
- * Scene 5 (WOW #2, scroll-scrubbed): the room lights up. Phones come on from the back rows to the front,
- * then the headline lands.
- * Quality notes: sprites are drawn at 256px (sharp on retina), far phones are small and crisp,
- * near phones are big soft bokeh, and while the scene is on screen the phones sway and twinkle a little.
+ * The crowd of lit phones (canvas): phones come on from the back rows to the front as `draw(p)` goes 0 to 1.
+ * Sprites are drawn at 256px (sharp on retina); far phones are small and crisp, near phones are soft bokeh;
+ * while on screen (`setRunning(true)`) the phones sway and twinkle a little.
+ * Used behind the leaderboard scene (scripts/scenes/scene6.ts).
  */
-import { gsap } from "../../lib/scroll";
-import { animateWords, isMobile, seeded } from "../motion";
+import { isMobile, seeded } from "../scripts/motion";
 
 // Crowd lights use the brand tokens (read at runtime, so a theme change in tokens.css carries over)
 const TOKENS = ["--white", "--sky-cyan", "--white", "--sun-yellow", "--magenta"];
@@ -55,7 +54,7 @@ function makeSprite(color: string, soft: boolean) {
 
 type Phone = { x: number; y: number; s: number; c: number; t: number; soft: boolean; ph: number; sw: number };
 
-function makeCrowd(canvas: HTMLCanvasElement) {
+export function makeCrowd(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d")!;
   const colors = readColors();
   const sharp = colors.map((c) => makeSprite(c, false));
@@ -142,39 +141,3 @@ function makeCrowd(canvas: HTMLCanvasElement) {
   return { draw, setRunning };
 }
 
-export function init({ reduced }: { reduced: boolean }) {
-  const s = document.querySelector<HTMLElement>("[data-scene='5']");
-  if (!s) return;
-  const canvas = s.querySelector<HTMLCanvasElement>(".s5-crowd")!;
-  const crowd = makeCrowd(canvas);
-  if (reduced) {
-    crowd.draw(1);
-    return;
-  }
-
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => crowd.setRunning(entries.some((e) => e.isIntersecting))).observe(s);
-  }
-
-  const title = s.querySelector<HTMLElement>(".s5-title")!;
-  const state = { crowd: 0 };
-  const render = () => crowd.draw(state.crowd);
-  gsap.set(title.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
-
-  const mobile = isMobile();
-  gsap
-    .timeline({
-      defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: s,
-        start: "top top",
-        end: () => "+=" + window.innerHeight * (mobile ? 1.4 : 1.6),
-        pin: s.querySelector(".scene-pin"),
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-      },
-    })
-    .to(state, { crowd: 1, duration: 1.6, onUpdate: render })
-    .add(animateWords(title, { duration: 0.35, stagger: 0.05 }), 0.7)
-    .to({}, { duration: 0.5 });
-}

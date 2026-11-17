@@ -10,6 +10,7 @@ import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
 import StageBackdrop from "../StageBackdrop.astro";
 const c = COPY.hero;
+const d = COPY.scene3.demo;
 const wa = whatsappLink();
 ---
 
@@ -47,8 +48,8 @@ const wa = whatsappLink();
       </div>
     </div>
 
-    <figure class="hero-tv" data-hero-fade>
-      <div class="hero-tv-screen">
+    <figure class="hero-tv">
+      <div class="hero-tv-screen" data-state="loop">
         <video
           class="hero-loop"
           src="/demo/tadam-hero-loop.mp4"
@@ -59,8 +60,19 @@ const wa = whatsappLink();
           loop
           playsinline
           autoplay
-          preload="metadata"
+          preload="auto"
           aria-label={c.loopLabel}></video>
+        <div class="hero-tv-bar">
+          <button type="button" class="tv-btn" data-act="sound" aria-label={d.unmute} aria-pressed="false" data-on={d.mute} data-off={d.unmute}>
+            <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm12.5 1.4L18 12l-1.5 1.6 1 1 1.5-1.6 1.6 1.6 1-1-1.6-1.6L22 10.4l-1-1-1.5 1.6-1.6-1.6z" fill="currentColor"></path></svg>
+            <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm11.5 3a4 4 0 0 0-2-3.5v7a4 4 0 0 0 2-3.5zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" fill="currentColor"></path></svg>
+            <span class="tv-btn-text">{d.unmute}</span>
+          </button>
+          <button type="button" class="tv-btn" data-act="fs" aria-label={d.fullscreen}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v2H7v3H5zm9 0h5v5h-2V7h-3zM5 14h2v3h3v2H5zm12 0h2v5h-5v-2h3z" fill="currentColor"></path></svg>
+            <span class="tv-btn-text">{d.fullscreen}</span>
+          </button>
+        </div>
       </div>
       <figcaption>{c.loopCaption}</figcaption>
     </figure>
@@ -68,16 +80,79 @@ const wa = whatsappLink();
 </section>
 
 <script>
-  // The loop is decoration: never with reduced motion, and only while the hero is on screen.
-  const v = document.querySelector<HTMLVideoElement>(".hero-loop");
-  if (v) {
+  /**
+   * The hero TV. A short muted loop plays from the moment the page loads.
+   * Sound or full screen switches it to the full recording, from the same moment, with sound
+   * (like the full video in scene 3). When the full recording ends, the silent loop comes back.
+   */
+  type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+  const v = document.querySelector<FsVideo>(".hero-loop");
+  const screen = document.querySelector<HTMLElement>(".hero-tv-screen");
+  if (v && screen) {
+    const LOOP_SRC = v.currentSrc || v.getAttribute("src")!;
+    const FULL_SRC = "/demo/tadam-demo.mp4";
+    const LOOP_START = 16; // where the loop starts inside the full recording (seconds)
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const soundBtn = screen.querySelector<HTMLButtonElement>("[data-act='sound']")!;
+    const soundText = soundBtn.querySelector<HTMLElement>(".tv-btn-text")!;
+    let full = false;
+
+    const syncSound = () => {
+      const on = !v.muted;
+      soundBtn.setAttribute("aria-pressed", String(on));
+      const label = (on ? soundBtn.dataset.on : soundBtn.dataset.off)!;
+      soundBtn.setAttribute("aria-label", label);
+      soundText.textContent = label;
+      screen.dataset.sound = on ? "on" : "off";
+    };
+    const goFull = () => {
+      if (full) return;
+      full = true;
+      const t = LOOP_START + (v.currentTime || 0);
+      v.loop = false;
+      v.src = FULL_SRC;
+      v.addEventListener("loadedmetadata", () => (v.currentTime = t), { once: true });
+      screen.dataset.state = "full";
+    };
+    const backToLoop = () => {
+      full = false;
+      v.muted = true;
+      v.loop = true;
+      v.src = LOOP_SRC;
+      screen.dataset.state = "loop";
+      if (!reduced) v.play().catch(() => {});
+    };
+
+    soundBtn.addEventListener("click", () => {
+      if (v.muted) {
+        goFull();
+        v.muted = false;
+        v.play().catch(() => {});
+      } else {
+        v.muted = true;
+      }
+    });
+    screen.querySelector("[data-act='fs']")!.addEventListener("click", () => {
+      goFull();
+      v.muted = false;
+      v.play().catch(() => {});
+      if (v.requestFullscreen) v.requestFullscreen().catch(() => {});
+      else v.webkitEnterFullscreen?.(); // iPhone Safari
+    });
+    v.addEventListener("volumechange", syncSound);
+    v.addEventListener("ended", () => full && backToLoop());
+
     if (reduced) {
       v.removeAttribute("autoplay");
       v.pause();
-    } else if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause())).observe(v);
+    } else {
+      v.play().catch(() => {}); // start right away, even while the opening animation plays
+      if ("IntersectionObserver" in window) {
+        // off screen: pause; back on screen: resume (with sound only if the visitor turned it on)
+        new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause())).observe(v);
+      }
     }
+    syncSound();
   }
 </script>
 
@@ -182,6 +257,7 @@ const wa = whatsappLink();
     gap: 14px;
   }
   .hero-tv-screen {
+    position: relative;
     width: 100%;
     border: 12px solid #0b0f24;
     border-radius: 18px;
@@ -197,6 +273,68 @@ const wa = whatsappLink();
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+  }
+  /* sound + full screen, bottom of the TV */
+  .hero-tv-bar {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    background: linear-gradient(to top, rgba(2, 11, 46, 0.8), transparent);
+    line-height: 1.2;
+  }
+  .tv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    background: rgba(2, 11, 46, 0.7);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tv-btn:hover {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+    color: var(--purple-ink);
+  }
+  .tv-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+  /* the sound button is the yellow call to action until the sound is on */
+  .hero-tv-screen[data-sound="off"] [data-act="sound"] {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+    color: var(--purple-ink);
+  }
+  .tv-btn .i-on,
+  .hero-tv-screen[data-sound="on"] .tv-btn .i-off {
+    display: none;
+  }
+  .hero-tv-screen[data-sound="on"] .tv-btn .i-on {
+    display: block;
+  }
+  @media (max-width: 480px) {
+    .tv-btn {
+      min-height: 40px;
+      padding: 0 10px;
+      font-size: 0.9rem;
+    }
+    .tv-btn svg {
+      width: 18px;
+      height: 18px;
+    }
   }
   .hero-tv figcaption {
     font-size: var(--fs-small);

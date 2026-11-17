@@ -52,8 +52,7 @@ Scene 1  The event (hall)     Scene1Event.astro                           script
 Scene 2  Memories (bubbles)   Scene2Insight.astro                         scripts/scenes/scene2.ts
 Scene 3  WOW #1: buzzer+demo  Scene3Reveal.astro                          scripts/scenes/scene3.ts
 Scene 4  How it's built       Scene4HowItWorks.astro (+ privacy strip)    scripts/scenes/scene4.ts
-Scene 5  WOW #2: the moment   Scene5Moment.astro                          scripts/scenes/scene5.ts
-Scene 6  Leaderboard payoff   Scene6Payoff.astro                          scripts/scenes/scene6.ts
+Scene 6  Lights + leaderboard  Scene6Payoff.astro                          scripts/scenes/scene6.ts
 Scene 7  CTA                  Scene7Cta.astro                             scripts/scenes/scene7.ts
 FAQ, Footer, DemoModal        src/components/
 Blog                          src/pages/blog/ (index + [slug]), src/components/blog/, /llms.txt from src/pages/llms.txt.ts

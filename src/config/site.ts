@@ -3,8 +3,12 @@ export const SITE = {
   facebookUrl: "https://www.facebook.com/heytadam",
   /** Messenger chat with the page: every "דברו איתנו" button goes here. */
   messengerUrl: "https://m.me/heytadam",
-  /** Contact emails (privacy page). Lead-form submissions are emailed to both by Netlify (Forms → notifications). */
-  contactEmails: ["tanyarofman@gmail.com", "leibov@gmail.com"],
+  /**
+   * The public email address. It is a forwarding address (Forward Email, set up with DNS records in Netlify DNS:
+   * MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:...") that delivers to Tanya's and Ilan's Gmail.
+   * Lead-form submissions are emailed straight to both Gmail addresses (Netlify → Forms → notifications).
+   */
+  email: "hey@heytadam.com",
 };
 
 /**

@@ -11,7 +11,6 @@ import { COPY } from "../content/copy.he";
 import { SITE, contactLink } from "../config/site";
 const c = COPY.privacyPage;
 const updated = "17 בנובמבר 2026";
-const [mailTanya, mailIlan] = SITE.contactEmails;
 ---
 
 <Base title={`${c.title} | טדאם!`} description="איזה מידע טדאם! אוסף, למה, עם מי הוא משותף ומה הזכויות שלכם.">
@@ -115,7 +114,7 @@ const [mailTanya, mailIlan] = SITE.contactEmails;
         <li>לבקש לתקן מידע שגוי או למחוק מידע.</li>
         <li>לבקש שלא נפנה אליכם יותר.</li>
       </ul>
-      <p>כדי לממש את הזכויות, כתבו לנו לאחת מהכתובות שבסוף העמוד.</p>
+      <p>כדי לממש את הזכויות, כתבו לנו לכתובת שבסוף העמוד.</p>
     </section>
 
     <section id="security">
@@ -135,8 +134,7 @@ const [mailTanya, mailIlan] = SITE.contactEmails;
       <h2 class="display">9. יצירת קשר</h2>
       <p>שאלות, בקשות או הערות על הפרטיות שלכם? כתבו לנו:</p>
       <ul class="contact">
-        <li><a href={`mailto:${mailTanya}`} dir="ltr">{mailTanya}</a></li>
-        <li><a href={`mailto:${mailIlan}`} dir="ltr">{mailIlan}</a></li>
+        <li>מייל: <a href={`mailto:${SITE.email}`} dir="ltr">{SITE.email}</a></li>
         <li>מסנג'ר: <a href={contactLink("privacy")} target="_blank" rel="noopener">דף הפייסבוק של טדאם!</a></li>
       </ul>
     </section>

@@ -6,7 +6,6 @@ import Scene1Event from "../components/scenes/Scene1Event.astro";
 import Scene2Insight from "../components/scenes/Scene2Insight.astro";
 import Scene3Reveal from "../components/scenes/Scene3Reveal.astro";
 import Scene4HowItWorks from "../components/scenes/Scene4HowItWorks.astro";
-import Scene5Moment from "../components/scenes/Scene5Moment.astro";
 import Scene6Payoff from "../components/scenes/Scene6Payoff.astro";
 import Pricing from "../components/Pricing.astro";
 import Scene7Cta from "../components/scenes/Scene7Cta.astro";
@@ -18,6 +17,7 @@ import { COPY } from "../content/copy.he";
 ---
 
 <Base>
+  <link slot="head" rel="preload" as="image" type="image/webp" href="/demo/tadam-hero-loop-poster.webp" />
   <Preloader />
   <a class="skip-link" href="#scene-1">{COPY.nav.skip}</a>
   <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
@@ -29,7 +29,6 @@ import { COPY } from "../content/copy.he";
     <Scene2Insight />
     <Scene3Reveal />
     <Scene4HowItWorks />
-    <Scene5Moment />
     <Scene6Payoff />
     <Pricing />
     <Scene7Cta />

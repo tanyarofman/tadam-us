@@ -32,9 +32,12 @@ import Person from "./Person.astro";
 </div>
 
 <style>
+  /* the photo fades into the page's stage background at the top (behind the headline) and at the bottom */
   .hall-art {
     position: absolute;
     inset: 0;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 32%, #000 52%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, transparent 32%, #000 52%, #000 84%, transparent 100%);
   }
   .hall-art :global(.hall-photo) {
     height: 100%;

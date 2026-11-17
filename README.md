@@ -36,6 +36,7 @@ driven by CSS variables in `src/styles/tokens.css`.
 | Drafts for review (noindex, not linked, blocked in robots.txt) | `src/pages/drafts/` (WhatsApp flow sample) |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
+| "Leave details" form (Netlify Forms, form name `lead`) | `src/components/LeadForm.astro`; submissions in Netlify → Forms; email alerts in Netlify → Forms → Form notifications |
 | Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` (also `public/robots.txt`) |
 | Blog articles (one Markdown file each) | `src/content/blog/*.md`, schema in `src/content.config.ts` |
 | Blog status, plan, playbook, sources | `docs/seo/` (start with `status.md`) |

@@ -3,7 +3,6 @@ import { COPY } from "../../content/copy.he";
 import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
 import StageBackdrop from "../StageBackdrop.astro";
-import Buzzer from "../Buzzer.astro";
 const c = COPY.hero;
 ---
 
@@ -33,10 +32,6 @@ const c = COPY.hero;
     </div>
   </div>
 
-  <a class="scroll-hint" href="#scene-1" data-scroll-to="#scene-1" data-hero-fade>
-    <span class="scroll-hint__buzzer"><Buzzer id="hint-buzzer" /></span>
-    <span class="scroll-hint__text">{c.scrollHint}</span>
-  </a>
 </section>
 
 <style>
@@ -98,34 +93,6 @@ const c = COPY.hero;
   :global(html.js) .hero:not(.intro-pending) .hero-burst,
   :global(html.no-js) .hero-burst {
     opacity: 1;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: max(18px, env(safe-area-inset-bottom));
-    inset-inline: 0;
-    margin-inline: auto;
-    width: max-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    font-size: var(--fs-small);
-    color: var(--text-muted);
-  }
-  .scroll-hint__buzzer {
-    width: 40px;
-    animation: hint-pulse 1.6s var(--ease-out) infinite;
-  }
-  @keyframes hint-pulse {
-    0%,
-    100% {
-      transform: translateY(0) scale(1);
-    }
-    50% {
-      transform: translateY(5px) scale(0.92);
-    }
   }
 
   /* Hidden until the intro plays (JS only) */

@@ -37,10 +37,12 @@ export function initScroll() {
   return lenis;
 }
 
-export function scrollToTarget(target: string | HTMLElement) {
+/** `offset` in px past the target's top (e.g. deep into a pinned scene). */
+export function scrollToTarget(target: string | HTMLElement, offset = 0) {
   const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { duration: 1.6 });
+  if (lenis) lenis.scrollTo(el, { duration: 1.6, offset });
+  else if (offset) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: prefersReducedMotion() ? "auto" : "smooth" });
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 

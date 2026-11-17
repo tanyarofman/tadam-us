@@ -17,9 +17,18 @@ export const COPY = {
   hero: {
     headline: "הרגע שכולם יזכרו מהאירוע שלכם.",
     sub: "הסיפורים, התמונות והפרטים האישיים שלכם הופכים לשעשועון טריוויה לייב עם מנחה על המסך הגדול ובטלפונים של האורחים.",
-    ctaPrimary: "בואו לראות דמו",
-    ctaSecondary: "איך זה עובד",
+    ctaPrimary: "דברו איתנו!",
+    ctaSecondary: "לסרטון המלא",
     loading: "טוען",
+    nav: [
+      { label: "איך זה עובד", href: "#scene-4" },
+      { label: "המנחים שלנו", href: "#hosts" },
+      { label: "שאלות נפוצות", href: "#faq" },
+    ],
+    navCta: "דברו איתנו",
+    navLabel: "ניווט ראשי",
+    loopLabel: "קטע מהקלטה של משחק אמיתי: המנחה על המסך הגדול ואורחת עונה מהטלפון",
+    loopCaption: "הקלטה של משחק אמיתי",
   },
 
   eventsStrip: {
@@ -138,6 +147,16 @@ export const COPY = {
   pricing: {
     includedTitle: "מה זה כולל?",
     includedSub: "כל מה שצריך למשחק שלם באירוע שלכם.",
+    /** The "what's included" tiles (shown while prices are hidden). icon: story | host | phone | trophy | build | gift */
+    included: [
+      { icon: "story", title: "משחק שנבנה עליכם", text: "שאלות, תמונות ובדיחות פנימיות מהסיפורים שאתם שולחים." },
+      { icon: "host", title: "מנחה על המסך הגדול", text: "בוחרים מנחה מתוך {readyMadeHosts} מנחים מוכנים, והוא מריץ את כל המשחק." },
+      { icon: "phone", title: "כל האורחים משחקים", text: "סורקים קוד ועונים מהטלפון. בלי להוריד אפליקציה." },
+      { icon: "trophy", title: "טבלת מובילים ומנצח", text: "ניקוד חי, מתח עד השאלה האחרונה, והכרזה על המנצח." },
+      { icon: "build", title: "אנחנו בונים, אתם נהנים", text: "שולחים לנו את החומרים, ואנחנו מכינים את המשחק מההתחלה ועד הסוף." },
+      { icon: "gift", title: "המשחק נשאר אצלכם", text: "אחרי האירוע המשחק נשאר אצלכם כמזכרת." },
+    ],
+    includedCta: "דברו איתנו!",
     extraBadge: "בתוספת",
     title: "כמה זה עולה?",
     sub: "מחיר אחד ברור למשחק שלם לאירוע שלכם. ומי שרוצה, מוסיף.",

@@ -1,6 +1,7 @@
 ---
 import { COPY } from "../content/copy.he";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
+import { whatsappLink } from "../config/site";
 import StageBackdrop from "./StageBackdrop.astro";
 import Person from "./art/Person.astro";
 const c = COPY.pricing;
@@ -9,6 +10,16 @@ const hostPhotos = ["host-classic", "host-friendly", "host-animated"];
 const cur = PRICING.currency;
 // Prices hidden: the section becomes "what's included" (no numbers, no edit card, add-ons get a badge).
 const show = PRICING.showPrices;
+const incColors = ["var(--game-yellow)", "var(--sky-cyan)", "var(--magenta)", "var(--buzzer-red)"];
+// simple line icons (24x24, stroke = currentColor)
+const icons: Record<string, string> = {
+  story: '<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M8 9h6M8 13h4"/><path d="M18 8h2v11"/>',
+  host: '<circle cx="12" cy="7" r="3.2"/><path d="M5.5 20c.6-4 3.2-6 6.5-6s5.9 2 6.5 6"/><path d="m10.5 14 1.5 3 1.5-3"/>',
+  phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/><path d="M9.5 7.5h5M9.5 11h5"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20.5h7M10 17h4"/>',
+  build: '<path d="m4 20 10-10"/><path d="m14 4 1 2.5L17.5 7.5 15 8.5 14 11l-1-2.5L10.5 7.5 13 6.5z"/><path d="M19 13v3M17.5 14.5h3"/>',
+  gift: '<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18M12 9v11"/><path d="M12 9C10 5 6.5 5.5 7.5 8c.4 1 2.5 1 4.5 1zM12 9c2-4 5.5-3.5 4.5-1-.4 1-2.5 1-4.5 1z"/>',
+};
 ---
 
 <section class="scene pricing" id="pricing" data-scene="pricing" aria-labelledby="pricing-title">
@@ -17,10 +28,31 @@ const show = PRICING.showPrices;
     <h2 id="pricing-title" class="display h-scene pricing-title reveal">{show ? c.title : c.includedTitle}</h2>
     <p class="lead pricing-sub reveal">{show ? c.sub : c.includedSub}</p>
 
-    <ul class:list={["cards", { "cards--single": !show }]} role="list" aria-label={show ? c.cardsLabel : undefined}>
+    {!show && (
+      <>
+        <ul class="included" role="list">
+          {c.included.map((it, i) => (
+            <li class="inc reveal" style={`--c:${incColors[i % incColors.length]}`}>
+              <span class="inc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[it.icon]} />
+              </span>
+              <h3 class="inc-title display">{it.title}</h3>
+              <p class="inc-text">{fillPrices(it.text)}</p>
+            </li>
+          ))}
+        </ul>
+        <a class="btn btn-buzzer inc-cta reveal" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="pricing">
+          <span class="btn-dot" aria-hidden="true"></span>
+          {c.includedCta}
+        </a>
+      </>
+    )}
+
+    {show && (
+    <ul class="cards" role="list" aria-label={c.cardsLabel}>
       <li class="card card--main reveal">
         <h3 class="card-name">{c.cards.base.name}</h3>
-        {show && <p class="price"><span class="num">{PRICING.base}</span><span class="cur" aria-label="שקלים">{cur}</span></p>}
+        {<p class="price"><span class="num">{PRICING.base}</span><span class="cur" aria-label="שקלים">{cur}</span></p>}
         <ul class="perks" role="list">
           {c.cards.base.perks.map((p) => <li class="pill">{fillPrices(p)}</li>)}
         </ul>
@@ -30,19 +62,17 @@ const show = PRICING.showPrices;
         </a>
       </li>
 
-      {show && (
-        <li class="card reveal">
-          <h3 class="card-name">{c.cards.edit.name}</h3>
-          <p class="price"><span class="num">{PRICING.edit}</span><span class="cur" aria-label="שקלים">{cur}</span></p>
-          <p class="card-text">{c.cards.edit.text}</p>
-          <p class="card-note">{c.cards.edit.note}</p>
-        </li>
-      )}
+      <li class="card reveal">
+        <h3 class="card-name">{c.cards.edit.name}</h3>
+        <p class="price"><span class="num">{PRICING.edit}</span><span class="cur" aria-label="שקלים">{cur}</span></p>
+        <p class="card-text">{c.cards.edit.text}</p>
+        <p class="card-note">{c.cards.edit.note}</p>
+      </li>
 
     </ul>
+    )}
 
-    {show && <h3 class="addons-title display reveal">{c.addonsTitle}</h3>}
-    <div class="hosts reveal" aria-labelledby="hosts-title">
+    <div class="hosts reveal" id="hosts" aria-labelledby="hosts-title">
       <div class="hosts-top">
         <div class="hosts-photos" role="list" aria-label={h.photosLabel}>
           {hostPhotos.map((name, i) => (
@@ -61,32 +91,6 @@ const show = PRICING.showPrices;
 
     </div>
 
-    <ul class="addons addons--host" role="list">
-      <li class="addon reveal">
-        <div class="addon-body">
-          <p class="addon-name">{c.addons.personalHost.title}</p>
-          <p class="addon-text">{h.personalText}</p>
-        </div>
-        {show ? (
-          <p class="addon-price"><span class="num">{PRICING.personalHost}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
-        ) : (
-          <p class="addon-price addon-price--badge"><span class="plus" aria-hidden="true">+</span>{c.extraBadge}</p>
-        )}
-      </li>
-    </ul>
-    <ul class="addons" role="list">
-      <li class="addon reveal">
-        <div class="addon-body">
-          <p class="addon-name">{c.addons.contributorLink.title}</p>
-          <p class="addon-text">{c.addons.contributorLink.text}</p>
-        </div>
-        {show ? (
-          <p class="addon-price"><span class="num">{PRICING.contributorLink}</span><span class="cur" aria-label="שקלים">{cur}</span><span class="plus" aria-hidden="true">+</span></p>
-        ) : (
-          <p class="addon-price addon-price--badge"><span class="plus" aria-hidden="true">+</span>{c.extraBadge}</p>
-        )}
-      </li>
-    </ul>
     {show && <p class="pricing-note">{c.note}</p>}
   </div>
 </section>
@@ -231,92 +235,93 @@ const show = PRICING.showPrices;
     margin-top: auto;
   }
 
-  /* ---- add-ons ---- */
-  .addons-title {
-    margin: clamp(22px, 4vh, 40px) 0 0;
-    font-size: var(--fs-h3);
-    color: var(--sun-yellow);
-  }
-  .addons {
+  /* ---- what's included (prices hidden) ---- */
+  .included {
     list-style: none;
     margin: 0;
     padding: 0;
     width: 100%;
-    max-width: 880px;
+    max-width: 1080px;
     display: grid;
-    gap: 12px;
-  }
-  /* answer pill: text on the right, value on the left */
-  .addon {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    padding: 18px 20px;
-    border-radius: 28px;
-    background: var(--white);
-    color: var(--bg-0);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 1.8vw, 20px);
     text-align: right;
   }
-  .addon-body {
-    min-width: 0;
+  .inc {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "icon title" "icon text";
+    column-gap: 16px;
+    row-gap: 4px;
+    align-items: start;
+    padding: 22px 22px 24px;
+    border-radius: 8px 30px 8px 30px; /* the slanted-card look of the host photos */
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+    border: 2px solid var(--surface-border);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
   }
-  .addon-name {
-    margin: 0 0 4px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.3rem;
-    line-height: 1.2;
+  /* a strip of the tile's color along the start edge */
+  .inc::before {
+    content: "";
+    position: absolute;
+    inset-block: 18px;
+    inset-inline-start: 0;
+    width: 5px;
+    border-radius: 0 5px 5px 0;
+    background: var(--c);
   }
-  .addon-text {
+  .inc-icon {
+    grid-area: icon;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: var(--c);
+    color: var(--purple-ink);
+    border: 3px solid var(--purple-ink);
+    box-shadow: 0 4px 0 var(--purple-ink);
+    transform: rotate(-4deg);
+  }
+  .inc-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  .inc-title {
+    grid-area: title;
+    margin: 0;
+    font-size: clamp(1.3rem, 1.9vw, 1.55rem);
+    line-height: 1.15;
+    color: var(--white);
+  }
+  .inc-text {
+    grid-area: text;
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.45;
-    color: color-mix(in srgb, var(--bg-0) 78%, white);
+    color: var(--text-muted);
   }
-  .addon-price {
-    margin: 0;
-    flex: none;
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 8px 18px 9px;
-    border-radius: 999px;
-    background: var(--bg-0);
-    color: var(--sun-yellow);
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1;
+  .inc-cta {
+    margin-top: clamp(10px, 2vh, 20px);
+    min-width: min(320px, 100%);
   }
-  .addon-price .num {
-    font-size: 1.9rem;
+  @media (max-width: 960px) {
+    .included {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
-  .addon-price .cur {
-    font-size: 1.15rem;
-    margin-inline-start: 2px;
-  }
-  .addon-price .plus {
-    font-size: 1.4rem;
-  }
-  .addon-price--badge {
-    align-items: center;
-    font-size: 1.15rem;
-    white-space: nowrap;
-  }
-  .addon-price--badge .plus {
-    font-size: 1.3rem;
-  }
-  .addon-price .join {
-    font-size: 1.05rem;
-    color: var(--white);
+  @media (max-width: 600px) {
+    .included {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   /* ---- hosts showcase ---- */
   .hosts {
     width: 100%;
-    max-width: 880px;
+    max-width: 1080px;
     margin-top: clamp(14px, 3vh, 28px);
     display: grid;
     gap: 22px;
@@ -333,13 +338,25 @@ const show = PRICING.showPrices;
     gap: clamp(8px, 2vw, 18px);
     direction: ltr; /* order as in the design: classic, friendly, animated */
   }
-  .host-photo {
-    border-radius: 18px;
-    transform: skewX(-4deg);
-    box-shadow: 0 14px 30px rgba(0, 0, 20, 0.4);
+  /* Ilan's host cards: slanted sides, one big rounded corner, stepping up from left to right */
+  .hosts-photos {
+    align-items: end;
+    padding-top: 28px;
   }
-  .host-photo--2 {
-    transform: skewX(-4deg) translateY(-8px);
+  .hosts-photos :global(.host-photo) {
+    aspect-ratio: 3 / 4.6 !important;
+    border-radius: 6px 34px 6px 28px;
+    transform: skewX(-4deg);
+    box-shadow: 0 18px 36px rgba(0, 0, 20, 0.45);
+  }
+  .hosts-photos :global(.host-photo .person-img) {
+    transform: skewX(4deg) scale(1.1); /* keep the faces straight inside the slanted card */
+  }
+  .hosts-photos :global(.host-photo--2) {
+    transform: skewX(-4deg) translateY(-14px);
+  }
+  .hosts-photos :global(.host-photo--3) {
+    transform: skewX(-4deg) translateY(-28px);
   }
   .hosts-head {
     position: relative;
@@ -396,31 +413,12 @@ const show = PRICING.showPrices;
       grid-template-columns: 1.25fr 1fr;
     }
   }
-  .addons--host {
-    margin-top: -6px;
-  }
-  .addons--host + .addons {
-    margin-top: 0;
-  }
   .pricing-note {
     margin: 6px 0 0;
     color: var(--text-muted);
     font-size: var(--fs-small);
   }
 
-  @media (min-width: 640px) {
-    .addon {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 18px 26px;
-      border-radius: 999px;
-    }
-    .addon-price {
-      align-self: center;
-    }
-  }
   .cards--single {
     max-width: 520px;
   }

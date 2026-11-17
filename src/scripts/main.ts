@@ -22,7 +22,9 @@ function initLinks() {
     const a = (e.target as HTMLElement).closest<HTMLElement>("[data-scroll-to]");
     if (a) {
       e.preventDefault();
-      scrollToTarget(a.dataset.scrollTo!);
+      // data-scroll-offset: extra screens to scroll past the target (lands inside a pinned scene)
+      const screens = prefersReducedMotion() ? 0 : Number(a.dataset.scrollOffset) || 0;
+      scrollToTarget(a.dataset.scrollTo!, screens * window.innerHeight);
     }
     const t = (e.target as HTMLElement).closest<HTMLElement>("[data-track]");
     if (t) track(t.dataset.track as TrackEvent, { source: t.dataset.source });

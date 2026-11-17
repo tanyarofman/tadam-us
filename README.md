@@ -34,7 +34,7 @@ driven by CSS variables in `src/styles/tokens.css`.
 | WhatsApp number + message | `src/config/site.ts` (now Ilan's number, temporary) |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
-| Drafts for review (noindex, not linked) | `src/pages/drafts/` (hero concepts, WhatsApp flow sample) |
+| Drafts for review (noindex, not linked, blocked in robots.txt) | `src/pages/drafts/` (WhatsApp flow sample) |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | Production domain (canonical / OG URLs) | `astro.config.mjs` → `site` (also `public/robots.txt`) |

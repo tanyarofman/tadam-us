@@ -1,7 +1,6 @@
 ---
 import { COPY } from "../content/copy.he";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
-import { whatsappLink } from "../config/site";
 import StageBackdrop from "./StageBackdrop.astro";
 import Person from "./art/Person.astro";
 const c = COPY.pricing;
@@ -41,10 +40,6 @@ const icons: Record<string, string> = {
             </li>
           ))}
         </ul>
-        <a class="btn btn-buzzer inc-cta reveal" href={whatsappLink()} target="_blank" rel="noopener" data-track="cta_whatsapp_click" data-source="pricing">
-          <span class="btn-dot" aria-hidden="true"></span>
-          {c.includedCta}
-        </a>
       </>
     )}
 
@@ -302,10 +297,6 @@ const icons: Record<string, string> = {
     font-size: 1.05rem;
     line-height: 1.45;
     color: var(--text-muted);
-  }
-  .inc-cta {
-    margin-top: clamp(10px, 2vh, 20px);
-    min-width: min(320px, 100%);
   }
   @media (max-width: 960px) {
     .included {

@@ -290,6 +290,11 @@ p {
     radial-gradient(70% 140% at 50% 0%, rgba(120, 160, 255, 0.35), transparent 70%),
     linear-gradient(180deg, #0a2290 0%, var(--floor-blue) 40%, #0a2a9e 100%);
 }
+/* page-wide: the same stage beams behind every section, fixed to the viewport (so each screen looks like the hero) */
+.stage-backdrop.page-stage {
+  position: fixed;
+  z-index: -1;
+}
 /* vertical reflections of the light beams on the floor */
 .stage-backdrop .reflections {
   position: absolute;

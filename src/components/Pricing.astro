@@ -22,7 +22,7 @@ const icons: Record<string, string> = {
 ---
 
 <section class="scene pricing" id="pricing" data-scene="pricing" aria-labelledby="pricing-title">
-  <StageBackdrop />
+  <StageBackdrop floorOnly />
   <div class="container pricing-inner">
     <h2 id="pricing-title" class="display h-scene pricing-title reveal">{show ? c.title : c.includedTitle}</h2>
     <p class="lead pricing-sub reveal">{show ? c.sub : c.includedSub}</p>

@@ -7,7 +7,7 @@ export const COPY = {
   meta: {
     title: "טדאם! | משחק הטריוויה החי לכל אירוע",
     description:
-      "משחק טריוויה חי על החוגג.ת שלכם, שנבנה מהסיפורים של המשפחה והחברים. כולם סורקים, כולם משחקים, ומי שמכיר הכי טוב מנצח.",
+      "הסיפורים, התמונות והפרטים האישיים שלכם הופכים לשעשועון טריוויה לייב עם מנחה על המסך הגדול ובטלפונים של האורחים.",
   },
 
   nav: {
@@ -15,8 +15,8 @@ export const COPY = {
   },
 
   hero: {
-    headline: "הרגע שכולם יזכרו מהאירוע.",
-    sub: "משחק טריוויה חי על החוגג.ת שלכם, שנבנה מהסיפורים של המשפחה והחברים. כולם סורקים, כולם משחקים, ומי שמכיר הכי טוב מנצח.",
+    headline: "הרגע שכולם יזכרו מהאירוע שלכם.",
+    sub: "הסיפורים, התמונות והפרטים האישיים שלכם הופכים לשעשועון טריוויה לייב עם מנחה על המסך הגדול ובטלפונים של האורחים.",
     ctaPrimary: "בואו לראות דמו",
     ctaSecondary: "איך זה עובד",
     scrollHint: "גללו למטה",
@@ -29,6 +29,7 @@ export const COPY = {
       "ימי הולדת",
       "בר ובת מצווה",
       "הרמות כוסית",
+      "אירועי חברה",
       "חתונות",
       "ימי נישואין",
       "אירועי משפחה",
@@ -104,26 +105,7 @@ export const COPY = {
   },
 
   scene5: {
-    headline: "סורקים, משחקים, וכל האולם עונה ביחד.",
-    // Placeholder celebrant name (session B decides the final one; keep it consistent with docs/PLAN.md).
-    celebrant: "נועה",
-    question: "מה נועה הכי אוהבת לאכול?",
-    // votes are demo numbers; they only show on the reveal, like in the real game
-    answers: [
-      { text: "פיצה", votes: 14 },
-      { text: "שניצל ופירה", votes: 52 },
-      { text: "סושי", votes: 19 },
-      { text: "פסטה", votes: 7 },
-    ],
-    correctIndex: 1,
-    pickedIndex: 1,
-    questionLabel: "שאלה ראשונה",
-    connected: "מחוברים",
-    connectedCount: 92,
-    phoneNext: "יאללה, בואו נתקדם",
-    bigScreenLabel: "המסך הגדול באולם",
-    phoneLabel: "הטלפון של אורח",
-    ringSeconds: 15,
+    headline: "סורקים, משחקים, וכולם עונים ביחד.",
   },
 
   scene6: {

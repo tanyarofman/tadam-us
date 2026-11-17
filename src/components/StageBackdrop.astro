@@ -6,15 +6,19 @@
  */
 interface Props {
   class?: string;
+  /** only the floor + glowing strip: the beams come from the page-wide layer (.page-stage in Base.astro) */
+  floorOnly?: boolean;
+  /** only the beams + edges, fixed to the viewport, behind the whole page (Base.astro) */
+  page?: boolean;
 }
-const { class: cls = "" } = Astro.props;
+const { class: cls = "", floorOnly = false, page = false } = Astro.props;
 ---
 
-<div class:list={["stage-backdrop", cls]} aria-hidden="true">
-  <div class="beams"></div>
-  <div class="edges"></div>
-  <div class="wall-base"></div>
-  <div class="floor"></div>
-  <div class="reflections"></div>
-  <div class="floor-strip"></div>
+<div class:list={["stage-backdrop", { "page-stage": page }, cls]} aria-hidden="true">
+  {!floorOnly && <div class="beams"></div>}
+  {!floorOnly && <div class="edges"></div>}
+  {!page && <div class="wall-base"></div>}
+  {!page && <div class="floor"></div>}
+  {!page && <div class="reflections"></div>}
+  {!page && <div class="floor-strip"></div>}
 </div>

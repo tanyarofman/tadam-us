@@ -14,11 +14,11 @@ const wa = whatsappLink();
 ---
 
 <section class="scene hero intro-pending" id="top" data-scene="hero" aria-labelledby="hero-title">
-  <StageBackdrop />
+  <StageBackdrop floorOnly />
   <div class="hero-burst" aria-hidden="true"></div>
   <div class="hero-loading sr-only" role="status" aria-live="polite">{c.loading}</div>
 
-  <header class="hero-bar container">
+  <header class="hero-bar container hero-wide">
     <a href="#top" class="hero-home" aria-label="טדאם!">
       <LogoAssemble class="hero-logo" />
     </a>
@@ -32,7 +32,7 @@ const wa = whatsappLink();
     </a>
   </header>
 
-  <div class="hero-inner container">
+  <div class="hero-inner container hero-wide">
     <div class="hero-copy">
       <SplitHeading as="h1" id="hero-title" class="h-hero hero-title" text={c.headline} highlight="יזכרו" breakAfter={3} />
       <p class="lead hero-sub" data-hero-fade>{c.sub}</p>
@@ -91,6 +91,11 @@ const wa = whatsappLink();
     overflow: hidden;
   }
 
+  /* the hero runs wider than the rest of the page, so the TV and the headline can be big */
+  .hero-wide {
+    --max-w: 1480px;
+  }
+
   /* ---- top bar ---- */
   .hero-bar {
     position: relative;
@@ -142,9 +147,9 @@ const wa = whatsappLink();
     z-index: 2;
     flex: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
     align-items: center;
-    gap: clamp(28px, 4.5vw, 72px);
+    gap: clamp(28px, 4vw, 64px);
   }
   .hero-copy {
     display: flex;
@@ -153,12 +158,13 @@ const wa = whatsappLink();
     gap: clamp(14px, 2.4vh, 24px);
   }
   :global(.hero-title) {
-    font-size: clamp(2.6rem, 4.9vw, 5rem);
+    font-size: clamp(2.8rem, 5.2vw, 6rem);
     line-height: 1.05;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .hero-sub {
     max-width: 46ch;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
   }
   .hero-ctas {
     display: flex;

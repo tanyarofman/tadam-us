@@ -30,7 +30,7 @@ driven by CSS variables in `src/styles/tokens.css`.
 | What | File |
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
-| Contact link (Messenger, heytadam Facebook page) + Facebook page + contact emails | `src/config/site.ts` |
+| Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
 | Colors / type scale / theme | `src/styles/tokens.css` |

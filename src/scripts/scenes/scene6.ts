@@ -1,5 +1,5 @@
 /**
- * Scenes 5 + 6 in one: "סורקים, משחקים, וכולם עונים ביחד" over a dimmed game video,
+ * Scenes 5 + 6 in one: "סורקים, משחקים, וכולם עונים ביחד" over the static site background,
  * then the scores change on the big screen, drumroll, the winner is... סבתא. A little confetti,
  * and the headline turns into the payoff. Kept calm on purpose: soft moves, no shaking.
  */
@@ -34,27 +34,11 @@ export function init({ reduced }: { reduced: boolean }) {
   const titleA = q(".s6-title-a");
   const title = q(".s6-title-b");
   const canvas = q<HTMLCanvasElement>(".confetti");
-  const bg = q<HTMLVideoElement>(".s6-bg");
 
   if (reduced) {
     gsap.set(titleA, { opacity: 0 });
     return;
   }
-
-  // the background video loads only when the scene is near, and plays only while it is on screen
-  let bgLoaded = false;
-  new IntersectionObserver(
-    ([e]) => {
-      if (e.isIntersecting) {
-        if (!bgLoaded) {
-          bgLoaded = true;
-          bg.preload = "auto";
-        }
-        bg.play().catch(() => {});
-      } else bg.pause();
-    },
-    { rootMargin: "50% 0px" },
-  ).observe(s);
 
   const fmt = new Intl.NumberFormat("he-IL");
   const pitch = () => rows[1].offsetTop - rows[0].offsetTop;

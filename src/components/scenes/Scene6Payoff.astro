@@ -9,17 +9,6 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
 <!-- Scenes 5 + 6 in one: everyone answers together, the scores change on the big screen, the winner. -->
 <section class="scene s6" id="scene-6" data-scene="6" aria-labelledby="s6-title">
   <div class="scene-pin s6-pin">
-    <!-- a real game, muted and dimmed, playing behind the leaderboard (decorative) -->
-    <video
-      class="s6-bg"
-      src="/demo/tadam-hero-loop.mp4"
-      poster="/demo/tadam-hero-loop-poster.webp"
-      muted
-      loop
-      playsinline
-      preload="none"
-      aria-hidden="true"
-      tabindex="-1"></video>
     <div class="s6-shade" aria-hidden="true"></div>
     <canvas class="confetti" aria-hidden="true"></canvas>
 
@@ -60,7 +49,6 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
     align-items: start;
     padding-block: var(--story-heading-top) 32px;
   }
-  .s6-bg,
   .s6-shade {
     position: absolute;
     inset: 0;
@@ -68,13 +56,7 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
     height: 100%;
     pointer-events: none;
   }
-  .s6-bg {
-    object-fit: cover;
-    filter: blur(3px) saturate(0.9);
-    transform: scale(1.04); /* hide the blurred edges */
-    opacity: 0.6;
-  }
-  /* darken the video so the board and the headline stay easy to read */
+  /* static shading keeps the board and headline clear against the site background */
   .s6-shade {
     background:
       radial-gradient(60% 50% at 50% 55%, rgba(2, 11, 46, 0.45), rgba(2, 11, 46, 0.85) 100%),
@@ -228,11 +210,6 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
     .lb-avatar {
       width: 32px;
       height: 32px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .s6-bg {
-      display: none;
     }
   }
   @media (max-width: 767px) and (max-height: 700px) {

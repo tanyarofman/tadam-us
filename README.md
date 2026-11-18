@@ -44,7 +44,7 @@ FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 
 ```
 Scene 0  Hero (TV + phone loops)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts, scripts/synced-preview.ts
-Scene 3  Event photo → buzzer → demo  Scene3Reveal.astro                 scripts/scenes/scene3.ts
+Scene 3  Event photo → logo → demo  Scene3Reveal.astro                   scripts/scenes/scene3.ts
 Scene 4  How it's built       Scene4HowItWorks.astro                      scripts/scenes/scene4.ts
 Scene 6  Leaderboard + winner  Scene6Payoff.astro                          scripts/scenes/scene6.ts
 Hosts                        src/components/Hosts.astro

@@ -25,6 +25,10 @@ The preceding visual updates are included: animated opening text with the underl
 
 Subsequent spacing updates center the complete host section, lower the portraits inside their cards, add the larger `(ואפשר גם ליצור מנחה משלכם!)` heading, and increase space above "מה זה כולל?". The closing section now has 88 px / 216 px top/bottom padding on desktop and 64 px / 176 px on mobile. The footer contact label is "דברו איתנו".
 
+## Integration with the latest main branch
+
+The subsequent merge of #50 retains its logo-only reveal, larger standalone leaderboard with a dimmed game-video background, softer score animations, and removal of the grandmother photo and crowd animation. The earlier photograph-specific leaderboard measurements above describe the initial mobile review. The combined version keeps the synchronized hero clips, final copy and spacing, large readable subtitles, and compact short-screen/landscape styles.
+
 ## Manual/device checks still needed
 
 - Chrome denied native fullscreen with `TypeError: not granted` in the automated browser session. Fullscreen on a physical phone and iPhone's native video player remain unverified.

@@ -1,6 +1,7 @@
 /**
- * Scenes 5 + 6 in one: everyone joins ("סורקים, משחקים, וכולם עונים ביחד"),
- * then the leaderboard climbs, drumroll, the winner is... סבתא. Confetti, and the headline turns into the payoff.
+ * Scenes 5 + 6 in one: "סורקים, משחקים, וכולם עונים ביחד" over a dimmed game video,
+ * then the scores change on the big screen, drumroll, the winner is... סבתא. A little confetti,
+ * and the headline turns into the payoff. Kept calm on purpose: soft moves, no shaking.
  */
 import { gsap } from "../../lib/scroll";
 import { confettiBurst } from "../../lib/confetti";
@@ -30,19 +31,30 @@ export function init({ reduced }: { reduced: boolean }) {
   const winner = rows[0];
   const crown = q(".lb-crown");
   const drum = q(".drumroll");
-  const kid = q(".kid-wrap");
   const titleA = q(".s6-title-a");
   const title = q(".s6-title-b");
   const canvas = q<HTMLCanvasElement>(".confetti");
-
-  // the living photo only animates while it is on screen
-  new IntersectionObserver(([e]) => kid.classList.toggle("is-offscreen", !e.isIntersecting)).observe(kid);
+  const bg = q<HTMLVideoElement>(".s6-bg");
 
   if (reduced) {
-    kid.classList.add("is-laughing");
     gsap.set(titleA, { opacity: 0 });
     return;
   }
+
+  // the background video loads only when the scene is near, and plays only while it is on screen
+  let bgLoaded = false;
+  new IntersectionObserver(
+    ([e]) => {
+      if (e.isIntersecting) {
+        if (!bgLoaded) {
+          bgLoaded = true;
+          bg.preload = "auto";
+        }
+        bg.play().catch(() => {});
+      } else bg.pause();
+    },
+    { rootMargin: "50% 0px" },
+  ).observe(s);
 
   const fmt = new Intl.NumberFormat("he-IL");
   const pitch = () => rows[1].offsetTop - rows[0].offsetTop;
@@ -59,7 +71,6 @@ export function init({ reduced }: { reduced: boolean }) {
   winner.classList.remove("is-winner");
   gsap.set(crown, { scale: 0, opacity: 0 });
   gsap.set([...titleA.querySelectorAll(".word-in"), ...title.querySelectorAll(".word-in")], { opacity: 0, yPercent: 110 });
-  gsap.set(kid, { opacity: 0.35, scale: 0.9 });
   Object.assign(scores, scoreVars(0));
   renderScores();
   setRanks(0);
@@ -72,39 +83,35 @@ export function init({ reduced }: { reduced: boolean }) {
       start: "top top",
       end: () => "+=" + window.innerHeight * (isMobile() ? 2.5 : 2.7),
       pin: s.querySelector(".scene-pin"),
-      scrub: 0.4,
+      scrub: 0.8,
       invalidateOnRefresh: true,
     },
   });
 
   // 1. everyone answers together
-  tl.add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }))
-    .to({}, { duration: 0.2 });
+  tl.add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }), 0.1).to({}, { duration: 0.4 });
 
   // 2. the leaderboard climbs
   for (let step = 1; step <= 2; step++) {
     tl.to(scores, { ...scoreVars(step), duration: 0.6, onUpdate: renderScores })
       .call(() => setRanks(tl.scrollTrigger?.direction === -1 ? step - 1 : step))
-      .add(gsap.to(rows, { y: (i: number) => yFor(step, i), duration: 0.5, ease: "power2.inOut" }), "<")
-      .to({}, { duration: 0.2 });
+      .add(gsap.to(rows, { y: (i: number) => yFor(step, i), duration: 0.6, ease: "power1.inOut" }), "<")
+      .to({}, { duration: 0.25 });
   }
   // drumroll
-  tl.to(drum, { opacity: 1, duration: 0.15 })
-    .to(rows.slice(0, 2), { x: 4, duration: 0.05, yoyo: true, repeat: 7 }, "<")
+  tl.to(drum, { opacity: 1, duration: 0.2 })
     .to({}, { duration: 0.4 })
     .to(drum, { opacity: 0, duration: 0.1 })
     // the reveal
     .to(scores, { ...scoreVars(3), duration: 0.4, onUpdate: renderScores })
-    .add(gsap.to(rows, { y: (i: number) => yFor(3, i), duration: 0.5, ease: "back.out(1.6)" }), "<")
+    .add(gsap.to(rows, { y: (i: number) => yFor(3, i), duration: 0.6, ease: "power2.out" }), "<")
     .call(() => {
       const fwd = tl.scrollTrigger?.direction !== -1;
       setRanks(fwd ? 3 : 2);
       winner.classList.toggle("is-winner", fwd);
-      kid.classList.toggle("is-laughing", fwd);
-      if (fwd) confettiBurst(canvas);
+      if (fwd) confettiBurst(canvas, 70, 2600);
     })
-    .to(crown, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(3)" })
-    .to(kid, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, "<")
+    .to(crown, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" })
     // 3. the headline turns into the payoff
     .to(titleA, { opacity: 0, y: -16, duration: 0.25 })
     .add(animateWords(title, { duration: 0.35, stagger: 0.05 }))

@@ -1,6 +1,5 @@
 /**
- * One shared scene: an expectant event photo, lights down, the buzzer gets pressed by the scroll,
- * "טדאם!" bursts, then the big screen "turns on" with the demo video.
+ * One shared scene: the event photo dims, the logo bursts in the center, then the demo video starts.
  *
  * Video: muted autoplay only while the screen is on and in view, pauses out of view,
  * never autoplays with sound, no autoplay at all with prefers-reduced-motion (poster + play button).
@@ -143,15 +142,11 @@ export function init({ reduced }: { reduced: boolean }) {
 
   document.documentElement.classList.add("s3-animated");
   const q = <T extends Element = HTMLElement>(sel: string) => s.querySelector<T>(sel)!;
-  const qa = (sel: string) => s.querySelectorAll(sel);
 
   const dark = q(".s3-dark");
   const screen = q(".s3-screen");
   const burst = q(".s3-burst");
   const rays = q(".s3-rays");
-  const buzzerWrap = q(".s3-buzzer");
-  const cap = q(".s3-buzzer .buzzer-cap");
-  const buzzerRays = qa(".s3-buzzer .ray-set");
   const tadam = q(".s3-tadam");
   const video = q(".s3-video");
   const line1 = q(".s3-title");
@@ -166,8 +161,6 @@ export function init({ reduced }: { reduced: boolean }) {
   gsap.set(openingTitle.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
   gsap.set(photo, { scale: 1.05 });
   gsap.set(burst, { opacity: 0 });
-  gsap.set(buzzerWrap, { scale: 0, opacity: 0 });
-  gsap.set(buzzerRays, { scale: 0, opacity: 0 });
   gsap.set(tadam, { scale: 0.2, opacity: 0, rotate: -8 });
   gsap.set(rays, { scale: 0.4, opacity: 0 });
   gsap.set(video, { autoAlpha: 0 });
@@ -204,18 +197,12 @@ export function init({ reduced }: { reduced: boolean }) {
     .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.08 })
     .to(screen, { filter: "brightness(0.4) saturate(0.5)", duration: 0.05 })
     .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.12 })
-    // 3. buzzer appears
+    // 3. "טדאם!" bursts in the middle of the screen
     .to(burst, { opacity: 1, duration: 0.2 }, "<")
-    .to(buzzerWrap, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2)" })
-    // 4. pressed by the scroll
-    .to(cap, { scaleY: 0.7, y: 6, duration: 0.25, ease: "power2.in" })
-    .to(cap, { scaleY: 1, y: 0, duration: 0.2, ease: "back.out(3)" })
-    .to(buzzerRays, { scale: 1.2, opacity: 1, duration: 0.3, ease: "back.out(3)", stagger: 0.04 }, "<")
-    .to(rays, { scale: 1.2, opacity: 0.5, rotate: 30, duration: 0.6 }, "<")
-    .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.35, ease: "back.out(2.5)" }, "<0.05")
-    .to(buzzerWrap, { y: "-30%", scale: 0.8, duration: 0.35 }, "<")
-    .to({}, { duration: 0.5 })
-    // 5. the burst clears and the big screen wakes up with the demo
+    .to(rays, { scale: 1.2, opacity: 0.5, rotate: 30, duration: 0.9 })
+    .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.5, ease: "back.out(2.5)" }, "<0.1")
+    .to({}, { duration: 0.8 })
+    // 4. the burst clears and the big screen wakes up with the demo
     .addLabel("video")
     .to(burst, { opacity: 0, scale: 1.2, duration: 0.35 })
     .fromTo(

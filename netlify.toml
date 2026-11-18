@@ -20,3 +20,62 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Interactive demo frontends; gameplay connects directly to its existing backend.
+# Keep the browser URL on heytadam.com, including host and phone join routes.
+[[redirects]]
+  from = "/eyal-demo"
+  to = "https://tadam.base44.app/eyal-demo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/noa-demo"
+  to = "https://tadam.base44.app/noa-demo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/base44-demo"
+  to = "https://tadam.base44.app/base44-demo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/host/*"
+  to = "https://tadam.base44.app/host/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/play/*"
+  to = "https://tadam.base44.app/play/:splat"
+  status = 200
+  force = true
+
+# Game assets come from Base44 so its backup also works during a Worker outage.
+# Existing landing-page files (including fonts) take precedence.
+[[redirects]]
+  from = "/assets/*"
+  to = "https://tadam.base44.app/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/audio/*"
+  to = "https://tadam.base44.app/audio/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/media/*"
+  to = "https://tadam.base44.app/media/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/images/*"
+  to = "https://tadam.base44.app/images/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/fonts/*"
+  to = "https://tadam.base44.app/fonts/:splat"
+  status = 200

@@ -30,11 +30,9 @@ export function init({ reduced }: { reduced: boolean }) {
   const scoreEls = rows.map((r) => r.querySelector<HTMLElement>(".lb-score")!);
   const winner = rows[0];
   const crown = q(".lb-crown");
-  const tag = q(".winner-tag");
   const drum = q(".drumroll");
   const titleA = q(".s6-title-a");
   const title = q(".s6-title-b");
-  const keepsake = q(".s6-keepsake");
   const canvas = q<HTMLCanvasElement>(".confetti");
   const bg = q<HTMLVideoElement>(".s6-bg");
 
@@ -72,7 +70,6 @@ export function init({ reduced }: { reduced: boolean }) {
   // initial state
   winner.classList.remove("is-winner");
   gsap.set(crown, { scale: 0, opacity: 0 });
-  gsap.set([tag, keepsake], { opacity: 0, y: 16 });
   gsap.set([...titleA.querySelectorAll(".word-in"), ...title.querySelectorAll(".word-in")], { opacity: 0, yPercent: 110 });
   Object.assign(scores, scoreVars(0));
   renderScores();
@@ -84,7 +81,7 @@ export function init({ reduced }: { reduced: boolean }) {
     scrollTrigger: {
       trigger: s,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 2.8 : 3),
+      end: () => "+=" + window.innerHeight * (isMobile() ? 2.5 : 2.7),
       pin: s.querySelector(".scene-pin"),
       scrub: 0.8,
       invalidateOnRefresh: true,
@@ -115,10 +112,8 @@ export function init({ reduced }: { reduced: boolean }) {
       if (fwd) confettiBurst(canvas, 70, 2600);
     })
     .to(crown, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" })
-    .to(tag, { opacity: 1, y: 0, duration: 0.25 }, "<")
     // 3. the headline turns into the payoff
     .to(titleA, { opacity: 0, y: -16, duration: 0.25 })
     .add(animateWords(title, { duration: 0.35, stagger: 0.05 }))
-    .to(keepsake, { opacity: 1, y: 0, duration: 0.3 })
     .to({}, { duration: 0.5 });
 }

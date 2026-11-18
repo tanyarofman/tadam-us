@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { COPY } from "../content/copy.he";
-import StageBackdrop from "../components/StageBackdrop.astro";
 
 interface Props {
   title?: string;
@@ -25,9 +24,10 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
-    {/* square icons: Google shows a favicon in search results only if it is 1:1 and at least 48px. Rebuild with tools/brand/make_favicons.py */}
+    {/* Keep the square raster fallbacks and app icons; use the yellow ! SVG for browser tabs. */}
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content={ogType} />
@@ -57,8 +57,6 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     </script>
   </head>
   <body>
-    {/* the stage (light beams + dark edges) behind every section, like the hero */}
-    <StageBackdrop page />
     <slot />
   </body>
 </html>

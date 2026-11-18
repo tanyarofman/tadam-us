@@ -1,12 +1,12 @@
 /**
- * Scene 3 (WOW #1): lights down, the screen flickers on, "טדאם!" bursts in the middle of the screen, then the big screen "turns on" with the demo video.
+ * One shared scene: the event photo dims, the logo bursts in the center, then the demo video starts.
  *
  * Video: muted autoplay only while the screen is on and in view, pauses out of view,
  * never autoplays with sound, no autoplay at all with prefers-reduced-motion (poster + play button).
  * The mp4 is only requested once the scene is near the viewport (preload stays "none" until then).
  */
 import { gsap } from "../../lib/scroll";
-import { isMobile } from "../motion";
+import { animateWords, isMobile } from "../motion";
 import { COPY } from "../../content/copy.he";
 
 type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
@@ -150,21 +150,28 @@ export function init({ reduced }: { reduced: boolean }) {
   const tadam = q(".s3-tadam");
   const video = q(".s3-video");
   const line1 = q(".s3-title");
+  const opening = q(".s3-opening");
+  const openingTitle = q(".s3-opening-title");
+  const photo = q(".s3-opening .person-img");
 
-  gsap.set(dark, { opacity: 0.15 });
-  gsap.set(screen, { filter: "brightness(0.15) saturate(0)" });
+  gsap.set(dark, { opacity: 0 });
+  gsap.set(screen, { filter: "brightness(1) saturate(1)" });
+  gsap.set(opening, { autoAlpha: 1 });
+  gsap.set(openingTitle, { autoAlpha: 1 });
+  gsap.set(openingTitle.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
+  gsap.set(photo, { scale: 1.05 });
   gsap.set(burst, { opacity: 0 });
   gsap.set(tadam, { scale: 0.2, opacity: 0, rotate: -8 });
   gsap.set(rays, { scale: 0.4, opacity: 0 });
-  gsap.set(video, { opacity: 0 });
-  gsap.set(line1, { opacity: 0, y: 20 });
+  gsap.set(video, { autoAlpha: 0 });
+  gsap.set(line1, { autoAlpha: 0, y: 12 });
 
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     scrollTrigger: {
       trigger: s,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 2.4 : 2.8),
+      end: () => "+=" + window.innerHeight * (isMobile() ? 3.4 : 3.8),
       pin: s.querySelector(".scene-pin"),
       scrub: 0.7,
       invalidateOnRefresh: true,
@@ -174,11 +181,18 @@ export function init({ reduced }: { reduced: boolean }) {
     },
   });
 
-  // 1. lights go down
-  tl.to(dark, { opacity: 0.85, duration: 0.8 })
-    .to(line1, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2)
+  // 1. The photo and first heading hold in the same frame as the coming show.
+  tl.to(photo, { scale: 1, duration: 1 })
+    .add(animateWords(openingTitle, { duration: 0.4, stagger: 0.05 }), 0.05)
+    .to({}, { duration: 0.35 })
+    .addLabel("reveal")
+    .to(openingTitle, { autoAlpha: 0, y: -12, duration: 0.35 }, "reveal")
+    .to(opening, { autoAlpha: 0, duration: 0.55 }, "reveal")
+    .to(dark, { opacity: 0.85, duration: 0.7 }, "reveal")
+    .to(screen, { filter: "brightness(0.15) saturate(0)", duration: 0.65 }, "reveal")
+    .to(line1, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, "reveal+=0.35")
     // 2. the screen flickers on
-    .to(screen, { filter: "brightness(0.7) saturate(0.6)", duration: 0.08 }, 0.8)
+    .to(screen, { filter: "brightness(0.7) saturate(0.6)", duration: 0.08 })
     .to(screen, { filter: "brightness(0.2) saturate(0)", duration: 0.06 })
     .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.08 })
     .to(screen, { filter: "brightness(0.4) saturate(0.5)", duration: 0.05 })
@@ -193,8 +207,8 @@ export function init({ reduced }: { reduced: boolean }) {
     .to(burst, { opacity: 0, scale: 1.2, duration: 0.35 })
     .fromTo(
       video,
-      { opacity: 0, scaleY: 0.02, filter: "brightness(3)" },
-      { opacity: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
+      { autoAlpha: 0, scaleY: 0.02, filter: "brightness(3)" },
+      { autoAlpha: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
       "<0.1",
     )
     .to({}, { duration: 0.6 });

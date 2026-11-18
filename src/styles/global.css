@@ -155,6 +155,20 @@ p {
   max-width: 24ch;
   margin-inline: auto;
 }
+
+/* Extra scroll distance for reading, with no DOM changes when forms/answers expand. */
+[data-scroll-hold] {
+  padding-bottom: 0;
+}
+[data-scroll-hold]::after {
+  content: "";
+  display: block;
+  height: 50svh;
+}
+[data-scroll-hold] > [data-scroll-pause] {
+  position: sticky;
+  top: 0;
+}
 .eyebrow {
   display: inline-block;
   font-family: var(--font-display);
@@ -240,90 +254,6 @@ p {
   transform: none;
   box-shadow: none;
   background: transparent;
-}
-
-/* ---------- Stage backdrop (hero + CTA): the game stage, rebuilt in CSS ----------
-   Reference values from the game host screen (1440x810):
-   beams #0251fd -> #003ede, edges #001670, floor #0d2696,
-   floor strip = curved white arc (#f8ffff centre, warm #ffecd8 ends) with vertical light reflections. */
-.stage-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  contain: strict;
-  overflow: hidden;
-  pointer-events: none;
-}
-.stage-backdrop .beams {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(40, 110, 255, 0) 0,
-    rgba(60, 130, 255, 0.5) clamp(60px, 7vw, 110px),
-    rgba(40, 110, 255, 0) clamp(130px, 15vw, 220px)
-  );
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 45%, black 80%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, black 45%, black 80%, transparent 100%);
-}
-.stage-backdrop .edges {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, var(--stage-navy) 0%, rgba(0, 22, 112, 0.5) 8%, transparent 24%, transparent 76%, rgba(0, 22, 112, 0.5) 92%, var(--stage-navy) 100%),
-    linear-gradient(180deg, rgba(0, 18, 100, 0.8) 0%, transparent 35%);
-}
-/* back wall meets floor: dark band just above the strip */
-.stage-backdrop .wall-base {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 12%;
-  height: 6%;
-  background: linear-gradient(180deg, transparent, rgba(0, 10, 70, 0.75));
-}
-.stage-backdrop .floor {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  height: 12%;
-  background:
-    radial-gradient(70% 140% at 50% 0%, rgba(120, 160, 255, 0.35), transparent 70%),
-    linear-gradient(180deg, #0a2290 0%, var(--floor-blue) 40%, #0a2a9e 100%);
-}
-/* page-wide: the same stage beams behind every section, fixed to the viewport (so each screen looks like the hero) */
-.stage-backdrop.page-stage {
-  position: fixed;
-  z-index: -1;
-}
-/* vertical reflections of the light beams on the floor */
-.stage-backdrop .reflections {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  height: 12%;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0,
-    rgba(255, 255, 255, 0.35) 3px,
-    transparent 9px,
-    transparent clamp(120px, 14vw, 200px)
-  );
-  -webkit-mask-image: linear-gradient(180deg, black, transparent);
-  mask-image: linear-gradient(180deg, black, transparent);
-  opacity: 0.8;
-}
-/* the glowing strip: a shallow arc, brightest in the middle */
-.stage-backdrop .floor-strip {
-  position: absolute;
-  inset-inline: -4%;
-  bottom: calc(12% - 5px);
-  height: 12px;
-  border-radius: 50% / 100%;
-  background: linear-gradient(90deg, #ffe9d2, #fff 22%, #f8ffff 50%, #fff 78%, #ffe9d2);
-  box-shadow:
-    0 0 14px 3px rgba(255, 255, 255, 0.85),
-    0 0 46px 12px rgba(150, 190, 255, 0.55),
-    0 14px 40px 10px rgba(255, 255, 255, 0.18);
 }
 
 /* ---------- Scroll progress (buzzer motif) ---------- */

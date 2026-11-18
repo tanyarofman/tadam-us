@@ -1,36 +1,38 @@
 ---
 import { COPY } from "../../content/copy.he";
-import { contactLink } from "../../config/site";
+import { contactLink, SITE } from "../../config/site";
 import SplitHeading from "../SplitHeading.astro";
-import StageBackdrop from "../StageBackdrop.astro";
 import Buzzer from "../Buzzer.astro";
 const c = COPY.scene7;
 ---
 
 <section class="scene s7" id="scene-7" data-scene="7" aria-labelledby="s7-title">
-  <StageBackdrop floorOnly />
+  <div class="s7-pin" data-scroll-pause>
   <div class="s7-inner container">
-    <button type="button" class="big-buzzer" data-open-demo data-source="cta-buzzer" aria-label={c.buzzerLabel}>
+    <a class="big-buzzer" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta-buzzer" aria-label={c.buzzerLabel}>
       <Buzzer id="cta-buzzer" rays />
-    </button>
+    </a>
     <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight="בעצמכם" />
+    <div class="s7-actions">
     <a class="btn btn-buzzer s7-btn" href={contactLink("cta")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="cta">
       <span class="btn-dot" aria-hidden="true"></span>
       {c.contact}
     </a>
-    <button type="button" class="btn btn-white s7-demo" data-open-demo data-source="cta">
+    <a class="btn btn-white s7-demo" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta">
       {c.cta}
-    </button>
+    </a>
+    </div>
+  </div>
   </div>
 </section>
 
 <style>
-  .s7 {
+  .s7-pin {
     min-height: 100vh;
     min-height: 100svh;
     display: grid;
-    place-items: center;
-    padding-block: clamp(80px, 12vh, 140px) clamp(120px, 18vh, 180px);
+    place-items: start center;
+    padding-block: clamp(80px, 13vh, 128px) clamp(40px, 6vh, 64px);
     overflow: hidden;
   }
   .s7-inner {
@@ -64,8 +66,14 @@ const c = COPY.scene7;
     max-width: 14ch;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
-  /* the demo button sits right under the Messenger button, a step quieter */
-  .s7-demo {
-    margin-top: calc(-1 * clamp(6px, 1.2vh, 14px));
+  .s7-actions {
+    margin-top: clamp(20px, 3vh, 32px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(440px, 100%);
+    gap: clamp(12px, 2vw, 20px);
+  }
+  .s7-actions .btn {
+    padding-inline: clamp(14px, 3vw, 28px);
   }
 </style>

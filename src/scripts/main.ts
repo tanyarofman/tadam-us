@@ -6,6 +6,7 @@ import { track, type TrackEvent } from "../lib/analytics";
 import { initReveals } from "./motion";
 import { initHero } from "./hero";
 import { initDemoModal } from "./demo-modal";
+import { initSyncedPreview } from "./synced-preview";
 
 function initScrollProgress() {
   const bar = document.querySelector<HTMLElement>(".scroll-progress__bar");
@@ -50,16 +51,25 @@ function boot() {
   initLinks();
   initDemoModal();
   initScrollProgress();
+  const preview = document.querySelector<HTMLElement>("[data-synced-preview]");
+  const startPreview = preview ? initSyncedPreview(preview) : () => {};
 
   // Below-the-fold scene code downloads in parallel with the intro,
   // and is initialised once the hero intro is done (keeps the intro smooth and LCP early).
+  const holds = import("./section-holds");
+  const pause = (id: string) => holds.then((m) => ({
+    init: (options: { reduced: boolean }) => m.init(id, options),
+  }));
   const loading = Promise.all([
-    import("./scenes/scene1"),
-    import("./scenes/scene2"),
     import("./scenes/scene3"),
     import("./scenes/scene4"),
     import("./scenes/scene6"),
+    pause("hosts"),
+    pause("pricing"),
+    pause("scene-7"),
     import("./scenes/scene7"),
+    pause("lead"),
+    pause("faq"),
   ]);
   let started = false;
   const start = () => {
@@ -67,7 +77,10 @@ function boot() {
     started = true;
     initScenes(loading);
   };
-  initHero(start);
+  initHero(() => {
+    startPreview();
+    start();
+  });
   // Safety net: if the visitor scrolls before the intro ends, set the scenes up right away.
   window.addEventListener("scroll", start, { once: true, passive: true });
 }

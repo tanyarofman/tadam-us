@@ -1,7 +1,7 @@
 /**
  * Scene 4: the "making-of". Pinned and scroll-driven so there is time to read:
  * the cards arrive one at a time (desktop: they build up in a row; phones: each takes the stage),
- * each plays its little animation, then the privacy sentence slides in on one line.
+ * each plays its little animation.
  */
 import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
@@ -11,43 +11,38 @@ export function init({ reduced }: { reduced: boolean }) {
   if (!s) return;
   const cards = Array.from(s.querySelectorAll<HTMLElement>(".step-card"));
   const title = s.querySelector(".s4-title");
-  const rows = Array.from(s.querySelectorAll<HTMLElement>(".approve-row"));
+  const choices = s.querySelectorAll<HTMLElement>(".host-option, .atmosphere-swatch");
   const tiles = s.querySelectorAll<HTMLElement>(".board-tile");
   const bubbles = s.querySelectorAll<HTMLElement>(".chat-bubble");
-  const privacy = s.querySelector<HTMLElement>(".privacy-strip")!;
 
   if (reduced) {
     cards.forEach((c) => c.classList.add("reveal"));
-    rows.forEach((r) => r.classList.add("is-yes"));
     return;
   }
 
-  privacy.classList.remove("reveal");
   s.classList.add("is-pinned");
 
   const mm = gsap.matchMedia();
-  mm.add({ phone: "(max-width: 899px)", wide: "(min-width: 900px)" }, (ctx) => {
+  mm.add({ phone: "(max-width: 899px), (orientation: landscape) and (max-height: 500px)", wide: "(min-width: 900px) and (min-height: 501px)" }, (ctx) => {
     const phone = !!ctx.conditions?.phone;
 
     gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
     gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
     gsap.set(bubbles, { opacity: 0, y: 20, scale: 0.9 });
     gsap.set(tiles, { opacity: 0 });
-    gsap.set(privacy, { clipPath: "inset(0% 0% 0% 100%)", opacity: 0 });
-    rows.forEach((r) => r.classList.remove("is-yes"));
+    gsap.set(choices, { y: 16, scale: 0.85, autoAlpha: 0 });
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
       scrollTrigger: {
         trigger: s,
         start: "top top",
-        end: () => "+=" + window.innerHeight * (phone ? 4.2 : 3.6),
+        end: () => "+=" + window.innerHeight * (phone ? 3.6 : 3),
         pin: s.querySelector(".s4-pin"),
         scrub: 0.6,
         invalidateOnRefresh: true,
       },
     });
-    const fwd = () => tl.scrollTrigger?.direction !== -1;
 
     tl.add(animateWords(title, { duration: 0.4, stagger: 0.05 }));
 
@@ -63,10 +58,7 @@ export function init({ reduced }: { reduced: boolean }) {
         tl.to(bubbles, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.3 });
       }
       if (step === "2") {
-        rows.forEach((r) => {
-          tl.call(() => r.classList.toggle("is-yes", fwd()));
-          tl.to({}, { duration: 0.3 });
-        });
+        tl.to(choices, { y: 0, scale: 1, autoAlpha: 1, duration: 0.35, stagger: 0.12, ease: "back.out(1.5)" });
       }
       if (step === "3") {
         tiles.forEach((t, j) => {
@@ -83,11 +75,5 @@ export function init({ reduced }: { reduced: boolean }) {
       tl.to({}, { duration: 0.6 });
     });
 
-    // the privacy promise: one sentence, sliding in along its line (right to left)
-    tl.to(privacy, { opacity: 1, duration: 0.15 })
-      .to(privacy, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power1.inOut" }, "<")
-      .to({}, { duration: 0.8 });
-
-    return () => rows.forEach((r) => r.classList.remove("is-yes"));
   });
 }

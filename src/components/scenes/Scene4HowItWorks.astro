@@ -1,6 +1,7 @@
 ---
 import { COPY } from "../../content/copy.he";
 import SplitHeading from "../SplitHeading.astro";
+import Person from "../art/Person.astro";
 const c = COPY.scene4;
 const m = c.mock;
 const tiles = [
@@ -44,23 +45,26 @@ const tiles = [
         </div>
       </li>
 
-      {/* Step 2: they send us the stories, photos and details */}
+      {/* Step 2: choose a host and a visual atmosphere */}
       <li class="step-card" data-step="2">
-        <div class="step-visual v-approve" aria-hidden="true">
-          <div class="approve-title">{m.approveTitle}</div>
-          {
-            m.approveItems.map((it, i) => (
-              <div class="approve-row" data-i={i}>
-                <div class="approve-q">
-                  <small>{it.from}</small>
-                  <span>{it.q}</span>
-                </div>
-                <div class="approve-btns">
-                  <span class="ab ab-yes">✓</span>
-                </div>
+        <div class="step-visual v-customize" aria-hidden="true">
+          <div class="customize-title">{m.hostTitle}</div>
+          <div class="host-options">
+            {["host-classic", "host-friendly", "host-animated"].map((name, i) => (
+              <div class:list={["host-option", { "is-selected": i === 1 }]}>
+                <Person name={name} alt="" width={480} height={640} />
+                {i === 1 && <span class="choice-check">✓</span>}
               </div>
-            ))
-          }
+            ))}
+          </div>
+          <div class="atmosphere-picker">
+            <span>{m.atmosphereTitle}</span>
+            <div class="atmosphere-options">
+              <span class="atmosphere-swatch" style="--swatch:linear-gradient(135deg,#143cff,#07164b)"></span>
+              <span class="atmosphere-swatch is-selected" style="--swatch:linear-gradient(135deg,#b24cfa,#30105d)">✓</span>
+              <span class="atmosphere-swatch" style="--swatch:linear-gradient(135deg,#ffad47,#bd2378)"></span>
+            </div>
+          </div>
         </div>
         <div class="step-text">
           <span class="step-num">2</span>
@@ -93,14 +97,6 @@ const tiles = [
       </li>
     </ol>
 
-    <aside class="privacy-strip reveal" aria-label="פרטיות">
-      <svg class="privacy-icon" viewBox="0 0 48 48" aria-hidden="true">
-        <rect x="9" y="21" width="30" height="22" rx="6" fill="var(--sun-yellow)" stroke="var(--purple-ink)" stroke-width="4"></rect>
-        <path d="M15 21 V15 Q15 6 24 6 Q33 6 33 15 V21" fill="none" stroke="var(--purple-ink)" stroke-width="4"></path>
-        <circle cx="24" cy="31" r="3.5" fill="var(--purple-ink)"></circle>
-      </svg>
-      <p>{c.privacy}</p>
-    </aside>
   </div>
   </div>
 </section>
@@ -111,17 +107,18 @@ const tiles = [
   }
   .s4-head {
     text-align: center;
-    margin-bottom: clamp(24px, 4vh, 56px);
+    margin-bottom: var(--story-heading-gap);
   }
   /* Pinned + animated mode (set by JS): fit the whole step sequence in one screen */
   :global(.s4.is-pinned) .s4-pin {
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
-    align-items: center;
-    padding-block: clamp(24px, 5vh, 64px);
+    align-items: flex-start;
+    padding-block: var(--story-heading-top) 32px;
   }
   :global(.s4-title) {
+    font-size: var(--fs-story-title);
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .s4-steps {
@@ -183,10 +180,10 @@ const tiles = [
     box-shadow: 0 6px 0 var(--purple-ink);
   }
   .mp-main {
-    width: 62%;
-    height: 230px;
-    bottom: -30px;
-    left: 19%;
+    width: 84%;
+    height: 252px;
+    bottom: -12px;
+    left: 8%;
     padding: 12px 10px;
     color: var(--purple-ink);
   }
@@ -194,7 +191,7 @@ const tiles = [
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.8rem;
+    font-size: 1.25rem;
     font-weight: 700;
     padding: 2px 6px 8px;
     border-bottom: 1px solid #d8cdf3;
@@ -205,8 +202,8 @@ const tiles = [
     max-width: 88%;
     margin-bottom: 8px;
     padding: 7px 10px;
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 1.2rem;
+    line-height: 1.3;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   }
   /* Messenger, mirrored for Hebrew: the parent's own message on the left (end, blue), our reply on the right (start, gray) */
@@ -231,72 +228,17 @@ const tiles = [
     font-weight: 800;
   }
 
-  /* --- visual 2: approve --- */
-  .v-approve {
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-  .approve-title {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-  .approve-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 9px 12px;
-    background: #fff;
-    color: var(--purple-ink);
-    border-radius: 14px;
-    border: 3px solid var(--purple-ink);
-    font-size: 0.8rem;
-    line-height: 1.3;
-    transition: background 0.3s;
-  }
-  .approve-q {
-    display: flex;
-    flex-direction: column;
-  }
-  .approve-q small {
-    color: var(--magenta);
-    font-weight: 500;
-  }
-  .approve-btns {
-    display: flex;
-    gap: 6px;
-    flex: none;
-  }
-  .ab {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid var(--purple-ink);
-    font-weight: 800;
-    background: #f1ecfb;
-    transition:
-      background 0.25s,
-      transform 0.25s var(--ease-bounce);
-  }
-  .approve-row.is-yes .ab-yes {
-    background: var(--magenta);
-    color: #fff;
-    transform: scale(1.15);
-  }
-  .approve-row.is-yes {
-    background: #ffe9f5;
-  }
-  .approve-row.is-no {
-    opacity: 0.5;
-  }
-  .approve-row.is-no .ab-no {
-    background: var(--purple-ink);
-    color: #fff;
-  }
+  /* --- visual 2: host portraits + atmosphere palettes --- */
+  .v-customize { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .customize-title { font-size: 1.25rem; font-weight: 700; text-align: center; }
+  .host-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .host-option { position: relative; border: 2px solid transparent; border-radius: 12px; opacity: .65; }
+  .host-option.is-selected { border-color: var(--game-yellow); opacity: 1; }
+  .choice-check { position: absolute; bottom: -8px; left: -5px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--game-yellow); color: var(--ink); font-size: 1.1rem; font-weight: 700; }
+  .atmosphere-picker { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; font-size: 1.15rem; }
+  .atmosphere-options { display: flex; gap: 8px; }
+  .atmosphere-swatch { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--swatch); border: 2px solid rgba(255,255,255,.35); font-weight: 700; }
+  .atmosphere-swatch.is-selected { border-color: var(--game-yellow); }
 
   /* --- visual 3: board --- */
   .v-board {
@@ -336,31 +278,6 @@ const tiles = [
     font-size: 0.9rem;
   }
 
-  .privacy-strip {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: fit-content;
-    max-width: 100%;
-    margin: clamp(24px, 5vh, 56px) auto 0;
-    padding: 14px 22px;
-    border-radius: var(--radius-m);
-    background: rgba(255, 255, 255, 0.06);
-    border: 2px solid var(--surface-border);
-    color: var(--text);
-    font-size: clamp(0.92rem, 1.15vw, 1rem);
-  }
-  .privacy-icon {
-    width: 36px;
-    flex: none;
-  }
-  /* one sentence, one line, on wide screens */
-  @media (min-width: 1180px) {
-    .privacy-strip p {
-      white-space: nowrap;
-    }
-  }
-
   @media (max-width: 899px) {
     .s4-steps {
       grid-template-columns: 1fr;
@@ -375,10 +292,36 @@ const tiles = [
       grid-area: 1 / 1;
     }
     :global(.s4.is-pinned) .step-visual {
-      height: 220px;
+      height: 270px;
     }
     :global(.s4.is-pinned) .step-text {
       padding: 16px 20px 20px;
     }
+  }
+  @media (max-width: 899px) and (max-height: 700px) {
+    :global(.s4.is-pinned) .s4-pin { padding-block: 24px; }
+    .s4-head { margin-bottom: 24px; }
+    :global(.s4.is-pinned) .step-text { padding: 12px 20px 16px; }
+    .step-num { margin-bottom: 8px; }
+  }
+  @media (orientation: landscape) and (max-height: 500px) {
+    :global(.s4.is-pinned) .s4-pin { padding-block: 16px; }
+    :global(.s4-title) { font-size: 2.2rem; }
+    .s4-head { margin-bottom: 16px; }
+    .s4-steps { grid-template-columns: 1fr; max-width: 760px; margin-inline: auto; }
+    :global(.s4.is-pinned) .step-card { grid-area: 1 / 1; }
+    .step-card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+    :global(.s4.is-pinned) .step-visual, .step-visual { height: min(250px, calc(100svh - 100px)); border-bottom: 0; }
+    .mp-main { height: calc(100% - 10px); bottom: -6px; padding: 8px; }
+    .chat-head { margin-bottom: 6px; padding-bottom: 6px; }
+    .chat-bubble { font-size: 1.1rem; padding: 5px 8px; margin-bottom: 6px; }
+    .host-options { width: min(100%, 240px); margin-inline: auto; }
+    .v-customize { gap: 8px; padding: 12px; }
+    .host-option :global(.person) { max-height: 110px; }
+    .atmosphere-picker { font-size: 1rem; }
+    .atmosphere-swatch { width: 28px; height: 28px; }
+    .board-slot { height: 48px; }
+    .step-text { padding: 12px 20px 16px; }
+    .step-num { margin-bottom: 8px; }
   }
 </style>

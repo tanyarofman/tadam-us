@@ -1,10 +1,5 @@
 ---
-/**
- * Scene 1 imagery, all photos in public/people/:
- *  - hall-crowd.webp   (16:9, full-bleed background, faces not identifiable)
- *  - kids-playing.webp  (1:1, corner; wrapper keeps the `.kids` hook scene1.ts fades in)
- * Until the files exist: stage-blue gradient with a placeholder crowd silhouette.
- */
+/** The opening photograph shares the exact frame used by the logo reveal and video. */
 import Person from "./Person.astro";
 ---
 
@@ -12,49 +7,26 @@ import Person from "./Person.astro";
   <Person
     class="hall-photo"
     kind="crowd"
-    name="hall-crowd"
-    width={1365}
-    height={768}
+    name="event-dinner-phones"
+    width={1600}
+    height={900}
     eager
-    alt="אולם מוצף באור כחול, קהל גדול מכל הגילאים מרים טלפונים מוארים מול מסך גדול על הבמה"
+    alt="אורחים באירוע משפחתי יושבים סביב שולחנות, אוכלים ומשתמשים בטלפונים לפני תחילת המשחק"
   />
-</div>
-<div class="kids-corner">
-  <div class="kids">
-    <Person
-      class="kids-photo"
-      name="kids-playing"
-      width={800}
-      height={800}
-      alt="שלושה ילדים עומדים בפינת האולם, צוחקים ומחזיקים את הטלפונים באוויר, מוכנים להצטרף למשחק"
-    />
-  </div>
 </div>
 
 <style>
-  /* the photo fades into the page's stage background at the top (behind the headline) and at the bottom */
   .hall-art {
-    position: absolute;
-    inset: 0;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 32%, #000 52%, #000 84%, transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0%, transparent 32%, #000 52%, #000 84%, transparent 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
   }
   .hall-art :global(.hall-photo) {
     height: 100%;
     aspect-ratio: auto !important;
-    border-radius: 0;
+    border-radius: inherit;
   }
   .hall-art :global(.person-img) {
     object-position: 50% 60%;
-  }
-  .kids-corner {
-    position: absolute;
-    inset-inline-start: clamp(8px, 2vw, 28px);
-    bottom: clamp(8px, 3vh, 28px);
-    width: clamp(150px, 24vw, 320px);
-  }
-  .kids-corner :global(.kids-photo) {
-    border-radius: var(--radius-m);
-    box-shadow: 0 0 30px 2px var(--screen-glow), 0 0 0 3px var(--stage-navy);
   }
 </style>

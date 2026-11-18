@@ -1,10 +1,9 @@
 /**
- * Scenes 5 + 6 in one: the whole room lights up ("סורקים, משחקים, וכולם עונים ביחד"),
+ * Scenes 5 + 6 in one: everyone joins ("סורקים, משחקים, וכולם עונים ביחד"),
  * then the leaderboard climbs, drumroll, the winner is... סבתא. Confetti, and the headline turns into the payoff.
  */
 import { gsap } from "../../lib/scroll";
 import { confettiBurst } from "../../lib/confetti";
-import { makeCrowd } from "../../lib/crowd";
 import { animateWords, isMobile } from "../motion";
 
 // Player index order (rank 1..5) and scores at each step. Index 0 = סבתא (see copy.he.ts)
@@ -30,27 +29,20 @@ export function init({ reduced }: { reduced: boolean }) {
   const scoreEls = rows.map((r) => r.querySelector<HTMLElement>(".lb-score")!);
   const winner = rows[0];
   const crown = q(".lb-crown");
-  const tag = q(".winner-tag");
   const drum = q(".drumroll");
   const kid = q(".kid-wrap");
   const titleA = q(".s6-title-a");
   const title = q(".s6-title-b");
-  const keepsake = q(".s6-keepsake");
   const canvas = q<HTMLCanvasElement>(".confetti");
-  const crowd = makeCrowd(q<HTMLCanvasElement>(".s6-crowd"));
 
   // the living photo only animates while it is on screen
   new IntersectionObserver(([e]) => kid.classList.toggle("is-offscreen", !e.isIntersecting)).observe(kid);
 
   if (reduced) {
     kid.classList.add("is-laughing");
-    crowd.draw(1);
     gsap.set(titleA, { opacity: 0 });
     return;
   }
-  new IntersectionObserver(([e]) => crowd.setRunning(e.isIntersecting)).observe(s);
-  const lights = { p: 0 };
-  const renderCrowd = () => crowd.draw(lights.p);
 
   const fmt = new Intl.NumberFormat("he-IL");
   const pitch = () => rows[1].offsetTop - rows[0].offsetTop;
@@ -66,7 +58,6 @@ export function init({ reduced }: { reduced: boolean }) {
   // initial state
   winner.classList.remove("is-winner");
   gsap.set(crown, { scale: 0, opacity: 0 });
-  gsap.set([tag, keepsake], { opacity: 0, y: 16 });
   gsap.set([...titleA.querySelectorAll(".word-in"), ...title.querySelectorAll(".word-in")], { opacity: 0, yPercent: 110 });
   gsap.set(kid, { opacity: 0.35, scale: 0.9 });
   Object.assign(scores, scoreVars(0));
@@ -79,16 +70,15 @@ export function init({ reduced }: { reduced: boolean }) {
     scrollTrigger: {
       trigger: s,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 3.6 : 3.8),
+      end: () => "+=" + window.innerHeight * (isMobile() ? 2.5 : 2.7),
       pin: s.querySelector(".scene-pin"),
-      scrub: 0.6,
+      scrub: 0.4,
       invalidateOnRefresh: true,
     },
   });
 
-  // 1. the room lights up and everyone answers together
-  tl.to(lights, { p: 1, duration: 1.2, onUpdate: renderCrowd })
-    .add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }), 0.3)
+  // 1. everyone answers together
+  tl.add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }))
     .to({}, { duration: 0.2 });
 
   // 2. the leaderboard climbs
@@ -115,10 +105,8 @@ export function init({ reduced }: { reduced: boolean }) {
     })
     .to(crown, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(3)" })
     .to(kid, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, "<")
-    .to(tag, { opacity: 1, y: 0, duration: 0.25 }, "<")
     // 3. the headline turns into the payoff
     .to(titleA, { opacity: 0, y: -16, duration: 0.25 })
     .add(animateWords(title, { duration: 0.35, stagger: 0.05 }))
-    .to(keepsake, { opacity: 1, y: 0, duration: 0.3 })
     .to({}, { duration: 0.5 });
 }

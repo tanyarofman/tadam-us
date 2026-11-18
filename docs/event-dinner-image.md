@@ -1,0 +1,8 @@
+# Dinner-table image — 18 November 2026
+
+Generated using built-in imagegen in text-to-image mode. Saved as `public/people/event-dinner-phones.webp` (1600 × 900), replacing the previous photo in the shared event-to-video scene. The generated PNG was resized and encoded as WebP at quality 90, with no retouching.
+
+## Final prompt
+
+Use case: photorealistic-natural. Asset type: cinematic 16:9 photograph for an Israeli live-trivia event website, showing the quiet dinner moment before the entertainment starts.
+A natural candid wide photograph of guests at a tasteful family celebration in an Israeli event venue. Several round tables with people seated and eating, plates with food, cutlery, glasses, simple flowers. In the foreground, a mixed group of adult friends and family, ages 25–65, in smart casual celebration clothes. Several guests casually look down at smartphones in their hands while others eat or chat quietly; they are not posing and not cheering. More occupied dinner tables softly visible in the background. Believable ordinary expressions and realistic hands, faces and table settings. Warm amber pendant lights with subtle rich blue ambient light; polished editorial photography, natural skin texture and a welcoming intimate atmosphere. Camera at seated guest eye level, balanced landscape composition with faces clearly readable. The frame will later transition into a show video. Absolutely no television, no projection screen, no monitor, no stage, no projector or performance area anywhere in the image. Only the handheld phones have screens; their contents should be unreadable. No words, no typography, no logos, no watermark. Output 16:9 landscape.

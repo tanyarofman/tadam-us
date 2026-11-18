@@ -1,4 +1,6 @@
 export const SITE = {
+  /** Public Eyal game demo. */
+  eyalDemoUrl: "https://tadam.base44.app/eyal-demo",
   /** The heytadam Facebook business page. */
   facebookUrl: "https://www.facebook.com/heytadam",
   /** Messenger chat with the page: every "דברו איתנו" button goes here. */

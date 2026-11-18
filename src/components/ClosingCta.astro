@@ -1,0 +1,47 @@
+---
+import { contactLink } from "../config/site";
+import { COPY } from "../content/copy.he";
+const c = COPY.closing;
+---
+
+<section class="closing-cta" id="closing" aria-labelledby="closing-title">
+  <div class="container">
+    <h2 id="closing-title" class="display closing-title">
+      {c.title}
+      <span class="closing-burst" aria-hidden="true"><i></i><i></i><i></i></span>
+    </h2>
+    <a class="btn closing-button" href={contactLink("bottom")} target="_blank" rel="noopener" data-track="cta_create_click" data-source="closing">
+      {c.cta}
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M38 24H10m10-10L10 24l10 10"></path></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .closing-cta {
+    padding-block: 88px 216px;
+    text-align: center;
+  }
+  .closing-title {
+    position: relative;
+    width: fit-content;
+    max-width: calc(100% - 36px);
+    margin: 0 auto 30px;
+    color: #fff;
+    font-size: clamp(2.5rem, 6.65vw, 4.75rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .closing-burst { position: absolute; left: -38px; top: -10px; width: 34px; height: 42px; }
+  .closing-burst i { position: absolute; width: 6px; height: 20px; border-radius: 4px; background: var(--sun-yellow); }
+  .closing-burst i:nth-child(1) { left: 28px; top: 0; transform: rotate(-12deg); }
+  .closing-burst i:nth-child(2) { left: 10px; top: 12px; transform: rotate(-48deg); }
+  .closing-burst i:nth-child(3) { left: 0; top: 29px; height: 17px; transform: rotate(-78deg); }
+  .closing-button { gap: 24px; padding: 16px 34px; font-size: clamp(1.7rem, 3.3vw, 2.375rem); }
+  .closing-button svg { width: 30px; height: 30px; }
+  @media (max-width: 600px) {
+    .closing-cta { padding-block: 64px 176px; }
+    .closing-title { max-width: calc(100% - 28px); }
+    .closing-burst { transform: scale(.7); transform-origin: right top; left: -29px; }
+  }
+</style>

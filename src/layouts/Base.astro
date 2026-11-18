@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { COPY } from "../content/copy.he";
-import StageBackdrop from "../components/StageBackdrop.astro";
 
 interface Props {
   title?: string;
@@ -25,7 +24,7 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
-    <link rel="icon" type="image/png" href="/brand/tadam-logo-v4.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="he_IL" />
     <meta property="og:title" content={title} />
@@ -53,8 +52,6 @@ const ogImage = new URL("/brand/og-image-v2.png", Astro.site);
     </script>
   </head>
   <body>
-    {/* the stage (light beams + dark edges) behind every section, like the hero */}
-    <StageBackdrop page />
     <slot />
   </body>
 </html>

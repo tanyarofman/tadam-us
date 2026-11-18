@@ -1,11 +1,7 @@
 ---
 import { COPY } from "../content/copy.he";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
-import StageBackdrop from "./StageBackdrop.astro";
-import Person from "./art/Person.astro";
 const c = COPY.pricing;
-const h = c.addons.personalHost.showcase;
-const hostPhotos = ["host-classic", "host-friendly", "host-animated"];
 const cur = PRICING.currency;
 // Prices hidden: the section becomes "what's included" (no numbers, no edit card, add-ons get a badge).
 const show = PRICING.showPrices;
@@ -22,7 +18,7 @@ const icons: Record<string, string> = {
 ---
 
 <section class="scene pricing" id="pricing" data-scene="pricing" aria-labelledby="pricing-title">
-  <StageBackdrop floorOnly />
+  <div class="pricing-pin" data-scroll-pause>
   <div class="container pricing-inner">
     <h2 id="pricing-title" class="display h-scene pricing-title reveal">{show ? c.title : c.includedTitle}</h2>
     <p class="lead pricing-sub reveal">{show ? c.sub : c.includedSub}</p>
@@ -67,26 +63,8 @@ const icons: Record<string, string> = {
     </ul>
     )}
 
-    <div class="hosts reveal" id="hosts" aria-labelledby="hosts-title">
-      <div class="hosts-top">
-        <div class="hosts-photos" role="list" aria-label={h.photosLabel}>
-          {hostPhotos.map((name, i) => (
-            <Person name={name} alt={h.readyAlts[i]} width={480} height={640} class={`host-photo host-photo--${i + 1}`} />
-          ))}
-        </div>
-        <div class="hosts-head">
-          <span class="spark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h4 id="hosts-title" class="display hosts-title">
-            <span>{h.titleLine1}</span>
-            <span class="hl swoosh">{h.titleLine2}</span>
-          </h4>
-          <p class="hosts-sub">{h.sub}</p>
-        </div>
-      </div>
-
-    </div>
-
     {show && <p class="pricing-note">{c.note}</p>}
+  </div>
   </div>
 </section>
 
@@ -108,13 +86,13 @@ const icons: Record<string, string> = {
 </script>
 
 <style>
-  /* desktop: the whole section (what's included + hosts) fits in one screen, sizes follow the screen height */
-  .pricing {
+  /* A readable, standalone feature section with a short native scroll hold. */
+  .pricing-pin {
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
-    align-items: center;
-    padding-block: clamp(24px, 4vh, 48px) clamp(96px, 14vh, 140px);
+    align-items: flex-start;
+    padding-block: clamp(80px, 12vh, 120px) clamp(40px, 7vh, 72px);
     overflow: hidden;
   }
   .pricing-inner {
@@ -126,12 +104,15 @@ const icons: Record<string, string> = {
   }
   .pricing-title {
     margin: 0;
-    font-size: clamp(2.2rem, 7vh, 4rem);
+    font-size: var(--fs-story-title);
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .pricing-sub {
     max-width: 46ch;
-    margin: 0 0 clamp(4px, 1.2vh, 14px);
+    margin: 0 0 clamp(20px, 3vh, 32px);
+    color: #f5f7ff;
+    font-size: clamp(1.3rem, 2.3vw, 1.65rem);
+    font-weight: 400;
   }
 
   /* ---- 3 cards (mobile first: stacked) ---- */
@@ -240,10 +221,10 @@ const icons: Record<string, string> = {
   /* ---- what's included (prices hidden) ---- */
   .included {
     list-style: none;
-    margin: 0;
+    margin: clamp(16px, 2.5vh, 24px) 0 0;
     padding: 0;
     width: 100%;
-    max-width: 1080px;
+    max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(12px, 1.8vw, 20px);
@@ -253,33 +234,24 @@ const icons: Record<string, string> = {
     position: relative;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas: "icon title" "icon text";
-    column-gap: 14px;
-    row-gap: 2px;
+    grid-template-areas: "icon title" "text text";
+    column-gap: 28px;
+    row-gap: 18px;
     align-items: center;
-    padding: clamp(12px, 1.8vh, 20px) 20px;
+    padding: clamp(30px, 3.2vw, 38px) 22px 26px;
+    min-height: 190px;
     border-radius: 8px 30px 8px 30px; /* the slanted-card look of the host photos */
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
     border: 2px solid var(--surface-border);
     backdrop-filter: blur(6px);
     overflow: hidden;
   }
-  /* a strip of the tile's color along the start edge */
-  .inc::before {
-    content: "";
-    position: absolute;
-    inset-block: 18px;
-    inset-inline-start: 0;
-    width: 5px;
-    border-radius: 0 5px 5px 0;
-    background: var(--c);
-  }
   .inc-icon {
     grid-area: icon;
     display: grid;
     place-items: center;
-    width: clamp(42px, 5.6vh, 52px);
-    height: clamp(42px, 5.6vh, 52px);
+    width: 54px;
+    height: 54px;
     border-radius: 14px;
     background: var(--c);
     color: var(--purple-ink);
@@ -294,16 +266,18 @@ const icons: Record<string, string> = {
   .inc-title {
     grid-area: title;
     margin: 0;
-    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
     line-height: 1.15;
     color: var(--white);
   }
   .inc-text {
     grid-area: text;
     margin: 0;
-    font-size: 1.05rem;
+    font-size: clamp(1.25rem, 1.9vw, 1.45rem);
+    font-weight: 400;
     line-height: 1.45;
-    color: var(--text-muted);
+    color: #f5f7ff;
+    white-space: pre-line;
   }
   @media (max-width: 960px) {
     .included {
@@ -316,107 +290,6 @@ const icons: Record<string, string> = {
     }
   }
 
-  /* ---- hosts showcase ---- */
-  .hosts {
-    width: 100%;
-    max-width: 1080px;
-    margin-top: clamp(6px, 1.5vh, 16px);
-    display: grid;
-    gap: 22px;
-    text-align: right;
-  }
-  .hosts-top {
-    display: grid;
-    gap: 22px;
-    align-items: center;
-  }
-  .hosts-photos {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(8px, 2vw, 18px);
-    direction: ltr; /* order as in the design: classic, friendly, animated */
-  }
-  /* Ilan's host cards: slanted sides, one big rounded corner, stepping up from left to right */
-  /* photo height follows the screen height so the section fits in one screen */
-  .hosts-photos {
-    align-items: end;
-    padding-top: 28px;
-  }
-  .hosts-photos :global(.host-photo) {
-    aspect-ratio: 3 / 4.6 !important;
-    border-radius: 6px 34px 6px 28px;
-    transform: skewX(-4deg);
-    box-shadow: 0 18px 36px rgba(0, 0, 20, 0.45);
-  }
-  .hosts-photos :global(.host-photo .person-img) {
-    transform: skewX(4deg) scale(1.1); /* keep the faces straight inside the slanted card */
-  }
-  .hosts-photos :global(.host-photo--2) {
-    transform: skewX(-4deg) translateY(-14px);
-  }
-  .hosts-photos :global(.host-photo--3) {
-    transform: skewX(-4deg) translateY(-28px);
-  }
-  .hosts-head {
-    position: relative;
-    display: grid;
-    gap: 10px;
-  }
-  .spark {
-    position: absolute;
-    inset-block-start: -6px;
-    inset-inline-end: 4px;
-    width: 46px;
-    height: 24px;
-  }
-  .spark i {
-    position: absolute;
-    width: 5px;
-    height: 16px;
-    border-radius: 3px;
-    background: var(--sun-yellow);
-    inset-block-start: 4px;
-  }
-  .spark i:nth-child(1) { inset-inline-end: 0; transform: rotate(35deg); }
-  .spark i:nth-child(2) { inset-inline-end: 20px; inset-block-start: 0; }
-  .spark i:nth-child(3) { inset-inline-end: 40px; transform: rotate(-35deg); }
-  .hosts-title {
-    margin: 0;
-    display: grid;
-    font-size: clamp(2.2rem, 6.4vh, 3.6rem);
-    line-height: 1.02;
-  }
-  .hl {
-    color: var(--sun-yellow);
-  }
-  .hosts-title .hl {
-    position: relative;
-    width: fit-content;
-    padding-bottom: 12px;
-  }
-  .hosts-title .hl::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 18px;
-  }
-  .hosts-sub {
-    margin: 0;
-    font-size: var(--fs-lead);
-    line-height: 1.35;
-    color: var(--white);
-  }
-  @media (min-width: 760px) {
-    .hosts-top {
-      grid-template-columns: 1.25fr 1fr;
-    }
-    .hosts-photos {
-      --ph: clamp(150px, 27vh, 280px);
-      grid-template-columns: repeat(3, calc(var(--ph) * 0.652));
-      justify-content: start;
-    }
-  }
   .pricing-note {
     margin: 6px 0 0;
     color: var(--text-muted);

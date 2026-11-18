@@ -1,22 +1,25 @@
 ---
 import { COPY } from "../../content/copy.he";
 import Buzzer from "../Buzzer.astro";
+import HallArt from "../art/HallArt.astro";
+import SplitHeading from "../SplitHeading.astro";
 const c = COPY.scene3;
 const d = c.demo;
-const crowd = Array.from({ length: 22 }, (_, i) => i);
 ---
 
 <section class="scene s3" id="scene-3" data-scene="3" aria-labelledby="s3-title">
   <div class="scene-pin s3-pin">
-    <div class="s3-crowd" aria-hidden="true">
-      {crowd.map((i) => <span style={`transform: translateY(${(Math.sin(i * 1.7) * 18 + 18).toFixed(1)}px) scale(${1 + (i % 3) * 0.08})`} />)}
-    </div>
     <div class="s3-dark" aria-hidden="true"></div>
 
     <div class="s3-stage container">
+      <div class="s3-headings">
+        <SplitHeading as="h2" class="h-scene s3-opening-title" text={COPY.scene1.headline} highlight="מחכים" />
+        <h2 id="s3-title" class="display h-scene s3-title">{c.headline}</h2>
+      </div>
 
       <div class="s3-screen">
         <div class="s3-screen-inner">
+          <div class="s3-opening"><HallArt /></div>
           <div class="s3-burst" aria-hidden="true">
             <div class="s3-rays"></div>
             <div class="s3-buzzer"><Buzzer id="s3-buzzer" rays /></div>
@@ -59,31 +62,21 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
         <div class="s3-scan" aria-hidden="true"></div>
       </div>
 
-      <h2 id="s3-title" class="display s3-title">{c.headline}</h2>
     </div>
   </div>
 </section>
 
 <style>
-  .s3-crowd {
-    position: absolute;
-    inset-inline: -4%;
-    bottom: -30px;
-    height: 140px;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    z-index: 2;
-    pointer-events: none;
+  .s3-pin {
+    align-items: start;
+    padding-block: var(--story-heading-top) 32px;
   }
-  .s3-crowd span {
-    width: calc(100% / 18);
-    min-width: 46px;
-    aspect-ratio: 1 / 1.25;
-    border-radius: 50% 50% 18% 18%;
-    background: #0d0220;
-    box-shadow: inset 0 6px 0 rgba(100, 216, 247, 0.12);
-  }
+  .s3-headings { display: grid; justify-items: center; }
+  .s3-headings > :global(*) { grid-area: 1 / 1; }
+  :global(.s3-opening-title) { display: none; max-width: 22ch; font-size: var(--fs-story-title); }
+  .s3-opening { display: none; position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; }
+  :global(html.s3-animated .s3-opening-title) { display: block; }
+  :global(html.s3-animated) .s3-opening { display: block; }
   .s3-dark {
     position: absolute;
     inset: 0;
@@ -97,12 +90,12 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(12px, 2.5vh, 24px);
+    gap: var(--story-heading-gap);
     text-align: center;
   }
   .s3-screen {
     position: relative;
-    width: min(980px, 100%, calc((100svh - 300px) * 1.78));
+    width: min(980px, 100%, calc((100svh - 350px) * 1.78));
     aspect-ratio: 16 / 9;
     border-radius: 18px;
     border: 8px solid var(--purple-ink);
@@ -220,7 +213,7 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     outline: 3px solid var(--sky-cyan);
     outline-offset: 3px;
   }
-  .s3-sound {
+  .s3-fs {
     margin-inline-start: auto;
   }
   .s3-sound[aria-pressed="false"] {
@@ -291,7 +284,7 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     display: block;
     width: clamp(200px, 52%, 620px);
     height: auto;
-    margin-top: 28%;
+    margin-top: 12%;
     filter: drop-shadow(0 10px 30px rgba(0, 0, 30, 0.55));
     opacity: 0;
   }
@@ -302,8 +295,8 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
     pointer-events: none;
   }
   .s3-title {
-    font-size: clamp(1.4rem, 3.6vw, 2.6rem);
-    max-width: 30ch;
+    font-size: var(--fs-story-title);
+    max-width: 26ch;
     text-wrap: balance;
     text-shadow: 0 3px 0 var(--purple-ink);
   }
@@ -327,7 +320,21 @@ const crowd = Array.from({ length: 22 }, (_, i) => i);
       top: 18%;
     }
     .s3-tadam {
-      margin-top: 40%;
+      margin-top: 20%;
     }
+  }
+  @media (orientation: landscape) and (max-height: 500px) {
+    .s3-pin { padding-block: 16px; }
+    .s3-stage { gap: 16px; }
+    .s3-title, :global(.s3-opening-title) { font-size: 2.2rem; max-width: 32ch; }
+    .s3-screen:not(:fullscreen) {
+      width: min(680px, 100%, calc((100svh - 160px) * 1.78));
+      margin-inline: auto;
+      border-width: 3px;
+    }
+    .s3-bar { padding: 6px 8px; }
+    .s3-btn { padding-inline: 10px; }
+    .s3-fs-text, .s3-sound-text { display: none; }
+    .s3-tadam { width: 52%; min-width: 0; }
   }
 </style>

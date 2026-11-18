@@ -11,7 +11,7 @@ export function initDemoModal() {
   const video = dialog.querySelector<HTMLVideoElement>("[data-demo-video]")!;
   let lastFocus: HTMLElement | null = null;
 
-  function open(source?: string) {
+  const open = (source?: string) => {
     lastFocus = document.activeElement as HTMLElement;
     dialog.showModal();
     lockScroll(true);
@@ -24,11 +24,11 @@ export function initDemoModal() {
       video.muted = true;
       video.play().catch(() => {});
     });
-  }
+  };
 
-  function close() {
+  const close = () => {
     if (dialog.open) dialog.close();
-  }
+  };
 
   dialog.addEventListener("close", () => {
     video.pause();

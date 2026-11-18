@@ -22,8 +22,8 @@ netlify deploy --dir dist --prod   # publish to heytadam.com
 
 ## Theme
 
-One theme, **Game Stage** (electric blue stage + glowing floor strip, matches the game screens),
-driven by CSS variables in `src/styles/tokens.css`.
+The site and opening logo animation share a smooth blue-to-navy gradient,
+defined by `--page-gradient` in `src/styles/tokens.css`.
 
 ## Where to edit things
 
@@ -32,7 +32,7 @@ driven by CSS variables in `src/styles/tokens.css`.
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
 | Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
-| Hero video loop (18s, no audio) | `public/demo/tadam-hero-loop.mp4` + poster |
+| Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen.mp4` (a.mp4), `public/demo/hero-phone.mp4` (b.mp4), and their JPEG posters |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | "Leave details" form (Netlify Forms, form name `lead`) | `src/components/LeadForm.astro`; submissions in Netlify → Forms; email alerts in Netlify → Forms → Form notifications |
@@ -46,14 +46,14 @@ FAQ answers are marked `// TODO confirm` in `copy.he.ts`.
 ## Page structure
 
 ```
-Scene 0  Hero (top bar + TV loop)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts
-Scene 1  The event (hall)     Scene1Event.astro                           scripts/scenes/scene1.ts
-Scene 2  Memories (bubbles)   Scene2Insight.astro                         scripts/scenes/scene2.ts
-Scene 3  WOW #1: buzzer+demo  Scene3Reveal.astro                          scripts/scenes/scene3.ts
-Scene 4  How it's built       Scene4HowItWorks.astro (+ privacy strip)    scripts/scenes/scene4.ts
-Scene 6  Lights + leaderboard  Scene6Payoff.astro                          scripts/scenes/scene6.ts
+Scene 0  Hero (TV + phone loops)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts, scripts/synced-preview.ts
+Scene 3  Event photo → buzzer → demo  Scene3Reveal.astro                 scripts/scenes/scene3.ts
+Scene 4  How it's built       Scene4HowItWorks.astro                      scripts/scenes/scene4.ts
+Scene 6  Leaderboard + winner  Scene6Payoff.astro                          scripts/scenes/scene6.ts
+Hosts                        src/components/Hosts.astro
+What's included              src/components/Pricing.astro
 Scene 7  CTA                  Scene7Cta.astro                             scripts/scenes/scene7.ts
-FAQ, Footer, DemoModal        src/components/
+Contact, FAQ, ClosingCta, Footer, DemoModal  src/components/
 Blog                          src/pages/blog/ (index + [slug]), src/components/blog/, /llms.txt from src/pages/llms.txt.ts
 Illustrations (SVG)           src/components/art/
 ```
@@ -61,10 +61,14 @@ Illustrations (SVG)           src/components/art/
 `src/scripts/main.ts` boots everything: Lenis + ScrollTrigger (`src/lib/scroll.ts`), the hero intro,
 then the scenes in page order (after the intro, one per task, so the main thread never blocks for long).
 
+The hero clips start only after the logo intro finishes and both clips can play. They pause together for buffering, an offscreen preview,
+or a hidden tab, and restart together when either clip ends. Reduced motion keeps their posters still.
+Run the playback tests with `node --experimental-strip-types --test tests/synced-preview.test.mjs`.
+
 ## The demo modal
 
-- Opened by the buzzer and the "בואו לראות דמו" button at the end of the page, and by `/#demo` links (blog).
-- Shows the full recording of a real game (`public/demo/tadam-demo.mp4`, Eyal's birthday) with native controls, playing with sound when opened by a click (muted if the browser blocks sound), and a "דברו איתנו!" Messenger button under it.
+- Opened by `/#demo` links (blog). The closing CTA's buzzer and "שחקו בדמו" button open Eyal's playable demo in a new tab.
+- Shows the full recording of a real game (`public/demo/tadam-demo.mp4`, Eyal's birthday) with native controls, playing with sound when opened by a click (muted if the browser blocks sound), and a "בואו נתחיל" Messenger button under it.
 - Closes on Esc, click outside, and the close button (the video pauses). Focus is trapped inside while open.
 
 ## Accessibility & motion

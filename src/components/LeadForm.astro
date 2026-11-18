@@ -11,6 +11,7 @@ const c = COPY.lead;
 ---
 
 <section class="lead-sec" id="lead" aria-labelledby="lead-title">
+  <div class="lead-pin" data-scroll-pause>
   <div class="container lead-inner">
     <h2 id="lead-title" class="display h-scene lead-title reveal">{c.title}</h2>
     <p class="lead lead-sub reveal">{c.sub}</p>
@@ -23,31 +24,26 @@ const c = COPY.lead;
 
       <div class="lead-grid">
         <label class="field">
-          <span class="field-label">{c.name}</span>
-          <input name="name" type="text" required autocomplete="name" />
+          <span class="field-label">{c.name} <span aria-hidden="true">*</span></span>
+          <input name="name" type="text" required autocomplete="name" placeholder={c.namePlaceholder} />
+        </label>
+        <label class="field">
+          <span class="field-label">{c.email} <span aria-hidden="true">*</span></span>
+          <input name="email" type="email" required autocomplete="email" dir="ltr" placeholder={c.emailPlaceholder} />
         </label>
         <label class="field">
           <span class="field-label">{c.phone}</span>
-          <input name="phone" type="tel" required autocomplete="tel" inputmode="tel" dir="ltr" pattern="[0-9+\-\s()]{9,}" />
+          <input name="phone" type="tel" autocomplete="tel" inputmode="tel" dir="ltr" placeholder={c.phonePlaceholder} />
         </label>
         <label class="field">
           <span class="field-label">{c.eventType}</span>
-          <select name="event-type" required>
-            <option value="" disabled selected>{c.eventTypePlaceholder}</option>
-            {c.eventTypes.map((t) => <option value={t}>{t}</option>)}
-          </select>
-        </label>
-        <label class="field">
-          <span class="field-label">{c.when}</span>
-          <input name="when" type="text" placeholder={c.whenPlaceholder} />
+          <input name="event-type" type="text" placeholder={c.eventTypePlaceholder} />
         </label>
       </div>
 
       <button type="submit" class="btn btn-buzzer lead-submit" data-label={c.submit} data-sending={c.sending}>
-        <span class="btn-dot" aria-hidden="true"></span>
         <span class="lead-submit-text">{c.submit}</span>
       </button>
-      <p class="lead-privacy">{c.privacy} <a href="/privacy">{c.privacyLink}</a></p>
 
       <p class="lead-status" role="status" aria-live="polite" data-status hidden></p>
       <p class="lead-error" role="alert" data-error hidden>
@@ -60,6 +56,7 @@ const c = COPY.lead;
       <p class="display">{c.success}</p>
     </div>
   </div>
+  </div>
 </section>
 
 <script>
@@ -70,10 +67,20 @@ const c = COPY.lead;
     const btn = form.querySelector<HTMLButtonElement>(".lead-submit")!;
     const btnText = btn.querySelector<HTMLElement>(".lead-submit-text")!;
     const err = form.querySelector<HTMLElement>("[data-error]")!;
+    const required = Array.from(form.querySelectorAll<HTMLInputElement>("input[required]"));
+    let sending = false;
+    const requiredValid = () => required.every((input) => input.value.trim().length > 0 && input.validity.valid);
+    const updateSubmit = () => { btn.disabled = sending || !requiredValid(); };
+    form.addEventListener("input", updateSubmit);
+    form.addEventListener("change", updateSubmit);
+    window.addEventListener("pageshow", updateSubmit);
+    updateSubmit();
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (!form.reportValidity()) return;
-      btn.disabled = true;
+      if (sending || !requiredValid() || !form.reportValidity()) return;
+      sending = true;
+      form.setAttribute("aria-busy", "true");
+      updateSubmit();
       btnText.textContent = btn.dataset.sending!;
       err.hidden = true;
       try {
@@ -91,8 +98,11 @@ const c = COPY.lead;
       } catch (x) {
         track("lead_error", { error: String(x) });
         err.hidden = false;
-        btn.disabled = false;
         btnText.textContent = btn.dataset.label!;
+      } finally {
+        sending = false;
+        form.removeAttribute("aria-busy");
+        updateSubmit();
       }
     });
   }
@@ -105,7 +115,12 @@ const c = COPY.lead;
   }
   .lead-sec {
     position: relative;
-    padding-block: clamp(64px, 11vh, 120px) clamp(24px, 4vh, 48px);
+  }
+  .lead-pin {
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    padding-block: clamp(32px, 6vh, 72px);
   }
   .lead-inner {
     max-width: 820px;
@@ -164,8 +179,7 @@ const c = COPY.lead;
     font-weight: 700;
     font-size: 1.1rem;
   }
-  .field input,
-  .field select {
+  .field input {
     width: 100%;
     min-height: 52px;
     padding: 10px 18px;
@@ -177,32 +191,37 @@ const c = COPY.lead;
     font-size: 1.05rem;
     text-align: right;
   }
-  .field input[type="tel"] {
+  .field input[dir="ltr"] {
     text-align: left; /* numbers read left to right */
+  }
+  .field input[type="tel"],
+  .field input[type="tel"]::placeholder {
+    text-align: right;
   }
   .field input::placeholder {
     color: color-mix(in srgb, var(--purple-ink) 45%, white);
   }
-  .field input:focus-visible,
-  .field select:focus-visible {
+  .field input:focus-visible {
     outline: none;
     border-color: var(--game-yellow);
     box-shadow: 0 0 0 4px rgba(255, 230, 0, 0.35);
   }
   .lead-submit {
     min-width: min(320px, 100%);
-    margin-top: 4px;
+    margin-top: clamp(24px, 4vh, 36px);
   }
   .lead-submit:disabled {
-    opacity: 0.7;
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .lead-submit:disabled:hover,
+  .lead-submit:disabled:active {
+    transform: none;
+    background: var(--btn-bg);
+  }
+  .lead-form[aria-busy="true"] .lead-submit {
     cursor: progress;
   }
-  .lead-privacy {
-    margin: 0;
-    font-size: var(--fs-small);
-    color: var(--text-muted);
-  }
-  .lead-privacy a,
   .lead-error a {
     color: var(--game-yellow);
   }

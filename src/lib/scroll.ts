@@ -13,14 +13,14 @@ gsap.registerPlugin(ScrollTrigger);
 // exited fullscreen. Own the resize refresh instead: skip it while fullscreen, run it once on exit.
 ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" });
 let refreshTimer = 0;
-const refreshSoon = () => {
+export const refreshScrollSoon = () => {
   clearTimeout(refreshTimer);
   refreshTimer = window.setTimeout(() => {
     if (!document.fullscreenElement) ScrollTrigger.refresh();
   }, 250);
 };
-window.addEventListener("resize", refreshSoon);
-document.addEventListener("fullscreenchange", refreshSoon);
+window.addEventListener("resize", refreshScrollSoon);
+document.addEventListener("fullscreenchange", refreshScrollSoon);
 
 export const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;

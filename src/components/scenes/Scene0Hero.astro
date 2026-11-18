@@ -167,7 +167,8 @@ const d = COPY.scene3.demo;
 
   /* the hero runs wider than the rest of the page, so the TV and the headline can be big */
   .hero-wide {
-    --max-w: 1480px;
+    --max-w: 1360px;
+    padding-inline: clamp(20px, 5vw, 80px); /* roomier side margins than the rest of the page */
   }
 
   /* ---- top bar ---- */
@@ -185,7 +186,7 @@ const d = COPY.scene3.demo;
     line-height: 0;
   }
   :global(.logo-assemble.hero-logo) {
-    width: clamp(118px, 12vw, 172px);
+    width: clamp(108px, 10vw, 150px);
   }
   .hero-nav ul {
     display: flex;
@@ -197,7 +198,7 @@ const d = COPY.scene3.demo;
   .hero-nav a {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--white);
     text-decoration: none;
   }
@@ -221,24 +222,27 @@ const d = COPY.scene3.demo;
     z-index: 2;
     flex: 1;
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
-    gap: clamp(28px, 4vw, 64px);
+    gap: clamp(40px, 6vw, 112px);
+    padding-block: clamp(16px, 4vh, 48px);
   }
   .hero-copy {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: clamp(14px, 2.4vh, 24px);
+    gap: clamp(16px, 2.8vh, 28px);
+    max-width: 580px;
   }
   :global(.hero-title) {
-    font-size: clamp(2.8rem, 5.2vw, 6rem);
+    font-size: clamp(2.5rem, 4.4vw, 5rem);
     line-height: 1.05;
     text-shadow: 0 4px 0 var(--purple-ink);
   }
   .hero-sub {
-    max-width: 46ch;
-    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    max-width: 42ch;
+    font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+    line-height: 1.6;
   }
   .hero-ctas {
     display: flex;
@@ -250,6 +254,10 @@ const d = COPY.scene3.demo;
 
   .hero-tv {
     margin: 0;
+    /* a smaller TV, also capped by the screen height so it never crowds a short laptop screen */
+    width: min(620px, 100%, calc((100svh - 300px) * 1.6));
+    min-width: min(360px, 100%);
+    justify-self: end;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -258,15 +266,15 @@ const d = COPY.scene3.demo;
   .hero-tv-screen {
     position: relative;
     width: 100%;
-    border: 12px solid #0b0f24;
-    border-radius: 18px;
+    border: 8px solid #0b0f24;
+    border-radius: 16px;
     overflow: hidden;
     line-height: 0;
     background: #0b0f24;
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.08),
-      0 0 80px 6px var(--screen-glow),
-      0 30px 60px rgba(0, 0, 20, 0.45);
+      0 0 60px 4px var(--screen-glow),
+      0 24px 48px rgba(0, 0, 20, 0.4);
   }
   .hero-loop {
     width: 100%;
@@ -345,10 +353,12 @@ const d = COPY.scene3.demo;
     .hero-inner {
       grid-template-columns: minmax(0, 1fr);
       padding-top: clamp(8px, 3vh, 28px);
+      gap: clamp(32px, 6vh, 48px);
       text-align: center;
     }
     .hero-copy {
       align-items: center;
+      justify-self: center;
     }
     :global(.hero-title) {
       font-size: clamp(2.4rem, 10.5vw, 4rem);
@@ -360,7 +370,8 @@ const d = COPY.scene3.demo;
       justify-content: center;
     }
     .hero-tv {
-      width: min(560px, 100%);
+      width: min(520px, 100%);
+      min-width: 0;
       justify-self: center;
     }
   }

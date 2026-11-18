@@ -21,11 +21,11 @@
 Summary and the 29-article plan: `keyword-research-2026-11.md`. Data: `keywords-il.csv` (about 1,600 keywords by cluster), `data/serp-2026-11-16.csv` (22 SERPs), `data/questions-2026-11-16.csv` (autocomplete questions).
 
 ## Draft previews on Netlify (no CLI in the cloud session)
-Build, zip `dist/`, and POST it as a draft deploy to the Netlify API (the Netlify token is a network secret for `api.netlify.com` in the cloud environment):
+Pull requests get an automatic deploy preview (`deploy-preview-<number>--heytadam.netlify.app`). For a preview without a PR: build, zip `dist/`, and POST it as a draft deploy to the Netlify API (the Netlify token is a network secret for `api.netlify.com` in the cloud environment):
 ```bash
 npm run build
 (cd dist && zip -qr ../dist.zip .)
-SITE_ID=$(curl -sS "https://api.netlify.com/api/v1/sites?filter=all" | python3 -c "import sys,json;print([s['id'] for s in json.load(sys.stdin) if s['name']=='tadam-game'][0])")
+SITE_ID=$(curl -sS "https://api.netlify.com/api/v1/sites?filter=all" | python3 -c "import sys,json;print([s['id'] for s in json.load(sys.stdin) if s['name']=='heytadam'][0])")
 curl -sS -X POST "https://api.netlify.com/api/v1/sites/$SITE_ID/deploys?draft=true" -H "Content-Type: application/zip" --data-binary @dist.zip
 ```
-The response has `deploy_ssl_url`. Never deploy to production from a branch; production deploys happen from `main` after Tanya merges (see CLAUDE.md).
+The response has `deploy_ssl_url`. Never deploy to production from a branch; merging to `main` deploys production automatically (see CLAUDE.md).

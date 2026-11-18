@@ -15,9 +15,34 @@ import ClosingCta from "../components/ClosingCta.astro";
 import DemoModal from "../components/DemoModal.astro";
 import Preloader from "../components/Preloader.astro";
 import { COPY } from "../content/copy.he";
+import { SITE } from "../config/site";
+
+const home = new URL("/", Astro.site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${home}#org`,
+    name: "טדאם!",
+    url: home,
+    logo: new URL("/favicon-512.png", Astro.site).href,
+    email: SITE.email,
+    sameAs: [SITE.facebookUrl],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "טדאם!",
+    alternateName: ["Tadam", "heytadam"],
+    url: home,
+    inLanguage: "he-IL",
+    publisher: { "@id": `${home}#org` },
+  },
+];
 ---
 
 <Base>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <link slot="head" rel="preload" as="image" type="image/jpeg" href="/demo/hero-screen-poster.jpg" />
   <link slot="head" rel="preload" as="image" type="image/jpeg" href="/demo/hero-phone-poster.jpg" />
   <Preloader />

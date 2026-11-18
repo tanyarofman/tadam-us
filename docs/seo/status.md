@@ -35,6 +35,7 @@ Seasonal deadlines (publish 3 to 4 weeks before):
 - Done 2026-11-17: sitemap submitted in Google Search Console. After each new article is live, request indexing for its URL in URL inspection.
 - Check Search Console (Pages, Performance) about a week after 2026-11-17 for indexing problems.
 - Re-check rankings and AI Overview sources for the target keywords at 4 and 8 weeks: `python3 tools/seo/research.py serp --file <keywords>` (about $0.002 per keyword) and compare with `docs/seo/data/serp-2026-11-16.csv`.
+- Done 2026-11-18: favicon fixed (square icons + Organization logo in structured data), live on production, and indexing requested for `https://heytadam.com/`. Google can take days to weeks to show the icon in results; if the globe is still there by early December, check URL inspection for the homepage.
 - Answer the forum and Facebook threads that rank (stips.co.il, Facebook groups and Reddit all show up on page 1 for event questions).
 
 ## Known issues

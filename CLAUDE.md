@@ -5,8 +5,8 @@ See README.md for how to run, switch themes and edit copy.
 ## Workflow
 
 - Never commit directly to `main`. Do every change on a branch (`feat/…`, `fix/…`, `chore/…`) and open a pull request for review.
-- Merge only when Tanya asks. Production deploys (`netlify deploy --dir dist --prod`) happen from `main` after a merge.
-- A draft preview for a PR: `npm run build && netlify deploy --dir dist` (gives a draft URL to share in the PR).
+- Merge only when Tanya asks. Netlify (site `heytadam`, linked to this repo) deploys `main` to production automatically on every merge; no manual deploy step. Check the deploy in the Netlify API (`/api/v1/sites/<id>/deploys`).
+- Every PR gets an automatic Netlify deploy preview (`deploy-preview-<number>--heytadam.netlify.app`) to share in the PR.
 
 ## Rules from the brief
 

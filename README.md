@@ -12,13 +12,10 @@ npm run build      # static output in dist/
 npm run preview    # serve the production build
 ```
 
-Deploy: Netlify picks up `netlify.toml` (build `npm run build`, publish `dist`).
-Netlify site: `heytadam` (formerly `tadam-game`), custom domain https://heytadam.com.
+Deploy: the Netlify site `heytadam` (formerly `tadam-game`, custom domain https://heytadam.com) is linked to this GitHub repo and builds with `netlify.toml` (build `npm run build`, publish `dist`).
 
-```bash
-netlify deploy --dir dist          # draft preview
-netlify deploy --dir dist --prod   # publish to heytadam.com
-```
+- Merging to `main` deploys to production automatically.
+- Every pull request gets a deploy preview at `deploy-preview-<number>--heytadam.netlify.app`.
 
 ## Theme
 

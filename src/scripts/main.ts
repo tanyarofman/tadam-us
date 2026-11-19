@@ -7,6 +7,7 @@ import { initReveals } from "./motion";
 import { initHero } from "./hero";
 import { initDemoModal } from "./demo-modal";
 import { initSyncedPreview } from "./synced-preview";
+import { initMobilePreview } from "./mobile-preview";
 
 function initScrollProgress() {
   const bar = document.querySelector<HTMLElement>(".scroll-progress__bar");
@@ -25,7 +26,12 @@ function initLinks() {
       e.preventDefault();
       // data-scroll-offset: extra screens to scroll past the target (lands inside a pinned scene)
       const screens = prefersReducedMotion() ? 0 : Number(a.dataset.scrollOffset) || 0;
-      scrollToTarget(a.dataset.scrollTo!, screens * window.innerHeight);
+      const target = document.querySelector<HTMLElement>(a.dataset.scrollTo!);
+      const demoScene = target?.classList.contains("mobile-sticky-scene") && screens && target.dataset.demoScroll;
+      const offset = demoScene
+        ? (target!.offsetHeight - (target!.firstElementChild as HTMLElement).offsetHeight) * Math.min(1, Number(demoScene) + 0.12)
+        : screens * window.innerHeight;
+      scrollToTarget(a.dataset.scrollTo!, offset);
     }
     const t = (e.target as HTMLElement).closest<HTMLElement>("[data-track]");
     if (t) track(t.dataset.track as TrackEvent, { source: t.dataset.source });
@@ -52,7 +58,8 @@ function boot() {
   initDemoModal();
   initScrollProgress();
   const preview = document.querySelector<HTMLElement>("[data-synced-preview]");
-  const startPreview = preview ? initSyncedPreview(preview) : () => {};
+  const initPreview = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches ? initMobilePreview : initSyncedPreview;
+  const startPreview = preview ? initPreview(preview) : () => {};
 
   // Below-the-fold scene code downloads in parallel with the intro,
   // and is initialised once the hero intro is done (keeps the intro smooth and LCP early).
@@ -65,7 +72,7 @@ function boot() {
     import("./scenes/scene4"),
     import("./scenes/scene6"),
     pause("hosts"),
-    pause("pricing"),
+    import("./included"),
     pause("scene-7"),
     import("./scenes/scene7"),
     pause("lead"),

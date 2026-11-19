@@ -6,7 +6,8 @@
  * The mp4 is only requested once the scene is near the viewport (preload stays "none" until then).
  */
 import { gsap } from "../../lib/scroll";
-import { animateWords, isMobile } from "../motion";
+import { animateWords } from "../motion";
+import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
 import { COPY } from "../../content/copy.he";
 
 type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
@@ -154,62 +155,60 @@ export function init({ reduced }: { reduced: boolean }) {
   const openingTitle = q(".s3-opening-title");
   const photo = q(".s3-opening .person-img");
 
-  gsap.set(dark, { opacity: 0 });
-  gsap.set(screen, { filter: "brightness(1) saturate(1)" });
-  gsap.set(opening, { autoAlpha: 1 });
-  gsap.set(openingTitle, { autoAlpha: 1 });
-  gsap.set(openingTitle.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
-  gsap.set(photo, { scale: 1.05 });
-  gsap.set(burst, { opacity: 0 });
-  gsap.set(tadam, { scale: 0.2, opacity: 0, rotate: -8 });
-  gsap.set(rays, { scale: 0.4, opacity: 0 });
-  gsap.set(video, { autoAlpha: 0 });
-  gsap.set(line1, { autoAlpha: 0, y: 12 });
+  gsap.matchMedia().add({ mobile: mobileSceneQuery, desktop: "(min-width: 768px) and (min-height: 501px)" }, (ctx) => {
+    const mobile = !!ctx.conditions?.mobile;
+    gsap.set(dark, { opacity: 0 });
+    gsap.set(screen, { filter: "brightness(1) saturate(1)" });
+    gsap.set(opening, { autoAlpha: 1 });
+    gsap.set(openingTitle, { autoAlpha: 1 });
+    gsap.set(openingTitle.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
+    gsap.set(photo, { scale: 1.05 });
+    gsap.set(burst, { opacity: 0 });
+    gsap.set(tadam, { scale: 0.2, opacity: 0, rotate: -8 });
+    gsap.set(rays, { scale: 0.4, opacity: 0 });
+    gsap.set(video, { autoAlpha: 0 });
+    gsap.set(line1, { autoAlpha: 0, y: 12 });
 
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: s,
-      start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 3.4 : 3.8),
-      pin: s.querySelector(".scene-pin"),
-      scrub: 0.7,
-      invalidateOnRefresh: true,
-    },
-    onUpdate() {
-      vid.screenOn(tl.time() >= tl.labels.video);
-    },
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 2.1 : 3.8, mobile ? 0.18 : 0.7),
+      onUpdate() {
+        vid.screenOn(tl.time() >= tl.labels.video);
+      },
+    });
+
+    // 1. The photo and first heading hold in the same frame as the coming show.
+    tl.to(photo, { scale: 1, duration: 1 })
+      .add(animateWords(openingTitle, { duration: 0.4, stagger: 0.05 }), 0.05)
+      .to({}, { duration: 0.35 })
+      .addLabel("reveal")
+      .to(openingTitle, { autoAlpha: 0, y: -12, duration: 0.35 }, "reveal")
+      .to(opening, { autoAlpha: 0, duration: 0.55 }, "reveal")
+      .to(dark, { opacity: 0.85, duration: 0.7 }, "reveal")
+      .to(screen, { filter: "brightness(0.15) saturate(0)", duration: 0.65 }, "reveal")
+      .to(line1, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, "reveal+=0.35")
+      // 2. the screen flickers on
+      .to(screen, { filter: "brightness(0.7) saturate(0.6)", duration: 0.08 })
+      .to(screen, { filter: "brightness(0.2) saturate(0)", duration: 0.06 })
+      .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.08 })
+      .to(screen, { filter: "brightness(0.4) saturate(0.5)", duration: 0.05 })
+      .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.12 })
+      // 3. "טדאם!" bursts in the middle of the screen
+      .to(burst, { opacity: 1, duration: 0.2 }, "<")
+      .to(rays, { scale: 1.2, opacity: 0.5, rotate: 30, duration: mobile ? 0.45 : 0.9 })
+      .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.5, ease: "back.out(2.5)" }, "<0.1")
+      .to({}, { duration: mobile ? 0.35 : 0.8 })
+      // 4. the burst clears and the big screen wakes up with the demo
+      .addLabel("video")
+      .to(burst, { opacity: 0, scale: 1.2, duration: 0.35 })
+      .fromTo(
+        video,
+        { autoAlpha: 0, scaleY: 0.02, filter: "brightness(3)" },
+        { autoAlpha: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
+        "<0.1",
+      )
+      .to({}, { duration: 0.6 });
+    // The hero's demo link follows the timeline label instead of a desktop-only offset.
+    s.dataset.demoScroll = String(tl.labels.video / tl.duration());
   });
-
-  // 1. The photo and first heading hold in the same frame as the coming show.
-  tl.to(photo, { scale: 1, duration: 1 })
-    .add(animateWords(openingTitle, { duration: 0.4, stagger: 0.05 }), 0.05)
-    .to({}, { duration: 0.35 })
-    .addLabel("reveal")
-    .to(openingTitle, { autoAlpha: 0, y: -12, duration: 0.35 }, "reveal")
-    .to(opening, { autoAlpha: 0, duration: 0.55 }, "reveal")
-    .to(dark, { opacity: 0.85, duration: 0.7 }, "reveal")
-    .to(screen, { filter: "brightness(0.15) saturate(0)", duration: 0.65 }, "reveal")
-    .to(line1, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, "reveal+=0.35")
-    // 2. the screen flickers on
-    .to(screen, { filter: "brightness(0.7) saturate(0.6)", duration: 0.08 })
-    .to(screen, { filter: "brightness(0.2) saturate(0)", duration: 0.06 })
-    .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.08 })
-    .to(screen, { filter: "brightness(0.4) saturate(0.5)", duration: 0.05 })
-    .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.12 })
-    // 3. "טדאם!" bursts in the middle of the screen
-    .to(burst, { opacity: 1, duration: 0.2 }, "<")
-    .to(rays, { scale: 1.2, opacity: 0.5, rotate: 30, duration: 0.9 })
-    .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.5, ease: "back.out(2.5)" }, "<0.1")
-    .to({}, { duration: 0.8 })
-    // 4. the burst clears and the big screen wakes up with the demo
-    .addLabel("video")
-    .to(burst, { opacity: 0, scale: 1.2, duration: 0.35 })
-    .fromTo(
-      video,
-      { autoAlpha: 0, scaleY: 0.02, filter: "brightness(3)" },
-      { autoAlpha: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
-      "<0.1",
-    )
-    .to({}, { duration: 0.6 });
 }

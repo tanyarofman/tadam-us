@@ -289,6 +289,32 @@ const icons: Record<string, string> = {
       grid-template-columns: minmax(0, 1fr);
     }
   }
+  :global(.pricing.mobile-sticky-scene) .pricing-pin {
+    min-height: 100lvh;
+    padding-block: clamp(72px, 12svh, 104px) 24px;
+  }
+  :global(.pricing.mobile-sticky-scene) .pricing-sub { margin-bottom: 8px; }
+  :global(.pricing.mobile-sticky-scene) .included {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  :global(.pricing.mobile-sticky-scene) .inc {
+    min-height: 164px;
+    padding: 22px 20px;
+    row-gap: 12px;
+    column-gap: 22px;
+  }
+  :global(.pricing.mobile-sticky-scene) .inc:nth-child(odd) { grid-area: 1 / 1; }
+  :global(.pricing.mobile-sticky-scene) .inc:nth-child(even) { grid-area: 2 / 1; }
+  :global(.pricing.mobile-sticky-scene) .inc-icon { width: 44px; height: 44px; }
+  :global(.pricing.mobile-sticky-scene) .inc-text { white-space: normal; text-wrap: balance; }
+  @media (orientation: landscape) and (max-height: 500px) {
+    :global(.pricing.mobile-sticky-scene) .pricing-pin { padding-block: 20px; }
+    :global(.pricing.mobile-sticky-scene) .included { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 1fr; }
+    :global(.pricing.mobile-sticky-scene) .inc:nth-child(even) { grid-area: 1 / 2; }
+  }
 
   .pricing-note {
     margin: 6px 0 0;

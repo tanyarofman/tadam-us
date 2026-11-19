@@ -5,6 +5,7 @@
  */
 import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
+import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
 
 export function init({ reduced }: { reduced: boolean }) {
   const s = document.querySelector<HTMLElement>("[data-scene='4']");
@@ -23,8 +24,9 @@ export function init({ reduced }: { reduced: boolean }) {
   s.classList.add("is-pinned");
 
   const mm = gsap.matchMedia();
-  mm.add({ phone: "(max-width: 899px), (orientation: landscape) and (max-height: 500px)", wide: "(min-width: 900px) and (min-height: 501px)" }, (ctx) => {
+  mm.add({ mobile: mobileSceneQuery, phone: "(max-width: 899px), (orientation: landscape) and (max-height: 500px)", wide: "(min-width: 900px) and (min-height: 501px)" }, (ctx) => {
     const phone = !!ctx.conditions?.phone;
+    const mobile = !!ctx.conditions?.mobile;
 
     gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
     gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
@@ -34,17 +36,12 @@ export function init({ reduced }: { reduced: boolean }) {
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: s,
-        start: "top top",
-        end: () => "+=" + window.innerHeight * (phone ? 3.6 : 3),
-        pin: s.querySelector(".s4-pin"),
-        scrub: 0.6,
-        invalidateOnRefresh: true,
-      },
+      scrollTrigger: sceneScroll(s, s.querySelector<HTMLElement>(".s4-pin")!, mobile, mobile ? 2.6 : phone ? 3.6 : 3, mobile ? 0.18 : 0.6),
     });
 
-    tl.add(animateWords(title, { duration: 0.4, stagger: 0.05 }));
+    if (mobile) {
+      animateWords(title, { duration: 0.4, stagger: 0.05, scrollTrigger: { trigger: s, start: "top 70%", end: "top 20%", scrub: 0.18 } });
+    } else tl.add(animateWords(title, { duration: 0.4, stagger: 0.05 }));
 
     cards.forEach((card, i) => {
       // on phones, the previous card steps back as the next one arrives

@@ -218,6 +218,10 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
     .board-head { margin-bottom: 10px; }
     .lb { --row: 42px; }
   }
+  @media (max-width: 767px) and (orientation: portrait) {
+    .s6-pin { padding-block: clamp(84px, 15svh, 132px) 28px; }
+    .s6-inner { gap: clamp(42px, 7svh, 60px); }
+  }
   @media (orientation: landscape) and (max-height: 500px) {
     .s6-pin { padding-block: 16px; }
     .s6-inner { flex-direction: row; gap: 24px; }

@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 // ScrollTrigger's own resize refresh re-inserts pinned elements into their spacers. Entering fullscreen
 // resizes the viewport, so that refresh detached the fullscreen element and the browser instantly
 // exited fullscreen. Own the resize refresh instead: skip it while fullscreen, run it once on exit.
-ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" });
+ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load", ignoreMobileResize: true });
 let refreshTimer = 0;
 export const refreshScrollSoon = () => {
   clearTimeout(refreshTimer);
@@ -19,7 +19,14 @@ export const refreshScrollSoon = () => {
     if (!document.fullscreenElement) ScrollTrigger.refresh();
   }, 250);
 };
-window.addEventListener("resize", refreshScrollSoon);
+let viewportWidth = window.innerWidth;
+window.addEventListener("resize", () => {
+  // Mobile browser chrome and the keyboard resize height while a gesture is in progress.
+  // Stable lvh scene panels need no refresh; orientation/width changes still do.
+  const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+  if (!mobile || window.innerWidth !== viewportWidth) refreshScrollSoon();
+  viewportWidth = window.innerWidth;
+});
 document.addEventListener("fullscreenchange", refreshScrollSoon);
 
 export const prefersReducedMotion = () =>
@@ -28,8 +35,8 @@ export const prefersReducedMotion = () =>
 let lenis: Lenis | null = null;
 
 export function initScroll() {
-  if (prefersReducedMotion()) return null;
-  lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.2 });
+  if (prefersReducedMotion() || window.matchMedia("(max-width: 767px), (pointer: coarse)").matches) return null;
+  lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.2, syncTouch: false });
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add((time) => lenis?.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);

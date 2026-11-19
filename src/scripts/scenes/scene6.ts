@@ -5,7 +5,8 @@
  */
 import { gsap } from "../../lib/scroll";
 import { confettiBurst } from "../../lib/confetti";
-import { animateWords, isMobile } from "../motion";
+import { animateWords } from "../motion";
+import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
 
 // Player index order (rank 1..5) and scores at each step. Index 0 = סבתא (see copy.he.ts)
 const ORDERS = [
@@ -51,53 +52,49 @@ export function init({ reduced }: { reduced: boolean }) {
   const scoreVars = (step: number) =>
     Object.fromEntries(SCORES[step].map((v, i) => [`p${i}`, v])) as Record<string, number>;
 
-  // initial state
-  winner.classList.remove("is-winner");
-  gsap.set(crown, { scale: 0, opacity: 0 });
-  gsap.set([...titleA.querySelectorAll(".word-in"), ...title.querySelectorAll(".word-in")], { opacity: 0, yPercent: 110 });
-  Object.assign(scores, scoreVars(0));
-  renderScores();
-  setRanks(0);
-  rows.forEach((r, i) => gsap.set(r, { y: yFor(0, i) }));
+  gsap.matchMedia().add({ mobile: mobileSceneQuery, desktop: "(min-width: 768px) and (min-height: 501px)" }, (ctx) => {
+    const mobile = !!ctx.conditions?.mobile;
+    // initial state
+    winner.classList.remove("is-winner");
+    gsap.set(crown, { scale: 0, opacity: 0 });
+    gsap.set([...titleA.querySelectorAll(".word-in"), ...title.querySelectorAll(".word-in")], { opacity: 0, yPercent: 110 });
+    Object.assign(scores, scoreVars(0));
+    renderScores();
+    setRanks(0);
+    rows.forEach((r, i) => gsap.set(r, { y: yFor(0, i) }));
 
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: s,
-      start: "top top",
-      end: () => "+=" + window.innerHeight * (isMobile() ? 2.5 : 2.7),
-      pin: s.querySelector(".scene-pin"),
-      scrub: 0.8,
-      invalidateOnRefresh: true,
-    },
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 1.8 : 2.7, mobile ? 0.18 : 0.8),
+    });
+
+    // 1. everyone answers together
+    tl.add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }), 0.1).to({}, { duration: 0.4 });
+
+    // 2. the leaderboard climbs
+    for (let step = 1; step <= 2; step++) {
+      tl.to(scores, { ...scoreVars(step), duration: 0.6, onUpdate: renderScores })
+        .call(() => setRanks(tl.scrollTrigger?.direction === -1 ? step - 1 : step))
+        .add(gsap.to(rows, { y: (i: number) => yFor(step, i), duration: 0.6, ease: "power1.inOut" }), "<")
+        .to({}, { duration: 0.25 });
+    }
+    // drumroll
+    tl.to(drum, { opacity: 1, duration: 0.2 })
+      .to({}, { duration: 0.4 })
+      .to(drum, { opacity: 0, duration: 0.1 })
+      // the reveal
+      .to(scores, { ...scoreVars(3), duration: 0.4, onUpdate: renderScores })
+      .add(gsap.to(rows, { y: (i: number) => yFor(3, i), duration: 0.6, ease: "power2.out" }), "<")
+      .call(() => {
+        const fwd = tl.scrollTrigger?.direction !== -1;
+        setRanks(fwd ? 3 : 2);
+        winner.classList.toggle("is-winner", fwd);
+        if (fwd) confettiBurst(canvas, 70, 2600);
+      })
+      .to(crown, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" })
+      // 3. the headline turns into the payoff
+      .to(titleA, { opacity: 0, y: -16, duration: 0.25 })
+      .add(animateWords(title, { duration: 0.35, stagger: 0.05 }))
+      .to({}, { duration: 0.5 });
   });
-
-  // 1. everyone answers together
-  tl.add(animateWords(titleA, { duration: 0.35, stagger: 0.05 }), 0.1).to({}, { duration: 0.4 });
-
-  // 2. the leaderboard climbs
-  for (let step = 1; step <= 2; step++) {
-    tl.to(scores, { ...scoreVars(step), duration: 0.6, onUpdate: renderScores })
-      .call(() => setRanks(tl.scrollTrigger?.direction === -1 ? step - 1 : step))
-      .add(gsap.to(rows, { y: (i: number) => yFor(step, i), duration: 0.6, ease: "power1.inOut" }), "<")
-      .to({}, { duration: 0.25 });
-  }
-  // drumroll
-  tl.to(drum, { opacity: 1, duration: 0.2 })
-    .to({}, { duration: 0.4 })
-    .to(drum, { opacity: 0, duration: 0.1 })
-    // the reveal
-    .to(scores, { ...scoreVars(3), duration: 0.4, onUpdate: renderScores })
-    .add(gsap.to(rows, { y: (i: number) => yFor(3, i), duration: 0.6, ease: "power2.out" }), "<")
-    .call(() => {
-      const fwd = tl.scrollTrigger?.direction !== -1;
-      setRanks(fwd ? 3 : 2);
-      winner.classList.toggle("is-winner", fwd);
-      if (fwd) confettiBurst(canvas, 70, 2600);
-    })
-    .to(crown, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" })
-    // 3. the headline turns into the payoff
-    .to(titleA, { opacity: 0, y: -16, duration: 0.25 })
-    .add(animateWords(title, { duration: 0.35, stagger: 0.05 }))
-    .to({}, { duration: 0.5 });
 }

@@ -156,6 +156,19 @@ p {
   margin-inline: auto;
 }
 
+/* The large viewport covers the whole phone even when Safari hides its bars.
+   Its stable height also keeps scroll distances unchanged during that gesture. */
+.mobile-sticky-scene::after {
+  content: "";
+  display: block;
+  height: var(--scene-travel);
+}
+.mobile-sticky-scene > .mobile-scene-pin {
+  position: sticky;
+  top: 0;
+  min-height: 100lvh;
+}
+
 /* Extra scroll distance for reading, with no DOM changes when forms/answers expand. */
 [data-scroll-hold] {
   padding-bottom: 0;
@@ -168,6 +181,10 @@ p {
 [data-scroll-hold] > [data-scroll-pause] {
   position: sticky;
   top: 0;
+}
+@media (max-width: 767px), (orientation: landscape) and (max-height: 500px) {
+  [data-scroll-hold]::after { height: 28svh; }
+  [data-scroll-hold] > [data-scroll-pause] { top: var(--hold-top, 0px); }
 }
 .eyebrow {
   display: inline-block;

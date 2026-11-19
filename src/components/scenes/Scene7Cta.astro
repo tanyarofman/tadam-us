@@ -76,4 +76,7 @@ const c = COPY.scene7;
   .s7-actions .btn {
     padding-inline: clamp(14px, 3vw, 28px);
   }
+  @media (max-width: 767px) {
+    .s7-actions { grid-template-columns: minmax(0, 1fr); width: min(320px, 100%); gap: 16px; }
+  }
 </style>

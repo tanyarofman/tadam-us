@@ -304,6 +304,12 @@ const tiles = [
     :global(.s4.is-pinned) .step-text { padding: 12px 20px 16px; }
     .step-num { margin-bottom: 8px; }
   }
+  @media (max-width: 767px) and (orientation: portrait) {
+    :global(.s4.is-pinned) .s4-pin { min-height: 100lvh; padding-block: clamp(84px, 15svh, 132px) 24px; }
+    .s4-head { margin-bottom: clamp(24px, 4svh, 36px); }
+    :global(.s4.is-pinned) .step-visual { height: clamp(190px, 33svh, 270px); }
+    .mp-main { height: calc(100% - 24px); }
+  }
   @media (orientation: landscape) and (max-height: 500px) {
     :global(.s4.is-pinned) .s4-pin { padding-block: 16px; }
     :global(.s4-title) { font-size: 2.2rem; }

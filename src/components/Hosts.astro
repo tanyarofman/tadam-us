@@ -68,4 +68,10 @@ const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-
     .hosts-sub { max-width: 28ch; }
     .hosts-photos { width: min(100%, 580px); justify-self: center; }
   }
+  @media (max-width: 767px) {
+    .hosts-inner { --gutter: 24px; }
+    .hosts-title { display: flex; gap: .18em; font-size: clamp(2rem, 9.4vw, 3rem); white-space: nowrap; }
+    .hosts-title .hl { display: inline-block; }
+    .hosts-sub { max-width: none; white-space: nowrap; font-size: clamp(1.15rem, 5.6vw, 1.6rem); }
+  }
 </style>

@@ -102,6 +102,9 @@ const c = COPY.hero;
   }
   .hero-tv-screen { aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #000; background: #0734ab; }
   .hero-devices video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .hero-preview[data-playback="loading"] .hero-tv-screen { background: url("/demo/hero-screen-poster.jpg") center / cover; }
+  .hero-preview[data-playback="loading"] .hero-phone-screen { background: url("/demo/hero-phone-poster.jpg") center / cover; }
+  .hero-preview[data-playback="loading"] video { opacity: 0; }
   .tv-light { position: absolute; bottom: .5cqw; left: 50%; width: .8cqw; height: .3cqw; border-radius: 50%; background: #b6c5e6; }
   .tv-foot { position: absolute; bottom: -2.4cqw; width: 6cqw; height: .7cqw; border: 1px solid #697489; border-radius: 6px; background: #11172e; }
   .tv-foot-left { left: 16%; transform: rotate(-35deg); }
@@ -131,12 +134,15 @@ const c = COPY.hero;
     .hero-preview figcaption { translate: 28px -14px; }
     .hero { padding-bottom: 20px; }
     .hero-bar { padding-block: 14px; }
-    .hero-inner { padding-top: 18px; gap: 16px; }
+    .hero-inner { padding-top: 52px; gap: 16px; }
     .hero-copy { gap: 12px; }
     .hero-ctas { width: 100%; }
     .hero-ctas .btn-buzzer { width: 100%; }
     .hero-ctas .btn-ghost { min-height: 44px; padding-block: 8px; }
     .hero-bar-cta { min-height: 46px; padding: 8px 20px 10px; font-size: 1.375rem; }
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    .hero-inner { padding-top: 56px; }
   }
   .hero-burst { display: none; }
   :global(html.js .intro-pending .hero-title .word-in),

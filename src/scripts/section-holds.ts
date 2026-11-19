@@ -12,8 +12,10 @@ export function init(id: string, { reduced }: { reduced: boolean }) {
 
   const fitMobileHold = () => {
     const mobile = window.matchMedia("(max-width: 767px), (orientation: landscape) and (max-height: 500px)").matches;
-    // A tall form/expanded FAQ must be scrollable to its bottom before it pauses.
-    pin.style.setProperty("--hold-top", `${mobile ? Math.min(0, window.innerHeight - pin.offsetHeight) : 0}px`);
+    // Reading sections pause at their heading, then release so the rest can scroll.
+    // Bottom-aligning a tall form/FAQ hides its heading before the pause even starts.
+    const startsAtHeading = pin.dataset.scrollPause === "start";
+    pin.style.setProperty("--hold-top", `${mobile && !startsAtHeading ? Math.min(0, window.innerHeight - pin.offsetHeight) : 0}px`);
   };
   fitMobileHold();
   let width = window.innerWidth;

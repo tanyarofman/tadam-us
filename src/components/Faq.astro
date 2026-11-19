@@ -16,7 +16,7 @@ const items = [...priceQs, ...c.items, ...addonQs].map((it) => ({
 ---
 
 <section class="faq" id="faq" aria-labelledby="faq-title">
-  <div class="faq-pin" data-scroll-pause>
+  <div class="faq-pin" data-scroll-pause="start">
   <div class="container faq-inner">
     <h2 id="faq-title" class="display h-scene faq-title reveal">{c.title}</h2>
     <div class="faq-list">
@@ -127,5 +127,8 @@ const items = [...priceQs, ...c.items, ...addonQs].map((it) => ({
     color: var(--game-yellow);
     font-weight: 700;
     text-underline-offset: 4px;
+  }
+  @media (max-width: 767px) {
+    .faq-pin { padding-block-start: clamp(72px, 12svh, 104px); }
   }
 </style>

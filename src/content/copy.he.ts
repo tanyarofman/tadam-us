@@ -267,8 +267,10 @@ export const COPY = {
 
   footer: {
     contact: "דברו איתנו",
+    contactMobile: "צרו קשר",
     facebook: "טדאם! בפייסבוק",
     privacy: "מדיניות פרטיות",
+    privacyMobile: "פרטיות",
     blog: "בלוג",
     copyright: "© טדאם!",
   },

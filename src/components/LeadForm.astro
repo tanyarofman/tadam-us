@@ -11,7 +11,7 @@ const c = COPY.lead;
 ---
 
 <section class="lead-sec" id="lead" aria-labelledby="lead-title">
-  <div class="lead-pin" data-scroll-pause>
+  <div class="lead-pin" data-scroll-pause="start">
   <div class="container lead-inner">
     <h2 id="lead-title" class="display h-scene lead-title reveal">{c.title}</h2>
     <p class="lead lead-sub reveal">{c.sub}</p>
@@ -257,6 +257,12 @@ const c = COPY.lead;
     color: var(--purple-ink);
     font-size: 1.6rem;
     font-weight: 800;
+  }
+  @media (max-width: 767px) {
+    .lead-pin {
+      align-items: start;
+      padding-block-start: clamp(72px, 12svh, 104px);
+    }
   }
   @media (max-width: 600px) {
     .lead-grid {

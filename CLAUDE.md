@@ -17,7 +17,7 @@ See README.md for how to run, switch themes and edit copy.
 ## Blog & SEO
 
 - Articles: one Markdown file each in `src/content/blog/`, schema in `src/content.config.ts`, template `src/pages/blog/[slug].astro`. `/llms.txt` is generated from them.
-- Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). Plan and findings: `docs/seo/keyword-research-2026-11.md`. How to write: `docs/seo/content-playbook.md`. Sources: `docs/seo/sources.md`.
+- Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). Plan and findings: `docs/seo/keyword-research-2026-11.md` (29-article plan) and `docs/seo/keyword-research-2026-11-22.md` (second round, new topics). How to write: `docs/seo/content-playbook.md`. Sources: `docs/seo/sources.md`.
 - Writing rules: every H2 is the question people search, followed by a 2-sentence answer; one table; 3 to 5 internal links (other articles, `/#demo`, `/`); 4 FAQ items in the frontmatter; `seoTitle` max 60 and `description` max 155 characters (the build enforces it); no prices in articles.
 - Link only sources you verified, inline on the phrase, never a sources list at the end. Log each one in `docs/seo/sources.md`.
 - Never invent first-hand experience or quotes. Ask Tanya for real stories. Until one exists, a short example scenario is allowed only as a quote block labeled **"תרחיש לדוגמה (לא אירוע אמיתי):"**, never presented as real. A hidden `[//]: # "להחליף בסיפור אמיתי..."` marker shows where the real story goes.

@@ -68,7 +68,7 @@ Each article: Hebrew, addresses parents as אתם, no em-dashes, generic host on
 **Group B: trivia know-how (topical authority + AI citations)**
 10. **איך מכינים משחק טריוויה לאירוע: המדריך המלא** · משחק/חידון טריוויה about 2,000
 11. **קהוט באירוע משפחתי? מה עובד ומה לא (השוואה)** · חידון קהוט; comparison pages get quoted by AI
-12. **100 שאלות טריוויה ידע כללי עם תשובות** · about 3,000; pure traffic, link to articles 10 and 8
+12. ✅ **100 שאלות טריוויה ידע כללי עם תשובות** · about 3,000; pure traffic, link to articles 10 and 8
 13. **חידון זוגי וחידון חברות: שאלות מוכנות** · about 800
 
 **Group C: adult birthdays**

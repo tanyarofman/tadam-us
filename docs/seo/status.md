@@ -1,6 +1,6 @@
 # Blog status and to-dos
 
-Last updated: 2026-11-22. The blog ([tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30)) was merged on 2026-11-16 and is live on https://heytadam.com/blog/. New articles go on a branch with their own pull request; merge only when Tanya asks.
+Last updated: 2026-11-22. 12 articles are live on https://heytadam.com/blog/. The first four went live on 2026-11-16 ([tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30)); eight more were merged on 2026-11-22 ([tanyarofman/tadam#57](https://github.com/tanyarofman/tadam/pull/57)). New articles go on a branch with their own pull request; merge only when Tanya asks.
 
 ## Published (live on heytadam.com)
 | Article | Target keyword | Status |
@@ -9,19 +9,35 @@ Last updated: 2026-11-22. The blog ([tanyarofman/tadam#30](https://github.com/ta
 | `office-holiday-toast` | הרמת כוסית לחג | Written, playbook applied, labeled example scenario until a real story arrives |
 | `bar-mitzvah-attractions` | אטרקציות לבר מצווה | Written, playbook applied, labeled example scenario until a real story arrives |
 | `team-building-day-ideas` | יום גיבוש לעובדים | Written, playbook applied, labeled example scenario until a real story arrives |
+| `pass-the-parcel-tasks` | משימות לחבילה עוברת | Live since 2026-11-22. Labeled example scenario |
+| `icebreaker-questions` | שאלות היכרות | Live since 2026-11-22. Labeled example scenario |
+| `bachelorette-party-games` | משחקים למסיבת רווקות | Live since 2026-11-22. Labeled example scenario. Reader addressed with neutral plural imperatives, guests in the feminine |
+| `tu-bishvat-quiz` | חידון טו בשבט | Live since 2026-11-22. Tu BiShvat is 23 Jan 2027 |
+| `hanukkah-riddles` | חידות לחנוכה | Live since 2026-11-22. 9,900 searches last December. Update the dates in October 2027 |
+| `hanukkah-games` | משחקים לחנוכה | Live since 2026-11-22. Bingo board and dreidel rules. Update the dates in October 2027 |
+| `new-years-eve-at-home` | סילבסטר בבית | Live since 2026-11-22. Small bet: demand for at-home games is not proven. Update the date each December |
+| `general-knowledge-trivia-questions` | שאלות טריוויה | Live since 2026-11-22. Article 12 of the original plan |
 
-## Written, waiting for review and merge (branch `claude/serene-johnson-ugkl57`, 2026-11-22)
-Topics from the second and third (year-end) research rounds ([`keyword-research-2026-11-22.md`](./keyword-research-2026-11-22.md)), approved by Tanya on 2026-11-22. After merging, request indexing in Search Console for each new URL, the two Hanukkah ones first.
-| Article | Target keyword | Status |
-|---|---|---|
-| `pass-the-parcel-tasks` | משימות לחבילה עוברת | Written, playbook applied, labeled example scenario |
-| `icebreaker-questions` | שאלות היכרות | Written, playbook applied, labeled example scenario |
-| `bachelorette-party-games` | משחקים למסיבת רווקות | Written, playbook applied, labeled example scenario |
-| `tu-bishvat-quiz` | חידון טו בשבט | Written, playbook applied, labeled example scenario. Tu BiShvat is 23 Jan 2027, so it should be live in December |
-| `hanukkah-riddles` | חידות לחנוכה | Written 2026-11-22 (year-end round). 9,900 searches last December. **Time-sensitive: Hanukkah starts 4 Dec 2026** |
-| `hanukkah-games` | משחקים לחנוכה | Written 2026-11-22 (year-end round). Includes a bingo board and dreidel rules. **Time-sensitive** |
-| `new-years-eve-at-home` | סילבסטר בבית | Written 2026-11-22 (year-end round). Small bet: demand for at-home games is not proven. Should be live by mid-December |
-| `general-knowledge-trivia-questions` | שאלות טריוויה | Written 2026-11-22. This is article 12 of the original plan |
+## Weekly task (set up 2026-11-22)
+A scheduled task named "Tadam weekly blog articles" runs every Sunday at 08:36 Israel time, first run 2026-11-29. Each run starts a fresh cloud session that:
+- picks 2 topics not covered yet (a seasonal topic 3 to 6 weeks away first, then "Next up" below, then new topics), checked with DataForSEO, at most $1 per run;
+- writes both articles by the playbook, builds, updates these docs;
+- opens ONE pull request and stops. It never merges. Tanya gets a push notification.
+
+Tanya manages it (pause, change the day, edit the instructions) in her scheduled tasks on claude.ai, or by asking Claude in a session. Not yet tested: whether an unattended run gets push access to this repository. If the first run reports it could not push, fix the setup.
+
+## What happened on 2026-11-22 (one session)
+- Tanya asked for 4 more articles on topics people search. She chose "new research first" over the saved plan, then approved all 4 proposed topics.
+- She then asked for 4 more around the end of the year. Research showed that year-end demand in Hebrew is Hanukkah, and she approved all 4 proposed topics.
+- All 8 were merged at her request and deployed. DataForSEO spend for the day: about $1.70.
+- She asked whether the Cite-Me prompt was followed. Honest answer given: yes for research, headings, capsules, inline sources, tables and FAQ; but the structure was not sent for her approval before drafting, and she was not asked for first-hand stories before drafting. She accepted that. With her in the conversation, prefer to show the headings first unless a deadline is close.
+- Working pattern that went well (Claude's reading, not something Tanya said): one recommendation with search numbers, a short list to approve, then plain summaries with preview links.
+
+## Open items after 2026-11-22
+- **Tanya:** request indexing in Search Console for the 8 new addresses, `hanukkah-riddles` and `hanukkah-games` first (Hanukkah starts 4 Dec 2026).
+- **Offered, not yet answered:** add more verified sources to `pass-the-parcel-tasks` (1 source), `icebreaker-questions` (2) and `bachelorette-party-games` (1). Only sources that support something the article says.
+- **Offered, not yet answered:** real stories to replace the labeled example scenarios in any of the 8.
+- **Easy to remove if Tanya prefers:** the Shabbat FAQ in `pass-the-parcel-tasks`.
 
 ## Waiting for Tanya: real stories (never invent them)
 Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
@@ -57,5 +73,5 @@ Seasonal deadlines (publish 3 to 4 weeks before):
 
 ## Known issues
 - **Gemini key:** saved in the cloud environment with the `Authorization` header, which the Gemini API rejects. Image generation from this environment needs the secret saved with the `x-goog-api-key` header instead.
-- **Sandbox network:** the cloud session can't open Netlify preview URLs or most outside sites. Sources are checked by web search; previews are checked by Tanya.
+- **Sandbox network:** the cloud session can't open Netlify preview URLs or most outside sites. Sources are checked by web search; previews are checked by Tanya. Update 2026-11-22: `curl https://heytadam.com/...` does work from the cloud session, so live pages and the sitemap can be checked after a deploy.
 - **`astro check`:** 5 pre-existing type errors in `src/scripts/demo-modal.ts` (`dialog` possibly null), not from the blog.

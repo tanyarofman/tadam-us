@@ -1,0 +1,1002 @@
+/**
+ * Intake prototype logic (/start). No backend: state lives in this browser (localStorage) and nothing is sent.
+ * Steps: 0 start, 1 event, 2 who, 3 stories, 4 details, 5 generating + host (mock), 6 review (mock),
+ * 7 order (mock), 8 launchpad (mock + the brief a developer or the team would receive).
+ */
+import { track } from "../lib/analytics";
+import { fill } from "../content/intake.he";
+import type { EventTile, Shape, ShapeConfig, Prompt } from "../content/intake.he";
+
+interface Host {
+  id: string;
+  name: string;
+  line: string;
+  image: string;
+}
+interface Data {
+  events: EventTile[];
+  shapes: Record<Shape, ShapeConfig>;
+  hosts: Host[];
+  material: { minChars: number; charsPerQuestion: number; maxPerPrompt: number; perPhoto: number; maxPhotos: number; minPrompts: number };
+  copy: typeof import("../content/intake.he").INTAKE;
+}
+interface State {
+  v: 1;
+  step: number;
+  eventId: string;
+  name: string;
+  extra: string;
+  title: string;
+  titleEdited: boolean;
+  answers: Record<string, string>;
+  modes: Record<string, "free" | "choice">;
+  choices: Record<string, { q: string; answers: string[]; correct: number }>;
+  photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
+  details: { date: string; guests: string; screen: string; contact: string };
+  host: string;
+  approved: boolean[];
+  own: { q: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
+  checks: boolean[];
+  code: string;
+}
+
+const KEY = "tadam-intake-v1";
+const MAX_STEP = 8;
+const root = document.querySelector<HTMLElement>("[data-intake]");
+const dataEl = document.getElementById("intake-data");
+
+if (root && dataEl) init(root, JSON.parse(dataEl.textContent || "{}") as Data);
+
+function init(root: HTMLElement, data: Data) {
+  const c = data.copy;
+  const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel);
+  const $$ = <T extends HTMLElement>(sel: string) => Array.from(root.querySelectorAll<T>(sel));
+
+  const blank = (): State => ({
+    v: 1,
+    step: 0,
+    eventId: "",
+    name: "",
+    extra: "",
+    title: "",
+    titleEdited: false,
+    answers: {},
+    modes: {},
+    choices: {},
+    photos: [],
+    details: { date: "", guests: "", screen: "", contact: "" },
+    host: "auto",
+    approved: [],
+    own: [],
+    checks: [false, false, false],
+    code: String(1000 + Math.floor(Math.random() * 9000)),
+  });
+
+  let state = load();
+  const photoFiles = new Map<number, string>(); // object URLs for this session only; images are never stored or sent
+  const tracked = new Set<string>();
+
+  function load(): State {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const s = JSON.parse(raw) as State;
+        if (s && s.v === 1) {
+          const st = { ...blank(), ...s };
+          st.photos = (st.photos || []).map((p) => ({ ...p, type: p.type ?? "free", free: p.free ?? "", answers: p.answers ?? ["", "", "", ""], correct: p.correct ?? -1 }));
+          return st;
+        }
+      }
+    } catch {
+      /* private mode or blocked storage: the prototype still works, it just does not resume */
+    }
+    return blank();
+  }
+  let saveTimer = 0;
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    } catch {
+      /* ignore */
+    }
+    const el = $("[data-save]");
+    if (el && state.step > 0) {
+      el.textContent = c.save;
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(() => (el.textContent = ""), 2500);
+    }
+  }
+
+  const event = () => data.events.find((e) => e.id === state.eventId);
+  const shape = (): ShapeConfig => ({ ...data.shapes[event()?.shape ?? "person"], ...(event()?.override || {}) });
+  const subjectName = () => state.name.trim() || "החוגג.ת";
+  const target = () => event()?.target ?? 9;
+
+  // ---------- material meter ----------
+  const modeOf = (id: string) => state.modes[id] || "free";
+  const choiceDone = (id: string) => {
+    const ch = state.choices[id];
+    return !!ch && !!ch.q.trim() && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
+  };
+  /** A story is usable when it has text (free mode) or a complete question with four answers (choice mode). */
+  const isDone = (id: string) =>
+    modeOf(id) === "choice" ? choiceDone(id) : (state.answers[id] || "").trim().length >= data.material.minChars;
+  function answeredPrompts(): Prompt[] {
+    return shape().prompts.filter((p) => isDone(p.id));
+  }
+  function questionsReady(): number {
+    const m = data.material;
+    let n = 0;
+    for (const p of shape().prompts) {
+      if (modeOf(p.id) === "choice") {
+        if (choiceDone(p.id)) n += 1;
+        continue;
+      }
+      const len = (state.answers[p.id] || "").trim().length;
+      if (len >= m.minChars) n += Math.min(m.maxPerPrompt, Math.max(1, Math.round(len / m.charsPerQuestion)));
+    }
+    n += state.photos.filter((p) => p.caption.trim().length > 3).length * m.perPhoto;
+    n += state.own.length;
+    return Math.min(target(), n);
+  }
+
+  // ---------- navigation ----------
+  function show(step: number, push = true) {
+    step = Math.max(0, Math.min(MAX_STEP, step));
+    if (step >= 2 && !state.eventId) step = 1;
+    state.step = step;
+    $$<HTMLElement>("[data-step]").forEach((s) => (s.hidden = Number(s.dataset.step) !== step));
+    renderStep(step);
+    renderProgress(step);
+    if (push) history.pushState({ step }, "", `#s${step}`);
+    else history.replaceState({ step }, "", `#s${step}`);
+    save();
+    window.scrollTo({ top: 0 });
+    $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
+    track("intake_step", { step, event: state.eventId });
+    if (step === 7) track("intake_complete", { event: state.eventId, answered: answeredPrompts().length });
+  }
+
+  function renderProgress(step: number) {
+    const nav = $("[data-progress]");
+    if (!nav) return;
+    nav.hidden = step === 0;
+    const stage = step <= 4 ? step : 5;
+    const text = $("[data-progress-text]");
+    if (text) text.textContent = `${c.stepWord} ${stage} ${c.of} 5`;
+    const bar = $<HTMLElement>("[data-progress-bar]");
+    if (bar) bar.style.width = `${(stage / 5) * 100}%`;
+    $$("[data-stage]").forEach((li) => {
+      if (Number(li.dataset.stage) === stage) li.setAttribute("aria-current", "step");
+      else li.removeAttribute("aria-current");
+    });
+  }
+
+  function renderStep(step: number) {
+    if (step >= 2) applyShapeText();
+    if (step === 1) renderEvents();
+    if (step === 2) renderWho();
+    if (step === 3) renderStories();
+    if (step === 4) renderDetails();
+    if (step === 5) startGeneration();
+    if (step === 6) renderReview();
+    if (step === 7) renderOrder();
+    if (step === 8) renderLaunch();
+  }
+
+  function applyShapeText() {
+    const sc = shape() as unknown as Record<string, string>;
+    $$<HTMLElement>("[data-t]").forEach((el) => {
+      const key = el.dataset.t || "";
+      el.textContent = fill(sc[key] || "", { name: subjectName() });
+    });
+  }
+
+  // ---------- 1: events ----------
+  function renderEvents() {
+    $$<HTMLButtonElement>("[data-event]").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.event === state.eventId)));
+  }
+
+  // ---------- 2: who ----------
+  const nameIn = $<HTMLInputElement>("#f-name")!;
+  const extraIn = $<HTMLInputElement>("#f-extra")!;
+  const titleIn = $<HTMLInputElement>("#f-title")!;
+  function renderWho() {
+    nameIn.placeholder = shape().namePlaceholder;
+    extraIn.placeholder = shape().extraPlaceholder;
+    nameIn.value = state.name;
+    extraIn.value = state.extra;
+    syncTitle();
+    renderSample();
+  }
+  /** The default title is only a placeholder (grey, behind the field). The field holds text only if the creator typed one. */
+  function defaultTitle() {
+    return fill(shape().title, { name: state.name.trim() || "..." });
+  }
+  function syncTitle() {
+    titleIn.placeholder = defaultTitle();
+    titleIn.value = state.titleEdited ? state.title : "";
+    if (!state.titleEdited) state.title = defaultTitle();
+  }
+  function renderSample() {
+    const sc = shape();
+    const name = state.name.trim() || "...";
+    const q = $("[data-sample-q]");
+    const a = $("[data-sample-a]");
+    if (q) q.textContent = fill(sc.sampleQuestion, { name });
+    if (a) a.innerHTML = sc.sampleAnswers.map((t, i) => `<li data-correct="${i === sc.sampleCorrect}">${esc(t)}</li>`).join("");
+  }
+  nameIn.addEventListener("input", () => {
+    state.name = nameIn.value;
+    syncTitle();
+    nameIn.removeAttribute("aria-invalid");
+    $("#f-name-err")!.hidden = true;
+    renderSample();
+    save();
+  });
+  extraIn.addEventListener("input", () => {
+    state.extra = extraIn.value;
+    save();
+  });
+  titleIn.addEventListener("input", () => {
+    state.titleEdited = titleIn.value.trim() !== "";
+    state.title = state.titleEdited ? titleIn.value : defaultTitle(); // emptied field falls back to the default
+    save();
+  });
+
+  // ---------- 3: stories ----------
+  const promptsEl = $<HTMLElement>("[data-prompts]")!;
+  let openPrompt = "";
+  // A story counts as "answered" (the green mark) once the creator leaves the box or presses save.
+  // The text itself is autosaved on every keystroke.
+  const committed = new Set<string>();
+  let committedInit = false;
+  const hasText = (id: string) => isDone(id);
+  function commit(id: string) {
+    if (!hasText(id)) {
+      committed.delete(id);
+    } else {
+      committed.add(id);
+      if (!tracked.has(id)) {
+        tracked.add(id);
+        track("intake_prompt_answered", { prompt: id, event: state.eventId });
+      }
+    }
+    const box = promptsEl.querySelector<HTMLElement>(`[data-prompt="${id}"]`);
+    if (box) {
+      box.dataset.answered = String(committed.has(id));
+      const mark = box.querySelector(".in-prompt__mark");
+      if (mark) mark.textContent = committed.has(id) ? "✓ " + c.stories.answered : "";
+    }
+  }
+  function renderStories() {
+    if (!committedInit) {
+      shape().prompts.forEach((p) => hasText(p.id) && committed.add(p.id));
+      committedInit = true;
+    }
+    if (!openPrompt) openPrompt = shape().prompts.find((p) => !isDone(p.id))?.id || shape().prompts[0].id;
+    promptsEl.innerHTML = "";
+    for (const p of shape().prompts) {
+      const answered = committed.has(p.id);
+      const open = openPrompt === p.id;
+      const box = document.createElement("div");
+      box.className = "in-prompt";
+      box.dataset.answered = String(answered);
+      box.dataset.prompt = p.id;
+      const label = fill(p.label, { name: subjectName() });
+      const choice = modeOf(p.id) === "choice";
+      const cv = state.choices[p.id] || { q: label, answers: ["", "", "", ""], correct: -1 };
+      box.innerHTML = `
+        <button type="button" class="in-prompt__head" aria-expanded="${open}" aria-controls="pb-${p.id}">
+          <span>${esc(label)}</span><span class="in-prompt__mark">${answered ? "✓ " + c.stories.answered : ""}</span>
+        </button>
+        <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
+          <label class="in-help" for="pt-${p.id}">${esc(fill(p.hint, { name: subjectName() }))}</label>
+          <div class="in-chips" role="radiogroup" aria-label="${esc(label)}">
+            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="free" data-pmode="${p.id}" ${choice ? "" : "checked"} /><span>${c.stories.modeFree}</span></label>
+            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="choice" data-pmode="${p.id}" ${choice ? "checked" : ""} /><span>${c.stories.modeChoice}</span></label>
+          </div>
+          ${
+            choice
+              ? `<label class="in-help" for="cq-${p.id}">${c.stories.choiceQuestion}</label>
+                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(cv.q)}" data-cq="${p.id}" />
+                 <p class="in-help">${c.stories.choiceHelp}</p>
+                 <div class="in-own-answers">${[0, 1, 2, 3]
+                   .map(
+                     (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(cv.answers[k] || "")}" data-cans="${p.id}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
+                       <label class="in-own-correct"><input type="radio" name="pcor-${p.id}" value="${k}" data-ccor="${p.id}" ${cv.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrectShort}</span></label></div>`,
+                   )
+                   .join("")}</div>`
+              : `<div class="in-rec" data-rec="${p.id}" role="status" hidden>
+            <span class="in-rec__dot" aria-hidden="true"></span>
+            <span>${c.stories.recording}</span>
+            <span class="in-rec__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="in-rec__time" data-mic-time="${p.id}">0:00</span>
+          </div>
+          <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>`
+          }
+          <div class="in-prompt__row">
+            ${choice ? "" : `<button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>`}
+            <button type="button" class="btn btn-white in-save-btn" data-save-prompt="${p.id}">${c.stories.save}</button>
+            <button type="button" class="btn btn-ghost" data-skip="${p.id}">${c.stories.skip}</button>
+            <span class="in-saved" data-saved-msg="${p.id}" role="status" hidden>✓ ${c.stories.savedMsg}</span>
+          </div>
+          ${choice ? "" : `<p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
+          <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>`}
+        </div>`;
+      promptsEl.append(box);
+      if (!choice) setupMic(box, p.id);
+    }
+    renderPhotos();
+    renderOwnList();
+    renderMeter();
+    const share = $<HTMLAnchorElement>("[data-share]");
+    if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
+  }
+  promptsEl.addEventListener("click", (e) => {
+    const t = e.target as HTMLElement;
+    const head = t.closest<HTMLElement>(".in-prompt__head");
+    if (head) {
+      const id = head.closest<HTMLElement>("[data-prompt]")!.dataset.prompt!;
+      openPrompt = openPrompt === id ? "" : id;
+      renderStories();
+      return;
+    }
+    const sv = t.closest<HTMLElement>("[data-save-prompt]");
+    if (sv) {
+      const id = sv.dataset.savePrompt!;
+      if (!hasText(id)) {
+        promptsEl.querySelector<HTMLTextAreaElement>(`#pt-${id}`)?.focus();
+        return;
+      }
+      commit(id);
+      renderMeter();
+      const ps = shape().prompts;
+      const i = ps.findIndex((p) => p.id === id);
+      openPrompt = ps.slice(i + 1).find((p) => !committed.has(p.id))?.id || "";
+      renderStories();
+      return;
+    }
+    const skip = t.closest<HTMLElement>("[data-skip]");
+    if (skip) {
+      const ps = shape().prompts;
+      const i = ps.findIndex((p) => p.id === skip.dataset.skip);
+      openPrompt = ps[i + 1]?.id || "";
+      renderStories();
+    }
+  });
+  // choice mode: mode switch, question, four answers, correct mark
+  const ensureChoice = (id: string) => (state.choices[id] ||= { q: fill(shape().prompts.find((p) => p.id === id)!.label, { name: subjectName() }), answers: ["", "", "", ""], correct: -1 });
+  promptsEl.addEventListener("change", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.pmode !== undefined) {
+      const id = t.dataset.pmode;
+      state.modes[id] = t.value as "free" | "choice";
+      if (t.value === "choice") ensureChoice(id);
+      commit(id);
+      openPrompt = id;
+      renderStories();
+      save();
+    } else if (t.dataset.ccor !== undefined) {
+      ensureChoice(t.dataset.ccor).correct = Number(t.value);
+      if (isDone(t.dataset.ccor)) commit(t.dataset.ccor);
+      renderMeter();
+      save();
+    }
+  });
+  promptsEl.addEventListener("input", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.cq !== undefined) ensureChoice(t.dataset.cq).q = t.value;
+    else if (t.dataset.cans !== undefined) {
+      const [id, k] = t.dataset.cans.split(":");
+      ensureChoice(id).answers[Number(k)] = t.value;
+    } else return;
+    const id = (t.dataset.cq ?? t.dataset.cans!.split(":")[0]) as string;
+    if (!isDone(id) && committed.has(id)) commit(id);
+    renderMeter();
+    save();
+  });
+  promptsEl.addEventListener("input", (e) => {
+    const ta = e.target as HTMLTextAreaElement;
+    if (!ta.id.startsWith("pt-")) return;
+    const id = ta.id.slice(3);
+    state.answers[id] = ta.value;
+    if (!hasText(id) && committed.has(id)) commit(id); // emptied: no longer answered
+    renderMeter();
+    save();
+  });
+  // leaving the box saves it and marks the story as answered
+  promptsEl.addEventListener("focusout", (e) => {
+    const ta = e.target as HTMLTextAreaElement;
+    const cid = (ta as HTMLElement).dataset?.cq ?? (ta as HTMLElement).dataset?.cans?.split(":")[0];
+    const id = cid ?? (ta.id && ta.id.startsWith("pt-") ? ta.id.slice(3) : "");
+    if (!id) return;
+    if (hasText(id) && !committed.has(id)) {
+      commit(id);
+      renderMeter();
+      save();
+    }
+  });
+
+  function renderMeter() {
+    const ready = questionsReady();
+    const t = target();
+    const text = $("[data-meter-text]");
+    if (text) text.textContent = fill(c.stories.counter, { n: ready, total: t });
+    const bar = $<HTMLElement>("[data-meter-bar]");
+    if (bar) bar.style.width = `${(ready / t) * 100}%`;
+    const need = Math.max(0, data.material.minPrompts - answeredPrompts().length);
+    const next = $<HTMLElement>('[data-next="3"]');
+    const help = $("[data-meter-help]");
+    if (next) next.setAttribute("aria-disabled", String(need > 0));
+    if (help) help.textContent = need > 0 ? fill(c.stories.needMore, { n: need }) : `${c.stories.ready}. ${c.stories.meterHelp}`;
+  }
+
+  // voice input (Web Speech API). Hidden where the browser does not support it.
+  type Rec = { lang: string; interimResults: boolean; continuous: boolean; start(): void; stop(): void; onresult: ((e: any) => void) | null; onerror: ((e: any) => void) | null; onend: (() => void) | null };
+  const SR = ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition) as (new () => Rec) | undefined;
+  let activeRec: Rec | null = null;
+  function setupMic(box: HTMLElement, id: string) {
+    const btn = box.querySelector<HTMLButtonElement>(`[data-mic="${id}"]`)!;
+    const timeEl = box.querySelector<HTMLElement>(`[data-mic-time="${id}"]`)!;
+    const recEl = box.querySelector<HTMLElement>(`[data-rec="${id}"]`)!;
+    const heardEl = box.querySelector<HTMLElement>(`[data-mic-heard="${id}"]`)!;
+    const errEl = box.querySelector<HTMLElement>(`[data-mic-err="${id}"]`)!;
+    const ta = box.querySelector<HTMLTextAreaElement>("textarea")!;
+    btn.textContent = "🎤 " + c.stories.mic;
+    if (!SR) return; // stays hidden, typing is always possible
+    btn.hidden = false;
+    let timer = 0;
+    let heard = false;
+    btn.addEventListener("click", () => {
+      errEl.hidden = true;
+      if (activeRec) {
+        activeRec.stop();
+        return;
+      }
+      const rec = new SR();
+      rec.lang = "he-IL";
+      rec.interimResults = true;
+      rec.continuous = true;
+      const base = ta.value;
+      let finalText = "";
+      let secs = 0;
+      heard = false;
+      rec.onresult = (e: any) => {
+        let interim = "";
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          if (e.results[i].isFinal) finalText += e.results[i][0].transcript + " ";
+          else interim += e.results[i][0].transcript;
+        }
+        heardEl.textContent = interim ? `${c.stories.heard} ${interim}` : "";
+        if (interim) heard = true;
+        if (finalText.trim()) {
+          heard = true;
+          ta.value = (base ? base.trimEnd() + " " : "") + finalText.trim();
+          ta.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      };
+      rec.onerror = (e: any) => {
+        const code = String(e?.error || "");
+        if (code === "not-allowed" || code === "service-not-allowed") showErr(c.stories.micDenied);
+        else if (code === "no-speech") showErr(c.stories.micEmpty);
+      };
+      rec.onend = () => {
+        window.clearInterval(timer);
+        btn.setAttribute("aria-pressed", "false");
+        btn.textContent = "🎤 " + c.stories.mic;
+        recEl.hidden = true;
+        heardEl.textContent = "";
+        ta.removeAttribute("data-recording");
+        if (!heard && errEl.hidden) showErr(c.stories.micEmpty);
+        activeRec = null;
+      };
+      const showErr = (m: string) => {
+        errEl.textContent = m; // next to the mic button, not at the bottom of the page
+        errEl.hidden = false;
+      };
+      try {
+        rec.start();
+      } catch {
+        showErr(c.stories.micDenied);
+        return;
+      }
+      activeRec = rec;
+      btn.setAttribute("aria-pressed", "true");
+      btn.textContent = "■ " + c.stories.micStop;
+      recEl.hidden = false;
+      ta.dataset.recording = "true";
+      timeEl.textContent = "0:00";
+      timer = window.setInterval(() => {
+        secs += 1;
+        timeEl.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`;
+      }, 1000);
+    });
+  }
+
+  // photos: kept in memory only, so no minors' images are stored or uploaded by the prototype
+  const photoInput = $<HTMLInputElement>("[data-photo-input]")!;
+  const photoList = $<HTMLElement>("[data-photos]")!;
+  function renderPhotos() {
+    photoList.innerHTML = "";
+    state.photos.forEach((p, i) => {
+      const li = document.createElement("li");
+      const url = photoFiles.get(i);
+      const choice = p.type === "choice";
+      li.dataset.photo = String(i);
+      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<span class="in-photo-ph" aria-hidden="true">🖼️</span>`}
+        <div class="in-photo-body">
+          <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
+          <input id="pq-${i}" class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosPlaceholder)}" data-caption="${i}" />
+          <div class="in-chips" role="radiogroup" aria-label="${esc(c.stage5.ownType)}">
+            <label class="in-chip"><input type="radio" name="pt-${i}" value="free" data-ptype="${i}" ${choice ? "" : "checked"} /><span>${c.stage5.ownTypeFree}</span></label>
+            <label class="in-chip"><input type="radio" name="pt-${i}" value="choice" data-ptype="${i}" ${choice ? "checked" : ""} /><span>${c.stage5.ownTypeChoice}</span></label>
+          </div>
+          ${
+            choice
+              ? `<div class="in-own-answers">` + [0, 1, 2, 3]
+                  .map(
+                    (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(p.answers[k] || "")}" data-pans="${i}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
+                      <label class="in-own-correct"><input type="radio" name="pc-${i}" value="${k}" data-pcorrect="${i}" ${p.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrectShort}</span></label></div>`,
+                  )
+                  .join("") + `</div>`
+              : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
+                 <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" data-pfree="${i}" />`
+          }
+          <p class="in-err" role="alert" data-photo-err="${i}" hidden>${c.stories.photoNeed}</p>
+          <div class="in-photo-actions">
+            <button type="button" class="btn btn-white in-save-btn" data-photo-save="${i}">${c.stories.save}</button>
+            <span class="in-saved" data-photo-badge="${i}" role="status" ${p.saved ? "" : "hidden"}>✓ ${c.stories.photoSaved}</span>
+            <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>
+          </div>
+        </div>`;
+      photoList.append(li);
+    });
+    const add = $<HTMLElement>("[data-photo-add]");
+    if (add) add.hidden = state.photos.length >= data.material.maxPhotos;
+  }
+  const photoComplete = (p: State["photos"][number]) =>
+    p.caption.trim().length > 3 && (p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0);
+  function markPhoto(i: number, ok: boolean) {
+    state.photos[i].saved = ok;
+    const badge = photoList.querySelector<HTMLElement>(`[data-photo-badge="${i}"]`);
+    if (badge) badge.hidden = !ok;
+    const err = photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`);
+    if (err && ok) err.hidden = true;
+  }
+  photoList.addEventListener("focusout", (e) => {
+    const t = e.target as HTMLInputElement;
+    const li = t.closest<HTMLElement>("[data-photo]");
+    if (!li || t.type === "radio") return;
+    const i = Number(li.dataset.photo);
+    if (photoComplete(state.photos[i]) && !state.photos[i].saved) {
+      markPhoto(i, true);
+      save();
+    }
+  });
+  photoInput.addEventListener("change", () => {
+    const f = photoInput.files?.[0];
+    if (!f || state.photos.length >= data.material.maxPhotos) return;
+    photoFiles.set(state.photos.length, URL.createObjectURL(f));
+    state.photos.push({ name: f.name, caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
+    photoInput.value = "";
+    renderPhotos();
+    renderMeter();
+    save();
+    photoList.querySelector<HTMLInputElement>(`[data-caption="${state.photos.length - 1}"]`)?.focus();
+  });
+  photoList.addEventListener("input", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.caption !== undefined) state.photos[Number(t.dataset.caption)].caption = t.value;
+    else if (t.dataset.pfree !== undefined) state.photos[Number(t.dataset.pfree)].free = t.value;
+    else if (t.dataset.pans !== undefined) {
+      const [i, k] = t.dataset.pans.split(":").map(Number);
+      state.photos[i].answers[k] = t.value;
+    } else return;
+    const li = t.closest<HTMLElement>("[data-photo]");
+    if (li) {
+      const i = Number(li.dataset.photo);
+      if (state.photos[i].saved && !photoComplete(state.photos[i])) markPhoto(i, false);
+    }
+    renderMeter();
+    save();
+  });
+  photoList.addEventListener("change", (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.ptype !== undefined) {
+      state.photos[Number(t.dataset.ptype)].type = t.value as "free" | "choice";
+      renderPhotos();
+      photoList.querySelector<HTMLInputElement>(`[data-ptype="${t.dataset.ptype}"][value="${t.value}"]`)?.focus();
+    } else if (t.dataset.pcorrect !== undefined) state.photos[Number(t.dataset.pcorrect)].correct = Number(t.value);
+    else return;
+    save();
+  });
+  photoList.addEventListener("click", (e) => {
+    const sb = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-save]");
+    if (sb) {
+      const i = Number(sb.dataset.photoSave);
+      if (photoComplete(state.photos[i])) {
+        markPhoto(i, true);
+        save();
+      } else photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`)!.hidden = false;
+      return;
+    }
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-remove]");
+    if (!b) return;
+    const i = Number(b.dataset.photoRemove);
+    state.photos.splice(i, 1);
+    const urls = [...photoFiles.entries()].filter(([k]) => k !== i).map(([k, v]) => [k > i ? k - 1 : k, v] as [number, string]);
+    photoFiles.clear();
+    urls.forEach(([k, v]) => photoFiles.set(k, v));
+    renderPhotos();
+    renderMeter();
+    save();
+  });
+
+  // ---------- 4: details ----------
+  function renderDetails() {
+    $$<HTMLInputElement>("[data-detail]").forEach((el) => {
+      const k = el.dataset.detail as keyof State["details"];
+      if (el.type === "radio") el.checked = state.details[k] === el.value;
+      else el.value = state.details[k];
+    });
+  }
+  root.addEventListener("input", (e) => {
+    const el = e.target as HTMLInputElement;
+    if (el.dataset?.detail) {
+      state.details[el.dataset.detail as keyof State["details"]] = el.value;
+      save();
+    }
+  });
+
+  // ---------- 5: generating (mock) + host ----------
+  let genTimer = 0;
+  function startGeneration() {
+    const title = $("[data-gen-title]");
+    if (title) title.textContent = fill(c.stage5.generating, { name: subjectName() });
+    const bar = $<HTMLElement>("[data-gen-bar]")!;
+    const label = $("[data-gen-label]")!;
+    const next = $<HTMLElement>("[data-gen-next]")!;
+    const hostsEl = $<HTMLElement>("[data-hosts]")!;
+    hostsEl.innerHTML = data.hosts
+      .map(
+        (h) => `<button type="button" class="in-host" role="radio" aria-checked="${state.host === h.id}" data-host="${h.id}">
+          ${h.image ? `<img src="${h.image}" alt="" width="520" height="650" loading="lazy" />` : `<span class="in-host__ph" aria-hidden="true">🎲</span>`}
+          <span class="in-host__info"><span class="in-host__tick" aria-hidden="true"></span><span><strong>${esc(h.name)}</strong><span>${esc(h.line)}</span></span></span>
+        </button>`,
+      )
+      .join("");
+    window.clearInterval(genTimer);
+    let pct = 0;
+    const stages = c.stage5.stages;
+    next.setAttribute("aria-disabled", "true");
+    const tick = () => {
+      pct = Math.min(100, pct + 4);
+      bar.style.width = `${pct}%`;
+      label.textContent = stages[Math.min(stages.length - 1, Math.floor((pct / 100) * stages.length))];
+      if (pct >= 100) {
+        window.clearInterval(genTimer);
+        next.setAttribute("aria-disabled", "false");
+        label.textContent = c.stage5.reviewLead;
+      }
+    };
+    genTimer = window.setInterval(tick, 400);
+    tick();
+  }
+  root.addEventListener("click", (e) => {
+    const h = (e.target as HTMLElement).closest<HTMLElement>("[data-host]");
+    if (!h) return;
+    state.host = h.dataset.host || "auto";
+    $$<HTMLElement>("[data-host]").forEach((b) => b.setAttribute("aria-checked", String(b === h)));
+    save();
+  });
+
+  // ---------- 6: review (mock questions, real sources) ----------
+  type Q = { snippet: string; own?: State["own"][number]; photo?: State["own"][number]; choice?: State["own"][number] };
+  /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
+  function questions(): Q[] {
+    const m = data.material;
+    const list: Q[] = [];
+    for (const p of shape().prompts) {
+      if (modeOf(p.id) === "choice") {
+        if (choiceDone(p.id)) {
+          const ch = state.choices[p.id];
+          list.push({ snippet: "", choice: { q: ch.q.trim(), type: "choice", free: "", answers: ch.answers.map((a) => a.trim()), correct: ch.correct } });
+        }
+        continue;
+      }
+      const text = (state.answers[p.id] || "").trim();
+      if (text.length < m.minChars) continue;
+      const n = Math.min(m.maxPerPrompt, Math.max(1, Math.round(text.length / m.charsPerQuestion)));
+      for (let i = 0; i < n; i++) list.push({ snippet: text });
+    }
+    state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => {
+      const complete = p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0;
+      list.push({ snippet: p.caption.trim(), photo: complete ? { q: p.caption.trim(), type: p.type, free: p.free.trim(), answers: p.answers.map((a) => a.trim()), correct: p.correct } : undefined });
+    });
+    const generated = list.slice(0, Math.max(0, target() - state.own.length));
+    return [...generated, ...state.own.map((o) => ({ snippet: "", own: o }))];
+  }
+  let reviewIndex = 0;
+  function renderReview() {
+    const list = questions();
+    if (state.approved.length !== list.length) state.approved = list.map((_, i) => !!state.approved[i]);
+    reviewIndex = Math.min(reviewIndex, Math.max(0, list.length - 1));
+    const el = $<HTMLElement>("[data-review]")!;
+    const s = list[reviewIndex];
+    if (!s) {
+      el.innerHTML = "";
+      return;
+    }
+    const ok = state.approved[reviewIndex];
+    const q = s.own || s.photo || s.choice;
+    const body = q
+      ? `<p class="in-qcard__source">${s.own ? c.stage5.ownMark : s.photo ? c.stage5.photoMark : c.stage5.tplMark}</p>
+         <p class="in-sample__q">${esc(q.q)}</p>
+         <ul class="in-qcard__answers">${
+           q.type === "free"
+             ? `<li data-correct="true">${esc(q.free)}</li>`
+             : q.answers.map((t, i) => `<li data-correct="${i === q.correct}">${esc(t)}</li>`).join("")
+         }</ul>`
+      : `<p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
+         <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>`;
+    el.innerHTML = `<article class="in-qcard" data-approved="${ok}">
+        <h3 class="in-sub">${fill(c.stage5.questionOf, { i: reviewIndex + 1, n: list.length })}</h3>
+        ${body}
+        <div class="in-qcard__actions">
+          <button type="button" class="btn btn-buzzer" data-approve>${ok ? "✓ " + c.stage5.approved : c.stage5.approve}</button>
+          ${q ? "" : `<button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>`}
+          <button type="button" class="btn btn-ghost" data-rv="-1" ${reviewIndex === 0 ? "disabled" : ""}>${c.back}</button>
+          <button type="button" class="btn btn-ghost" data-rv="1" ${reviewIndex >= list.length - 1 ? "disabled" : ""}>${c.next}</button>
+        </div>
+      </article>`;
+    $$<HTMLInputElement>("[data-check]").forEach((cb) => (cb.checked = !!state.checks[Number(cb.dataset.check)]));
+    updateReviewGate();
+  }
+  // own question form: a question, four answers, one marked correct
+  const ownForm = $<HTMLFormElement>("[data-own-form]")!;
+  const ownOpen = $<HTMLElement>("[data-own-open]")!;
+  const ownErr = $<HTMLElement>("[data-own-err]")!;
+  const ownList = $<HTMLElement>("[data-own-list]")!;
+  const ownFree = $<HTMLElement>("[data-own-free]")!;
+  const ownChoice = $<HTMLElement>("[data-own-choice]")!;
+  const ownType = () => (ownForm.querySelector<HTMLInputElement>('input[name="own-type"]:checked')?.value || "free") as "free" | "choice";
+  function syncOwnType() {
+    ownFree.hidden = ownType() !== "free";
+    ownChoice.hidden = ownType() !== "choice";
+  }
+  ownForm.addEventListener("change", (e) => {
+    if ((e.target as HTMLInputElement).name === "own-type") syncOwnType();
+  });
+  function renderOwnList() {
+    ownList.innerHTML = state.own
+      .map(
+        (o, i) => `<li><span>${esc(o.q)}<small>${o.type === "free" ? c.stage5.ownTypeFree : c.stage5.ownTypeChoice}</small></span>
+          <button type="button" class="btn btn-ghost" data-own-remove="${i}">${c.stage5.ownRemove}</button></li>`,
+      )
+      .join("");
+  }
+  ownList.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-own-remove]");
+    if (!b) return;
+    state.own.splice(Number(b.dataset.ownRemove), 1);
+    renderOwnList();
+    renderMeter();
+    save();
+  });
+  function closeOwn() {
+    ownForm.hidden = true;
+    ownOpen.hidden = false;
+    ownForm.reset();
+    syncOwnType();
+    ownErr.hidden = true;
+  }
+  ownOpen.addEventListener("click", () => {
+    ownForm.hidden = false;
+    ownOpen.hidden = true;
+    ownForm.querySelector<HTMLInputElement>("#own-q")?.focus();
+  });
+  $<HTMLElement>("[data-own-cancel]")!.addEventListener("click", closeOwn);
+  ownForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = ownForm.querySelector<HTMLInputElement>("#own-q")!.value.trim();
+    const type = ownType();
+    const free = ownForm.querySelector<HTMLInputElement>("#own-free")!.value.trim();
+    const answers = [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
+    const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
+    const bad = !q || (type === "free" ? !free : answers.some((a) => !a) || !picked);
+    if (bad) {
+      ownErr.textContent = type === "free" ? c.stage5.ownNeed : c.stage5.ownNeedChoice;
+      ownErr.hidden = false;
+      return;
+    }
+    state.own.push({ q, type, free: type === "free" ? free : "", answers: type === "choice" ? answers : [], correct: type === "choice" ? Number(picked!.value) : 0 });
+    closeOwn();
+    renderOwnList();
+    renderMeter();
+    save();
+    ownOpen.focus();
+  });
+  function updateReviewGate() {
+    const all = state.approved.length > 0 && state.approved.every(Boolean) && state.checks.every(Boolean);
+    $<HTMLElement>('[data-next="6"]')?.setAttribute("aria-disabled", String(!all));
+  }
+  root.addEventListener("click", (e) => {
+    const t = e.target as HTMLElement;
+    if (t.closest("[data-approve]")) {
+      state.approved[reviewIndex] = !state.approved[reviewIndex];
+      if (state.approved[reviewIndex] && reviewIndex < state.approved.length - 1) reviewIndex += 1;
+      renderReview();
+      save();
+    }
+    const rv = t.closest<HTMLElement>("[data-rv]");
+    if (rv) {
+      reviewIndex += Number(rv.dataset.rv);
+      renderReview();
+    }
+  });
+  root.addEventListener("change", (e) => {
+    const cb = e.target as HTMLInputElement;
+    if (cb.dataset?.check !== undefined) {
+      state.checks[Number(cb.dataset.check)] = cb.checked;
+      updateReviewGate();
+      save();
+    }
+  });
+
+  // ---------- 7: order (mock) ----------
+  function renderOrder() {
+    const d = state.details;
+    const hostName = data.hosts.find((h) => h.id === state.host)?.name || "";
+    const rows: [string, string][] = [
+      ["אירוע", event()?.label || ""],
+      ["על מי", subjectName()],
+      ["שם המשחק", state.title],
+      ["מנחה", hostName],
+      ["שאלות", String(questions().length)],
+    ];
+    if (d.guests) rows.push(["אורחים", d.guests]);
+    $("[data-summary]")!.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
+    const od = $<HTMLElement>("[data-order-date]")!;
+    if (d.date) {
+      od.hidden = false;
+      od.textContent = fill(c.stage5.orderDate, { date: new Date(d.date).toLocaleDateString("he-IL") });
+    } else od.hidden = true;
+  }
+
+  // ---------- 8: launchpad + brief ----------
+  function brief() {
+    const d = state.details;
+    return {
+      eventType: state.eventId,
+      subjectShape: event()?.shape,
+      subject: { name: state.name.trim(), ageOrRole: state.extra.trim() },
+      title: state.title,
+      stories: shape().prompts
+        .filter((p) => (modeOf(p.id) === "choice" ? choiceDone(p.id) : (state.answers[p.id] || "").trim()))
+        .map((p) =>
+          modeOf(p.id) === "choice"
+            ? { promptId: p.id, prompt: state.choices[p.id].q.trim(), type: "choice", answers: state.choices[p.id].answers.map((a) => a.trim()), correct: state.choices[p.id].correct }
+            : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
+        ),
+      photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
+      logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null, contact: d.contact || null },
+      host: state.host,
+      ownQuestions: state.own,
+      questionCount: target(),
+      materialReady: questionsReady(),
+      consent: { photos: state.photos.length > 0 },
+    };
+  }
+  function briefText(): string {
+    const b = brief();
+    const lines = [`אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
+    b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.type === "choice" ? (s.answers || []).map((a, i) => (i === s.correct ? "*" : "") + a).join(" / ") : s.text}`));
+    if (b.photos.length) {
+      lines.push("", "תמונות (כיתובים):");
+      b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));
+    }
+    const l = b.logistics;
+    const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`, l.screen && `מסך: ${l.screen}`].filter(Boolean);
+    if (extra.length) lines.push("", ...(extra as string[]));
+    lines.push("", `מספר שאלות: ${b.questionCount}`);
+    return lines.join("\n");
+  }
+  async function renderLaunch() {
+    const t = $("[data-launch-title]");
+    if (t) t.textContent = fill(c.stage5.launchTitle, { name: subjectName() });
+    $("[data-code]")!.textContent = state.code;
+    $("[data-dev-json]")!.textContent = JSON.stringify(brief(), null, 2);
+    $("[data-dev-text]")!.textContent = briefText();
+    const box = $<HTMLElement>("[data-qr]")!;
+    if (!box.firstChild) {
+      const { default: qrcode } = await import("qrcode-generator");
+      const qr = qrcode(0, "M");
+      qr.addData(location.origin + location.pathname + "#sample-" + state.code);
+      qr.make();
+      box.innerHTML = qr.createSvgTag({ cellSize: 8, margin: 0, scalable: true });
+    }
+  }
+  async function copy(text: string, btn: HTMLElement) {
+    const old = btn.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = c.stage5.copied;
+    } catch {
+      btn.textContent = "לא הצלחנו להעתיק";
+    }
+    window.setTimeout(() => (btn.textContent = old), 1800);
+  }
+
+  // ---------- global clicks ----------
+  root.addEventListener("click", (e) => {
+    const t = e.target as HTMLElement;
+    const ev = t.closest<HTMLElement>("[data-event]");
+    if (ev) {
+      const changed = state.eventId !== ev.dataset.event;
+      state.eventId = ev.dataset.event!;
+      if (changed) {
+        // a different event can change the shape: keep what was typed, drop the title default and prompts' open state
+        if (!state.titleEdited) state.title = "";
+        openPrompt = "";
+      }
+      renderEvents();
+      window.setTimeout(() => show(2), 160);
+      return;
+    }
+    const go = t.closest<HTMLElement>("[data-go]");
+    if (go) {
+      if (go.dataset.go === "1" && state.step === 0) track("intake_start");
+      show(Number(go.dataset.go));
+      return;
+    }
+    const nx = t.closest<HTMLElement>("[data-next]");
+    if (nx) {
+      const from = Number(nx.dataset.next);
+      if (nx.getAttribute("aria-disabled") === "true") {
+        if (from === 3) renderMeter();
+        return;
+      }
+      if (from === 2 && !state.name.trim()) {
+        nameIn.setAttribute("aria-invalid", "true");
+        $("#f-name-err")!.hidden = false;
+        nameIn.focus();
+        return;
+      }
+      show(from + 1);
+      return;
+    }
+    if (t.closest("[data-restart]")) {
+      if (!window.confirm(c.restart + "?")) return;
+      state = blank();
+      photoFiles.clear();
+      openPrompt = "";
+      reviewIndex = 0;
+      save();
+      show(0);
+      return;
+    }
+    if (t.closest("[data-copy-link]")) {
+      void copy(location.origin + location.pathname, t.closest<HTMLElement>("[data-copy-link]")!);
+      return;
+    }
+    const cp = t.closest<HTMLElement>("[data-copy]");
+    if (cp) void copy(cp.dataset.copy === "json" ? JSON.stringify(brief(), null, 2) : briefText(), cp);
+  });
+
+  // Back button returns to the previous stage without wiping anything (state is saved on every change).
+  window.addEventListener("popstate", (e) => {
+    const s = (e.state && typeof e.state.step === "number" ? e.state.step : parseHash()) as number;
+    show(s, false);
+  });
+  function parseHash(): number {
+    const m = /^#s(\d)$/.exec(location.hash);
+    return m ? Number(m[1]) : state.step;
+  }
+
+  show(state.step, false);
+}
+
+function esc(s: string): string {
+  return s.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch] as string);
+}

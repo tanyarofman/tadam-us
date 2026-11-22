@@ -1871,12 +1871,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-one .in-textarea {
       min-height: 98px;
     }
-    .in-screen {
-      padding: 10px 16px 2px;
-    }
-    .in-screen__title {
-      font-size: 2rem;
-    }
     .in-ticket {
       padding: 14px 20px;
       gap: 10px;
@@ -1940,6 +1934,132 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .intake {
       padding-bottom: 100px;
+    }
+  }
+  /* use the whole screen: each step sits in the middle of the space between the header and the bottom bar,
+     and the roomier screens stretch their gaps with the window height */
+  .in-step:not(.in-hero) {
+    min-height: calc(100svh - 244px);
+    align-content: center;
+  }
+  .in-who,
+  .in-step[data-step="1"],
+  .in-step[data-step="4"] {
+    gap: clamp(14px, 4.2vh, 44px);
+  }
+  .in-who .in-screen {
+    padding: clamp(14px, 5vh, 56px) 20px clamp(8px, 2.5vh, 24px);
+    gap: clamp(6px, 1.8vh, 18px);
+  }
+  .in-who .in-screen__title {
+    font-size: clamp(1.6rem, 6.5vh, 3.2rem);
+  }
+  .in-who .in-input--big {
+    min-height: clamp(60px, 11vh, 84px);
+  }
+  .in-who__extra .in-input {
+    min-height: clamp(60px, 11vh, 84px);
+  }
+  /* normal-height windows: give every screen room to breathe */
+  @media (min-height: 641px) {
+    .in-one {
+      gap: clamp(16px, 3vh, 30px);
+    }
+    .in-one > .in-count {
+      margin-bottom: calc(clamp(16px, 3vh, 30px) * -0.6);
+    }
+    .in-one > .lead {
+      margin-top: calc(clamp(16px, 3vh, 30px) * -0.4);
+    }
+    .in-pair {
+      gap: 28px;
+    }
+    .in-pair .in-field {
+      gap: 12px;
+    }
+    .in-pair .in-input,
+    .in-own .in-input,
+    .in-one .in-photo-body .in-input {
+      min-height: 62px;
+    }
+    /* own question: one thing per row, answers two by two */
+    .in-own {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .in-own > .in-chips,
+    .in-own > [data-own-free] {
+      grid-column: 1 / -1;
+    }
+    .in-one .in-own-answers {
+      gap: 14px;
+    }
+    .in-one .in-photo-body .in-own-answers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .in-own-wrap {
+      display: grid;
+      gap: 18px;
+    }
+    .in-own-list li {
+      padding: 6px 16px;
+      border-width: 1px;
+    }
+    .in-one .in-prompt__body {
+      gap: 16px;
+    }
+  }
+  @media (min-height: 641px) and (min-width: 700px) {
+    .in-one .in-photo-list li {
+      grid-template-columns: 260px minmax(0, 1fr);
+    }
+    .in-one .in-photo-body {
+      padding: 16px 18px;
+      gap: 12px;
+    }
+  }
+  /* hosts with room: wider row, taller pictures, each host's line under the name */
+  @media (min-height: 641px) and (min-width: 1100px) {
+    .in-step[data-step="4"]:has(.in-hostwrap:not([hidden])) {
+      max-width: 1180px;
+    }
+    .in-hostwrap {
+      gap: 20px;
+    }
+    .in-hosts {
+      gap: 18px;
+    }
+    .in-one .in-host img,
+    .in-one .in-host__ph {
+      aspect-ratio: 4 / 4.6;
+      object-position: 50% 0;
+    }
+    .in-host {
+      border-radius: 20px;
+      transition: transform 0.2s var(--ease-out), border-color 0.2s;
+    }
+    .in-host:hover {
+      transform: translateY(-6px);
+      border-color: var(--game-yellow);
+    }
+    .in-host__info {
+      padding: 12px 10px 14px;
+    }
+    .in-host__info > span:last-child {
+      justify-items: center;
+      text-align: center;
+      gap: 4px;
+    }
+    .in-host strong {
+      font-size: 1.3rem;
+    }
+    .in-host__info span span {
+      display: block;
+      min-height: 2.5em;
+    }
+    .in-hostline {
+      display: none;
     }
   }
   @media (prefers-reduced-motion: reduce) {

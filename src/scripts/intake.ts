@@ -257,7 +257,6 @@ function init(root: HTMLElement, data: Data) {
   // ---------- 2: who ----------
   const nameIn = $<HTMLInputElement>("#f-name")!;
   const extraIn = $<HTMLInputElement>("#f-extra")!;
-  const titleIn = $<HTMLInputElement>("#f-title")!;
   function renderWho() {
     nameIn.placeholder = shape().namePlaceholder;
     extraIn.placeholder = shape().extraPlaceholder;
@@ -270,17 +269,39 @@ function init(root: HTMLElement, data: Data) {
     return fill(shape().title, { name: state.name.trim() || "..." });
   }
   function syncTitle() {
-    titleIn.placeholder = defaultTitle();
-    titleIn.value = state.titleEdited ? state.title : "";
     if (!state.titleEdited) state.title = defaultTitle();
     $("[data-title-preview]")!.textContent = state.title;
   }
-  const titleBox = $<HTMLElement>("[data-title-box]")!;
-  const titleEdit = $<HTMLButtonElement>("[data-title-edit]")!;
-  titleEdit.addEventListener("click", () => {
-    titleBox.hidden = !titleBox.hidden;
-    titleEdit.setAttribute("aria-expanded", String(!titleBox.hidden));
-    if (!titleBox.hidden) titleIn.focus();
+  // The game title is edited in place: "change the name" (or a click on the title) selects the text on the screen itself.
+  const titleView = $<HTMLElement>("[data-title-preview]")!;
+  function editTitle() {
+    if (titleView.isContentEditable) return;
+    titleView.contentEditable = "plaintext-only";
+    if (!titleView.isContentEditable) titleView.contentEditable = "true"; // older browsers
+    titleView.focus();
+    const range = document.createRange();
+    range.selectNodeContents(titleView);
+    const sel = window.getSelection();
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+  }
+  $<HTMLButtonElement>("[data-title-edit]")!.addEventListener("click", editTitle);
+  titleView.addEventListener("click", editTitle);
+  titleView.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === "Escape") {
+      e.preventDefault();
+      titleView.blur();
+    }
+  });
+  titleView.addEventListener("input", () => {
+    const text = (titleView.textContent || "").replace(/\s+/g, " ").slice(0, 80);
+    state.titleEdited = text.trim() !== "" && text.trim() !== defaultTitle();
+    state.title = state.titleEdited ? text.trim() : defaultTitle();
+    save();
+  });
+  titleView.addEventListener("blur", () => {
+    titleView.contentEditable = "false";
+    titleView.textContent = state.title; // an emptied title falls back to the suggested one
   });
   nameIn.addEventListener("input", () => {
     state.name = nameIn.value;
@@ -291,12 +312,6 @@ function init(root: HTMLElement, data: Data) {
   });
   extraIn.addEventListener("input", () => {
     state.extra = extraIn.value;
-    save();
-  });
-  titleIn.addEventListener("input", () => {
-    state.titleEdited = titleIn.value.trim() !== "";
-    state.title = state.titleEdited ? titleIn.value : defaultTitle(); // emptied field falls back to the default
-    $("[data-title-preview]")!.textContent = state.title;
     save();
   });
 

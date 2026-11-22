@@ -84,12 +84,9 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </div>
       <figure class="in-screen" aria-live="polite">
         <figcaption>{c.who.screenNote}</figcaption>
-        <p class="in-screen__title display" data-title-preview></p>
-        <button class="in-screen__edit" type="button" data-title-edit aria-expanded="false" aria-controls="title-box">{c.who.titleEdit}</button>
-        <div class="in-field" id="title-box" data-title-box hidden>
-          <label for="f-title">{c.who.titleLabel}</label>
-          <input id="f-title" class="in-input" type="text" autocomplete="off" maxlength="80" />
-        </div>
+        <p class="in-screen__title display" data-title-preview role="textbox" aria-label={c.who.titleLabel} spellcheck="false"></p>
+        <button class="in-screen__edit" type="button" data-title-edit>{c.who.titleEdit}</button>
+        <input id="f-title" type="hidden" />
       </figure>
     </section>
 
@@ -181,16 +178,19 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           </ul>
           <p class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display">{price}</strong></p>
         </div>
-        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
-        <div class="in-ticket__form" data-price={price}>
+        <div class="in-ticket__side">
+          <p class="in-ticket__price display" aria-hidden="true">{price}</p>
           <div class="in-field">
             <label for="o-email">{c.order.email}</label>
-            <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" />
+            <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required placeholder="name@example.com" data-order="email" />
           </div>
-          <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
         </div>
-        <p class="in-err" role="alert" data-order-err hidden></p>
-        <p class="in-ticket__note">🔒 {c.order.payNote}</p>
+        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
+        <div class="in-ticket__foot">
+          <label class="in-agree"><input type="checkbox" data-order-consent /><span class="in-agree__box" aria-hidden="true"></span><span>{c.order.consent}</span></label>
+          <p class="in-err" role="alert" data-order-err hidden></p>
+          <p class="in-ticket__note"><span aria-hidden="true">🔒</span> {c.order.payNote}</p>
+        </div>
       </form>
     </section>
 
@@ -879,17 +879,72 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     color: var(--game-yellow);
     white-space: nowrap;
   }
-  .in-ticket__form {
+  .in-ticket__side {
     display: grid;
+    gap: 14px;
+  }
+  .in-ticket__side .in-field {
+    margin: 0;
     gap: 10px;
   }
-  .in-ticket__form .in-field {
+  .in-ticket__price {
+    display: none;
     margin: 0;
+    line-height: 1;
+    color: var(--game-yellow);
+    font-size: clamp(3rem, 8vh, 4.4rem);
+  }
+  .in-ticket__foot {
+    display: grid;
+    gap: 12px;
+    border-top: 2px dashed var(--in-line);
+    padding-top: 16px;
   }
   .in-ticket__note {
     margin: 0;
     font-size: var(--fs-small);
     color: var(--text-muted);
+  }
+  /* the agreement: a round tick instead of the browser's grey square */
+  .in-agree {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    line-height: 1.35;
+  }
+  .in-agree input {
+    position: absolute;
+    opacity: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    cursor: pointer;
+  }
+  .in-agree__box {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    display: grid;
+    place-items: center;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .in-agree input:checked + .in-agree__box {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+    transform: scale(1.08);
+  }
+  .in-agree input:checked + .in-agree__box::after {
+    content: "✓";
+    color: var(--stage-navy);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .in-agree input:focus-visible + .in-agree__box {
+    outline: 3px solid var(--game-yellow);
+    outline-offset: 3px;
   }
   /* every screen slides in a little, so a long flow feels like it is moving */
   .in-step:not([hidden]) > * {
@@ -985,6 +1040,25 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     display: grid;
     place-items: center;
     overflow-wrap: anywhere;
+  }
+  .in-screen__title {
+    cursor: text;
+    border-radius: 12px;
+    padding-inline: 12px;
+    outline: 2px dashed transparent;
+    outline-offset: 4px;
+    transition: outline-color 0.15s, background 0.15s;
+  }
+  .in-screen__title:hover {
+    outline-color: rgba(255, 255, 255, 0.35);
+  }
+  .in-screen__title[contenteditable]:not([contenteditable="false"]) {
+    outline-color: var(--game-yellow);
+    background: rgba(0, 0, 0, 0.25);
+  }
+  .in-screen__title::selection {
+    background: var(--game-yellow);
+    color: var(--stage-navy);
   }
   .in-screen__edit {
     background: none;
@@ -1529,10 +1603,50 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-pair {
       grid-template-columns: 1fr 1fr;
     }
-    .in-ticket__form {
-      grid-template-columns: 1fr 1fr;
-      align-items: end;
+    /* order card: the game and what is included on one side, the price and the email on the other,
+       and a quiet footer with the agreement and the secure-payment line */
+    .in-ticket {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      column-gap: clamp(28px, 4vw, 56px);
+      row-gap: clamp(14px, 2.6vh, 26px);
+      padding: clamp(18px, 3.4vh, 36px) clamp(20px, 3vw, 40px);
+    }
+    .in-ticket__head,
+    .in-ticket__deal {
+      grid-column: 1;
+    }
+    .in-ticket__deal {
+      display: block;
+      border: 0;
+      padding: 0;
+    }
+    .in-ticket__deal .in-ticket__total {
+      display: none;
+    }
+    .in-ticket__side {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+    }
+    .in-ticket__price {
+      display: block;
+    }
+    .in-ticket > .in-err,
+    .in-ticket__foot {
+      grid-column: 1 / -1;
+    }
+    .in-ticket__foot {
+      grid-template-columns: 1fr auto;
+      align-items: center;
       column-gap: 24px;
+    }
+    .in-ticket__foot .in-err {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .in-ticket__note {
+      text-align: end;
+      max-width: 34ch;
     }
     .in-hero {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -1881,44 +1995,18 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-ticket__head .in-count {
       display: none;
     }
-    /* order on a short window: the game and what is included on one side, price and email on the other */
     .in-ticket {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-      column-gap: 32px;
-      align-items: start;
+      row-gap: 8px;
+      padding: 12px 22px;
     }
-    .in-ticket__head,
-    .in-ticket__deal {
-      grid-column: 1;
+    .in-ticket__price {
+      font-size: 2.6rem;
     }
-    .in-ticket__deal {
-      display: block;
-      border-bottom: 0;
-      padding-bottom: 0;
+    .in-ticket__side {
+      gap: 8px;
     }
-    .in-ticket__deal .in-ticket__total {
-      display: none;
-    }
-    .in-ticket__form {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      grid-template-columns: 1fr;
-      align-self: center;
-    }
-    .in-ticket__form::before {
-      content: attr(data-price);
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--game-yellow);
-    }
-    .in-ticket__note,
-    .in-ticket > .in-err {
-      grid-column: 1 / -1;
-    }
-    .in-includes {
-      gap: 2px;
+    .in-ticket__foot {
+      padding-top: 8px;
     }
     .in-one .in-photo-list img,
     .in-one .in-photo-list .in-photo-again {

@@ -1,11 +1,12 @@
 ---
 /**
- * Demo modal: the full recording of a real game (Eyal's birthday) with sound, and a Messenger CTA under it.
+ * Demo modal: the full recording of a real game (Eyal's birthday, Tom's on /en/) with sound, and a Messenger CTA under it.
  * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
  */
 import { useCopy } from "../content/copy";
-import { contactLink } from "../config/site";
-const { copy: COPY } = useCopy(Astro.url);
+import { contactLink, demoMedia } from "../config/site";
+const { copy: COPY, locale } = useCopy(Astro.url);
+const media = demoMedia(locale);
 const c = COPY.modal;
 ---
 
@@ -20,7 +21,7 @@ const c = COPY.modal;
       <video
         class="dm-video"
         data-demo-video
-        poster="/demo/tadam-demo-poster.webp"
+        poster={media.demoPoster}
         width="1280"
         height="720"
         preload="none"
@@ -28,7 +29,7 @@ const c = COPY.modal;
         playsinline
         aria-label={c.videoLabel}
       >
-        <source src="/demo/tadam-demo.mp4" type="video/mp4" />
+        <source src={media.demo} type="video/mp4" />
       </video>
     </div>
     <p class="dm-caption">{c.caption}</p>

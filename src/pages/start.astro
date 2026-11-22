@@ -1730,6 +1730,11 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-photos {
     justify-items: stretch;
   }
+  @media (max-width: 699px) {
+    .in-one .in-photo-list img {
+      max-height: 130px;
+    }
+  }
   .in-own fieldset {
     border: 0;
     margin: 0;
@@ -2030,6 +2035,12 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     min-height: calc(100svh - 244px);
     align-content: center;
   }
+  /* Screens with a "free answer / four options" switch are anchored to the top instead of centered,
+     so switching modes only grows the screen downward and nothing above the switch moves. */
+  .in-step[data-step="3"]:not(.in-hero) {
+    align-content: start;
+    padding-top: clamp(8px, 4vh, 40px);
+  }
   .in-who,
   .in-step[data-step="1"],
   .in-step[data-step="4"] {
@@ -2103,8 +2114,8 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       grid-template-columns: 260px minmax(0, 1fr);
     }
     .in-one .in-photo-body {
-      padding: 16px 18px;
-      gap: 12px;
+      padding: 12px 18px;
+      gap: 9px;
     }
   }
   /* hosts with room: wider row, taller pictures, each host's line under the name */

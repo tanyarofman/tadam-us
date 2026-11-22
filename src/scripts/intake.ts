@@ -78,6 +78,16 @@ function init(root: HTMLElement, data: Data) {
     orderId: "",
   });
 
+  // /start/?new starts from a clean slate (the saved draft and the last order number are dropped)
+  if (new URLSearchParams(location.search).has("new")) {
+    try {
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(ORDER_KEY);
+    } catch {
+      /* ignore */
+    }
+    history.replaceState(null, "", location.pathname);
+  }
   let state = load();
   // The image files live in memory only (a reload loses them and the card asks to pick the photo again).
   // They are sent once, with the order.

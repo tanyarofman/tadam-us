@@ -23,6 +23,14 @@ Topics from the second and third (year-end) research rounds ([`keyword-research-
 | `new-years-eve-at-home` | סילבסטר בבית | Written 2026-11-22 (year-end round). Small bet: demand for at-home games is not proven. Should be live by mid-December |
 | `general-knowledge-trivia-questions` | שאלות טריוויה | Written 2026-11-22. This is article 12 of the original plan |
 
+## English translations (2026-11-22, `/en/blog/`)
+
+All 12 articles are translated in `src/content/blog-en/` (same file names), for English speakers in Israel.
+They are translations, not written from English keyword research: `targetKeyword` is the translated phrase.
+Hebrew wordplay was replaced with English wordplay in `hanukkah-riddles` (emoji riddles 16, 18, 19, behead-the-word 23 to 26,
+sound-alikes 27 to 32, hard riddles 39 and 45) and one tongue twister in `pass-the-parcel-tasks` (item 4).
+Open: article titles mix Title Case and sentence case; pick one. A new Hebrew article needs its English twin.
+
 ## Waiting for Tanya: real stories (never invent them)
 Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
 1. **Family / Hanukkah:** a family event where Tadam was played. Who won, which question got the biggest laugh.

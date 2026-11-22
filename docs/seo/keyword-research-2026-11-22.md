@@ -36,9 +36,9 @@ How Tadam fits each one: pass-the-parcel questions and bachelorette games are "h
 | קהוט בעברית 1,000, מנטימטר 4,400 | | People looking for those tools. Covered by planned article 11 (Kahoot comparison). |
 | שאלות לזוגות about 600 | | Covered by planned article 13. |
 
-## Third round: end-of-year topics (2026-11-22, about $0.45)
+## Third round: end-of-year topics (2026-11-22, about $0.70)
 
-Tanya asked for 4 more articles around the end of the year. Data: `data/seeds-year-end-il.txt`, `data/volume-year-end-2026-11-22.csv`, `data/suggestions-year-end-2026-11-22.csv`, `data/serp-year-end-2026-11-22.csv`, and month-by-month volumes in `data/monthly-year-end-2026-11-22.csv`.
+Tanya asked for 4 more articles around the end of the year. Data: `data/seeds-year-end-il.txt`, `data/volume-year-end-2026-11-22.csv`, `data/suggestions-year-end-2026-11-22.csv`, `data/serp-year-end-2026-11-22.csv`, `data/questions-year-end-2026-11-22.csv`, and month-by-month volumes in `data/monthly-year-end-2026-11-22.csv`.
 
 What the data says:
 - **In Hebrew, year-end search demand is Hanukkah.** The yearly averages hide it: almost all of it lands in late November and December.
@@ -59,6 +59,15 @@ What the data says:
 | חידון ידע כללי (planned article 12) | 880 | 1,300 | 1,300 | zolo, yo-yoo, baba-mail. Steady all year, CPC $14.80 |
 | חפש את המטמון | 590 | 590 | 720 | stips forum threads. Steady all year |
 
-Candidates put to Tanya: חידות לחנוכה, משחקים לחנוכה (with bingo and party ideas), an at-home New Year's Eve and Novy God evening (games plus year-in-review questions; demand not proven), and 100 general-knowledge trivia questions (planned article 12). Spare: חפש את המטמון.
+Approved by Tanya and written on 2026-11-22:
+
+| # | Article (file in `src/content/blog/`) | Target keyword |
+|---|---|---|
+| 34 | חידות לחנוכה (`hanukkah-riddles`) | חידות לחנוכה |
+| 35 | משחקים לחנוכה, with a bingo board and dreidel rules (`hanukkah-games`) | משחקים לחנוכה |
+| 36 | סילבסטר בבית: games and year-in-review questions (`new-years-eve-at-home`) | סילבסטר בבית (demand not proven) |
+| 12 | 100 שאלות טריוויה (`general-knowledge-trivia-questions`), from the original plan | שאלות טריוויה |
+
+Spare, not written: חפש את המטמון (about 1,000 a month, steady all year).
 
 Timing: Hanukkah starts on 4 December 2026. Hanukkah articles need to be live within days and sent for indexing in Search Console to catch part of this year's peak; either way they stay in place for 2027.

@@ -11,13 +11,17 @@ Last updated: 2026-11-22. The blog ([tanyarofman/tadam#30](https://github.com/ta
 | `team-building-day-ideas` | יום גיבוש לעובדים | Written, playbook applied, labeled example scenario until a real story arrives |
 
 ## Written, waiting for review and merge (branch `claude/serene-johnson-ugkl57`, 2026-11-22)
-Topics from the second research round ([`keyword-research-2026-11-22.md`](./keyword-research-2026-11-22.md)), approved by Tanya on 2026-11-22.
+Topics from the second and third (year-end) research rounds ([`keyword-research-2026-11-22.md`](./keyword-research-2026-11-22.md)), approved by Tanya on 2026-11-22. After merging, request indexing in Search Console for each new URL, the two Hanukkah ones first.
 | Article | Target keyword | Status |
 |---|---|---|
 | `pass-the-parcel-tasks` | משימות לחבילה עוברת | Written, playbook applied, labeled example scenario |
 | `icebreaker-questions` | שאלות היכרות | Written, playbook applied, labeled example scenario |
 | `bachelorette-party-games` | משחקים למסיבת רווקות | Written, playbook applied, labeled example scenario |
 | `tu-bishvat-quiz` | חידון טו בשבט | Written, playbook applied, labeled example scenario. Tu BiShvat is 23 Jan 2027, so it should be live in December |
+| `hanukkah-riddles` | חידות לחנוכה | Written 2026-11-22 (year-end round). 9,900 searches last December. **Time-sensitive: Hanukkah starts 4 Dec 2026** |
+| `hanukkah-games` | משחקים לחנוכה | Written 2026-11-22 (year-end round). Includes a bingo board and dreidel rules. **Time-sensitive** |
+| `new-years-eve-at-home` | סילבסטר בבית | Written 2026-11-22 (year-end round). Small bet: demand for at-home games is not proven. Should be live by mid-December |
+| `general-knowledge-trivia-questions` | שאלות טריוויה | Written 2026-11-22. This is article 12 of the original plan |
 
 ## Waiting for Tanya: real stories (never invent them)
 Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
@@ -35,14 +39,14 @@ Each article now has one clearly labeled example scenario ("תרחיש לדוג�
 - **Directory listings** (karamel.co.il, mesibonet.co.il): AI Overviews quote them. Free listings first; a paid listing needs her OK.
 
 ## Next articles (order from `keyword-research-2026-11.md`)
-Next up: 3 אטרקציות לבת מצווה, 4 רעיונות למסיבת בת מצווה, 6 הפעלה לבר ובת מצווה, 20 ערב צוות, 21 משחקי גיבוש, 10 איך מכינים משחק טריוויה לאירוע.
+Next up: 3 אטרקציות לבת מצווה, 4 רעיונות למסיבת בת מצווה, 6 הפעלה לבר ובת מצווה, 20 ערב צוות, 21 משחקי גיבוש, 10 איך מכינים משחק טריוויה לאירוע. (Article 12, 100 trivia questions, was written on 2026-11-22.)
 Seasonal deadlines (publish 3 to 4 weeks before):
 - Family Day (יום המשפחה, 7 Feb 2027): a "family quiz for Family Day" article, publish in January (see the second research round)
-- Purim quiz (חידון פורים, 720/month): publish by early February
+- Purim quiz (חידון פורים, 720/month) and a גמד ענק guide (peaks at 1,900 in February): publish by early February
 - Passover quiz and office Passover toast (חידון פסח 720, הרמת כוסית לפסח 110): publish by early March
 - School year-end party (מסיבת סיום כיתה ו): publish in April
 - Rosh Hashanah toast (הרמת כוסית לראש השנה): publish in August
-- Hanukkah games (משחקים לחנוכה, about 2,700/month in season): publish in October 2027
+- Hanukkah 2027: the quiz, riddles and games articles exist; update the dates in them in October 2027
 
 ## After publishing on the real domain
 - Done 2026-11-17: sitemap submitted in Google Search Console. After each new article is live, request indexing for its URL in URL inspection.

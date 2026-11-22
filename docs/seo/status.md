@@ -31,7 +31,7 @@ Tanya manages it (pause, change the day, edit the instructions) in her scheduled
 - She then asked for 4 more around the end of the year. Research showed that year-end demand in Hebrew is Hanukkah, and she approved all 4 proposed topics.
 - All 8 were merged at her request and deployed. DataForSEO spend for the day: about $1.70.
 - She asked whether the Cite-Me prompt was followed. Honest answer given: yes for research, headings, capsules, inline sources, tables and FAQ; but the structure was not sent for her approval before drafting, and she was not asked for first-hand stories before drafting. She accepted that. With her in the conversation, prefer to show the headings first unless a deadline is close.
-- Her style in this work: she approves quickly, wants a recommendation with numbers, and prefers plain summaries with preview links.
+- Working pattern that went well (Claude's reading, not something Tanya said): one recommendation with search numbers, a short list to approve, then plain summaries with preview links.
 
 ## Open items after 2026-11-22
 - **Tanya:** request indexing in Search Console for the 8 new addresses, `hanukkah-riddles` and `hanukkah-games` first (Hanukkah starts 4 Dec 2026).

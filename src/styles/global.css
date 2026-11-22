@@ -354,9 +354,16 @@ html[dir="ltr"] .step-card .h-card {
 /* Keep the English spacing refinements with the original Almoni typography. */
 html[lang="en"].fonts-loading body { visibility: hidden; }
 html[lang="en"].fonts-failed { --font-display: Arial, sans-serif; --font-body: Arial, sans-serif; }
-html[lang="en"] .hero-sub { line-height: 1.4; }
-html[lang="en"] .hero-preview figcaption { translate: clamp(38px, 5vw, 64px) -20px; }
+html[lang="en"] .hero .hero-sub { line-height: 1.4; top: calc(12px - clamp(30px, 4.5vh, 44px)); }
+html[lang="en"] .hero .hero-preview figcaption { translate: clamp(50px, 6vw, 76px) -20px; }
 @media(max-width:767px) {
-  html[lang="en"] .hero-preview figcaption { translate: 12px -12px; max-width: calc(100% - 24px); }
+  html[lang="en"] .hero .hero-preview figcaption { translate: 36px -12px; max-width: calc(100% - 72px); }
 }
 html[lang="en"] .hosts-sub { white-space: normal; }
+
+/* Let the English host heading use its available width before wrapping. */
+html[lang="en"] .hosts-title { display: block; white-space: normal; text-wrap: wrap; }
+html[lang="en"] .hosts-title > span { display: inline; }
+html[lang="en"] .hosts-title > .hl { display: inline-block; }
+
+@media(max-width:900px) { html[lang="en"] .hero .hero-sub { top: -14px; } }

@@ -56,13 +56,8 @@ const alternates = bilingual
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    {lang === "en" ? <>
-      <link rel="preload" as="font" type="font/woff2" href="/fonts/OverusedGrotesk-VF.woff2" crossorigin />
-      <link rel="preload" as="font" type="font/woff2" href="/fonts/InterVariable.woff2" crossorigin />
-    </> : <>
-      <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
-      <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
-    </>}
+    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
+    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
     <link rel="preload" as="image" type="image/webp" href={lang === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} fetchpriority="high" />
     <slot name="head" />
     <script is:inline>
@@ -80,7 +75,7 @@ const alternates = bilingual
             d.classList.remove("fonts-loading");
           }
           function loadFonts() {
-          Promise.all([document.fonts.load('700 16px "Overused Grotesk"'), document.fonts.load('400 16px Inter')])
+          Promise.all([document.fonts.load('700 16px Almoni'), document.fonts.load('400 16px Almoni')])
             .then(function (fonts) { reveal(fonts.every(function (f) { return f.length > 0; })); }, function () { reveal(false); });
           setTimeout(function () { reveal(false); }, 6000);
           }

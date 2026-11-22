@@ -3,7 +3,7 @@
  * Markup and copy never contain a price: copy.he.ts uses {placeholders} (see `fillPrices`),
  * the Pricing component reads the numbers below. Changing a price is a one-line edit here.
  *
- * Set by Tanya on 2026-11-16: base 750, every extra (edit, contributor link, personal host) 50.
+ * Set by Tanya on 2026-11-22: one price, 790 for a game. The extras (50 each) are from 2026-11-16 and not re-confirmed.
  */
 
 /**
@@ -11,6 +11,14 @@
  * TODO confirm with Ilan: today it lives on base44. Never put a personal `?id=` link here.
  */
 export const CREATE_URL = "https://tadam.base44.app/create";
+
+/**
+ * Payment page (Morning / Green Invoice) the order flow at /start sends the customer to after the order is saved.
+ * Empty until Tanya brings the link: the flow then shows a "not connected yet" screen instead.
+ * In Morning, set the "redirect after successful payment" URL to PAID_URL.
+ */
+export const PAYMENT_URL = "";
+export const PAID_URL = "https://heytadam.com/start/thanks/";
 
 export const PRICING = {
   /**
@@ -21,8 +29,8 @@ export const PRICING = {
 
   currency: "₪",
 
-  /** Personal game for an event. (Ilan's page shows 250.) */
-  base: 750, // TODO confirm
+  /** Personal game for an event. */
+  base: 790,
   /** Each extra edit of an already produced game. */
   edit: 50,
 

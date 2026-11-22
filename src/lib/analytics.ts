@@ -23,7 +23,10 @@ export type TrackEvent =
   | "intake_start"
   | "intake_step"
   | "intake_prompt_answered"
-  | "intake_complete";
+  | "intake_complete"
+  | "order_submit"
+  | "order_error"
+  | "order_paid";
 
 declare global {
   interface Window {

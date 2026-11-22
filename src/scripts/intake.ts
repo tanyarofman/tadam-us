@@ -1,7 +1,8 @@
 /**
- * Intake prototype logic (/start). No backend: state lives in this browser (localStorage) and nothing is sent.
- * Steps: 0 start, 1 event, 2 who, 3 stories, 4 details, 5 generating + host (mock), 6 review (mock),
- * 7 order (mock), 8 launchpad (mock + the brief a developer or the team would receive).
+ * Order flow logic (/start). The draft lives in this browser (localStorage) until the order is sent.
+ * Steps: 0 start + price, 1 event, 2 who, 3 stories, 4 event details + host, 5 summary + contact + order,
+ * 6 "payment link not connected" (only while paymentUrl is empty).
+ * Sending the order posts the brief and the photos to Netlify Forms (form "order"), then goes to the payment page.
  */
 import { track } from "../lib/analytics";
 import { fill } from "../content/intake.he";
@@ -19,6 +20,8 @@ interface Data {
   hosts: Host[];
   material: { minChars: number; charsPerQuestion: number; maxPerPrompt: number; perPhoto: number; maxPhotos: number; minPrompts: number };
   copy: typeof import("../content/intake.he").INTAKE;
+  price: string;
+  paymentUrl: string;
 }
 interface State {
   v: 1;
@@ -34,14 +37,17 @@ interface State {
   photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
   details: { date: string; guests: string; screen: string; contact: string };
   host: string;
-  approved: boolean[];
+  contactName: string;
+  phone: string;
+  email: string;
+  consent: boolean;
+  orderId: string;
   own: { q: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
-  checks: boolean[];
-  code: string;
 }
 
 const KEY = "tadam-intake-v1";
-const MAX_STEP = 8;
+const MAX_STEP = 6;
+const ORDER_KEY = "tadam-order";
 const root = document.querySelector<HTMLElement>("[data-intake]");
 const dataEl = document.getElementById("intake-data");
 
@@ -66,14 +72,18 @@ function init(root: HTMLElement, data: Data) {
     photos: [],
     details: { date: "", guests: "", screen: "", contact: "" },
     host: "auto",
-    approved: [],
+    contactName: "",
+    phone: "",
+    email: "",
+    consent: false,
+    orderId: "",
     own: [],
-    checks: [false, false, false],
-    code: String(1000 + Math.floor(Math.random() * 9000)),
   });
 
   let state = load();
-  const photoFiles = new Map<number, string>(); // object URLs for this session only; images are never stored or sent
+  // The image files live in memory only (a reload loses them and the card asks to pick the photo again).
+  // They are sent once, with the order.
+  const photoFiles = new Map<number, { file: File; url: string }>();
   const tracked = new Set<string>();
 
   function load(): State {
@@ -144,6 +154,7 @@ function init(root: HTMLElement, data: Data) {
   function show(step: number, push = true) {
     step = Math.max(0, Math.min(MAX_STEP, step));
     if (step >= 2 && !state.eventId) step = 1;
+    if (step === 6 && !state.orderId) step = 5;
     state.step = step;
     $$<HTMLElement>("[data-step]").forEach((s) => (s.hidden = Number(s.dataset.step) !== step));
     renderStep(step);
@@ -154,14 +165,13 @@ function init(root: HTMLElement, data: Data) {
     window.scrollTo({ top: 0 });
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
     track("intake_step", { step, event: state.eventId });
-    if (step === 7) track("intake_complete", { event: state.eventId, answered: answeredPrompts().length });
   }
 
   function renderProgress(step: number) {
     const nav = $("[data-progress]");
     if (!nav) return;
     nav.hidden = step === 0;
-    const stage = step <= 4 ? step : 5;
+    const stage = Math.min(step, 5);
     const text = $("[data-progress-text]");
     if (text) text.textContent = `${c.stepWord} ${stage} ${c.of} 5`;
     const bar = $<HTMLElement>("[data-progress-bar]");
@@ -177,11 +187,11 @@ function init(root: HTMLElement, data: Data) {
     if (step === 1) renderEvents();
     if (step === 2) renderWho();
     if (step === 3) renderStories();
-    if (step === 4) renderDetails();
-    if (step === 5) startGeneration();
-    if (step === 6) renderReview();
-    if (step === 7) renderOrder();
-    if (step === 8) renderLaunch();
+    if (step === 4) {
+      renderDetails();
+      renderHosts();
+    }
+    if (step === 5) renderOrder();
   }
 
   function applyShapeText() {
@@ -521,10 +531,10 @@ function init(root: HTMLElement, data: Data) {
     photoList.innerHTML = "";
     state.photos.forEach((p, i) => {
       const li = document.createElement("li");
-      const url = photoFiles.get(i);
+      const url = photoFiles.get(i)?.url;
       const choice = p.type === "choice";
       li.dataset.photo = String(i);
-      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<span class="in-photo-ph" aria-hidden="true">🖼️</span>`}
+      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<label class="btn btn-white in-photo-again">${c.stories.photosAgain}<input type="file" accept="image/*" class="sr-only" data-photo-again="${i}" /></label>`}
         <div class="in-photo-body">
           <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
           <input id="pq-${i}" class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosPlaceholder)}" data-caption="${i}" />
@@ -577,7 +587,7 @@ function init(root: HTMLElement, data: Data) {
   photoInput.addEventListener("change", () => {
     const f = photoInput.files?.[0];
     if (!f || state.photos.length >= data.material.maxPhotos) return;
-    photoFiles.set(state.photos.length, URL.createObjectURL(f));
+    photoFiles.set(state.photos.length, { file: f, url: URL.createObjectURL(f) });
     state.photos.push({ name: f.name, caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
     photoInput.value = "";
     renderPhotos();
@@ -603,7 +613,14 @@ function init(root: HTMLElement, data: Data) {
   });
   photoList.addEventListener("change", (e) => {
     const t = e.target as HTMLInputElement;
-    if (t.dataset.ptype !== undefined) {
+    if (t.dataset.photoAgain !== undefined) {
+      const f = t.files?.[0];
+      const i = Number(t.dataset.photoAgain);
+      if (!f || !state.photos[i]) return;
+      photoFiles.set(i, { file: f, url: URL.createObjectURL(f) });
+      state.photos[i].name = f.name;
+      renderPhotos();
+    } else if (t.dataset.ptype !== undefined) {
       state.photos[Number(t.dataset.ptype)].type = t.value as "free" | "choice";
       renderPhotos();
       photoList.querySelector<HTMLInputElement>(`[data-ptype="${t.dataset.ptype}"][value="${t.value}"]`)?.focus();
@@ -625,7 +642,7 @@ function init(root: HTMLElement, data: Data) {
     if (!b) return;
     const i = Number(b.dataset.photoRemove);
     state.photos.splice(i, 1);
-    const urls = [...photoFiles.entries()].filter(([k]) => k !== i).map(([k, v]) => [k > i ? k - 1 : k, v] as [number, string]);
+    const urls = [...photoFiles.entries()].filter(([k]) => k !== i).map(([k, v]) => [k > i ? k - 1 : k, v] as [number, { file: File; url: string }]);
     photoFiles.clear();
     urls.forEach(([k, v]) => photoFiles.set(k, v));
     renderPhotos();
@@ -649,14 +666,8 @@ function init(root: HTMLElement, data: Data) {
     }
   });
 
-  // ---------- 5: generating (mock) + host ----------
-  let genTimer = 0;
-  function startGeneration() {
-    const title = $("[data-gen-title]");
-    if (title) title.textContent = fill(c.stage5.generating, { name: subjectName() });
-    const bar = $<HTMLElement>("[data-gen-bar]")!;
-    const label = $("[data-gen-label]")!;
-    const next = $<HTMLElement>("[data-gen-next]")!;
+  // ---------- 4: host ----------
+  function renderHosts() {
     const hostsEl = $<HTMLElement>("[data-hosts]")!;
     hostsEl.innerHTML = data.hosts
       .map(
@@ -666,22 +677,6 @@ function init(root: HTMLElement, data: Data) {
         </button>`,
       )
       .join("");
-    window.clearInterval(genTimer);
-    let pct = 0;
-    const stages = c.stage5.stages;
-    next.setAttribute("aria-disabled", "true");
-    const tick = () => {
-      pct = Math.min(100, pct + 4);
-      bar.style.width = `${pct}%`;
-      label.textContent = stages[Math.min(stages.length - 1, Math.floor((pct / 100) * stages.length))];
-      if (pct >= 100) {
-        window.clearInterval(genTimer);
-        next.setAttribute("aria-disabled", "false");
-        label.textContent = c.stage5.reviewLead;
-      }
-    };
-    genTimer = window.setInterval(tick, 400);
-    tick();
   }
   root.addEventListener("click", (e) => {
     const h = (e.target as HTMLElement).closest<HTMLElement>("[data-host]");
@@ -691,68 +686,6 @@ function init(root: HTMLElement, data: Data) {
     save();
   });
 
-  // ---------- 6: review (mock questions, real sources) ----------
-  type Q = { snippet: string; own?: State["own"][number]; photo?: State["own"][number]; choice?: State["own"][number] };
-  /** One entry per game question: generated ones (mock, with their real source story) then the creator's own. */
-  function questions(): Q[] {
-    const m = data.material;
-    const list: Q[] = [];
-    for (const p of shape().prompts) {
-      if (modeOf(p.id) === "choice") {
-        if (choiceDone(p.id)) {
-          const ch = state.choices[p.id];
-          list.push({ snippet: "", choice: { q: ch.q.trim(), type: "choice", free: "", answers: ch.answers.map((a) => a.trim()), correct: ch.correct } });
-        }
-        continue;
-      }
-      const text = (state.answers[p.id] || "").trim();
-      if (text.length < m.minChars) continue;
-      const n = Math.min(m.maxPerPrompt, Math.max(1, Math.round(text.length / m.charsPerQuestion)));
-      for (let i = 0; i < n; i++) list.push({ snippet: text });
-    }
-    state.photos.filter((p) => p.caption.trim().length > 3).forEach((p) => {
-      const complete = p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0;
-      list.push({ snippet: p.caption.trim(), photo: complete ? { q: p.caption.trim(), type: p.type, free: p.free.trim(), answers: p.answers.map((a) => a.trim()), correct: p.correct } : undefined });
-    });
-    const generated = list.slice(0, Math.max(0, target() - state.own.length));
-    return [...generated, ...state.own.map((o) => ({ snippet: "", own: o }))];
-  }
-  let reviewIndex = 0;
-  function renderReview() {
-    const list = questions();
-    if (state.approved.length !== list.length) state.approved = list.map((_, i) => !!state.approved[i]);
-    reviewIndex = Math.min(reviewIndex, Math.max(0, list.length - 1));
-    const el = $<HTMLElement>("[data-review]")!;
-    const s = list[reviewIndex];
-    if (!s) {
-      el.innerHTML = "";
-      return;
-    }
-    const ok = state.approved[reviewIndex];
-    const q = s.own || s.photo || s.choice;
-    const body = q
-      ? `<p class="in-qcard__source">${s.own ? c.stage5.ownMark : s.photo ? c.stage5.photoMark : c.stage5.tplMark}</p>
-         <p class="in-sample__q">${esc(q.q)}</p>
-         <ul class="in-qcard__answers">${
-           q.type === "free"
-             ? `<li data-correct="true">${esc(q.free)}</li>`
-             : q.answers.map((t, i) => `<li data-correct="${i === q.correct}">${esc(t)}</li>`).join("")
-         }</ul>`
-      : `<p class="in-qcard__source">${c.stage5.source}: «${esc(s.snippet.length > 110 ? s.snippet.slice(0, 110) + "..." : s.snippet)}»</p>
-         <p class="in-qcard__ph">${c.stage5.placeholderQuestion}</p>`;
-    el.innerHTML = `<article class="in-qcard" data-approved="${ok}">
-        <h3 class="in-sub">${fill(c.stage5.questionOf, { i: reviewIndex + 1, n: list.length })}</h3>
-        ${body}
-        <div class="in-qcard__actions">
-          <button type="button" class="btn btn-buzzer" data-approve>${ok ? "✓ " + c.stage5.approved : c.stage5.approve}</button>
-          ${q ? "" : `<button type="button" class="btn btn-white" data-rewrite>${c.stage5.rewrite}</button>`}
-          <button type="button" class="btn btn-ghost" data-rv="-1" ${reviewIndex === 0 ? "disabled" : ""}>${c.back}</button>
-          <button type="button" class="btn btn-ghost" data-rv="1" ${reviewIndex >= list.length - 1 ? "disabled" : ""}>${c.next}</button>
-        </div>
-      </article>`;
-    $$<HTMLInputElement>("[data-check]").forEach((cb) => (cb.checked = !!state.checks[Number(cb.dataset.check)]));
-    updateReviewGate();
-  }
   // own question form: a question, four answers, one marked correct
   const ownForm = $<HTMLFormElement>("[data-own-form]")!;
   const ownOpen = $<HTMLElement>("[data-own-open]")!;
@@ -817,54 +750,42 @@ function init(root: HTMLElement, data: Data) {
     save();
     ownOpen.focus();
   });
-  function updateReviewGate() {
-    const all = state.approved.length > 0 && state.approved.every(Boolean) && state.checks.every(Boolean);
-    $<HTMLElement>('[data-next="6"]')?.setAttribute("aria-disabled", String(!all));
-  }
-  root.addEventListener("click", (e) => {
-    const t = e.target as HTMLElement;
-    if (t.closest("[data-approve]")) {
-      state.approved[reviewIndex] = !state.approved[reviewIndex];
-      if (state.approved[reviewIndex] && reviewIndex < state.approved.length - 1) reviewIndex += 1;
-      renderReview();
-      save();
-    }
-    const rv = t.closest<HTMLElement>("[data-rv]");
-    if (rv) {
-      reviewIndex += Number(rv.dataset.rv);
-      renderReview();
-    }
-  });
-  root.addEventListener("change", (e) => {
-    const cb = e.target as HTMLInputElement;
-    if (cb.dataset?.check !== undefined) {
-      state.checks[Number(cb.dataset.check)] = cb.checked;
-      updateReviewGate();
-      save();
-    }
-  });
-
-  // ---------- 7: order (mock) ----------
+  // ---------- 5: summary, contact, order ----------
+  const orderForm = $<HTMLFormElement>("[data-order-form]")!;
+  const orderErr = $<HTMLElement>("[data-order-err]")!;
+  const orderCta = $<HTMLButtonElement>("[data-order-cta]")!;
+  const consentIn = $<HTMLInputElement>("[data-order-consent]")!;
+  const orderInputs = () => $$<HTMLInputElement>("[data-order]");
+  const missingPhotos = () => state.photos.filter((_, i) => !photoFiles.has(i)).length;
   function renderOrder() {
     const d = state.details;
+    const r = c.order.rows;
     const hostName = data.hosts.find((h) => h.id === state.host)?.name || "";
     const rows: [string, string][] = [
-      ["אירוע", event()?.label || ""],
-      ["על מי", subjectName()],
-      ["שם המשחק", state.title],
-      ["מנחה", hostName],
-      ["שאלות", String(questions().length)],
+      [r.event, event()?.label || ""],
+      [r.who, subjectName()],
+      [r.game, state.title],
+      [r.host, hostName],
+      [r.material, fill(c.order.materialValue, { n: questionsReady(), total: target() })],
     ];
-    if (d.guests) rows.push(["אורחים", d.guests]);
+    if (state.photos.length) rows.push([r.photos, String(state.photos.length)]);
+    if (d.date) rows.push([r.date, new Date(d.date).toLocaleDateString("he-IL")]);
+    if (d.guests) rows.push([r.guests, d.guests]);
     $("[data-summary]")!.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
-    const od = $<HTMLElement>("[data-order-date]")!;
-    if (d.date) {
-      od.hidden = false;
-      od.textContent = fill(c.stage5.orderDate, { date: new Date(d.date).toLocaleDateString("he-IL") });
-    } else od.hidden = true;
+    $<HTMLElement>("[data-photos-missing]")!.hidden = missingPhotos() === 0;
+    orderInputs().forEach((el) => (el.value = state[el.dataset.order as "contactName" | "phone" | "email"]));
+    consentIn.checked = state.consent;
+    orderErr.hidden = true;
   }
+  orderForm.addEventListener("input", (e) => {
+    const el = e.target as HTMLInputElement;
+    if (el.dataset.order) state[el.dataset.order as "contactName" | "phone" | "email"] = el.value;
+    else if (el === consentIn) state.consent = el.checked;
+    else return;
+    el.removeAttribute("aria-invalid");
+    save();
+  });
 
-  // ---------- 8: launchpad + brief ----------
   function brief() {
     const d = state.details;
     return {
@@ -880,53 +801,116 @@ function init(root: HTMLElement, data: Data) {
             : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
         ),
       photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
-      logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null, contact: d.contact || null },
+      logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null },
+      contact: { name: state.contactName.trim(), phone: state.phone.trim(), email: state.email.trim() },
+      orderId: state.orderId,
       host: state.host,
       ownQuestions: state.own,
       questionCount: target(),
       materialReady: questionsReady(),
-      consent: { photos: state.photos.length > 0 },
+      consent: { factsAndPhotos: state.consent },
     };
   }
   function briefText(): string {
     const b = brief();
     const lines = [`אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
     b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.type === "choice" ? (s.answers || []).map((a, i) => (i === s.correct ? "*" : "") + a).join(" / ") : s.text}`));
+    if (b.ownQuestions.length) {
+      lines.push("", "שאלות של המזמינים:");
+      b.ownQuestions.forEach((o) => lines.push(`- ${o.q}: ${o.type === "free" ? o.free : o.answers.map((a, i) => (i === o.correct ? "*" : "") + a).join(" / ")}`));
+    }
     if (b.photos.length) {
-      lines.push("", "תמונות (כיתובים):");
+      lines.push("", "תמונות (לפי הסדר, photo-1 והלאה):");
       b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));
     }
     const l = b.logistics;
     const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`, l.screen && `מסך: ${l.screen}`].filter(Boolean);
     if (extra.length) lines.push("", ...(extra as string[]));
-    lines.push("", `מספר שאלות: ${b.questionCount}`);
+    lines.push("", `מנחה: ${data.hosts.find((h) => h.id === state.host)?.name || ""}`, `מספר שאלות: ${b.questionCount}`, "(* מסמן את התשובה הנכונה)");
     return lines.join("\n");
   }
-  async function renderLaunch() {
-    const t = $("[data-launch-title]");
-    if (t) t.textContent = fill(c.stage5.launchTitle, { name: subjectName() });
-    $("[data-code]")!.textContent = state.code;
-    $("[data-dev-json]")!.textContent = JSON.stringify(brief(), null, 2);
-    $("[data-dev-text]")!.textContent = briefText();
-    const box = $<HTMLElement>("[data-qr]")!;
-    if (!box.firstChild) {
-      const { default: qrcode } = await import("qrcode-generator");
-      const qr = qrcode(0, "M");
-      qr.addData(location.origin + location.pathname + "#sample-" + state.code);
-      qr.make();
-      box.innerHTML = qr.createSvgTag({ cellSize: 8, margin: 0, scalable: true });
-    }
-  }
-  async function copy(text: string, btn: HTMLElement) {
-    const old = btn.textContent;
+  /** Phone photos are several MB each; the form accepts a few MB in total, so each is scaled down first. */
+  async function shrink(file: File): Promise<Blob> {
     try {
-      await navigator.clipboard.writeText(text);
-      btn.textContent = c.stage5.copied;
+      const bmp = await createImageBitmap(file);
+      const k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+      const cv = document.createElement("canvas");
+      cv.width = Math.round(bmp.width * k);
+      cv.height = Math.round(bmp.height * k);
+      cv.getContext("2d")!.drawImage(bmp, 0, 0, cv.width, cv.height);
+      const blob = await new Promise<Blob | null>((res) => cv.toBlob(res, "image/jpeg", 0.82));
+      return blob && blob.size < file.size ? blob : file;
     } catch {
-      btn.textContent = "לא הצלחנו להעתיק";
+      return file; // a format the browser cannot draw: send it as it is
     }
-    window.setTimeout(() => (btn.textContent = old), 1800);
   }
+  let sending = false;
+  orderForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (sending) return;
+    const bad = orderInputs().filter((el) => !el.value.trim() || !el.validity.valid);
+    orderInputs().forEach((el) => (bad.includes(el) ? el.setAttribute("aria-invalid", "true") : el.removeAttribute("aria-invalid")));
+    if (bad.length || !consentIn.checked) {
+      orderErr.textContent = c.order.errRequired;
+      orderErr.hidden = false;
+      (bad[0] || consentIn).focus();
+      return;
+    }
+    sending = true;
+    orderErr.hidden = true;
+    orderCta.setAttribute("aria-busy", "true");
+    orderCta.textContent = orderCta.dataset.sending!;
+    // one id per draft, so pressing again after a failed payment does not look like a second order
+    state.orderId ||= "TD-" + Date.now().toString(36).toUpperCase().slice(-6);
+    save();
+    try {
+      const b = brief();
+      const d = state.details;
+      const fd = new FormData();
+      const fields: Record<string, string> = {
+        "form-name": "order",
+        "order-id": state.orderId,
+        name: state.contactName.trim(),
+        phone: state.phone.trim(),
+        email: state.email.trim(),
+        event: event()?.label || "",
+        about: `${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`,
+        "game-title": state.title,
+        host: data.hosts.find((h) => h.id === state.host)?.name || "",
+        "event-date": d.date,
+        guests: d.guests,
+        screen: d.screen,
+        price: data.price,
+        brief: briefText(),
+        "brief-json": JSON.stringify(b),
+      };
+      Object.entries(fields).forEach(([k, v]) => fd.append(k, v));
+      for (const [i, p] of photoFiles) {
+        const blob = await shrink(p.file);
+        const name = blob === p.file ? p.file.name : p.file.name.replace(/\.[^.]*$/, "") + ".jpg";
+        fd.append(`photo-${i + 1}`, blob, name);
+      }
+      const res = await fetch("/", { method: "POST", body: fd });
+      if (!res.ok) throw new Error(String(res.status));
+      try {
+        localStorage.setItem(ORDER_KEY, JSON.stringify({ id: state.orderId, at: Date.now() }));
+      } catch {
+        /* ignore */
+      }
+      track("order_submit", { event: state.eventId, photos: photoFiles.size });
+      track("intake_complete", { event: state.eventId, answered: answeredPrompts().length });
+      if (data.paymentUrl) location.href = data.paymentUrl;
+      else show(6);
+    } catch (x) {
+      track("order_error", { error: String(x) });
+      orderErr.textContent = c.order.errSend;
+      orderErr.hidden = false;
+    } finally {
+      sending = false;
+      orderCta.removeAttribute("aria-busy");
+      orderCta.textContent = orderCta.dataset.label!;
+    }
+  });
 
   // ---------- global clicks ----------
   root.addEventListener("click", (e) => {
@@ -971,17 +955,10 @@ function init(root: HTMLElement, data: Data) {
       state = blank();
       photoFiles.clear();
       openPrompt = "";
-      reviewIndex = 0;
       save();
       show(0);
       return;
     }
-    if (t.closest("[data-copy-link]")) {
-      void copy(location.origin + location.pathname, t.closest<HTMLElement>("[data-copy-link]")!);
-      return;
-    }
-    const cp = t.closest<HTMLElement>("[data-copy]");
-    if (cp) void copy(cp.dataset.copy === "json" ? JSON.stringify(brief(), null, 2) : briefText(), cp);
   });
 
   // Back button returns to the previous stage without wiping anything (state is saved on every change).

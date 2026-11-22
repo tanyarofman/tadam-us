@@ -1,0 +1,83 @@
+---
+/**
+ * Where Morning sends the customer after a successful payment (PAID_URL in src/config/pricing.ts).
+ * Shows the order number saved by /start in this browser, and clears the draft so a new order starts clean.
+ */
+import Base from "../../layouts/Base.astro";
+import { INTAKE as c } from "../../content/intake.he";
+import { contactLink } from "../../config/site";
+const t = c.thanks;
+---
+
+<Base title={t.metaTitle} description={t.lead} noindex>
+  <main class="thanks">
+    <a href="/" class="thanks__logo" aria-label="טדאם!, לדף הבית">
+      <img src="/brand/tadam-logo-nobuzzer.webp" alt="טדאם!" width="1438" height="622" />
+    </a>
+    <h1 class="display h-scene">{t.title}</h1>
+    <p class="lead">{t.lead}</p>
+    <p class="thanks__order" data-order-box hidden>{t.orderNo}: <strong dir="ltr" data-order-id></strong></p>
+    <h2 class="thanks__sub">{t.nextTitle}</h2>
+    <ol class="thanks__next">
+      {t.next.map((x) => <li>{x}</li>)}
+    </ol>
+    <div class="thanks__nav">
+      <a class="btn btn-buzzer" href="/">{t.home}</a>
+      <a class="btn btn-ghost" href={contactLink("order-thanks")} target="_blank" rel="noopener">{t.contact}</a>
+    </div>
+  </main>
+  <script>
+    import { track } from "../../lib/analytics";
+    let id = "";
+    try {
+      id = JSON.parse(localStorage.getItem("tadam-order") || "{}").id || "";
+      if (id) localStorage.removeItem("tadam-intake-v1");
+    } catch {
+      /* blocked storage: the page still confirms the payment */
+    }
+    const box = document.querySelector<HTMLElement>("[data-order-box]");
+    const el = document.querySelector<HTMLElement>("[data-order-id]");
+    if (id && box && el) {
+      el.textContent = id;
+      box.hidden = false;
+    }
+    track("order_paid", { order: id });
+  </script>
+</Base>
+
+<style>
+  .thanks {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 24px var(--gutter) 96px;
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+  .thanks__logo img {
+    width: 132px;
+    height: auto;
+  }
+  .thanks__order {
+    margin: 0;
+    background: rgba(0, 22, 112, 0.72);
+    border-radius: var(--radius-m);
+    padding: 12px 16px;
+  }
+  .thanks__sub {
+    margin: 8px 0 0;
+    font-size: 1.3rem;
+  }
+  .thanks__next {
+    margin: 0;
+    padding-inline-start: 22px;
+    display: grid;
+    gap: 8px;
+  }
+  .thanks__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+</style>

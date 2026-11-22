@@ -133,7 +133,7 @@ Run it: `npm run dev`, then open `/start`. A shared preview: `npm run build && n
 **For Ilan**
 1. Can `/create` accept a prefilled draft (a URL with a payload, or a call that returns a draft link)? If not, is the pasted text block good enough for now?
 2. Can the generator refuse a question that has no source story and return fewer questions?
-3. A host preview, HEIC photos, a visible "saved" state in his wizard, and the checkout price aligned to 750 and 50.
+3. A host preview, HEIC photos, a visible "saved" state in his wizard, and the checkout price aligned to the current price (790 since 2026-11-22, see `src/config/pricing.ts`).
 
 **For Tanya**
 1. Payment provider and the delivery promise (hours, or a deadline tied to the date).

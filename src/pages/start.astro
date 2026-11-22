@@ -1,13 +1,18 @@
 ---
 /**
- * Intake prototype: how a creator asks for a game. Not linked from the site (noindex).
- * Frontend only: nothing is sent anywhere. Answers stay in this browser (localStorage).
- * Spec: docs/intake-flow.md. Copy and event config: src/content/intake.he.ts.
+ * Self-serve order flow: tell us about the event, see the summary and the price, order, pay.
+ * Not linked from the site yet (noindex). Answers stay in this browser (localStorage) until the order is sent.
+ * The order goes to Netlify Forms (form "order", the hidden form at the bottom registers its fields), then the
+ * customer is sent to PAYMENT_URL (Morning). Morning returns them to /start/thanks/.
+ * Copy and event config: src/content/intake.he.ts. Price and payment link: src/config/pricing.ts.
  */
 import Base from "../layouts/Base.astro";
 import { EVENTS, SHAPES, HOSTS, MATERIAL, INTAKE as c } from "../content/intake.he";
 
-const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL, copy: c };
+import { PRICING, PAYMENT_URL, money } from "../config/pricing";
+
+const price = money(PRICING.base);
+const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL, copy: c, price, paymentUrl: PAYMENT_URL };
 ---
 
 <Base title={c.meta.title} description={c.meta.description} noindex>
@@ -50,10 +55,19 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <span class="eyebrow">{c.start.eyebrow}</span>
       <h1 class="display h-scene" id="h0" tabindex="-1">{c.start.title}</h1>
       <p class="lead">{c.start.lead}</p>
+      <div class="in-price">
+        <p class="in-price__num display">{price}</p>
+        <p class="in-price__label">{c.start.priceLabel}</p>
+        <p class="in-help">{c.start.priceNote}</p>
+      </div>
+      <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
+      <h2 class="in-sub">{c.start.howTitle}</h2>
+      <ol class="in-how">
+        {c.start.how.map((h) => <li><strong>{h.t}</strong><span>{h.d}</span></li>)}
+      </ol>
       <ul class="in-bullets">
         {c.start.bullets.map((b) => <li>{b}</li>)}
       </ul>
-      <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
     </section>
 
     <!-- 1: event -->
@@ -182,7 +196,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </div>
     </section>
 
-    <!-- 4: details -->
+    <!-- 4: details + host -->
     <section class="in-step" data-step="4" aria-labelledby="h4" hidden>
       <h2 class="display h-card" id="h4" tabindex="-1">{c.details.title}</h2>
       <p class="lead">{c.details.lead}</p>
@@ -203,99 +217,82 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           ))
         }
       </fieldset>
-      <div class="in-field">
-        <label for="d-contact">{c.details.contact}</label>
-        <input id="d-contact" class="in-input" type="text" inputmode="email" autocomplete="email" placeholder={c.details.contactPlaceholder} data-detail="contact" aria-describedby="d-contact-help" />
-        <p class="in-help" id="d-contact-help">{c.details.contactHelp}</p>
+      <div class="in-hostpick">
+        <h3 class="in-sub">{c.stage5.hostTitle}</h3>
+        <p class="in-help">{c.stage5.hostHelp}</p>
+        <div class="in-hosts" role="radiogroup" aria-label={c.stage5.hostTitle} data-hosts></div>
       </div>
       <div class="in-nav">
         <button class="btn btn-ghost" type="button" data-go="3">{c.back}</button>
-        <button class="btn btn-ghost" type="button" data-next="4">{c.details.skip}</button>
         <button class="btn btn-buzzer" type="button" data-next="4">{c.details.cta}</button>
       </div>
     </section>
 
-    <!-- 5: generating + host -->
+    <!-- 5: summary, price, contact, order -->
     <section class="in-step" data-step="5" aria-labelledby="h5" hidden>
-      <p class="in-proto-note">{c.stage5.note}</p>
-      <h2 class="display h-card" id="h5" tabindex="-1" data-gen-title></h2>
-      <div class="in-meter">
-        <div class="in-meter__bar" aria-hidden="true"><i data-gen-bar></i></div>
-        <p class="in-help" role="status" aria-live="polite" data-gen-label></p>
-      </div>
-      <h3 class="in-sub">{c.stage5.hostTitle}</h3>
-      <p class="in-help">{c.stage5.hostHelp} {c.stage5.waitHint}</p>
-      <div class="in-hosts" role="radiogroup" aria-label={c.stage5.hostTitle} data-hosts></div>
-      <div class="in-nav">
-        <button class="btn btn-ghost" type="button" data-go="4">{c.back}</button>
-        <button class="btn btn-buzzer" type="button" data-next="5" aria-disabled="true" data-gen-next>{c.stage5.reviewTitle}</button>
-      </div>
-    </section>
-
-    <!-- 6: review -->
-    <section class="in-step" data-step="6" aria-labelledby="h6" hidden>
-      <p class="in-proto-note">{c.stage5.note}</p>
-      <h2 class="display h-card" id="h6" tabindex="-1">{c.stage5.reviewTitle}</h2>
-      <p class="lead">{c.stage5.reviewLead}</p>
-      <div class="in-review" data-review></div>
-      <fieldset class="in-checks">
-        {
-          c.stage5.checklist.map((t, i) => (
-            <label class="in-check"><input type="checkbox" data-check={i} /><span>{t}</span></label>
-          ))
-        }
-      </fieldset>
-      <div class="in-nav">
-        <button class="btn btn-ghost" type="button" data-go="5">{c.back}</button>
-        <button class="btn btn-buzzer" type="button" data-next="6" aria-disabled="true">{c.stage5.toOrder}</button>
-      </div>
-    </section>
-
-    <!-- 7: order -->
-    <section class="in-step" data-step="7" aria-labelledby="h7" hidden>
-      <p class="in-proto-note">{c.stage5.note}</p>
-      <h2 class="display h-card" id="h7" tabindex="-1">{c.stage5.orderTitle}</h2>
-      <h3 class="in-sub">{c.stage5.orderSummary}</h3>
-      <dl class="in-summary" data-summary></dl>
-      <p class="in-help">{c.stage5.orderPrice}</p>
-      <p class="in-help">{c.stage5.orderEta}</p>
-      <p class="in-help" data-order-date hidden></p>
-      <div class="in-nav">
-        <button class="btn btn-ghost" type="button" data-go="6">{c.back}</button>
-        <button class="btn btn-buzzer" type="button" data-next="7">{c.stage5.orderCta}</button>
-      </div>
-    </section>
-
-    <!-- 8: launchpad -->
-    <section class="in-step" data-step="8" aria-labelledby="h8" hidden>
-      <p class="in-proto-note">{c.stage5.note}</p>
-      <h2 class="display h-scene" id="h8" tabindex="-1" data-launch-title></h2>
-      <p class="lead">{c.stage5.launchLead}</p>
-      <div class="in-launch">
-        <div class="in-qr" data-qr role="img" aria-label="קוד QR לדוגמה"></div>
-        <div>
-          <p class="in-help">{c.stage5.codeLabel}</p>
-          <p class="in-code display" data-code></p>
-          <button class="btn btn-white" type="button" data-copy-link>{c.stage5.copyLink}</button>
+      <h2 class="display h-card" id="h5" tabindex="-1">{c.order.title}</h2>
+      <div class="in-order">
+        <div class="in-order__col">
+          <h3 class="in-sub">{c.order.summary}</h3>
+          <dl class="in-summary" data-summary></dl>
+          <p class="in-help" data-order-date hidden></p>
+          <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
+          <button class="btn btn-ghost in-order__edit" type="button" data-go="3">{c.order.edit}</button>
+          <h3 class="in-sub">{c.order.nextTitle}</h3>
+          <ol class="in-how in-how--plain">
+            {c.order.next.map((t) => <li><span>{t}</span></li>)}
+          </ol>
         </div>
+        <form class="in-order__col in-order__pay" data-order-form novalidate>
+          <div class="in-price">
+            <p class="in-price__label">{c.order.priceLabel}</p>
+            <p class="in-price__num display">{price}</p>
+            <ul class="in-includes">
+              {c.order.includes.map((t) => <li>{t}</li>)}
+            </ul>
+          </div>
+          <h3 class="in-sub">{c.order.contactTitle}</h3>
+          <div class="in-field">
+            <label for="o-name">{c.order.name}</label>
+            <input id="o-name" class="in-input" type="text" autocomplete="name" maxlength="80" required data-order="contactName" />
+          </div>
+          <div class="in-field">
+            <label for="o-phone">{c.order.phone}</label>
+            <input id="o-phone" class="in-input" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20" required pattern="[0-9+\-\s]{9,}" data-order="phone" />
+          </div>
+          <div class="in-field">
+            <label for="o-email">{c.order.email}</label>
+            <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" aria-describedby="o-email-help" />
+            <p class="in-help" id="o-email-help">{c.order.emailHelp}</p>
+          </div>
+          <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
+          <p class="in-err" role="alert" data-order-err hidden></p>
+          <button class="btn btn-buzzer in-order__cta" type="submit" data-order-cta data-label={`${c.order.cta} · ${price}`} data-sending={c.order.sending}>
+            {c.order.cta} · {price}
+          </button>
+          <p class="in-help">{c.order.payNote}</p>
+        </form>
       </div>
-      <h3 class="in-sub">{c.stage5.testTitle}</h3>
-      <fieldset class="in-checks">
-        {c.stage5.test.map((t) => <label class="in-check"><input type="checkbox" /><span>{t}</span></label>)}
-      </fieldset>
-      <p class="in-help">{c.stage5.editNote}</p>
-      <details class="in-dev">
-        <summary>{c.stage5.devTitle}</summary>
-        <h4>{c.stage5.devJson}</h4>
-        <pre data-dev-json dir="ltr"></pre>
-        <button class="btn btn-white" type="button" data-copy="json">{c.stage5.devCopy}</button>
-        <h4>{c.stage5.devText}</h4>
-        <pre data-dev-text></pre>
-        <button class="btn btn-white" type="button" data-copy="text">{c.stage5.devCopy}</button>
-      </details>
-      <div class="in-nav"><button class="btn btn-ghost" type="button" data-restart>{c.restart}</button></div>
+      <div class="in-nav"><button class="btn btn-ghost" type="button" data-go="4">{c.back}</button></div>
+    </section>
+
+    <!-- 6: shown only while PAYMENT_URL is empty -->
+    <section class="in-step" data-step="6" aria-labelledby="h6" hidden>
+      <h2 class="display h-card" id="h6" tabindex="-1">{c.pay.title}</h2>
+      <p class="in-proto-note">{c.pay.note}</p>
+      <div class="in-nav"><a class="btn btn-buzzer" href="/start/thanks/">{c.pay.cta}</a></div>
     </section>
   </div>
+
+  <!-- Registers the "order" form and its fields with Netlify Forms at deploy. The script posts the real values. -->
+  <form name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+    <input name="bot-field" />
+    <input name="order-id" /><input name="name" /><input name="phone" /><input name="email" />
+    <input name="event" /><input name="about" /><input name="game-title" /><input name="host" />
+    <input name="event-date" /><input name="guests" /><input name="screen" /><input name="price" />
+    <textarea name="brief"></textarea><textarea name="brief-json"></textarea>
+    {[1, 2, 3, 4, 5].map((i) => <input type="file" name={`photo-${i}`} />)}
+  </form>
 
   <script id="intake-data" type="application/json" set:html={JSON.stringify(data)} />
   <script>
@@ -392,6 +389,91 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     padding: 0 20px 0 0;
     display: grid;
     gap: 8px;
+  }
+  .in-price {
+    display: grid;
+    gap: 4px;
+    justify-items: start;
+    background: var(--in-card);
+    border: 1px solid var(--in-line);
+    border-radius: var(--radius-m);
+    padding: 16px 18px;
+  }
+  .in-price__num {
+    margin: 0;
+    font-size: clamp(2.6rem, 9vw, 3.6rem);
+    line-height: 1;
+    color: var(--game-yellow);
+  }
+  .in-price__label {
+    margin: 0;
+    font-weight: 700;
+  }
+  .in-how {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: how;
+    display: grid;
+    gap: 12px;
+  }
+  .in-how li {
+    counter-increment: how;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 12px;
+    align-items: start;
+  }
+  .in-how li::before {
+    content: counter(how);
+    grid-row: 1 / span 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--game-yellow);
+    color: #0a1a6b;
+    font-weight: 700;
+  }
+  .in-how strong,
+  .in-how span {
+    grid-column: 2;
+  }
+  .in-how--plain li {
+    align-items: center;
+  }
+  .in-includes {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 4px;
+  }
+  .in-includes li::before {
+    content: "✓ ";
+    color: var(--game-yellow);
+    font-weight: 700;
+  }
+  .in-order,
+  .in-order__col {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+  .in-order__edit {
+    justify-self: start;
+  }
+  .in-order__cta {
+    width: 100%;
+  }
+  .in-order__cta[aria-busy="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .in-hostpick {
+    display: grid;
+    gap: 10px;
   }
   .in-proto-note {
     font-size: var(--fs-small);
@@ -1175,8 +1257,17 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       margin-inline: auto;
       padding-block: 24px;
     }
-    .in-step[data-step="0"] .in-bullets {
+    .in-step[data-step="0"] .in-bullets,
+    .in-step[data-step="0"] .in-how {
       text-align: start;
+    }
+    .in-step[data-step="0"] .in-price {
+      justify-items: center;
+      padding-inline: 40px;
+    }
+    .in-step[data-step="0"] .in-how {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
     }
     /* step 2: fields on one side, the live sample on the other */
     .in-step[data-step="2"] {
@@ -1219,12 +1310,16 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-step[data-step="4"] > h2,
     .in-step[data-step="4"] > .lead,
+    .in-step[data-step="4"] > .in-hostpick,
     .in-step[data-step="4"] > .in-nav {
       grid-column: 1 / -1;
     }
-    /* steps 6 and 7: readable column in the middle */
-    .in-step[data-step="6"],
-    .in-step[data-step="7"] {
+    /* step 5: what you filled on one side, price and contact on the other */
+    .in-order {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 48px;
+    }
+    .in-step[data-step="6"] {
       max-width: 900px;
       width: 100%;
       margin-inline: auto;

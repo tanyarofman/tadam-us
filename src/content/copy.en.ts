@@ -26,7 +26,7 @@ export const COPY = {
   },
 
   hero: {
-    headline: "The moment everyone will remember from your event.",
+    headline: "The moment everyone will remember.",
     /** The headline word that gets the magenta swoosh, and the word count before the line break (wide screens, 0 = none). */
     highlight: "remember",
     breakAfter: 0,

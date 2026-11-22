@@ -51,6 +51,9 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <p class="lead">{c.start.lead}</p>
       <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
       <p class="in-hero__price"><strong>{price}</strong> {c.start.priceNote}</p>
+      <figure class="in-tv" aria-hidden="true">
+        <video src="/demo/hero-screen.mp4" poster="/demo/hero-screen-poster.jpg" width="960" height="540" muted playsinline autoplay loop disablepictureinpicture></video>
+      </figure>
     </section>
 
     <!-- 1: event -->
@@ -861,6 +864,49 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-one__note {
     text-align: center;
   }
+  /* every screen slides in a little, so a long flow feels like it is moving */
+  .in-step:not([hidden]) > * {
+    animation: in-rise 0.4s var(--ease-out) both;
+  }
+  .in-step:not([hidden]) > *:nth-child(2) { animation-delay: 0.04s; }
+  .in-step:not([hidden]) > *:nth-child(3) { animation-delay: 0.08s; }
+  .in-step:not([hidden]) > *:nth-child(n + 4) { animation-delay: 0.12s; }
+  @keyframes in-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  /* the order card comes out like a printed ticket */
+  .in-step:not([hidden]) > .in-ticket {
+    transform-origin: top;
+    animation: in-print 0.7s var(--ease-out) both;
+  }
+  @keyframes in-print {
+    from {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+      transform: translateY(-16px);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  .in-tv {
+    margin: 12px 0 0;
+    width: 100%;
+    max-width: 520px;
+    border: 8px solid #0b1030;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    transform: rotate(-1.5deg);
+  }
+  .in-tv video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   /* 0: hero, as clean as the home page */
   .in-hero {
     min-height: calc(100svh - 220px);
@@ -1456,6 +1502,20 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-pair {
       grid-template-columns: 1fr 1fr;
     }
+    .in-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 56px;
+    }
+    .in-hero > * {
+      grid-column: 1;
+    }
+    .in-hero > .in-tv {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: center;
+      justify-self: end;
+      margin: 0;
+    }
     .in-who {
       max-width: 760px;
       width: 100%;
@@ -1486,7 +1546,8 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-progress i,
     .in-meter__bar i,
     .in-tile,
-    .in-tile__icon {
+    .in-tile__icon,
+    .in-step:not([hidden]) > * {
       transition: none;
       animation: none;
     }

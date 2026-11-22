@@ -314,7 +314,10 @@ function init(root: HTMLElement, data: Data) {
     promptsEl.hidden = hub;
     $<HTMLElement>("[data-more]")!.hidden = !hub;
     $("[data-story-count]")!.textContent = hub ? "" : fill(c.more.count, { i: state.sub + 1, n: all.length });
-    $("[data-story-title]")!.textContent = hub ? c.more.title : fill(cur.label, { name: subjectName() });
+    const enough = answeredPrompts().length >= data.material.minPrompts;
+    $("[data-story-title]")!.textContent = hub
+      ? fill(enough ? c.more.title : c.more.titleFew, { n: questionsReady(), name: subjectName() })
+      : fill(cur.label, { name: subjectName() });
     $("[data-story-lead]")!.textContent = hub ? c.more.lead : fill(cur.hint, { name: subjectName() });
     promptsEl.innerHTML = "";
     for (const p of hub ? [] : [cur]) {
@@ -435,6 +438,7 @@ function init(root: HTMLElement, data: Data) {
     const hub = onHub();
     barNext.setAttribute("aria-disabled", String(hub && need > 0));
     barNext.textContent = hub || isDone(shape().prompts[state.sub].id) ? c.next : c.more.skip;
+    if (hub) $("[data-story-title]")!.textContent = fill(need > 0 ? c.more.titleFew : c.more.title, { n: ready, name: subjectName() });
     const needEl = $<HTMLElement>("[data-more-need]")!;
     needEl.hidden = !(hub && need > 0);
     needEl.textContent = fill(c.stories.needMore, { n: need });

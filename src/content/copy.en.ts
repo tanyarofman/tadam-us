@@ -252,8 +252,8 @@ export const COPY = {
       },
       {
         q: "Can we see an example before we start?",
-        a: "Of course. Eyal's game gives you a peek at the host, the questions and the guests' experience (the game is in Hebrew). Open it on a computer and join from your phone with the code on the screen.",
-        demoLinkText: "Eyal's game",
+        a: "Of course. Tom's game gives you a peek at the host, the questions and the guests' experience. Open it on a computer and join from your phone with the code on the screen.",
+        demoLinkText: "Tom's game",
       },
       {
         q: "How long does the game take at the event?",

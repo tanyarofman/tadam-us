@@ -1,6 +1,8 @@
 export const SITE = {
-  /** Public Eyal game demo. */
+  /** Public Eyal game demo (Hebrew): the playable demo on the Hebrew page. */
   eyalDemoUrl: "https://heytadam.com/eyal-demo",
+  /** Public Tom birthday game demo (English): the playable demo on the English page (`/en/`). */
+  tomDemoUrl: "https://heytadam.com/tom-demo",
   /** The heytadam Facebook business page. */
   facebookUrl: "https://www.facebook.com/heytadam",
   /** Messenger chat with the page: every "דברו איתנו" button goes here. */
@@ -12,6 +14,9 @@ export const SITE = {
    */
   email: "hey@heytadam.com",
 };
+
+/** The playable demo game in the page's language. */
+export const demoUrl = (locale: "he" | "en") => (locale === "en" ? SITE.tomDemoUrl : SITE.eyalDemoUrl);
 
 /**
  * Link for the contact buttons: a Messenger chat with the heytadam page.

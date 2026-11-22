@@ -1,16 +1,16 @@
 ---
 import { useCopy } from "../../content/copy";
-import { contactLink, SITE } from "../../config/site";
+import { contactLink, demoUrl } from "../../config/site";
 import SplitHeading from "../SplitHeading.astro";
 import Buzzer from "../Buzzer.astro";
-const { copy: COPY } = useCopy(Astro.url);
+const { copy: COPY, locale } = useCopy(Astro.url);
 const c = COPY.scene7;
 ---
 
 <section class="scene s7" id="scene-7" data-scene="7" aria-labelledby="s7-title">
   <div class="s7-pin" data-scroll-pause>
   <div class="s7-inner container">
-    <a class="big-buzzer" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta-buzzer" aria-label={c.buzzerLabel}>
+    <a class="big-buzzer" href={demoUrl(locale)} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta-buzzer" aria-label={c.buzzerLabel}>
       <Buzzer id="cta-buzzer" rays />
     </a>
     <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight={c.highlight} />
@@ -19,7 +19,7 @@ const c = COPY.scene7;
       <span class="btn-dot" aria-hidden="true"></span>
       {c.contact}
     </a>
-    <a class="btn btn-white s7-demo" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta">
+    <a class="btn btn-white s7-demo" href={demoUrl(locale)} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta">
       {c.cta}
     </a>
     </div>

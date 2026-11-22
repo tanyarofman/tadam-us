@@ -20,6 +20,9 @@
 ## What was found (2026-11-16)
 Summary and the 29-article plan: `keyword-research-2026-11.md`. Data: `keywords-il.csv` (about 1,600 keywords by cluster), `data/serp-2026-11-16.csv` (22 SERPs), `data/questions-2026-11-16.csv` (autocomplete questions).
 
+## Second round (2026-11-22)
+Topics outside the first plan: `keyword-research-2026-11-22.md`. Data: `data/seeds-new-topics-il.txt`, `data/volume-2026-11-22.csv`, `data/suggestions-2026-11-22.csv`, `data/serp-2026-11-22.csv`, `data/questions-2026-11-22.csv`. Spent about $1. The `questions` command now treats "No Search Results" (status 40102) from autocomplete as an empty answer instead of stopping.
+
 ## Draft previews on Netlify (no CLI in the cloud session)
 Pull requests get an automatic deploy preview (`deploy-preview-<number>--heytadam.netlify.app`). For a preview without a PR: build, zip `dist/`, and POST it as a draft deploy to the Netlify API (the Netlify token is a network secret for `api.netlify.com` in the cloud environment):
 ```bash

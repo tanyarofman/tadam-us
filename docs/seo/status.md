@@ -1,6 +1,6 @@
 # Blog status and to-dos
 
-Last updated: 2026-11-17. The blog ([tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30)) was merged on 2026-11-16 and is live on https://heytadam.com/blog/. New articles go on a branch with their own pull request; merge only when Tanya asks.
+Last updated: 2026-11-22. The blog ([tanyarofman/tadam#30](https://github.com/tanyarofman/tadam/pull/30)) was merged on 2026-11-16 and is live on https://heytadam.com/blog/. New articles go on a branch with their own pull request; merge only when Tanya asks.
 
 ## Published (live on heytadam.com)
 | Article | Target keyword | Status |
@@ -10,11 +10,22 @@ Last updated: 2026-11-17. The blog ([tanyarofman/tadam#30](https://github.com/ta
 | `bar-mitzvah-attractions` | אטרקציות לבר מצווה | Written, playbook applied, labeled example scenario until a real story arrives |
 | `team-building-day-ideas` | יום גיבוש לעובדים | Written, playbook applied, labeled example scenario until a real story arrives |
 
+## Written, waiting for review and merge (branch `claude/serene-johnson-ugkl57`, 2026-11-22)
+Topics from the second research round ([`keyword-research-2026-11-22.md`](./keyword-research-2026-11-22.md)), approved by Tanya on 2026-11-22.
+| Article | Target keyword | Status |
+|---|---|---|
+| `pass-the-parcel-tasks` | משימות לחבילה עוברת | Written, playbook applied, labeled example scenario |
+| `icebreaker-questions` | שאלות היכרות | Written, playbook applied, labeled example scenario |
+| `bachelorette-party-games` | משחקים למסיבת רווקות | Written, playbook applied, labeled example scenario |
+| `tu-bishvat-quiz` | חידון טו בשבט | Written, playbook applied, labeled example scenario. Tu BiShvat is 23 Jan 2027, so it should be live in December |
+
 ## Waiting for Tanya: real stories (never invent them)
 Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
 1. **Family / Hanukkah:** a family event where Tadam was played. Who won, which question got the biggest laugh.
 2. **Bar/bat mitzvah:** a real moment (for example the grandmother beat the classmates), plus a quote from a parent or guest.
 3. **Company / team:** team size and which team question worked best, plus a quote from a manager or employee.
+
+4. **Second round (2026-11-22):** a birthday or party with pass the parcel, a team or class opening with getting-to-know-you questions, a bachelorette party, a Tu BiShvat family evening.
 
 ## Decisions for Tanya
 - **Custom domain: done (2026-11-17).** The site is on https://heytadam.com (`site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` updated). Google Search Console: heytadam.com verified as a Domain property on 2026-11-17 (TXT `google-site-verification=…` in Netlify DNS; never delete it, or verification is lost). Sitemap `https://heytadam.com/sitemap-index.xml` submitted and the home page sent for indexing the same day (a Domain property needs the full sitemap URL, not just the file name).
@@ -26,10 +37,12 @@ Each article now has one clearly labeled example scenario ("תרחיש לדוג�
 ## Next articles (order from `keyword-research-2026-11.md`)
 Next up: 3 אטרקציות לבת מצווה, 4 רעיונות למסיבת בת מצווה, 6 הפעלה לבר ובת מצווה, 20 ערב צוות, 21 משחקי גיבוש, 10 איך מכינים משחק טריוויה לאירוע.
 Seasonal deadlines (publish 3 to 4 weeks before):
+- Family Day (יום המשפחה, 7 Feb 2027): a "family quiz for Family Day" article, publish in January (see the second research round)
 - Purim quiz (חידון פורים, 720/month): publish by early February
 - Passover quiz and office Passover toast (חידון פסח 720, הרמת כוסית לפסח 110): publish by early March
 - School year-end party (מסיבת סיום כיתה ו): publish in April
 - Rosh Hashanah toast (הרמת כוסית לראש השנה): publish in August
+- Hanukkah games (משחקים לחנוכה, about 2,700/month in season): publish in October 2027
 
 ## After publishing on the real domain
 - Done 2026-11-17: sitemap submitted in Google Search Console. After each new article is live, request indexing for its URL in URL inspection.

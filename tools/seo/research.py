@@ -43,6 +43,9 @@ def post(endpoint: str, task: dict) -> dict:
         data = json.load(r)
     t = data["tasks"][0]
     print(f"{endpoint}: {t['status_code']} {t['status_message']} cost ${t.get('cost')}", file=sys.stderr)
+    if t["status_code"] == 40102:  # "No Search Results": a valid empty answer (common for autocomplete seeds)
+        t["result"] = None
+        return t
     if t["status_code"] != 20000:
         raise SystemExit(1)
     return t

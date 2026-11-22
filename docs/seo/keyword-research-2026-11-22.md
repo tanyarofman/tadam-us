@@ -35,3 +35,30 @@ How Tadam fits each one: pass-the-parcel questions and bachelorette games are "h
 | שבת חתן 1,300, חינה 3,600 | | Searches are about hotels, dates and customs. משחקים לשבת חתן is only 70. |
 | קהוט בעברית 1,000, מנטימטר 4,400 | | People looking for those tools. Covered by planned article 11 (Kahoot comparison). |
 | שאלות לזוגות about 600 | | Covered by planned article 13. |
+
+## Third round: end-of-year topics (2026-11-22, about $0.45)
+
+Tanya asked for 4 more articles around the end of the year. Data: `data/seeds-year-end-il.txt`, `data/volume-year-end-2026-11-22.csv`, `data/suggestions-year-end-2026-11-22.csv`, `data/serp-year-end-2026-11-22.csv`, and month-by-month volumes in `data/monthly-year-end-2026-11-22.csv`.
+
+What the data says:
+- **In Hebrew, year-end search demand is Hanukkah.** The yearly averages hide it: almost all of it lands in late November and December.
+- **New Year's Eve and Novy God are big words with little game demand.** נובי גוד reaches 27,100 in December and מסיבת סילבסטר 6,600, but people look for what it is, when it is, and parties to go to. משחקים לסילבסטר is 10.
+- **Company year-end searches are tiny** (סיכום שנה 110, מסיבת סוף שנה 70, קיקאוף 110). אירוע חנוכה reaches 1,600 in December, but page 1 is public family events, not office events.
+- **גמד ענק peaks in February (1,900, around Purim), not December.** Write it with the Purim quiz.
+
+| Keyword | Yearly average | December 2025 | November 2025 | Who ranks |
+|---|---|---|---|---|
+| חידון חנוכה (already written) | 1,300 | 12,100 | 1,300 | |
+| חידות לחנוכה | 880 | 9,900 | 1,000 | wordwall, stips. Results are quizzes, not riddles |
+| פעילות לחנוכה | 880 | 8,100 | 1,600 | outing guides (ligdol, mako, kipa) |
+| משחקים לחנוכה | 720 | 6,600 | 1,000 | Pinterest pages about Christmas games |
+| בינגו חנוכה | 480 | 4,400 | 880 | wordwall |
+| מסיבת חנוכה | 480 | 3,600 | 1,600 | |
+| שאלות לחנוכה | 260 | 2,900 | 260 | covered by the Hanukkah quiz |
+| משחקים לחנוכה להדפסה | 260 | 2,400 | 590 | |
+| חידון ידע כללי (planned article 12) | 880 | 1,300 | 1,300 | zolo, yo-yoo, baba-mail. Steady all year, CPC $14.80 |
+| חפש את המטמון | 590 | 590 | 720 | stips forum threads. Steady all year |
+
+Candidates put to Tanya: חידות לחנוכה, משחקים לחנוכה (with bingo and party ideas), an at-home New Year's Eve and Novy God evening (games plus year-in-review questions; demand not proven), and 100 general-knowledge trivia questions (planned article 12). Spare: חפש את המטמון.
+
+Timing: Hanukkah starts on 4 December 2026. Hanukkah articles need to be live within days and sent for indexing in Search Console to catch part of this year's peak; either way they stay in place for 2027.

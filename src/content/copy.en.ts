@@ -65,7 +65,7 @@ export const COPY = {
   },
 
   scene1: {
-    headline: "Every event has that moment when everyone is waiting for something.",
+    headline: "Every event has a moment when everyone is waiting for something.",
     highlight: "waiting",
     photoAlt: "Guests at a family event sit around tables, eating and looking at their phones before the game starts",
     hallLabel: "Illustration: an event hall with tables, a DJ booth and colorful lights. In the corner, bored guests on their phones.",
@@ -73,7 +73,7 @@ export const COPY = {
 
   scene3: {
     burst: "Tadam!",
-    headline: "Then the lights go down, the screen comes to life, and the host takes the stage.",
+    headline: "Then the lights dim, the screen wakes up, and the host takes the stage.",
     demo: {
       label: "A demo of a real game (in Hebrew): the big screen and the phone",
       play: "Play",
@@ -90,11 +90,11 @@ export const COPY = {
     headline: "Here's how it works.",
     steps: [
       {
-        title: "You talk to us.",
+        title: "Talk to us.",
         text: "Tell us about the event and the guests of honor.",
       },
       {
-        title: "You pick a host and a vibe.",
+        title: "Pick a host and a vibe.",
         text: "Tailor the game to your event.",
       },
       {
@@ -128,7 +128,7 @@ export const COPY = {
       { name: "Roni from work", score: 2150 },
       { name: "Dad", score: 1980 },
     ],
-    headline: "And in the end, everyone finds out who the real champions are",
+    headline: "In the end, everyone finds out who the real champions are",
   },
 
   scene7: {

@@ -1,83 +1,276 @@
 ---
 /**
  * Where Morning sends the customer after a successful payment (PAID_URL in src/config/pricing.ts).
- * Shows the order number saved by /start in this browser, and clears the draft so a new order starts clean.
+ * Shows the order number saved by /start in this browser, clears the draft so a new order starts clean,
+ * and offers blog articles about other kinds of events (never the event that was just ordered).
  */
+import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { INTAKE as c } from "../../content/intake.he";
 import { contactLink } from "../../config/site";
 const t = c.thanks;
+
+/** Article slug → the /start event ids it is about (an article is hidden when the order was for one of them). */
+const IDEAS: Record<string, string[]> = {
+  "bar-mitzvah-attractions": ["bar-bat"],
+  "bachelorette-party-games": ["bachelor"],
+  "team-building-day-ideas": ["teambuilding"],
+  "office-holiday-toast": ["toast"],
+  "pass-the-parcel-tasks": ["birthday", "round-birthday"],
+  "icebreaker-questions": [],
+  "new-years-eve-at-home": [],
+};
+const posts = await getCollection("blog", (p) => !p.data.draft);
+const ideas = Object.entries(IDEAS).flatMap(([slug, events]) => {
+  const post = posts.find((p) => p.id === slug);
+  return post ? [{ slug, events: events.join(" "), title: post.data.seoTitle ?? post.data.title, category: post.data.category }] : [];
+});
+const confetti = Array.from({ length: 18 }, (_, i) => i);
 ---
 
 <Base title={t.metaTitle} description={t.lead} noindex>
+  <div class="confetti" aria-hidden="true">
+    {confetti.map((i) => <i style={`--x:${(i * 53) % 100}%;--d:${(i % 6) * 0.35}s;--h:${[52, 320, 190, 0][i % 4]};--r:${(i % 5) * 40}deg`} />)}
+  </div>
   <main class="thanks">
     <a href="/" class="thanks__logo" aria-label="טדאם!, לדף הבית">
       <img src="/brand/tadam-logo-nobuzzer.webp" alt="טדאם!" width="1438" height="622" />
     </a>
+    <span class="thanks__check" aria-hidden="true">✓</span>
     <h1 class="display h-scene">{t.title}</h1>
     <p class="lead">{t.lead}</p>
     <p class="thanks__order" data-order-box hidden>{t.orderNo}: <strong dir="ltr" data-order-id></strong></p>
-    <h2 class="thanks__sub">{t.nextTitle}</h2>
+
     <ol class="thanks__next">
-      {t.next.map((x) => <li>{x}</li>)}
+      {t.next.map((x) => <li><strong>{x.t}</strong><span>{x.d}</span></li>)}
     </ol>
+
+    <section class="thanks__ideas" aria-labelledby="ideas-title">
+      <h2 id="ideas-title" class="display">{t.ideasTitle}</h2>
+      <ul>
+        {
+          ideas.map((p) => (
+            <li data-idea data-events={p.events}>
+              <a href={`/blog/${p.slug}/`}>
+                <span class="thanks__cat">{p.category}</span>
+                <strong>{p.title}</strong>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="thanks__all" href="/blog/">{t.ideasAll}</a>
+    </section>
+
     <div class="thanks__nav">
       <a class="btn btn-buzzer" href="/">{t.home}</a>
-      <a class="btn btn-ghost" href={contactLink("order-thanks")} target="_blank" rel="noopener">{t.contact}</a>
+      <a class="thanks__all" href={contactLink("order-thanks")} target="_blank" rel="noopener">{t.contact}</a>
     </div>
   </main>
   <script>
     import { track } from "../../lib/analytics";
-    let id = "";
+    let order: { id?: string; event?: string } = {};
     try {
-      id = JSON.parse(localStorage.getItem("tadam-order") || "{}").id || "";
-      if (id) localStorage.removeItem("tadam-intake-v1");
+      order = JSON.parse(localStorage.getItem("tadam-order") || "{}");
+      if (order.id) localStorage.removeItem("tadam-intake-v1");
     } catch {
       /* blocked storage: the page still confirms the payment */
     }
     const box = document.querySelector<HTMLElement>("[data-order-box]");
     const el = document.querySelector<HTMLElement>("[data-order-id]");
-    if (id && box && el) {
-      el.textContent = id;
+    if (order.id && box && el) {
+      el.textContent = order.id;
       box.hidden = false;
     }
-    track("order_paid", { order: id });
+    // three articles, never one about the event that was just ordered
+    let shown = 0;
+    document.querySelectorAll<HTMLElement>("[data-idea]").forEach((li) => {
+      const same = !!order.event && (li.dataset.events || "").split(" ").includes(order.event);
+      li.hidden = same || shown >= 3;
+      if (!li.hidden) shown += 1;
+    });
+    track("order_paid", { order: order.id || "" });
   </script>
 </Base>
 
 <style>
+  [hidden] {
+    display: none !important;
+  }
   .thanks {
-    max-width: 720px;
+    position: relative;
+    max-width: 920px;
     margin-inline: auto;
-    padding: 24px var(--gutter) 96px;
+    padding: 28px var(--gutter) 96px;
     display: grid;
     gap: 18px;
-    justify-items: start;
+    justify-items: center;
+    text-align: center;
   }
   .thanks__logo img {
     width: 132px;
     height: auto;
   }
+  .thanks__check {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-top: 12px;
+    animation: pop 0.6s var(--ease-out) both;
+  }
+  @keyframes pop {
+    from {
+      transform: scale(0.3) rotate(-30deg);
+      opacity: 0;
+    }
+  }
+  .thanks h1,
+  .thanks .lead {
+    margin: 0;
+  }
   .thanks__order {
     margin: 0;
     background: rgba(0, 22, 112, 0.72);
-    border-radius: var(--radius-m);
-    padding: 12px 16px;
-  }
-  .thanks__sub {
-    margin: 8px 0 0;
-    font-size: 1.3rem;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    padding: 8px 20px;
   }
   .thanks__next {
+    list-style: none;
+    counter-reset: n;
+    margin: 14px 0 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    gap: 12px;
+  }
+  .thanks__next li {
+    counter-increment: n;
+    display: grid;
+    gap: 4px;
+    justify-items: center;
+    padding: 18px 14px;
+    border-radius: var(--radius-m);
+    background: rgba(0, 22, 112, 0.72);
+  }
+  .thanks__next li::before {
+    content: counter(n);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    font-weight: 700;
+  }
+  .thanks__next strong {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+  .thanks__next span {
+    color: var(--text-muted);
+  }
+  .thanks__ideas {
+    width: 100%;
+    margin-top: 28px;
+    display: grid;
+    gap: 14px;
+    justify-items: center;
+  }
+  .thanks__ideas h2 {
     margin: 0;
-    padding-inline-start: 22px;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: var(--game-yellow);
+  }
+  .thanks__ideas ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    gap: 12px;
+  }
+  .thanks__ideas li a {
+    height: 100%;
     display: grid;
     gap: 8px;
+    align-content: start;
+    text-align: start;
+    padding: 16px;
+    border-radius: var(--radius-m);
+    background: #fff;
+    color: var(--stage-navy);
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-out);
+  }
+  .thanks__ideas li a:hover {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+  .thanks__cat {
+    justify-self: start;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    background: var(--game-yellow);
+    border-radius: 999px;
+    padding: 1px 10px 3px;
+  }
+  .thanks__all {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--game-yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
   .thanks__nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 8px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .confetti {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .confetti i {
+    position: absolute;
+    top: -20px;
+    left: var(--x);
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    background: hsl(var(--h) 100% 60%);
+    animation: fall 3.2s var(--d) ease-in both;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(calc(var(--r) + 540deg));
+      opacity: 0.2;
+    }
+  }
+  @media (min-width: 760px) {
+    .thanks__next,
+    .thanks__ideas ul {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .confetti {
+      display: none;
+    }
+    .thanks__check {
+      animation: none;
+    }
   }
 </style>

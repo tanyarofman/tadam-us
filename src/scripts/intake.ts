@@ -157,6 +157,7 @@ function init(root: HTMLElement, data: Data) {
     if (step === 6 && !state.orderId) step = 5;
     state.step = step;
     $$<HTMLElement>("[data-step]").forEach((s) => (s.hidden = Number(s.dataset.step) !== step));
+    renderBar(step);
     renderStep(step);
     renderProgress(step);
     if (push) history.pushState({ step }, "", `#s${step}`);
@@ -166,6 +167,20 @@ function init(root: HTMLElement, data: Data) {
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
     track("intake_step", { step, event: state.eventId });
   }
+
+  // The bottom bar is one element for every step, so "back" and the main button never move.
+  const bar = $<HTMLElement>("[data-bar]")!;
+  const barNext = $<HTMLButtonElement>("[data-bar-next]")!;
+  const orderLabel = `${c.order.cta} · ${data.price}`;
+  function renderBar(step: number) {
+    bar.hidden = step === 0 || step === 6;
+    $<HTMLElement>("[data-bar-meter]")!.hidden = step !== 3;
+    barNext.dataset.next = String(step);
+    barNext.setAttribute("aria-disabled", "false");
+    barNext.hidden = step === 1 && !state.eventId;
+    barNext.textContent = step === 4 ? c.details.cta : step === 5 ? orderLabel : c.next;
+  }
+  $<HTMLElement>("[data-bar-back]")!.addEventListener("click", () => show(state.step - 1));
 
   function renderProgress(step: number) {
     const nav = $("[data-progress]");
@@ -217,7 +232,6 @@ function init(root: HTMLElement, data: Data) {
     nameIn.value = state.name;
     extraIn.value = state.extra;
     syncTitle();
-    renderSample();
   }
   /** The default title is only a placeholder (grey, behind the field). The field holds text only if the creator typed one. */
   function defaultTitle() {
@@ -227,21 +241,20 @@ function init(root: HTMLElement, data: Data) {
     titleIn.placeholder = defaultTitle();
     titleIn.value = state.titleEdited ? state.title : "";
     if (!state.titleEdited) state.title = defaultTitle();
+    $("[data-title-preview]")!.textContent = state.title;
   }
-  function renderSample() {
-    const sc = shape();
-    const name = state.name.trim() || "...";
-    const q = $("[data-sample-q]");
-    const a = $("[data-sample-a]");
-    if (q) q.textContent = fill(sc.sampleQuestion, { name });
-    if (a) a.innerHTML = sc.sampleAnswers.map((t, i) => `<li data-correct="${i === sc.sampleCorrect}">${esc(t)}</li>`).join("");
-  }
+  const titleBox = $<HTMLElement>("[data-title-box]")!;
+  const titleEdit = $<HTMLButtonElement>("[data-title-edit]")!;
+  titleEdit.addEventListener("click", () => {
+    titleBox.hidden = !titleBox.hidden;
+    titleEdit.setAttribute("aria-expanded", String(!titleBox.hidden));
+    if (!titleBox.hidden) titleIn.focus();
+  });
   nameIn.addEventListener("input", () => {
     state.name = nameIn.value;
     syncTitle();
     nameIn.removeAttribute("aria-invalid");
     $("#f-name-err")!.hidden = true;
-    renderSample();
     save();
   });
   extraIn.addEventListener("input", () => {
@@ -251,6 +264,7 @@ function init(root: HTMLElement, data: Data) {
   titleIn.addEventListener("input", () => {
     state.titleEdited = titleIn.value.trim() !== "";
     state.title = state.titleEdited ? titleIn.value : defaultTitle(); // emptied field falls back to the default
+    $("[data-title-preview]")!.textContent = state.title;
     save();
   });
 
@@ -753,7 +767,7 @@ function init(root: HTMLElement, data: Data) {
   // ---------- 5: summary, contact, order ----------
   const orderForm = $<HTMLFormElement>("[data-order-form]")!;
   const orderErr = $<HTMLElement>("[data-order-err]")!;
-  const orderCta = $<HTMLButtonElement>("[data-order-cta]")!;
+  const orderCta = barNext;
   const consentIn = $<HTMLInputElement>("[data-order-consent]")!;
   const orderInputs = () => $$<HTMLInputElement>("[data-order]");
   const missingPhotos = () => state.photos.filter((_, i) => !photoFiles.has(i)).length;
@@ -859,7 +873,7 @@ function init(root: HTMLElement, data: Data) {
     sending = true;
     orderErr.hidden = true;
     orderCta.setAttribute("aria-busy", "true");
-    orderCta.textContent = orderCta.dataset.sending!;
+    orderCta.textContent = c.order.sending;
     // one id per draft, so pressing again after a failed payment does not look like a second order
     state.orderId ||= "TD-" + Date.now().toString(36).toUpperCase().slice(-6);
     save();
@@ -893,7 +907,7 @@ function init(root: HTMLElement, data: Data) {
       const res = await fetch("/", { method: "POST", body: fd });
       if (!res.ok) throw new Error(String(res.status));
       try {
-        localStorage.setItem(ORDER_KEY, JSON.stringify({ id: state.orderId, at: Date.now() }));
+        localStorage.setItem(ORDER_KEY, JSON.stringify({ id: state.orderId, event: state.eventId, at: Date.now() }));
       } catch {
         /* ignore */
       }
@@ -908,7 +922,7 @@ function init(root: HTMLElement, data: Data) {
     } finally {
       sending = false;
       orderCta.removeAttribute("aria-busy");
-      orderCta.textContent = orderCta.dataset.label!;
+      if (state.step === 5) orderCta.textContent = orderLabel;
     }
   });
 
@@ -925,7 +939,12 @@ function init(root: HTMLElement, data: Data) {
         openPrompt = "";
       }
       renderEvents();
-      window.setTimeout(() => show(2), 160);
+      const tiles = ev.parentElement!;
+      tiles.dataset.picked = "";
+      window.setTimeout(() => {
+        delete tiles.dataset.picked;
+        show(2);
+      }, 380);
       return;
     }
     const go = t.closest<HTMLElement>("[data-go]");
@@ -937,6 +956,10 @@ function init(root: HTMLElement, data: Data) {
     const nx = t.closest<HTMLElement>("[data-next]");
     if (nx) {
       const from = Number(nx.dataset.next);
+      if (from === 5) {
+        orderForm.requestSubmit();
+        return;
+      }
       if (nx.getAttribute("aria-disabled") === "true") {
         if (from === 3) renderMeter();
         return;

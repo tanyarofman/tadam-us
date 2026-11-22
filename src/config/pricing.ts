@@ -14,10 +14,10 @@ export const CREATE_URL = "https://tadam.base44.app/create";
 
 /**
  * Payment page (Morning / Green Invoice) the order flow at /start sends the customer to after the order is saved.
- * Empty until Tanya brings the link: the flow then shows a "not connected yet" screen instead.
+ * If it is ever empty, the flow shows a "not connected yet" screen instead.
  * In Morning, set the "redirect after successful payment" URL to PAID_URL.
  */
-export const PAYMENT_URL = "";
+export const PAYMENT_URL = "https://pages.greeninvoice.co.il/payments/links/51208535-604c-4cca-875e-978929f0316f";
 export const PAID_URL = "https://heytadam.com/start/thanks/";
 
 export const PRICING = {

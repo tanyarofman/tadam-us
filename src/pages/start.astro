@@ -38,7 +38,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <a href="/" class="in-logo" aria-label="טדאם!, לדף הבית">
         <img src="/brand/tadam-logo-nobuzzer.webp" alt="טדאם!" width="1438" height="622" />
       </a>
-      <span class="in-badge">{c.prototypeBadge}</span>
       <span class="in-save" data-save role="status" aria-live="polite"></span>
     </header>
 
@@ -51,68 +50,47 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     </nav>
 
     <!-- 0: start -->
-    <section class="in-step" data-step="0" aria-labelledby="h0">
-      <span class="eyebrow">{c.start.eyebrow}</span>
+    <section class="in-step in-hero" data-step="0" aria-labelledby="h0">
       <h1 class="display h-scene" id="h0" tabindex="-1">{c.start.title}</h1>
       <p class="lead">{c.start.lead}</p>
-      <div class="in-price">
-        <p class="in-price__num display">{price}</p>
-        <p class="in-price__label">{c.start.priceLabel}</p>
-        <p class="in-help">{c.start.priceNote}</p>
-      </div>
       <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
-      <h2 class="in-sub">{c.start.howTitle}</h2>
-      <ol class="in-how">
-        {c.start.how.map((h) => <li><strong>{h.t}</strong><span>{h.d}</span></li>)}
-      </ol>
-      <ul class="in-bullets">
-        {c.start.bullets.map((b) => <li>{b}</li>)}
-      </ul>
+      <p class="in-hero__price"><strong>{price}</strong> {c.start.priceNote}</p>
     </section>
 
     <!-- 1: event -->
     <section class="in-step" data-step="1" aria-labelledby="h1" hidden>
       <h2 class="display h-card" id="h1" tabindex="-1">{c.event.title}</h2>
-      <p class="lead">{c.event.lead}</p>
       <div class="in-tiles" role="radiogroup" aria-labelledby="h1">
         {
-          EVENTS.map((e) => (
-            <button class="in-tile" type="button" role="radio" aria-checked="false" data-event={e.id}>
+          EVENTS.map((e, i) => (
+            <button class="in-tile" type="button" role="radio" aria-checked="false" data-event={e.id} style={`--i:${i}`}>
               <span class="in-tile__icon" aria-hidden="true">{e.icon}</span>
               <span class="in-tile__label">{e.label}</span>
             </button>
           ))
         }
       </div>
-      <div class="in-nav"><button class="btn btn-ghost" type="button" data-go="0">{c.back}</button></div>
     </section>
 
     <!-- 2: who -->
-    <section class="in-step" data-step="2" aria-labelledby="h2" hidden>
-      <h2 class="display h-card" id="h2" tabindex="-1">{c.who.title}</h2>
+    <section class="in-step in-who" data-step="2" aria-labelledby="h2" hidden>
+      <h2 class="display h-card" id="h2" tabindex="-1"><label for="f-name" data-t="nameLabel"></label></h2>
       <div class="in-field">
-        <label for="f-name" data-t="nameLabel"></label>
-        <input id="f-name" class="in-input" type="text" autocomplete="off" maxlength="48" aria-describedby="f-name-help f-name-err" />
-        <p class="in-help" id="f-name-help" data-t="nameHelp"></p>
+        <input id="f-name" class="in-input in-input--big" type="text" autocomplete="off" maxlength="48" aria-describedby="f-name-err" />
         <p class="in-err" id="f-name-err" role="alert" hidden>{c.who.required}</p>
       </div>
-      <div class="in-field">
+      <figure class="in-screen" aria-live="polite">
+        <figcaption>{c.who.screenNote}</figcaption>
+        <p class="in-screen__title display" data-title-preview></p>
+        <button class="in-screen__edit" type="button" data-title-edit aria-expanded="false" aria-controls="title-box">{c.who.titleEdit}</button>
+        <div class="in-field" id="title-box" data-title-box hidden>
+          <label for="f-title">{c.who.titleLabel}</label>
+          <input id="f-title" class="in-input" type="text" autocomplete="off" maxlength="80" />
+        </div>
+      </figure>
+      <div class="in-field in-who__extra">
         <label for="f-extra" data-t="extraLabel"></label>
         <input id="f-extra" class="in-input" type="text" autocomplete="off" maxlength="48" />
-      </div>
-      <div class="in-field">
-        <label for="f-title">{c.who.titleLabel}</label>
-        <input id="f-title" class="in-input" type="text" autocomplete="off" maxlength="80" aria-describedby="f-title-help" />
-        <p class="in-help" id="f-title-help">{c.who.titleHelp}</p>
-      </div>
-      <figure class="in-sample" aria-live="polite">
-        <figcaption><span class="in-sample__badge">{c.who.sampleBadge}</span> {c.who.sampleNote}</figcaption>
-        <p class="in-sample__q" data-sample-q></p>
-        <ul class="in-sample__a" data-sample-a></ul>
-      </figure>
-      <div class="in-nav">
-        <button class="btn btn-ghost" type="button" data-go="1">{c.back}</button>
-        <button class="btn btn-buzzer" type="button" data-next="2">{c.next}</button>
       </div>
     </section>
 
@@ -183,17 +161,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         <a class="btn btn-white" data-share target="_blank" rel="noopener">{c.stories.shareBtn}</a>
       </div>
 
-      <div class="in-dock">
-        <div class="in-meter" role="status" aria-live="polite">
-          <p class="in-meter__text"><span>{c.stories.meterLabel}</span> <strong data-meter-text></strong></p>
-          <div class="in-meter__bar" aria-hidden="true"><i data-meter-bar></i></div>
-          <p class="in-help" data-meter-help>{c.stories.meterHelp}</p>
-        </div>
-        <div class="in-nav">
-          <button class="btn btn-ghost" type="button" data-go="2">{c.back}</button>
-          <button class="btn btn-buzzer" type="button" data-next="3" aria-disabled="true">{c.next}</button>
-        </div>
-      </div>
     </section>
 
     <!-- 4: details + host -->
@@ -221,10 +188,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         <h3 class="in-sub">{c.stage5.hostTitle}</h3>
         <p class="in-help">{c.stage5.hostHelp}</p>
         <div class="in-hosts" role="radiogroup" aria-label={c.stage5.hostTitle} data-hosts></div>
-      </div>
-      <div class="in-nav">
-        <button class="btn btn-ghost" type="button" data-go="3">{c.back}</button>
-        <button class="btn btn-buzzer" type="button" data-next="4">{c.details.cta}</button>
       </div>
     </section>
 
@@ -267,21 +230,29 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           </div>
           <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
           <p class="in-err" role="alert" data-order-err hidden></p>
-          <button class="btn btn-buzzer in-order__cta" type="submit" data-order-cta data-label={`${c.order.cta} · ${price}`} data-sending={c.order.sending}>
-            {c.order.cta} · {price}
-          </button>
           <p class="in-help">{c.order.payNote}</p>
         </form>
       </div>
-      <div class="in-nav"><button class="btn btn-ghost" type="button" data-go="4">{c.back}</button></div>
     </section>
 
     <!-- 6: shown only while PAYMENT_URL is empty -->
     <section class="in-step" data-step="6" aria-labelledby="h6" hidden>
       <h2 class="display h-card" id="h6" tabindex="-1">{c.pay.title}</h2>
       <p class="in-proto-note">{c.pay.note}</p>
-      <div class="in-nav"><a class="btn btn-buzzer" href="/start/thanks/">{c.pay.cta}</a></div>
+      <a class="btn btn-buzzer" href="/start/thanks/">{c.pay.cta}</a>
     </section>
+
+    <!-- One bottom bar for every step: "back" and the main button always sit in the same place. -->
+    <footer class="in-bar" data-bar hidden>
+      <div class="in-meter" role="status" aria-live="polite" data-bar-meter hidden>
+        <p class="in-meter__text"><span>{c.stories.meterLabel}</span> <strong data-meter-text></strong> <span class="in-meter__help" data-meter-help>{c.stories.meterHelp}</span></p>
+        <div class="in-meter__bar" aria-hidden="true"><i data-meter-bar></i></div>
+      </div>
+      <div class="in-bar__row">
+        <button class="in-bar__back" type="button" data-bar-back>{c.back}</button>
+        <button class="btn btn-buzzer in-bar__next" type="button" data-bar-next>{c.next}</button>
+      </div>
+    </footer>
   </div>
 
   <!-- Registers the "order" form and its fields with Netlify Forms at deploy. The script posts the real values. -->
@@ -306,7 +277,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     --in-line: rgba(255, 255, 255, 0.22);
     max-width: 1280px;
     margin-inline: auto;
-    padding: 16px var(--gutter) 120px;
+    padding: 16px var(--gutter) 170px;
     display: grid;
     gap: 22px;
   }
@@ -488,28 +459,54 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     gap: 12px;
   }
   .in-tile {
-    min-height: 88px;
+    position: relative;
+    min-height: 104px;
     display: grid;
-    gap: 4px;
+    gap: 8px;
     justify-items: center;
     align-content: center;
-    padding: 12px 8px;
-    background: var(--in-card);
-    border: 2px solid var(--in-line);
-    border-radius: var(--radius-m);
+    padding: 14px 8px;
+    color: #fff;
+    background: linear-gradient(160deg, rgba(40, 80, 255, 0.5), rgba(0, 22, 112, 0.8));
+    border: 2px solid transparent;
+    border-radius: 22px;
     cursor: pointer;
     text-align: center;
     -webkit-tap-highlight-color: transparent;
-    transition: transform 0.12s var(--ease-out), border-color 0.12s;
+    transition: transform 0.2s var(--ease-out), background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.25s;
+    animation: in-tile-in 0.45s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 35ms);
+  }
+  @keyframes in-tile-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.96);
+    }
   }
   .in-tile:hover,
-  .in-tile[aria-checked="true"] {
+  .in-tile:focus-visible {
+    transform: translateY(-4px) rotate(-1.2deg);
     border-color: var(--game-yellow);
-    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(255, 230, 0, 0.18);
+  }
+  .in-tile:hover .in-tile__icon,
+  .in-tile:focus-visible .in-tile__icon {
+    transform: scale(1.25) rotate(8deg);
+  }
+  .in-tile[aria-checked="true"] {
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    border-color: var(--game-yellow);
+    transform: scale(1.04);
+    box-shadow: 0 0 0 6px rgba(255, 230, 0, 0.25);
+  }
+  .in-tiles[data-picked] .in-tile:not([aria-checked="true"]) {
+    opacity: 0.35;
   }
   .in-tile__icon {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     line-height: 1;
+    transition: transform 0.25s var(--ease-out);
   }
   .in-tile__label {
     font-family: var(--font-display);
@@ -723,6 +720,129 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     gap: 12px;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+  /* the shared bottom bar */
+  .in-bar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 20;
+    background: rgba(4, 12, 64, 0.94);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--in-line);
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+    display: grid;
+    gap: 10px;
+  }
+  .in-bar > * {
+    width: 100%;
+    max-width: calc(1280px - var(--gutter) * 2);
+    margin-inline: auto;
+  }
+  .in-bar__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 56px;
+  }
+  .in-bar__back {
+    background: none;
+    border: 0;
+    padding: 12px 4px;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 1.15rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--game-yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .in-bar__next {
+    min-height: 56px;
+    min-width: 160px;
+  }
+  .in-bar__next[hidden] {
+    display: none;
+  }
+  .in-bar__next[aria-busy="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .in-bar .in-meter__text {
+    margin: 0 0 6px;
+    font-size: var(--fs-small);
+  }
+  .in-meter__help {
+    color: var(--text-muted);
+    margin-inline-start: 8px;
+  }
+  /* 0: hero, as clean as the home page */
+  .in-hero {
+    min-height: calc(100svh - 220px);
+    align-content: center;
+    justify-items: start;
+    gap: 22px;
+  }
+  .in-hero .lead {
+    max-width: 30ch;
+  }
+  .in-hero__price {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .in-hero__price strong {
+    color: var(--game-yellow);
+    font-family: var(--font-display);
+    font-size: 1.35em;
+    margin-inline-end: 6px;
+  }
+  /* 2: who */
+  .in-input--big {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    min-height: 72px;
+    font-weight: 700;
+  }
+  .in-screen {
+    margin: 0;
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    padding: 22px 18px 16px;
+    border-radius: var(--radius-m);
+    border: 3px solid #0b1030;
+    background: radial-gradient(120% 140% at 50% 0%, #2a55ff 0%, #0a1a8a 55%, #050b3d 100%);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+  .in-screen figcaption {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .in-screen__title {
+    margin: 0;
+    color: var(--game-yellow);
+    font-size: clamp(1.6rem, 6vw, 2.8rem);
+    line-height: 1.1;
+    min-height: 2.2em;
+    display: grid;
+    place-items: center;
+    overflow-wrap: anywhere;
+  }
+  .in-screen__edit {
+    background: none;
+    border: 0;
+    color: #fff;
+    font: inherit;
+    font-size: var(--fs-small);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .in-screen .in-field {
+    width: 100%;
+    text-align: start;
   }
   .in-nav .btn-buzzer {
     margin-inline-start: auto;
@@ -1248,45 +1368,12 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       gap: 16px;
     }
     .in-tile {
-      min-height: 120px;
+      min-height: 132px;
     }
-    .in-step[data-step="0"] {
-      text-align: center;
-      justify-items: center;
-      max-width: 860px;
+    .in-who {
+      max-width: 760px;
+      width: 100%;
       margin-inline: auto;
-      padding-block: 24px;
-    }
-    .in-step[data-step="0"] .in-bullets,
-    .in-step[data-step="0"] .in-how {
-      text-align: start;
-    }
-    .in-step[data-step="0"] .in-price {
-      justify-items: center;
-      padding-inline: 40px;
-    }
-    .in-step[data-step="0"] .in-how {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-    /* step 2: fields on one side, the live sample on the other */
-    .in-step[data-step="2"] {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      column-gap: 48px;
-    }
-    .in-step[data-step="2"] > h2,
-    .in-step[data-step="2"] > .in-nav {
-      grid-column: 1 / -1;
-    }
-    .in-step[data-step="2"] > .in-field {
-      grid-column: 1;
-    }
-    .in-step[data-step="2"] > .in-sample {
-      grid-column: 2;
-      grid-row: 2 / span 3;
-      align-self: start;
-      position: sticky;
-      top: 16px;
     }
     /* step 3: stories two per row, the open one takes the full row */
     .in-prompts {
@@ -1310,8 +1397,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-step[data-step="4"] > h2,
     .in-step[data-step="4"] > .lead,
-    .in-step[data-step="4"] > .in-hostpick,
-    .in-step[data-step="4"] > .in-nav {
+    .in-step[data-step="4"] > .in-hostpick {
       grid-column: 1 / -1;
     }
     /* step 5: what you filled on one side, price and contact on the other */
@@ -1337,8 +1423,10 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   @media (prefers-reduced-motion: reduce) {
     .in-progress__bar i,
     .in-meter__bar i,
-    .in-tile {
+    .in-tile,
+    .in-tile__icon {
       transition: none;
+      animation: none;
     }
   }
 </style>

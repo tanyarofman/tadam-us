@@ -1,9 +1,10 @@
 ---
 import { useCopy, otherLanguagePath } from "../../content/copy";
-import { contactLink } from "../../config/site";
+import { contactLink, demoMedia } from "../../config/site";
 import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
-const { copy: COPY, home } = useCopy(Astro.url);
+const { copy: COPY, home, locale } = useCopy(Astro.url);
+const media = demoMedia(locale);
 const c = COPY.hero;
 ---
 
@@ -39,17 +40,17 @@ const c = COPY.hero;
         </a>
       </div>
     </div>
-    <figure class="hero-preview" aria-label={c.loopLabel} data-synced-preview>
+    <figure class="hero-preview" aria-label={c.loopLabel} data-synced-preview style={`--screen-poster: url(${media.heroScreenPoster}); --phone-poster: url(${media.heroPhonePoster})`}>
       <div class="hero-devices">
         <div class="hero-television" aria-hidden="true">
           <div class="hero-tv-screen">
-            <video data-preview-screen src="/demo/hero-screen.mp4" poster="/demo/hero-screen-poster.jpg" width="960" height="540" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
+            <video data-preview-screen src={media.heroScreen} poster={media.heroScreenPoster} width="960" height="540" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
           </div>
           <span class="tv-light"></span><span class="tv-foot tv-foot-left"></span><span class="tv-foot tv-foot-right"></span>
         </div>
         <div class="hero-phone" aria-hidden="true">
           <div class="hero-phone-screen">
-            <video data-preview-phone src="/demo/hero-phone.mp4" poster="/demo/hero-phone-poster.jpg" width="624" height="1370" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
+            <video data-preview-phone src={media.heroPhone} poster={media.heroPhonePoster} width="624" height="1370" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
             <span class="phone-speaker"></span>
           </div>
           <span class="phone-spark"><i></i><i></i><i></i></span>
@@ -108,8 +109,8 @@ const c = COPY.hero;
   }
   .hero-tv-screen { aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #000; background: #0734ab; }
   .hero-devices video { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .hero-preview[data-playback="loading"] .hero-tv-screen { background: url("/demo/hero-screen-poster.jpg") center / cover; }
-  .hero-preview[data-playback="loading"] .hero-phone-screen { background: url("/demo/hero-phone-poster.jpg") center / cover; }
+  .hero-preview[data-playback="loading"] .hero-tv-screen { background: var(--screen-poster) center / cover; }
+  .hero-preview[data-playback="loading"] .hero-phone-screen { background: var(--phone-poster) center / cover; }
   .hero-preview[data-playback="loading"] video { opacity: 0; }
   .tv-light { position: absolute; bottom: .5cqw; left: 50%; width: .8cqw; height: .3cqw; border-radius: 50%; background: #b6c5e6; }
   .tv-foot { position: absolute; bottom: -2.4cqw; width: 6cqw; height: .7cqw; border: 1px solid #697489; border-radius: 6px; background: #11172e; }

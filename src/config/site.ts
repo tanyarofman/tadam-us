@@ -19,6 +19,23 @@ export const SITE = {
 export const demoUrl = (locale: "he" | "en") => (locale === "en" ? SITE.tomDemoUrl : SITE.eyalDemoUrl);
 
 /**
+ * Recorded demo videos in the page's language: the synced hero clips (big screen + phone, ~19s, no audio)
+ * and the full game recording (with sound). Hebrew = Eyal's birthday, English = Tom's 13th birthday
+ * (recorded from /tom-demo, question 1 for the hero clips).
+ */
+export const demoMedia = (locale: "he" | "en") => {
+  const s = locale === "en" ? "-en" : "";
+  return {
+    heroScreen: `/demo/hero-screen${s}.mp4`,
+    heroScreenPoster: `/demo/hero-screen${s}-poster.jpg`,
+    heroPhone: `/demo/hero-phone${s}.mp4`,
+    heroPhonePoster: `/demo/hero-phone${s}-poster.jpg`,
+    demo: `/demo/tadam-demo${s}.mp4`,
+    demoPoster: `/demo/tadam-demo${s}-poster.webp`,
+  };
+};
+
+/**
  * Link for the contact buttons: a Messenger chat with the heytadam page.
  * `ref` (e.g. "hero", "cta", "article-<slug>") is passed to the page so it can tell where the chat started.
  */

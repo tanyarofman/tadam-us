@@ -32,7 +32,7 @@ defined by `--page-gradient` in `src/styles/tokens.css`.
 | Privacy policy text | `src/pages/privacy.astro` (Hebrew), `src/pages/en/privacy.astro` (English) |
 | Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
-| Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen.mp4` (a.mp4), `public/demo/hero-phone.mp4` (b.mp4), and their JPEG posters |
+| Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen.mp4` (a.mp4), `public/demo/hero-phone.mp4` (b.mp4), and their JPEG posters. English (`/en/`): the same names with `-en`, recorded from the Tom demo (`/tom-demo`). Paths per language: `demoMedia()` in `src/config/site.ts` |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | "Leave details" form (Netlify Forms, form name `lead`) | `src/components/LeadForm.astro`; submissions in Netlify → Forms; email alerts in Netlify → Forms → Form notifications |

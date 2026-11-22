@@ -175,20 +175,34 @@ function init(root: HTMLElement, data: Data) {
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
     track("intake_step", { step, sub, event: state.eventId });
   }
+  /** Drops photo cards that were opened and left completely empty. */
+  function prunePhotos() {
+    const keep: number[] = [];
+    state.photos.forEach((p, i) => {
+      if (photoFiles.has(i) || p.caption.trim() || p.free.trim() || p.answers.some((a) => a.trim())) keep.push(i);
+    });
+    if (keep.length === state.photos.length) return;
+    const files = keep.map((i) => photoFiles.get(i));
+    state.photos = keep.map((i) => state.photos[i]);
+    photoFiles.clear();
+    files.forEach((f, k) => f && photoFiles.set(k, f));
+  }
   function forward() {
+    prunePhotos();
     let sub = state.sub + 1;
     // a second photo screen only makes sense after a first photo
     if (state.step === 3 && sub < subCount(3) && kindOf(sub) === "photo" && sub - shape().prompts.length - 1 > state.photos.length) sub = subCount(3);
     if (sub < subCount(state.step)) return show(state.step, sub);
     if (state.step === 3 && need() > 0) {
-      const el = $<HTMLElement>("[data-more-need]")!;
+      show(state.step, state.sub, false); // redraw first: an empty photo card may just have been dropped
       $("[data-more-need-text]")!.textContent = fill(c.stories.needMore, { n: need() });
-      el.hidden = false;
+      $<HTMLElement>("[data-more-need]")!.hidden = false;
       return;
     }
     show(state.step + 1);
   }
   function backward() {
+    prunePhotos();
     if (state.sub > 0) return show(state.step, state.sub - 1);
     const prev = state.step - 1;
     let sub = subCount(prev) - 1;
@@ -361,6 +375,9 @@ function init(root: HTMLElement, data: Data) {
           : fill(c.more.photoCount, { i: photoSlot() + 1, n: data.material.maxPhotos });
     $("[data-story-title]")!.textContent = kind === "q" ? fill(cur.label, { name }) : kind === "own" ? c.stage5.ownSection : c.stories.photosTitle;
     $("[data-story-lead]")!.textContent = kind === "q" ? fill(cur.hint, { name }) : kind === "own" ? c.more.ownLead : c.more.photoLead;
+    // the photo screen always shows the card: an upload tile where the picture will be, with the question fields ready
+    if (kind === "photo" && !state.photos[photoSlot()] && photoSlot() === state.photos.length)
+      state.photos.push({ name: "", caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
     promptsEl.innerHTML = "";
     for (const p of hub ? [] : [cur]) {
       const answered = committed.has(p.id);
@@ -477,7 +494,7 @@ function init(root: HTMLElement, data: Data) {
     if (state.step !== 3) return;
     // "next" when this screen has something, "skip" when it is empty
     const kind = kindOf(state.sub);
-    const has = kind === "q" ? isDone(shape().prompts[state.sub].id) : kind === "own" ? state.own.length > 0 || ownDirty() : !!state.photos[photoSlot()];
+    const has = kind === "q" ? isDone(shape().prompts[state.sub].id) : kind === "own" ? state.own.length > 0 || ownDirty() : photoFiles.has(photoSlot()) || !!state.photos[photoSlot()]?.caption.trim();
     barNext.textContent = has ? c.next : c.more.skip;
     if (kind === "own") $("[data-story-count]")!.textContent = fill(c.more.unlocked, { n: ready, name: subjectName() });
     if (need() === 0) $<HTMLElement>("[data-more-need]")!.hidden = true;
@@ -566,7 +583,6 @@ function init(root: HTMLElement, data: Data) {
   }
 
   // photos: kept in memory only, so no minors' images are stored or uploaded by the prototype
-  const photoInput = $<HTMLInputElement>("[data-photo-input]")!;
   const photoList = $<HTMLElement>("[data-photos]")!;
   function renderPhotos() {
     photoList.innerHTML = "";
@@ -576,7 +592,7 @@ function init(root: HTMLElement, data: Data) {
       const choice = p.type === "choice";
       li.dataset.photo = String(i);
       li.hidden = state.step === 3 && kindOf(state.sub) === "photo" && i !== photoSlot();
-      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<label class="btn btn-white in-photo-again">${c.stories.photosAgain}<input type="file" accept="image/*" class="sr-only" data-photo-again="${i}" /></label>`}
+      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<label class="in-photo-again"><span aria-hidden="true">📷</span>${p.name ? c.stories.photosAgain : c.stories.photosUpload}<input type="file" accept="image/*" class="sr-only" data-photo-again="${i}" /></label>`}
         <div class="in-photo-body">
           <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
           <input id="pq-${i}" class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosPlaceholder)}" data-caption="${i}" />
@@ -599,13 +615,11 @@ function init(root: HTMLElement, data: Data) {
           <div class="in-photo-actions">
             <button type="button" class="btn btn-white in-save-btn" data-photo-save="${i}">${c.stories.save}</button>
             <span class="in-saved" data-photo-badge="${i}" role="status" ${p.saved ? "" : "hidden"}>✓ ${c.stories.photoSaved}</span>
-            <button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>
+            ${url ? `<button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>` : ""}
           </div>
         </div>`;
       photoList.append(li);
     });
-    const add = $<HTMLElement>("[data-photo-add]");
-    if (add) add.hidden = state.photos.length >= data.material.maxPhotos || !!state.photos[photoSlot()];
   }
   const photoComplete = (p: State["photos"][number]) =>
     p.caption.trim().length > 3 && (p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0);
@@ -625,17 +639,6 @@ function init(root: HTMLElement, data: Data) {
       markPhoto(i, true);
       save();
     }
-  });
-  photoInput.addEventListener("change", () => {
-    const f = photoInput.files?.[0];
-    if (!f || state.photos.length >= data.material.maxPhotos) return;
-    photoFiles.set(state.photos.length, { file: f, url: URL.createObjectURL(f) });
-    state.photos.push({ name: f.name, caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
-    photoInput.value = "";
-    renderPhotos();
-    renderMeter();
-    save();
-    photoList.querySelector<HTMLInputElement>(`[data-caption="${state.photos.length - 1}"]`)?.focus();
   });
   photoList.addEventListener("input", (e) => {
     const t = e.target as HTMLInputElement;
@@ -659,9 +662,25 @@ function init(root: HTMLElement, data: Data) {
       const f = t.files?.[0];
       const i = Number(t.dataset.photoAgain);
       if (!f || !state.photos[i]) return;
-      photoFiles.set(i, { file: f, url: URL.createObjectURL(f) });
-      state.photos[i].name = f.name;
-      renderPhotos();
+      // only pictures the browser can open: they are scaled down before sending, so any file size is fine
+      void createImageBitmap(f).then(
+        (bmp) => {
+          bmp.close();
+          photoFiles.set(i, { file: f, url: URL.createObjectURL(f) });
+          state.photos[i].name = f.name;
+          renderPhotos();
+          renderMeter();
+          save();
+          photoList.querySelector<HTMLInputElement>(`[data-caption="${i}"]`)?.focus();
+        },
+        () => {
+          const err = photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`);
+          if (err) {
+            err.textContent = c.stories.photosBad;
+            err.hidden = false;
+          }
+        },
+      );
     } else if (t.dataset.ptype !== undefined) {
       state.photos[Number(t.dataset.ptype)].type = t.value as "free" | "choice";
       renderPhotos();

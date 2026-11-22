@@ -129,12 +129,8 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <!-- a photo with a question: one photo per screen -->
       <div class="in-photos" data-photo-screen hidden>
         <ul class="in-photo-list" data-photos></ul>
-        <label class="in-drop" data-photo-add>
-          <span class="in-drop__icon" aria-hidden="true">📷</span>
-          <strong>{c.stories.photosAdd}</strong>
-          <small>{c.stories.photosConsent}</small>
-          <input type="file" accept="image/*" data-photo-input class="sr-only" />
-        </label>
+        <p class="in-help in-photo-note">{c.stories.photosLimits} {c.stories.photosConsent}</p>
+        <input type="file" data-photo-input hidden />
       </div>
 
       <p class="in-err in-need" data-more-need hidden>
@@ -1735,6 +1731,40 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       max-height: 130px;
     }
   }
+  /* the picture slot before a photo is chosen: an "upload" tile where the picture will be */
+  .in-photo-again {
+    display: grid;
+    gap: 6px;
+    place-content: center;
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    min-height: 150px;
+    padding: 14px;
+    border: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.08);
+    outline: 2px dashed rgba(255, 255, 255, 0.4);
+    outline-offset: -10px;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.15s, outline-color 0.15s;
+  }
+  .in-photo-again:hover,
+  .in-photo-again:focus-within {
+    background: rgba(255, 230, 0, 0.14);
+    outline-color: var(--game-yellow);
+  }
+  .in-photo-again > span {
+    font-size: 2rem;
+  }
+  .in-photo-note {
+    margin: 0;
+    text-align: center;
+  }
   .in-own fieldset {
     border: 0;
     margin: 0;
@@ -2077,9 +2107,14 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       gap: 12px;
     }
     .in-pair .in-input,
-    .in-own .in-input,
-    .in-one .in-photo-body .in-input {
+    .in-own .in-input {
       min-height: 62px;
+    }
+    .in-one .in-photo-body .in-input {
+      min-height: 54px;
+    }
+    .in-photos {
+      gap: 8px;
     }
     /* own question: one thing per row, answers two by two */
     .in-own {

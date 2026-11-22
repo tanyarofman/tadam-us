@@ -299,7 +299,7 @@ export const INTAKE = {
     ideasTitle: "בינתיים, רעיונות לאירוע הבא",
     ideasAll: "לכל הכתבות",
     home: "חזרה לאתר",
-    contact: "יש שאלה? כתבו לנו",
+    contact: "יש שאלה? דברו איתנו",
   },
 
   stage5: {

@@ -32,6 +32,7 @@ ${faq}
 
 ## דפים
 - [דף הבית](${abs("/")}): הסבר, דמו ומחירון
+- [English version](${abs("/en/")}): the same page in English, for English speakers in Israel
 - [הבלוג](${abs("/blog/")}): רעיונות לאירועים, אטרקציות וחידונים
 
 ## מאמרים

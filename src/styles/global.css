@@ -288,6 +288,10 @@ p {
   transform-origin: right center; /* RTL: grows from the right */
   transform: scaleX(0);
 }
+[dir="ltr"] .scroll-progress__bar {
+  background: linear-gradient(90deg, var(--magenta), var(--game-yellow));
+  transform-origin: left center;
+}
 
 /* ---------- Reveal (used by reduced-motion + simple fades) ---------- */
 .reveal {

@@ -10,7 +10,8 @@ See README.md for how to run, switch themes and edit copy.
 
 ## Rules from the brief
 
-- Hebrew only, RTL, parents addressed in plural (אתם), no em-dashes in copy.
+- The site is Hebrew, RTL, parents addressed in plural (אתם), no em-dashes in copy.
+- English version (`/en/` and `/en/privacy`, for English speakers in Israel): a straight translation of the Hebrew landing page, not a different story. Change `src/content/copy.he.ts` first, then mirror it in `src/content/copy.en.ts` (same keys; `npm run check` fails if they drift). The blog is Hebrew only. A site for the US and Europe is a separate project, not this repo.
 - Never show real celebrities, athletes or recognizable characters; the host is always generic.
 - Ask before adding a paid service, changing the story order, or using an image of a real person.
 

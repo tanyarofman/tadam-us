@@ -1,7 +1,8 @@
 ---
-import { COPY } from "../../content/copy.he";
+import { useCopy } from "../../content/copy";
 import HallArt from "../art/HallArt.astro";
 import SplitHeading from "../SplitHeading.astro";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.scene3;
 const d = c.demo;
 ---
@@ -12,7 +13,7 @@ const d = c.demo;
 
     <div class="s3-stage container">
       <div class="s3-headings">
-        <SplitHeading as="h2" class="h-scene s3-opening-title" text={COPY.scene1.headline} highlight="מחכים" />
+        <SplitHeading as="h2" class="h-scene s3-opening-title" text={COPY.scene1.headline} highlight={COPY.scene1.highlight} />
         <h2 id="s3-title" class="display h-scene s3-title">{c.headline}</h2>
       </div>
 
@@ -23,7 +24,7 @@ const d = c.demo;
             <div class="s3-rays"></div>
             <img class="s3-tadam" src="/brand/tadam-logo-v4.webp" alt={c.burst} width="736" height="332" decoding="async" />
           </div>
-          <div class="s3-video" data-state="idle">
+          <div class="s3-video" data-state="idle" data-labels={JSON.stringify({ play: d.play, pause: d.pause, replay: d.replay, mute: d.mute, unmute: d.unmute })}>
             <video
               class="s3-vid"
               poster="/demo/tadam-demo-poster.webp"

@@ -1,0 +1,77 @@
+---
+/** The whole landing page. Rendered at `/` (Hebrew) and `/en/` (English); the language comes from the URL. */
+import Base from "../../layouts/Base.astro";
+import Scene0Hero from "../scenes/Scene0Hero.astro";
+import EventsStrip from "../EventsStrip.astro";
+import Scene3Reveal from "../scenes/Scene3Reveal.astro";
+import Scene4HowItWorks from "../scenes/Scene4HowItWorks.astro";
+import Scene6Payoff from "../scenes/Scene6Payoff.astro";
+import Pricing from "../Pricing.astro";
+import Hosts from "../Hosts.astro";
+import Scene7Cta from "../scenes/Scene7Cta.astro";
+import Faq from "../Faq.astro";
+import LeadForm from "../LeadForm.astro";
+import Footer from "../Footer.astro";
+import ClosingCta from "../ClosingCta.astro";
+import DemoModal from "../DemoModal.astro";
+import Preloader from "../Preloader.astro";
+import { useCopy } from "../../content/copy";
+import { SITE } from "../../config/site";
+
+const { copy: COPY, lang } = useCopy(Astro.url);
+// The organization and site are one entity in both languages; the Hebrew home is its address.
+const home = new URL("/", Astro.site).href;
+const page = new URL(Astro.url.pathname, Astro.site).href;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${home}#org`,
+    name: "טדאם!",
+    alternateName: "Tadam!",
+    url: home,
+    logo: new URL("/favicon-512.png", Astro.site).href,
+    email: SITE.email,
+    sameAs: [SITE.facebookUrl],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: COPY.brand,
+    alternateName: lang === "he" ? ["Tadam", "heytadam"] : ["טדאם!", "heytadam"],
+    url: page,
+    inLanguage: lang === "he" ? "he-IL" : "en",
+    publisher: { "@id": `${home}#org` },
+  },
+];
+---
+
+<Base bilingual>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <link slot="head" rel="preload" as="image" type="image/jpeg" href="/demo/hero-screen-poster.jpg" />
+  <link slot="head" rel="preload" as="image" type="image/jpeg" href="/demo/hero-phone-poster.jpg" />
+  <Preloader />
+  <a class="skip-link" href="#scene-3">{COPY.nav.skip}</a>
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
+
+  <main id="main">
+    <Scene0Hero />
+    <EventsStrip />
+    <Scene3Reveal />
+    <Scene4HowItWorks />
+    <Scene6Payoff />
+    <Hosts />
+    <Pricing />
+    <Scene7Cta />
+    <LeadForm />
+    <Faq />
+    <ClosingCta />
+  </main>
+  <Footer />
+  <DemoModal />
+
+
+  <script>
+    import "../../scripts/main";
+  </script>
+</Base>

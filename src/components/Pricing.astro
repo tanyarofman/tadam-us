@@ -1,6 +1,7 @@
 ---
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
 import { CREATE_URL, PRICING, fillPrices } from "../config/pricing";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.pricing;
 const cur = PRICING.currency;
 // Prices hidden: the section becomes "what's included" (no numbers, no edit card, add-ons get a badge).
@@ -43,7 +44,7 @@ const icons: Record<string, string> = {
     <ul class="cards" role="list" aria-label={c.cardsLabel}>
       <li class="card card--main reveal">
         <h3 class="card-name">{c.cards.base.name}</h3>
-        {<p class="price"><span class="num">{PRICING.base}</span><span class="cur" aria-label="שקלים">{cur}</span></p>}
+        {<p class="price"><span class="num">{PRICING.base}</span><span class="cur" aria-label={c.currencyLabel}>{cur}</span></p>}
         <ul class="perks" role="list">
           {c.cards.base.perks.map((p) => <li class="pill">{fillPrices(p)}</li>)}
         </ul>
@@ -55,7 +56,7 @@ const icons: Record<string, string> = {
 
       <li class="card reveal">
         <h3 class="card-name">{c.cards.edit.name}</h3>
-        <p class="price"><span class="num">{PRICING.edit}</span><span class="cur" aria-label="שקלים">{cur}</span></p>
+        <p class="price"><span class="num">{PRICING.edit}</span><span class="cur" aria-label={c.currencyLabel}>{cur}</span></p>
         <p class="card-text">{c.cards.edit.text}</p>
         <p class="card-note">{c.cards.edit.note}</p>
       </li>
@@ -207,7 +208,7 @@ const icons: Record<string, string> = {
     font-weight: 700;
     font-size: 1.1rem;
     line-height: 1.25;
-    text-align: right;
+    text-align: start;
     text-wrap: balance;
   }
   .card-cta {
@@ -228,7 +229,7 @@ const icons: Record<string, string> = {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(12px, 1.8vw, 20px);
-    text-align: right;
+    text-align: start;
   }
   .inc {
     position: relative;

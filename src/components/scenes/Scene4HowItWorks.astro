@@ -1,17 +1,12 @@
 ---
-import { COPY } from "../../content/copy.he";
+import { useCopy } from "../../content/copy";
 import SplitHeading from "../SplitHeading.astro";
 import Person from "../art/Person.astro";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.scene4;
 const m = c.mock;
-const tiles = [
-  { color: "var(--answer-1)", label: "שאלה" },
-  { color: "var(--answer-2)", label: "תמונה" },
-  { color: "var(--answer-3)", label: "סיפור" },
-  { color: "var(--answer-4)", label: "בדיחה" },
-  { color: "var(--answer-2)", label: "שאלה" },
-  { color: "var(--answer-3)", label: "מנחה" },
-];
+const tileColors = ["var(--answer-1)", "var(--answer-2)", "var(--answer-3)", "var(--answer-4)", "var(--answer-2)", "var(--answer-3)"];
+const tiles = m.tiles.map((label, i) => ({ color: tileColors[i % tileColors.length], label }));
 ---
 
 <section class="scene s4" id="scene-4" data-scene="4" aria-labelledby="s4-title">
@@ -141,6 +136,7 @@ const tiles = [
     transform-origin: 100% 50%; /* RTL: flips in from the start (right) edge */
     backdrop-filter: blur(6px);
   }
+  :global([dir="ltr"]) .step-card { transform-origin: 0% 50%; }
   .step-visual {
     position: relative;
     height: 270px;
@@ -217,6 +213,10 @@ const tiles = [
     background: #eceef3;
     border-radius: 18px 4px 18px 18px;
   }
+  /* English (LTR): the regular Messenger layout, own message on the right, the reply on the left. */
+  :global([dir="ltr"]) .chat-out { border-radius: 18px 18px 4px 18px; }
+  :global([dir="ltr"]) .chat-in { border-radius: 4px 18px 18px 18px; }
+  :global([dir="ltr"]) .choice-check { left: auto; right: -5px; }
   .chat-head-logo {
     display: grid;
     place-items: center;

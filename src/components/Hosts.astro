@@ -1,6 +1,7 @@
 ---
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
 import Person from "./art/Person.astro";
+const { copy: COPY } = useCopy(Astro.url);
 const h = COPY.pricing.addons.personalHost.showcase;
 const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-waist"];
 ---
@@ -37,7 +38,7 @@ const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-
     gap: clamp(48px, 7vw, 112px);
     align-items: center;
   }
-  .hosts-head { display: grid; gap: 22px; text-align: right; }
+  .hosts-head { display: grid; gap: 22px; text-align: start; }
   .hosts-title { display: grid; margin: 0; font-size: var(--fs-story-title); line-height: 1.08; }
   .hl { position: relative; width: fit-content; padding-bottom: 12px; color: var(--sun-yellow); }
   .hl::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 18px; }
@@ -72,6 +73,8 @@ const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-
     .hosts-inner { --gutter: 24px; }
     .hosts-title { display: flex; gap: .18em; font-size: clamp(2rem, 9.4vw, 3rem); white-space: nowrap; }
     .hosts-title .hl { display: inline-block; }
+    /* The English title is longer: on narrow phones it may wrap onto a second line. */
+    :global([dir="ltr"]) .hosts-title { flex-wrap: wrap; justify-content: center; }
     .hosts-sub { max-width: none; white-space: nowrap; font-size: clamp(1.15rem, 5.6vw, 1.6rem); }
   }
 </style>

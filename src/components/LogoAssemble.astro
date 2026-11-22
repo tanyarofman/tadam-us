@@ -17,13 +17,15 @@ const cols: [number, number][] = [
   [22, 41],
   [0, 22],
 ];
+import { useCopy } from "../content/copy";
 interface Props {
   class?: string;
 }
+const { copy } = useCopy(Astro.url);
 const { class: cls = "" } = Astro.props;
 ---
 
-<div class:list={["logo-assemble", cls]} role="img" aria-label="טדאם!" data-logo>
+<div class:list={["logo-assemble", cls]} role="img" aria-label={copy.brand} data-logo>
   <img class="logo-full" src={SRC} alt="" width="736" height="332" decoding="async" />
   <img
     class="logo-piece piece-top"

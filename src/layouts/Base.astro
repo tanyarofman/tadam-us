@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
-import { COPY } from "../content/copy.he";
+import { useCopy, otherLanguagePath, LOCALES } from "../content/copy";
+const { copy: COPY, lang, dir, ogLocale } = useCopy(Astro.url);
 
 interface Props {
   title?: string;
@@ -8,20 +9,30 @@ interface Props {
   noindex?: boolean;
   /** "article" on blog posts. */
   ogType?: "website" | "article";
+  /** True on pages that exist in both languages (home, privacy): adds hreflang links. */
+  bilingual?: boolean;
 }
-const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website" } = Astro.props;
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website", bilingual = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
+// hreflang: this page and its twin in the other language; Hebrew is the default for everyone else.
+const twin = new URL(otherLanguagePath(Astro.url), Astro.site);
+const alternates = bilingual
+  ? lang === "he"
+    ? [{ hreflang: LOCALES.he.hreflang, href: canonical }, { hreflang: LOCALES.en.hreflang, href: twin }, { hreflang: "x-default", href: canonical }]
+    : [{ hreflang: LOCALES.he.hreflang, href: twin }, { hreflang: LOCALES.en.hreflang, href: canonical }, { hreflang: "x-default", href: twin }]
+  : [];
 ---
 
 <!doctype html>
-<html lang="he" dir="rtl" class="no-js">
+<html lang={lang} dir={dir} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
     {/* Keep the square raster fallbacks and app icons; use the yellow ! SVG for browser tabs. */}
@@ -31,16 +42,16 @@ const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="he_IL" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="טדאם!" />
+    <meta property="og:site_name" content={COPY.brand} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="525" />
-    <meta property="og:image:alt" content="טדאם! שעשועון אישי לאירוע שלכם" />
+    <meta property="og:image:alt" content={COPY.meta.ogAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

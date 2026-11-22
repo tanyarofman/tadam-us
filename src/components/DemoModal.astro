@@ -3,8 +3,9 @@
  * Demo modal: the full recording of a real game (Eyal's birthday) with sound, and a Messenger CTA under it.
  * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
  */
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
 import { contactLink } from "../config/site";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.modal;
 ---
 

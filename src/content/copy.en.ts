@@ -12,9 +12,9 @@ export const COPY = {
     cta: "Let's create a game",
   },
   meta: {
-    title: "Tadam! A live trivia game show for your event",
+    title: "Tadam! A personal game show for your event",
     description:
-      "Your stories, photos and personal details become an interactive game",
+      "Turn your stories, photos and personal details into a live trivia game show, with a host on the big screen and guests playing on their phones.",
     ogAlt: "Tadam! A personal game show for your event",
   },
 

@@ -26,9 +26,9 @@ export const demoUrl = (locale: "he" | "en") => (locale === "en" ? SITE.tomDemoU
 export const demoMedia = (locale: "he" | "en") => {
   const s = locale === "en" ? "-en" : "";
   return {
-    heroScreen: `/demo/hero-screen${s}.mp4`,
+    heroScreen: `/demo/hero-screen${s}${locale === "en" ? "-v2" : ""}.mp4`,
     heroScreenPoster: `/demo/hero-screen${s}-poster.jpg`,
-    heroPhone: `/demo/hero-phone${s}.mp4`,
+    heroPhone: `/demo/hero-phone${s}${locale === "en" ? "-v2" : ""}.mp4`,
     heroPhonePoster: `/demo/hero-phone${s}-poster.jpg`,
     demo: `/demo/tadam-demo${s}.mp4`,
     demoPoster: `/demo/tadam-demo${s}-poster.webp`,

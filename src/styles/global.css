@@ -367,3 +367,9 @@ html[lang="en"] .hosts-title > span { display: inline; }
 html[lang="en"] .hosts-title > .hl { display: inline-block; }
 
 @media(max-width:900px) { html[lang="en"] .hero .hero-sub { top: -14px; } }
+
+/* English device composition: phone overlaps the television on the right. */
+html[lang="en"] .hero-phone { left: auto; right: 1%; transform: rotate(3deg); }
+html[lang="en"] .hero .phone-speaker { display: none; }
+html[lang="en"] .hero .phone-spark { left: auto; right: -3.2cqw; transform: scaleX(-1); }
+html[lang="en"] .hero-television { left: 0; right: auto; }

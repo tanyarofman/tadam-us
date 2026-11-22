@@ -307,6 +307,39 @@ export const COPY = {
     back: "חזרה לדף הבית",
   },
 
+  /** Blog pages (index, article frame). The articles themselves are Markdown in src/content/blog/. */
+  blog: {
+    name: "הבלוג",
+    headerBlog: "הבלוג",
+    headerDemo: "דמו",
+    headerHome: "טדאם! דף הבית",
+    headerNav: "ניווט",
+    indexTitle: "הבלוג של טדאם! | רעיונות לאירועים, אטרקציות וחידונים",
+    indexDescription:
+      "רעיונות לבר ובת מצווה, ימי הולדת, חגים, ימי גיבוש ואירועי חברה. אטרקציות שמחברות את כל האורחים, וחידונים מוכנים לשחק.",
+    indexName: "הבלוג של טדאם!",
+    indexLead: "רעיונות לאירועים שכולם זוכרים: בר ובת מצווה, ימי הולדת, חגים, ימי גיבוש ואירועי חברה.",
+    crumbs: "פירורי לחם",
+    updated: "עודכן",
+    answerAria: "התשובה הקצרה",
+    answerLabel: "בקצרה",
+    toc: "בכתבה",
+    /** The category whose articles get the team call to action instead of the family one. */
+    teamCategory: "חברות וצוותים",
+    ctaTeam: {
+      title: "רוצים שהרגע הזה יהיה על הצוות שלכם?",
+      text: "טדאם! הוא משחק טריוויה חי שנבנה מהסיפורים של העובדים. כולם סורקים קוד מהמסך, עונים מהטלפון, גם מי שמתחבר מהבית, ומי שמכיר את הצוות הכי טוב מנצח. בלי אפליקציה, בערך 15 דקות.",
+    },
+    ctaFamily: {
+      title: "רוצים שהרגע הזה יהיה על החוגג.ת שלכם?",
+      text: "טדאם! הוא משחק טריוויה חי שנבנה מהסיפורים של המשפחה והחברים. כולם סורקים קוד מהמסך, עונים מהטלפון, ומי שמכיר הכי טוב מנצח. בלי אפליקציה, בערך 15 דקות.",
+    },
+    ctaDemo: "בואו לראות דמו",
+    ctaContact: "דברו איתנו במסנג'ר",
+    faqTitle: "שאלות נפוצות",
+    related: "עוד בבלוג",
+  },
+
 } as const;
 
 export type Copy = typeof COPY;

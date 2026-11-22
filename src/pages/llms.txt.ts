@@ -11,6 +11,9 @@ export const GET: APIRoute = async ({ site }) => {
   const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime(),
   );
+  const postsEn = (await getCollection("blogEn", (p) => !p.data.draft)).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
   const faq = COPY.faq.items.map((f) => `- ${f.q} ${f.a}`).join("\n");
 
   const body = `# טדאם! (Tadam)
@@ -34,9 +37,13 @@ ${faq}
 - [דף הבית](${abs("/")}): הסבר, דמו ומחירון
 - [English version](${abs("/en/")}): the same page in English, for English speakers in Israel
 - [הבלוג](${abs("/blog/")}): רעיונות לאירועים, אטרקציות וחידונים
+- [The blog in English](${abs("/en/blog/")}): the same articles, translated
 
 ## מאמרים
 ${posts.map((p) => `- [${p.data.title}](${abs(`/blog/${p.id}/`)}): ${p.data.answer}`).join("\n")}
+
+## Articles in English
+${postsEn.map((p) => `- [${p.data.title}](${abs(`/en/blog/${p.id}/`)}): ${p.data.answer}`).join("\n")}
 `;
 
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

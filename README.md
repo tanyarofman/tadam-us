@@ -28,6 +28,7 @@ defined by `--page-gradient` in `src/styles/tokens.css`.
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
 | The English translation of it (`/en/`), same keys | `src/content/copy.en.ts` |
+| Blog articles | `src/content/blog/` (Hebrew), `src/content/blog-en/` (English translation, same file name) |
 | Privacy policy text | `src/pages/privacy.astro` (Hebrew), `src/pages/en/privacy.astro` (English) |
 | Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |

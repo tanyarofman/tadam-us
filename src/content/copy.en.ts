@@ -280,7 +280,7 @@ export const COPY = {
     facebook: "Tadam! on Facebook",
     privacy: "Privacy policy",
     privacyMobile: "Privacy",
-    blog: "Blog (in Hebrew)",
+    blog: "Blog",
     linksLabel: "Links",
     copyright: "© Tadam!",
   },
@@ -297,6 +297,39 @@ export const COPY = {
     title: "Privacy policy",
     body: "Your photos and stories stay yours. Only you and we see them, and every item goes through your approval before it reaches the screen.",
     back: "Back to the home page",
+  },
+
+  /** Blog pages (index, article frame). The articles themselves are Markdown in src/content/blog-en/. */
+  blog: {
+    name: "Blog",
+    headerBlog: "Blog",
+    headerDemo: "Demo",
+    headerHome: "Tadam! home page",
+    headerNav: "Navigation",
+    indexTitle: "The Tadam! blog | Event ideas, activities and quizzes",
+    indexDescription:
+      "Ideas for bar and bat mitzvahs, birthdays, holidays, team-building days and company events. Activities that bring all the guests together, and quizzes ready to play.",
+    indexName: "The Tadam! blog",
+    indexLead: "Ideas for events everyone remembers: bar and bat mitzvahs, birthdays, holidays, team-building days and company events.",
+    crumbs: "Breadcrumbs",
+    updated: "Updated",
+    answerAria: "The short answer",
+    answerLabel: "In short",
+    toc: "In this article",
+    /** The category whose articles get the team call to action instead of the family one. */
+    teamCategory: "Companies and teams",
+    ctaTeam: {
+      title: "Want this moment to be about your team?",
+      text: "Tadam! is a live trivia game built from your employees' stories. Everyone scans a code from the screen and answers from their phone, including people joining from home, and whoever knows the team best wins. No app, about 15 minutes.",
+    },
+    ctaFamily: {
+      title: "Want this moment to be about your guest of honor?",
+      text: "Tadam! is a live trivia game built from the stories of family and friends. Everyone scans a code from the screen and answers from their phone, and whoever knows them best wins. No app, about 15 minutes.",
+    },
+    ctaDemo: "Come see a demo",
+    ctaContact: "Talk to us on Messenger",
+    faqTitle: "Frequently asked questions",
+    related: "More from the blog",
   },
 
 } as const;

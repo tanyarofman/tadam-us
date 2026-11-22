@@ -1,8 +1,8 @@
 ---
-title: "New Year's Eve at Home: 10 Games and 30 Year-in-Review Questions for Family, Friends and Your Team"
-seoTitle: "New Year's Eve at Home: 10 Games and 30 Questions"
+title: "New Year's Eve Games at Home: 10 Games and 30 Year-in-Review Questions for Family, Friends and Your Team"
+seoTitle: "New Year's Eve Games at Home: 10 Games and 30 Questions"
 description: "What to do on Sylvester or Novy God at home: 10 New Year's Eve games, 30 year-in-review questions for family, friends and your team, and a ready plan."
-targetKeyword: "New Year's Eve at home"
+targetKeyword: "New Year's Eve games"
 answer: "A good New Year's Eve at home is built from a meal, one or two games that sum up the year of the people in the room, and a countdown. Here you will find 10 games for Sylvester and Novy God, 30 year-in-review questions for family, friends and your team at work, and a ready plan for the evening, from dinner to midnight. This year the evening falls on Thursday, December 31, 2026."
 date: 2026-11-22
 category: "Holidays and family"
@@ -17,13 +17,13 @@ faq:
     a: "Ten to fifteen questions are enough, and each person answers two or three. It is better for everyone to answer the same question, because comparing the answers is the interesting part."
 ---
 
-Not every New Year's Eve needs a ticket to a party. An evening at home, with the people you went through the year with, can be the one you remember, as long as there is more to it than the TV and a countdown. We have gathered here ten games and thirty questions that sum up your year, not the year of the news.
+Not every New Year's Eve needs a ticket to a party. An evening at home, with the people you went through the year with, can be the one you remember, as long as there is more to it than the TV and a countdown. We have gathered here ten New Year's Eve games and thirty questions that sum up your year, not the year of the news.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
 ## When is Sylvester 2026, and how is it different from Novy God?
 
-The eve of the civil New Year falls on Thursday, December 31, 2026. Sylvester and Novy God are celebrated on the same night, and they are two different traditions of the same moment.
+The eve of the civil New Year falls on Thursday, December 31, 2026. Sylvester (סילבסטר) and Novy God (נובי גוד) are celebrated on the same night, and they are two different traditions of the same moment.
 
 Novy God, "new year" in Russian, is according to [the Ministry of Education](https://pop.education.gov.il/new-immigrants/cultural-social-integration/novy-god/) a family holiday with no religious or ideological meaning, celebrated on the night between December 31 and January 1. It came to Israel with the immigrants from the former Soviet Union. The name Sylvester comes from Pope [Sylvester I, who died on December 31, 335](https://www.hamichlol.org.il/%D7%A1%D7%99%D7%9C%D7%91%D7%A1%D7%98%D7%A8_%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F). Whatever you call this evening at your place, the games here suit it.
 

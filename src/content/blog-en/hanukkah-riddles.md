@@ -42,14 +42,14 @@ Younger kids do best with "Who am I" riddles and emoji riddles, and older ones w
 
 ## Which "Who am I" riddles suit kids?
 
-Short riddles about the things kids see, eat and spin during the holiday. Read one clue after another, and whoever knows jumps in.
+Short "Who am I" riddles (מי אני) about the things kids see, eat and spin during the holiday. Read one clue after another, and whoever knows jumps in.
 
-1. **I have one leg and four sides. I spin and spin, until I fall.** A dreidel (sevivon).
-2. **I stand taller than all the others and light them all, and nobody counts me.** The shamash, the helper candle.
-3. **I'm round and sweet. I have jam in my belly and powdered sugar on my head.** A sufganiyah, a Hanukkah doughnut.
-4. **I was born from a potato, went into the frying pan, and came out golden.** A latke (levivah).
+1. **I have one leg and four sides. I spin and spin, until I fall.** A dreidel (sevivon, סביבון).
+2. **I stand taller than all the others and light them all, and nobody counts me.** The shamash (שמש), the helper candle.
+3. **I'm round and sweet. I have jam in my belly and powdered sugar on my head.** A sufganiyah (סופגנייה), a Hanukkah doughnut.
+4. **I was born from a potato, went into the frying pan, and came out golden.** A latke (levivah, לביבה).
 5. **I'm small and sealed. I was supposed to last one day, and I lasted eight.** The jug of oil.
-6. **I have eight branches plus one, and every evening I shine a little brighter.** A hanukkiah.
+6. **I have eight branches plus one, and every evening I shine a little brighter.** A hanukkiah (חנוכייה).
 7. **I'm round and wrapped in gold, and inside I'm chocolate.** A chocolate coin, Hanukkah gelt.
 8. **We are five brothers from Modi'in, and our father started the revolt.** The Maccabees, the sons of Mattathias.
 9. **I'm a month in the Hebrew calendar, and the holiday begins on my 25th day.** Kislev.
@@ -74,7 +74,7 @@ Picture riddles, each hiding a word, a custom or a song of the holiday. Show the
 
 ## What are behead-the-word riddles for Hanukkah?
 
-In a behead-the-word riddle you take the first letter off a word and get a new word. You have to crack both.
+In a behead-the-word riddle (קפד ראשו) you take the first letter off a word and get a new word. You have to crack both.
 
 23. **I'm what the candles do in the window. Behead me, and I'm the opposite of high.** Glow, low.
 24. **I'm what you do to a dreidel. Behead me, and I'm small and sharp and hold a note on the board.** Spin, pin.
@@ -83,7 +83,7 @@ In a behead-the-word riddle you take the first letter off a word and get a new w
 
 ## What are sound-alike riddles for Hanukkah?
 
-A sound-alike riddle has two clues: one for a word, and one for a word that sounds exactly the same but is spelled differently and means something else entirely. Whoever finds the pair wins.
+A sound-alike riddle (the English cousin of הוא והיא riddles) has two clues: one for a word, and one for a word that sounds exactly the same but is spelled differently and means something else entirely. Whoever finds the pair wins.
 
 27. **One: the number of nights of Hanukkah. The other: what you did to the last sufganiyah.** Eight, ate.
 28. **One: what the miracle was. The other: what you do to the potatoes for latkes.** Great, grate.
@@ -110,7 +110,7 @@ Riddles that lean on wordplay and on small details of the holiday. They sound si
 39. **What's in the middle of every latke?** The letter T.
 40. **I'm placed last and lit first. Who am I?** The new candle of that evening.
 41. **I have four letters on me and not a single word, and still I tell a whole story.** A dreidel.
-42. **In Israel I carry a pe, and abroad a shin. What's the difference between the two words?** Po and sham, here and there: "Nes gadol haya po" (a great miracle happened here) or "Nes gadol haya sham" (a great miracle happened there).
+42. **In Israel I carry a pe, and abroad a shin. What's the difference between the two words?** Po (פה) and sham (שם), here and there: "Nes gadol haya po" (נס גדול היה פה, a great miracle happened here) or "Nes gadol haya sham" (נס גדול היה שם, a great miracle happened there).
 43. **Which holiday always stretches across two months?** Hanukkah, which begins in Kislev and ends in Tevet.
 44. **The longer I burn the shorter I get, and still every evening there are more of me. Who am I?** The Hanukkah candles.
 45. **The more candles you light, the less of me there is. What am I?** Darkness.

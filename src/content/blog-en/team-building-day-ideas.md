@@ -1,8 +1,8 @@
 ---
-title: "What do you do on a team-building day? Ideas for a small team, the office and a low budget"
-seoTitle: "Team-building day ideas, pay and tax in Israel"
+title: "Team Building Activities: What Do You Do on a Team-Building Day? Ideas for a Small Team, the Office and a Low Budget"
+seoTitle: "Team Building Activities: Ideas, Pay and Tax in Israel"
 description: "Team-building day and team evening ideas for small teams, the office and winter. Plus: is it paid, do you have to attend, and what about tax in Israel?"
-targetKeyword: "team-building day ideas"
+targetKeyword: "team building activities"
 answer: "A good team-building day starts with a goal: getting to know new employees, celebrating the end of a project, or simply taking a breather. Workshops and intimate activities suit a small team, challenge games suit a large one, and activities that work from a phone suit a hybrid team. The activities that connect people fastest are the ones where employees discover new things about each other, for example a quiz built from the team's own stories."
 date: 2026-11-16
 updated: 2026-11-17
@@ -18,7 +18,7 @@ faq:
     a: "Choose an activity that also works remotely, such as a quiz where everyone answers from their phone and sees the same screen. You can also send a kit to people's homes for a shared workshop on Zoom."
 ---
 
-"We need to do a team-building day" is one of the easiest tasks to pass along, and one of the hardest to do well. The same fun day that worked for a team of 60 can be awkward for a team of eight, and what excites new employees can bore someone who has already done that route three times. Here is a simple way to choose, ideas by type, and answers to the questions people search for most: pay, mandatory attendance and tax.
+"We need to do a team-building day" is one of the easiest tasks to pass along, and one of the hardest to do well. The same fun day that worked for a team of 60 can be awkward for a team of eight, and what excites new employees can bore someone who has already done that route three times. Here is a simple way to choose, team building activities by type, and answers to the questions people search for most: pay, mandatory attendance and tax.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
@@ -95,7 +95,7 @@ In practice, the best approach is never to get to "mandatory" at all: choose an 
 
 No, if it meets the Tax Authority's conditions: a work day with full pay, on work days, without spouses. If part of the activity takes place on a weekend or during a vacation, employees will be charged a taxable benefit on the entire activity.
 
-[According to a summary of the guideline](https://www.capitax.co.il/content/2/print/1784), in any case that does not meet the rules, a taxable benefit (shovi hatava) must be attributed to the employees, meaning the event counts as taxable income. It is important to know that a ruling of the [Tel Aviv Regional Labor Court](https://www.capitax.co.il/Attachments/10162-11-20.pdf) noted that the guideline reflects the Tax Authority's position and is not binding law. For questions about deducting the expense and about VAT, talk to your company's accountant.
+[According to a summary of the guideline](https://www.capitax.co.il/content/2/print/1784), in any case that does not meet the rules, a taxable benefit (shovi hatava, שווי הטבה) must be attributed to the employees, meaning the event counts as taxable income. It is important to know that a ruling of the [Tel Aviv Regional Labor Court](https://www.capitax.co.il/Attachments/10162-11-20.pdf) noted that the guideline reflects the Tax Authority's position and is not binding law. For questions about deducting the expense and about VAT, talk to your company's accountant.
 
 > The information here is a general summary and is not legal or tax advice.
 

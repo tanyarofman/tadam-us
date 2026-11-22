@@ -84,8 +84,8 @@ Questions about the sources and the history of the holiday: where it is first me
 
 Short nature questions that both a child and a grandmother can guess. They work especially well as tasting questions, with the fruit itself on the table.
 
-23. **What is a dvela?** A dried fig.
-24. **Which fruit is leder (fruit leather) usually made from?** Apricot.
+23. **What is a dvela (דבלה)?** A dried fig.
+24. **Which fruit is leder (לדר, fruit leather) usually made from?** Apricot.
 25. **Which part of the carob tree do you eat?** The pods.
 26. **How can you tell the age of a tree that was cut down?** You count the rings in the trunk.
 27. **What do you call a tree that sheds its leaves in winter?** A deciduous tree.

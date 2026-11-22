@@ -1,6 +1,6 @@
 ---
-title: "Bachelorette party games and tasks: 12 games and 40 ready-made questions and tasks"
-seoTitle: "Bachelorette party games: 12 games and 40 tasks"
+title: "Bachelorette Party Games and Tasks: 12 Games and 40 Ready-Made Questions and Tasks"
+seoTitle: "Bachelorette Party Games: 12 Games and 40 Tasks"
 description: "12 bachelorette party games, 25 quiz questions about the bride and groom and 15 ready-made tasks. Works at home, and when Mom and Grandma are coming too."
 targetKeyword: "bachelorette party games"
 answer: "The games that work best at a bachelorette party are the ones about the bride herself: a \"How well do you know the bride\" quiz, \"What did the groom say\" with answers recorded in advance, and pass the parcel with tasks. Here you'll find 12 games, 25 ready-made questions about the bride and groom and 15 tasks, all suitable for a party at home and for a guest list that includes Mom and Grandma."
@@ -25,7 +25,7 @@ You've booked a place, set a date, and there's a WhatsApp group with a secret na
 
 A bachelorette party is usually built from a meal or a shared activity, plus a games part dedicated to the bride. What people remember afterward is usually the second part.
 
-The activity can be a workshop, a spa day, an evening at home or a weekend in a tzimmer (a guest cabin). The games are what connect the guests, who usually come from different periods of the bride's life: childhood friends, army friends, work friends and family. A game about the bride gives everyone something in common.
+The activity can be a workshop, a spa day, an evening at home or a weekend in a tzimmer (צימר, a guest cabin). The games are what connect the guests, who usually come from different periods of the bride's life: childhood friends, army friends, work friends and family. A game about the bride gives everyone something in common.
 
 ## When do you hold a bachelorette party, and how do you organize it?
 

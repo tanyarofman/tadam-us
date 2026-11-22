@@ -1,8 +1,8 @@
 ---
-title: "Pass the parcel tasks and questions: 60 ideas for kids, teens and adults"
-seoTitle: "Pass the parcel tasks and questions: 60 ready ideas"
+title: "Pass the Parcel Tasks and Questions: 60 Ideas for Kids, Teens and Adults"
+seoTitle: "Pass the Parcel Tasks and Questions: 60 Ready Ideas"
 description: "60 pass the parcel tasks and questions for kids, teens and adults, plus how to prepare the parcel: how many layers, what goes inside, and big groups."
-targetKeyword: "pass the parcel tasks"
+targetKeyword: "pass the parcel"
 answer: "Pass the parcel is a prize wrapped in many layers that travels between the players while music plays. When the music stops, whoever is holding the parcel removes a layer and does the task or answers the question waiting there. Here you'll find 60 ready-made tasks and questions by age, and everything you need to prepare the parcel: a layer for every player, a note in every layer and a small prize in the middle."
 date: 2026-11-22
 category: "Birthdays"
@@ -25,7 +25,7 @@ Some games need no explanation. A circle, music, a parcel passing from hand to h
 
 Pass the parcel is a party game in which a prize wrapped in many layers goes around a circle while music plays. When the music stops, whoever is holding the parcel removes one layer, and you keep going until the last layer.
 
-In Hebrew the game is called chavila overet, and it is known as a [classic British party game](https://en.wikipedia.org/wiki/Pass_the_parcel). In the original version, a small prize waits in every layer. In the version familiar in Israel, every layer holds a note with a task or a question, and the prize is saved for whoever opens the last layer.
+In Hebrew the game is called chavila overet (חבילה עוברת), and it is known as a [classic British party game](https://en.wikipedia.org/wiki/Pass_the_parcel). In the original version, a small prize waits in every layer. In the version familiar in Israel, every layer holds a note with a task or a question, and the prize is saved for whoever opens the last layer.
 
 ## How do you prepare a pass the parcel?
 

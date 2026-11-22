@@ -1,8 +1,8 @@
 ---
-title: "Icebreaker questions and games: 80 questions and 7 games for your team, class and family"
-seoTitle: "Icebreaker questions: 80 questions and 7 icebreaker games"
+title: "Icebreakers: 80 Icebreaker Questions and 7 Icebreaker Games for Your Team, Class and Family"
+seoTitle: "Icebreakers: 80 Icebreaker Questions and 7 Games"
 description: "80 ready icebreaker questions: light, funny, this or that and deep, for kids and for teams at work, plus 7 icebreaker games that work with any group."
-targetKeyword: "icebreaker questions"
+targetKeyword: "icebreakers"
 answer: "Good icebreaker questions are open questions that are easy to answer and have no right answer, like \"What dish do you make best?\". Start with light and funny questions, and only then move on to more personal ones. Here you will find 80 ready questions by type and by audience, and seven icebreaker games that turn them into a 10 to 20 minute activity."
 date: 2026-11-22
 category: "Companies and teams"
@@ -17,7 +17,7 @@ faq:
     a: "Two truths and a lie, this or that questions with a vote, and a quiz where everyone answers from their phone and sees the same screen. All of them work without getting up from your chair."
 ---
 
-"Let's go around and introduce ourselves" is a sentence that makes half the room look at the floor. The problem is usually the question. "Tell us a bit about yourself" is hard to answer, and "What dish do you make best?" is a question everyone wants to answer. We have gathered 80 questions of the second kind here, and seven games that use them.
+"Let's go around and introduce ourselves" is a sentence that makes half the room look at the floor. The problem is usually the question. "Tell us a bit about yourself" is hard to answer, and "What dish do you make best?" is a question everyone wants to answer. We have gathered 80 icebreaker questions of the second kind here, and seven icebreaker games that use them.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 

@@ -1,8 +1,8 @@
 ---
-title: "Bar mitzvah attractions: which 25 ideas do guests actually remember?"
-seoTitle: "Bar mitzvah attractions: 25 ideas for hall or home"
-description: "25 bar and bat mitzvah attractions by type: photos, dance floor, food, shows and activities for every guest. What suits a hall or a home, and how to pick."
-targetKeyword: "bar mitzvah attractions"
+title: "Bar Mitzvah Ideas: Which 25 Entertainment Ideas and Attractions Do Guests Actually Remember?"
+seoTitle: "Bar Mitzvah Ideas: 25 Entertainment Ideas for Hall or Home"
+description: "25 bar and bat mitzvah ideas by type: photos, dance floor, food, shows and entertainment for every guest. What suits a hall or a home, and how to pick."
+targetKeyword: "bar mitzvah ideas"
 answer: "The most popular bar mitzvah attractions are photo stations (magnets, 360, selfie mirror), dance floor extras (drummers, LED accessories), food stations and short shows. The ones people remember most are about the bar or bat mitzvah kid and involve every age group, for example a live trivia game about the child that all the guests play from their phones."
 date: 2026-11-16
 updated: 2026-11-17
@@ -18,7 +18,7 @@ faq:
     a: "Popular vendors get booked months ahead, especially in spring and summer. It's worth booking the main attraction right after you lock in the hall and the date."
 ---
 
-Every parent planning a bar mitzvah reaches the same question at some point: what will there be at the event besides food and dancing? The list below is organized by type, with a short note on who each attraction suits, a table of what works in a hall and what works at home, and how to choose without ending up with five attractions that all do the same thing.
+Every parent planning a bar mitzvah reaches the same question at some point: what will there be at the event besides food and dancing? The 25 bar mitzvah ideas below, the entertainment Israelis call attractions (אטרקציות), are organized by type, with a short note on who each attraction suits, a table of what works in a hall and what works at home, and how to choose without ending up with five attractions that all do the same thing.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
@@ -107,6 +107,6 @@ At Tadam! it works like this:
 
 No app and no stage needed, and older guests who aren't comfortable with phones play together with the grandchildren.
 
-> **Example scenario (not a real event):** 180 guests, and the DJ stops the music after the first course. A photo of Yonatan at age 4 in a huge kova tembel (the classic Israeli bucket hat) comes up on the screen, with the question "Where was this photo taken?". The friends from class guess "at the beach", Grandma Ruti answers correctly ("on the trip to the Galilee!") and climbs to first place, and when she wins at the end, the whole class table stands up and applauds her.
+> **Example scenario (not a real event):** 180 guests, and the DJ stops the music after the first course. A photo of Yonatan at age 4 in a huge kova tembel (כובע טמבל, the classic Israeli bucket hat) comes up on the screen, with the question "Where was this photo taken?". The friends from class guess "at the beach", Grandma Ruti answers correctly ("on the trip to the Galilee!") and climbs to first place, and when she wins at the end, the whole class table stands up and applauds her.
 
 Want to see what it looks like? [Watch the demo](/en/#demo). Celebrating during Hanukkah? Try the [family Hanukkah quiz](/en/blog/hanukkah-quiz/) first. And looking for an idea for a work event? Here's a [guide to the office holiday toast](/en/blog/office-holiday-toast/).

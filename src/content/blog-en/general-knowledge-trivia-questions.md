@@ -1,8 +1,8 @@
 ---
-title: "100 Trivia Questions with Answers: A General Knowledge Quiz by Topic, for Kids and Adults"
-seoTitle: "100 Trivia Questions with Answers: General Knowledge Quiz"
+title: "100 General Knowledge Questions and Answers: A Trivia Quiz by Topic, for Kids and Adults"
+seoTitle: "100 General Knowledge Questions and Answers: Trivia Quiz"
 description: "100 general knowledge trivia questions with answers, by topic: Israel, geography, science, history, the human body, culture, sports, Hebrew and food."
-targetKeyword: "trivia questions"
+targetKeyword: "general knowledge questions"
 answer: "Here you will find 100 general knowledge trivia questions with answers, divided into nine topics: Israel, geography, science and nature, history, the human body, culture, sports and games, Hebrew and food. For a quiz night, pick 20 to 30 questions from three or four topics, split into mixed teams, and finish with a round of personal questions about the players."
 date: 2026-11-22
 category: "Trivia"
@@ -17,7 +17,7 @@ faq:
     a: "General knowledge trivia asks about the world, and personal trivia asks about the people in the room. At a family event or a team evening, the personal questions are usually the ones people remember."
 ---
 
-A good trivia question is one where half the room is sure it knows the answer, and the other half is sure of a different answer. We have gathered 100 questions like that here, with answers, divided by topic. Within each topic the questions run from easy to hard, so you can choose according to your crowd.
+A good trivia question is one where half the room is sure it knows the answer, and the other half is sure of a different answer. We have gathered 100 general knowledge questions like that here, with answers, divided by topic. Within each topic the questions run from easy to hard, so you can choose according to your crowd.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 

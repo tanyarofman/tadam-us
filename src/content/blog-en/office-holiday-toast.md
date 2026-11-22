@@ -1,8 +1,8 @@
 ---
-title: "How do you run an office holiday toast that people actually look forward to?"
-seoTitle: "Office holiday toast: structure, ideas and checklist"
+title: "How Do You Run an Office Holiday Toast That People Actually Look Forward To?"
+seoTitle: "Office Holiday Toast: Structure, Ideas and Checklist"
 description: "How to run a holiday toast at work (Hanukkah, Rosh Hashanah, Pesach): a 30-minute structure, 10 activity ideas, tips for hybrid teams and a checklist."
-targetKeyword: "office holiday toast"
+targetKeyword: "holiday toast"
 answer: "A good office holiday toast lasts 30 to 45 minutes and has three parts: short opening remarks (up to 3 minutes), one activity that involves everyone, for example a quiz about the team's year, and food with time to talk. Most important: let people talk about themselves and the year that passed, not only listen to a speech."
 date: 2026-11-16
 updated: 2026-11-17
@@ -18,7 +18,7 @@ faq:
     a: "Three to four weeks before the holiday. That is enough to set a date that works for everyone and to collect stories and photos from employees for the activity."
 ---
 
-Almost every company in Israel holds a holiday toast (haramat kosit) for Rosh Hashanah, for Pesach, and more and more for Hanukkah too. Most of the time it looks the same: a speech, a glass of wine, snacks, and within ten minutes everyone is back at their computer. It doesn't have to be that way.
+Almost every company in Israel holds a holiday toast (haramat kosit, הרמת כוסית) for Rosh Hashanah, for Pesach, and more and more for Hanukkah too. Most of the time it looks the same: a speech, a glass of wine, snacks, and within ten minutes everyone is back at their computer. It doesn't have to be that way.
 
 [//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 

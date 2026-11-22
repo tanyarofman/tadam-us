@@ -8,14 +8,14 @@
 import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
 import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
-import { COPY } from "../../content/copy.he";
 
 type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
 type FsEl = HTMLElement & { webkitRequestFullscreen?: () => Promise<void> };
 
 function initVideo(s: HTMLElement, reduced: boolean) {
-  const d = COPY.scene3.demo;
   const box = s.querySelector<HTMLElement>(".s3-video")!;
+  // Button labels in the page's language (written by Scene3Reveal.astro)
+  const d: Record<"play" | "pause" | "replay" | "mute" | "unmute", string> = JSON.parse(box.dataset.labels!);
   const screen = s.querySelector<FsEl>(".s3-screen")!;
   const video = box.querySelector<FsVideo>("video")!;
   const sound = box.querySelector<HTMLButtonElement>(".s3-sound")!;

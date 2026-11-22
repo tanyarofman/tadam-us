@@ -1,6 +1,7 @@
 ---
 import { contactLink } from "../config/site";
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.closing;
 ---
 
@@ -39,9 +40,13 @@ const c = COPY.closing;
   .closing-burst i:nth-child(3) { left: 0; top: 29px; height: 17px; transform: rotate(-78deg); }
   .closing-button { gap: 24px; padding: 16px 34px; font-size: clamp(1.7rem, 3.3vw, 2.375rem); }
   .closing-button svg { width: 30px; height: 30px; }
+  /* English (LTR): the arrow points forward (right) and the spark sits at the end of the title (right). */
+  :global([dir="ltr"]) .closing-button svg { transform: scaleX(-1); }
+  :global([dir="ltr"]) .closing-burst { left: auto; right: -38px; transform: scaleX(-1); }
   @media (max-width: 600px) {
     .closing-cta { padding-block: 64px 176px; }
     .closing-title { max-width: calc(100% - 28px); }
     .closing-burst { transform: scale(.7); transform-origin: right top; left: -29px; }
+    :global([dir="ltr"]) .closing-burst { transform: scale(-.7, .7); transform-origin: left top; left: auto; right: -29px; }
   }
 </style>

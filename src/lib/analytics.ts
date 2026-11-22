@@ -19,7 +19,8 @@ export type TrackEvent =
   | "blog_demo_click"
   | "blog_contact_click"
   | "lead_submit"
-  | "lead_error";
+  | "lead_error"
+  | "language_switch";
 
 declare global {
   interface Window {

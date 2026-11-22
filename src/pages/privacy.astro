@@ -1,222 +1,135 @@
 ---
 /**
- * Privacy policy. Written 2026-11-17 from how the product works today (lead form on Netlify Forms, Messenger,
+ * Privacy policy (Hebrew). Written 2026-11-17 from how the product works today (lead form on Netlify Forms, Messenger,
  * materials sent for the game, the game itself on the game platform). Not legal advice: have a lawyer review it.
  * Lines marked TODO confirm are commitments the team still needs to confirm (they match the FAQ).
  * When adding analytics, ads pixels or cookies, update the "מידע טכני" and "ספקים" sections.
+ * The English version is src/pages/en/privacy.astro: keep the two in sync.
  */
-import Base from "../layouts/Base.astro";
-import Footer from "../components/Footer.astro";
-import { COPY } from "../content/copy.he";
+import PrivacyShell from "../components/pages/PrivacyShell.astro";
 import { SITE, contactLink } from "../config/site";
-const c = COPY.privacyPage;
 const updated = "17 בנובמבר 2026";
 ---
 
-<Base title={`${c.title} | טדאם!`} description="איזה מידע טדאם! אוסף, למה, עם מי הוא משותף ומה הזכויות שלכם.">
-  <main class="container privacy">
-    <a href="/" class="privacy-logo"><img src="/brand/tadam-logo-v4.webp" alt="טדאם!" width="736" height="332" /></a>
-    <h1 class="display privacy-title">{c.title}</h1>
-    <p class="updated">עודכן לאחרונה: {updated}</p>
+<PrivacyShell description="איזה מידע טדאם! אוסף, למה, עם מי הוא משותף ומה הזכויות שלכם." updatedLine={`עודכן לאחרונה: ${updated}`}>
 
-    <p class="lead">
-      טדאם! מכינים משחקי טריוויה חיים לאירועים, מהסיפורים והתמונות שאתם שולחים לנו. המדיניות הזו מסבירה איזה מידע אנחנו
-      אוספים, למה אנחנו משתמשים בו, עם מי הוא משותף ומה הזכויות שלכם. התמונות והסיפורים שלכם נשארים שלכם.
+  <p class="lead">
+    טדאם! מכינים משחקי טריוויה חיים לאירועים, מהסיפורים והתמונות שאתם שולחים לנו. המדיניות הזו מסבירה איזה מידע אנחנו
+    אוספים, למה אנחנו משתמשים בו, עם מי הוא משותף ומה הזכויות שלכם. התמונות והסיפורים שלכם נשארים שלכם.
+  </p>
+
+  <nav class="toc" aria-label="תוכן העניינים">
+    <ol>
+      <li><a href="#collect">איזה מידע אנחנו אוספים</a></li>
+      <li><a href="#use">למה אנחנו משתמשים במידע</a></li>
+      <li><a href="#share">עם מי המידע משותף</a></li>
+      <li><a href="#others">מידע על אנשים אחרים וילדים</a></li>
+      <li><a href="#keep">כמה זמן אנחנו שומרים את המידע</a></li>
+      <li><a href="#rights">הזכויות שלכם</a></li>
+      <li><a href="#security">אבטחת מידע</a></li>
+      <li><a href="#changes">שינויים במדיניות</a></li>
+      <li><a href="#contact">יצירת קשר</a></li>
+    </ol>
+  </nav>
+
+  <section id="collect">
+    <h2 class="display">1. איזה מידע אנחנו אוספים</h2>
+    <ul>
+      <li><strong>כשאתם משאירים פרטים באתר:</strong> שם, מספר טלפון, סוג האירוע ומועד משוער, אם מילאתם אותו.</li>
+      <li><strong>כשאתם פונים אלינו במסנג'ר או במייל:</strong> השם ופרופיל הפייסבוק שלכם או כתובת המייל שלכם, ותוכן ההודעות.</li>
+      <li>
+        <strong>החומרים למשחק:</strong> סיפורים, שאלות, תמונות ופרטים על החוגגים ועל האורחים, שאתם בוחרים לשלוח לנו כדי
+        שנבנה את המשחק.
+      </li>
+      <li>
+        <strong>במהלך המשחק באירוע:</strong> אורחים מצטרפים מהטלפון בסריקת קוד, בוחרים שם תצוגה ועונים על השאלות. השם
+        והניקוד מופיעים על המסך ובטבלת המובילים.
+      </li>
+      <li>
+        <strong>מידע טכני:</strong> כמו כל אתר, שרתי האחסון רושמים מידע טכני בסיסי (כמו כתובת IP וסוג הדפדפן) כדי להפעיל
+        את האתר ולשמור על האבטחה שלו. כרגע האתר לא משתמש בכלי פרסום או במעקב של צד שלישי.
+      </li>
+    </ul>
+  </section>
+
+  <section id="use">
+    <h2 class="display">2. למה אנחנו משתמשים במידע</h2>
+    <ul>
+      <li>כדי לחזור אליכם, לענות על שאלות ולתאם את האירוע.</li>
+      <li>כדי לבנות את המשחק שלכם ולהריץ אותו באירוע.</li>
+      <li>כדי לשפר את השירות ולשמור על אבטחת האתר.</li>
+    </ul>
+    {/* TODO confirm: the same commitments as the FAQ answer "מי רואה את התמונות והסיפורים?" */}
+    <p>
+      אנחנו לא מוכרים את המידע שלכם, לא משתמשים בתמונות ובסיפורים שלכם לפרסום בלי אישור מפורש מכם, ולא משתמשים בהם
+      לאימון מודלים של בינה מלאכותית.
     </p>
+  </section>
 
-    <nav class="toc" aria-label="תוכן העניינים">
-      <ol>
-        <li><a href="#collect">איזה מידע אנחנו אוספים</a></li>
-        <li><a href="#use">למה אנחנו משתמשים במידע</a></li>
-        <li><a href="#share">עם מי המידע משותף</a></li>
-        <li><a href="#others">מידע על אנשים אחרים וילדים</a></li>
-        <li><a href="#keep">כמה זמן אנחנו שומרים את המידע</a></li>
-        <li><a href="#rights">הזכויות שלכם</a></li>
-        <li><a href="#security">אבטחת מידע</a></li>
-        <li><a href="#changes">שינויים במדיניות</a></li>
-        <li><a href="#contact">יצירת קשר</a></li>
-      </ol>
-    </nav>
+  <section id="share">
+    <h2 class="display">3. עם מי המידע משותף</h2>
+    <p>
+      רק אתם ואנחנו רואים את החומרים שלכם לפני האירוע. באירוע עצמו, המשחק מוצג על המסך הגדול ובטלפונים של האורחים שמשחקים.
+      כדי לתת את השירות אנחנו נעזרים בספקים, שמקבלים רק את מה שנחוץ להם:
+    </p>
+    <ul>
+      <li><strong>Netlify:</strong> אחסון האתר וקבלת הטפסים שאתם ממלאים בו.</li>
+      <li><strong>Meta (פייסבוק ומסנג'ר) ו-Google (Gmail):</strong> השיחות וההתכתבויות איתכם.</li>
+      <li><strong>פלטפורמת המשחק:</strong> השירות שבו המשחק נבנה ורץ באירוע, כולל השאלות והתמונות שבו.</li>
+    </ul>
+    <p>
+      חלק מהספקים שומרים מידע על שרתים מחוץ לישראל. נמסור מידע לגורם אחר רק אם החוק מחייב אותנו לעשות זאת.
+    </p>
+  </section>
 
-    <section id="collect">
-      <h2 class="display">1. איזה מידע אנחנו אוספים</h2>
-      <ul>
-        <li><strong>כשאתם משאירים פרטים באתר:</strong> שם, מספר טלפון, סוג האירוע ומועד משוער, אם מילאתם אותו.</li>
-        <li><strong>כשאתם פונים אלינו במסנג'ר או במייל:</strong> השם ופרופיל הפייסבוק שלכם או כתובת המייל שלכם, ותוכן ההודעות.</li>
-        <li>
-          <strong>החומרים למשחק:</strong> סיפורים, שאלות, תמונות ופרטים על החוגגים ועל האורחים, שאתם בוחרים לשלוח לנו כדי
-          שנבנה את המשחק.
-        </li>
-        <li>
-          <strong>במהלך המשחק באירוע:</strong> אורחים מצטרפים מהטלפון בסריקת קוד, בוחרים שם תצוגה ועונים על השאלות. השם
-          והניקוד מופיעים על המסך ובטבלת המובילים.
-        </li>
-        <li>
-          <strong>מידע טכני:</strong> כמו כל אתר, שרתי האחסון רושמים מידע טכני בסיסי (כמו כתובת IP וסוג הדפדפן) כדי להפעיל
-          את האתר ולשמור על האבטחה שלו. כרגע האתר לא משתמש בכלי פרסום או במעקב של צד שלישי.
-        </li>
-      </ul>
-    </section>
+  <section id="others">
+    <h2 class="display">4. מידע על אנשים אחרים וילדים</h2>
+    <p>
+      המשחק בנוי מסיפורים ותמונות של החוגגים ושל אנשים שקרובים אליהם, לפעמים גם ילדים (למשל ביום הולדת או בבר ובת מצווה).
+      כששולחים לנו חומרים על אנשים אחרים, אתם מאשרים שמותר לכם לשתף אותם לצורך המשחק. אנחנו משתמשים בהם רק למשחק של האירוע
+      שלכם, וממליצים לא לשלוח מידע רגיש כמו מידע רפואי או מספרי זהות.
+    </p>
+  </section>
 
-    <section id="use">
-      <h2 class="display">2. למה אנחנו משתמשים במידע</h2>
-      <ul>
-        <li>כדי לחזור אליכם, לענות על שאלות ולתאם את האירוע.</li>
-        <li>כדי לבנות את המשחק שלכם ולהריץ אותו באירוע.</li>
-        <li>כדי לשפר את השירות ולשמור על אבטחת האתר.</li>
-      </ul>
-      {/* TODO confirm: the same commitments as the FAQ answer "מי רואה את התמונות והסיפורים?" */}
-      <p>
-        אנחנו לא מוכרים את המידע שלכם, לא משתמשים בתמונות ובסיפורים שלכם לפרסום בלי אישור מפורש מכם, ולא משתמשים בהם
-        לאימון מודלים של בינה מלאכותית.
-      </p>
-    </section>
+  <section id="keep">
+    <h2 class="display">5. כמה זמן אנחנו שומרים את המידע</h2>
+    {/* TODO confirm: retention. No automatic-deletion promise until the real policy is decided. */}
+    <p>
+      אנחנו שומרים את המידע כל עוד הוא נחוץ למטרות שבגללן נאסף, למשל כדי שהמשחק יישאר אצלכם כמזכרת אחרי האירוע. אפשר לבקש
+      מאיתנו בכל עת למחוק את החומרים ואת פרטי הקשר שלכם, ונטפל בבקשה בהקדם.
+    </p>
+  </section>
 
-    <section id="share">
-      <h2 class="display">3. עם מי המידע משותף</h2>
-      <p>
-        רק אתם ואנחנו רואים את החומרים שלכם לפני האירוע. באירוע עצמו, המשחק מוצג על המסך הגדול ובטלפונים של האורחים שמשחקים.
-        כדי לתת את השירות אנחנו נעזרים בספקים, שמקבלים רק את מה שנחוץ להם:
-      </p>
-      <ul>
-        <li><strong>Netlify:</strong> אחסון האתר וקבלת הטפסים שאתם ממלאים בו.</li>
-        <li><strong>Meta (פייסבוק ומסנג'ר) ו-Google (Gmail):</strong> השיחות וההתכתבויות איתכם.</li>
-        <li><strong>פלטפורמת המשחק:</strong> השירות שבו המשחק נבנה ורץ באירוע, כולל השאלות והתמונות שבו.</li>
-      </ul>
-      <p>
-        חלק מהספקים שומרים מידע על שרתים מחוץ לישראל. נמסור מידע לגורם אחר רק אם החוק מחייב אותנו לעשות זאת.
-      </p>
-    </section>
+  <section id="rights">
+    <h2 class="display">6. הזכויות שלכם</h2>
+    <p>לפי חוק הגנת הפרטיות, אתם יכולים:</p>
+    <ul>
+      <li>לבקש לעיין במידע שיש לנו עליכם.</li>
+      <li>לבקש לתקן מידע שגוי או למחוק מידע.</li>
+      <li>לבקש שלא נפנה אליכם יותר.</li>
+    </ul>
+    <p>כדי לממש את הזכויות, כתבו לנו לכתובת שבסוף העמוד.</p>
+  </section>
 
-    <section id="others">
-      <h2 class="display">4. מידע על אנשים אחרים וילדים</h2>
-      <p>
-        המשחק בנוי מסיפורים ותמונות של החוגגים ושל אנשים שקרובים אליהם, לפעמים גם ילדים (למשל ביום הולדת או בבר ובת מצווה).
-        כששולחים לנו חומרים על אנשים אחרים, אתם מאשרים שמותר לכם לשתף אותם לצורך המשחק. אנחנו משתמשים בהם רק למשחק של האירוע
-        שלכם, וממליצים לא לשלוח מידע רגיש כמו מידע רפואי או מספרי זהות.
-      </p>
-    </section>
+  <section id="security">
+    <h2 class="display">7. אבטחת מידע</h2>
+    <p>
+      אנחנו נוקטים אמצעים סבירים כדי לשמור על המידע שלכם, והגישה אליו מוגבלת למי שצריך אותו כדי לתת לכם את השירות. אין
+      שיטה שמבטיחה הגנה מלאה, ואם נגלה פגיעה במידע שלכם נעדכן אתכם.
+    </p>
+  </section>
 
-    <section id="keep">
-      <h2 class="display">5. כמה זמן אנחנו שומרים את המידע</h2>
-      {/* TODO confirm: retention. No automatic-deletion promise until the real policy is decided. */}
-      <p>
-        אנחנו שומרים את המידע כל עוד הוא נחוץ למטרות שבגללן נאסף, למשל כדי שהמשחק יישאר אצלכם כמזכרת אחרי האירוע. אפשר לבקש
-        מאיתנו בכל עת למחוק את החומרים ואת פרטי הקשר שלכם, ונטפל בבקשה בהקדם.
-      </p>
-    </section>
+  <section id="changes">
+    <h2 class="display">8. שינויים במדיניות</h2>
+    <p>אנחנו עשויים לעדכן את המדיניות מדי פעם. התאריך בראש העמוד מראה מתי עודכנה לאחרונה.</p>
+  </section>
 
-    <section id="rights">
-      <h2 class="display">6. הזכויות שלכם</h2>
-      <p>לפי חוק הגנת הפרטיות, אתם יכולים:</p>
-      <ul>
-        <li>לבקש לעיין במידע שיש לנו עליכם.</li>
-        <li>לבקש לתקן מידע שגוי או למחוק מידע.</li>
-        <li>לבקש שלא נפנה אליכם יותר.</li>
-      </ul>
-      <p>כדי לממש את הזכויות, כתבו לנו לכתובת שבסוף העמוד.</p>
-    </section>
-
-    <section id="security">
-      <h2 class="display">7. אבטחת מידע</h2>
-      <p>
-        אנחנו נוקטים אמצעים סבירים כדי לשמור על המידע שלכם, והגישה אליו מוגבלת למי שצריך אותו כדי לתת לכם את השירות. אין
-        שיטה שמבטיחה הגנה מלאה, ואם נגלה פגיעה במידע שלכם נעדכן אתכם.
-      </p>
-    </section>
-
-    <section id="changes">
-      <h2 class="display">8. שינויים במדיניות</h2>
-      <p>אנחנו עשויים לעדכן את המדיניות מדי פעם. התאריך בראש העמוד מראה מתי עודכנה לאחרונה.</p>
-    </section>
-
-    <section id="contact">
-      <h2 class="display">9. יצירת קשר</h2>
-      <p>שאלות, בקשות או הערות על הפרטיות שלכם? כתבו לנו:</p>
-      <ul class="contact">
-        <li>מייל: <a href={`mailto:${SITE.email}`} dir="ltr">{SITE.email}</a></li>
-        <li>מסנג'ר: <a href={contactLink("privacy")} target="_blank" rel="noopener">דף הפייסבוק של טדאם!</a></li>
-      </ul>
-    </section>
-
-    <a class="btn btn-buzzer back" href="/">{c.back}</a>
-  </main>
-  <Footer />
-</Base>
-
-<style>
-  .privacy {
-    max-width: 780px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding-block: 56px 72px;
-    line-height: 1.7;
-  }
-  .privacy-logo img {
-    width: 150px;
-  }
-  .privacy-title {
-    margin: 8px 0 0;
-    font-size: clamp(2.2rem, 6vw, 3.6rem);
-    color: var(--game-yellow);
-    text-shadow: 0 4px 0 var(--purple-ink);
-  }
-  .updated {
-    margin: -10px 0 0;
-    color: var(--text-muted);
-    font-size: var(--fs-small);
-  }
-  .lead {
-    margin: 0;
-  }
-  .toc {
-    padding: 18px 22px;
-    border-radius: var(--radius-m);
-    background: var(--surface);
-    border: 2px solid var(--surface-border);
-  }
-  .toc ol {
-    margin: 0;
-    padding-inline-start: 1.2em;
-    columns: 2;
-    column-gap: 32px;
-  }
-  .toc a,
-  .contact a {
-    color: var(--white);
-    text-decoration-color: var(--game-yellow);
-    text-underline-offset: 4px;
-  }
-  section {
-    scroll-margin-top: 24px;
-  }
-  h2 {
-    margin: 12px 0 8px;
-    font-size: clamp(1.5rem, 3.4vw, 2rem);
-    color: var(--game-yellow);
-  }
-  section p,
-  section ul {
-    margin: 0 0 10px;
-  }
-  section ul {
-    padding-inline-start: 1.2em;
-  }
-  section li {
-    margin-bottom: 6px;
-  }
-  .contact {
-    list-style: none;
-    padding: 0 !important;
-  }
-  .back {
-    align-self: flex-start;
-    margin-top: 12px;
-  }
-  @media (max-width: 600px) {
-    .toc ol {
-      columns: 1;
-    }
-  }
-</style>
+  <section id="contact">
+    <h2 class="display">9. יצירת קשר</h2>
+    <p>שאלות, בקשות או הערות על הפרטיות שלכם? כתבו לנו:</p>
+    <ul class="contact">
+      <li>מייל: <a href={`mailto:${SITE.email}`} dir="ltr">{SITE.email}</a></li>
+      <li>מסנג'ר: <a href={contactLink("privacy")} target="_blank" rel="noopener">דף הפייסבוק של טדאם!</a></li>
+    </ul>
+  </section>
+</PrivacyShell>

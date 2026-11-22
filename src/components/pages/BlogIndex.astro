@@ -1,0 +1,114 @@
+---
+/** The blog index, in the language of the URL: `/blog/` (Hebrew) and `/en/blog/` (English). */
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import BlogHeader from "../blog/BlogHeader.astro";
+import Footer from "../Footer.astro";
+import { useCopy, localPath, BLOG_COLLECTION } from "../../content/copy";
+
+const { copy, locale, langTag } = useCopy(Astro.url);
+const t = copy.blog;
+const blogHome = localPath(locale, "/blog/");
+const posts = (await getCollection(BLOG_COLLECTION[locale], (p) => !p.data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const title = t.indexTitle;
+const description = t.indexDescription;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: t.indexName,
+  description,
+  inLanguage: langTag,
+  url: new URL(blogHome, Astro.site).href,
+  blogPost: posts.map((p) => ({
+    "@type": "BlogPosting",
+    headline: p.data.title,
+    url: new URL(`${blogHome}${p.id}/`, Astro.site).href,
+    datePublished: p.data.date.toISOString(),
+  })),
+};
+---
+
+<Base title={title} description={description} bilingual>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <BlogHeader />
+  <main class="container blog-index">
+    <h1 class="display h-scene">{t.name}</h1>
+    <p class="lead">{t.indexLead}</p>
+    <ul class="post-list">
+      {
+        posts.map((p) => (
+          <li>
+            <a href={`${blogHome}${p.id}/`} class="post-card">
+              <span class="post-cat">{p.data.category}</span>
+              <h2 class="post-title display">{p.data.title}</h2>
+              <p class="post-desc">{p.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import "../../scripts/blog";
+</script>
+
+<style>
+  .blog-index {
+    padding-block: 48px 80px;
+    max-width: 980px;
+  }
+  .blog-index .lead {
+    margin-top: 14px;
+    color: var(--text-muted);
+  }
+  .post-list {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 760px) {
+    .post-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .post-card {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    height: 100%;
+    padding: 22px 24px;
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .post-card:hover {
+    border-color: var(--game-yellow);
+  }
+  .post-cat {
+    justify-self: start;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--stage-navy);
+    background: var(--game-yellow);
+    padding: 2px 12px 4px;
+    border-radius: 999px;
+  }
+  .post-title {
+    font-size: 1.7rem;
+    line-height: 1.12;
+    color: var(--white);
+  }
+  .post-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+</style>

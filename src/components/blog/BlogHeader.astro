@@ -1,15 +1,18 @@
 ---
 /** Slim header for blog pages: logo home, link to the blog index, demo CTA. */
+import { useCopy, localPath } from "../../content/copy";
+const { copy, locale, home } = useCopy(Astro.url);
+const b = copy.blog;
 ---
 
 <header class="blog-header">
   <div class="container blog-header-inner">
-    <a href="/" class="blog-header-logo" aria-label="טדאם! דף הבית">
-      <img src="/brand/tadam-logo-v4.webp" alt="טדאם!" width="736" height="332" />
+    <a href={home} class="blog-header-logo" aria-label={b.headerHome}>
+      <img src="/brand/tadam-logo-v4.webp" alt={copy.brand} width="736" height="332" />
     </a>
-    <nav class="blog-header-nav" aria-label="ניווט">
-      <a href="/blog/">הבלוג</a>
-      <a class="btn btn-buzzer blog-header-cta" href="/#demo" data-track="blog_demo_click" data-source="blog-header">דמו</a>
+    <nav class="blog-header-nav" aria-label={b.headerNav}>
+      <a href={localPath(locale, "/blog/")}>{b.headerBlog}</a>
+      <a class="btn btn-buzzer blog-header-cta" href={`${home}#demo`} data-track="blog_demo_click" data-source="blog-header">{b.headerDemo}</a>
     </nav>
   </div>
 </header>

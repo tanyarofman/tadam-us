@@ -1,6 +1,12 @@
 ---
-import { COPY } from "../content/copy.he";
+import { useCopy, localPath, otherLanguagePath } from "../content/copy";
 import { SITE, contactLink } from "../config/site";
+interface Props {
+  /** False on a page that has no twin in the other language (an article not translated yet): hides the language link. */
+  bilingual?: boolean;
+}
+const { bilingual: bilingualPage = true } = Astro.props;
+const { copy: COPY, locale, home } = useCopy(Astro.url);
 const c = COPY.footer;
 ---
 
@@ -13,12 +19,13 @@ const c = COPY.footer;
         </a>
       </li>
     </ul>
-    <nav class="footer-links" aria-label="קישורים">
+    <nav class="footer-links" aria-label={c.linksLabel}>
       <a href={contactLink("footer")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="footer"><span class="footer-desktop">{c.contact}</span><span class="footer-mobile">{c.contactMobile}</span></a>
-      <a href="/blog/">{c.blog}</a>
-      <a href="/privacy"><span class="footer-desktop">{c.privacy}</span><span class="footer-mobile">{c.privacyMobile}</span></a>
+      <a href={localPath(locale, "/blog/")}>{c.blog}</a>
+      <a href={localPath(locale, "/privacy")}><span class="footer-desktop">{c.privacy}</span><span class="footer-mobile">{c.privacyMobile}</span></a>
+      {bilingualPage && <a href={otherLanguagePath(Astro.url)} lang={locale === "he" ? "en" : "he"} aria-label={COPY.nav.langSwitchLabel} data-track="language_switch" data-source="footer">{COPY.nav.langSwitch}</a>}
     </nav>
-    <a class="footer-copy" href="/"><span class="footer-desktop">{c.copyright} {new Date().getFullYear()}</span><span class="footer-mobile">{c.copyright}</span></a>
+    <a class="footer-copy" href={home}><span class="footer-desktop">{c.copyright} {new Date().getFullYear()}</span><span class="footer-mobile">{c.copyright}</span></a>
   </div>
 </footer>
 

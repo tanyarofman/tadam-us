@@ -4,6 +4,8 @@
  */
 
 export const COPY = {
+  /** The brand name as written in this language (logo label, page titles, structured data). */
+  brand: "טדאם!",
   closing: {
     title: "אז, למי עושים טדאם?",
     cta: "בואו ניצור משחק",
@@ -12,14 +14,21 @@ export const COPY = {
     title: "טדאם! שעשועון טריוויה לייב לאירוע שלכם",
     description:
       "הסיפורים, התמונות והפרטים האישיים שלכם הופכים למשחק אינטראקטיבי",
+    ogAlt: "טדאם! שעשועון אישי לאירוע שלכם",
   },
 
   nav: {
     skip: "דלגו לתוכן",
+    /** The link to the other language version of the same page. */
+    langSwitch: "English",
+    langSwitchLabel: "English version",
   },
 
   hero: {
     headline: "הרגע שכולם יזכרו מהאירוע שלכם.",
+    /** The headline word that gets the magenta swoosh, and the word count before the line break (wide screens, 0 = none). */
+    highlight: "יזכרו",
+    breakAfter: 3,
     sub: "הסיפורים, התמונות והפרטים האישיים שלכם הופכים לשעשועון טריוויה לייב עם מנחה על המסך הגדול.",
     ctaPrimary: "בואו נתחיל",
     ctaSecondary: "צפו בסרטון הדגמה",
@@ -56,6 +65,8 @@ export const COPY = {
 
   scene1: {
     headline: "יש רגע בכל אירוע שבו כולם מחכים למשהו.",
+    highlight: "מחכים",
+    photoAlt: "אורחים באירוע משפחתי יושבים סביב שולחנות, אוכלים ומשתמשים בטלפונים לפני תחילת המשחק",
     hallLabel: "איור: אולם אירועים עם שולחנות, עמדת די ג'יי ואורות צבעוניים. בפינה, אורחים משועממים מול הטלפונים.",
   },
 
@@ -97,11 +108,13 @@ export const COPY = {
       hostTitle: "המנחה שלכם",
       atmosphereTitle: "האווירה שלכם",
       boardTitle: "המשחק של נועה",
+      tiles: ["שאלה", "תמונה", "סיפור", "בדיחה", "שאלה", "מנחה"],
     },
   },
 
   scene5: {
     headline: "סורקים, משחקים, וכולם עונים ביחד.",
+    highlight: "ביחד",
   },
 
   scene6: {
@@ -119,6 +132,7 @@ export const COPY = {
 
   scene7: {
     headline: "רוצים לראות את זה בעצמכם?",
+    highlight: "בעצמכם",
     contact: "צרו משחק",
     cta: "שחקו בדמו",
     buzzerLabel: "לחצו על הבאזר כדי לשחק בדמו",
@@ -146,6 +160,7 @@ export const COPY = {
     title: "כמה זה עולה?",
     sub: "מחיר אחד ברור למשחק שלם לאירוע שלכם. ומי שרוצה, מוסיף.",
     cardsLabel: "מחירון",
+    currencyLabel: "שקלים",
     cards: {
       base: {
         name: "משחק אישי לאירוע",
@@ -227,6 +242,7 @@ export const COPY = {
     success: "תודה! קיבלנו את הפרטים ונחזור אליכם בקרוב.",
     error: "משהו השתבש בשליחה. נסו שוב, או כתבו לנו במסנג'ר.",
     errorMessenger: "למסנג'ר",
+    honeypot: "אל תמלאו את השדה הזה",
   },
 
   faq: {
@@ -272,6 +288,7 @@ export const COPY = {
     privacy: "מדיניות פרטיות",
     privacyMobile: "פרטיות",
     blog: "בלוג",
+    linksLabel: "קישורים",
     copyright: "© טדאם!",
   },
 
@@ -288,6 +305,39 @@ export const COPY = {
     // TODO confirm: full privacy policy text
     body: "התמונות והסיפורים שלכם נשארים שלכם. רק אתם ואנחנו רואים אותם, וכל פריט עובר את האישור שלכם לפני שהוא עולה למסך.",
     back: "חזרה לדף הבית",
+  },
+
+  /** Blog pages (index, article frame). The articles themselves are Markdown in src/content/blog/. */
+  blog: {
+    name: "הבלוג",
+    headerBlog: "הבלוג",
+    headerDemo: "דמו",
+    headerHome: "טדאם! דף הבית",
+    headerNav: "ניווט",
+    indexTitle: "הבלוג של טדאם! | רעיונות לאירועים, אטרקציות וחידונים",
+    indexDescription:
+      "רעיונות לבר ובת מצווה, ימי הולדת, חגים, ימי גיבוש ואירועי חברה. אטרקציות שמחברות את כל האורחים, וחידונים מוכנים לשחק.",
+    indexName: "הבלוג של טדאם!",
+    indexLead: "רעיונות לאירועים שכולם זוכרים: בר ובת מצווה, ימי הולדת, חגים, ימי גיבוש ואירועי חברה.",
+    crumbs: "פירורי לחם",
+    updated: "עודכן",
+    answerAria: "התשובה הקצרה",
+    answerLabel: "בקצרה",
+    toc: "בכתבה",
+    /** The category whose articles get the team call to action instead of the family one. */
+    teamCategory: "חברות וצוותים",
+    ctaTeam: {
+      title: "רוצים שהרגע הזה יהיה על הצוות שלכם?",
+      text: "טדאם! הוא משחק טריוויה חי שנבנה מהסיפורים של העובדים. כולם סורקים קוד מהמסך, עונים מהטלפון, גם מי שמתחבר מהבית, ומי שמכיר את הצוות הכי טוב מנצח. בלי אפליקציה, בערך 15 דקות.",
+    },
+    ctaFamily: {
+      title: "רוצים שהרגע הזה יהיה על החוגג.ת שלכם?",
+      text: "טדאם! הוא משחק טריוויה חי שנבנה מהסיפורים של המשפחה והחברים. כולם סורקים קוד מהמסך, עונים מהטלפון, ומי שמכיר הכי טוב מנצח. בלי אפליקציה, בערך 15 דקות.",
+    },
+    ctaDemo: "בואו לראות דמו",
+    ctaContact: "דברו איתנו במסנג'ר",
+    faqTitle: "שאלות נפוצות",
+    related: "עוד בבלוג",
   },
 
 } as const;

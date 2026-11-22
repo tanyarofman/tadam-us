@@ -39,6 +39,19 @@ Tanya manages it (pause, change the day, edit the instructions) in her scheduled
 - **Offered, not yet answered:** real stories to replace the labeled example scenarios in any of the 8.
 - **Easy to remove if Tanya prefers:** the Shabbat FAQ in `pass-the-parcel-tasks`.
 
+## English translations (2026-11-22, `/en/blog/`)
+
+All 12 articles are translated in `src/content/blog-en/` (same file names), for English speakers in Israel.
+English search volume in Israel was checked on 2026-11-22 (`data/seeds-english-il.txt`, `data/volume-english-il-2026-11-22.csv`, $0.09).
+It is small: most phrases get 10 to 40 searches a month. The exceptions, now used in titles and `targetKeyword`:
+"general knowledge questions" 590, "icebreakers" 590, "trivia questions" and "trivia quiz" 210 each, "general knowledge quiz" 170.
+"Bar mitzvah attractions", "office holiday toast" and "team-building day ideas" have no measurable volume, so those titles lead with
+"bar mitzvah ideas", "holiday toast" and "team building activities". "Tu bishvat" alone gets 720, the quiz phrase 10.
+Titles are in Title Case. Unclear transliterated terms carry the Hebrew word in parentheses.
+Hebrew wordplay was replaced with English wordplay in `hanukkah-riddles` (emoji riddles 16, 18, 19, behead-the-word 23 to 26,
+sound-alikes 27 to 32, hard riddles 39 and 45) and one tongue twister in `pass-the-parcel-tasks` (item 4).
+A new Hebrew article needs its English twin.
+
 ## Waiting for Tanya: real stories (never invent them)
 Each article now has one clearly labeled example scenario ("תרחיש לדוגמה (לא אירוע אמיתי)", Tanya's choice on 2026-11-16) and a hidden marker where the real story goes (`grep -n "להחליף בסיפור" src/content/blog/*.md`). When a real story arrives, it replaces the scenario in that article. 2 or 3 sentences each:
 1. **Family / Hanukkah:** a family event where Tadam was played. Who won, which question got the biggest laugh.

@@ -1,6 +1,8 @@
 ---
 /** The opening photograph shares the exact frame used by the logo reveal and video. */
 import Person from "./Person.astro";
+import { useCopy } from "../../content/copy";
+const { copy } = useCopy(Astro.url);
 ---
 
 <div class="hall-art">
@@ -11,7 +13,7 @@ import Person from "./Person.astro";
     width={1600}
     height={900}
     eager
-    alt="אורחים באירוע משפחתי יושבים סביב שולחנות, אוכלים ומשתמשים בטלפונים לפני תחילת המשחק"
+    alt={copy.scene1.photoAlt}
   />
 </div>
 

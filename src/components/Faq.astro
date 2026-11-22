@@ -1,7 +1,8 @@
 ---
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
 import { PRICING, fillPrices } from "../config/pricing";
 import { SITE } from "../config/site";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.faq;
 // Order: the price question (only while PRICING.showPrices), the general questions, then the add-ons
 // (price and add-on questions live in the `pricing` copy block).
@@ -11,7 +12,7 @@ const addonQs = COPY.pricing.faq.filter((it) => !isPrice(it));
 const items = [...priceQs, ...c.items, ...addonQs].map((it) => ({
   q: it.q,
   a: fillPrices(it.a),
-  demoLinkText: "demoLinkText" in it ? it.demoLinkText : null,
+  demoLinkText: "demoLinkText" in it && typeof it.demoLinkText === "string" ? it.demoLinkText : null,
 }));
 ---
 

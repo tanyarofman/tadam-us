@@ -1,0 +1,385 @@
+---
+/**
+ * The blog article page, in the language of the URL: `/blog/<slug>/` (Hebrew, src/content/blog/)
+ * and `/en/blog/<slug>/` (English, src/content/blog-en/). The pages only pick the article and pass it in.
+ */
+import { render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import BlogHeader from "../blog/BlogHeader.astro";
+import Footer from "../Footer.astro";
+import { contactLink } from "../../config/site";
+import { useCopy, localPath } from "../../content/copy";
+
+type Post = CollectionEntry<"blog"> | CollectionEntry<"blogEn">;
+interface Props {
+  post: Post;
+  /** All published articles in this language (for "more from the blog"). */
+  all: Post[];
+  /** The same article exists in the other language: adds hreflang and the language link. */
+  hasTwin: boolean;
+}
+const { post, all, hasTwin } = Astro.props;
+const { copy, locale, home, dateLocale, langTag } = useCopy(Astro.url);
+const t = copy.blog;
+const blogHome = localPath(locale, "/blog/");
+const { Content, headings } = await render(post);
+const d = post.data;
+const url = new URL(`${blogHome}${post.id}/`, Astro.site).href;
+const fmt = (date: Date) => date.toLocaleDateString(dateLocale, { day: "numeric", month: "long", year: "numeric" });
+const suffixed = `${d.seoTitle ?? d.title} | ${copy.brand}`;
+const pageTitle = suffixed.length <= 60 ? suffixed : (d.seoTitle ?? d.title);
+const cta = d.category === t.teamCategory ? t.ctaTeam : t.ctaFamily;
+const toc = headings.filter((h) => h.depth === 2);
+const related = all
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => Number(b.data.category === d.category) - Number(a.data.category === d.category))
+  .slice(0, 3);
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: d.title,
+    description: d.description,
+    inLanguage: langTag,
+    datePublished: d.date.toISOString(),
+    dateModified: (d.updated ?? d.date).toISOString(),
+    mainEntityOfPage: url,
+    url,
+    image: new URL("/brand/og-image-v3.jpg", Astro.site).href,
+    keywords: d.targetKeyword,
+    author: { "@type": "Organization", name: copy.brand, url: new URL(home, Astro.site).href },
+    publisher: {
+      "@type": "Organization",
+      name: copy.brand,
+      logo: { "@type": "ImageObject", url: new URL("/favicon-512.png", Astro.site).href },
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: copy.brand, item: new URL(home, Astro.site).href },
+      { "@type": "ListItem", position: 2, name: t.name, item: new URL(blogHome, Astro.site).href },
+      { "@type": "ListItem", position: 3, name: d.title, item: url },
+    ],
+  },
+  ...(d.faq.length
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: d.faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        },
+      ]
+    : []),
+];
+---
+
+<Base title={pageTitle} description={d.description} ogType="article" bilingual={hasTwin}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <meta slot="head" property="article:published_time" content={d.date.toISOString()} />
+  <BlogHeader />
+  <main class="container article-wrap">
+    <nav class="crumbs" aria-label={t.crumbs}>
+      <a href={home}>{copy.brand}</a> <span aria-hidden="true">›</span> <a href={blogHome}>{t.name}</a> <span aria-hidden="true">›</span>{" "}
+      <span>{d.category}</span>
+    </nav>
+
+    <article class="article">
+      <header class="article-head">
+        <span class="eyebrow">{d.category}</span>
+        <h1 class="display article-title">{d.title}</h1>
+        <p class="article-meta">
+          <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
+          {d.updated && <> · {t.updated} <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>}
+        </p>
+      </header>
+
+      <aside class="answer-box" aria-label={t.answerAria}>
+        <p class="answer-label">{t.answerLabel}</p>
+        <p>{d.answer}</p>
+      </aside>
+
+      {
+        toc.length > 2 && (
+          <nav class="toc" aria-label={t.toc}>
+            <p class="toc-title">{t.toc}</p>
+            <ol>
+              {toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <aside class="article-cta">
+        <p class="article-cta-title display">{cta.title}</p>
+        <p>{cta.text}</p>
+        <div class="article-cta-actions">
+          <a class="btn btn-buzzer" href={`${home}#demo`} data-track="blog_demo_click" data-source={`article:${post.id}`}>
+            <span class="btn-dot" aria-hidden="true"></span>{t.ctaDemo}
+          </a>
+          <a
+            class="article-cta-wa"
+            href={contactLink(`article-${post.id}`)}
+            target="_blank"
+            rel="noopener"
+            data-track="blog_contact_click"
+            data-source={`article:${post.id}`}>{t.ctaContact}</a
+          >
+        </div>
+      </aside>
+
+      {
+        d.faq.length > 0 && (
+          <section class="article-faq" aria-labelledby="faq-title">
+            <h2 id="faq-title" class="display">{t.faqTitle}</h2>
+            {d.faq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </section>
+        )
+      }
+    </article>
+
+    {
+      related.length > 0 && (
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title" class="display">{t.related}</h2>
+          <ul>
+            {related.map((p) => (
+              <li>
+                <a href={`${blogHome}${p.id}/`}>
+                  <span class="related-cat">{p.data.category}</span>
+                  <span class="related-title">{p.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+  <Footer bilingual={hasTwin} />
+</Base>
+
+<script>
+  import "../../scripts/blog";
+</script>
+
+<style>
+  .article-wrap {
+    max-width: 820px;
+    padding-block: 28px 72px;
+  }
+  .crumbs {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+  .crumbs a {
+    color: var(--text-muted);
+    text-underline-offset: 4px;
+  }
+  .article-title {
+    font-size: clamp(2.2rem, 6.4vw, 3.6rem);
+    color: var(--game-yellow);
+    text-wrap: balance;
+    margin-bottom: 14px;
+  }
+  .article-meta {
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+  .answer-box {
+    margin-block: 32px;
+    padding: 20px 24px;
+    border-radius: var(--radius-m);
+    background: var(--pill-white);
+    color: var(--ink);
+    font-size: var(--fs-lead);
+    line-height: 1.45;
+  }
+  .answer-label {
+    font-weight: 700;
+    font-size: var(--fs-small);
+    margin-bottom: 6px;
+    color: var(--stage-blue);
+  }
+  .toc {
+    margin-bottom: 36px;
+    padding: 18px 24px;
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+  }
+  .toc-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .toc ol {
+    margin: 0;
+    padding-inline-start: 22px;
+  }
+  .toc li {
+    padding-block: 3px;
+  }
+  .toc a {
+    color: var(--text);
+    text-underline-offset: 4px;
+  }
+
+  .prose {
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+    color: var(--game-yellow);
+    margin: 48px 0 14px;
+    scroll-margin-top: 24px;
+  }
+  .prose :global(h3) {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin: 30px 0 8px;
+  }
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 16px;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-inline-start: 26px;
+  }
+  .prose :global(li) {
+    margin-bottom: 8px;
+  }
+  .prose :global(a) {
+    color: var(--sky-cyan);
+    text-underline-offset: 4px;
+  }
+  .prose :global(strong) {
+    color: var(--white);
+  }
+  .prose :global(blockquote) {
+    margin: 24px 0;
+    padding: 16px 22px;
+    border-inline-start: 5px solid var(--game-yellow);
+    background: var(--surface);
+    border-radius: var(--radius-s);
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+    font-size: 1.1rem;
+    display: block;
+    overflow-x: auto;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--surface-border);
+    text-align: start;
+    vertical-align: top;
+  }
+  .prose :global(th) {
+    color: var(--game-yellow);
+  }
+
+  .article-cta {
+    margin-block: 48px;
+    padding: 28px;
+    border-radius: var(--radius-l);
+    background: var(--surface-solid);
+    border: 2px solid var(--surface-border);
+    display: grid;
+    gap: 14px;
+  }
+  .article-cta-title {
+    font-size: var(--fs-h3);
+    color: var(--game-yellow);
+    line-height: 1.1;
+  }
+  .article-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 24px;
+    margin-top: 6px;
+  }
+  .article-cta-wa {
+    color: var(--text);
+    text-underline-offset: 5px;
+  }
+
+  .article-faq h2,
+  .related h2 {
+    font-size: var(--fs-h3);
+    color: var(--game-yellow);
+    margin-bottom: 14px;
+  }
+  .article-faq details {
+    border-bottom: 1px solid var(--surface-border);
+    padding-block: 14px;
+  }
+  .article-faq summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .article-faq details p {
+    margin-top: 10px;
+    color: var(--text-muted);
+  }
+
+  .related {
+    margin-top: 56px;
+  }
+  .related ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .related a {
+    display: grid;
+    gap: 2px;
+    padding: 16px 20px;
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+    text-decoration: none;
+  }
+  .related a:hover {
+    border-color: var(--game-yellow);
+  }
+  .related-cat {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .related-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+</style>

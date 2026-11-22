@@ -29,7 +29,9 @@ export function init({ reduced }: { reduced: boolean }) {
     const mobile = !!ctx.conditions?.mobile;
 
     gsap.set(title!.querySelectorAll(".word-in"), { opacity: 0, yPercent: 110 });
-    gsap.set(cards, { rotateY: -80, opacity: 0, transformPerspective: 1400 });
+    // each card flips in from its start edge: the right in Hebrew, the left in English
+    const flip = document.documentElement.dir === "ltr" ? 80 : -80;
+    gsap.set(cards, { rotateY: flip, opacity: 0, transformPerspective: 1400 });
     gsap.set(bubbles, { opacity: 0, y: 20, scale: 0.9 });
     gsap.set(tiles, { opacity: 0 });
     gsap.set(choices, { y: 16, scale: 0.85, autoAlpha: 0 });

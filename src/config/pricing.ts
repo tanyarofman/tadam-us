@@ -1,6 +1,6 @@
 /**
  * Pricing + the link into the creation flow. One place for every number on the page.
- * Markup and copy never contain a price: copy.he.ts uses {placeholders} (see `fillPrices`),
+ * Markup and copy never contain a price: copy.he.ts / copy.en.ts use {placeholders} (see `fillPrices`),
  * the Pricing component reads the numbers below. Changing a price is a one-line edit here.
  *
  * Set by Tanya on 2026-11-16: base 750, every extra (edit, contributor link, personal host) 50.

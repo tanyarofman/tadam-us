@@ -10,13 +10,15 @@ See README.md for how to run, switch themes and edit copy.
 
 ## Rules from the brief
 
-- Hebrew only, RTL, parents addressed in plural (אתם), no em-dashes in copy.
+- The site is Hebrew, RTL, parents addressed in plural (אתם), no em-dashes in copy.
+- English version (`/en/`, for English speakers in Israel): a straight translation of the Hebrew site, not a different story. Change `src/content/copy.he.ts` first, then mirror it in `src/content/copy.en.ts` (same keys; `npm run check` fails if they drift). A site for the US and Europe is a separate project, not this repo.
 - Never show real celebrities, athletes or recognizable characters; the host is always generic.
 - Ask before adding a paid service, changing the story order, or using an image of a real person.
 
 ## Blog & SEO
 
-- Articles: one Markdown file each in `src/content/blog/`, schema in `src/content.config.ts`, template `src/pages/blog/[slug].astro`. `/llms.txt` is generated from them.
+- Articles: one Markdown file each in `src/content/blog/`, schema in `src/content.config.ts`, template `src/components/pages/BlogArticle.astro`. `/llms.txt` is generated from them.
+- English articles (`/en/blog/`): a translation of each Hebrew article in `src/content/blog-en/`, same file name. Write the Hebrew article first, then translate it: same structure, same sources and links (internal links get the `/en` prefix), English category names from `src/content.config.ts`. Wordplay that only works in Hebrew is replaced with English wordplay of the same kind, keeping every count true. The scenario label in English is **"Example scenario (not a real event):"**. Titles in Title Case. Where a translated or transliterated term is not clear, add the Hebrew word in parentheses next to it. English search volume in Israel is small (see `docs/seo/status.md`); check it with `tools/seo/research.py volume` before choosing an English title.
 - Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). Plan and findings: `docs/seo/keyword-research-2026-11.md` (29-article plan) and `docs/seo/keyword-research-2026-11-22.md` (second round, new topics). How to write: `docs/seo/content-playbook.md`. Sources: `docs/seo/sources.md`.
 - Writing rules: every H2 is the question people search, followed by a 2-sentence answer; one table; 3 to 5 internal links (other articles, `/#demo`, `/`); 4 FAQ items in the frontmatter; `seoTitle` max 60 and `description` max 155 characters (the build enforces it); no prices in articles.
 - Link only sources you verified, inline on the phrase, never a sources list at the end. Log each one in `docs/seo/sources.md`.

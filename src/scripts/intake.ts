@@ -150,9 +150,12 @@ function init(root: HTMLElement, data: Data) {
   }
 
   // ---------- navigation ----------
-  /** Step 3 is one screen per story question plus the "add more" screen; step 4 is date, then host. */
-  const subCount = (step: number) => (step === 3 ? shape().prompts.length + 1 : step === 4 ? 2 : 1);
-  const onHub = () => state.step === 3 && state.sub >= shape().prompts.length;
+  /** Step 3: one screen per story question, then "your own question", then up to two photo screens. Step 4: date, then host. */
+  const subCount = (step: number) => (step === 3 ? shape().prompts.length + 1 + data.material.maxPhotos : step === 4 ? 2 : 1);
+  type Kind = "q" | "own" | "photo";
+  const kindOf = (sub: number): Kind => (sub < shape().prompts.length ? "q" : sub === shape().prompts.length ? "own" : "photo");
+  const photoSlot = () => state.sub - shape().prompts.length - 1;
+  const need = () => Math.max(0, data.material.minPrompts - answeredPrompts().length);
   function show(step: number, sub = 0, push = true) {
     step = Math.max(0, Math.min(MAX_STEP, step));
     if (step >= 2 && !state.eventId) step = 1;
@@ -172,8 +175,26 @@ function init(root: HTMLElement, data: Data) {
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
     track("intake_step", { step, sub, event: state.eventId });
   }
-  const forward = () => (state.sub < subCount(state.step) - 1 ? show(state.step, state.sub + 1) : show(state.step + 1));
-  const backward = () => (state.sub > 0 ? show(state.step, state.sub - 1) : show(state.step - 1, subCount(state.step - 1) - 1));
+  function forward() {
+    let sub = state.sub + 1;
+    // a second photo screen only makes sense after a first photo
+    if (state.step === 3 && sub < subCount(3) && kindOf(sub) === "photo" && sub - shape().prompts.length - 1 > state.photos.length) sub = subCount(3);
+    if (sub < subCount(state.step)) return show(state.step, sub);
+    if (state.step === 3 && need() > 0) {
+      const el = $<HTMLElement>("[data-more-need]")!;
+      $("[data-more-need-text]")!.textContent = fill(c.stories.needMore, { n: need() });
+      el.hidden = false;
+      return;
+    }
+    show(state.step + 1);
+  }
+  function backward() {
+    if (state.sub > 0) return show(state.step, state.sub - 1);
+    const prev = state.step - 1;
+    let sub = subCount(prev) - 1;
+    if (prev === 3) while (kindOf(sub) === "photo" && sub - shape().prompts.length - 1 > state.photos.length) sub -= 1;
+    show(prev, sub);
+  }
 
   // The bottom bar is one element for every step, so "back" and the main button never move.
   const bar = $<HTMLElement>("[data-bar]")!;
@@ -309,16 +330,22 @@ function init(root: HTMLElement, data: Data) {
       committedInit = true;
     }
     const all = shape().prompts;
-    const hub = onHub();
+    const kind = kindOf(state.sub);
+    const hub = kind !== "q";
     const cur = all[state.sub];
     promptsEl.hidden = hub;
-    $<HTMLElement>("[data-more]")!.hidden = !hub;
-    $("[data-story-count]")!.textContent = hub ? "" : fill(c.more.count, { i: state.sub + 1, n: all.length });
-    const enough = answeredPrompts().length >= data.material.minPrompts;
-    $("[data-story-title]")!.textContent = hub
-      ? fill(enough ? c.more.title : c.more.titleFew, { n: questionsReady(), name: subjectName() })
-      : fill(cur.label, { name: subjectName() });
-    $("[data-story-lead]")!.textContent = hub ? c.more.lead : fill(cur.hint, { name: subjectName() });
+    $<HTMLElement>("[data-own-screen]")!.hidden = kind !== "own";
+    $<HTMLElement>("[data-photo-screen]")!.hidden = kind !== "photo";
+    $<HTMLElement>("[data-more-need]")!.hidden = true;
+    const name = subjectName();
+    $("[data-story-count]")!.textContent =
+      kind === "q"
+        ? fill(c.more.count, { i: state.sub + 1, n: all.length })
+        : kind === "own"
+          ? fill(c.more.unlocked, { n: questionsReady(), name })
+          : fill(c.more.photoCount, { i: photoSlot() + 1, n: data.material.maxPhotos });
+    $("[data-story-title]")!.textContent = kind === "q" ? fill(cur.label, { name }) : kind === "own" ? c.stage5.ownSection : c.stories.photosTitle;
+    $("[data-story-lead]")!.textContent = kind === "q" ? fill(cur.hint, { name }) : kind === "own" ? c.more.ownLead : c.more.photoLead;
     promptsEl.innerHTML = "";
     for (const p of hub ? [] : [cur]) {
       const answered = committed.has(p.id);
@@ -370,8 +397,6 @@ function init(root: HTMLElement, data: Data) {
     renderPhotos();
     renderOwnList();
     renderMeter();
-    const share = $<HTMLAnchorElement>("[data-share]");
-    if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
   }
   // choice mode: mode switch, question, four answers, correct mark
   const ensureChoice = (id: string) => (state.choices[id] ||= { q: "", answers: ["", "", "", ""], correct: -1 });
@@ -435,15 +460,12 @@ function init(root: HTMLElement, data: Data) {
     const help = $("[data-meter-help]");
     if (help) help.textContent = "";
     if (state.step !== 3) return;
-    // on a question: "next" when there is an answer, "skip" when not. On the last screen: at least 3 answers.
-    const need = Math.max(0, data.material.minPrompts - answeredPrompts().length);
-    const hub = onHub();
-    barNext.setAttribute("aria-disabled", String(hub && need > 0));
-    barNext.textContent = hub || isDone(shape().prompts[state.sub].id) ? c.next : c.more.skip;
-    if (hub) $("[data-story-title]")!.textContent = fill(need > 0 ? c.more.titleFew : c.more.title, { n: ready, name: subjectName() });
-    const needEl = $<HTMLElement>("[data-more-need]")!;
-    needEl.hidden = !(hub && need > 0);
-    needEl.textContent = fill(c.stories.needMore, { n: need });
+    // "next" when this screen has something, "skip" when it is empty
+    const kind = kindOf(state.sub);
+    const has = kind === "q" ? isDone(shape().prompts[state.sub].id) : kind === "own" ? state.own.length > 0 || ownDirty() : !!state.photos[photoSlot()];
+    barNext.textContent = has ? c.next : c.more.skip;
+    if (kind === "own") $("[data-story-count]")!.textContent = fill(c.more.unlocked, { n: ready, name: subjectName() });
+    if (need() === 0) $<HTMLElement>("[data-more-need]")!.hidden = true;
   }
 
   // voice input (Web Speech API). Hidden where the browser does not support it.
@@ -538,6 +560,7 @@ function init(root: HTMLElement, data: Data) {
       const url = photoFiles.get(i)?.url;
       const choice = p.type === "choice";
       li.dataset.photo = String(i);
+      li.hidden = state.step === 3 && kindOf(state.sub) === "photo" && i !== photoSlot();
       li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<label class="btn btn-white in-photo-again">${c.stories.photosAgain}<input type="file" accept="image/*" class="sr-only" data-photo-again="${i}" /></label>`}
         <div class="in-photo-body">
           <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
@@ -555,7 +578,7 @@ function init(root: HTMLElement, data: Data) {
                   )
                   .join("") + `</div>`
               : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
-                 <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" data-pfree="${i}" />`
+                 <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" placeholder="${c.stage5.ownFreeAnswer}" data-pfree="${i}" />`
           }
           <p class="in-err" role="alert" data-photo-err="${i}" hidden>${c.stories.photoNeed}</p>
           <div class="in-photo-actions">
@@ -567,7 +590,7 @@ function init(root: HTMLElement, data: Data) {
       photoList.append(li);
     });
     const add = $<HTMLElement>("[data-photo-add]");
-    if (add) add.hidden = state.photos.length >= data.material.maxPhotos;
+    if (add) add.hidden = state.photos.length >= data.material.maxPhotos || !!state.photos[photoSlot()];
   }
   const photoComplete = (p: State["photos"][number]) =>
     p.caption.trim().length > 3 && (p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0);
@@ -655,7 +678,12 @@ function init(root: HTMLElement, data: Data) {
   });
 
   // ---------- 4: details ----------
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const now = new Date();
+  const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  $<HTMLInputElement>("#d-date")!.min = today; // the calendar does not offer days that have passed
   function renderDetails() {
+    $<HTMLElement>("[data-date-err]")!.hidden = true;
     $$<HTMLInputElement>("[data-detail]").forEach((el) => {
       const k = el.dataset.detail as keyof State["details"];
       if (el.type === "radio") el.checked = state.details[k] === el.value;
@@ -666,6 +694,7 @@ function init(root: HTMLElement, data: Data) {
     const el = e.target as HTMLInputElement;
     if (el.dataset?.detail) {
       state.details[el.dataset.detail as keyof State["details"]] = el.value;
+      if (el.dataset.detail === "date") $<HTMLElement>("[data-date-err]")!.hidden = !(el.value && el.value < today);
       save();
     }
   });
@@ -698,7 +727,6 @@ function init(root: HTMLElement, data: Data) {
 
   // own question form: a question, four answers, one marked correct
   const ownForm = $<HTMLFormElement>("[data-own-form]")!;
-  const ownOpen = $<HTMLElement>("[data-own-open]")!;
   const ownErr = $<HTMLElement>("[data-own-err]")!;
   const ownList = $<HTMLElement>("[data-own-list]")!;
   const ownFree = $<HTMLElement>("[data-own-free]")!;
@@ -727,39 +755,42 @@ function init(root: HTMLElement, data: Data) {
     renderMeter();
     save();
   });
-  function closeOwn() {
-    ownForm.hidden = true;
-    ownOpen.hidden = false;
+  const ownQ = ownForm.querySelector<HTMLInputElement>("#own-q")!;
+  const ownFreeIn = ownForm.querySelector<HTMLInputElement>("#own-free")!;
+  const ownAnswers = () => [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
+  /** Something was typed in the form but not added yet. */
+  const ownDirty = () => !!ownQ.value.trim() || !!ownFreeIn.value.trim() || ownAnswers().some(Boolean);
+  /** Adds the typed question. "empty": nothing typed, "invalid": half filled (the error is shown), "added". */
+  function addOwn(): "empty" | "invalid" | "added" {
+    if (!ownDirty()) return "empty";
+    const q = ownQ.value.trim();
+    const type = ownType();
+    const free = ownFreeIn.value.trim();
+    const answers = ownAnswers();
+    const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
+    if (!q || (type === "free" ? !free : answers.some((a) => !a) || !picked)) {
+      ownErr.textContent = type === "free" ? c.stage5.ownNeed : c.stage5.ownNeedChoice;
+      ownErr.hidden = false;
+      return "invalid";
+    }
+    state.own.push({ q, type, free: type === "free" ? free : "", answers: type === "choice" ? answers : [], correct: type === "choice" ? Number(picked!.value) : 0 });
     ownForm.reset();
     syncOwnType();
     ownErr.hidden = true;
-  }
-  ownOpen.addEventListener("click", () => {
-    ownForm.hidden = false;
-    ownOpen.hidden = true;
-    ownForm.querySelector<HTMLInputElement>("#own-q")?.focus();
-  });
-  $<HTMLElement>("[data-own-cancel]")!.addEventListener("click", closeOwn);
-  ownForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const q = ownForm.querySelector<HTMLInputElement>("#own-q")!.value.trim();
-    const type = ownType();
-    const free = ownForm.querySelector<HTMLInputElement>("#own-free")!.value.trim();
-    const answers = [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
-    const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
-    const bad = !q || (type === "free" ? !free : answers.some((a) => !a) || !picked);
-    if (bad) {
-      ownErr.textContent = type === "free" ? c.stage5.ownNeed : c.stage5.ownNeedChoice;
-      ownErr.hidden = false;
-      return;
-    }
-    state.own.push({ q, type, free: type === "free" ? free : "", answers: type === "choice" ? answers : [], correct: type === "choice" ? Number(picked!.value) : 0 });
-    closeOwn();
     renderOwnList();
     renderMeter();
     save();
-    ownOpen.focus();
+    return "added";
+  }
+  ownForm.addEventListener("input", () => {
+    ownErr.hidden = true;
+    renderMeter();
   });
+  ownForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (addOwn() !== "invalid") ownQ.focus();
+  });
+
   // ---------- 5: summary, contact, order ----------
   const orderForm = $<HTMLFormElement>("[data-order-form]")!;
   const orderErr = $<HTMLElement>("[data-order-err]")!;
@@ -944,9 +975,14 @@ function init(root: HTMLElement, data: Data) {
         return;
       }
       if (nx.getAttribute("aria-disabled") === "true") return;
-      if (from === 3 && !onHub()) {
+      if (from === 3 && kindOf(state.sub) === "q") {
         const id = shape().prompts[state.sub].id;
         if (isDone(id)) commit(id);
+      }
+      if (from === 3 && kindOf(state.sub) === "own" && addOwn() === "invalid") return;
+      if (from === 4 && state.sub === 0 && state.details.date && state.details.date < today) {
+        $<HTMLElement>("[data-date-err]")!.hidden = false;
+        return;
       }
       if (from === 2 && !state.name.trim()) {
         nameIn.setAttribute("aria-invalid", "true");
@@ -955,6 +991,11 @@ function init(root: HTMLElement, data: Data) {
         return;
       }
       forward();
+      return;
+    }
+    if (t.closest("[data-first-empty]")) {
+      const i = shape().prompts.findIndex((p) => !isDone(p.id));
+      show(3, Math.max(0, i));
       return;
     }
     if (t.closest("[data-restart]")) {

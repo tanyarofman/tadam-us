@@ -100,31 +100,21 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <p class="lead" data-story-lead></p>
       <div class="in-prompts" data-prompts></div>
 
-      <div class="in-more-list" data-more hidden>
-        <p class="in-err" data-more-need hidden></p>
-        <details class="in-more">
-          <summary><span class="in-more__icon" aria-hidden="true">✍️</span><span><strong>{c.stage5.ownSection}</strong><small>{c.more.ownHint}</small></span></summary>
-      <div class="in-own-wrap">
+      <!-- own question: same shape as the questions before it -->
+      <div class="in-own-wrap" data-own-screen hidden>
         <ul class="in-own-list" data-own-list></ul>
-        <button class="btn btn-white in-own-open" type="button" data-own-open>+ {c.stage5.ownAdd}</button>
-        <form class="in-own" data-own-form hidden novalidate>
-          <h3 class="in-sub">{c.stage5.ownTitle}</h3>
-          <div class="in-field">
-            <label for="own-q">{c.stage5.ownQuestion}</label>
-            <input id="own-q" class="in-input" type="text" maxlength="120" />
-          </div>
-          <fieldset class="in-field in-chips">
-            <legend>{c.stage5.ownType}</legend>
+        <form class="in-own" data-own-form novalidate>
+          <input id="own-q" class="in-input" type="text" maxlength="120" aria-label={c.stage5.ownQuestion} placeholder={c.more.ownPlaceholder} />
+          <fieldset class="in-chips">
+            <legend class="sr-only">{c.stage5.ownType}</legend>
             <label class="in-chip"><input type="radio" name="own-type" value="free" checked /><span>{c.stage5.ownTypeFree}</span></label>
             <label class="in-chip"><input type="radio" name="own-type" value="choice" /><span>{c.stage5.ownTypeChoice}</span></label>
           </fieldset>
-          <div class="in-field" data-own-free>
-            <label for="own-free">{c.stage5.ownFreeAnswer}</label>
-            <input id="own-free" class="in-input" type="text" maxlength="80" />
-            <p class="in-help">{c.stage5.ownFreeHelp}</p>
+          <div data-own-free>
+            <input id="own-free" class="in-input" type="text" maxlength="80" aria-label={c.stage5.ownFreeAnswer} placeholder={c.stage5.ownFreeAnswer} />
           </div>
           <fieldset class="in-own-answers" data-own-choice hidden>
-            <legend class="in-help">{c.stage5.ownHelp}</legend>
+            <legend class="sr-only">{c.stage5.ownHelp}</legend>
             {
               [0, 1, 2, 3].map((i) => (
                 <div class="in-own-row">
@@ -135,34 +125,25 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
             }
           </fieldset>
           <p class="in-err" role="alert" data-own-err hidden></p>
-          <div class="in-nav">
-            <button class="btn btn-ghost" type="button" data-own-cancel>{c.stage5.ownCancel}</button>
-            <button class="btn btn-buzzer" type="submit">{c.stage5.ownSave}</button>
-          </div>
+          <button class="in-screen__edit in-own-more" type="submit">+ {c.more.ownAnother}</button>
         </form>
       </div>
 
-        </details>
-        <details class="in-more">
-          <summary><span class="in-more__icon" aria-hidden="true">📷</span><span><strong>{c.stories.photosTitle}</strong><small>{c.more.photosHint}</small></span></summary>
-      <div class="in-photos">
+      <!-- a photo with a question: one photo per screen -->
+      <div class="in-photos" data-photo-screen hidden>
         <ul class="in-photo-list" data-photos></ul>
-        <label class="btn btn-white in-photo-add" data-photo-add>
-          {c.stories.photosAdd}
+        <label class="in-drop" data-photo-add>
+          <span class="in-drop__icon" aria-hidden="true">📷</span>
+          <strong>{c.stories.photosAdd}</strong>
+          <small>{c.stories.photosConsent}</small>
           <input type="file" accept="image/*" data-photo-input class="sr-only" />
         </label>
-        <p class="in-help">{c.stories.photosConsent}</p>
       </div>
 
-        </details>
-        <details class="in-more">
-          <summary><span class="in-more__icon" aria-hidden="true">💬</span><span><strong>{c.stories.share}</strong><small>{c.more.shareHint}</small></span></summary>
-      <div class="in-share">
-        <p class="in-help">{c.stories.shareHelp}</p>
-        <a class="btn btn-white" data-share target="_blank" rel="noopener">{c.stories.shareBtn}</a>
-      </div>
-        </details>
-      </div>
+      <p class="in-err in-need" data-more-need hidden>
+        <span data-more-need-text></span>
+        <button class="in-screen__edit" type="button" data-first-empty>{c.stories.backToQuestions}</button>
+      </p>
     </section>
 
     <!-- 4: when (optional), then who hosts: two short screens -->
@@ -173,6 +154,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         <div class="in-field">
           <label for="d-date">{c.details.date}</label>
           <input id="d-date" class="in-input" type="date" data-detail="date" />
+          <p class="in-err" role="alert" data-date-err hidden>{c.details.datePast}</p>
         </div>
         <div class="in-field">
           <label for="d-guests">{c.details.guests}</label>
@@ -1592,6 +1574,74 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       font-size: 1.15rem;
     }
   }
+  /* own question and photo screens */
+  .in-own {
+    display: grid;
+    gap: 10px;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .in-own-more {
+    justify-self: start;
+    padding-inline: 0;
+  }
+  .in-drop {
+    display: grid;
+    gap: 6px;
+    justify-items: center;
+    text-align: center;
+    padding: clamp(18px, 6vh, 44px) 16px;
+    border: 2px dashed var(--in-line);
+    border-radius: 22px;
+    background: var(--in-card);
+    cursor: pointer;
+    width: 100%;
+  }
+  .in-drop:hover,
+  .in-drop:focus-within {
+    border-color: var(--game-yellow);
+  }
+  .in-drop__icon {
+    font-size: 2.2rem;
+  }
+  .in-drop strong {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+  .in-drop small {
+    color: var(--text-muted);
+    max-width: 44ch;
+  }
+  .in-photos {
+    justify-items: stretch;
+  }
+  .in-own fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .in-one .in-photo-list {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  /* the hint inside each field replaces the small labels; the photo saves by itself */
+  .in-one .in-photo-body > .in-help,
+  .in-one [data-photo-save],
+  .in-one [data-photo-badge] {
+    display: none;
+  }
+  .in-one .in-photo-body {
+    display: grid;
+    gap: 8px;
+  }
+  .in-need {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+  }
   /* hints inside every text box are light grey and vanish on the first keystroke */
   .in-input::placeholder,
   .in-textarea::placeholder {
@@ -1734,42 +1784,22 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-one .in-own-answers {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
-    /* the three optional extras sit in one row; an opened one takes the full width */
-    .in-more-list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* photo beside its question */
+    .in-one .in-photo-list li {
+      grid-template-columns: 220px minmax(0, 1fr);
       align-items: start;
+      padding: 0;
     }
-    .in-more-list > .in-err,
-    .in-more[open] {
-      grid-column: 1 / -1;
+    .in-one .in-photo-list img,
+    .in-one .in-photo-list .in-photo-again {
+      height: 100%;
+      max-height: none;
+      aspect-ratio: auto;
+      min-height: 150px;
     }
-    .in-more summary {
-      grid-template-columns: 1fr auto;
-      row-gap: 2px;
-    }
-    .in-more__icon {
-      grid-column: 1 / -1;
-    }
-    .in-pair,
-    .in-ticket__form {
-      grid-template-columns: 1fr 1fr;
-    }
-    /* order: the game and what is included on one side, price and email on the other */
-    .in-ticket {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      column-gap: 28px;
-      align-items: start;
-    }
-    .in-ticket__head {
-      grid-column: 1;
-    }
-    .in-ticket__deal {
-      grid-column: 1 / -1;
-    }
-    .in-ticket__form,
-    .in-ticket > .in-err,
-    .in-ticket__note {
-      grid-column: 1 / -1;
+    .in-one .in-photo-body {
+      padding: 8px 12px 4px;
+      gap: 6px;
     }
   }
   /* short windows (a laptop with browser bars): tighten type and spacing */
@@ -1823,6 +1853,17 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-more summary strong {
       font-size: 1.05rem;
+    }
+    .in-ticket__head .in-count {
+      display: none;
+    }
+    .in-one .in-photo-list img,
+    .in-one .in-photo-list .in-photo-again {
+      min-height: 120px;
+      max-height: 210px;
+    }
+    .in-drop {
+      padding-block: 14px;
     }
     /* four-options mode: the hint inside the field is enough */
     .in-one .in-prompt__body > .in-help {

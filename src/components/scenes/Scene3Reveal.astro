@@ -24,7 +24,7 @@ const d = c.demo;
           <div class="s3-opening"><HallArt /></div>
           <div class="s3-burst" aria-hidden="true">
             <div class="s3-rays"></div>
-            <img class="s3-tadam" src="/brand/tadam-logo-v4.webp" alt={c.burst} width="736" height="332" decoding="async" />
+            <img class="s3-tadam" src={locale === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} alt={c.burst} width="736" height="332" decoding="async" />
           </div>
           <div class="s3-video" data-state="idle" data-labels={JSON.stringify({ play: d.play, pause: d.pause, replay: d.replay, mute: d.mute, unmute: d.unmute })}>
             <video

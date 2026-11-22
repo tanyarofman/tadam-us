@@ -350,3 +350,28 @@ html[dir="ltr"] .step-card .h-card {
   font-size: clamp(1.45rem, 2.4vw, 2.1rem);
   white-space: nowrap;
 }
+
+/* English uses locally hosted Latin fonts; Hebrew retains its original typography. */
+@font-face { font-family: "Overused Grotesk"; src: url("/fonts/OverusedGrotesk-VF.woff2") format("woff2"); font-weight: 300 900; font-style: normal; font-display: block; }
+@font-face { font-family: "Inter"; src: url("/fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: block; }
+html[lang="en"] { --font-display: "Overused Grotesk", Arial, sans-serif; --font-body: "Inter", Arial, sans-serif; --fs-body: 1rem; --fs-lead: clamp(1.05rem, 2vw, 1.35rem); --fs-small: .875rem; }
+html[lang="en"].fonts-loading body { visibility: hidden; }
+html[lang="en"].fonts-failed { --font-display: Arial, sans-serif; --font-body: Arial, sans-serif; }
+html[lang="en"] .hero-sub { line-height: 1.4; font-size: clamp(1.15rem, 2vw, 1.6rem); }
+html[lang="en"] .hero-preview figcaption { translate: clamp(38px, 5vw, 64px) -20px; font-size: clamp(.85rem, 1.3vw, 1.1rem); }
+@media(max-width:767px) { html[lang="en"] .hero-preview figcaption { translate: 12px -12px; max-width: calc(100% - 24px); } }
+
+html[lang="en"] .hero-ctas .btn { font-size: 1.4rem; }
+html[lang="en"] .hero-ctas .btn-ghost { font-size: 1.2rem; }
+html[lang="en"] .hero-nav a { font-size: 1.4rem; }
+html[lang="en"] .hero-bar-cta { font-size: 1.25rem; }
+html[lang="en"] .hosts-sub { white-space: normal; }
+@media(max-width:767px) {
+  html[lang="en"] .hosts-title { font-size: clamp(1.65rem, 7.5vw, 2.5rem); }
+  html[lang="en"] .hosts-sub { font-size: 1.05rem; }
+  html[lang="en"] .hosts-custom-title { font-size: 1.65rem; }
+  html[lang="en"] .inc-title { font-size: 1.3rem; }
+  html[lang="en"] .inc-text { font-size: 1rem; }
+}
+html[lang="en"] .hosts-title { font-size: clamp(1.65rem, 2.5vw, 2.75rem); }
+html[lang="en"] .hosts-title > span:first-child { white-space: nowrap; }

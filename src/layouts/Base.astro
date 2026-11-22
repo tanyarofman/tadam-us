@@ -56,15 +56,37 @@ const alternates = bilingual
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
-    <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
-    <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo-v4.webp" fetchpriority="high" />
+    {lang === "en" ? <>
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/OverusedGrotesk-VF.woff2" crossorigin />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/InterVariable.woff2" crossorigin />
+    </> : <>
+      <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
+      <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
+    </>}
+    <link rel="preload" as="image" type="image/webp" href={lang === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} fetchpriority="high" />
     <slot name="head" />
     <script is:inline>
       (function () {
         var d = document.documentElement;
         d.classList.remove("no-js");
         d.classList.add("js");
+        if (d.lang === "en" && document.fonts) {
+          d.classList.add("fonts-loading");
+          var settled = false;
+          function reveal(ok) {
+            if (settled) return;
+            settled = true;
+            if (!ok) d.classList.add("fonts-failed");
+            d.classList.remove("fonts-loading");
+          }
+          function loadFonts() {
+          Promise.all([document.fonts.load('700 16px "Overused Grotesk"'), document.fonts.load('400 16px Inter')])
+            .then(function (fonts) { reveal(fonts.every(function (f) { return f.length > 0; })); }, function () { reveal(false); });
+          setTimeout(function () { reveal(false); }, 6000);
+          }
+          if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadFonts, { once: true });
+          else loadFonts();
+        }
       })();
     </script>
   </head>

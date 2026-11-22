@@ -78,6 +78,10 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         <input id="f-name" class="in-input in-input--big" type="text" autocomplete="off" maxlength="48" aria-describedby="f-name-err" />
         <p class="in-err" id="f-name-err" role="alert" hidden>{c.who.required}</p>
       </div>
+      <div class="in-field in-who__extra">
+        <label for="f-extra" data-t="extraLabel"></label>
+        <input id="f-extra" class="in-input" type="text" autocomplete="off" maxlength="48" />
+      </div>
       <figure class="in-screen" aria-live="polite">
         <figcaption>{c.who.screenNote}</figcaption>
         <p class="in-screen__title display" data-title-preview></p>
@@ -87,10 +91,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           <input id="f-title" class="in-input" type="text" autocomplete="off" maxlength="80" />
         </div>
       </figure>
-      <div class="in-field in-who__extra">
-        <label for="f-extra" data-t="extraLabel"></label>
-        <input id="f-extra" class="in-input" type="text" autocomplete="off" maxlength="48" />
-      </div>
     </section>
 
     <!-- 3: stories, one question per screen, then an optional "add more" screen -->
@@ -182,7 +182,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           <p class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display">{price}</strong></p>
         </div>
         <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
-        <div class="in-ticket__form">
+        <div class="in-ticket__form" data-price={price}>
           <div class="in-field">
             <label for="o-email">{c.order.email}</label>
             <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" />
@@ -1675,16 +1675,16 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     gap: 10px;
   }
   .in-tile {
-    min-height: clamp(76px, 12.5vh, 132px);
+    min-height: clamp(84px, 17vh, 150px);
     padding: 8px 6px;
     gap: 4px;
     border-radius: 18px;
   }
   .in-tile__icon {
-    font-size: clamp(1.5rem, 4vh, 2.2rem);
+    font-size: clamp(1.7rem, 5vh, 2.4rem);
   }
   .in-tile__label {
-    font-size: 1.05rem;
+    font-size: clamp(1.05rem, 2.6vh, 1.3rem);
   }
   .in-input--big {
     min-height: 60px;
@@ -1767,7 +1767,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       margin: 0;
     }
     .in-who {
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.5fr 1fr;
       column-gap: 16px;
       align-items: end;
     }
@@ -1783,6 +1783,54 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-one .in-own-answers {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    /* story screen: the mode switch and the microphone share one row above the text box */
+    .in-one .in-prompt__body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    .in-one .in-prompt__body > * {
+      grid-column: 1 / -1;
+      margin: 0;
+    }
+    .in-one .in-prompt__body > .in-chips {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .in-one .in-prompt__body > .in-prompt__row {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    /* own question: answer type beside the answer */
+    .in-own {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+    }
+    .in-own > * {
+      grid-column: 1 / -1;
+    }
+    .in-own > .in-chips {
+      grid-column: 1;
+    }
+    .in-own > [data-own-free] {
+      grid-column: 2;
+    }
+    /* photo: "remove" sits on the picture */
+    .in-one .in-photo-list li {
+      position: relative;
+    }
+    .in-one .in-photo-actions {
+      position: absolute;
+      inset: auto auto 8px 8px;
+      inset-inline-start: 8px;
+    }
+    .in-one .in-photo-actions .btn {
+      background: rgba(4, 12, 64, 0.8);
+      border-radius: 999px;
+      padding: 4px 14px;
+      min-height: 36px;
     }
     /* photo beside its question */
     .in-one .in-photo-list li {
@@ -1802,106 +1850,96 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       gap: 6px;
     }
   }
-  /* short windows (a laptop with browser bars): tighten type and spacing */
+  /* short windows (a laptop with browser bars): same sizes, a little less air */
   @media (max-height: 640px) and (min-width: 700px) {
     .in-step {
-      gap: 8px;
+      gap: 10px;
     }
     .in-one {
-      padding-top: 4px;
+      padding-top: 6px;
     }
     .intake .h-card {
-      font-size: 1.7rem;
+      font-size: 2rem;
       margin: 0;
     }
     .intake .h-scene {
-      font-size: 2.6rem;
-    }
-    .intake .lead {
-      font-size: 1.05rem;
+      font-size: 3rem;
     }
     .in-tv {
-      max-width: 400px;
-    }
-    .in-tile {
-      min-height: 84px;
-    }
-    .in-input,
-    .in-input--big,
-    .in-who__extra .in-input {
-      min-height: 46px;
-      font-size: 1.1rem;
-    }
-    .in-field label,
-    .in-field legend {
-      font-size: 1rem;
-    }
-    .in-screen__title {
-      font-size: 1.7rem;
+      max-width: 430px;
     }
     .in-one .in-textarea {
-      min-height: 84px;
+      min-height: 98px;
     }
-    .in-chip span,
-    .in-mic {
-      min-height: 38px;
-      padding-block: 4px;
-      font-size: 1rem;
+    .in-screen {
+      padding: 10px 16px 2px;
     }
-    .in-more summary {
-      padding: 6px 14px;
+    .in-screen__title {
+      font-size: 2rem;
     }
-    .in-more summary strong {
-      font-size: 1.05rem;
+    .in-ticket {
+      padding: 14px 20px;
+      gap: 10px;
+    }
+    .in-ticket__deal {
+      padding-block: 8px;
     }
     .in-ticket__head .in-count {
       display: none;
     }
+    /* order on a short window: the game and what is included on one side, price and email on the other */
+    .in-ticket {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      column-gap: 32px;
+      align-items: start;
+    }
+    .in-ticket__head,
+    .in-ticket__deal {
+      grid-column: 1;
+    }
+    .in-ticket__deal {
+      display: block;
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .in-ticket__deal .in-ticket__total {
+      display: none;
+    }
+    .in-ticket__form {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      grid-template-columns: 1fr;
+      align-self: center;
+    }
+    .in-ticket__form::before {
+      content: attr(data-price);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--game-yellow);
+    }
+    .in-ticket__note,
+    .in-ticket > .in-err {
+      grid-column: 1 / -1;
+    }
+    .in-includes {
+      gap: 2px;
+    }
     .in-one .in-photo-list img,
     .in-one .in-photo-list .in-photo-again {
       min-height: 120px;
-      max-height: 210px;
+      max-height: 200px;
     }
     .in-drop {
-      padding-block: 14px;
+      padding-block: 12px;
     }
     /* four-options mode: the hint inside the field is enough */
     .in-one .in-prompt__body > .in-help {
       display: none;
     }
-    .in-one .in-own-answers {
-      gap: 8px;
-    }
-    .in-ticket {
-      padding: 12px 18px;
-      gap: 8px;
-    }
-    .in-ticket__deal {
-      padding-block: 6px;
-    }
-    .in-ticket__game {
-      font-size: 1.4rem;
-    }
-    .in-includes {
-      gap: 0;
-      font-size: 0.98rem;
-    }
-    .in-ticket__total strong {
-      font-size: 2.6rem;
-    }
-    .in-check {
-      min-height: 40px;
-      font-size: 0.98rem;
-    }
-    .in-bar__row,
-    .in-bar__next {
-      min-height: 46px;
-    }
-    .in-bar {
-      padding-block: 8px;
-    }
     .intake {
-      padding-bottom: 96px;
+      padding-bottom: 100px;
     }
   }
   @media (prefers-reduced-motion: reduce) {

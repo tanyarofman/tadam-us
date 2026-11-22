@@ -18,7 +18,7 @@ const c = COPY.hero;
         <ul role="list">{c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}</ul>
       </nav>
       <div class="hero-bar-action" data-hero-fade>
-        <a class="hero-lang" href={otherLanguagePath(Astro.url)} lang={home === "/" ? "en" : "he"} aria-label={COPY.nav.langSwitchLabel} data-track="language_switch" data-source="hero-nav">{COPY.nav.langSwitch}</a>
+        {locale === "he" && <a class="hero-lang" href={otherLanguagePath(Astro.url)} lang={home === "/" ? "en" : "he"} aria-label={COPY.nav.langSwitchLabel} data-track="language_switch" data-source="hero-nav">{COPY.nav.langSwitch}</a>}
         <a class="btn hero-bar-cta" href={contactLink("hero-nav")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="hero-nav">{c.navCta}</a>
       </div>
     </div>
@@ -92,7 +92,7 @@ const c = COPY.hero;
   .hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.4vh, 24px); max-width: 580px; }
   :global(.hero-title) { font-size: clamp(2.5rem, 4.4vw, 5rem); line-height: 1.05; text-shadow: 0 4px 0 var(--purple-ink); }
   /* English has no forced line break: the browser balances the lines, and a slightly smaller size keeps the headline at two lines like the Hebrew. */
-  :global([dir="ltr"] .hero-title) { text-wrap: balance; font-size: clamp(2.5rem, 4.4vw, 3.75rem); }
+  :global([dir="ltr"] .hero-title) { text-wrap: balance; font-size: clamp(2.65rem, 4.7vw, 4rem); }
   .hero-sub { max-width: 42ch; font-size: clamp(1.5rem, 2.45vw, 2rem); line-height: 1.6; }
   :global(.hero-title) { position: relative; top: calc(-1 * clamp(20px, 3vh, 30px)); }
   .hero-sub { position: relative; top: calc(-1 * clamp(30px, 4.5vh, 44px)); }
@@ -134,7 +134,7 @@ const c = COPY.hero;
     .hero-copy { align-items: center; justify-self: center; }
     :global(.hero-title) { font-size: clamp(2.65rem, 11.5vw, 4.4rem); top: -16px; }
     .hero-sub { top: -26px; }
-    :global([dir="ltr"] .hero-title) { font-size: clamp(2rem, 11vw, 4.4rem); }
+    :global([dir="ltr"] .hero-title) { font-size: clamp(2.15rem, 11.5vw, 4.6rem); }
     :global(.hero-title .split-br) { display: none; }
     .hero-preview { width: min(520px, 100%); min-width: 0; justify-self: center; gap: 14px; }
   }

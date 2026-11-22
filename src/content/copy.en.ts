@@ -8,7 +8,7 @@ export const COPY = {
   /** The brand name as written in this language (logo label, page titles, structured data). */
   brand: "Tadam!",
   closing: {
-    title: "So, who gets a Tadam?",
+    title: "So, who's Tadam worthy?",
     cta: "Let's create a game",
   },
   meta: {
@@ -32,11 +32,11 @@ export const COPY = {
     breakAfter: 0,
     sub: "Your stories, photos and personal details become a live trivia game show, with a host on the big screen.",
     ctaPrimary: "Let's get started",
-    ctaSecondary: "Watch the demo video",
+    ctaSecondary: "Watch the demo",
     loading: "Loading",
     nav: [
-      { label: "How it works", href: "#scene-4" },
-      { label: "Our hosts", href: "#hosts" },
+      { label: "How it Works", href: "#scene-4" },
+      { label: "Our Hosts", href: "#hosts" },
       { label: "FAQ", href: "#faq" },
     ],
     navCta: "Let's get started",
@@ -49,25 +49,24 @@ export const COPY = {
     label: "Events that Tadam! is a great fit for",
     items: [
       "Birthdays",
-      "Bar and bat mitzvahs",
-      "Holiday toasts",
-      "Company events",
-      "Weddings",
+      "Class Reunions",
+      "Farewell Parties",
+      "Company Events",
       "Anniversaries",
-      "Family events",
-      "Bachelor and bachelorette parties",
-      "Milestone birthdays",
-      "Henna parties",
-      "Class reunions",
-      "Team-building days",
-      "Farewell and retirement parties",
+      "Weddings",
+      "Bachelor and Bachelorette Parties",
+      "Bar and Bat Mitzvahs",
+      "Team-Building",
+      "Holiday Toasts",
+      "Family Events",
+      "Sweet Sixteen",
     ],
   },
 
   scene1: {
     headline: "Every event has a moment when everyone is waiting for something.",
     highlight: "waiting",
-    photoAlt: "Guests at a family event sit around tables, eating and looking at their phones before the game starts",
+    photoAlt: "Guests at an American Sweet Sixteen dinner sit around tables, eating and checking their phones before the game starts",
     hallLabel: "Illustration: an event hall with tables, a DJ booth and colorful lights. In the corner, bored guests on their phones.",
   },
 
@@ -91,7 +90,7 @@ export const COPY = {
     steps: [
       {
         title: "Talk to us.",
-        text: "Tell us about the event and the guests of honor.",
+        text: "Tell us about the event and the guest of honor.",
       },
       {
         title: "Pick a host and a vibe.",
@@ -104,11 +103,11 @@ export const COPY = {
     ],
     mock: {
       chatFrom: "Tadam!",
-      chatText: "Hi! I'd love to hear about Tadam! for Noa's birthday 🎉",
-      chatReply: "How fun! Tell us a bit about Noa and the event",
+      chatText: "Hi! I'd love to hear about Tadam! for Carol's birthday 🎉",
+      chatReply: "How fun! Tell us a bit about Carol and the event",
       hostTitle: "Your host",
       atmosphereTitle: "Your vibe",
-      boardTitle: "Noa's game",
+      boardTitle: "Carol's game",
       tiles: ["Question", "Photo", "Story", "Joke", "Question", "Host"],
     },
   },
@@ -124,8 +123,8 @@ export const COPY = {
     players: [
       { name: "Grandma Rachel", score: 2840, winner: true },
       { name: "Maya, the best friend", score: 2710 },
-      { name: "Uncle Avi", score: 2390 },
-      { name: "Roni from work", score: 2150 },
+      { name: "Uncle Joe", score: 2390 },
+      { name: "Michel from work", score: 2150 },
       { name: "Dad", score: 1980 },
     ],
     headline: "In the end, everyone finds out who the real champions are",
@@ -189,8 +188,8 @@ export const COPY = {
         text: "{readyMadeHosts} ready-made hosts are included in the price. Want a host created especially for you? Order one as an add-on.",
         /** The showcase panel (3 ready-made hosts + the personalized host pitch). */
         showcase: {
-          titleLine1: "There's a host",
-          titleLine2: "for every party.",
+          titleLine1: "There's a host for",
+          titleLine2: "every party.",
           sub: "Choose the face and the voice of your game",
           photosLabel: "Examples of hosts",
           readyAlts: [
@@ -199,7 +198,7 @@ export const COPY = {
             "Ready-made host: an animated character in a purple suit",
           ],
           personalText: "Want a character that's only yours? We'll create it from scratch, with no copyright worries.",
-          customTitle: "(And you can create your own host too!)",
+          customTitle: "(you can create your own host too!)",
           customSub: "You can also create an event host based on the aunt from America, the CEO or a beloved character",
         },
       },
@@ -232,7 +231,7 @@ export const COPY = {
     email: "Email address",
     emailPlaceholder: "you@example.com",
     phone: "Phone",
-    phonePlaceholder: "050-1234567",
+    phonePlaceholder: "(201) 555-0123",
     eventType: "What's the event?",
     eventTypePlaceholder: "For example: a birthday or a company event",
     submit: "Send message",
@@ -269,7 +268,7 @@ export const COPY = {
       },
       {
         q: "Which events is it right for?",
-        a: "Any event: birthdays, bar and bat mitzvahs, weddings, holiday toasts, company events and team-building days, bachelor and bachelorette parties and family events. We tailor the stories and the questions to the guests of honor and to the crowd.",
+        a: "Any event: birthdays, bar and bat mitzvahs, weddings, holiday toasts, company events and team-building days, bachelor and bachelorette parties and family events. We tailor the stories and the questions to the guest of honor and to the crowd.",
       },
     ],
   },

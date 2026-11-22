@@ -2,14 +2,14 @@
 /** The opening photograph shares the exact frame used by the logo reveal and video. */
 import Person from "./Person.astro";
 import { useCopy } from "../../content/copy";
-const { copy } = useCopy(Astro.url);
+const { copy, locale } = useCopy(Astro.url);
 ---
 
 <div class="hall-art">
   <Person
     class="hall-photo"
     kind="crowd"
-    name="event-dinner-phones"
+    name={locale === "en" ? "sweet-sixteen-dinner" : "event-dinner-phones"}
     width={1600}
     height={900}
     eager

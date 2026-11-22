@@ -20,7 +20,7 @@ export const COPY = {
   nav: {
     skip: "דלגו לתוכן",
     /** The link to the other language version of the same page. */
-    langSwitch: "English",
+    langSwitch: "EN",
     langSwitchLabel: "English version",
   },
 

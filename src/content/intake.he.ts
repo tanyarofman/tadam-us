@@ -98,7 +98,6 @@ export const SHAPES: Record<Shape, ShapeConfig> = {
     prompts: [
       { id: "loves", label: "מה {name} אוהב.ת?", hint: "אוכל, שיר, סדרה, תחביב, משחק", placeholder: "לדוגמה: פיצה עם תירס, שיר אחד שמשמיעים בלופ, כדורסל" },
       { id: "sayings", label: "כינויים ומשפטים שאומרים כל הזמן", hint: "מה כולם מכירים? איך קוראים לו.ה בבית?", placeholder: "לדוגמה: כולם קוראים לה 'נונה', והמשפט שלה הוא 'עוד שנייה'" },
-      { id: "habit", label: "הרגל מצחיק שכולם מכירים", hint: "משהו קטן ואישי שמעלה חיוך", placeholder: "לדוגמה: מסדר את הנעליים לפי צבעים" },
       { id: "story", label: "סיפור אחד שמספרים עליו.ה", hint: "במשפחה, בכיתה או בין חברים. כמה שורות מספיקות.", placeholder: "לדוגמה: פעם בטיול הוא החליט לנווט ואנחנו הגענו לחניון אחר" },
       { id: "people", label: "מי האנשים הכי קרובים?", hint: "שמות וקשר: אחים, חברים, סבא וסבתא", placeholder: "לדוגמה: אחיה הקטן יואב, החברה הכי טובה מאיה, סבתא רחל" },
       { id: "inside", label: "בדיחה פנימית", hint: "משהו שרק מי שהיה שם יבין. נהפוך אותו לשאלה שכולם מחכים לה.", placeholder: "לדוגמה: מה קרה בשבת עם הפנקייק?" },
@@ -158,7 +157,7 @@ export const MATERIAL = {
   maxPerPrompt: 3,
   /** A photo with a caption is worth this many questions. */
   perPhoto: 1,
-  maxPhotos: 2,
+  maxPhotos: 5,
   /** The "continue" button unlocks at this many answered prompts. */
   minPrompts: 3,
 };
@@ -238,6 +237,10 @@ export const INTAKE = {
     photosRemove: "הסרה",
     photosConsent: "מעלים רק תמונות שיש לכם רשות להשתמש בהן. אפשר לבקש מחיקה בכל שלב.",
     photosAgain: "בחרו שוב את התמונה",
+    photoAttach: "הוסיפו תמונה",
+    photoReplace: "החלפת תמונה",
+    photoRemove: "הסרת התמונה",
+    photoMax: "אפשר לצרף עד 5 תמונות בסך הכול.",
     photosUpload: "העלו תמונה",
     photosLimits: "JPG, PNG או WEBP, בכל גודל.",
     photosBad: "לא הצלחנו לפתוח את התמונה הזאת. נסו תמונה בפורמט JPG או PNG.",
@@ -247,13 +250,16 @@ export const INTAKE = {
 
   more: {
     unlocked: "יש כבר חומר ל-{n} שאלות על {name}",
-    ownLead: "שאלה שרק אתם יודעים לשאול. לא חובה.",
-    ownPlaceholder: "לדוגמה: מה האוכל שהכי שונאים?",
-    ownAnother: "הוספה ועוד שאלה",
-    photoCount: "תמונה {i} מתוך {n}",
-    photoLead: "כל תמונה הופכת לשאלה במשחק. לא חובה.",
     count: "שאלה {i} מתוך {n}",
     skip: "דלגו",
+    /** The last story screen, the same for every event: anything that was not said yet. */
+    extra: {
+      id: "extra",
+      label: "יש עוד משהו שלא סיפרתם?",
+      hint: "סיפור, שאלה משלכם או כל דבר שחשוב לכם שיהיה במשחק. לא חובה.",
+      placeholder: "לדוגמה: בכל חג הוא מכין את אותה עוגה, ואף אחד לא מעז להגיד לו",
+    },
+    extraQuestion: "כתבו כאן את השאלה שלכם",
   },
 
   details: {

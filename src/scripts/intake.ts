@@ -36,13 +36,13 @@ interface State {
   answers: Record<string, string>;
   modes: Record<string, "free" | "choice">;
   choices: Record<string, { q: string; answers: string[]; correct: number }>;
-  photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
+  /** Prompt id → file name of the photo attached to that question. */
+  photos: Record<string, string>;
   details: { date: string; guests: string };
   host: string;
   email: string;
   consent: boolean;
   orderId: string;
-  own: { q: string; type: "free" | "choice"; free: string; answers: string[]; correct: number }[];
 }
 
 const KEY = "tadam-intake-v1";
@@ -70,19 +70,18 @@ function init(root: HTMLElement, data: Data) {
     answers: {},
     modes: {},
     choices: {},
-    photos: [],
+    photos: {},
     details: { date: "", guests: "" },
     host: "auto",
     email: "",
     consent: false,
     orderId: "",
-    own: [],
   });
 
   let state = load();
   // The image files live in memory only (a reload loses them and the card asks to pick the photo again).
   // They are sent once, with the order.
-  const photoFiles = new Map<number, { file: File; url: string }>();
+  const photoFiles = new Map<string, { file: File; url: string }>();
   const tracked = new Set<string>();
 
   function load(): State {
@@ -92,7 +91,7 @@ function init(root: HTMLElement, data: Data) {
         const s = JSON.parse(raw) as State;
         if (s && s.v === 1) {
           const st = { ...blank(), ...s };
-          st.photos = (st.photos || []).map((p) => ({ ...p, type: p.type ?? "free", free: p.free ?? "", answers: p.answers ?? ["", "", "", ""], correct: p.correct ?? -1 }));
+          if (Array.isArray(st.photos)) st.photos = {}; // drafts from the older photo screens
           return st;
         }
       }
@@ -117,7 +116,11 @@ function init(root: HTMLElement, data: Data) {
   }
 
   const event = () => data.events.find((e) => e.id === state.eventId);
-  const shape = (): ShapeConfig => ({ ...data.shapes[event()?.shape ?? "person"], ...(event()?.override || {}) });
+  /** The event's wording and questions, plus the closing "anything else?" question that every event gets. */
+  const shape = (): ShapeConfig => {
+    const sc = { ...data.shapes[event()?.shape ?? "person"], ...(event()?.override || {}) };
+    return { ...sc, prompts: [...sc.prompts, c.more.extra] };
+  };
   const subjectName = () => state.name.trim() || "החוגג.ת";
   const target = () => event()?.target ?? 9;
 
@@ -125,7 +128,7 @@ function init(root: HTMLElement, data: Data) {
   const modeOf = (id: string) => state.modes[id] || "free";
   const choiceDone = (id: string) => {
     const ch = state.choices[id];
-    return !!ch && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
+    return !!ch && (id !== c.more.extra.id || !!ch.q.trim()) && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
   };
   /** A story is usable when it has text (free mode) or a complete question with four answers (choice mode). */
   const isDone = (id: string) =>
@@ -144,17 +147,13 @@ function init(root: HTMLElement, data: Data) {
       const len = (state.answers[p.id] || "").trim().length;
       if (len >= m.minChars) n += Math.min(m.maxPerPrompt, Math.max(1, Math.round(len / m.charsPerQuestion)));
     }
-    n += state.photos.filter((p) => p.caption.trim().length > 3).length * m.perPhoto;
-    n += state.own.length;
+    n += Object.keys(state.photos).length * m.perPhoto;
     return Math.min(target(), n);
   }
 
   // ---------- navigation ----------
-  /** Step 3: one screen per story question, then "your own question", then up to two photo screens. Step 4: date, then host. */
-  const subCount = (step: number) => (step === 3 ? shape().prompts.length + 1 + data.material.maxPhotos : step === 4 ? 2 : 1);
-  type Kind = "q" | "own" | "photo";
-  const kindOf = (sub: number): Kind => (sub < shape().prompts.length ? "q" : sub === shape().prompts.length ? "own" : "photo");
-  const photoSlot = () => state.sub - shape().prompts.length - 1;
+  /** Step 3: one screen per story question (the last one is "anything else?"). Step 4: date, then host. */
+  const subCount = (step: number) => (step === 3 ? shape().prompts.length : step === 4 ? 2 : 1);
   const need = () => Math.max(0, data.material.minPrompts - answeredPrompts().length);
   function show(step: number, sub = 0, push = true) {
     step = Math.max(0, Math.min(MAX_STEP, step));
@@ -175,40 +174,16 @@ function init(root: HTMLElement, data: Data) {
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
     track("intake_step", { step, sub, event: state.eventId });
   }
-  /** Drops photo cards that were opened and left completely empty. */
-  function prunePhotos() {
-    const keep: number[] = [];
-    state.photos.forEach((p, i) => {
-      if (photoFiles.has(i) || p.caption.trim() || p.free.trim() || p.answers.some((a) => a.trim())) keep.push(i);
-    });
-    if (keep.length === state.photos.length) return;
-    const files = keep.map((i) => photoFiles.get(i));
-    state.photos = keep.map((i) => state.photos[i]);
-    photoFiles.clear();
-    files.forEach((f, k) => f && photoFiles.set(k, f));
-  }
   function forward() {
-    prunePhotos();
-    let sub = state.sub + 1;
-    // a second photo screen only makes sense after a first photo
-    if (state.step === 3 && sub < subCount(3) && kindOf(sub) === "photo" && sub - shape().prompts.length - 1 > state.photos.length) sub = subCount(3);
-    if (sub < subCount(state.step)) return show(state.step, sub);
+    if (state.sub < subCount(state.step) - 1) return show(state.step, state.sub + 1);
     if (state.step === 3 && need() > 0) {
-      show(state.step, state.sub, false); // redraw first: an empty photo card may just have been dropped
       $("[data-more-need-text]")!.textContent = fill(c.stories.needMore, { n: need() });
       $<HTMLElement>("[data-more-need]")!.hidden = false;
       return;
     }
     show(state.step + 1);
   }
-  function backward() {
-    prunePhotos();
-    if (state.sub > 0) return show(state.step, state.sub - 1);
-    const prev = state.step - 1;
-    let sub = subCount(prev) - 1;
-    if (prev === 3) while (kindOf(sub) === "photo" && sub - shape().prompts.length - 1 > state.photos.length) sub -= 1;
-    show(prev, sub);
-  }
+  const backward = () => (state.sub > 0 ? show(state.step, state.sub - 1) : show(state.step - 1, subCount(state.step - 1) - 1));
 
   // The bottom bar is one element for every step, so "back" and the main button never move.
   const bar = $<HTMLElement>("[data-bar]")!;
@@ -359,25 +334,16 @@ function init(root: HTMLElement, data: Data) {
       committedInit = true;
     }
     const all = shape().prompts;
-    const kind = kindOf(state.sub);
-    const hub = kind !== "q";
     const cur = all[state.sub];
-    promptsEl.hidden = hub;
-    $<HTMLElement>("[data-own-screen]")!.hidden = kind !== "own";
-    $<HTMLElement>("[data-photo-screen]")!.hidden = kind !== "photo";
+    const isExtra = cur.id === c.more.extra.id;
+    const hub = false;
     $<HTMLElement>("[data-more-need]")!.hidden = true;
     const name = subjectName();
-    $("[data-story-count]")!.textContent =
-      kind === "q"
-        ? fill(c.more.count, { i: state.sub + 1, n: all.length })
-        : kind === "own"
-          ? fill(c.more.unlocked, { n: questionsReady(), name })
-          : fill(c.more.photoCount, { i: photoSlot() + 1, n: data.material.maxPhotos });
-    $("[data-story-title]")!.textContent = kind === "q" ? fill(cur.label, { name }) : kind === "own" ? c.stage5.ownSection : c.stories.photosTitle;
-    $("[data-story-lead]")!.textContent = kind === "q" ? fill(cur.hint, { name }) : kind === "own" ? c.more.ownLead : c.more.photoLead;
-    // the photo screen always shows the card: an upload tile where the picture will be, with the question fields ready
-    if (kind === "photo" && !state.photos[photoSlot()] && photoSlot() === state.photos.length)
-      state.photos.push({ name: "", caption: "", type: "free", free: "", answers: ["", "", "", ""], correct: -1 });
+    $("[data-story-count]")!.textContent = isExtra
+      ? fill(c.more.unlocked, { n: questionsReady(), name })
+      : fill(c.more.count, { i: state.sub + 1, n: all.length - 1 });
+    $("[data-story-title]")!.textContent = fill(cur.label, { name });
+    $("[data-story-lead]")!.textContent = fill(cur.hint, { name });
     promptsEl.innerHTML = "";
     for (const p of hub ? [] : [cur]) {
       const answered = committed.has(p.id);
@@ -401,7 +367,7 @@ function init(root: HTMLElement, data: Data) {
           ${
             choice
               ? `<label class="in-help" for="cq-${p.id}">${c.stories.choiceQuestion}</label>
-                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(typedQ)}" placeholder="${esc(label)}" aria-label="${c.stories.choiceQuestion}" data-cq="${p.id}" />
+                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(typedQ)}" placeholder="${esc(p.id === c.more.extra.id ? c.more.extraQuestion : label)}" aria-label="${c.stories.choiceQuestion}" data-cq="${p.id}" />
                  <p class="in-help">${c.stories.choiceHelp}</p>
                  <div class="in-own-answers">${[0, 1, 2, 3]
                    .map(
@@ -419,17 +385,52 @@ function init(root: HTMLElement, data: Data) {
           }
           <div class="in-prompt__row">
             ${choice ? "" : `<button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>`}
+            <label class="in-attach"><span aria-hidden="true">📷</span><span>${photoFiles.has(p.id) ? c.stories.photoReplace : state.photos[p.id] ? c.stories.photosAgain : c.stories.photoAttach}</span><input type="file" accept="image/*" class="sr-only" data-attach="${p.id}" /></label>
+            ${photoFiles.has(p.id) ? `<span class="in-attached"><img src="${photoFiles.get(p.id)!.url}" alt="" /><button type="button" data-attach-remove="${p.id}" aria-label="${c.stories.photoRemove}">✕</button></span>` : ""}
           </div>
+          <p class="in-err" role="alert" data-attach-err hidden></p>
           ${choice ? "" : `<p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
           <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>`}
         </div>`;
       promptsEl.append(box);
       if (!choice) setupMic(box, p.id);
     }
-    renderPhotos();
-    renderOwnList();
     renderMeter();
   }
+  // a photo attached to the question: opened once to make sure the browser can read it, sent with the order
+  promptsEl.addEventListener("change", (e) => {
+    const t = e.target as HTMLInputElement;
+    const id = t.dataset.attach;
+    const f = t.files?.[0];
+    if (!id || !f) return;
+    const fail = (msg: string) => {
+      const err = promptsEl.querySelector<HTMLElement>("[data-attach-err]");
+      if (err) {
+        err.textContent = msg;
+        err.hidden = false;
+      }
+    };
+    if (!state.photos[id] && Object.keys(state.photos).length >= data.material.maxPhotos) return fail(c.stories.photoMax);
+    void createImageBitmap(f).then(
+      (bmp) => {
+        bmp.close();
+        photoFiles.set(id, { file: f, url: URL.createObjectURL(f) });
+        state.photos[id] = f.name;
+        renderStories();
+        save();
+      },
+      () => fail(c.stories.photosBad),
+    );
+  });
+  promptsEl.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-attach-remove]");
+    if (!b) return;
+    const id = b.dataset.attachRemove!;
+    photoFiles.delete(id);
+    delete state.photos[id];
+    renderStories();
+    save();
+  });
   // choice mode: mode switch, question, four answers, correct mark
   const ensureChoice = (id: string) => (state.choices[id] ||= { q: "", answers: ["", "", "", ""], correct: -1 });
   promptsEl.addEventListener("change", (e) => {
@@ -493,10 +494,9 @@ function init(root: HTMLElement, data: Data) {
     if (help) help.textContent = "";
     if (state.step !== 3) return;
     // "next" when this screen has something, "skip" when it is empty
-    const kind = kindOf(state.sub);
-    const has = kind === "q" ? isDone(shape().prompts[state.sub].id) : kind === "own" ? state.own.length > 0 || ownDirty() : photoFiles.has(photoSlot()) || !!state.photos[photoSlot()]?.caption.trim();
-    barNext.textContent = has ? c.next : c.more.skip;
-    if (kind === "own") $("[data-story-count]")!.textContent = fill(c.more.unlocked, { n: ready, name: subjectName() });
+    const id = shape().prompts[state.sub].id;
+    barNext.textContent = isDone(id) || !!state.photos[id] ? c.next : c.more.skip;
+    if (id === c.more.extra.id) $("[data-story-count]")!.textContent = fill(c.more.unlocked, { n: ready, name: subjectName() });
     if (need() === 0) $<HTMLElement>("[data-more-need]")!.hidden = true;
   }
 
@@ -582,135 +582,6 @@ function init(root: HTMLElement, data: Data) {
     });
   }
 
-  // photos: kept in memory only, so no minors' images are stored or uploaded by the prototype
-  const photoList = $<HTMLElement>("[data-photos]")!;
-  function renderPhotos() {
-    photoList.innerHTML = "";
-    state.photos.forEach((p, i) => {
-      const li = document.createElement("li");
-      const url = photoFiles.get(i)?.url;
-      const choice = p.type === "choice";
-      li.dataset.photo = String(i);
-      li.hidden = state.step === 3 && kindOf(state.sub) === "photo" && i !== photoSlot();
-      li.innerHTML = `${url ? `<img src="${url}" alt="" />` : `<label class="in-photo-again"><span aria-hidden="true">📷</span>${p.name ? c.stories.photosAgain : c.stories.photosUpload}<input type="file" accept="image/*" class="sr-only" data-photo-again="${i}" /></label>`}
-        <div class="in-photo-body">
-          <label class="in-help" for="pq-${i}">${esc(c.stories.photosCaption)}</label>
-          <input id="pq-${i}" class="in-input" type="text" value="${esc(p.caption)}" placeholder="${esc(c.stories.photosPlaceholder)}" data-caption="${i}" />
-          <div class="in-chips" role="radiogroup" aria-label="${esc(c.stage5.ownType)}">
-            <label class="in-chip"><input type="radio" name="pt-${i}" value="free" data-ptype="${i}" ${choice ? "" : "checked"} /><span>${c.stage5.ownTypeFree}</span></label>
-            <label class="in-chip"><input type="radio" name="pt-${i}" value="choice" data-ptype="${i}" ${choice ? "checked" : ""} /><span>${c.stage5.ownTypeChoice}</span></label>
-          </div>
-          ${
-            choice
-              ? `<div class="in-own-answers">` + [0, 1, 2, 3]
-                  .map(
-                    (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(p.answers[k] || "")}" data-pans="${i}:${k}" aria-label="${c.stage5.ownAnswer} ${k + 1}" placeholder="${c.stage5.ownAnswer} ${k + 1}" />
-                      <label class="in-own-correct"><input type="radio" name="pc-${i}" value="${k}" data-pcorrect="${i}" ${p.correct === k ? "checked" : ""} /><span>${c.stage5.ownCorrectShort}</span></label></div>`,
-                  )
-                  .join("") + `</div>`
-              : `<label class="in-help" for="pf-${i}">${c.stage5.ownFreeAnswer}</label>
-                 <input id="pf-${i}" class="in-input" type="text" maxlength="80" value="${esc(p.free)}" placeholder="${c.stage5.ownFreeAnswer}" data-pfree="${i}" />`
-          }
-          <p class="in-err" role="alert" data-photo-err="${i}" hidden>${c.stories.photoNeed}</p>
-          <div class="in-photo-actions">
-            <button type="button" class="btn btn-white in-save-btn" data-photo-save="${i}">${c.stories.save}</button>
-            <span class="in-saved" data-photo-badge="${i}" role="status" ${p.saved ? "" : "hidden"}>✓ ${c.stories.photoSaved}</span>
-            ${url ? `<button type="button" class="btn btn-ghost" data-photo-remove="${i}">${c.stories.photosRemove}</button>` : ""}
-          </div>
-        </div>`;
-      photoList.append(li);
-    });
-  }
-  const photoComplete = (p: State["photos"][number]) =>
-    p.caption.trim().length > 3 && (p.type === "free" ? !!p.free.trim() : p.answers.every((a) => a.trim()) && p.correct >= 0);
-  function markPhoto(i: number, ok: boolean) {
-    state.photos[i].saved = ok;
-    const badge = photoList.querySelector<HTMLElement>(`[data-photo-badge="${i}"]`);
-    if (badge) badge.hidden = !ok;
-    const err = photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`);
-    if (err && ok) err.hidden = true;
-  }
-  photoList.addEventListener("focusout", (e) => {
-    const t = e.target as HTMLInputElement;
-    const li = t.closest<HTMLElement>("[data-photo]");
-    if (!li || t.type === "radio") return;
-    const i = Number(li.dataset.photo);
-    if (photoComplete(state.photos[i]) && !state.photos[i].saved) {
-      markPhoto(i, true);
-      save();
-    }
-  });
-  photoList.addEventListener("input", (e) => {
-    const t = e.target as HTMLInputElement;
-    if (t.dataset.caption !== undefined) state.photos[Number(t.dataset.caption)].caption = t.value;
-    else if (t.dataset.pfree !== undefined) state.photos[Number(t.dataset.pfree)].free = t.value;
-    else if (t.dataset.pans !== undefined) {
-      const [i, k] = t.dataset.pans.split(":").map(Number);
-      state.photos[i].answers[k] = t.value;
-    } else return;
-    const li = t.closest<HTMLElement>("[data-photo]");
-    if (li) {
-      const i = Number(li.dataset.photo);
-      if (state.photos[i].saved && !photoComplete(state.photos[i])) markPhoto(i, false);
-    }
-    renderMeter();
-    save();
-  });
-  photoList.addEventListener("change", (e) => {
-    const t = e.target as HTMLInputElement;
-    if (t.dataset.photoAgain !== undefined) {
-      const f = t.files?.[0];
-      const i = Number(t.dataset.photoAgain);
-      if (!f || !state.photos[i]) return;
-      // only pictures the browser can open: they are scaled down before sending, so any file size is fine
-      void createImageBitmap(f).then(
-        (bmp) => {
-          bmp.close();
-          photoFiles.set(i, { file: f, url: URL.createObjectURL(f) });
-          state.photos[i].name = f.name;
-          renderPhotos();
-          renderMeter();
-          save();
-          photoList.querySelector<HTMLInputElement>(`[data-caption="${i}"]`)?.focus();
-        },
-        () => {
-          const err = photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`);
-          if (err) {
-            err.textContent = c.stories.photosBad;
-            err.hidden = false;
-          }
-        },
-      );
-    } else if (t.dataset.ptype !== undefined) {
-      state.photos[Number(t.dataset.ptype)].type = t.value as "free" | "choice";
-      renderPhotos();
-      photoList.querySelector<HTMLInputElement>(`[data-ptype="${t.dataset.ptype}"][value="${t.value}"]`)?.focus();
-    } else if (t.dataset.pcorrect !== undefined) state.photos[Number(t.dataset.pcorrect)].correct = Number(t.value);
-    else return;
-    save();
-  });
-  photoList.addEventListener("click", (e) => {
-    const sb = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-save]");
-    if (sb) {
-      const i = Number(sb.dataset.photoSave);
-      if (photoComplete(state.photos[i])) {
-        markPhoto(i, true);
-        save();
-      } else photoList.querySelector<HTMLElement>(`[data-photo-err="${i}"]`)!.hidden = false;
-      return;
-    }
-    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-photo-remove]");
-    if (!b) return;
-    const i = Number(b.dataset.photoRemove);
-    state.photos.splice(i, 1);
-    const urls = [...photoFiles.entries()].filter(([k]) => k !== i).map(([k, v]) => [k > i ? k - 1 : k, v] as [number, { file: File; url: string }]);
-    photoFiles.clear();
-    urls.forEach(([k, v]) => photoFiles.set(k, v));
-    renderPhotos();
-    renderMeter();
-    save();
-  });
-
   // ---------- 4: details ----------
   const pad = (n: number) => String(n).padStart(2, "0");
   const now = new Date();
@@ -759,85 +630,19 @@ function init(root: HTMLElement, data: Data) {
     save();
   });
 
-  // own question form: a question, four answers, one marked correct
-  const ownForm = $<HTMLFormElement>("[data-own-form]")!;
-  const ownErr = $<HTMLElement>("[data-own-err]")!;
-  const ownList = $<HTMLElement>("[data-own-list]")!;
-  const ownFree = $<HTMLElement>("[data-own-free]")!;
-  const ownChoice = $<HTMLElement>("[data-own-choice]")!;
-  const ownType = () => (ownForm.querySelector<HTMLInputElement>('input[name="own-type"]:checked')?.value || "free") as "free" | "choice";
-  function syncOwnType() {
-    ownFree.hidden = ownType() !== "free";
-    ownChoice.hidden = ownType() !== "choice";
-  }
-  ownForm.addEventListener("change", (e) => {
-    if ((e.target as HTMLInputElement).name === "own-type") syncOwnType();
-  });
-  function renderOwnList() {
-    ownList.innerHTML = state.own
-      .map(
-        (o, i) => `<li><span>${esc(o.q)}<small>${o.type === "free" ? c.stage5.ownTypeFree : c.stage5.ownTypeChoice}</small></span>
-          <button type="button" class="btn btn-ghost" data-own-remove="${i}">${c.stage5.ownRemove}</button></li>`,
-      )
-      .join("");
-  }
-  ownList.addEventListener("click", (e) => {
-    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-own-remove]");
-    if (!b) return;
-    state.own.splice(Number(b.dataset.ownRemove), 1);
-    renderOwnList();
-    renderMeter();
-    save();
-  });
-  const ownQ = ownForm.querySelector<HTMLInputElement>("#own-q")!;
-  const ownFreeIn = ownForm.querySelector<HTMLInputElement>("#own-free")!;
-  const ownAnswers = () => [0, 1, 2, 3].map((i) => ownForm.querySelector<HTMLInputElement>(`[data-own-a="${i}"]`)!.value.trim());
-  /** Something was typed in the form but not added yet. */
-  const ownDirty = () => !!ownQ.value.trim() || !!ownFreeIn.value.trim() || ownAnswers().some(Boolean);
-  /** Adds the typed question. "empty": nothing typed, "invalid": half filled (the error is shown), "added". */
-  function addOwn(): "empty" | "invalid" | "added" {
-    if (!ownDirty()) return "empty";
-    const q = ownQ.value.trim();
-    const type = ownType();
-    const free = ownFreeIn.value.trim();
-    const answers = ownAnswers();
-    const picked = ownForm.querySelector<HTMLInputElement>('input[name="own-correct"]:checked');
-    if (!q || (type === "free" ? !free : answers.some((a) => !a) || !picked)) {
-      ownErr.textContent = type === "free" ? c.stage5.ownNeed : c.stage5.ownNeedChoice;
-      ownErr.hidden = false;
-      return "invalid";
-    }
-    state.own.push({ q, type, free: type === "free" ? free : "", answers: type === "choice" ? answers : [], correct: type === "choice" ? Number(picked!.value) : 0 });
-    ownForm.reset();
-    syncOwnType();
-    ownErr.hidden = true;
-    renderOwnList();
-    renderMeter();
-    save();
-    return "added";
-  }
-  ownForm.addEventListener("input", () => {
-    ownErr.hidden = true;
-    renderMeter();
-  });
-  ownForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (addOwn() !== "invalid") ownQ.focus();
-  });
-
   // ---------- 5: summary, contact, order ----------
   const orderForm = $<HTMLFormElement>("[data-order-form]")!;
   const orderErr = $<HTMLElement>("[data-order-err]")!;
   const orderCta = barNext;
   const consentIn = $<HTMLInputElement>("[data-order-consent]")!;
   const emailIn = $<HTMLInputElement>("#o-email")!;
-  const missingPhotos = () => state.photos.filter((_, i) => !photoFiles.has(i)).length;
+  const missingPhotos = () => Object.keys(state.photos).filter((id) => !photoFiles.has(id)).length;
   const hostName = () => data.hosts.find((h) => h.id === state.host)?.name || "";
   function renderOrder() {
     $("[data-ticket-title]")!.textContent = state.title;
     $("[data-ticket-meta]")!.textContent =
       fill(c.order.meta, { event: event()?.label || "", host: hostName(), n: questionsReady() }) +
-      (state.photos.length ? fill(c.order.metaPhotos, { n: state.photos.length }) : "");
+      (photoFiles.size ? fill(c.order.metaPhotos, { n: photoFiles.size }) : "");
     $<HTMLElement>("[data-photos-missing]")!.hidden = missingPhotos() === 0;
     emailIn.value = state.email;
     consentIn.checked = state.consent;
@@ -852,6 +657,12 @@ function init(root: HTMLElement, data: Data) {
     save();
   });
 
+  /** Attached photos in question order; `field` is the form field the file travels in (photo-1 … photo-5). */
+  function photoList() {
+    return shape()
+      .prompts.filter((p) => photoFiles.has(p.id))
+      .map((p, i) => ({ id: p.id, field: `photo-${i + 1}`, label: fill(p.label, { name: subjectName() }), name: state.photos[p.id], file: photoFiles.get(p.id)!.file }));
+  }
   function brief() {
     const d = state.details;
     return {
@@ -866,12 +677,11 @@ function init(root: HTMLElement, data: Data) {
             ? { promptId: p.id, prompt: state.choices[p.id].q.trim() || fill(p.label, { name: subjectName() }), type: "choice", answers: state.choices[p.id].answers.map((a) => a.trim()), correct: state.choices[p.id].correct }
             : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
         ),
-      photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
+      photos: photoList().map((x) => ({ field: x.field, promptId: x.id, prompt: x.label, file: x.name })),
       logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null },
       contact: { email: state.email.trim() },
       orderId: state.orderId,
       host: state.host,
-      ownQuestions: state.own,
       questionCount: target(),
       materialReady: questionsReady(),
       consent: { factsAndPhotos: state.consent },
@@ -881,13 +691,9 @@ function init(root: HTMLElement, data: Data) {
     const b = brief();
     const lines = [`אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
     b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.type === "choice" ? (s.answers || []).map((a, i) => (i === s.correct ? "*" : "") + a).join(" / ") : s.text}`));
-    if (b.ownQuestions.length) {
-      lines.push("", "שאלות של המזמינים:");
-      b.ownQuestions.forEach((o) => lines.push(`- ${o.q}: ${o.type === "free" ? o.free : o.answers.map((a, i) => (i === o.correct ? "*" : "") + a).join(" / ")}`));
-    }
     if (b.photos.length) {
-      lines.push("", "תמונות (לפי הסדר, photo-1 והלאה):");
-      b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));
+      lines.push("", "תמונות:");
+      b.photos.forEach((x) => lines.push(`- ${x.field}: ${x.prompt}`));
     }
     const l = b.logistics;
     const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`].filter(Boolean);
@@ -948,10 +754,9 @@ function init(root: HTMLElement, data: Data) {
         "brief-json": JSON.stringify(b),
       };
       Object.entries(fields).forEach(([k, v]) => fd.append(k, v));
-      for (const [i, p] of photoFiles) {
-        const blob = await shrink(p.file);
-        const name = blob === p.file ? p.file.name : p.file.name.replace(/\.[^.]*$/, "") + ".jpg";
-        fd.append(`photo-${i + 1}`, blob, name);
+      for (const x of photoList()) {
+        const blob = await shrink(x.file);
+        fd.append(x.field, blob, blob === x.file ? x.file.name : x.file.name.replace(/\.[^.]*$/, "") + ".jpg");
       }
       const res = await fetch("/", { method: "POST", body: fd });
       if (!res.ok) throw new Error(String(res.status));
@@ -1009,11 +814,10 @@ function init(root: HTMLElement, data: Data) {
         return;
       }
       if (nx.getAttribute("aria-disabled") === "true") return;
-      if (from === 3 && kindOf(state.sub) === "q") {
+      if (from === 3) {
         const id = shape().prompts[state.sub].id;
         if (isDone(id)) commit(id);
       }
-      if (from === 3 && kindOf(state.sub) === "own" && addOwn() === "invalid") return;
       if (from === 4 && state.sub === 0 && state.details.date && state.details.date < today) {
         $<HTMLElement>("[data-date-err]")!.hidden = false;
         return;

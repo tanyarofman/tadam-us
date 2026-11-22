@@ -97,42 +97,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <p class="lead" data-story-lead></p>
       <div class="in-prompts" data-prompts></div>
 
-      <!-- own question: same shape as the questions before it -->
-      <div class="in-own-wrap" data-own-screen hidden>
-        <ul class="in-own-list" data-own-list></ul>
-        <form class="in-own" data-own-form novalidate>
-          <input id="own-q" class="in-input" type="text" maxlength="120" aria-label={c.stage5.ownQuestion} placeholder={c.more.ownPlaceholder} />
-          <fieldset class="in-chips">
-            <legend class="sr-only">{c.stage5.ownType}</legend>
-            <label class="in-chip"><input type="radio" name="own-type" value="free" checked /><span>{c.stage5.ownTypeFree}</span></label>
-            <label class="in-chip"><input type="radio" name="own-type" value="choice" /><span>{c.stage5.ownTypeChoice}</span></label>
-          </fieldset>
-          <div data-own-free>
-            <input id="own-free" class="in-input" type="text" maxlength="80" aria-label={c.stage5.ownFreeAnswer} placeholder={c.stage5.ownFreeAnswer} />
-          </div>
-          <fieldset class="in-own-answers" data-own-choice hidden>
-            <legend class="sr-only">{c.stage5.ownHelp}</legend>
-            {
-              [0, 1, 2, 3].map((i) => (
-                <div class="in-own-row">
-                  <input class="in-input" type="text" maxlength="60" data-own-a={i} aria-label={`${c.stage5.ownAnswer} ${i + 1}`} placeholder={`${c.stage5.ownAnswer} ${i + 1}`} />
-                  <label class="in-own-correct"><input type="radio" name="own-correct" value={i} /><span>{c.stage5.ownCorrectShort}</span></label>
-                </div>
-              ))
-            }
-          </fieldset>
-          <p class="in-err" role="alert" data-own-err hidden></p>
-          <button class="in-screen__edit in-own-more" type="submit">+ {c.more.ownAnother}</button>
-        </form>
-      </div>
-
-      <!-- a photo with a question: one photo per screen -->
-      <div class="in-photos" data-photo-screen hidden>
-        <ul class="in-photo-list" data-photos></ul>
-        <p class="in-help in-photo-note">{c.stories.photosLimits} {c.stories.photosConsent}</p>
-        <input type="file" data-photo-input hidden />
-      </div>
-
       <p class="in-err in-need" data-more-need hidden>
         <span data-more-need-text></span>
         <button class="in-screen__edit" type="button" data-first-empty>{c.stories.backToQuestions}</button>
@@ -1684,6 +1648,55 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       font-size: 1.15rem;
     }
   }
+  /* a photo can be attached to any question */
+  .in-prompt__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .in-attach {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 6px 18px 8px;
+    border-radius: 999px;
+    border: 2px solid var(--in-line);
+    background: var(--in-card);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .in-attach:hover,
+  .in-attach:focus-within {
+    border-color: var(--game-yellow);
+  }
+  .in-attached {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+  .in-attached img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid var(--game-yellow);
+  }
+  .in-attached button {
+    position: absolute;
+    inset: -8px auto auto -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+  }
   /* own question and photo screens */
   .in-own {
     display: grid;
@@ -2091,6 +2104,30 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   }
   /* normal-height windows: give every screen room to breathe */
   @media (min-height: 641px) {
+    /* the order card: a little bigger and airier */
+    .in-pay {
+      max-width: 980px;
+    }
+    .in-ticket {
+      row-gap: clamp(18px, 3.4vh, 34px);
+      padding: clamp(22px, 4.4vh, 48px) clamp(22px, 3.6vw, 52px);
+    }
+    .in-ticket__game {
+      font-size: clamp(1.6rem, 4.4vh, 2.3rem);
+    }
+    .in-ticket .in-includes {
+      gap: 10px;
+      font-size: 1.12rem;
+    }
+    .in-ticket__side {
+      gap: 20px;
+    }
+    .in-ticket__side .in-input {
+      min-height: 62px;
+    }
+    .in-ticket__foot {
+      padding-top: clamp(16px, 2.8vh, 26px);
+    }
     .in-one {
       gap: clamp(16px, 3vh, 30px);
     }

@@ -26,6 +26,8 @@ interface Data {
 interface State {
   v: 1;
   step: number;
+  /** Screen inside a step: the story question in step 3, date or host in step 4. */
+  sub: number;
   eventId: string;
   name: string;
   extra: string;
@@ -35,10 +37,8 @@ interface State {
   modes: Record<string, "free" | "choice">;
   choices: Record<string, { q: string; answers: string[]; correct: number }>;
   photos: { name: string; caption: string; type: "free" | "choice"; free: string; answers: string[]; correct: number; saved?: boolean }[];
-  details: { date: string; guests: string; screen: string; contact: string };
+  details: { date: string; guests: string };
   host: string;
-  contactName: string;
-  phone: string;
   email: string;
   consent: boolean;
   orderId: string;
@@ -61,6 +61,7 @@ function init(root: HTMLElement, data: Data) {
   const blank = (): State => ({
     v: 1,
     step: 0,
+    sub: 0,
     eventId: "",
     name: "",
     extra: "",
@@ -70,10 +71,8 @@ function init(root: HTMLElement, data: Data) {
     modes: {},
     choices: {},
     photos: [],
-    details: { date: "", guests: "", screen: "", contact: "" },
+    details: { date: "", guests: "" },
     host: "auto",
-    contactName: "",
-    phone: "",
     email: "",
     consent: false,
     orderId: "",
@@ -151,22 +150,30 @@ function init(root: HTMLElement, data: Data) {
   }
 
   // ---------- navigation ----------
-  function show(step: number, push = true) {
+  /** Step 3 is one screen per story question plus the "add more" screen; step 4 is date, then host. */
+  const subCount = (step: number) => (step === 3 ? shape().prompts.length + 1 : step === 4 ? 2 : 1);
+  const onHub = () => state.step === 3 && state.sub >= shape().prompts.length;
+  function show(step: number, sub = 0, push = true) {
     step = Math.max(0, Math.min(MAX_STEP, step));
     if (step >= 2 && !state.eventId) step = 1;
     if (step === 6 && !state.orderId) step = 5;
+    sub = Math.max(0, Math.min(subCount(step) - 1, sub));
     state.step = step;
+    state.sub = sub;
     $$<HTMLElement>("[data-step]").forEach((s) => (s.hidden = Number(s.dataset.step) !== step));
     renderBar(step);
     renderStep(step);
     renderProgress(step);
-    if (push) history.pushState({ step }, "", `#s${step}`);
-    else history.replaceState({ step }, "", `#s${step}`);
+    const hash = `#s${step}-${sub}`;
+    if (push) history.pushState({ step, sub }, "", hash);
+    else history.replaceState({ step, sub }, "", hash);
     save();
     window.scrollTo({ top: 0 });
     $<HTMLElement>(`[data-step="${step}"] [tabindex="-1"]`)?.focus({ preventScroll: true });
-    track("intake_step", { step, event: state.eventId });
+    track("intake_step", { step, sub, event: state.eventId });
   }
+  const forward = () => (state.sub < subCount(state.step) - 1 ? show(state.step, state.sub + 1) : show(state.step + 1));
+  const backward = () => (state.sub > 0 ? show(state.step, state.sub - 1) : show(state.step - 1, subCount(state.step - 1) - 1));
 
   // The bottom bar is one element for every step, so "back" and the main button never move.
   const bar = $<HTMLElement>("[data-bar]")!;
@@ -178,23 +185,24 @@ function init(root: HTMLElement, data: Data) {
     barNext.dataset.next = String(step);
     barNext.setAttribute("aria-disabled", "false");
     barNext.hidden = step === 1 && !state.eventId;
-    barNext.textContent = step === 4 ? c.details.cta : step === 5 ? orderLabel : c.next;
+    barNext.textContent = step === 4 && state.sub === 1 ? c.details.cta : step === 5 ? orderLabel : c.next;
   }
-  $<HTMLElement>("[data-bar-back]")!.addEventListener("click", () => show(state.step - 1));
+  $<HTMLElement>("[data-bar-back]")!.addEventListener("click", backward);
 
   function renderProgress(step: number) {
     const nav = $("[data-progress]");
     if (!nav) return;
-    nav.hidden = step === 0;
-    const stage = Math.min(step, 5);
-    const text = $("[data-progress-text]");
-    if (text) text.textContent = `${c.stepWord} ${stage} ${c.of} 5`;
-    const bar = $<HTMLElement>("[data-progress-bar]");
-    if (bar) bar.style.width = `${(stage / 5) * 100}%`;
-    $$("[data-stage]").forEach((li) => {
-      if (Number(li.dataset.stage) === stage) li.setAttribute("aria-current", "step");
-      else li.removeAttribute("aria-current");
-    });
+    nav.hidden = step === 0 || step === 6;
+    // every screen counts the same, so the line moves on each "next"
+    let done = 0;
+    let total = 0;
+    for (let i = 1; i <= 5; i++) {
+      if (i < step) done += subCount(i);
+      total += subCount(i);
+    }
+    const pct = Math.round(((done + state.sub + 1) / total) * 100);
+    nav.setAttribute("aria-valuenow", String(pct));
+    $<HTMLElement>("[data-progress-bar]")!.style.width = `${pct}%`;
   }
 
   function renderStep(step: number) {
@@ -205,6 +213,9 @@ function init(root: HTMLElement, data: Data) {
     if (step === 4) {
       renderDetails();
       renderHosts();
+      $$<HTMLElement>('[data-step="4"] [data-sub]').forEach((el) => (el.hidden = Number(el.dataset.sub) !== state.sub));
+      $("[data-details-title]")!.textContent = state.sub === 0 ? c.details.whenTitle : c.details.hostTitle;
+      $("[data-details-lead]")!.textContent = state.sub === 0 ? c.details.whenLead : c.details.hostLead;
     }
     if (step === 5) renderOrder();
   }
@@ -270,7 +281,6 @@ function init(root: HTMLElement, data: Data) {
 
   // ---------- 3: stories ----------
   const promptsEl = $<HTMLElement>("[data-prompts]")!;
-  let openPrompt = "";
   // A story counts as "answered" (the green mark) once the creator leaves the box or presses save.
   // The text itself is autosaved on every keystroke.
   const committed = new Set<string>();
@@ -298,11 +308,18 @@ function init(root: HTMLElement, data: Data) {
       shape().prompts.forEach((p) => hasText(p.id) && committed.add(p.id));
       committedInit = true;
     }
-    if (!openPrompt) openPrompt = shape().prompts.find((p) => !isDone(p.id))?.id || shape().prompts[0].id;
+    const all = shape().prompts;
+    const hub = onHub();
+    const cur = all[state.sub];
+    promptsEl.hidden = hub;
+    $<HTMLElement>("[data-more]")!.hidden = !hub;
+    $("[data-story-count]")!.textContent = hub ? "" : fill(c.more.count, { i: state.sub + 1, n: all.length });
+    $("[data-story-title]")!.textContent = hub ? c.more.title : fill(cur.label, { name: subjectName() });
+    $("[data-story-lead]")!.textContent = hub ? c.more.lead : fill(cur.hint, { name: subjectName() });
     promptsEl.innerHTML = "";
-    for (const p of shape().prompts) {
+    for (const p of hub ? [] : [cur]) {
       const answered = committed.has(p.id);
-      const open = openPrompt === p.id;
+      const open = true;
       const box = document.createElement("div");
       box.className = "in-prompt";
       box.dataset.answered = String(answered);
@@ -311,11 +328,8 @@ function init(root: HTMLElement, data: Data) {
       const choice = modeOf(p.id) === "choice";
       const cv = state.choices[p.id] || { q: label, answers: ["", "", "", ""], correct: -1 };
       box.innerHTML = `
-        <button type="button" class="in-prompt__head" aria-expanded="${open}" aria-controls="pb-${p.id}">
-          <span>${esc(label)}</span><span class="in-prompt__mark">${answered ? "✓ " + c.stories.answered : ""}</span>
-        </button>
+        <span class="in-prompt__mark" hidden></span>
         <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
-          <label class="in-help" for="pt-${p.id}">${esc(fill(p.hint, { name: subjectName() }))}</label>
           <div class="in-chips" role="radiogroup" aria-label="${esc(label)}">
             <label class="in-chip"><input type="radio" name="pm-${p.id}" value="free" data-pmode="${p.id}" ${choice ? "" : "checked"} /><span>${c.stories.modeFree}</span></label>
             <label class="in-chip"><input type="radio" name="pm-${p.id}" value="choice" data-pmode="${p.id}" ${choice ? "checked" : ""} /><span>${c.stories.modeChoice}</span></label>
@@ -341,9 +355,6 @@ function init(root: HTMLElement, data: Data) {
           }
           <div class="in-prompt__row">
             ${choice ? "" : `<button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>`}
-            <button type="button" class="btn btn-white in-save-btn" data-save-prompt="${p.id}">${c.stories.save}</button>
-            <button type="button" class="btn btn-ghost" data-skip="${p.id}">${c.stories.skip}</button>
-            <span class="in-saved" data-saved-msg="${p.id}" role="status" hidden>✓ ${c.stories.savedMsg}</span>
           </div>
           ${choice ? "" : `<p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
           <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>`}
@@ -357,38 +368,6 @@ function init(root: HTMLElement, data: Data) {
     const share = $<HTMLAnchorElement>("[data-share]");
     if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
   }
-  promptsEl.addEventListener("click", (e) => {
-    const t = e.target as HTMLElement;
-    const head = t.closest<HTMLElement>(".in-prompt__head");
-    if (head) {
-      const id = head.closest<HTMLElement>("[data-prompt]")!.dataset.prompt!;
-      openPrompt = openPrompt === id ? "" : id;
-      renderStories();
-      return;
-    }
-    const sv = t.closest<HTMLElement>("[data-save-prompt]");
-    if (sv) {
-      const id = sv.dataset.savePrompt!;
-      if (!hasText(id)) {
-        promptsEl.querySelector<HTMLTextAreaElement>(`#pt-${id}`)?.focus();
-        return;
-      }
-      commit(id);
-      renderMeter();
-      const ps = shape().prompts;
-      const i = ps.findIndex((p) => p.id === id);
-      openPrompt = ps.slice(i + 1).find((p) => !committed.has(p.id))?.id || "";
-      renderStories();
-      return;
-    }
-    const skip = t.closest<HTMLElement>("[data-skip]");
-    if (skip) {
-      const ps = shape().prompts;
-      const i = ps.findIndex((p) => p.id === skip.dataset.skip);
-      openPrompt = ps[i + 1]?.id || "";
-      renderStories();
-    }
-  });
   // choice mode: mode switch, question, four answers, correct mark
   const ensureChoice = (id: string) => (state.choices[id] ||= { q: fill(shape().prompts.find((p) => p.id === id)!.label, { name: subjectName() }), answers: ["", "", "", ""], correct: -1 });
   promptsEl.addEventListener("change", (e) => {
@@ -398,7 +377,6 @@ function init(root: HTMLElement, data: Data) {
       state.modes[id] = t.value as "free" | "choice";
       if (t.value === "choice") ensureChoice(id);
       commit(id);
-      openPrompt = id;
       renderStories();
       save();
     } else if (t.dataset.ccor !== undefined) {
@@ -447,13 +425,19 @@ function init(root: HTMLElement, data: Data) {
     const t = target();
     const text = $("[data-meter-text]");
     if (text) text.textContent = fill(c.stories.counter, { n: ready, total: t });
-    const bar = $<HTMLElement>("[data-meter-bar]");
-    if (bar) bar.style.width = `${(ready / t) * 100}%`;
-    const need = Math.max(0, data.material.minPrompts - answeredPrompts().length);
-    const next = $<HTMLElement>('[data-next="3"]');
+    const meterBar = $<HTMLElement>("[data-meter-bar]");
+    if (meterBar) meterBar.style.width = `${(ready / t) * 100}%`;
     const help = $("[data-meter-help]");
-    if (next) next.setAttribute("aria-disabled", String(need > 0));
-    if (help) help.textContent = need > 0 ? fill(c.stories.needMore, { n: need }) : `${c.stories.ready}. ${c.stories.meterHelp}`;
+    if (help) help.textContent = "";
+    if (state.step !== 3) return;
+    // on a question: "next" when there is an answer, "skip" when not. On the last screen: at least 3 answers.
+    const need = Math.max(0, data.material.minPrompts - answeredPrompts().length);
+    const hub = onHub();
+    barNext.setAttribute("aria-disabled", String(hub && need > 0));
+    barNext.textContent = hub || isDone(shape().prompts[state.sub].id) ? c.next : c.more.skip;
+    const needEl = $<HTMLElement>("[data-more-need]")!;
+    needEl.hidden = !(hub && need > 0);
+    needEl.textContent = fill(c.stories.needMore, { n: need });
   }
 
   // voice input (Web Speech API). Hidden where the browser does not support it.
@@ -769,31 +753,22 @@ function init(root: HTMLElement, data: Data) {
   const orderErr = $<HTMLElement>("[data-order-err]")!;
   const orderCta = barNext;
   const consentIn = $<HTMLInputElement>("[data-order-consent]")!;
-  const orderInputs = () => $$<HTMLInputElement>("[data-order]");
+  const emailIn = $<HTMLInputElement>("#o-email")!;
   const missingPhotos = () => state.photos.filter((_, i) => !photoFiles.has(i)).length;
+  const hostName = () => data.hosts.find((h) => h.id === state.host)?.name || "";
   function renderOrder() {
-    const d = state.details;
-    const r = c.order.rows;
-    const hostName = data.hosts.find((h) => h.id === state.host)?.name || "";
-    const rows: [string, string][] = [
-      [r.event, event()?.label || ""],
-      [r.who, subjectName()],
-      [r.game, state.title],
-      [r.host, hostName],
-      [r.material, fill(c.order.materialValue, { n: questionsReady(), total: target() })],
-    ];
-    if (state.photos.length) rows.push([r.photos, String(state.photos.length)]);
-    if (d.date) rows.push([r.date, new Date(d.date).toLocaleDateString("he-IL")]);
-    if (d.guests) rows.push([r.guests, d.guests]);
-    $("[data-summary]")!.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
+    $("[data-ticket-title]")!.textContent = state.title;
+    $("[data-ticket-meta]")!.textContent =
+      fill(c.order.meta, { event: event()?.label || "", host: hostName(), n: questionsReady() }) +
+      (state.photos.length ? fill(c.order.metaPhotos, { n: state.photos.length }) : "");
     $<HTMLElement>("[data-photos-missing]")!.hidden = missingPhotos() === 0;
-    orderInputs().forEach((el) => (el.value = state[el.dataset.order as "contactName" | "phone" | "email"]));
+    emailIn.value = state.email;
     consentIn.checked = state.consent;
     orderErr.hidden = true;
   }
   orderForm.addEventListener("input", (e) => {
     const el = e.target as HTMLInputElement;
-    if (el.dataset.order) state[el.dataset.order as "contactName" | "phone" | "email"] = el.value;
+    if (el === emailIn) state.email = el.value;
     else if (el === consentIn) state.consent = el.checked;
     else return;
     el.removeAttribute("aria-invalid");
@@ -815,8 +790,8 @@ function init(root: HTMLElement, data: Data) {
             : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
         ),
       photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),
-      logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null, screen: d.screen || null },
-      contact: { name: state.contactName.trim(), phone: state.phone.trim(), email: state.email.trim() },
+      logistics: { date: d.date || null, guests: d.guests ? Number(d.guests) : null },
+      contact: { email: state.email.trim() },
       orderId: state.orderId,
       host: state.host,
       ownQuestions: state.own,
@@ -838,7 +813,7 @@ function init(root: HTMLElement, data: Data) {
       b.photos.forEach((p) => lines.push(`- ${p.question || p.file}: ${p.type === "free" ? p.free : p.answers.map((a, i) => (i === p.correct ? "*" : "") + a).join(" / ")}`));
     }
     const l = b.logistics;
-    const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`, l.screen && `מסך: ${l.screen}`].filter(Boolean);
+    const extra = [l.date && `תאריך: ${l.date}`, l.guests && `אורחים: ${l.guests}`].filter(Boolean);
     if (extra.length) lines.push("", ...(extra as string[]));
     lines.push("", `מנחה: ${data.hosts.find((h) => h.id === state.host)?.name || ""}`, `מספר שאלות: ${b.questionCount}`, "(* מסמן את התשובה הנכונה)");
     return lines.join("\n");
@@ -862,12 +837,12 @@ function init(root: HTMLElement, data: Data) {
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (sending) return;
-    const bad = orderInputs().filter((el) => !el.value.trim() || !el.validity.valid);
-    orderInputs().forEach((el) => (bad.includes(el) ? el.setAttribute("aria-invalid", "true") : el.removeAttribute("aria-invalid")));
-    if (bad.length || !consentIn.checked) {
+    const badEmail = !emailIn.value.trim() || !emailIn.validity.valid;
+    if (badEmail) emailIn.setAttribute("aria-invalid", "true");
+    if (badEmail || !consentIn.checked) {
       orderErr.textContent = c.order.errRequired;
       orderErr.hidden = false;
-      (bad[0] || consentIn).focus();
+      (badEmail ? emailIn : consentIn).focus();
       return;
     }
     sending = true;
@@ -884,16 +859,13 @@ function init(root: HTMLElement, data: Data) {
       const fields: Record<string, string> = {
         "form-name": "order",
         "order-id": state.orderId,
-        name: state.contactName.trim(),
-        phone: state.phone.trim(),
         email: state.email.trim(),
         event: event()?.label || "",
         about: `${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`,
         "game-title": state.title,
-        host: data.hosts.find((h) => h.id === state.host)?.name || "",
+        host: hostName(),
         "event-date": d.date,
         guests: d.guests,
-        screen: d.screen,
         price: data.price,
         brief: briefText(),
         "brief-json": JSON.stringify(b),
@@ -936,7 +908,6 @@ function init(root: HTMLElement, data: Data) {
       if (changed) {
         // a different event can change the shape: keep what was typed, drop the title default and prompts' open state
         if (!state.titleEdited) state.title = "";
-        openPrompt = "";
       }
       renderEvents();
       const tiles = ev.parentElement!;
@@ -960,9 +931,10 @@ function init(root: HTMLElement, data: Data) {
         orderForm.requestSubmit();
         return;
       }
-      if (nx.getAttribute("aria-disabled") === "true") {
-        if (from === 3) renderMeter();
-        return;
+      if (nx.getAttribute("aria-disabled") === "true") return;
+      if (from === 3 && !onHub()) {
+        const id = shape().prompts[state.sub].id;
+        if (isDone(id)) commit(id);
       }
       if (from === 2 && !state.name.trim()) {
         nameIn.setAttribute("aria-invalid", "true");
@@ -970,14 +942,13 @@ function init(root: HTMLElement, data: Data) {
         nameIn.focus();
         return;
       }
-      show(from + 1);
+      forward();
       return;
     }
     if (t.closest("[data-restart]")) {
       if (!window.confirm(c.restart + "?")) return;
       state = blank();
       photoFiles.clear();
-      openPrompt = "";
       save();
       show(0);
       return;
@@ -986,15 +957,15 @@ function init(root: HTMLElement, data: Data) {
 
   // Back button returns to the previous stage without wiping anything (state is saved on every change).
   window.addEventListener("popstate", (e) => {
-    const s = (e.state && typeof e.state.step === "number" ? e.state.step : parseHash()) as number;
-    show(s, false);
+    const [s, sub] = e.state && typeof e.state.step === "number" ? [e.state.step, e.state.sub || 0] : parseHash();
+    show(s, sub, false);
   });
-  function parseHash(): number {
-    const m = /^#s(\d)$/.exec(location.hash);
-    return m ? Number(m[1]) : state.step;
+  function parseHash(): [number, number] {
+    const m = /^#s(\d)(?:-(\d+))?$/.exec(location.hash);
+    return m ? [Number(m[1]), Number(m[2] || 0)] : [state.step, state.sub];
   }
 
-  show(state.step, false);
+  show(state.step, state.sub, false);
 }
 
 function esc(s: string): string {

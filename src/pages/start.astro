@@ -41,13 +41,9 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <span class="in-save" data-save role="status" aria-live="polite"></span>
     </header>
 
-    <nav class="in-progress" data-progress aria-label="התקדמות" hidden>
-      <p class="in-progress__text" data-progress-text></p>
-      <div class="in-progress__bar" aria-hidden="true"><i data-progress-bar></i></div>
-      <ol class="in-progress__stages">
-        {c.stages.map((s, i) => <li data-stage={i + 1}>{s}</li>)}
-      </ol>
-    </nav>
+    <div class="in-progress" data-progress role="progressbar" aria-label="התקדמות" aria-valuemin="0" aria-valuemax="100" hidden>
+      <i data-progress-bar></i>
+    </div>
 
     <!-- 0: start -->
     <section class="in-step in-hero" data-step="0" aria-labelledby="h0">
@@ -94,19 +90,18 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </div>
     </section>
 
-    <!-- 3: stories -->
-    <section class="in-step" data-step="3" aria-labelledby="h3" hidden>
-      <h2 class="display h-card" id="h3" tabindex="-1" data-t="storiesTitle"></h2>
-      <p class="lead" data-t="storiesLead"></p>
-      <details class="in-why">
-        <summary>{c.stories.helpTitle}</summary>
-        <p class="in-help">{c.stories.help}</p>
-      </details>
+    <!-- 3: stories, one question per screen, then an optional "add more" screen -->
+    <section class="in-step in-one" data-step="3" aria-labelledby="h3" hidden>
+      <p class="in-count" data-story-count></p>
+      <h2 class="display h-card" id="h3" tabindex="-1" data-story-title></h2>
+      <p class="lead" data-story-lead></p>
       <div class="in-prompts" data-prompts></div>
 
+      <div class="in-more-list" data-more hidden>
+        <p class="in-err" data-more-need hidden></p>
+        <details class="in-more">
+          <summary><span class="in-more__icon" aria-hidden="true">✍️</span><span><strong>{c.stage5.ownSection}</strong><small>{c.more.ownHint}</small></span></summary>
       <div class="in-own-wrap">
-        <h3 class="in-sub">{c.stage5.ownSection}</h3>
-        <p class="in-help">{c.stage5.ownSectionHelp}</p>
         <ul class="in-own-list" data-own-list></ul>
         <button class="btn btn-white in-own-open" type="button" data-own-open>+ {c.stage5.ownAdd}</button>
         <form class="in-own" data-own-form hidden novalidate>
@@ -144,9 +139,10 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         </form>
       </div>
 
+        </details>
+        <details class="in-more">
+          <summary><span class="in-more__icon" aria-hidden="true">📷</span><span><strong>{c.stories.photosTitle}</strong><small>{c.more.photosHint}</small></span></summary>
       <div class="in-photos">
-        <h3 class="in-sub">{c.stories.photosTitle}</h3>
-        <p class="in-help">{c.stories.photosHelp}</p>
         <ul class="in-photo-list" data-photos></ul>
         <label class="btn btn-white in-photo-add" data-photo-add>
           {c.stories.photosAdd}
@@ -155,84 +151,53 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
         <p class="in-help">{c.stories.photosConsent}</p>
       </div>
 
+        </details>
+        <details class="in-more">
+          <summary><span class="in-more__icon" aria-hidden="true">💬</span><span><strong>{c.stories.share}</strong><small>{c.more.shareHint}</small></span></summary>
       <div class="in-share">
-        <h3 class="in-sub">{c.stories.share}</h3>
         <p class="in-help">{c.stories.shareHelp}</p>
         <a class="btn btn-white" data-share target="_blank" rel="noopener">{c.stories.shareBtn}</a>
       </div>
-
-    </section>
-
-    <!-- 4: details + host -->
-    <section class="in-step" data-step="4" aria-labelledby="h4" hidden>
-      <h2 class="display h-card" id="h4" tabindex="-1">{c.details.title}</h2>
-      <p class="lead">{c.details.lead}</p>
-      <div class="in-field">
-        <label for="d-date">{c.details.date}</label>
-        <input id="d-date" class="in-input" type="date" data-detail="date" aria-describedby="d-date-help" />
-        <p class="in-help" id="d-date-help">{c.details.dateHelp}</p>
-      </div>
-      <div class="in-field">
-        <label for="d-guests">{c.details.guests}</label>
-        <input id="d-guests" class="in-input" type="number" inputmode="numeric" min="1" max="2000" data-detail="guests" />
-      </div>
-      <fieldset class="in-field in-chips">
-        <legend>{c.details.screen}</legend>
-        {
-          c.details.screens.map((s) => (
-            <label class="in-chip"><input type="radio" name="screen" value={s} data-detail="screen" /><span>{s}</span></label>
-          ))
-        }
-      </fieldset>
-      <div class="in-hostpick">
-        <h3 class="in-sub">{c.stage5.hostTitle}</h3>
-        <p class="in-help">{c.stage5.hostHelp}</p>
-        <div class="in-hosts" role="radiogroup" aria-label={c.stage5.hostTitle} data-hosts></div>
+        </details>
       </div>
     </section>
 
-    <!-- 5: summary, price, contact, order -->
-    <section class="in-step" data-step="5" aria-labelledby="h5" hidden>
-      <h2 class="display h-card" id="h5" tabindex="-1">{c.order.title}</h2>
-      <div class="in-order">
-        <div class="in-order__col">
-          <h3 class="in-sub">{c.order.summary}</h3>
-          <dl class="in-summary" data-summary></dl>
-          <p class="in-help" data-order-date hidden></p>
-          <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
-          <button class="btn btn-ghost in-order__edit" type="button" data-go="3">{c.order.edit}</button>
-          <h3 class="in-sub">{c.order.nextTitle}</h3>
-          <ol class="in-how in-how--plain">
-            {c.order.next.map((t) => <li><span>{t}</span></li>)}
-          </ol>
+    <!-- 4: when (optional), then who hosts: two short screens -->
+    <section class="in-step in-one" data-step="4" aria-labelledby="h4" hidden>
+      <h2 class="display h-card" id="h4" tabindex="-1" data-details-title></h2>
+      <p class="lead" data-details-lead></p>
+      <div class="in-pair" data-sub="0">
+        <div class="in-field">
+          <label for="d-date">{c.details.date}</label>
+          <input id="d-date" class="in-input" type="date" data-detail="date" />
         </div>
-        <form class="in-order__col in-order__pay" data-order-form novalidate>
-          <div class="in-price">
-            <p class="in-price__label">{c.order.priceLabel}</p>
-            <p class="in-price__num display">{price}</p>
-            <ul class="in-includes">
-              {c.order.includes.map((t) => <li>{t}</li>)}
-            </ul>
-          </div>
-          <h3 class="in-sub">{c.order.contactTitle}</h3>
-          <div class="in-field">
-            <label for="o-name">{c.order.name}</label>
-            <input id="o-name" class="in-input" type="text" autocomplete="name" maxlength="80" required data-order="contactName" />
-          </div>
-          <div class="in-field">
-            <label for="o-phone">{c.order.phone}</label>
-            <input id="o-phone" class="in-input" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20" required pattern="[0-9+\-\s]{9,}" data-order="phone" />
-          </div>
-          <div class="in-field">
-            <label for="o-email">{c.order.email}</label>
-            <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" aria-describedby="o-email-help" />
-            <p class="in-help" id="o-email-help">{c.order.emailHelp}</p>
-          </div>
-          <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
-          <p class="in-err" role="alert" data-order-err hidden></p>
-          <p class="in-help">{c.order.payNote}</p>
-        </form>
+        <div class="in-field">
+          <label for="d-guests">{c.details.guests}</label>
+          <input id="d-guests" class="in-input" type="number" inputmode="numeric" min="1" max="2000" data-detail="guests" />
+        </div>
       </div>
+      <div class="in-hosts" role="radiogroup" aria-labelledby="h4" data-hosts data-sub="1"></div>
+    </section>
+
+    <!-- 5: the order: what you get, the price, one email -->
+    <section class="in-step in-one" data-step="5" aria-labelledby="h5" hidden>
+      <h2 class="display h-card" id="h5" tabindex="-1">{c.order.title}</h2>
+      <form class="in-ticket" data-order-form novalidate>
+        <p class="in-ticket__game display" data-ticket-title></p>
+        <p class="in-ticket__meta" data-ticket-meta></p>
+        <ul class="in-includes">
+          {c.order.includes.map((t) => <li>{t}</li>)}
+        </ul>
+        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
+        <div class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display">{price}</strong></div>
+        <div class="in-field">
+          <label for="o-email">{c.order.email}</label>
+          <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" />
+        </div>
+        <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
+        <p class="in-err" role="alert" data-order-err hidden></p>
+      </form>
+      <p class="in-help in-one__note">{c.order.payNote}</p>
     </section>
 
     <!-- 6: shown only while PAYMENT_URL is empty -->
@@ -258,9 +223,9 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   <!-- Registers the "order" form and its fields with Netlify Forms at deploy. The script posts the real values. -->
   <form name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
     <input name="bot-field" />
-    <input name="order-id" /><input name="name" /><input name="phone" /><input name="email" />
+    <input name="order-id" /><input name="email" />
     <input name="event" /><input name="about" /><input name="game-title" /><input name="host" />
-    <input name="event-date" /><input name="guests" /><input name="screen" /><input name="price" />
+    <input name="event-date" /><input name="guests" /><input name="price" />
     <textarea name="brief"></textarea><textarea name="brief-json"></textarea>
     {[1, 2, 3, 4, 5].map((i) => <input type="file" name={`photo-${i}`} />)}
   </form>
@@ -305,19 +270,17 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     color: var(--text-muted);
     min-height: 1.5em;
   }
-  .in-progress__text {
-    font-size: var(--fs-small);
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-  .in-progress__bar,
+  .in-progress,
   .in-meter__bar {
-    height: 10px;
+    height: 6px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.2);
     overflow: hidden;
   }
-  .in-progress__bar i,
+  .in-progress {
+    margin-top: 14px;
+  }
+  .in-progress i,
   .in-meter__bar i {
     display: block;
     height: 100%;
@@ -325,21 +288,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     background: var(--game-yellow);
     border-radius: 999px;
     transition: width 0.4s var(--ease-out);
-  }
-  .in-progress__stages {
-    list-style: none;
-    margin: 8px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-align: center;
-  }
-  .in-progress__stages li[aria-current="step"] {
-    color: var(--game-yellow);
-    font-weight: 700;
   }
   .in-step {
     display: grid;
@@ -777,6 +725,141 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-meter__help {
     color: var(--text-muted);
     margin-inline-start: 8px;
+  }
+  /* one thing per screen: a narrow centered column */
+  .in-one {
+    max-width: 720px;
+    width: 100%;
+    margin-inline: auto;
+    padding-top: clamp(16px, 5vh, 56px);
+  }
+  .in-one > .lead {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .in-count {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--game-yellow);
+    font-weight: 700;
+  }
+  .in-one .in-prompts {
+    display: block;
+  }
+  .in-one .in-prompt {
+    background: none;
+    border: 0;
+    overflow: visible;
+  }
+  .in-one .in-prompt__body {
+    padding: 0;
+  }
+  .in-one .in-textarea {
+    min-height: 180px;
+    font-size: 1.15rem;
+  }
+  .in-more-list {
+    display: grid;
+    gap: 12px;
+  }
+  .in-more {
+    background: var(--in-card);
+    border: 2px solid var(--in-line);
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .in-more[open] {
+    border-color: var(--game-yellow);
+  }
+  .in-more summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  .in-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .in-more summary::after {
+    content: "+";
+    font-size: 1.6rem;
+    color: var(--game-yellow);
+    font-weight: 700;
+  }
+  .in-more[open] summary::after {
+    content: "−";
+  }
+  .in-more__icon {
+    font-size: 1.8rem;
+  }
+  .in-more summary strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+  }
+  .in-more summary small {
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+  .in-more > div {
+    padding: 0 16px 16px;
+    display: grid;
+    gap: 12px;
+  }
+  .in-pair {
+    display: grid;
+    gap: 16px;
+  }
+  .in-one .in-host img,
+  .in-one .in-host__ph {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 0.82;
+    object-fit: cover;
+    object-position: 50% 12%;
+  }
+  .in-bar .in-meter__bar {
+    display: none;
+  }
+  .in-bar .in-meter__text {
+    margin: 0;
+  }
+  /* 5: the order as a ticket */
+  .in-ticket {
+    display: grid;
+    gap: 16px;
+    background: var(--in-card);
+    border: 1px solid var(--in-line);
+    border-radius: 26px;
+    padding: 22px 20px;
+  }
+  .in-ticket__game {
+    margin: 0;
+    color: var(--game-yellow);
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    line-height: 1.15;
+  }
+  .in-ticket__meta {
+    margin: -8px 0 0;
+    color: var(--text-muted);
+  }
+  .in-ticket__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-top: 2px dashed var(--in-line);
+    padding-top: 14px;
+  }
+  .in-ticket__total strong {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    color: var(--game-yellow);
+    line-height: 1;
+  }
+  .in-one__note {
+    text-align: center;
   }
   /* 0: hero, as clean as the home page */
   .in-hero {
@@ -1370,40 +1453,19 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-tile {
       min-height: 132px;
     }
+    .in-pair {
+      grid-template-columns: 1fr 1fr;
+    }
     .in-who {
       max-width: 760px;
       width: 100%;
       margin-inline: auto;
-    }
-    /* step 3: stories two per row, the open one takes the full row */
-    .in-prompts {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      align-items: start;
-    }
-    .in-prompt:has(.in-prompt__body:not([hidden])) {
-      grid-column: 1 / -1;
     }
     .in-own-answers {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .in-photo-list {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    /* step 4: two columns of fields */
-    .in-step[data-step="4"] {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      column-gap: 48px;
-    }
-    .in-step[data-step="4"] > h2,
-    .in-step[data-step="4"] > .lead,
-    .in-step[data-step="4"] > .in-hostpick {
-      grid-column: 1 / -1;
-    }
-    /* step 5: what you filled on one side, price and contact on the other */
-    .in-order {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      column-gap: 48px;
     }
     .in-step[data-step="6"] {
       max-width: 900px;
@@ -1413,7 +1475,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   }
   @media (min-width: 1100px) {
     .in-hosts {
-      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
     }
     .in-host strong {
@@ -1421,7 +1483,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .in-progress__bar i,
+    .in-progress i,
     .in-meter__bar i,
     .in-tile,
     .in-tile__icon {

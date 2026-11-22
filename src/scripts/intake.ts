@@ -125,7 +125,7 @@ function init(root: HTMLElement, data: Data) {
   const modeOf = (id: string) => state.modes[id] || "free";
   const choiceDone = (id: string) => {
     const ch = state.choices[id];
-    return !!ch && !!ch.q.trim() && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
+    return !!ch && ch.answers.length === 4 && ch.answers.every((a) => a.trim()) && ch.correct >= 0;
   };
   /** A story is usable when it has text (free mode) or a complete question with four answers (choice mode). */
   const isDone = (id: string) =>
@@ -329,7 +329,9 @@ function init(root: HTMLElement, data: Data) {
       box.dataset.prompt = p.id;
       const label = fill(p.label, { name: subjectName() });
       const choice = modeOf(p.id) === "choice";
-      const cv = state.choices[p.id] || { q: label, answers: ["", "", "", ""], correct: -1 };
+      const cv = state.choices[p.id] || { q: "", answers: ["", "", "", ""], correct: -1 };
+      // the suggested question is only a grey hint: an older draft that stored it as text shows it as a hint too
+      const typedQ = cv.q.trim() === label ? "" : cv.q;
       box.innerHTML = `
         <span class="in-prompt__mark" hidden></span>
         <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
@@ -340,7 +342,7 @@ function init(root: HTMLElement, data: Data) {
           ${
             choice
               ? `<label class="in-help" for="cq-${p.id}">${c.stories.choiceQuestion}</label>
-                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(cv.q)}" data-cq="${p.id}" />
+                 <input id="cq-${p.id}" class="in-input" type="text" maxlength="120" value="${esc(typedQ)}" placeholder="${esc(label)}" aria-label="${c.stories.choiceQuestion}" data-cq="${p.id}" />
                  <p class="in-help">${c.stories.choiceHelp}</p>
                  <div class="in-own-answers">${[0, 1, 2, 3]
                    .map(
@@ -372,7 +374,7 @@ function init(root: HTMLElement, data: Data) {
     if (share) share.href = `https://wa.me/?text=${encodeURIComponent(c.stories.shareText + location.origin + location.pathname)}`;
   }
   // choice mode: mode switch, question, four answers, correct mark
-  const ensureChoice = (id: string) => (state.choices[id] ||= { q: fill(shape().prompts.find((p) => p.id === id)!.label, { name: subjectName() }), answers: ["", "", "", ""], correct: -1 });
+  const ensureChoice = (id: string) => (state.choices[id] ||= { q: "", answers: ["", "", "", ""], correct: -1 });
   promptsEl.addEventListener("change", (e) => {
     const t = e.target as HTMLInputElement;
     if (t.dataset.pmode !== undefined) {
@@ -679,12 +681,18 @@ function init(root: HTMLElement, data: Data) {
         </button>`,
       )
       .join("");
+    showHostLine();
+  }
+  function showHostLine() {
+    const h = data.hosts.find((x) => x.id === state.host);
+    $("[data-host-line]")!.textContent = h ? `${h.name}: ${h.line}` : "";
   }
   root.addEventListener("click", (e) => {
     const h = (e.target as HTMLElement).closest<HTMLElement>("[data-host]");
     if (!h) return;
     state.host = h.dataset.host || "auto";
     $$<HTMLElement>("[data-host]").forEach((b) => b.setAttribute("aria-checked", String(b === h)));
+    showHostLine();
     save();
   });
 
@@ -790,7 +798,7 @@ function init(root: HTMLElement, data: Data) {
         .filter((p) => (modeOf(p.id) === "choice" ? choiceDone(p.id) : (state.answers[p.id] || "").trim()))
         .map((p) =>
           modeOf(p.id) === "choice"
-            ? { promptId: p.id, prompt: state.choices[p.id].q.trim(), type: "choice", answers: state.choices[p.id].answers.map((a) => a.trim()), correct: state.choices[p.id].correct }
+            ? { promptId: p.id, prompt: state.choices[p.id].q.trim() || fill(p.label, { name: subjectName() }), type: "choice", answers: state.choices[p.id].answers.map((a) => a.trim()), correct: state.choices[p.id].correct }
             : { promptId: p.id, prompt: fill(p.label, { name: subjectName() }), type: "free", text: state.answers[p.id].trim() },
         ),
       photos: state.photos.map((p) => ({ file: p.name, question: p.caption.trim(), type: p.type, free: p.type === "free" ? p.free.trim() : "", answers: p.type === "choice" ? p.answers.map((a) => a.trim()) : [], correct: p.type === "choice" ? p.correct : null })),

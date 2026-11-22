@@ -74,7 +74,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     <!-- 2: who -->
     <section class="in-step in-who" data-step="2" aria-labelledby="h2" hidden>
       <h2 class="display h-card" id="h2" tabindex="-1"><label for="f-name" data-t="nameLabel"></label></h2>
-      <div class="in-field">
+      <div class="in-field in-who__name">
         <input id="f-name" class="in-input in-input--big" type="text" autocomplete="off" maxlength="48" aria-describedby="f-name-err" />
         <p class="in-err" id="f-name-err" role="alert" hidden>{c.who.required}</p>
       </div>
@@ -179,28 +179,37 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
           <input id="d-guests" class="in-input" type="number" inputmode="numeric" min="1" max="2000" data-detail="guests" />
         </div>
       </div>
-      <div class="in-hosts" role="radiogroup" aria-labelledby="h4" data-hosts data-sub="1"></div>
+      <div class="in-hostwrap" data-sub="1">
+        <div class="in-hosts" role="radiogroup" aria-labelledby="h4" data-hosts></div>
+        <p class="in-hostline" data-host-line aria-live="polite"></p>
+      </div>
     </section>
 
-    <!-- 5: the order: what you get, the price, one email -->
-    <section class="in-step in-one" data-step="5" aria-labelledby="h5" hidden>
-      <h2 class="display h-card" id="h5" tabindex="-1">{c.order.title}</h2>
+    <!-- 5: the order on one screen: the game, what is included next to the price, one email -->
+    <section class="in-step in-one in-pay" data-step="5" aria-labelledby="h5" hidden>
       <form class="in-ticket" data-order-form novalidate>
-        <p class="in-ticket__game display" data-ticket-title></p>
-        <p class="in-ticket__meta" data-ticket-meta></p>
-        <ul class="in-includes">
-          {c.order.includes.map((t) => <li>{t}</li>)}
-        </ul>
-        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
-        <div class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display">{price}</strong></div>
-        <div class="in-field">
-          <label for="o-email">{c.order.email}</label>
-          <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" />
+        <div class="in-ticket__head">
+          <span class="in-count">{c.order.title}</span>
+          <h2 class="in-ticket__game display" id="h5" tabindex="-1" data-ticket-title></h2>
+          <p class="in-ticket__meta" data-ticket-meta></p>
         </div>
-        <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
+        <div class="in-ticket__deal">
+          <ul class="in-includes">
+            {c.order.includes.map((t) => <li>{t}</li>)}
+          </ul>
+          <p class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display">{price}</strong></p>
+        </div>
+        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
+        <div class="in-ticket__form">
+          <div class="in-field">
+            <label for="o-email">{c.order.email}</label>
+            <input id="o-email" class="in-input" type="email" autocomplete="email" dir="ltr" maxlength="120" required data-order="email" />
+          </div>
+          <label class="in-check"><input type="checkbox" data-order-consent /><span>{c.order.consent}</span></label>
+        </div>
         <p class="in-err" role="alert" data-order-err hidden></p>
+        <p class="in-ticket__note">🔒 {c.order.payNote}</p>
       </form>
-      <p class="in-help in-one__note">{c.order.payNote}</p>
     </section>
 
     <!-- 6: shown only while PAYMENT_URL is empty -->
@@ -245,7 +254,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     --in-line: rgba(255, 255, 255, 0.22);
     max-width: 1280px;
     margin-inline: auto;
-    padding: 16px var(--gutter) 170px;
+    padding: 16px var(--gutter) 140px;
     display: grid;
     gap: 22px;
   }
@@ -830,39 +839,75 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-bar .in-meter__text {
     margin: 0;
   }
-  /* 5: the order as a ticket */
+  /* 5: the order as a ticket that fits one screen */
+  .in-pay {
+    max-width: 860px;
+    padding-top: 12px;
+  }
   .in-ticket {
     display: grid;
-    gap: 16px;
+    gap: 14px;
     background: var(--in-card);
     border: 1px solid var(--in-line);
     border-radius: 26px;
-    padding: 22px 20px;
+    padding: 18px 20px;
+  }
+  .in-ticket__head {
+    display: grid;
+    gap: 2px;
   }
   .in-ticket__game {
     margin: 0;
     color: var(--game-yellow);
-    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    font-size: clamp(1.4rem, 4.5vw, 1.9rem);
     line-height: 1.15;
   }
+  .in-ticket__game:focus {
+    outline: none;
+  }
   .in-ticket__meta {
-    margin: -8px 0 0;
+    margin: 0;
     color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+  .in-ticket__deal {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    border-block: 2px dashed var(--in-line);
+    padding-block: 12px;
+  }
+  .in-ticket__deal .in-includes {
+    margin: 0;
   }
   .in-ticket__total {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    border-top: 2px dashed var(--in-line);
-    padding-top: 14px;
-  }
-  .in-ticket__total strong {
-    font-size: clamp(2rem, 7vw, 2.8rem);
-    color: var(--game-yellow);
+    margin: 0;
+    display: grid;
+    justify-items: end;
     line-height: 1;
   }
-  .in-one__note {
-    text-align: center;
+  .in-ticket__total span {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .in-ticket__total strong {
+    font-size: clamp(2.4rem, 9vw, 3.4rem);
+    color: var(--game-yellow);
+    white-space: nowrap;
+  }
+  .in-ticket__form {
+    display: grid;
+    gap: 10px;
+  }
+  .in-ticket__form .in-field {
+    margin: 0;
+  }
+  .in-ticket__note {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
   }
   /* every screen slides in a little, so a long flow feels like it is moving */
   .in-step:not([hidden]) > * {
@@ -1502,6 +1547,11 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-pair {
       grid-template-columns: 1fr 1fr;
     }
+    .in-ticket__form {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      column-gap: 24px;
+    }
     .in-hero {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       column-gap: 56px;
@@ -1540,6 +1590,277 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     }
     .in-host strong {
       font-size: 1.15rem;
+    }
+  }
+  /* hints inside every text box are light grey and vanish on the first keystroke */
+  .in-input::placeholder,
+  .in-textarea::placeholder {
+    color: #9aa1b5;
+    opacity: 1;
+    font-weight: 400;
+  }
+  /* ---------- every screen fits one screen: compact layout ---------- */
+  .intake {
+    padding-top: 10px;
+    padding-bottom: 118px;
+  }
+  .in-logo img {
+    width: 92px;
+  }
+  .in-progress {
+    margin-top: 8px;
+  }
+  .in-step {
+    gap: 14px;
+  }
+  .in-one {
+    padding-top: clamp(6px, 3vh, 44px);
+  }
+  .in-hero {
+    min-height: calc(100svh - 150px);
+    gap: 16px;
+  }
+  .in-tiles {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .in-tile {
+    min-height: clamp(76px, 12.5vh, 132px);
+    padding: 8px 6px;
+    gap: 4px;
+    border-radius: 18px;
+  }
+  .in-tile__icon {
+    font-size: clamp(1.5rem, 4vh, 2.2rem);
+  }
+  .in-tile__label {
+    font-size: 1.05rem;
+  }
+  .in-input--big {
+    min-height: 60px;
+  }
+  .in-screen {
+    padding: 12px 16px 6px;
+    gap: 4px;
+  }
+  .in-screen__title {
+    min-height: 1.6em;
+    font-size: clamp(1.4rem, 5vw, 2.3rem);
+  }
+  .in-one .in-textarea {
+    min-height: clamp(96px, 24vh, 190px);
+  }
+  .in-more summary {
+    padding: 10px 14px;
+  }
+  .in-more__icon {
+    font-size: 1.5rem;
+  }
+  /* hosts: small cards in one or two rows, the chosen host's line under them */
+  .in-hostwrap {
+    display: grid;
+    gap: 12px;
+  }
+  .in-hosts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .in-one .in-host img,
+  .in-one .in-host__ph {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+  }
+  .in-host__info {
+    padding: 6px 4px 8px;
+    justify-content: center;
+  }
+  .in-host__tick,
+  .in-host__info span span {
+    display: none;
+  }
+  .in-host strong {
+    font-size: 1.05rem;
+    text-align: center;
+  }
+  .in-hostline {
+    margin: 0;
+    min-height: 1.5em;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  .in-bar {
+    padding-block: 10px calc(10px + env(safe-area-inset-bottom));
+    gap: 4px;
+  }
+  .in-bar__row,
+  .in-bar__next {
+    min-height: 52px;
+  }
+  @media (min-width: 700px) {
+    .in-tiles {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .in-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 40px;
+    }
+    .in-hero > * {
+      grid-column: 1;
+    }
+    .in-hero > .in-tv {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: center;
+      justify-self: end;
+      margin: 0;
+    }
+    .in-who {
+      grid-template-columns: 1.4fr 1fr;
+      column-gap: 16px;
+      align-items: end;
+    }
+    .in-who > h2,
+    .in-who > .in-screen {
+      grid-column: 1 / -1;
+    }
+    .in-who__extra .in-input {
+      min-height: 60px;
+    }
+    .in-hosts {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+    .in-one .in-own-answers {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    /* the three optional extras sit in one row; an opened one takes the full width */
+    .in-more-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+    .in-more-list > .in-err,
+    .in-more[open] {
+      grid-column: 1 / -1;
+    }
+    .in-more summary {
+      grid-template-columns: 1fr auto;
+      row-gap: 2px;
+    }
+    .in-more__icon {
+      grid-column: 1 / -1;
+    }
+    .in-pair,
+    .in-ticket__form {
+      grid-template-columns: 1fr 1fr;
+    }
+    /* order: the game and what is included on one side, price and email on the other */
+    .in-ticket {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      column-gap: 28px;
+      align-items: start;
+    }
+    .in-ticket__head {
+      grid-column: 1;
+    }
+    .in-ticket__deal {
+      grid-column: 1 / -1;
+    }
+    .in-ticket__form,
+    .in-ticket > .in-err,
+    .in-ticket__note {
+      grid-column: 1 / -1;
+    }
+  }
+  /* short windows (a laptop with browser bars): tighten type and spacing */
+  @media (max-height: 640px) and (min-width: 700px) {
+    .in-step {
+      gap: 8px;
+    }
+    .in-one {
+      padding-top: 4px;
+    }
+    .intake .h-card {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+    .intake .h-scene {
+      font-size: 2.6rem;
+    }
+    .intake .lead {
+      font-size: 1.05rem;
+    }
+    .in-tv {
+      max-width: 400px;
+    }
+    .in-tile {
+      min-height: 84px;
+    }
+    .in-input,
+    .in-input--big,
+    .in-who__extra .in-input {
+      min-height: 46px;
+      font-size: 1.1rem;
+    }
+    .in-field label,
+    .in-field legend {
+      font-size: 1rem;
+    }
+    .in-screen__title {
+      font-size: 1.7rem;
+    }
+    .in-one .in-textarea {
+      min-height: 84px;
+    }
+    .in-chip span,
+    .in-mic {
+      min-height: 38px;
+      padding-block: 4px;
+      font-size: 1rem;
+    }
+    .in-more summary {
+      padding: 6px 14px;
+    }
+    .in-more summary strong {
+      font-size: 1.05rem;
+    }
+    /* four-options mode: the hint inside the field is enough */
+    .in-one .in-prompt__body > .in-help {
+      display: none;
+    }
+    .in-one .in-own-answers {
+      gap: 8px;
+    }
+    .in-ticket {
+      padding: 12px 18px;
+      gap: 8px;
+    }
+    .in-ticket__deal {
+      padding-block: 6px;
+    }
+    .in-ticket__game {
+      font-size: 1.4rem;
+    }
+    .in-includes {
+      gap: 0;
+      font-size: 0.98rem;
+    }
+    .in-ticket__total strong {
+      font-size: 2.6rem;
+    }
+    .in-check {
+      min-height: 40px;
+      font-size: 0.98rem;
+    }
+    .in-bar__row,
+    .in-bar__next {
+      min-height: 46px;
+    }
+    .in-bar {
+      padding-block: 8px;
+    }
+    .intake {
+      padding-bottom: 96px;
     }
   }
   @media (prefers-reduced-motion: reduce) {

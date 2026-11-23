@@ -355,9 +355,9 @@ html[dir="ltr"] .step-card .h-card {
 html[lang="en"].fonts-loading body { visibility: hidden; }
 html[lang="en"].fonts-failed { --font-display: Arial, sans-serif; --font-body: Arial, sans-serif; }
 html[lang="en"] .hero .hero-sub { line-height: 1.4; top: calc(12px - clamp(30px, 4.5vh, 44px)); }
-html[lang="en"] .hero .hero-preview figcaption { translate: clamp(50px, 6vw, 76px) -20px; }
-@media(max-width:767px) {
-  html[lang="en"] .hero .hero-preview figcaption { translate: 36px -12px; max-width: calc(100% - 72px); }
+html[lang="en"] .hero .hero-preview figcaption { width: 92%; align-self: flex-start; translate: 0 -20px; }
+@media(max-width:900px) {
+  html[lang="en"] .hero .hero-preview figcaption { width: 100%; max-width: none; align-self: center; translate: 0 -12px; text-align: center; }
 }
 html[lang="en"] .hosts-sub { white-space: normal; }
 
@@ -372,4 +372,4 @@ html[lang="en"] .hosts-title > .hl { display: inline-block; }
 html[lang="en"] .hero-phone { left: auto; right: 1%; transform: rotate(3deg); }
 html[lang="en"] .hero .phone-speaker { display: none; }
 html[lang="en"] .hero .phone-spark { left: auto; right: -3.2cqw; transform: scaleX(-1); }
-html[lang="en"] .hero-television { left: 0; right: auto; }
+html[lang="en"] .hero-television { left: 0; right: auto; transform: rotate(-2deg); }

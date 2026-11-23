@@ -26,7 +26,7 @@ export const PAID_URL = "https://heytadam.com/start/thanks/";
  * `paymentUrl` empty means the flow shows a "payment not connected yet" screen after the order is saved.
  */
 export const ORDER_EN = {
-  price: "",
+  price: "$99",
   paymentUrl: "",
   paidUrl: "https://heytadam.com/en/start/thanks/",
 };

@@ -10,7 +10,7 @@ We want you to love your game. If you're not happy, you can get a **full refund 
 
 - Reply to your order confirmation email from Paddle, or
 - Go to [paddle.net](https://paddle.net) and look up your order, or
-- Write to us at [[SUPPORT EMAIL]] with the email address you used to pay.
+- Write to us at tanya@velonova.io with the email address you used to pay.
 
 ## What happens next
 

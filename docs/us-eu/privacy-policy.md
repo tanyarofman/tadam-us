@@ -6,7 +6,7 @@
 
 ## 1. Who we are
 
-Tadam! is operated by [[LEGAL NAME]], a business registered in Israel (business number [[BUSINESS NUMBER]]), at [[BUSINESS ADDRESS]]. We are the "controller" of the personal data described here. Contact us about privacy at [[SUPPORT EMAIL]].
+Tadam! is operated by Tanya Rofman, a sole trader (Osek Murshe, עוסק מורשה) registered in Israel, at Ein Gedi 2/2, Tel Aviv 6203602, Israel. We are the "controller" of the personal data described here. Contact us about privacy at tanya@velonova.io.
 
 ## 2. What we collect
 
@@ -60,7 +60,7 @@ We are based in Israel, which the European Commission recognizes as providing an
 
 ## 7. Children
 
-The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an account. Information about children that a parent includes in a game is used only to make that game and is deleted after 30 days. If you believe a child has given us personal data directly, write to [[SUPPORT EMAIL]] and we'll delete it.
+The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an account. Information about children that a parent includes in a game is used only to make that game and is deleted after 30 days. If you believe a child has given us personal data directly, write to tanya@velonova.io and we'll delete it.
 
 ## 8. Your rights
 
@@ -76,7 +76,7 @@ Depending on where you live, you can ask to:
 
 **California and other US state residents** have the right to know, delete and correct their data, and to opt out of the sale or sharing of personal data. We don't sell or share personal data in that sense. We won't treat you differently for using your rights.
 
-To use any right, write to [[SUPPORT EMAIL]]. We reply within 30 days.
+To use any right, write to tanya@velonova.io. We reply within 30 days.
 
 ## 9. Cookies
 
@@ -92,4 +92,4 @@ We may update this policy. The date at the top shows the latest version. If a ch
 
 ## 12. Contact
 
-[[LEGAL NAME]], [[BUSINESS ADDRESS]], [[SUPPORT EMAIL]].
+Tanya Rofman, Ein Gedi 2/2, Tel Aviv 6203602, Israel, tanya@velonova.io.

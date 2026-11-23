@@ -6,13 +6,13 @@
 
 ## 1. Who we are
 
-Tadam! ("Tadam", "we", "us") is operated by [[LEGAL NAME]], a business registered in Israel (business number [[BUSINESS NUMBER]]), at [[BUSINESS ADDRESS]]. Contact: [[SUPPORT EMAIL]].
+Tadam! ("Tadam", "we", "us") is operated by Tanya Rofman, a sole trader (Osek Murshe, עוסק מורשה) registered in Israel, at Ein Gedi 2/2, Tel Aviv 6203602, Israel. Contact: tanya@velonova.io.
 
 These terms apply to your use of us.heytadam.com and to every game you create or buy there (the "Service"). By creating a game or making a purchase, you agree to these terms.
 
 ## 2. The Service
 
-Tadam is an online tool for creating a personalized trivia game show for a party or event. You provide stories, details and photos; the Service drafts questions, lets you choose a ready-made host and voice, and lets you review and edit the game. After payment, the finished game is delivered by email as a private link, usually within [[DELIVERY TIME]]. The game is played in a web browser: the host appears on a big screen and guests answer from their phones.
+Tadam is an online tool for creating a personalized trivia game show for a party or event. You provide stories, details and photos; the Service drafts questions, lets you choose a ready-made host and voice, and lets you review and edit the game. After payment, the finished game is delivered by email as a private link, usually within 24 hours. The game is played in a web browser: the host appears on a big screen and guests answer from their phones.
 
 Some parts of the game, such as draft questions, the host's voice and the host's video, are produced with the help of automated and AI tools. You can review and change the questions before you pay.
 
@@ -48,7 +48,7 @@ Anyone with the link can open the game. Share it only with people you trust.
 
 ## 8. How long we keep your game
 
-Your game link works for **30 days** from delivery. After 30 days, the game and your content are deleted and the link stops working. You can ask us to delete them earlier at any time by writing to [[SUPPORT EMAIL]]. Details are in our [Privacy Policy](/privacy).
+Your game link works for **30 days** from delivery. After 30 days, the game and your content are deleted and the link stops working. You can ask us to delete them earlier at any time by writing to tanya@velonova.io. Details are in our [Privacy Policy](/privacy).
 
 ## 9. Availability
 
@@ -64,8 +64,8 @@ We may update these terms. The version in force when you place an order applies 
 
 ## 12. Governing law
 
-These terms are governed by the laws of the State of Israel, and the courts of [[CITY]], Israel have jurisdiction. If you are a consumer in the EU or UK, you also keep the protection of the mandatory laws of your country and may bring a claim in your local courts.
+These terms are governed by the laws of the State of Israel, and the courts of Tel Aviv, Israel have jurisdiction. If you are a consumer in the EU or UK, you also keep the protection of the mandatory laws of your country and may bring a claim in your local courts.
 
 ## 13. Contact
 
-[[LEGAL NAME]], [[BUSINESS ADDRESS]], [[SUPPORT EMAIL]].
+Tanya Rofman, Ein Gedi 2/2, Tel Aviv 6203602, Israel, tanya@velonova.io.

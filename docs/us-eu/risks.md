@@ -2,7 +2,7 @@
 
 | # | Risk | What could happen | Mitigation | Owner |
 |---|---|---|---|---|
-| 1 | Paddle sees a human service | The game is reviewed and produced by the team after payment. Paddle turns down standalone human services | Self-serve wording everywhere. The wizard on the site. An honest "[[DELIVERY TIME]]" delivery promise | Tanya |
+| 1 | Paddle sees a human service | The game is reviewed and produced by the team after payment. Paddle turns down standalone human services | Self-serve wording everywhere. The wizard on the site. An honest "24 hours" delivery promise | Tanya |
 | 2 | Generative AI scrutiny | Paddle looks hard at AI products, and restricts deepfakes and voice impersonation | Ready-made invented hosts only. AI use explained plainly in the application | Tanya |
 | 3 | Children's data (GDPR, COPPA) | Photos and stories of minors. Fines are high | Buyers 18+, consent in the terms, 30-day deletion, processors listed. **Lawyer review before launch** | Tanya + lawyer |
 | 4 | 30 days vs "a keepsake" | Buyers may expect to replay the game later | Say "30 days" in pricing, the FAQ and the checkout. Option: "30 days after the event" if the wizard collects the date | Tanya |

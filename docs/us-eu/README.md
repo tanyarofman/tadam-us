@@ -9,10 +9,12 @@ Decisions (Tanya, 2026-11-23):
 | Site | `us.heytadam.com`, its own repo. heytadam.com/en stays as is for English speakers in Israel |
 | Payments | Paddle (merchant of record). Seller: Tanya's עוסק מורשה |
 | Buying flow | Self-serve on us.heytadam.com: "Create yours", the English wizard, Paddle checkout, the game arrives as a private link |
-| Price | $99 per game (EUR price to be set) |
+| Price | $99 per game. Other currencies (EUR etc.) are the equivalent, converted by Paddle at checkout |
 | Refunds | Full refund within 14 days of purchase, no questions asked |
 | Hosts | Ready-made or invented characters only. Never a host based on a real person |
 | Data | Content and the game link kept for 30 days, then deleted |
+| Delivery | The game link arrives within 24 hours of payment |
+| Seller details | Tanya Rofman, עוסק מורשה, Ein Gedi 2/2, Tel Aviv. Support: tanya@velonova.io until the new-domain address exists. The business number appears only in the Paddle application, not on public pages |
 
 | File | What it is |
 |---|---|

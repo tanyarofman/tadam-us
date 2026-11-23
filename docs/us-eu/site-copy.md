@@ -35,7 +35,7 @@ Birthdays · Bar and Bat Mitzvahs · Sweet Sixteen · Weddings · Anniversaries 
 1. **Tell us about the guest of honor.** Type or record the stories, nicknames and inside jokes, and add a few photos.
 2. **Pick a host and a voice.** Choose from our cast of ready-made hosts.
 3. **Review your questions.** We draft the questions from your stories. Edit, swap or delete any of them.
-4. **Pay and get your link.** Your game arrives by email within [[DELIVERY TIME]], as a private link.
+4. **Pay and get your link.** Your game arrives by email within 24 hours, as a private link.
 5. **Play at the party.** Open the link on a TV or projector. Guests scan the code and play from their phones.
 
 ## Scene: the game
@@ -55,7 +55,7 @@ Birthdays · Bar and Bat Mitzvahs · Sweet Sixteen · Weddings · Anniversaries 
 
 - **Headline:** One price, the whole show.
 - **Price card:**
-  - **$99** per game ([[EUR PRICE]] in Europe). Taxes are calculated at checkout.
+  - **$99** per game. In Europe you pay the same price in euros, converted at checkout. Taxes are calculated at checkout.
   - A game built from your stories and photos
   - Your choice of host and voice
   - Every guest plays from their phone, no app needed
@@ -85,7 +85,7 @@ About 10 to 15 minutes. Long enough to get everyone excited, and short enough fo
 A TV or projector, an internet connection and a few minutes of everyone's attention. Guests scan the code on the screen and play in their phone's browser.
 
 **How soon do we get the game?**
-Within [[DELIVERY TIME]] of payment. Create it at least two days before the party to be safe.
+Within 24 hours of payment. Create it at least two days before the party to be safe.
 
 **How long can we play it?**
 Your private link works for 30 days from delivery. After that, the game and everything you uploaded are deleted.
@@ -109,8 +109,8 @@ Birthdays, bar and bat mitzvahs, weddings, anniversaries, graduations, retiremen
 
 ## Footer
 
-- Links: How it works · Pricing · FAQ · Terms of Service · Privacy Policy · Refund Policy · Contact ([[SUPPORT EMAIL]])
-- Line: © 2026 [[LEGAL NAME]], Israel. Payments processed by Paddle.com.
+- Links: How it works · Pricing · FAQ · Terms of Service · Privacy Policy · Refund Policy · Contact (tanya@velonova.io)
+- Line: © 2026 Tanya Rofman, Israel. Payments processed by Paddle.com.
 
 ## What changed from heytadam.com/en, and why
 

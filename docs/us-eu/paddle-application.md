@@ -4,9 +4,9 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## Business
 
-- **Legal entity:** [[LEGAL NAME]], sole trader (עוסק מורשה) registered in Israel, business number [[BUSINESS NUMBER]].
+- **Legal entity:** Tanya Rofman, sole trader (עוסק מורשה) registered in Israel, business number 312896764.
 - **Website:** https://us.heytadam.com
-- **Support email:** [[SUPPORT EMAIL]]
+- **Support email:** tanya@velonova.io
 - **Product type:** Software / SaaS: a digital party-game creator (one-time purchase per game).
 
 ## Product description (about 100 words)
@@ -15,7 +15,7 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## How is the product delivered?
 
-> Digitally. Within [[DELIVERY TIME]] of payment, the customer receives an email with a private link to their game. The link works for 30 days.
+> Digitally. Within 24 hours of payment, the customer receives an email with a private link to their game. The link works for 30 days.
 
 ## Do you use AI?
 
@@ -23,7 +23,7 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## Pricing
 
-> $99 per game, one-time ([[EUR PRICE]] in Europe). No subscription.
+> $99 per game, one-time (the equivalent in euros and other local currencies, converted by Paddle at checkout). No subscription.
 
 ## Refund policy
 
@@ -31,7 +31,7 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## Expected volume
 
-> We are launching in the US and Europe. First 12 months: about [[NUMBER]] orders per month, average order $99.
+> We are launching in the US and Europe. First 12 months: about 20 to 50 orders per month, average order $99.
 
 ## If asked about heytadam.com (the Israeli site)
 

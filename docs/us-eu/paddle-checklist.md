@@ -8,13 +8,13 @@ Paddle approves the seller (business and identity) and every domain that opens a
 |---|---|---|---|
 | 1 | Site is live on HTTPS (not "coming soon") | Netlify site on `us.heytadam.com` | To do (new repo) |
 | 2 | Clear description of the product | `site-copy.md`: hero, How it works, What's included | Drafted |
-| 3 | Prices visible without logging in | `site-copy.md`: Pricing ($99) | Drafted, EUR price to set |
+| 3 | Prices visible without logging in | `site-copy.md`: Pricing ($99, euros converted by Paddle at checkout) | Drafted |
 | 4 | Terms of Service, public, linked in the footer | `terms.md` at `/terms` | Drafted |
 | 5 | Terms name Paddle as the merchant of record | `terms.md` section 3 | Drafted |
-| 6 | Legal business name in the terms and footer, **exactly** as on the Paddle account | `terms.md` section 1, `site-copy.md` footer | Needs `[[LEGAL NAME]]` |
+| 6 | Legal business name in the terms and footer, **exactly** as on the Paddle account | `terms.md` section 1, `site-copy.md` footer | Filled: Tanya Rofman |
 | 7 | Privacy policy, public, linked in the footer | `privacy-policy.md` at `/privacy` | Drafted |
 | 8 | Refund policy, public, linked, 14+ days, no "all sales final" or exclusions | `refund-policy.md` at `/refunds` | Drafted |
-| 9 | Support contact on the site | Footer + legal pages: `[[SUPPORT EMAIL]]` | Decide address |
+| 9 | Support contact on the site | Footer + legal pages: tanya@velonova.io for now | Swap for the new-domain address when the forward exists |
 | 10 | The product fits Paddle (software, not a standalone human service) | Self-serve wording everywhere; no "we build it for you" | Drafted |
 | 11 | No impersonation of real people (deepfakes, voice cloning) | Ready-made / invented hosts only, terms section 6 | Drafted |
 | 12 | The wizard and checkout pages use the same story (self-serve, 30 days, $99) | English wizard (Tanya) | To do |
@@ -31,7 +31,7 @@ Paddle approves the seller (business and identity) and every domain that opens a
 
 ## Order of work
 
-1. Fill the placeholders (`[[LEGAL NAME]]`, `[[BUSINESS NUMBER]]`, `[[BUSINESS ADDRESS]]`, `[[SUPPORT EMAIL]]`, `[[EUR PRICE]]`, `[[DELIVERY TIME]]`) and get the AI vendor list from Ilan for the privacy policy.
+1. Business details, support email, price and delivery time are filled (2026-11-23). Still open: the AI vendor list from Ilan for the privacy policy, and the new support address on the new domain.
 2. Lawyer review of `terms.md` and `privacy-policy.md`.
 3. Build and publish us.heytadam.com with the landing page and the three legal pages.
 4. Open a Paddle **sandbox** account and wire the checkout and webhook (no approval needed).

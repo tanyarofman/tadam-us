@@ -67,7 +67,7 @@ If the new site is English only, the Hebrew file can be reduced to the types, `M
 The new site has to supply these, or the copies have to be adjusted:
 
 - **Layout:** `src/layouts/Base.astro`. It sets the page language and direction from the address (`/en/…` is English, left-to-right).
-- **Global styles:** `src/styles/global.css`. The wizard uses its classes `btn`, `btn-buzzer`, `btn-dot`, `display`, `h-card`, `h-scene`, `lead`, `skip-link`, and its variables `--game-yellow`, `--stage-navy`, `--text-muted`, `--font-display`, `--fs-small`, `--radius-s`, `--radius-m`, `--gutter`, `--ease-out`, `--pill-ink`, `--pill-white`, `--buzzer-red`, `--answer-correct`.
+- **Global styles:** `src/styles/global.css`. The wizard uses its classes `btn`, `btn-buzzer`, `btn-dot`, `display`, `h-card`, `h-scene`, `lead`, `skip-link`, and its variables `--game-yellow`, `--stage-navy`, `--text-muted`, `--font-display`, `--fs-small`, `--radius-s`, `--radius-m`, `--gutter`, `--ease-out`, `--pill-ink`, `--pill-white`, `--buzzer-red`, `--answer-correct`, `--answer-wrong`.
 - **Font:** Almoni (`public/fonts/`). The start screen waits for it to load before showing.
 - **Small helpers:** `track` from `src/lib/analytics.ts` (a stub, no vendor), `demoMedia` and `contactLink` from `src/config/site.ts`, `BLOG_COLLECTION` from `src/content/copy.ts` (the thank-you page suggests blog articles).
 - **Assets:** the English logo `public/brand/tadam-logo-en.webp` and the English game clip `public/demo/hero-screen-en-v2.mp4` with its poster.

@@ -74,7 +74,7 @@ export const COPY = {
     burst: "Tadam!",
     headline: "Then the lights dim, the screen wakes up, and the host takes the stage.",
     demo: {
-      label: "A demo of a real game (in Hebrew): the big screen and the phone",
+      label: "A demo game for Tom's 13th birthday: the big screen and the phone",
       play: "Play",
       pause: "Pause",
       unmute: "Turn sound on",
@@ -287,8 +287,8 @@ export const COPY = {
   modal: {
     title: "Come see a demo",
     close: "Close",
-    videoLabel: "The Tadam! demo: a recording of a real game for Eyal's birthday (in Hebrew)",
-    caption: "A recording of a real game, in Hebrew: the host is on the big screen, and the guests answer from their phones.",
+    videoLabel: "The Tadam! demo: a recording of the game for Tom's 13th birthday",
+    caption: "A recording of the game for Tom's 13th birthday: the host is on the big screen, and the guests answer from their phones.",
     cta: "Let's get started",
   },
 

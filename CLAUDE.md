@@ -11,6 +11,7 @@ See README.md for how to run, switch themes and edit copy.
 ## Rules from the brief
 
 - Hebrew only, RTL, parents addressed in plural (אתם), no em-dashes in copy.
+- Exception (Tanya, 2026-11-23): the order flow also exists in English, left-to-right, at `/en/start` (copy in `src/content/intake.en.ts`). The landing page and the blog stay Hebrew only.
 - Never show real celebrities, athletes or recognizable characters; the host is always generic.
 - Ask before adding a paid service, changing the story order, or using an image of a real person.
 

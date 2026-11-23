@@ -22,6 +22,7 @@ interface Data {
   copy: typeof import("../content/intake.he").INTAKE;
   price: string;
   paymentUrl: string;
+  lang: "he" | "en";
 }
 interface State {
   v: 1;
@@ -45,7 +46,7 @@ interface State {
   orderId: string;
 }
 
-const KEY = "tadam-intake-v1";
+const KEY_BASE = "tadam-intake-v1";
 const MAX_STEP = 6;
 const ORDER_KEY = "tadam-order";
 const root = document.querySelector<HTMLElement>("[data-intake]");
@@ -55,6 +56,8 @@ if (root && dataEl) init(root, JSON.parse(dataEl.textContent || "{}") as Data);
 
 function init(root: HTMLElement, data: Data) {
   const c = data.copy;
+  // each language keeps its own draft, so switching between /start and /en/start never mixes answers
+  const KEY = data.lang === "en" ? `${KEY_BASE}-en` : KEY_BASE;
   const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel);
   const $$ = <T extends HTMLElement>(sel: string) => Array.from(root.querySelectorAll<T>(sel));
 
@@ -131,7 +134,7 @@ function init(root: HTMLElement, data: Data) {
     const sc = { ...data.shapes[event()?.shape ?? "person"], ...(event()?.override || {}) };
     return { ...sc, prompts: [...sc.prompts, c.more.extra] };
   };
-  const subjectName = () => state.name.trim() || "החוגג.ת";
+  const subjectName = () => state.name.trim() || c.ui.someone;
   const target = () => event()?.target ?? 9;
 
   // ---------- material meter ----------
@@ -198,7 +201,7 @@ function init(root: HTMLElement, data: Data) {
   // The bottom bar is one element for every step, so "back" and the main button never move.
   const bar = $<HTMLElement>("[data-bar]")!;
   const barNext = $<HTMLButtonElement>("[data-bar-next]")!;
-  const orderLabel = `${c.order.cta} · ${data.price}`;
+  const orderLabel = data.price ? `${c.order.cta} · ${data.price}` : c.order.cta;
   function renderBar(step: number) {
     bar.hidden = step === 0 || step === 6;
     $<HTMLElement>("[data-bar-meter]")!.hidden = step !== 3;
@@ -533,7 +536,7 @@ function init(root: HTMLElement, data: Data) {
         return;
       }
       const rec = new SR();
-      rec.lang = "he-IL";
+      rec.lang = c.ui.speechLang;
       rec.interimResults = true;
       rec.continuous = true;
       const base = ta.value;
@@ -676,6 +679,7 @@ function init(root: HTMLElement, data: Data) {
   function brief() {
     const d = state.details;
     return {
+      lang: data.lang,
       eventType: state.eventId,
       subjectShape: event()?.shape,
       subject: { name: state.name.trim(), ageOrRole: state.extra.trim() },
@@ -699,7 +703,8 @@ function init(root: HTMLElement, data: Data) {
   }
   function briefText(): string {
     const b = brief();
-    const lines = [`אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
+    // the summary is for the team, so its labels stay in Hebrew whatever language the customer used
+    const lines = [`שפת ההזמנה: ${data.lang === "en" ? "אנגלית" : "עברית"}`, `אירוע: ${event()?.label}`, `על מי: ${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`, `שם המשחק: ${b.title}`, "", "סיפורים:"];
     b.stories.forEach((s) => lines.push(`- ${s.prompt}: ${s.type === "choice" ? (s.answers || []).map((a, i) => (i === s.correct ? "*" : "") + a).join(" / ") : s.text}`));
     if (b.photos.length) {
       lines.push("", "תמונות:");
@@ -752,6 +757,7 @@ function init(root: HTMLElement, data: Data) {
       const fields: Record<string, string> = {
         "form-name": "order",
         "order-id": state.orderId,
+        lang: data.lang,
         email: state.email.trim(),
         event: event()?.label || "",
         about: `${b.subject.name}${b.subject.ageOrRole ? " (" + b.subject.ageOrRole + ")" : ""}`,

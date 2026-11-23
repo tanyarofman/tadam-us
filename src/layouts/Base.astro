@@ -8,14 +8,18 @@ interface Props {
   noindex?: boolean;
   /** "article" on blog posts. */
   ogType?: "website" | "article";
+  /** Page language and direction. Hebrew, right-to-left by default. */
+  lang?: string;
+  dir?: "rtl" | "ltr";
+  locale?: string;
 }
-const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website" } = Astro.props;
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website", lang = "he", dir = "rtl", locale = "he_IL" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
 ---
 
 <!doctype html>
-<html lang="he" dir="rtl" class="no-js">
+<html lang={lang} dir={dir} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -31,7 +35,7 @@ const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="he_IL" />
+    <meta property="og:locale" content={locale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

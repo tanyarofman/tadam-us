@@ -173,6 +173,19 @@ export const HOSTS = [
 ];
 
 export const INTAKE = {
+  /** Language settings and the few strings that live outside the screens. */
+  ui: {
+    lang: "he",
+    dir: "rtl",
+    locale: "he_IL",
+    speechLang: "he-IL",
+    brand: "טדאם!",
+    home: "טדאם!, לדף הבית",
+    skipLink: "דלגו לתוכן",
+    progress: "התקדמות",
+    someone: "החוגג.ת",
+    emailPlaceholder: "name@example.com",
+  },
   meta: {
     title: "בונים משחק | טדאם!",
     description: "מזמינים משחק טריוויה אישי לאירוע: מספרים, מזמינים ומשלמים.",

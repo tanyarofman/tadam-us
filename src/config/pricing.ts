@@ -20,6 +20,17 @@ export const CREATE_URL = "https://tadam.base44.app/create";
 export const PAYMENT_URL = "https://pages.greeninvoice.co.il/payments/links/51208535-604c-4cca-875e-978929f0316f";
 export const PAID_URL = "https://heytadam.com/start/thanks/";
 
+/**
+ * The English flow (/en/start) is paid in USD or EUR through a different payment tool (not chosen yet).
+ * `price` is the text shown to the customer, for example "$149"; while it is empty the flow shows no price.
+ * `paymentUrl` empty means the flow shows a "payment not connected yet" screen after the order is saved.
+ */
+export const ORDER_EN = {
+  price: "",
+  paymentUrl: "",
+  paidUrl: "https://heytadam.com/en/start/thanks/",
+};
+
 export const PRICING = {
   /**
    * Prices are hidden on the page for now (Tanya, 2026-11-16): the section shows "what's included"

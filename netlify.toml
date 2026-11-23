@@ -48,6 +48,12 @@
   force = true
 
 [[redirects]]
+  from = "/friends-demo"
+  to = "https://tadam.base44.app/friends-demo"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/host/*"
   to = "https://tadam.base44.app/host/:splat"
   status = 200

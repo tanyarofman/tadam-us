@@ -5,7 +5,7 @@
  * All pieces are the same cached PNG, so once assembled it is pixel-identical to the logo.
  */
 
-const SRC = "/brand/tadam-logo-v4.webp";
+
 // Bands (percent of image height)
 const TOP = 29;
 const BOTTOM = 75;
@@ -17,13 +17,16 @@ const cols: [number, number][] = [
   [22, 41],
   [0, 22],
 ];
+import { useCopy } from "../content/copy";
 interface Props {
   class?: string;
 }
+const { copy, locale } = useCopy(Astro.url);
+const SRC = locale === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp";
 const { class: cls = "" } = Astro.props;
 ---
 
-<div class:list={["logo-assemble", cls]} role="img" aria-label="טדאם!" data-logo>
+<div class:list={["logo-assemble", cls]} style={locale === "en" ? "aspect-ratio: 1000 / 394" : undefined} role="img" aria-label={copy.brand} data-logo>
   <img class="logo-full" src={SRC} alt="" width="736" height="332" decoding="async" />
   <img
     class="logo-piece piece-top"

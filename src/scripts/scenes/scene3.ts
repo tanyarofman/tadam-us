@@ -8,14 +8,14 @@
 import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
 import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
-import { COPY } from "../../content/copy.he";
 
 type FsVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
 type FsEl = HTMLElement & { webkitRequestFullscreen?: () => Promise<void> };
 
 function initVideo(s: HTMLElement, reduced: boolean) {
-  const d = COPY.scene3.demo;
   const box = s.querySelector<HTMLElement>(".s3-video")!;
+  // Button labels in the page's language (written by Scene3Reveal.astro)
+  const d: Record<"play" | "pause" | "replay" | "mute" | "unmute", string> = JSON.parse(box.dataset.labels!);
   const screen = s.querySelector<FsEl>(".s3-screen")!;
   const video = box.querySelector<FsVideo>("video")!;
   const sound = box.querySelector<HTMLButtonElement>(".s3-sound")!;
@@ -171,7 +171,7 @@ export function init({ reduced }: { reduced: boolean }) {
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 2.1 : 3.8, mobile ? 0.18 : 0.7),
+      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 2.7 : 3.8, mobile ? 0.18 : 0.7),
       onUpdate() {
         vid.screenOn(tl.time() >= tl.labels.video);
       },
@@ -207,7 +207,9 @@ export function init({ reduced }: { reduced: boolean }) {
         { autoAlpha: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
         "<0.1",
       )
-      .to({}, { duration: 0.6 });
+      // Spend the extra mobile scroll distance on the fully revealed video.
+      // This preserves the quick photo/logo entrance while giving playback room to hold.
+      .to({}, { duration: mobile ? 1.8 : 0.6 });
     // The hero's demo link follows the timeline label instead of a desktop-only offset.
     s.dataset.demoScroll = String(tl.labels.video / tl.duration());
   });

@@ -11,6 +11,7 @@ import Base from "../../layouts/Base.astro";
 import * as HE from "../../content/intake.he";
 import * as EN from "../../content/intake.en";
 import { PRICING, PAYMENT_URL, ORDER_EN, money } from "../../config/pricing";
+import { demoMedia } from "../../config/site";
 
 interface Props {
   lang?: "he" | "en";
@@ -22,6 +23,9 @@ const MATERIAL = HE.MATERIAL;
 
 const price = en ? ORDER_EN.price : money(PRICING.base);
 const base = en ? "/en/start/" : "/start/";
+const home = en ? "/en/" : "/";
+const logo = en ? { src: "/brand/tadam-logo-en.webp", w: 1000, h: 394 } : { src: "/brand/tadam-logo-nobuzzer.webp", w: 1438, h: 622 };
+const media = demoMedia(lang);
 const data = {
   events: EVENTS,
   shapes: SHAPES,
@@ -34,7 +38,7 @@ const data = {
 };
 ---
 
-<Base title={c.meta.title} description={c.meta.description} noindex lang={c.ui.lang} dir={c.ui.dir as "rtl" | "ltr"} locale={c.ui.locale}>
+<Base title={c.meta.title} description={c.meta.description} noindex>
   <style slot="head" is:inline>
     /* No flash of the fallback font: the page appears once Almoni is loaded (or after 2.5 s at most). */
     .js:not(.fonts-ready) .intake { opacity: 0; }
@@ -54,8 +58,8 @@ const data = {
   <a class="skip-link" href="#in-main">{c.ui.skipLink}</a>
   <div class="intake" id="in-main" data-intake>
     <header class="in-top">
-      <a href="/" class="in-logo" aria-label={c.ui.home}>
-        <img src="/brand/tadam-logo-nobuzzer.webp" alt={c.ui.brand} width="1438" height="622" />
+      <a href={home} class="in-logo" aria-label={c.ui.home}>
+        <img src={logo.src} alt={c.ui.brand} width={logo.w} height={logo.h} />
       </a>
       <span class="in-save" data-save role="status" aria-live="polite"></span>
     </header>
@@ -71,7 +75,7 @@ const data = {
       <button class="btn btn-buzzer" type="button" data-go="1"><span class="btn-dot" aria-hidden="true"></span>{c.start.cta}</button>
       {price && <p class="in-hero__price"><strong>{price}</strong> {c.start.priceNote}</p>}
       <figure class="in-tv" aria-hidden="true">
-        <video src="/demo/hero-screen.mp4" poster="/demo/hero-screen-poster.jpg" width="960" height="540" muted playsinline autoplay loop disablepictureinpicture></video>
+        <video src={media.heroScreen} poster={media.heroScreenPoster} width="960" height="540" muted playsinline autoplay loop disablepictureinpicture></video>
       </figure>
     </section>
 

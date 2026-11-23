@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
-import { COPY } from "../content/copy.he";
+import { useCopy, otherLanguagePath, LOCALES } from "../content/copy";
+const { copy: COPY, lang, dir, ogLocale } = useCopy(Astro.url);
 
 interface Props {
   title?: string;
@@ -8,14 +9,19 @@ interface Props {
   noindex?: boolean;
   /** "article" on blog posts. */
   ogType?: "website" | "article";
-  /** Page language and direction. Hebrew, right-to-left by default. */
-  lang?: string;
-  dir?: "rtl" | "ltr";
-  locale?: string;
+  /** True on pages that exist in both languages (home, privacy): adds hreflang links. */
+  bilingual?: boolean;
 }
-const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website", lang = "he", dir = "rtl", locale = "he_IL" } = Astro.props;
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website", bilingual = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
+const ogImage = new URL(lang === "en" ? "/brand/og-image-en-v1.jpg" : "/brand/og-image-v3.jpg", Astro.site);
+// hreflang: this page and its twin in the other language; Hebrew is the default for everyone else.
+const twin = new URL(otherLanguagePath(Astro.url), Astro.site);
+const alternates = bilingual
+  ? lang === "he"
+    ? [{ hreflang: LOCALES.he.hreflang, href: canonical }, { hreflang: LOCALES.en.hreflang, href: twin }, { hreflang: "x-default", href: canonical }]
+    : [{ hreflang: LOCALES.he.hreflang, href: twin }, { hreflang: LOCALES.en.hreflang, href: canonical }, { hreflang: "x-default", href: twin }]
+  : [];
 ---
 
 <!doctype html>
@@ -26,6 +32,7 @@ const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
     {/* Keep the square raster fallbacks and app icons; use the yellow ! SVG for browser tabs. */}
@@ -35,29 +42,46 @@ const ogImage = new URL("/brand/og-image-v3.jpg", Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content={locale} />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="טדאם!" />
+    <meta property="og:site_name" content={COPY.brand} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="525" />
-    <meta property="og:image:alt" content="טדאם! שעשועון אישי לאירוע שלכם" />
+    <meta property="og:image:alt" content={COPY.meta.ogAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
-    <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo-v4.webp" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href={lang === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} fetchpriority="high" />
     <slot name="head" />
     <script is:inline>
       (function () {
         var d = document.documentElement;
         d.classList.remove("no-js");
         d.classList.add("js");
+        if (d.lang === "en" && document.fonts) {
+          d.classList.add("fonts-loading");
+          var settled = false;
+          function reveal(ok) {
+            if (settled) return;
+            settled = true;
+            if (!ok) d.classList.add("fonts-failed");
+            d.classList.remove("fonts-loading");
+          }
+          function loadFonts() {
+          Promise.all([document.fonts.load('700 16px Almoni'), document.fonts.load('400 16px Almoni')])
+            .then(function (fonts) { reveal(fonts.every(function (f) { return f.length > 0; })); }, function () { reveal(false); });
+          setTimeout(function () { reveal(false); }, 6000);
+          }
+          if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadFonts, { once: true });
+          else loadFonts();
+        }
       })();
     </script>
   </head>

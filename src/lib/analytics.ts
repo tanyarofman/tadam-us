@@ -26,7 +26,8 @@ export type TrackEvent =
   | "intake_complete"
   | "order_submit"
   | "order_error"
-  | "order_paid";
+  | "order_paid"
+  | "language_switch";
 
 declare global {
   interface Window {

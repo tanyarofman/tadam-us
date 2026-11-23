@@ -1,24 +1,25 @@
 ---
-import { COPY } from "../../content/copy.he";
-import { contactLink, SITE } from "../../config/site";
+import { useCopy } from "../../content/copy";
+import { contactLink, demoUrl } from "../../config/site";
 import SplitHeading from "../SplitHeading.astro";
 import Buzzer from "../Buzzer.astro";
+const { copy: COPY, locale } = useCopy(Astro.url);
 const c = COPY.scene7;
 ---
 
 <section class="scene s7" id="scene-7" data-scene="7" aria-labelledby="s7-title">
   <div class="s7-pin" data-scroll-pause>
   <div class="s7-inner container">
-    <a class="big-buzzer" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta-buzzer" aria-label={c.buzzerLabel}>
+    <a class="big-buzzer" href={demoUrl(locale)} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta-buzzer" aria-label={c.buzzerLabel}>
       <Buzzer id="cta-buzzer" rays />
     </a>
-    <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight="בעצמכם" />
+    <SplitHeading as="h2" id="s7-title" class="h-scene s7-title" text={c.headline} highlight={c.highlight} />
     <div class="s7-actions">
     <a class="btn btn-buzzer s7-btn" href={contactLink("cta")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="cta">
       <span class="btn-dot" aria-hidden="true"></span>
       {c.contact}
     </a>
-    <a class="btn btn-white s7-demo" href={SITE.eyalDemoUrl} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta">
+    <a class="btn btn-white s7-demo" href={demoUrl(locale)} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="cta">
       {c.cta}
     </a>
     </div>
@@ -73,6 +74,8 @@ const c = COPY.scene7;
     width: min(440px, 100%);
     gap: clamp(12px, 2vw, 20px);
   }
+  /* English button labels are longer */
+  :global([dir="ltr"]) .s7-actions { width: min(540px, 100%); }
   .s7-actions .btn {
     padding-inline: clamp(14px, 3vw, 28px);
   }

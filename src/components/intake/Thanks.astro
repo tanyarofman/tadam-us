@@ -9,6 +9,7 @@ import Base from "../../layouts/Base.astro";
 import { INTAKE as HE } from "../../content/intake.he";
 import { INTAKE as EN } from "../../content/intake.en";
 import { contactLink } from "../../config/site";
+import { BLOG_COLLECTION } from "../../content/copy";
 
 interface Props {
   lang?: "he" | "en";
@@ -27,8 +28,11 @@ const IDEAS: Record<string, string[]> = {
   "icebreaker-questions": [],
   "new-years-eve-at-home": [],
 };
-// The blog is in Hebrew only, so the English page has no article suggestions.
-const posts = lang === "he" ? await getCollection("blog", (p) => !p.data.draft) : [];
+// Each language suggests articles from its own blog (same slugs in both).
+const posts = await getCollection(BLOG_COLLECTION[lang], (p) => !p.data.draft);
+const home = lang === "en" ? "/en/" : "/";
+const blog = lang === "en" ? "/en/blog/" : "/blog/";
+const logo = lang === "en" ? { src: "/brand/tadam-logo-en.webp", w: 1000, h: 394 } : { src: "/brand/tadam-logo-nobuzzer.webp", w: 1438, h: 622 };
 const ideas = Object.entries(IDEAS).flatMap(([slug, events]) => {
   const post = posts.find((p) => p.id === slug);
   return post ? [{ slug, events: events.join(" "), title: post.data.seoTitle ?? post.data.title, category: post.data.category }] : [];
@@ -36,13 +40,13 @@ const ideas = Object.entries(IDEAS).flatMap(([slug, events]) => {
 const confetti = Array.from({ length: 18 }, (_, i) => i);
 ---
 
-<Base title={t.metaTitle} description={t.lead} noindex lang={c.ui.lang} dir={c.ui.dir as "rtl" | "ltr"} locale={c.ui.locale}>
+<Base title={t.metaTitle} description={t.lead} noindex>
   <div class="confetti" aria-hidden="true">
     {confetti.map((i) => <i style={`--x:${(i * 53) % 100}%;--d:${(i % 6) * 0.35}s;--h:${[52, 320, 190, 0][i % 4]};--r:${(i % 5) * 40}deg`} />)}
   </div>
   <main class:list={["thanks", { "thanks--solo": ideas.length === 0 }]} data-lang={lang}>
-    <a href="/" class="thanks__logo" aria-label={c.ui.home}>
-      <img src="/brand/tadam-logo-nobuzzer.webp" alt={c.ui.brand} width="1438" height="622" />
+    <a href={home} class="thanks__logo" aria-label={c.ui.home}>
+      <img src={logo.src} alt={c.ui.brand} width={logo.w} height={logo.h} />
     </a>
 
     <div class="thanks__main">
@@ -51,7 +55,7 @@ const confetti = Array.from({ length: 18 }, (_, i) => i);
       <ol class="thanks__next">
         {t.next.map((x) => <li><strong>{x.t}</strong><span>{x.d}</span></li>)}
       </ol>
-      <a class="btn btn-buzzer" href="/">{t.home}</a>
+      <a class="btn btn-buzzer" href={home}>{t.home}</a>
       <p class="thanks__foot">
         <a href={contactLink("order-thanks")} target="_blank" rel="noopener">{t.contact}</a>
         <span data-order-box hidden>{t.orderNo}: <span dir="ltr" data-order-id></span></span>
@@ -65,7 +69,7 @@ const confetti = Array.from({ length: 18 }, (_, i) => i);
           {
             ideas.map((p) => (
               <li data-idea data-events={p.events}>
-                <a href={`/blog/${p.slug}/`}>
+                <a href={`${blog}${p.slug}/`}>
                   <span class="thanks__cat">{p.category}</span>
                   <strong>{p.title}</strong>
                 </a>
@@ -73,7 +77,7 @@ const confetti = Array.from({ length: 18 }, (_, i) => i);
             ))
           }
         </ul>
-        <a class="thanks__all" href="/blog/">{t.ideasAll}</a>
+        <a class="thanks__all" href={blog}>{t.ideasAll}</a>
       </aside>
     )}
   </main>

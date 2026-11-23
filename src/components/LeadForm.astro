@@ -5,8 +5,9 @@
  * and Netlify can email each one (Forms → Form notifications).
  * With JS the form posts in the background and shows a thank-you in place; without JS it posts normally.
  */
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
 import { contactLink } from "../config/site";
+const { copy: COPY, locale } = useCopy(Astro.url);
 const c = COPY.lead;
 ---
 
@@ -18,8 +19,10 @@ const c = COPY.lead;
 
     <form class="lead-form reveal" name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-lead-form>
       <input type="hidden" name="form-name" value="lead" />
+      {/* Which language version the lead came from, so the reply can be in the same language. */}
+      <input type="hidden" name="language" value={locale} />
       <p class="lead-hp" aria-hidden="true">
-        <label>אל תמלאו את השדה הזה <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        <label>{c.honeypot} <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
       </p>
 
       <div class="lead-grid">
@@ -167,7 +170,7 @@ const c = COPY.lead;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px 16px;
-    text-align: right;
+    text-align: start;
   }
   .field {
     display: flex;
@@ -189,7 +192,7 @@ const c = COPY.lead;
     color: var(--purple-ink);
     font: inherit;
     font-size: 1.05rem;
-    text-align: right;
+    text-align: start;
   }
   .field input[dir="ltr"] {
     text-align: left; /* numbers read left to right */
@@ -197,6 +200,10 @@ const c = COPY.lead;
   .field input[type="tel"],
   .field input[type="tel"]::placeholder {
     text-align: right;
+  }
+  :global([dir="ltr"]) .field input[type="tel"],
+  :global([dir="ltr"]) .field input[type="tel"]::placeholder {
+    text-align: left;
   }
   .field input::placeholder {
     color: color-mix(in srgb, var(--purple-ink) 45%, white);

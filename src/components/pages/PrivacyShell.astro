@@ -1,0 +1,107 @@
+---
+/**
+ * The frame of the privacy policy page (logo, title, "last updated", back button, footer) and its styles.
+ * The policy text itself is the slot: src/pages/privacy.astro (Hebrew) and src/pages/en/privacy.astro (English).
+ */
+import Base from "../../layouts/Base.astro";
+import Footer from "../Footer.astro";
+import { useCopy } from "../../content/copy";
+interface Props {
+  description: string;
+  /** e.g. "עודכן לאחרונה: 17 בנובמבר 2026" */
+  updatedLine: string;
+}
+const { description, updatedLine } = Astro.props;
+const { copy: COPY, home } = useCopy(Astro.url);
+const c = COPY.privacyPage;
+---
+
+<Base title={`${c.title} | ${COPY.brand}`} description={description} bilingual>
+  <main class="container privacy">
+    <a href={home} class="privacy-logo"><img src="/brand/tadam-logo-v4.webp" alt={COPY.brand} width="736" height="332" /></a>
+    <h1 class="display privacy-title">{c.title}</h1>
+    <p class="updated">{updatedLine}</p>
+
+    <slot />
+
+    <a class="btn btn-buzzer back" href={home}>{c.back}</a>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .privacy {
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-block: 56px 72px;
+    line-height: 1.7;
+  }
+  .privacy-logo img {
+    width: 150px;
+  }
+  .privacy-title {
+    margin: 8px 0 0;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    color: var(--game-yellow);
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .privacy :global(.updated) {
+    margin: -10px 0 0;
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+  }
+  .privacy :global(.lead) {
+    margin: 0;
+  }
+  .privacy :global(.toc) {
+    padding: 18px 22px;
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    border: 2px solid var(--surface-border);
+  }
+  .privacy :global(.toc ol) {
+    margin: 0;
+    padding-inline-start: 1.2em;
+    columns: 2;
+    column-gap: 32px;
+  }
+  .privacy :global(.toc a),
+  .privacy :global(.contact a) {
+    color: var(--white);
+    text-decoration-color: var(--game-yellow);
+    text-underline-offset: 4px;
+  }
+  .privacy :global(section) {
+    scroll-margin-top: 24px;
+  }
+  .privacy :global(h2) {
+    margin: 12px 0 8px;
+    font-size: clamp(1.5rem, 3.4vw, 2rem);
+    color: var(--game-yellow);
+  }
+  .privacy :global(section p),
+  .privacy :global(section ul) {
+    margin: 0 0 10px;
+  }
+  .privacy :global(section ul) {
+    padding-inline-start: 1.2em;
+  }
+  .privacy :global(section li) {
+    margin-bottom: 6px;
+  }
+  .privacy :global(.contact) {
+    list-style: none;
+    padding: 0 !important;
+  }
+  .privacy :global(.back) {
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+  @media (max-width: 600px) {
+    .privacy :global(.toc ol) {
+      columns: 1;
+    }
+  }
+</style>

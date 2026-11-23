@@ -1,6 +1,7 @@
 ---
-import { COPY } from "../../content/copy.he";
+import { useCopy } from "../../content/copy";
 import SplitHeading from "../SplitHeading.astro";
+const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.scene6;
 const lights = COPY.scene5;
 const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", "var(--buzzer-red)", "#8a62d0"];
@@ -14,7 +15,7 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
 
     <div class="container s6-inner">
       <div class="s6-heads">
-        <SplitHeading as="h2" id="s6-title" class="h-scene s6-title s6-title-a" text={lights.headline} highlight="ביחד" />
+        <SplitHeading as="h2" id="s6-title" class="h-scene s6-title s6-title-a" text={lights.headline} highlight={lights.highlight} />
         <SplitHeading as="p" class="h-scene s6-title s6-title-b" text={c.headline} />
       </div>
 

@@ -27,9 +27,12 @@ defined by `--page-gradient` in `src/styles/tokens.css`.
 | What | File |
 |---|---|
 | All Hebrew copy (headlines, bubbles, FAQ, modal) | `src/content/copy.he.ts` |
+| The English translation of it (`/en/`), same keys | `src/content/copy.en.ts` |
+| Blog articles | `src/content/blog/` (Hebrew), `src/content/blog-en/` (English translation, same file name) |
+| Privacy policy text | `src/pages/privacy.astro` (Hebrew), `src/pages/en/privacy.astro` (English) |
 | Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
-| Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen.mp4` (a.mp4), `public/demo/hero-phone.mp4` (b.mp4), and their JPEG posters |
+| Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen.mp4` (a.mp4), `public/demo/hero-phone.mp4` (b.mp4), and their JPEG posters. English (`/en/`): the same names with `-en`, recorded from the Tom demo (`/tom-demo`). Paths per language: `demoMedia()` in `src/config/site.ts` |
 | Colors / type scale / theme | `src/styles/tokens.css` |
 | Analytics (currently a stub that pushes to `window.dataLayer`) | `src/lib/analytics.ts` |
 | "Leave details" form (Netlify Forms, form name `lead`) | `src/components/LeadForm.astro`; submissions in Netlify → Forms; email alerts in Netlify → Forms → Form notifications |
@@ -72,7 +75,7 @@ Run the playback tests with `node --experimental-strip-types --test tests/synced
 
 - `prefers-reduced-motion`: no smooth scroll, no pinning or scrubbing; every scene renders its final "story" state with simple fades.
 - All copy is real DOM text. Scene 3 demo video (`public/demo/`): muted autoplay only while on screen, never with sound, no autoplay with reduced motion (poster + play button); the mp4 is requested only when the scene is near the viewport. Buttons: play/pause, sound, full screen.
-- Hebrew, RTL from the root (`<html lang="he" dir="rtl">`).
+- Hebrew, RTL from the root (`<html lang="he" dir="rtl">`). The English version under `/en/` is the same page in LTR (`lang="en" dir="ltr"`): components read their text with `useCopy(Astro.url)` from `src/content/copy.ts`, and LTR-only style tweaks are marked `[dir="ltr"]`.
 
 ## Performance notes
 

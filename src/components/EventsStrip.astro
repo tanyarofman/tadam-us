@@ -1,5 +1,6 @@
 ---
-import { COPY } from "../content/copy.he";
+import { useCopy } from "../content/copy";
+const { copy: COPY, dir } = useCopy(Astro.url);
 const c = COPY.eventsStrip;
 // Two identical groups side by side; the track slides by exactly one group, so the loop is seamless.
 // Each group holds the list twice so it is wider than any screen.
@@ -12,7 +13,7 @@ const group = [...c.items, ...c.items];
       [0, 1].map((g) => (
         <ul class="events-strip__group" aria-hidden={g === 1 ? "true" : undefined}>
           {group.map((item) => (
-            <li class="events-strip__item" dir="rtl">
+            <li class="events-strip__item" dir={dir}>
               <span class="events-strip__dot" aria-hidden="true" />
               {item}
             </li>
@@ -44,7 +45,7 @@ const group = [...c.items, ...c.items];
     position: relative;
     z-index: 2;
     overflow: hidden;
-    direction: ltr; /* the track math is simpler in LTR; items are dir="rtl" */
+    direction: ltr; /* the track math is simpler in LTR; items carry the page direction */
     background: var(--stage-navy);
     border-block: 1px solid var(--surface-border);
     box-shadow: 0 -12px 32px rgba(0, 22, 112, 0.5);

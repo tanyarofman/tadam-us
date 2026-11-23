@@ -171,7 +171,7 @@ export function init({ reduced }: { reduced: boolean }) {
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 2.1 : 3.8, mobile ? 0.18 : 0.7),
+      scrollTrigger: sceneScroll(s, q(".scene-pin"), mobile, mobile ? 2.7 : 3.8, mobile ? 0.18 : 0.7),
       onUpdate() {
         vid.screenOn(tl.time() >= tl.labels.video);
       },
@@ -207,7 +207,9 @@ export function init({ reduced }: { reduced: boolean }) {
         { autoAlpha: 1, scaleY: 1, filter: "brightness(1)", duration: 0.4, ease: "power3.out" },
         "<0.1",
       )
-      .to({}, { duration: 0.6 });
+      // Spend the extra mobile scroll distance on the fully revealed video.
+      // This preserves the quick photo/logo entrance while giving playback room to hold.
+      .to({}, { duration: mobile ? 1.8 : 0.6 });
     // The hero's demo link follows the timeline label instead of a desktop-only offset.
     s.dataset.demoScroll = String(tl.labels.video / tl.duration());
   });

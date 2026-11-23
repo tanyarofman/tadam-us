@@ -357,7 +357,7 @@ html[lang="en"].fonts-failed { --font-display: Arial, sans-serif; --font-body: A
 html[lang="en"] .hero .hero-sub { line-height: 1.4; top: calc(12px - clamp(30px, 4.5vh, 44px)); }
 html[lang="en"] .hero .hero-preview figcaption { width: 92%; align-self: flex-start; padding-inline-start: 1%; text-align: left; translate: 0 -20px; }
 @media(max-width:900px) {
-  html[lang="en"] .hero .hero-preview figcaption { width: 100%; max-width: none; align-self: center; margin-top: 12px; padding-inline-start: 0; translate: 0 0; text-align: center; }
+  html[lang="en"] .hero .hero-preview figcaption { width: 100%; max-width: none; align-self: center; margin-top: 12px; margin-bottom: 16px; padding-inline-start: 0; translate: 0 0; text-align: center; }
 }
 html[lang="en"] .hosts-sub { white-space: normal; }
 

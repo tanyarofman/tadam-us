@@ -47,7 +47,7 @@ under "אתם מביאים את הסיפורים. אנחנו את השואו.", 
 events" block (we do NOT do this, it conflicts with our brief), **pricing**, 7 FAQ items, closing CTA "אז, למי עושים טדאם?".
 Alternating dark-blue and cream bands, yellow pill CTAs, magenta swoosh under key words, small spark marks around headlines.
 **Pricing (decided by Tanya, 2026-11-16; source of truth is `src/config/pricing.ts`):**
-- משחק אישי לאירוע: **790 ILS** (set 2026-11-22) (your stories, one of 5 ready-made hosts, a game every guest plays)
+- משחק אישי לאירוע: **390 ILS** (set 2026-11-23) (your stories, one of 5 ready-made hosts, a game every guest plays)
 - Every extra is **50 ILS**: an edit of an already produced game (via the game's edit link), the contributor link for friends and kids, a personal host.
 - Ilan's page and the live checkout popup still show the old **250 / 50**; the app must be aligned to the numbers above (the payment screen is also still a simulation, see `docs/onboarding-flow.md`).
 
@@ -72,7 +72,7 @@ Keep changes inside your files so PRs merge cleanly. If you must touch another s
 
 ## Open items for Tanya
 
-- The price is 790 since 2026-11-22 (extras of 50 not re-confirmed, see `src/config/pricing.ts`); the `// TODO confirm` marks there are still to be cleared by Tanya. Ilan must update the checkout popup (it hard-codes 250 / 50) and add a real payment step.
+- The price is 390 since 2026-11-23 (extras of 50 not re-confirmed, see `src/config/pricing.ts`); the `// TODO confirm` marks there are still to be cleared by Tanya. Ilan must update the checkout popup (it hard-codes 250 / 50) and add a real payment step.
 - Almoni font license.
 - Demo video: the phone bar shows a `base44.app` URL; and ideally a purpose-made demo (no cartoon / family media) is recorded later.
 - Photoreal people use image-generation credits (Magnific). Confirm before the imagery session runs.

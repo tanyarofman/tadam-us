@@ -3,7 +3,7 @@
  * Markup and copy never contain a price: copy.he.ts uses {placeholders} (see `fillPrices`),
  * the Pricing component reads the numbers below. Changing a price is a one-line edit here.
  *
- * Set by Tanya on 2026-11-22: one price, 790 for a game. The extras (50 each) are from 2026-11-16 and not re-confirmed.
+ * Set by Tanya on 2026-11-23: one price, 390 for a game (it was 790 for a day). The extras (50 each) are from 2026-11-16 and not re-confirmed.
  */
 
 /**
@@ -30,7 +30,7 @@ export const PRICING = {
   currency: "₪",
 
   /** Personal game for an event. */
-  base: 790,
+  base: 390,
   /** Each extra edit of an already produced game. */
   edit: 50,
 

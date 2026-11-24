@@ -41,6 +41,13 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
+- **Request indexing in Search Console** (URL inspection, then Request indexing) once each rewrite is live on tadamevents.com. Tick each one off here when done:
+  - [ ] `/blog/hanukkah-games/` (PR #15, first: Hanukkah starts Dec 4)
+  - [ ] `/blog/hanukkah-trivia/` (PR #15)
+  - [ ] `/blog/new-years-eve-games/` (PR #21)
+  - [ ] `/blog/office-christmas-party-games/` (PR #21)
+  - [ ] `/blog/pass-the-parcel-tasks/` (PR #21)
+  - Never request the redirected old addresses (`hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)

@@ -131,7 +131,7 @@ If you want a full quiz with ready-made questions, start with the bride section 
 
 At a couples shower, choose games where both partners play and both families compete. The couples newlywed game, two families trivia and a date night jar include everyone.
 
-**23. The couples newlywed game.** The couple answers questions about each other, sitting back to back. You can run it like the wedding shoe game, with our [60 shoe game questions](/blog/wedding-shoe-game-questions/).
+**23. The couples newlywed game.** The couple answers questions about each other, sitting back to back. You can run it like the wedding shoe game. For a shower where both partners are guests of honor, see our [couples shower games](/blog/couples-shower-games/).
 
 **24. Two families trivia.** The bride's side and the groom's side answer questions about both partners. It's the fastest way for two families to learn each other's stories.
 

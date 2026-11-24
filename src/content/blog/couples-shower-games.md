@@ -79,7 +79,7 @@ The best couples shower games involve both partners and the whole room: a game w
 A few notes on the favorites:
 
 - **What did they say (1).** Before the shower, ask each partner 10 questions about the other. At the shower, read the question, let the other partner guess, then reveal the real answer.
-- **Shoe game (2).** The couple sits back to back, each holding one of their own shoes and one of their partner's, and raises a shoe to answer "who is more likely to…". See our [shoe game questions](/blog/wedding-shoe-game-questions/).
+- **Shoe game (2).** The couple sits back to back, each holding one of their own shoes and one of their partner's, and raises a shoe to answer "who is more likely to…". It works at an engagement party too: see our [engagement party games](/blog/engagement-party-games/).
 - **Couple trivia (3).** Questions about the couple, answered by guests in teams. The best friend on one side usually loses to a sibling on the other.
 - **Wedding guessing game (14).** Guests guess the first dance song, how long the speeches will run and who cries first. Open the ballots after the wedding.
 

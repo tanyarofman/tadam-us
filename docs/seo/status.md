@@ -12,6 +12,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 | How to write an article | `content-playbook.md` (rules) and `CLAUDE.md` |
 | How to research | `how-to-research.md`, `tools/seo/research.py --market us` |
 | Verified sources | `sources.md` |
+| Session records (what was decided and why, by date) | `../history/` (start with `2026-11-24-us-site-setup.md`) |
 
 ## Done
 - 2026-11-24: first research round ($2.37 of the approved $10), the site review, and the article plan.

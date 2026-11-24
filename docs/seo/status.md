@@ -32,7 +32,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Waiting for Tanya
 - **Search Console:** add and verify tadamevents.com (a DNS TXT record in Netlify DNS works), then submit `https://tadamevents.com/sitemap-index.xml`. Also Bing Webmaster Tools. Needs Tanya's Google account.
-- **Contact route for the US:** an email address on the new domain, a separate social page, or the form only.
+- **Contact route for the US:** the email is done (hey@tadamevents.com). The buttons still open Messenger on the Israeli Facebook page: a US social page, or the form and email only?
+- **Test email:** send one to hey@tadamevents.com and check it reaches both inboxes.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **Prices** in USD/EUR, or keep them hidden.
 - **Privacy policy** for the US and the EU. Claude can draft it; a legal check is advised.

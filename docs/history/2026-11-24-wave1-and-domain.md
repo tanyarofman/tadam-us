@@ -13,11 +13,15 @@ Session record (follows `2026-11-24-us-site-setup.md` from PR #6).
 ## Domain and email
 - Tanya bought **tadamevents.com**. It is in Netlify DNS and is the custom domain of the Netlify project `tadam-us`.
 - **Email:** Forward Email records (MX, the `forward-email` TXT and SPF) were copied from the heytadam.com zone to the tadamevents.com zone. hey@tadamevents.com forwards to the same two Gmail inboxes as hey@heytadam.com. Tanya should send a test email.
-- **PR #8:** the site address becomes tadamevents.com, the `noindex` header is removed, and the public email becomes hey@tadamevents.com. Tanya asked for this; it merges when she says so.
+- **PR #8, merged** (by the setup session, at Tanya's request, together with #6, #7 and #9): the site address is tadamevents.com, the `noindex` header is removed, and the public email is hey@tadamevents.com. The live deploy is built from main at 5a8824a.
 
 ## Open items
+- Tanya sends a test email to hey@tadamevents.com and checks it reaches both inboxes.
 - Add tadamevents.com to Search Console (and Bing Webmaster Tools), then submit the sitemap.
 - The US contact route: buttons still open Messenger on the Israeli Facebook page.
 - Real event stories for the 8 articles, and whether remote guests can play.
-- The 404 page overflows by 16px at 390px. A task was suggested for it.
 - Next writing work: rewrite the 9 existing articles for the US, showing Tanya the headings first.
+
+## End of session
+- The article check scripts are now in the repository: `tools/seo/check_articles.py` and `tools/seo/check_mobile.mjs`.
+- Tanya is moving the work to a new Claude Code session on her own computer, in a local clone of `tanyarofman/tadam-us`. The plan is in `docs/history/2026-11-24-handoff.md`.

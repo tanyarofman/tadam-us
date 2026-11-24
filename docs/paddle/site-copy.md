@@ -110,7 +110,8 @@ Birthdays, bar and bat mitzvahs, weddings, anniversaries, graduations, retiremen
 ## Footer
 
 - Links: How it works · Pricing · FAQ · Terms of Service · Privacy Policy · Refund Policy · Contact (hey@tadamevents.com)
-- Line: © 2026 Tanya Rofman, Israel. Payments processed by Paddle.com.
+- Line: © 2026 Tanya Rofman. Payments processed by Paddle.com.
+- No country or address in the footer (Tanya, 2026-11-24: no connection to Israel on the site). The legal name stays, because Paddle checks it against the account.
 
 ## What changed from heytadam.com/en, and why
 

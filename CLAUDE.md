@@ -28,6 +28,7 @@ This repository started as a copy of the Israeli site. The plan, in order:
 ## Rules for the site
 
 - **Language:** American English (US spelling; UK and European readers accept it). Address readers as "you". Plain and warm, like the current `src/content/copy.en.ts`. No em-dashes or en-dashes in copy.
+- **UK articles** (decided by Tanya 2026-11-24): articles written for the UK and Ireland (`mr-and-mrs-quiz-questions`, `hen-party-games`, `christmas-quiz-questions`, `pass-the-parcel-tasks`) use British spelling throughout (colour, organise, favourite) and UK terms (quiz, hen do, Mr and Mrs, wedding breakfast). Titles stay in Title Case like the rest of the blog.
 - **Markets:** the US first, then the UK, Ireland and English-speaking Europe. Events, holidays, dates and examples come from these markets (birthdays and milestones, weddings and showers, companies and teams, holidays and family), not from Israel.
 - **Prices:** $99 per game, one-time (set 2026-11-23, `src/config/pricing.ts`). Paddle converts other currencies at checkout. Never in blog articles.
 - **Paddle (payments):** the site must pass Paddle's website review: self-serve wording (never "we build it for you"), invented hosts only, the legal pages `/terms`, `/privacy`, `/refunds` and the footer line "© <year> Tanya Rofman. Payments processed by Paddle.com." Plan and drafts: `docs/paddle/` (start with `HANDOFF.md`). Never put the business number on the site.

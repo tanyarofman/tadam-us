@@ -15,10 +15,10 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Done
 - 2026-11-24: first research round ($2.37 of the approved $10), the site review, and the article plan.
-- 2026-11-24: wave 1, articles 1 to 4 written (PR open, not merged): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
+- 2026-11-24: wave 1, articles 1 to 4 written (PR #4, not merged): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
 
 ## Next
-1. **English only at the root,** plus the site review fixes that need no decision (structured data, `llms.txt`, US locale and dates, the events strip, FAQ wording, and `noindex` on netlify.app).
+1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
 2. **Existing articles:**
    - Rewrite 6 for the US: trivia questions, icebreakers, bachelorette games, team building, office party, New Year's Eve.
    - Rewrite 3 for US families: hanukkah games (dreidel), hanukkah trivia, bar and bat mitzvah.

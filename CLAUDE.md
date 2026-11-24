@@ -11,12 +11,10 @@ See README.md for how to run the site and where things live.
 This repository started as a copy of the Israeli site. The plan, in order:
 
 1. This CLAUDE.md (done).
-2. Market research with DataForSEO for the US, UK and English-speaking Europe: `docs/seo/keyword-research-us-*.md`.
-3. Cite-Me AI-search review of the whole site: `docs/seo/site-review-us-*.md`.
-4. English only at the root: move `src/pages/en/*` to `/`, then delete the Hebrew pages, `copy.he.ts`, `src/content/blog/` (Hebrew) and RTL.
-5. A US blog: rewrite the universal articles, delete the Israel-only ones, and add new articles from the research plan.
-
-Until step 4 is done the code still contains the Hebrew site. Treat `/en/` and `src/content/blog-en/` as the source for this site.
+2. Market research with DataForSEO for the US, UK and English-speaking Europe: `docs/seo/keyword-research-us-*.md` (done, PR #2).
+3. Cite-Me AI-search review of the whole site: `docs/seo/site-review-us-*.md` (done, PR #2).
+4. English only at the root (done, PR #3): the site and blog are served at `/`, with no Hebrew pages or RTL.
+5. A US blog: rewrite the universal articles, delete the Israel-only ones, and add new articles from the research plan (in progress, see `docs/seo/status.md`).
 
 ## Workflow
 
@@ -36,7 +34,7 @@ Until step 4 is done the code still contains the Hebrew site. Treat `/en/` and `
 
 ## Blog & SEO
 
-- Articles: one Markdown file each, schema in `src/content.config.ts`, template `src/components/pages/BlogArticle.astro`. `/llms.txt` is generated from them. Until step 4 the English articles live in `src/content/blog-en/` and are served at `/en/blog/`.
+- Articles: one Markdown file each, schema in `src/content.config.ts`, template `src/components/pages/BlogArticle.astro`. `/llms.txt` is generated from them. Articles live in `src/content/blog/` and are served at `/blog/<slug>/`.
 - Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). How to write: `docs/seo/content-playbook.md` (the Cite-Me method). Sources: `docs/seo/sources.md`. The Hebrew research files in `docs/seo/` describe the Israeli market and are history only.
 - Writing rules:
   - Every H2 is the question people search, followed by a 2-sentence answer of at most 50 words.

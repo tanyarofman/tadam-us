@@ -1,139 +1,189 @@
 ---
 /**
- * Privacy policy (English). A translation of src/pages/privacy.astro: keep the two in sync, the Hebrew is the source.
- * Not legal advice: have a lawyer review it. Lines marked TODO confirm follow the same open items as the Hebrew page.
+ * Privacy Policy (EU and UK GDPR, US state laws such as the CCPA/CPRA, COPPA). Source draft: docs/paddle/privacy-policy.md
+ * (keep the two in sync). Not legal advice: a lawyer reviews it before the live Paddle account.
+ * TODO (Ilan) items are marked inline: the processor list and the AI-training opt-outs (docs/paddle/ai-vendors.md).
  */
-import PrivacyShell from "../components/pages/PrivacyShell.astro";
-import { SITE, contactLink } from "../config/site";
-const updated = "November 17, 2026";
+import LegalShell from "../components/pages/LegalShell.astro";
+import { SITE } from "../config/site";
+import { useCopy } from "../content/copy";
+const { copy: COPY } = useCopy(Astro.url);
+const l = COPY.legalPage;
+const mail = SITE.email;
 ---
 
-<PrivacyShell description="What information Tadam! collects, why, who it is shared with and what your rights are." updatedLine={`Last updated: ${updated}`}>
-
-  <p class="lead">
-    Tadam! creates live trivia games for events, from the stories and photos you send us. This policy explains what
-    information we collect, what we use it for, who it is shared with and what your rights are. Your photos and stories
-    stay yours.
-  </p>
+<LegalShell title="Privacy Policy" description="What personal data Tadam! collects, why, who it is shared with, how long we keep it and what your rights are under the GDPR and US state laws." updatedLine={`Last updated: ${l.updated}`}>
 
   <nav class="toc" aria-label="Table of contents">
     <ol>
-      <li><a href="#collect">What information we collect</a></li>
-      <li><a href="#use">What we use the information for</a></li>
-      <li><a href="#share">Who the information is shared with</a></li>
-      <li><a href="#others">Information about other people and children</a></li>
-      <li><a href="#keep">How long we keep the information</a></li>
+      <li><a href="#who">Who we are</a></li>
+      <li><a href="#collect">What we collect</a></li>
+      <li><a href="#use">Why we use it</a></li>
+      <li><a href="#share">Who we share it with</a></li>
+      <li><a href="#transfers">International transfers</a></li>
+      <li><a href="#keep">How long we keep it</a></li>
+      <li><a href="#children">Children</a></li>
       <li><a href="#rights">Your rights</a></li>
-      <li><a href="#security">Information security</a></li>
-      <li><a href="#changes">Changes to this policy</a></li>
-      <li><a href="#contact">Contact us</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ol>
   </nav>
 
+  <section id="who">
+    <h2 class="display">1. Who we are</h2>
+    <p>
+      Tadam! is operated by {l.legalName}, a sole trader (Osek Murshe) registered in Israel, at {l.address}. We are the
+      "controller" of the personal data described here. Contact us about privacy at <a href={`mailto:${mail}`}>{mail}</a>.
+    </p>
+  </section>
+
   <section id="collect">
-    <h2 class="display">1. What information we collect</h2>
-    <ul>
-      <li><strong>When you leave your details on the site:</strong> name, phone number, type of event and approximate date, if you filled it in.</li>
-      <li><strong>When you contact us on Messenger or by email:</strong> your name and Facebook profile or your email address, and the content of the messages.</li>
-      <li>
-        <strong>The materials for the game:</strong> stories, questions, photos and details about the guests of honor and
-        the guests, which you choose to send us so we can build the game.
-      </li>
-      <li>
-        <strong>During the game at the event:</strong> guests join from their phones by scanning a code, choose a display
-        name and answer the questions. The name and the score appear on the screen and on the leaderboard.
-      </li>
-      <li>
-        <strong>Technical information:</strong> like any website, the hosting servers log basic technical information
-        (such as IP address and browser type) to run the site and keep it secure. At the moment the site does not use
-        advertising tools or third-party tracking.
-      </li>
-    </ul>
+    <h2 class="display">2. What we collect</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What</th><th>Examples</th><th>Where it comes from</th></tr></thead>
+        <tbody>
+          <tr><td>Your account and order details</td><td>Name, email address, country</td><td>You, when you create a game and pay</td></tr>
+          <tr><td>Payment details</td><td>Card or PayPal details, billing address</td><td>Collected and handled by <strong>Paddle</strong>, our merchant of record. We never see your full card number</td></tr>
+          <tr><td>Game content</td><td>Stories, names, nicknames, details, photos and voice recordings about the guest of honor and other people</td><td>You, in the game creator</td></tr>
+          <tr><td>Guest play data</td><td>The nickname a guest types to join, their answers and score</td><td>Guests, when they play. Guests don't need an account or email</td></tr>
+          <tr><td>Messages to us</td><td>Your email address and what you write</td><td>You, when you email us</td></tr>
+          <tr><td>Technical data</td><td>IP address, browser type, pages visited, error logs</td><td>Automatically, when you use the site</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Game content often includes information about <strong>other people, including children</strong>, such as the guest
+      of honor at a bar mitzvah or birthday. You may only upload it if you have their permission, or their parent's or
+      guardian's permission for children (see our <a href="/terms">Terms</a>). Please don't upload sensitive information
+      such as health details, financial details or ID numbers.
+    </p>
   </section>
 
   <section id="use">
-    <h2 class="display">2. What we use the information for</h2>
-    <ul>
-      <li>To get back to you, answer questions and coordinate the event.</li>
-      <li>To build your game and run it at the event.</li>
-      <li>To improve the service and keep the site secure.</li>
-    </ul>
-    {/* TODO confirm: the same commitments as the FAQ answer "Who sees the photos and stories?" */}
+    <h2 class="display">3. Why we use it, and our legal basis (GDPR)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Purpose</th><th>Legal basis</th></tr></thead>
+        <tbody>
+          <tr><td>Creating, delivering and supporting your game</td><td>Performance of our contract with you</td></tr>
+          <tr><td>Processing payments, taxes and refunds (through Paddle)</td><td>Contract and legal obligation</td></tr>
+          <tr><td>Keeping the Service secure and fixing errors</td><td>Legitimate interests</td></tr>
+          <tr><td>Sending service emails (your game link, receipts)</td><td>Contract</td></tr>
+          <tr><td>Marketing emails, only if you opt in</td><td>Consent, which you can withdraw at any time</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p>
-      We do not sell your information, we do not use your photos and stories for advertising without your explicit
-      approval, and we do not use them to train AI models.
+      We don't sell your personal data, don't share it for cross-context behavioral advertising, and don't use your game
+      content to train AI models ourselves.
     </p>
+    {/* TODO (Ilan): once the opt-outs in docs/paddle/ai-vendors.md are confirmed (Base44, HeyGen, ElevenLabs), add back:
+        "We have opted out of AI training with every provider that offers it, and we choose providers that don't train on customer data." */}
   </section>
 
   <section id="share">
-    <h2 class="display">3. Who the information is shared with</h2>
-    <p>
-      Only you and we see your materials before the event. At the event itself, the game is shown on the big screen and
-      on the phones of the guests who are playing. To provide the service we work with providers, who receive only what
-      they need:
-    </p>
-    <ul>
-      <li><strong>Netlify:</strong> hosting the site and receiving the forms you fill in on it.</li>
-      <li><strong>Meta (Facebook and Messenger) and Google (Gmail):</strong> our conversations and correspondence with you.</li>
-      <li><strong>The game platform:</strong> the service where the game is built and runs at the event, including the questions and photos in it.</li>
-    </ul>
-    <p>
-      Some of the providers store information on servers outside Israel. We will hand information to another party only
-      if the law requires us to.
-    </p>
+    <h2 class="display">4. Who we share it with</h2>
+    <p>We use service providers ("processors") that handle data only on our instructions:</p>
+    {/* TODO (Ilan): confirm the ElevenLabs location and which service sends the game-link emails (then add it as a row). */}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Provider</th><th>What for</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>Paddle.com</td><td>Payments, tax, refunds (Paddle is an independent controller for payment data)</td><td>UK / EU / US</td></tr>
+          <tr><td>Netlify</td><td>Hosting the website</td><td>US</td></tr>
+          <tr><td>Base44 (and the AI models it runs on)</td><td>Hosting the game creator and the games, drafting questions from your stories</td><td>US</td></tr>
+          <tr><td>ElevenLabs</td><td>The host's synthetic voice reading your game's script</td><td>US</td></tr>
+          <tr><td>HeyGen</td><td>The host's video</td><td>US</td></tr>
+          <tr><td>BytePlus (Seedance)</td><td>Video generation</td><td>Malaysia, Indonesia and/or the EU</td></tr>
+          <tr><td>Forward Email and Google (Gmail)</td><td>Receiving and answering the emails you send us</td><td>US</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We may also disclose data if the law requires it, or to protect our rights.</p>
   </section>
 
-  <section id="others">
-    <h2 class="display">4. Information about other people and children</h2>
+  <section id="transfers">
+    <h2 class="display">5. International transfers</h2>
     <p>
-      The game is built from stories and photos of the guests of honor and of people close to them, sometimes children
-      too (for example at a birthday or a bar or bat mitzvah). When you send us materials about other people, you
-      confirm that you are allowed to share them for the game. We use them only for the game of your event, and we
-      recommend not sending sensitive information such as medical information or ID numbers.
+      We are based in Israel, which the European Commission recognizes as providing an adequate level of data protection.
+      Some providers process data in the US or elsewhere. Where data leaves the EU or UK, we rely on adequacy decisions,
+      the EU-US Data Privacy Framework where the provider is certified, or Standard Contractual Clauses.
     </p>
   </section>
 
   <section id="keep">
-    <h2 class="display">5. How long we keep the information</h2>
-    {/* TODO confirm: retention. No automatic-deletion promise until the real policy is decided. */}
+    <h2 class="display">6. How long we keep it</h2>
+    <ul>
+      <li><strong>Game content and the game itself:</strong> 30 days from delivery, then deleted. You can ask us to delete it sooner.</li>
+      <li><strong>Order records:</strong> as long as tax and accounting law requires (in Israel, generally 7 years). These records don't include your game content.</li>
+      {/* TODO (Ilan): replace with the real log retention once known. */}
+      <li><strong>Technical logs:</strong> kept by our hosting providers for a limited time to run and secure the Service, then deleted.</li>
+    </ul>
+  </section>
+
+  <section id="children">
+    <h2 class="display">7. Children</h2>
     <p>
-      We keep the information for as long as it is needed for the purposes it was collected for, for example so the
-      game stays with you as a keepsake after the event. You can ask us at any time to delete your materials and your
-      contact details, and we will handle the request promptly.
+      The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their
+      personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an
+      account. Information about children that a parent includes in a game is used only to make that game and is deleted
+      after 30 days. If you believe a child has given us personal data directly, write to
+      {" "}<a href={`mailto:${mail}`}>{mail}</a> and we'll delete it.
     </p>
   </section>
 
   <section id="rights">
-    <h2 class="display">6. Your rights</h2>
-    <p>Under the Israeli Privacy Protection Law, you can:</p>
+    <h2 class="display">8. Your rights</h2>
+    <p>Depending on where you live, you can ask to:</p>
     <ul>
-      <li>Ask to see the information we hold about you.</li>
-      <li>Ask us to correct wrong information or to delete information.</li>
-      <li>Ask us not to contact you anymore.</li>
+      <li>access the data we hold about you, or get a copy of it</li>
+      <li>correct it</li>
+      <li>delete it</li>
+      <li>restrict or object to how we use it</li>
+      <li>withdraw consent at any time, where we rely on consent</li>
     </ul>
-    <p>To exercise these rights, write to us at the address at the end of this page.</p>
+    <p><strong>EU and UK residents</strong> can also complain to their local data protection authority.</p>
+    <p>
+      <strong>California and other US state residents</strong> have the right to know, delete and correct their data,
+      and to opt out of the sale or sharing of personal data. We don't sell or share personal data in that sense. We
+      won't treat you differently for using your rights.
+    </p>
+    <p>To use any right, write to <a href={`mailto:${mail}`}>{mail}</a>. We reply within 30 days.</p>
+  </section>
+
+  <section id="cookies">
+    <h2 class="display">9. Cookies</h2>
+    <p>
+      We use only the cookies and similar storage the site needs to work (for example, to keep your game draft while you
+      create it). We don't use advertising or analytics cookies.
+    </p>
+    {/* If analytics are added later: list them here and add a cookie banner for EU visitors. */}
   </section>
 
   <section id="security">
-    <h2 class="display">7. Information security</h2>
+    <h2 class="display">10. Security</h2>
     <p>
-      We take reasonable measures to protect your information, and access to it is limited to those who need it to
-      provide you with the service. No method guarantees complete protection, and if we discover that your information
-      was compromised we will let you know.
+      We use encryption in transit (HTTPS), access controls and reputable providers. Game links are private and hard to
+      guess, but anyone with the link can open the game, so share it only with your guests.
     </p>
   </section>
 
   <section id="changes">
-    <h2 class="display">8. Changes to this policy</h2>
-    <p>We may update this policy from time to time. The date at the top of the page shows when it was last updated.</p>
+    <h2 class="display">11. Changes</h2>
+    <p>
+      We may update this policy. The date at the top shows the latest version. If a change is significant, we'll tell you
+      by email or on the site.
+    </p>
   </section>
 
   <section id="contact">
-    <h2 class="display">9. Contact us</h2>
-    <p>Questions, requests or comments about your privacy? Write to us:</p>
+    <h2 class="display">12. Contact</h2>
     <ul class="contact">
-      <li>Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-      <li>Messenger: <a href={contactLink("privacy")} target="_blank" rel="noopener">the Tadam! Facebook page</a></li>
+      <li>{l.legalName}, {l.address}</li>
+      <li>Email: <a href={`mailto:${mail}`}>{mail}</a></li>
     </ul>
   </section>
-</PrivacyShell>
+</LegalShell>

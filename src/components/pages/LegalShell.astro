@@ -1,25 +1,28 @@
 ---
 /**
- * The frame of the privacy policy page (logo, title, "last updated", back button, footer) and its styles.
- * The policy text itself is the slot: src/pages/privacy.astro (Hebrew) and src/pages/en/privacy.astro (English).
+ * The frame of the legal pages (logo, title, "last updated", back button, footer) and their styles.
+ * The text itself is the slot: src/pages/terms.astro, privacy.astro and refunds.astro.
+ * Their source drafts are in docs/paddle/ (terms.md, privacy-policy.md, refund-policy.md): keep them in sync.
  */
 import Base from "../../layouts/Base.astro";
 import Footer from "../Footer.astro";
 import { useCopy } from "../../content/copy";
 interface Props {
+  /** The page title (h1 and <title>), e.g. "Terms of Service". */
+  title: string;
   description: string;
   /** e.g. "Last updated: November 17, 2026" */
   updatedLine: string;
 }
-const { description, updatedLine } = Astro.props;
+const { title, description, updatedLine } = Astro.props;
 const { copy: COPY, home } = useCopy(Astro.url);
-const c = COPY.privacyPage;
+const c = COPY.legalPage;
 ---
 
-<Base title={`${c.title} | ${COPY.brand}`} description={description}>
+<Base title={`${title} | ${COPY.brand}`} description={description}>
   <main class="container privacy">
     <a href={home} class="privacy-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" /></a>
-    <h1 class="display privacy-title">{c.title}</h1>
+    <h1 class="display privacy-title">{title}</h1>
     <p class="updated">{updatedLine}</p>
 
     <slot />
@@ -90,6 +93,32 @@ const c = COPY.privacyPage;
   }
   .privacy :global(section li) {
     margin-bottom: 6px;
+  }
+  .privacy :global(.table-wrap) {
+    overflow-x: auto;
+    margin: 0 0 12px;
+  }
+  .privacy :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    line-height: 1.5;
+  }
+  .privacy :global(th),
+  .privacy :global(td) {
+    padding: 10px 12px;
+    text-align: start;
+    vertical-align: top;
+    border-bottom: 1px solid var(--surface-border);
+  }
+  .privacy :global(th) {
+    color: var(--game-yellow);
+    font-weight: 700;
+  }
+  .privacy :global(section a) {
+    color: var(--white);
+    text-decoration-color: var(--game-yellow);
+    text-underline-offset: 4px;
   }
   .privacy :global(.contact) {
     list-style: none;

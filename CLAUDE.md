@@ -6,6 +6,8 @@ This repository is the **English site for the US and Europe**. The Israeli Hebre
 
 See README.md for how to run the site and where things live.
 
+**Start of every session:** read the newest file in `docs/history/` (session records: what was decided, why, and what is open) and `docs/seo/status.md`. At the end of a session with decisions in it, add a dated record there (`docs/history/YYYY-MM-DD-<topic>.md`).
+
 ## Status (November 2026)
 
 This repository started as a copy of the Israeli site. The plan, in order:

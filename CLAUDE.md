@@ -6,6 +6,8 @@ This repository is the **English site for the US and Europe**. The Israeli Hebre
 
 See README.md for how to run the site and where things live.
 
+**Start of every session:** read the newest file in `docs/history/` (session records: what was decided, why, and what is open) and `docs/seo/status.md`. At the end of a session with decisions in it, add a dated record there (`docs/history/YYYY-MM-DD-<topic>.md`).
+
 ## Status (November 2026)
 
 This repository started as a copy of the Israeli site. The plan, in order:
@@ -21,7 +23,7 @@ This repository started as a copy of the Israeli site. The plan, in order:
 - Never commit directly to `main`. Do every change on a branch (`feat/…`, `fix/…`, `chore/…`) and open a pull request for review.
 - Merge only when Tanya asks. The Netlify project `tadam-us` (linked to this repository) deploys `main` to production automatically on every merge; there is no manual deploy step. Check deploys in the Netlify API (`/api/v1/sites/<id>/deploys`, site name `tadam-us`).
 - Every PR gets an automatic deploy preview (`deploy-preview-<number>--tadam-us.netlify.app`) to share in the PR.
-- **Domain:** not bought yet; the site is at https://tadam-us.netlify.app. The code still names heytadam.com (the Israeli domain) in `astro.config.mjs` (`site`), `public/robots.txt`, `src/config/site.ts` and `netlify.toml`. When Tanya has the domain, change all four in one PR and add the domain to the Netlify project.
+- **Domain:** not bought yet (Tanya will buy a new name; heytadam.com stays with the Israeli site). The site is at https://tadam-us.netlify.app, set as `site` in `astro.config.mjs` and in `public/robots.txt`, and every page is sent with `X-Robots-Tag: noindex` (`netlify.toml`) so the unlaunched site stays out of search. When the domain exists, in one PR: change `site` and `robots.txt`, remove the noindex header, and update `src/config/site.ts` (contact and email still point to the Israeli heytadam page). Then add the domain to the Netlify project and set up Search Console.
 
 ## Rules for the site
 

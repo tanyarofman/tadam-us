@@ -18,7 +18,11 @@
   - Checked after the deploy: the live home page, legal pages, blog index, every blog article in the sitemap, `/llms.txt` and the manifest have no Israel, Tel Aviv, address, shekel or .il link.
 - **PR #32, notes:** `docs/seo/status.md` and `netlify.toml` say the bar mitzvah article is hidden by Tanya's decision, not waiting for a rewrite.
 - **PR #33, Paddle docs:** `site-copy.md` and `HANDOFF.md` have the new footer line; the `terms.md` and `privacy-policy.md` drafts match the live pages (no Israel), each with a note at the top.
+- **PR #43, Paddle checklist:** `docs/paddle/paddle-checklist.md` now has a review status, checked on the live site:
+  - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
+  - **Website requirements 1 to 11 pass:** product description, $99 price, Terms (Paddle as merchant of record), Privacy, Refunds (14 days), legal name in the footer and on the legal pages, email contact only, self-serve wording, invented hosts.
+  - **Blocking the review:** `/create` (every "Create yours" button) is a "Coming soon" page with no checkout yet (requirement 12), and the legal pages still need a lawyer's review.
 
 ## Open
 - **Governing law:** a lawyer may want a governing-law clause back. Any jurisdiction named must be the real one, so it's Tanya's call.
-- **Paddle review:** check that the site passes without a country or address. The legal name matches the account, so it should.
+- **Paddle review:** before submitting, the site needs the wizard and checkout at `/create` and a lawyer's review of `/terms` and `/privacy`. Then open the live account and submit `tadamevents.com` (checklist requirement 13). Check that the site passes without a country or address; the legal name matches the account, so it should.

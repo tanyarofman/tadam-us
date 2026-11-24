@@ -55,7 +55,7 @@ Ask about what kids see and do on Hanukkah: the candles, the dreidel, the food a
 
 1. **How many nights does Hanukkah last?** Eight.
 2. **What's the candle that lights all the others called?** The shamash, or helper candle.
-3. **Which four letters are on a dreidel outside Israel?** Nun, gimel, hei and shin.
+3. **Which four letters are on a dreidel?** Nun, gimel, hei and shin.
 4. **What do the dreidel letters stand for?** "Nes gadol haya sham," a great miracle happened there.
 5. **Why do we eat foods fried in oil on Hanukkah?** To remember the oil that lasted eight days.
 6. **What are potato pancakes fried for Hanukkah called?** Latkes.

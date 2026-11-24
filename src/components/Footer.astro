@@ -5,6 +5,11 @@
  */
 import { useCopy } from "../content/copy";
 import { SITE } from "../config/site";
+interface Props {
+  /** Leave out the logo and tagline column (pages that already show the logo in the header, like /create). */
+  hideBrand?: boolean;
+}
+const { hideBrand = false } = Astro.props;
 const { copy: COPY, home } = useCopy(Astro.url);
 const c = COPY.footer;
 const legal = COPY.legalPage;
@@ -12,11 +17,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
+  <div class:list={["container footer-grid", { "no-brand": hideBrand }]}>
+    {!hideBrand && <div class="footer-brand">
       <a href={home} class="footer-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" loading="lazy" /></a>
       <p class="footer-tagline">{c.tagline}</p>
-    </div>
+    </div>}
 
     <nav class="footer-col" aria-labelledby="footer-game">
       <h2 id="footer-game" class="footer-heading">{c.gameLabel}</h2>
@@ -99,6 +104,9 @@ const year = new Date().getFullYear();
     color: var(--text-muted);
     font-size: var(--fs-small);
   }
+  .footer-grid.no-brand {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   @media (max-width: 860px) {
     .footer-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -106,9 +114,13 @@ const year = new Date().getFullYear();
     .footer-brand {
       grid-column: 1 / -1;
     }
+    .footer-grid.no-brand {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   @media (max-width: 340px) {
-    .footer-grid {
+    .footer-grid,
+    .footer-grid.no-brand {
       grid-template-columns: minmax(0, 1fr);
     }
   }

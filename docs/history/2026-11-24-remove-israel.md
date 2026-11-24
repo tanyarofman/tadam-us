@@ -5,7 +5,7 @@
 ## What changed
 - Legal pages and footer: removed the street address, "registered in Israel" and "Osek Murshe", the Israeli governing-law clause (Tel Aviv courts), and the Israel mentions in the international transfers and retention sections. The footer now reads "© <year> Tanya Rofman. Payments processed by Paddle.com." The legal name stays (Paddle checks it).
 - Terms, section 12: now only says consumers keep their local mandatory law and courts. There is no governing-law choice any more.
-- Blog: `pass-the-parcel-tasks` edited (Hebrew name, "the version familiar in Israel", shekels). The Hanukkah articles were rewritten for the US in PR #15 at the same time. `office-holiday-toast`, `new-years-eve-at-home` and `bar-mitzvah-attractions` hidden as drafts with 302 redirects to /blog/ until their US rewrites.
+- Blog: The Hanukkah, New Year's Eve, office party and pass the parcel articles were rewritten for the US in PRs #15 and #21 at the same time; this PR removed the two Israel mentions left in the Hanukkah ones. `bar-mitzvah-attractions` is hidden as a draft with a 302 to /blog/ until its US rewrite.
 - `site.webmanifest`: Hebrew name and RTL replaced with "Tadam!", English, LTR. Leaderboard numbers format as en-US instead of he-IL.
 
 ## Open

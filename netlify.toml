@@ -45,18 +45,6 @@
 
 # Hidden until rewritten for the US (it was written for Israel). 302 so the URL can come back.
 [[redirects]]
-  from = "/blog/office-holiday-toast"
-  to = "/blog/"
-  status = 302
-
-# Hidden until rewritten for the US (it was written for Israel). 302 so the URL can come back.
-[[redirects]]
-  from = "/blog/new-years-eve-at-home"
-  to = "/blog/"
-  status = 302
-
-# Hidden until rewritten for the US (it was written for Israel). 302 so the URL can come back.
-[[redirects]]
   from = "/blog/bar-mitzvah-attractions"
   to = "/blog/"
   status = 302
@@ -64,6 +52,16 @@
 [[redirects]]
   from = "/blog/hanukkah-quiz"
   to = "/blog/hanukkah-trivia/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/new-years-eve-at-home"
+  to = "/blog/new-years-eve-games/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/office-holiday-toast"
+  to = "/blog/office-christmas-party-games/"
   status = 301
 
 [[redirects]]

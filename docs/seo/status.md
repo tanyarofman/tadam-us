@@ -22,6 +22,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: Search Console verified for tadamevents.com (Domain property, DNS TXT record in Netlify DNS) and both sitemaps read successfully (22 pages). Bing Webmaster Tools added by import from Search Console; sitemap submitted.
 - 2026-11-24: DataForSEO questions for the 8 rewrite topics (`data/questions-us-rewrites-2026-11-24.csv`, 507 questions): $0.29 (balance $40.61 to $40.31). Total this round: $2.66 of the approved $10.
 - 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
+- 2026-11-24: DataForSEO questions for the 7 wave 2 topics without saved data (`data/questions-us-wave2-2026-11-24.csv`, 451 questions: baby shower games, 30th birthday ideas, 60th birthday party ideas, wedding reception games, couples shower ideas, rehearsal dinner ideas, engagement party ideas): $0.25 (balance $40.31 to $40.06). Total this round: $2.91 of the approved $10. Wave 2 and wave 3 are written in their own sessions; use this file there.
+- 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -34,12 +36,10 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 4. **Wave 2** (couples shower, engagement party, rehearsal dinner, reception games, baby shower, 30th, 60th, retirement): show Tanya the headings before drafting.
 
 ## Waiting for Tanya
-- **Contact route for the US:** the email is done (hey@tadamevents.com). The buttons still open Messenger on the Israeli Facebook page: a US social page, or the form and email only?
-- **Test email:** send one to hey@tadamevents.com and check it reaches both inboxes.
+(Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
+- **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
-- **Prices** in USD/EUR, or keep them hidden.
-- **Privacy policy** for the US and the EU. Claude can draft it; a legal check is advised.
-- **FAQ wording:** how to compare Tadam with Kahoot or Jackbox, whether remote guests can play, and how far ahead to order.
+- **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)
 - **A second demo** (a wedding or a 40th) to match the main US searches. Optional.
 - **Real stories** from events, to replace the labeled example scenarios.
 - **Demo video:** the home page hero shows "Play GTA VI" as an answer (a real game title). Consider re-recording that question.

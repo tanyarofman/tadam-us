@@ -32,6 +32,22 @@
   to = "/:splat"
   status = 301
 
+# Blog articles removed or renamed for the US site (2026-11-24).
+[[redirects]]
+  from = "/blog/hanukkah-riddles"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/tu-bishvat-quiz"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/team-building-day-ideas"
+  to = "/blog/team-building-activities-for-work/"
+  status = 301
+
 # Interactive demo frontends; gameplay connects directly to its existing backend.
 # Keep the browser URL on this site, including host and phone join routes.
 [[redirects]]

@@ -92,7 +92,7 @@ Games with movement, searching and messy hands. They suit ages four and up, and 
 
 **12. Eight tasks for eight candles.** A small task for every evening: sing a Hanukkah song in a robot voice, tell a joke, say something nice about the person sitting next to you.
 
-**6. Hanukkah riddles.** "I have one leg and four sides, who am I?" We've gathered [45 Hanukkah riddles with answers](/blog/hanukkah-riddles/), from easy to hard.
+**6. Hanukkah riddles.** "I have one leg and four sides, who am I?" Write a few riddles about Hanukkah objects, from easy to hard.
 
 ## Which Hanukkah games suit adults and teens?
 

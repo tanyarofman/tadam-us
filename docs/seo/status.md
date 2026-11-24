@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24.
+Last updated: 2026-11-24 (US rewrites).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -19,19 +19,21 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: wave 1, articles 1 to 4 written (PR #4, merged 2026-11-24): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: wave 1, articles 5 to 8 written (PR #5, merged 2026-11-24): `bridal-shower-trivia-questions`, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `super-bowl-party-games`. Articles 1 and 4 now link to the bridal shower trivia article. No new DataForSEO spend (still $2.37).
 - 2026-11-24: domain tadamevents.com live, `noindex` removed, canonical URLs and sitemap on the new domain; hey@tadamevents.com forwards like hey@heytadam.com.
+- 2026-11-24: Search Console verified for tadamevents.com (Domain property, DNS TXT record in Netlify DNS) and both sitemaps read successfully (22 pages). Bing Webmaster Tools added by import from Search Console; sitemap submitted.
+- 2026-11-24: DataForSEO questions for the 8 rewrite topics (`data/questions-us-rewrites-2026-11-24.csv`, 507 questions): $0.29 (balance $40.61 to $40.31). Total this round: $2.66 of the approved $10.
+- 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
 2. **Existing articles:**
-   - Rewrite 6 for the US: trivia questions, icebreakers, bachelorette games, team building, office party, New Year's Eve.
-   - Rewrite 3 for US families: hanukkah games (dreidel), hanukkah trivia, bar and bat mitzvah.
+   - ~~Rewrite trivia, icebreakers, bachelorette and team building~~ Done 2026-11-24.
+   - ~~Delete `hanukkah-riddles` and `tu-bishvat-quiz`~~ Done 2026-11-24.
+   - Still to rewrite: office party (as office Christmas party games), New Year's Eve, hanukkah games (dreidel), hanukkah trivia, bar and bat mitzvah. The seasonal ones can wait for next season (October and November 2027); the questions for them are already in `data/questions-us-rewrites-2026-11-24.csv`.
    - Keep `pass-the-parcel-tasks` as a UK article.
-   - Delete `hanukkah-riddles` and `tu-bishvat-quiz`.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
 4. **Wave 2** (couples shower, engagement party, rehearsal dinner, reception games, baby shower, 30th, 60th, retirement): show Tanya the headings before drafting.
 
 ## Waiting for Tanya
-- **Search Console:** add and verify tadamevents.com (a DNS TXT record in Netlify DNS works), then submit `https://tadamevents.com/sitemap-index.xml`. Also Bing Webmaster Tools. Needs Tanya's Google account.
 - **Contact route for the US:** the email is done (hey@tadamevents.com). The buttons still open Messenger on the Israeli Facebook page: a US social page, or the form and email only?
 - **Test email:** send one to hey@tadamevents.com and check it reaches both inboxes.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.

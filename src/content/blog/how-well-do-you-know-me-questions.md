@@ -118,7 +118,7 @@ Couples questions ask about the relationship itself: the first date, the first f
 59. Where do I want us to live one day?
 60. What do I love most about our relationship?
 
-If the couple is getting married, the same questions work at a shower or rehearsal dinner. For the reception version, see our [wedding shoe game questions](/blog/wedding-shoe-game-questions/).
+If the couple is getting married, the same questions work at a shower or rehearsal dinner. For the reception version, see our [wedding shoe game questions](/blog/wedding-shoe-game-questions/). For the bachelorette party, here are [20 bachelorette party games](/blog/bachelorette-party-games/).
 
 ## What are how well do you know me questions for family?
 

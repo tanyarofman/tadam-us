@@ -1,154 +1,187 @@
 ---
-title: "Bachelorette Party Games and Tasks: 12 Games and 40 Ready-Made Questions and Tasks"
-seoTitle: "Bachelorette Party Games: 12 Games and 40 Tasks"
-description: "12 bachelorette party games, 25 quiz questions about the bride and groom and 15 ready-made tasks. Works at home, and when Mom and Grandma are coming too."
+title: "Bachelorette Party Games: 20 Fun Ideas That Aren't Cheesy, Plus 40 Questions About the Bride"
+seoTitle: "Bachelorette Party Games: 20 Ideas and 40 Questions"
+description: "20 bachelorette party games that aren't cheesy: games about the bride, games without drinking, games to play out on the town, plus 40 ready questions."
 targetKeyword: "bachelorette party games"
-answer: "The games that work best at a bachelorette party are the ones about the bride herself: a \"How well do you know the bride\" quiz, \"What did the groom say\" with answers recorded in advance, and pass the parcel with tasks. Here you'll find 12 games, 25 ready-made questions about the bride and groom and 15 tasks, all suitable for a party at home and for a guest list that includes Mom and Grandma."
+answer: "The bachelorette party games people enjoy most are about the bride: \"What did the groom say\", a quiz on how well the group knows her, and two truths and a lie. Plan two or three games, mix one without drinking, and keep each under 20 minutes. Below are 20 games for every kind of group, plus 40 ready-made questions for the groom and about the bride."
 date: 2026-11-22
+updated: 2026-11-24
 category: "Weddings and events"
 faq:
-  - q: "When do you hold a bachelorette party?"
-    a: "Schedule it two weeks to a month before the wedding. In the last week the bride is busy and tired, and it's better to leave it free."
-  - q: "How many games does a bachelorette party need?"
-    a: "Two or three are enough: a light opening game, a main game about the bride, and something she gets to keep. More than that turns the evening into an agenda."
-  - q: "Which games suit a bachelorette party at home?"
-    a: "A quiz about the bride, \"What did the groom say\", pass the parcel and childhood photos. All of them work in a living room, with no special equipment and no outside host."
-  - q: "What do you do when the guests don't know each other?"
-    a: "Open with a short get-to-know-you game, like \"How I know the bride\" or two truths and a lie. Ten minutes in, the army friends and the work friends are already laughing at the same stories."
+  - q: "How many games should you plan for a bachelorette party?"
+    a: "Two or three games are enough for an evening, and one is fine for a weekend packed with activities. Keep each game under 20 minutes so there's time to eat, talk and go out."
+  - q: "Who usually plans the bachelorette party?"
+    a: "The maid of honor usually plans it, with help from the bridesmaids. If there's no maid of honor, the bride can ask one friend to lead, so one person makes the decisions."
+  - q: "Can the groom be part of the bachelorette games?"
+    a: "Yes, without being there. Record his answers to questions about the bride before the party, on paper or on video, and reveal them during the \"What did the groom say\" game."
+  - q: "What is the difference between a bachelorette party and a hen party?"
+    a: "They're the same celebration with different names. Americans say bachelorette party, and people in the UK and Ireland say hen party or hen do."
 ---
 
-You've booked a place, set a date, and there's a WhatsApp group with a secret name. Now the question is what you actually do there. A good bachelorette evening needs three things in all: food, time to talk, and one game that is entirely about the bride. We've gathered 12 games here, along with all the questions and tasks you need for them.
+A bachelorette party brings together the bride's college friends, her sister, her coworkers and maybe her future sister-in-law. Some have never met. The right game gets them laughing together in the first half hour. Here are 20 bachelorette party games that aren't cheesy, plus 40 ready-made questions for the groom and about the bride.
 
-[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
+[//]: # "Replace with a real story from an event, then delete the example scenario."
 
-## What do you do at a bachelorette party?
+## What does a bachelorette party usually include?
 
-A bachelorette party is usually built from a meal or a shared activity, plus a games part dedicated to the bride. What people remember afterward is usually the second part.
+A bachelorette party usually includes a dinner or a night out, a few games about the bride, and something she loves, like a spa day, a concert or a weekend trip. The best ones are planned around the bride's taste, not a standard checklist.
 
-The activity can be a workshop, a spa day, an evening at home or a weekend in a tzimmer (צימר, a guest cabin). The games are what connect the guests, who usually come from different periods of the bride's life: childhood friends, army friends, work friends and family. A game about the bride gives everyone something in common.
+According to The Knot, the [maid of honor and bridesmaids traditionally host the bachelorette party](https://www.theknot.com/content/who-hosts-wedding-events). A plan that works for most groups:
 
-## When do you hold a bachelorette party, and how do you organize it?
+1. **Start with food.** A dinner or a brunch gives everyone time to meet.
+2. **Play one or two games** while everyone is still at the table.
+3. **Then the main event:** going out, a show, a class or a night in.
 
-Set a date two weeks to a month before the wedding, and start organizing about two months ahead. One or two organizers handle everything, either together with the bride or as a surprise.
+Here are all 20 games at a glance:
 
-1. **Guest list.** Even for a surprise party, check the list with someone who knows the bride well.
-2. **Date.** Lock it in with the bride or the groom first, and only then with everyone else.
-3. **Budget.** Agree in advance on an amount that's comfortable for all the guests, and on who pays for the bride.
-4. **Place and activity.** A home, a restaurant, a workshop or an overnight stay. Choose by what the bride loves, not by what photographs well.
-5. **Games.** Pick two or three, and collect the material a week ahead: answers from the groom, childhood photos, notes.
+| Game | Props | Drinking? | Best for |
+|---|---|---|---|
+| 1. What did the groom say | Groom's answers | Optional | Any group |
+| 2. How well do you know the bride | Questions | Optional | Any group |
+| 3. Two truths and a lie | Nothing | Optional | New friends |
+| 4. Never have I ever | Nothing | Often | Close friends |
+| 5. Truth or dare cards | Cards | Optional | Close friends |
+| 6. Most likely to | Nothing | Optional | Any group |
+| 7. Name that love song | A speaker | No | Any group |
+| 8. Lip sync battle | A speaker | Optional | Big groups |
+| 9. Advice and date night cards | Cards, pens | No | Mixed ages |
+| 10. Craft night | Craft kit | No | Small groups |
+| 11. Mocktail contest | Juices, garnish | No | Any group |
+| 12. Memory jar | A jar, notes | No | Mixed ages |
+| 13. Scavenger hunt | A list | Optional | Night out |
+| 14. Photo challenge | Phones | Optional | Night out |
+| 15. Advice from strangers | A notebook | No | Night out |
+| 16. Secret missions | Cards | Optional | Night out |
+| 17. Love story timeline | Cards | No | Mixed ages |
+| 18. Guess her age | Old photos | No | Mixed ages |
+| 19. Family vs friends | Questions | No | Mixed ages |
+| 20. Toast circle | Nothing | Optional | Last game |
 
-## Which games suit a bachelorette party?
+## Which bachelorette party games are actually fun?
 
-Games about the bride and the couple, which all the guests can join without knowing each other. The table sums up 12 games and what to prepare for each one.
+The games that are actually fun are about the bride and her story, not about props and matching sashes. Guests laugh because the answers are true, and the bride hears how much people know her.
 
-| Game | What to prepare in advance | Especially good for |
-|---|---|---|
-| 1. How well do you know the bride | 15 questions and the bride's answers | Any party |
-| 2. What did the groom say | A video or recording of the groom | Any party |
-| 3. Pass the parcel | A parcel with task notes | A group of up to 20 |
-| 4. Photo challenges | A list of challenges for each team | A party outdoors or in the city |
-| 5. Whose memory is it? | A note from each guest | A group that doesn't know each other |
-| 6. Two truths and a lie about the bride | Nothing | Opening the evening |
-| 7. Childhood photos | Photos from the family | When Mom and Grandma are coming |
-| 8. Bride bingo | Cards with the bride's phrases | A long meal |
-| 9. Name that tune | The couple's playlist | A car ride or an evening at home |
-| 10. Toilet paper wedding dress | A few rolls | A group with energy |
-| 11. Advice for married life | Cards and pens | The end of the evening |
-| 12. Time capsule | Envelopes and a box | A keepsake for the bride |
+**1. What did the groom say.** Before the party, ask the groom 15 to 20 questions about the bride and record his answers. At the party, the bride guesses what he said before you reveal each answer. The questions are below.
 
-**1. How well do you know the bride.** The organizer asks, everyone writes down an answer, and the bride reveals the right one. Whoever collects the most points gets the title "best friend", at least until the wedding.
+**2. How well do you know the bride.** The bride's friends answer questions about her, and she reveals the right answers. It's the quickest way to find out who has known her longest. There are 20 questions below, and 100 more in our [how well do you know me questions](/blog/how-well-do-you-know-me-questions/).
 
-**2. What did the groom say.** Film the groom in advance answering questions, and the bride guesses what he said before you play the video. The format is familiar from [the American TV game show The Newlywed Game](https://en.wikipedia.org/wiki/The_Newlywed_Game), which first aired in 1966 and tested how well newly married couples knew each other.
+**3. Two truths and a lie.** Each guest shares three short stories about the bride, and the group guesses which one never happened. It also helps guests from different circles get to know each other.
 
-**3. Pass the parcel.** A prize for the bride in the middle, and a task or question in every layer. You'll find how to prepare the parcel, and dozens more notes, in our guide to [pass the parcel tasks and questions](/blog/pass-the-parcel-tasks/).
+**4. Never have I ever.** Players hold up five fingers and lower one for each thing they've done. Keep it clean when relatives are there, and let the bride go first.
 
-**4. Photo challenges.** Split into teams, and each team has to come back with photos from a list: with someone who has the groom's name, with something blue, with a couple who have been married 30 years and are willing to give a piece of advice.
+**5. Truth or dare cards.** Write the cards in advance and match them to the group. Light dares, like "sing the chorus of your favorite song", work better than embarrassing ones.
 
-**5. Whose memory is it?** Each guest writes a memory with the bride on a note, without a name. The bride reads them out and guesses who wrote each one.
+**6. Most likely to.** Read a prompt like "most likely to be late to the wedding" and everyone points at a guest on three. Add prompts about the bride and the groom.
 
-**6. Two truths and a lie about the bride.** Each guest tells three stories about the bride, and the rest of the room guesses which one never happened.
+**7. Name that love song.** Play the first five seconds of a love song, and teams race to name it. Finish with the couple's own song.
 
-**7. Childhood photos.** Project or pass around old photos of the bride, and guess how old she is and where the photo was taken. Mom and Grandma win this one easily, and that's exactly the point.
+**8. Lip sync battle.** Pairs pick a song and perform it, and the bride judges. It works best with a big group and a long evening.
 
-**8. Bride bingo.** Every square has a phrase the bride says a lot, or something she does. You mark squares during the evening, and the first to complete a row shouts bingo.
+## How do you play the "what did the groom say" game?
 
-**9. Name that tune.** Play a second or two of the couple's songs: the song from the first date, the song she sings in the car, the song for walking to the chuppah if it's already been chosen.
+Before the party, interview the groom with 15 to 20 questions about the bride and write down or film his answers. At the party, the bride guesses each answer first, then you reveal what he said.
 
-**10. Toilet paper wedding dress.** Teams design a dress on one of the participants in five minutes, and the bride picks a winner.
+How to run it:
 
-**11. Advice for married life.** Everyone writes one serious piece of advice and one funny one. The bride reads them aloud and keeps the cards.
+1. **Interview the groom a week ahead.** Ask him not to tell the bride.
+2. **Film the answers if you can.** His face as he answers is half the fun.
+3. **At the party,** read each question, let the bride guess, then show his answer.
+4. **Score it:** one point for every answer that matches. Some groups give the bride a small "penalty" task for each miss, like telling the story behind the question.
 
-**12. Time capsule.** Each guest writes the bride a short letter to be opened on the first wedding anniversary.
-
-## What questions do you ask in a "How well do you know the bride" quiz?
-
-Questions about the bride's habits, tastes and stories, each with one clear answer. You get the answers from the bride herself, right before the game or by message in advance.
-
-1. What's her regular order at a café?
-2. What did she want to be when she was a child?
-3. Which song does she sing loudest in the car?
-4. What was her childhood nickname?
-5. What is she most afraid of?
-6. Which series has she watched the most times?
-7. What's the first thing she does in the morning?
-8. Where was her best trip ever?
-9. Which food does she refuse to taste?
-10. Which hobby did she start and then drop?
-11. What's the phrase she says most often?
-12. What time does she go to sleep when nobody's watching?
-13. What does she always forget at home?
-14. What was her first job?
-15. What would she take with her to a desert island?
+The game is a party version of [The Newlywed Game](https://en.wikipedia.org/wiki/The_Newlywed_Game), the American TV game show from 1966 that tested how well newlywed spouses knew each other.
 
 ## What questions do you ask the groom in advance?
 
-Questions about the couple, which the groom answers in a short video while the bride guesses his answer. Ten questions are enough for fifteen minutes of laughter.
+Ask the groom questions with short answers about the bride and their relationship: their first date, her habits, her favorite things. Mix easy ones with a few he might get wrong.
 
-16. Where did you two first meet, and what was she wearing?
-17. Who said "I love you" first?
-18. What does she do that makes you laugh the most?
-19. Which habit of hers took you the longest to get used to?
-20. Which dish does she make best?
-21. Which of you is the better driver? (And what will she say?)
-22. What was your best date?
-23. How is she saved in your phone?
-24. What was the first thing you thought when you saw her?
-25. What's the first thing she'll do on the morning after the wedding?
+1. Where did you go on your first date?
+2. What was the first thing you noticed about her?
+3. When did you know she was the one?
+4. What's her favorite food?
+5. What's her go-to order at a coffee shop?
+6. What does she do that always makes you laugh?
+7. What's her biggest pet peeve?
+8. Who said "I love you" first?
+9. What's her favorite movie to watch again and again?
+10. What would she do with a free Saturday?
+11. Who is the better cook?
+12. What's the best trip you've taken together?
+13. What's her hidden talent?
+14. What song does she sing in the car?
+15. What's one thing she can't live without?
+16. Who takes longer to get ready?
+17. What was your first fight about?
+18. What's her dream vacation?
+19. What nickname do you call her?
+20. What do you love most about her?
 
-## Which tasks suit a bachelorette party?
+For more questions about the couple, see our [100 newlywed game questions](/blog/newlywed-game-questions/).
 
-Short, funny tasks that don't embarrass the bride in front of her mother. They suit pass the parcel, task cards on the table or photo challenges.
+## Which "how well do you know the bride" questions work best?
 
-26. Raise a toast to the bride in rhyme.
-27. Tell everyone about the first time you met the bride.
-28. Imitate the bride talking on the phone with her mother.
-29. Act out, without words, how the groom proposed.
-30. Sing the bride a line from a love song, with a personal dedication.
-31. Give the bride one piece of relationship advice, completely serious.
-32. Show the oldest photo you have with the bride.
-33. Take a selfie with everyone you hadn't met before tonight.
-34. Guess what the bride will order to drink, before she orders.
-35. Invent a joint name for the couple, like a celebrity couple has.
-36. Describe in half a minute what you think the couple will look like 50 years from now.
-37. Write the bride a note to open on the morning of the wedding.
-38. Organize a group photo in which everyone makes the bride's signature face.
-39. Share a small secret about the bride that you're allowed to tell.
-40. Teach everyone one dance move for the wedding.
+The best questions have one clear answer the bride can confirm, and a mix of childhood, friendship and relationship topics. That way her old friends, new friends and family each get a chance to win.
 
-> **Example scenario (not a real event):** 14 guests in the living room, among them the bride's mother and two aunts. The question "How is she saved in your phone?" comes up on the screen, the bride is sure the answer is her name, and then the groom answers in the video: "The Boss". The army friends lead all evening, until Grandma recognizes the kindergarten photo and closes the gap.
+21. What was her first job?
+22. Where was she born?
+23. What did she want to be when she grew up?
+24. What's her middle name?
+25. What's her favorite color?
+26. What was her first car?
+27. What's her favorite dessert?
+28. What's her coffee order?
+29. Which city would she move to tomorrow?
+30. What's her favorite holiday?
+31. What was her childhood nickname?
+32. What's her go-to karaoke song?
+33. How many countries has she visited?
+34. What's her favorite TV show to rewatch?
+35. What's the strangest food she likes?
+36. What's her biggest fear?
+37. Where did she meet her partner?
+38. How long have they been together?
+39. What's one thing on her bucket list?
+40. What will she be like at 80?
 
-## Which games work when Mom and Grandma are coming, or at a joint party with the groom?
+> **Example scenario (not a real event):** Twelve friends at a rented house. On question 31, her college roommate is sure the bride's childhood nickname was "Bean". Her cousin says "Pickle", and the bride confirms it was Pickle until age 12. The cousin wins the round, and by the end of the night everyone is calling the bride Pickle.
 
-Choose games that rely on memories and knowledge, not on embarrassment. Childhood photos, a quiz about the bride and advice for married life work at any age.
+## Which bachelorette games work without drinking?
 
-The test is simple: would the bride want this game filmed and sent to the family group chat? The same games also suit bachelorette parties for religious brides, and any bride who prefers an evening free of awkward moments.
+Games without drinking focus on stories, music and making something together: advice cards, a craft night, a mocktail contest or a memory jar. They work for pregnant guests, people who don't drink, and daytime parties.
 
-At a joint party for the bride and groom, turn the quiz into a competition. The groom's friends against the bride's friends, with questions about both of them. Who knows the couple better?
+**9. Advice and date night cards.** Each guest writes one piece of marriage advice and one date idea. The bride takes the cards home.
 
-## How do you turn the bride quiz into a game on a screen?
+**10. Craft night.** A candle making, flower arranging or painting kit gives everyone something to do with their hands while they talk.
 
-Show the questions on a TV or projector, and all the guests answer from their phones. The score updates on the screen, and the organizer can finally sit down and enjoy herself.
+**11. Mocktail contest.** Teams invent a mocktail named after the couple, and the bride picks the winner.
 
-At [Tadam!](/) you send us stories, photos and answers about the bride and the couple, and we build a live trivia game from them. Every question goes through your approval before it reaches the screen. On the evening itself everyone scans a code and answers from their phone with no app, and at the end we announce who knows the bride best. The same game also works at the henna, at the Shabbat Chatan and at the wedding itself. [Watch the demo](/#demo) to see what it looks like.
+**12. Memory jar.** Each guest writes a favorite memory with the bride. She reads a few out loud and keeps the jar.
 
-Want to open the evening with a short round? Take a few [funny icebreaker questions](/blog/icebreaker-questions/).
+## Which bachelorette games can you play while out on the town?
+
+Out on the town, choose games that need only a phone and a list: a scavenger hunt, a photo challenge or secret missions. They keep the group together and give the night a shape.
+
+**13. Scavenger hunt.** Give teams a list: a photo with a stranger in a hat, a selfie with a bartender, a napkin signed by someone named after a groomsman. First team to finish wins.
+
+**14. Photo challenge.** Recreate an old photo of the bride, find a sign with the groom's initials, or snap the group mid-jump.
+
+**15. Advice from strangers.** Ask people you meet for their best marriage advice and write it in a notebook. It becomes a great keepsake.
+
+**16. Secret missions.** Each guest draws a card with a small mission, like "get the bride to say the groom's name three times". At the end of the night, everyone reveals their mission.
+
+## Which games work when moms and grandmas come?
+
+When moms and grandmas join, pick games built on memories and family stories rather than drinking or dares. A love story timeline, guess her age and family vs friends let every generation shine.
+
+**17. Love story timeline.** Hand out cards with moments from the couple's story, like the first date and the proposal. The group puts them in order.
+
+**18. Guess her age.** Show 10 photos of the bride from different years, and guests guess how old she was in each. Moms and grandmas usually win.
+
+**19. Family vs friends.** Split into two teams and ask questions about the bride. Family knows the childhood, friends know the last ten years.
+
+**20. Toast circle.** End the evening with each guest sharing one wish for the bride. Someone records it on a phone, and she watches it again before the wedding.
+
+## How do you turn the bride quiz into a game on the big screen?
+
+Put the questions on a TV or projector, and let every guest answer from their phone at the same time. The screen shows the right answer and who's leading, so nobody has to keep score.
+
+That's what [Tadam!](/) does. You send us stories, photos and the groom's answers, and we build a personal trivia game about the bride with a host on the screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who knows the bride best. It works at a bachelorette party, a [bridal shower](/blog/bridal-shower-games/) or a rehearsal dinner. [Watch the demo](/#demo) to see a full game.

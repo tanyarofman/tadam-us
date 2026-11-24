@@ -1,172 +1,193 @@
 ---
-title: "Icebreakers: 80 Icebreaker Questions and 7 Icebreaker Games for Your Team, Class and Family"
-seoTitle: "Icebreakers: 80 Icebreaker Questions and 7 Games"
-description: "80 ready icebreaker questions: light, funny, this or that and deep, for kids and for teams at work, plus 7 icebreaker games that work with any group."
-targetKeyword: "icebreakers"
-answer: "Good icebreaker questions are open questions that are easy to answer and have no right answer, like \"What dish do you make best?\". Start with light and funny questions, and only then move on to more personal ones. Here you will find 80 ready questions by type and by audience, and seven icebreaker games that turn them into a 10 to 20 minute activity."
+title: "80 Icebreaker Questions for Work, Plus 7 Quick Games for Meetings"
+seoTitle: "80 Icebreaker Questions for Work: Fun, Funny and Deep"
+description: "80 icebreaker questions for work: quick ones for staff meetings, fun and funny questions for coworkers, would you rather, deep questions and 7 quick games."
+targetKeyword: "icebreaker questions for work"
+answer: "A good icebreaker question for work is easy to answer in under a minute, safe for everyone, and still says something about the person. Start a staff meeting with one light question, such as the best thing that happened this week, and keep deeper questions for teams that already trust each other. Below are 80 icebreaker questions for work by type, plus 7 quick games."
 date: 2026-11-22
+updated: 2026-11-24
 category: "Companies and teams"
 faq:
-  - q: "How many icebreaker questions do you need for a meeting?"
-    a: "For an opening round, one question that everyone answers is enough. For a 15-minute activity, prepare 10 to 15 questions and let each person answer two or three."
-  - q: "How do you choose icebreaker questions that aren't awkward?"
-    a: "Choose questions that can be answered in one sentence, where every answer is a good one. Avoid questions about relationships, money, appearance and political opinions, and give everyone the option to pass."
-  - q: "What is icebreaker bingo?"
-    a: "A grid of squares, each with a trait or an experience written in it, like \"plays an instrument\" or \"was born abroad\". Participants walk around looking for a different person for each square, and the first to complete a row wins."
-  - q: "Which icebreaker games work on Zoom or with a remote team?"
-    a: "Two truths and a lie, this or that questions with a vote, and a quiz where everyone answers from their phone and sees the same screen. All of them work without getting up from your chair."
+  - q: "How long should an icebreaker take?"
+    a: "Five to ten minutes at the start of a meeting is enough. With more than ten people, ask one question and give each person 30 seconds, or split into small groups."
+  - q: "What is the most powerful icebreaker?"
+    a: "The one that gets people to share a small, real story, such as a first job or an embarrassing moment. Personal stories build connection faster than opinions or trivia."
+  - q: "Should icebreakers be optional?"
+    a: "Yes. Let people pass on any question, and avoid topics like family, health, money or politics. A safe icebreaker is one nobody dreads."
+  - q: "How many icebreaker questions should you ask in one meeting?"
+    a: "One question is plenty for a regular meeting. Save two or three questions, or a game, for a kickoff, an offsite or a team with new members."
 ---
 
-"Let's go around and introduce ourselves" is a sentence that makes half the room look at the floor. The problem is usually the question. "Tell us a bit about yourself" is hard to answer, and "What dish do you make best?" is a question everyone wants to answer. We have gathered 80 icebreaker questions of the second kind here, and seven icebreaker games that use them.
+Every team has met in a room where nobody wants to speak first. One good question changes that. Here are 80 icebreaker questions for work, sorted by type and occasion, plus 7 quick games for meetings and team days.
 
-[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
+[//]: # "Replace with a real story from an event, then delete the example scenario."
 
-## What makes a good icebreaker question?
+## What makes a good icebreaker question for work?
 
-Good icebreaker questions are open, easy to answer, and have no right answer. The order matters: start light, and go deeper gradually.
+A good icebreaker question for work is quick to answer, safe for everyone and a little personal. It should take under a minute and leave people knowing one new thing about a colleague.
 
-That is also what the psychologist Arthur Aron found in a 1997 study: strangers who asked each other questions that became gradually more personal [felt closer than strangers who made small talk](https://ggia.berkeley.edu/practice/36_questions_for_increasing_closeness). That study is where the famous list of 36 questions came from. You don't need 36 questions to open a team meeting, but the principle works in any group: easy first, personal later.
+Personal questions work for a reason. In a well-known study, strangers who took turns asking each other [increasingly personal questions felt closer than pairs who made small talk](https://ggia.berkeley.edu/practice/36_questions_for_increasing_closeness). At work you don't need to go that deep, but the principle holds: a small real story beats a generic opinion.
 
-## Which light icebreaker questions suit any group?
+Four rules for choosing questions:
 
-Questions about food, habits and preferences that anyone can answer in one sentence. They suit an opening round, even when people don't know each other at all.
+- **Easy to answer.** Nobody should need to think for more than a few seconds.
+- **Safe.** Skip family plans, health, money, religion and politics.
+- **Optional.** Anyone can pass.
+- **Matched to the team.** New teams get light questions, close teams can go deeper.
 
-1. What dish do you make best?
-2. What is the first thing you do in the morning?
-3. Which series have you watched more than once?
-4. What is the next destination on your travel list?
-5. Which song always lifts your mood?
-6. Where did you grow up, and what did you love most about it?
-7. Which hobby do you wish you had more time for?
-8. What would you eat for your last meal?
-9. Which app do you open the most?
-10. Are you a morning person or a night person?
-11. What is the last book or podcast you recommended to someone?
-12. What is your favorite place in Israel?
-13. What would you learn if you had a free month?
-14. What pet do you have, or wish you had?
-15. What is the small thing that makes your day?
+Here's how the types compare:
 
-## Which funny icebreaker questions break the ice?
-
-Imaginary or exaggerated questions, where the answer is funny even when it is serious. They are good for a group that already knows each other a little, and for any gathering that needs energy.
-
-16. What is your most useless talent?
-17. Which food do you eat in a way everyone says is wrong?
-18. What is the strangest thing in your bag right now?
-19. If you were an animal, which animal would you be, and what would it say about you?
-20. Which song do you know by heart and feel embarrassed about?
-21. What would you do if you were invisible for a day?
-22. Which job would you be especially bad at?
-23. What is the most pointless argument you ever won?
-24. If there were a TV channel about your life, what would it be called?
-25. What is the most childish thing you still do?
-26. Which smell takes you straight back to childhood?
-27. What is the most unnecessary thing you bought this year?
-28. What funny law would you pass in your home?
-29. Which of your WhatsApp groups has the most embarrassing name?
-30. What are you sure you are good at, while everyone around you thinks otherwise?
-
-## Which "this or that" questions work as icebreakers?
-
-Questions with only two options, answered in a second. They are the easiest for people who don't like speaking in front of a group, and you can play them with a vote or by standing on two sides of the room.
-
-31. Beach or mountains?
-32. Coffee or tea?
-33. Sweet or salty?
-34. Winter or summer?
-35. Voice message or text message?
-36. Cook or order in?
-37. A movie at home or a movie at the cinema?
-38. Arrive fifteen minutes early or one minute late?
-39. A planned vacation or a spontaneous one?
-40. Dog or cat?
-41. Get up early or go to bed late?
-42. Pineapple on pizza: yes or no?
-43. Work from home or from the office?
-44. A big party or a small evening with friends?
-45. Know the future or change one thing in the past?
-
-## Which deep icebreaker questions work once the ice is broken?
-
-Questions about moments, people and decisions that reveal who the person in front of you is. They suit a small group, pairs, or the second half of the gathering.
-
-46. What is the best decision you have made in your life?
-47. Who has influenced you the most, and how?
-48. What is the best advice you ever received?
-49. What are you most proud of that almost no one knows about?
-50. What would you say to your 16-year-old self?
-51. What have you learned about yourself in the past year?
-52. What makes you feel at home?
-53. Which moment in your life would you like to live again?
-54. What have you always wanted to try and haven't dared to yet?
-55. What counts as a good day for you?
-56. What can you talk about for hours?
-57. What calms you most on a hard day?
-58. Which family tradition matters most to you?
-59. What have you changed your mind about in recent years?
-60. What would you like people to say about you on your 80th birthday?
-
-## Which icebreaker questions suit kids and a classroom?
-
-Short questions about things kids love: games, animals, food and vacation. They suit the start of the school year, summer camp and the first meeting of a youth movement group.
-
-61. What is your favorite game to play at recess?
-62. Which superpower would you choose?
-63. What is the most fun thing you did on vacation?
-64. Which animal would you like to keep at home?
-65. Which food would you eat every day?
-66. What do you want to be when you grow up?
-67. What are you best at?
-68. If you invented a new holiday, what would people do on it?
-69. What is your favorite book, movie or game?
-70. What makes you laugh the most?
-
-## Which icebreaker questions suit a team at work?
-
-Questions that connect the person to the work without getting into private life. They suit the start of a meeting, onboarding new employees and the beginning of a team-building day.
-
-71. What was your first job, and what did you learn from it?
-72. What helps you concentrate the most?
-73. Which tool or shortcut can't you work without?
-74. What would you do for work if not this field?
-75. What is the most surprising thing you have learned in this role?
-76. What time of day are you most productive?
-77. Which mistake did you learn the most from?
-78. Who on the team taught you something recently, and what was it?
-79. What would you like everyone to know about the way you work?
-80. What is the first thing you would change in the office?
-
-Questions like number 77 also have practical value. In a study by Prof. Leigh Thompson of the Kellogg School of Management, teams that told each other an embarrassing story before brainstorming [came up with more ideas than teams that talked about an achievement](https://insight.kellogg.northwestern.edu/article/boost-creativity-brainstorm-embarrassment). Planning a whole day for the team? Here are [team-building day ideas](/blog/team-building-day-ideas/).
-
-## Which icebreaker games work with a group?
-
-The games that work are the ones that give everyone a small role and don't require a speech. The table sums up seven games by group size and time.
-
-| Game | Group size | Time | What you need |
+| Type | Example | When to use | Time |
 |---|---|---|---|
-| Two truths and a lie | 4 to 15 | 10 to 15 minutes | Nothing |
-| Icebreaker bingo | 10 to 60 | 15 minutes | A printed card and a pen for each person |
-| Whose fact is it? | 6 to 30 | 15 minutes | Slips of paper and a box |
-| This or that on the move | 8 to 100 | 5 to 10 minutes | A room with space to move |
-| Interview in pairs | 6 to 30 | 15 to 20 minutes | Three questions from the list |
-| Ball of yarn | 6 to 20 | 10 to 15 minutes | A ball of yarn |
-| A quiz about the group | 10 and up | 15 to 20 minutes | A screen and phones |
+| Quick | Best thing this week | Every meeting | 5 min |
+| Fun | First concert | New teams | 10 min |
+| Funny | Worst haircut | Friday calls | 10 min |
+| Would you rather | Beach or mountains | Big groups | 5 min |
+| Deep | Best advice | Close teams | 15 min |
+| Virtual | Something on your desk | Video calls | 10 min |
+| Holiday | Favorite tradition | Seasonal | 10 min |
 
-1. **Two truths and a lie.** Everyone says three sentences about themselves, and the rest of the group guesses which one is the lie.
-2. **Icebreaker bingo.** Each square has a trait or an experience ("speaks three languages", "ran a marathon"), and you look for a different person for each square.
-3. **Whose fact is it?** Everyone writes on a slip of paper a fact people don't know about them. The facilitator reads it out, and the group guesses whose it is.
-4. **This or that on the move.** Read out a question from the list, and everyone stands on the side of their answer. You quickly find out who is like whom.
-5. **Interview in pairs.** Each pair interviews one another for three minutes, and then everyone introduces their partner to the group.
-6. **Ball of yarn.** Whoever holds the ball answers a question, holds on to the end of the yarn and throws the ball onward. By the end there is a web connecting everyone.
-7. **A quiz about the group.** Collect a fact from every participant ahead of time, and build questions from them: "Which of us lived in Japan for a year?".
+## What is a good icebreaker question for a staff meeting?
 
-> **Example scenario (not a real event):** A kickoff meeting for a new team, nine people who mostly haven't worked together. Instead of a round of names, everyone answers "What was your first job?". It turns out two of them waited tables in the same year on the same street, and the team lead delivered newspapers by bike. By the break, nobody is talking about work anymore.
+A good staff meeting icebreaker is one quick question about the week or about work habits. It warms up the room in five minutes and gives the manager a sense of how people are doing.
+
+1. What's the best thing that happened to you this week?
+2. Describe your week in one word.
+3. What's one thing you're looking forward to this month?
+4. What's the best piece of work advice you've ever received?
+5. What's a small win you had recently?
+6. What's one app or tool you couldn't work without?
+7. Are you a morning person or a night owl?
+8. What's your go-to snack during a busy day?
+9. What did you learn this week, at work or outside it?
+10. What's on your desk right now that tells a story?
+
+## What are fun questions to ask coworkers?
+
+Fun questions for coworkers ask about first experiences, hobbies and small preferences. They're easy to answer, and they often uncover surprising stories about people you see every day.
+
+11. What was your first job?
+12. What was the first concert you went to?
+13. What's a hobby you'd love to try?
+14. What's the best meal you've ever had?
+15. If you could live in any city for a year, which would it be?
+16. What did you want to be when you were 10?
+17. What's a skill you have that nobody at work knows about?
+18. What's the best trip you've ever taken?
+19. What's a book or show you recommend to everyone?
+20. What's your favorite way to spend a Sunday?
+21. If you could master any instrument, which would it be?
+22. What's the most interesting place you've lived?
+23. Which season do you like best, and why?
+24. What's a food you could eat every day?
+25. What's the best gift you've ever received?
+
+## What are funny icebreaker questions for work?
+
+Funny icebreaker questions invite light stories about small disasters and odd habits. They work best on a Friday or at the start of a long workshop, when people need a laugh.
+
+26. What's the worst haircut you've ever had?
+27. What's the strangest food combination you secretly love?
+28. What's the most useless talent you have?
+29. What would your autobiography be called?
+30. What's the funniest thing that happened to you at a job?
+31. If your pet could talk, what would it complain about?
+32. What's the weirdest thing you've ever bought online?
+33. What would be your walk-up song?
+34. What's the worst fashion trend you took part in?
+35. What's a word you always mispronounce?
+36. If you were a kitchen appliance, which one would you be?
+37. What's the silliest thing you were afraid of as a child?
+38. Which fictional place would you most like to visit?
+39. What's the most embarrassing autocorrect you've ever sent?
+40. What would you name a boat?
+
+## What are good "would you rather" and "this or that" icebreakers for work?
+
+Would you rather and this or that questions offer two choices and need only a word to answer. They're perfect for big groups, quick polls and anyone who'd rather not tell a story.
+
+41. Would you rather work from a beach or from a mountain cabin?
+42. Would you rather have a four-day week or a two-hour lunch every day?
+43. Would you rather give a speech or write a report?
+44. Would you rather never answer email again or never join a video call again?
+45. Would you rather have a personal chef or a personal driver?
+46. Would you rather be able to speak every language or play every instrument?
+47. Would you rather start work at 6 a.m. or finish at 9 p.m.?
+48. Would you rather travel to the past or to the future?
+49. Coffee or tea?
+50. Call or text?
+51. Beach or mountains?
+52. Early bird or night owl?
+53. Sweet or salty?
+54. Books or podcasts?
+55. Plan everything or wing it?
+
+## What are good deep icebreaker questions?
+
+Deep icebreaker questions ask about values, lessons and turning points. Use them with teams that already know each other, at an offsite or a kickoff, and always let people pass.
+
+56. What's the best advice you've ever received?
+57. What's something you changed your mind about in the last few years?
+58. Who had the biggest influence on your career?
+59. What's a moment you were proud of that nobody saw?
+60. What's a mistake that taught you something important?
+61. What does a great workday look like for you?
+62. What would you do if you knew you couldn't fail?
+63. What's something you want to get better at this year?
+64. What's an embarrassing moment you can laugh about now?
+65. What do you want people to say about working with you?
+
+Question 64 has a practical side too. In a study by Leigh Thompson of the Kellogg School of Management, teams that shared an embarrassing story before brainstorming [came up with more ideas than teams that shared a proud moment](https://insight.kellogg.northwestern.edu/article/boost-creativity-brainstorm-embarrassment).
+
+## Which icebreaker questions work in virtual meetings?
+
+In virtual meetings, ask questions people can answer by showing something on camera or typing in the chat. Seeing a colleague's mug, pet or view does more for a remote team than another status update.
+
+66. Show us one object on your desk and tell us its story.
+67. What's the view from your window right now?
+68. What's in your mug today?
+69. Do you have a pet who joins your calls?
+70. What's your best tip for working from home?
+71. What's playing in your headphones this week?
+72. Type one emoji that sums up your week in the chat.
+
+## Which holiday icebreaker questions work at work?
+
+Holiday icebreaker questions ask about traditions, food and favorite memories, without assuming everyone celebrates the same holidays. Phrase them so anyone can answer, whatever they celebrate.
+
+73. What's your favorite holiday tradition, from any holiday?
+74. What's the best holiday food you make or eat?
+75. What's the best gift you've ever given?
+76. What's your favorite winter activity?
+77. What was your best Halloween costume?
+78. What are you thankful for this year?
+79. What's one thing you want to do before the year ends?
+80. What's a New Year's resolution you actually kept?
+
+> **Example scenario (not a real event):** A team of nine starts its Monday call with question 11. The new project manager says her first job was driving an ice cream truck for one summer. Two weeks later the team's shared calendar has a "Truck Day" lunch, and she brings the bell.
+
+## Which 5-minute icebreaker games work with a group?
+
+Quick icebreaker games need no props and work with five to 30 people: two truths and a lie, a human bingo sheet, or a one-word check-in. Each takes five to ten minutes and gets everyone talking.
+
+**Two truths and a lie.** Each person shares three facts, and the group guesses the false one.
+
+**One-word check-in.** Everyone describes their week in one word, then one person explains theirs.
+
+**Coworker bingo.** Each square says something like "has lived abroad" or "plays an instrument", and people find a colleague for each square.
+
+**Common ground.** Small groups have three minutes to find five things they all have in common, beyond work.
+
+**Desert island.** Each person names one book, one song and one food they'd bring to a desert island.
+
+**The question ball.** Write questions on a beach ball. Whoever catches it answers the question under their right thumb.
+
+**Guess who.** Everyone answers one question on a card without a name. Read the cards out and guess who wrote each.
+
+For longer activities, see our [30 team building activities for work](/blog/team-building-activities-for-work/).
 
 ## How do you turn icebreaker questions into a game on a screen?
 
-Collect one answer from every participant ahead of time, and turn each answer into a question the whole room guesses. That way even people who don't like speaking in front of a group take part, and everyone learns something about everyone.
+Collect answers from the team in advance, turn them into "who said it" questions, and show them on a screen. Everyone guesses from their phone, and the reveal of each answer gets the room talking.
 
-That is the seventh game in the table, and it is what we do at [Tadam!](/). You collect stories and photos from your team, class or family and send them to us, we build the game from them, and every question goes through your approval before it reaches the screen. At the gathering itself the game runs on the big screen, and everyone scans a code and answers from their phone without an app, including people joining from home. [Watch the demo](/#demo) to see what it looks like.
-
-Looking for an icebreaker game with notes and surprises? Try [tasks and questions for pass the parcel](/blog/pass-the-parcel-tasks/).
+That's what [Tadam!](/) does. You send us stories, photos and fun facts about the team, and we build a personal trivia game with a host on the big screen. Everyone plays from their phone with no app, and the leaderboard shows who knows the team best. For general questions to mix in, see our [100 trivia questions for adults](/blog/general-knowledge-trivia-questions/), or [watch the demo](/#demo) to see a full game.

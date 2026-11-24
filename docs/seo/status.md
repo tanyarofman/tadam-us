@@ -81,6 +81,9 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
     - [ ] `/blog/rehearsal-dinner-ideas/`
   - **Day 3:**
     - [ ] `/blog/wedding-reception-games/`
+    - [ ] `/blog/christmas-quiz-questions/` (UK set, #26; seasonal, can move up)
+    - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
+    - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
     - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).

@@ -1,51 +1,43 @@
 /**
  * Pricing + the link into the creation flow. One place for every number on the page.
- * Markup and copy never contain a price: copy.he.ts / copy.en.ts use {placeholders} (see `fillPrices`),
- * the Pricing component reads the numbers below. Changing a price is a one-line edit here.
+ * Copy never contains a price: copy.en.ts uses {placeholders} (see `fillPrices`), the Pricing component reads the numbers.
  *
- * Set by Tanya on 2026-11-16: base 750, every extra (edit, contributor link, personal host) 50.
+ * Set on 2026-11-23 (docs/paddle/HANDOFF.md): $99 per game, one-time. Paddle is the merchant of record and converts
+ * to other currencies (EUR, GBP...) at checkout, and adds sales tax or VAT there.
  */
 
 /**
- * The creation flow (wizard) of the game.
- * TODO confirm with Ilan: today it lives on base44. Never put a personal `?id=` link here.
+ * The creation flow (wizard) behind every "Create yours" button: it lives on tadamevents.com and ends in the Paddle
+ * checkout (Tanya, 2026-11-24: Base44 is not part of the flow). Until the wizard exists, /create is a placeholder
+ * (src/pages/create.astro) that the wizard replaces.
  */
-export const CREATE_URL = "https://tadam.base44.app/create";
+export const CREATE_URL = "/create";
 
 export const PRICING = {
-  /**
-   * Prices are hidden on the page for now (Tanya, 2026-11-16): the section shows "what's included"
-   * without numbers, and the price FAQ is skipped. Flip to true to bring every price back.
-   */
-  showPrices: false,
-
-  currency: "₪",
-
-  /** Personal game for an event. (Ilan's page shows 250.) */
-  base: 750, // TODO confirm
-  /** Each extra edit of an already produced game. */
-  edit: 50,
-
-  /** Add-on: friends/kids also get a contributor link (parents still approve every item). */
-  contributorLink: 50, // TODO confirm
-  /** Add-on: a personal custom host made for the event (one of the ready-made hosts is included). */
-  personalHost: 50, // TODO confirm
-  /** Ready-made hosts included in the base price. */
-  readyMadeHosts: 5, // TODO confirm
+  /** Shown next to the number. */
+  currency: "$",
+  /** ISO code for structured data. */
+  currencyCode: "USD",
+  /** One personal game, one-time payment. */
+  base: 99,
+  /** Days to ask for a full refund (docs/paddle/refund-policy.md). */
+  refundDays: 14,
+  /** Days the game link works before the game and its content are deleted. */
+  linkDays: 30,
+  /** Hours from payment to delivery of the game link. */
+  deliveryHours: 24,
 };
 
-const nbsp = " ";
-/** "250 ₪" for running text (FAQ). */
-export const money = (n: number) => `${n}${nbsp}${PRICING.currency}`;
+/** "$99" for running text. */
+export const money = (n: number) => `${PRICING.currency}${n}`;
 
 const tokens: Record<string, string> = {
   base: money(PRICING.base),
-  edit: money(PRICING.edit),
-  contributorLink: money(PRICING.contributorLink),
-  personalHost: money(PRICING.personalHost),
-  readyMadeHosts: String(PRICING.readyMadeHosts),
+  refundDays: String(PRICING.refundDays),
+  linkDays: String(PRICING.linkDays),
+  deliveryHours: String(PRICING.deliveryHours),
 };
 
-/** Replaces {base}, {edit}, {contributorLink}, {personalHost}, {readyMadeHosts} in copy. */
+/** Replaces {base}, {refundDays}, {linkDays}, {deliveryHours} in copy. */
 export const fillPrices = (text: string) =>
   text.replace(/\{(\w+)\}/g, (m, k: string) => tokens[k] ?? m);

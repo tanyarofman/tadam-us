@@ -4,7 +4,7 @@ import { render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import BlogHeader from "../blog/BlogHeader.astro";
 import Footer from "../Footer.astro";
-import { contactLink } from "../../config/site";
+import { emailLink } from "../../config/site";
 import { useCopy, localPath } from "../../content/copy";
 
 type Post = CollectionEntry<"blog">;
@@ -128,9 +128,7 @@ const jsonLd = [
           </a>
           <a
             class="article-cta-wa"
-            href={contactLink(`article-${post.id}`)}
-            target="_blank"
-            rel="noopener"
+            href={emailLink()}
             data-track="blog_contact_click"
             data-source={`article:${post.id}`}>{t.ctaContact}</a
           >

@@ -2,7 +2,7 @@
 import { useCopy } from "../content/copy";
 import Person from "./art/Person.astro";
 const { copy: COPY } = useCopy(Astro.url);
-const h = COPY.pricing.addons.personalHost.showcase;
+const h = COPY.hosts;
 const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-waist"];
 ---
 
@@ -19,11 +19,10 @@ const hostPhotos = ["host-classic-waist", "host-friendly-waist", "host-animated-
       </div>
       <div class="hosts-photos reveal" role="group" aria-label={h.photosLabel}>
         {hostPhotos.map((name, i) => (
-          <Person name={name} alt={h.readyAlts[i]} width={411} height={736} class={`host-photo host-photo--${i + 1}`} />
+          <Person name={name} alt={h.alts[i]} width={411} height={736} class={`host-photo host-photo--${i + 1}`} />
         ))}
       </div>
     </div>
-    <h3 class="display hosts-custom-title reveal">{h.customTitle}</h3>
   </div>
   </div>
 </section>

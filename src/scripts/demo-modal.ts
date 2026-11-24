@@ -1,5 +1,5 @@
 /**
- * Demo modal: the full recording of a real game, with sound, plus a Messenger CTA.
+ * Demo modal: the full recording of a real game, with sound, plus a "Create yours" CTA.
  * Opening is a click, so the video may start with sound; closing pauses it (it continues from there next time).
  */
 import { track } from "../lib/analytics";

@@ -107,4 +107,4 @@ With [Tadam!](/) you collect stories and photos from the team and send them to u
 
 > **Example scenario (not a real event):** A development team of 12, a winter team-building day that moved to the office because of rain. Instead of a workshop, 20 minutes of a quiz about the team: whose childhood photo is the one with the guitar, and who took down the server on their first day. An employee who joined a month ago comes out of it knowing everyone's names, and their nicknames too.
 
-[Watch the demo](/#demo), or talk to us on Messenger (the button below) about fitting it to your company. More on this: [a holiday toast at the office](/blog/office-holiday-toast/), and for a family evening on Hanukkah: [a Hanukkah quiz with answers](/blog/hanukkah-quiz/).
+[Watch the demo](/#demo), or email us (the link below) about fitting it to your company. More on this: [a holiday toast at the office](/blog/office-holiday-toast/), and for a family evening on Hanukkah: [a Hanukkah quiz with answers](/blog/hanukkah-quiz/).

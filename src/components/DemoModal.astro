@@ -1,10 +1,11 @@
 ---
 /**
- * Demo modal: the full recording of a real game (Eyal's birthday, Tom's on /en/) with sound, and a Messenger CTA under it.
+ * Demo modal: the full recording of a real game (Eyal's birthday, Tom's on /en/) with sound, and a "Create yours" CTA under it.
  * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
  */
 import { useCopy } from "../content/copy";
-import { contactLink, demoMedia } from "../config/site";
+import { demoMedia } from "../config/site";
+import { CREATE_URL } from "../config/pricing";
 const { copy: COPY, locale } = useCopy(Astro.url);
 const media = demoMedia(locale);
 const c = COPY.modal;
@@ -34,7 +35,7 @@ const c = COPY.modal;
     </div>
     <p class="dm-caption">{c.caption}</p>
 
-    <a class="btn btn-buzzer dm-cta" href={contactLink("demo-modal")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="demo-modal">
+    <a class="btn btn-buzzer dm-cta" href={CREATE_URL} data-track="cta_create_click" data-source="demo-modal">
       <span class="btn-dot" aria-hidden="true"></span>
       {c.cta}
     </a>

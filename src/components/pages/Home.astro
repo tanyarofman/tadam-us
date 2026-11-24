@@ -10,7 +10,6 @@ import Pricing from "../Pricing.astro";
 import Hosts from "../Hosts.astro";
 import Scene7Cta from "../scenes/Scene7Cta.astro";
 import Faq from "../Faq.astro";
-import LeadForm from "../LeadForm.astro";
 import Footer from "../Footer.astro";
 import ClosingCta from "../ClosingCta.astro";
 import DemoModal from "../DemoModal.astro";
@@ -23,13 +22,7 @@ const { copy: COPY, locale, langTag } = useCopy(Astro.url);
 const media = demoMedia(locale);
 const home = new URL("/", Astro.site).href;
 const page = new URL(Astro.url.pathname, Astro.site).href;
-// The FAQ in the same order Faq.astro shows it (price question only while prices are shown).
-const isPrice = (it: object) => "pricesOnly" in it && it.pricesOnly === true;
-const faqItems = [
-  ...(PRICING.showPrices ? COPY.pricing.faq.filter(isPrice) : []),
-  ...COPY.faq.items,
-  ...COPY.pricing.faq.filter((it) => !isPrice(it)),
-].map((f) => ({ q: f.q, a: fillPrices(f.a) }));
+const faqItems = COPY.faq.items.map((f) => ({ q: f.q, a: fillPrices(f.a) }));
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -40,7 +33,6 @@ const jsonLd = [
     url: home,
     logo: new URL("/favicon-512.png", Astro.site).href,
     email: SITE.email,
-    sameAs: [SITE.facebookUrl],
   },
   {
     "@context": "https://schema.org",
@@ -60,6 +52,12 @@ const jsonLd = [
     provider: { "@id": `${home}#org` },
     areaServed: ["US", "GB", "IE", "EU"],
     url: home,
+    offers: {
+      "@type": "Offer",
+      price: PRICING.base,
+      priceCurrency: PRICING.currencyCode,
+      url: new URL("/#pricing", Astro.site).href,
+    },
   },
   {
     "@context": "https://schema.org",
@@ -86,7 +84,6 @@ const jsonLd = [
     <Hosts />
     <Pricing />
     <Scene7Cta />
-    <LeadForm />
     <Faq />
     <ClosingCta />
   </main>

@@ -1,19 +1,23 @@
 ---
 import { useCopy } from "../content/copy";
-import { PRICING, fillPrices } from "../config/pricing";
+import { fillPrices } from "../config/pricing";
 import { demoUrl } from "../config/site";
 const { copy: COPY, locale } = useCopy(Astro.url);
 const c = COPY.faq;
-// Order: the price question (only while PRICING.showPrices), the general questions, then the add-ons
-// (price and add-on questions live in the `pricing` copy block).
-const isPrice = (it: object) => "pricesOnly" in it && it.pricesOnly === true;
-const priceQs = PRICING.showPrices ? COPY.pricing.faq.filter(isPrice) : [];
-const addonQs = COPY.pricing.faq.filter((it) => !isPrice(it));
-const items = [...priceQs, ...c.items, ...addonQs].map((it) => ({
-  q: it.q,
-  a: fillPrices(it.a),
-  demoLinkText: "demoLinkText" in it && typeof it.demoLinkText === "string" ? it.demoLinkText : null,
-}));
+// `link.href` "demo" opens the playable demo in a new tab; any other href is a path on this site.
+const items = c.items.map((it) => {
+  const link = "link" in it ? it.link : null;
+  const a = fillPrices(it.a);
+  if (!link || !a.includes(link.text)) return { q: it.q, before: a, link: null, after: "" };
+  const [before, ...rest] = a.split(link.text);
+  const isDemo = link.href === "demo";
+  return {
+    q: it.q,
+    before,
+    after: rest.join(link.text),
+    link: { text: link.text, href: isDemo ? `${demoUrl(locale)}?autostart=1` : link.href, external: isDemo },
+  };
+});
 ---
 
 <section class="faq" id="faq" aria-labelledby="faq-title">
@@ -29,9 +33,9 @@ const items = [...priceQs, ...c.items, ...addonQs].map((it) => ({
               <span class="faq-icon" aria-hidden="true" />
             </summary>
             <div class="faq-a">
-              <p>{it.demoLinkText ? (
-                <>{it.a.split(it.demoLinkText)[0]}<a href={`${demoUrl(locale)}?autostart=1`} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="faq">{it.demoLinkText}</a>{it.a.split(it.demoLinkText)[1]}</>
-              ) : it.a}</p>
+              <p>{it.before}{it.link && (it.link.external
+                ? <a href={it.link.href} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="faq">{it.link.text}</a>
+                : <a href={it.link.href}>{it.link.text}</a>)}{it.after}</p>
             </div>
           </details>
         ))

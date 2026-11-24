@@ -1,16 +1,10 @@
 export const SITE = {
   /** The public playable demo: Tom's birthday game. `/tom-demo` is proxied to Base44 in netlify.toml. */
   tomDemoUrl: "/tom-demo",
-  /** The heytadam Facebook business page. */
-  /** TODO (Tanya): the US contact route. These are still the Israeli heytadam Facebook page and Messenger. */
-  facebookUrl: "https://www.facebook.com/heytadam",
-  /** Messenger chat with the page: every "Talk to us" button goes here. */
-  messengerUrl: "https://m.me/heytadam",
   /**
-   * The public email address. It is a forwarding address (Forward Email, set up with DNS records in the tadamevents.com
-   * Netlify DNS zone: MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:..." + SPF) that delivers to Tanya's and
-   * Ilan's Gmail, the same recipients as hey@heytadam.com.
-   * Lead-form submissions are emailed straight to both Gmail addresses (Netlify → Forms → notifications).
+   * The public email address and the only contact route on the site (no social accounts for the US yet).
+   * It is a forwarding address (Forward Email, set up with DNS records in the tadamevents.com Netlify DNS zone:
+   * MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:..." + SPF) that delivers to Tanya's and Ilan's Gmail.
    */
   email: "hey@tadamevents.com",
 };
@@ -31,9 +25,5 @@ export const demoMedia = (_locale: "en" = "en") => ({
   demoPoster: "/demo/tadam-demo-en-poster.webp",
 });
 
-/**
- * Link for the contact buttons: a Messenger chat with the heytadam page.
- * `ref` (e.g. "hero", "cta", "article-<slug>") is passed to the page so it can tell where the chat started.
- */
-export const contactLink = (ref?: string) =>
-  ref ? `${SITE.messengerUrl}?ref=${encodeURIComponent(ref)}` : SITE.messengerUrl;
+/** mailto: link for the contact links (footer, blog articles, legal pages). */
+export const emailLink = () => `mailto:${SITE.email}`;

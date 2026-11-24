@@ -75,7 +75,6 @@ function boot() {
     import("./included"),
     pause("scene-7"),
     import("./scenes/scene7"),
-    pause("lead"),
     pause("faq"),
   ]);
   let started = false;

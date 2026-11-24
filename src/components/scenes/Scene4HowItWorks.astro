@@ -1,5 +1,6 @@
 ---
 import { useCopy } from "../../content/copy";
+import { fillPrices } from "../../config/pricing";
 import SplitHeading from "../SplitHeading.astro";
 import Person from "../art/Person.astro";
 const { copy: COPY } = useCopy(Astro.url);
@@ -17,7 +18,7 @@ const tiles = m.tiles.map((label, i) => ({ color: tileColors[i % tileColors.leng
     </div>
 
     <ol class="s4-steps" role="list">
-      {/* Step 1: a Messenger chat with our Facebook page */}
+      {/* Step 1: telling the game creator about the guest of honor */}
       <li class="step-card" data-step="1">
         <div class="step-visual v-link" aria-hidden="true">
           <div class="mini-phone mp-main">
@@ -87,7 +88,7 @@ const tiles = m.tiles.map((label, i) => ({ color: tileColors[i % tileColors.leng
         <div class="step-text">
           <span class="step-num">3</span>
           <h3 class="display h-card">{c.steps[2].title}</h3>
-          <p>{c.steps[2].text}</p>
+          <p>{fillPrices(c.steps[2].text)}</p>
         </div>
       </li>
     </ol>

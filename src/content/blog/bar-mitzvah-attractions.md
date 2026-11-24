@@ -100,9 +100,9 @@ Because it's the one moment of the evening when the whole hall stops and does so
 
 At Tadam! it works like this:
 
-1. **You talk to us.** Send us a message on Messenger and tell us about the event and about the bar or bat mitzvah kid.
-2. **You send us the material.** Stories, photos and inside jokes from family and friends. Nothing reaches the screen without your approval, so nobody gets embarrassed.
-3. **We build the game**, with a host who runs it.
+1. **You tell us about the kid.** In the game creator, add stories, nicknames and photos of the bar or bat mitzvah kid.
+2. **You pick a host and review the questions.** We draft them from your stories, and you can edit or delete any of them, so nobody gets embarrassed.
+3. **You get the game** as a private link by email, with a host who runs it.
 4. **At the event**, the DJ stops the music for about 15 minutes. Everyone scans, plays, and at the end we announce who knows the bar mitzvah boy best.
 
 No app and no stage needed, and older guests who aren't comfortable with phones play together with the grandchildren.

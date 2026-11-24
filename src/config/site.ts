@@ -7,11 +7,12 @@ export const SITE = {
   /** Messenger chat with the page: every "Talk to us" button goes here. */
   messengerUrl: "https://m.me/heytadam",
   /**
-   * The public email address. It is a forwarding address (Forward Email, set up with DNS records in Netlify DNS:
-   * MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:...") that delivers to Tanya's and Ilan's Gmail.
+   * The public email address. It is a forwarding address (Forward Email, set up with DNS records in the tadamevents.com
+   * Netlify DNS zone: MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:..." + SPF) that delivers to Tanya's and
+   * Ilan's Gmail, the same recipients as hey@heytadam.com.
    * Lead-form submissions are emailed straight to both Gmail addresses (Netlify → Forms → notifications).
    */
-  email: "hey@heytadam.com",
+  email: "hey@tadamevents.com",
 };
 
 /** The playable demo game. */

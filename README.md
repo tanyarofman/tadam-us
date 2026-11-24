@@ -14,8 +14,7 @@ npm run preview    # serve the production build
 ```
 
 Deploy: the Netlify project `tadam-us` is linked to this GitHub repo and builds with `netlify.toml` (build `npm run build`, publish `dist`).
-The site is at https://tadam-us.netlify.app until the US domain is bought, with a `noindex` header so search engines skip it.
-At launch: change `site` in `astro.config.mjs` and `public/robots.txt`, and remove `X-Robots-Tag` in `netlify.toml`.
+The site is at https://tadamevents.com (Netlify DNS). The address is set in `site` in `astro.config.mjs` and in `public/robots.txt`.
 
 - Merging to `main` deploys to production automatically.
 - Every pull request gets a deploy preview at `deploy-preview-<number>--tadam-us.netlify.app`.
@@ -33,7 +32,7 @@ defined by `--page-gradient` in `src/styles/tokens.css`.
 | All site copy (headlines, bubbles, FAQ, modal, blog frame) | `src/content/copy.en.ts` (read through `useCopy()` in `src/content/copy.ts`) |
 | Blog articles | `src/content/blog/` |
 | Privacy policy text | `src/pages/privacy.astro` |
-| Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@heytadam.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
+| Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@tadamevents.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen-en-v2.mp4`, `public/demo/hero-phone-en-v2.mp4` and their posters, recorded from the Tom demo (`/tom-demo`). Paths: `demoMedia()` in `src/config/site.ts` |
 | Colors / type scale / theme | `src/styles/tokens.css` |

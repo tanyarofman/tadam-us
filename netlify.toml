@@ -20,9 +20,6 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    # Not launched yet: keep tadam-us.netlify.app (and deploy previews) out of search engines.
-    # Remove this line when the US domain is live.
-    X-Robots-Tag = "noindex"
 
 # The site used to have an English copy under /en/; it is English-only at the root now.
 [[redirects]]

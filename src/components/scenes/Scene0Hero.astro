@@ -1,9 +1,9 @@
 ---
-import { useCopy, otherLanguagePath } from "../../content/copy";
+import { useCopy } from "../../content/copy";
 import { contactLink, demoMedia } from "../../config/site";
 import LogoAssemble from "../LogoAssemble.astro";
 import SplitHeading from "../SplitHeading.astro";
-const { copy: COPY, home, locale } = useCopy(Astro.url);
+const { copy: COPY, locale } = useCopy(Astro.url);
 const media = demoMedia(locale);
 const c = COPY.hero;
 ---
@@ -18,7 +18,6 @@ const c = COPY.hero;
         <ul role="list">{c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}</ul>
       </nav>
       <div class="hero-bar-action" data-hero-fade>
-        {locale === "he" && <a class="hero-lang" href={otherLanguagePath(Astro.url)} lang={home === "/" ? "en" : "he"} aria-label={COPY.nav.langSwitchLabel} data-track="language_switch" data-source="hero-nav">{COPY.nav.langSwitch}</a>}
         <a class="btn hero-bar-cta" href={contactLink("hero-nav")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="hero-nav">{c.navCta}</a>
       </div>
     </div>
@@ -80,8 +79,6 @@ const c = COPY.hero;
   .hero-nav a { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: var(--white); text-decoration: none; }
   .hero-nav a:hover { color: var(--game-yellow); }
   .hero-bar-action { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); }
-  .hero-lang { display: inline-flex; align-items: center; min-height: 44px; color: var(--white); font-size: 1.25rem; text-underline-offset: 5px; white-space: nowrap; }
-  .hero-lang:hover { color: var(--game-yellow); }
   .hero-bar-cta { min-height: 52px; padding: 10px 28px 12px; font-size: 1.625rem; white-space: nowrap; }
   .hero-inner {
     position: relative; z-index: 2; flex: 1; display: grid;
@@ -153,7 +150,6 @@ const c = COPY.hero;
   @media (max-width: 380px) {
     .hero-bar { gap: 10px; }
     .hero-bar-action { gap: 10px; }
-    .hero-lang { font-size: 1.1rem; }
     :global([dir="ltr"]) .hero-bar-cta { padding-inline: 14px; font-size: 1.15rem; }
     :global([dir="ltr"] .logo-assemble.hero-logo) { width: 96px; }
   }

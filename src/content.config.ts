@@ -3,8 +3,8 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 /**
- * Blog articles: one Markdown file per article in src/content/blog/ (Hebrew) and src/content/blog-en/ (English).
- * Copy rules (see CLAUDE.md): Hebrew, parents addressed as אתם, no em-dashes, generic host only.
+ * Blog articles: one Markdown file per article in src/content/blog/.
+ * Copy rules (see CLAUDE.md): American English, readers addressed as "you", no em-dashes, generic host only.
  * The keyword plan behind each article lives in docs/seo/.
  */
 const article = <C extends [string, ...string[]]>(categories: C) =>
@@ -15,7 +15,7 @@ const article = <C extends [string, ...string[]]>(categories: C) =>
     seoTitle: z.string().max(60).optional(),
     /** Meta description: 155 characters max, keyword + an action. */
     description: z.string().max(155),
-    /** The search phrase this article is written for (docs/seo/keyword-research-2026-11.md). */
+    /** The search phrase this article is written for (docs/seo/keyword-research-us-2026-11.md). */
     targetKeyword: z.string(),
     /** Short direct answer shown at the top. This is what Google AI Overviews and chatbots quote. */
     answer: z.string(),
@@ -27,15 +27,10 @@ const article = <C extends [string, ...string[]]>(categories: C) =>
     draft: z.boolean().default(false),
   });
 
+/** The blog: one Markdown file per article in src/content/blog/, served at /blog/<slug>/. */
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
-  schema: article(["בר ובת מצווה", "חגים ומשפחה", "חברות וצוותים", "ימי הולדת", "חתונות ואירועים", "טריוויה"]),
-});
-
-/** English translations of the articles, for /en/blog/. Same file name (slug) as the Hebrew article. */
-const blogEn = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog-en" }),
   schema: article(["Bar and bat mitzvah", "Holidays and family", "Companies and teams", "Birthdays", "Weddings and events", "Trivia"]),
 });
 
-export const collections = { blog, blogEn };
+export const collections = { blog };

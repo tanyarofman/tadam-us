@@ -20,9 +20,23 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # Not launched yet: keep tadam-us.netlify.app (and deploy previews) out of search engines.
+    # Remove this line when the US domain is live.
+    X-Robots-Tag = "noindex"
+
+# The site used to have an English copy under /en/; it is English-only at the root now.
+[[redirects]]
+  from = "/en"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en/*"
+  to = "/:splat"
+  status = 301
 
 # Interactive demo frontends; gameplay connects directly to its existing backend.
-# Keep the browser URL on heytadam.com, including host and phone join routes.
+# Keep the browser URL on this site, including host and phone join routes.
 [[redirects]]
   from = "/eyal-demo"
   to = "https://tadam.base44.app/eyal-demo"

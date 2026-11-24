@@ -4,13 +4,11 @@
  * Then it flies up into its place in the hero (see scripts/hero.ts).
  * Hidden without JS. Decorative only; it never blocks keyboard or screen-reader users for long.
  */
-import { localeOf } from "../content/copy";
-const english = localeOf(Astro.url) === "en";
 ---
 
 <div class="preloader" data-preloader aria-hidden="true">
   <div class="pre-bg"></div>
-  <img class="pre-logo" data-pre-logo src={english ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} alt="" width="736" height="332" decoding="async" />
+  <img class="pre-logo" data-pre-logo src="/brand/tadam-logo-en.webp" alt="" width="736" height="332" decoding="async" />
 </div>
 
 <style>

@@ -1,124 +1,124 @@
 ---
-title: "חידון חנוכה עם תשובות: 40 שאלות למשפחה (לילדים, למבוגרים ומצחיקות)"
-seoTitle: "חידון חנוכה עם תשובות: 40 שאלות למשפחה"
-description: "חידון חנוכה מוכן עם תשובות: שאלות לילדים, שאלות מאתגרות למבוגרים ו-10 שאלות מצחיקות על המשפחה, ואיך מריצים אותו כמשחק מהטלפון."
-targetKeyword: "חידון חנוכה"
-answer: "חידון חנוכה טוב משלב שאלות ידע קלילות (כמה נרות מדליקים, מה כתוב על הסביבון, מי היו המכבים) עם שאלות אישיות על המשפחה. כאן תמצאו 30 שאלות ידע עם תשובות, מחולקות לילדים ולמבוגרים, ועוד 10 שאלות מצחיקות על המשפחה, ואת כל מה שצריך כדי להריץ את החידון בערב ההדלקה ב-15 דקות."
+title: "Hanukkah Quiz with Answers: 40 Questions for the Family (for Kids, for Adults, and Funny Ones)"
+seoTitle: "Hanukkah Quiz with Answers: 40 Questions for the Family"
+description: "A ready Hanukkah quiz with answers: questions for kids, harder ones for adults and 10 funny questions about the family, plus how to run it from your phone."
+targetKeyword: "Hanukkah quiz"
+answer: "A good Hanukkah quiz mixes light knowledge questions (how many candles you light, what's written on the dreidel, who the Maccabees were) with personal questions about the family. Here you'll find 30 knowledge questions with answers, split between kids and adults, plus 10 funny questions about the family, and everything you need to run the quiz on candle lighting night in 15 minutes."
 date: 2026-11-16
 updated: 2026-11-17
-category: "חגים ומשפחה"
+category: "Holidays and family"
 faq:
-  - q: "כמה שאלות צריך בחידון חנוכה משפחתי?"
-    a: "בין 15 ל-25 שאלות, שזה בערך 15 דקות. עדיף לערבב: חצי שאלות ידע וחצי שאלות על המשפחה."
-  - q: "איך מתאימים את החידון לילדים קטנים?"
-    a: "תנו לילדים לענות בקבוצה עם מבוגר ובחרו שאלות עם תשובה של מילה אחת, כמו שמש, סביבון או שמונה. ילדים מצטיינים דווקא בשאלות על המשפחה."
-  - q: "אפשר לשחק בחידון חנוכה מהטלפון?"
-    a: "כן. מקרינים את השאלות על הטלוויזיה וכולם עונים מהטלפון, ב-טדאם! למשל סורקים קוד ועונים בדפדפן בלי אפליקציה."
-  - q: "מתי חנוכה 2026?"
-    a: "חנוכה תשפ״ז מתחיל ביום שישי, 4 בדצמבר 2026, עם השקיעה, ונמשך עד מוצאי שבת 12 בדצמבר. הנר הראשון נדלק ביום שישי בערב."
+  - q: "How many questions do you need for a family Hanukkah quiz?"
+    a: "Between 15 and 25 questions, which is about 15 minutes. It's best to mix: half knowledge questions and half questions about the family."
+  - q: "How do you adapt the quiz for young kids?"
+    a: "Let the kids answer in a team with an adult, and pick questions with a one-word answer, like shamash, dreidel or eight. Kids actually shine on the questions about the family."
+  - q: "Can you play a Hanukkah quiz from your phone?"
+    a: "Yes. You show the questions on the TV and everyone answers from their phone. With Tadam!, for example, you scan a code and answer in the browser with no app."
+  - q: "When is Hanukkah 2026?"
+    a: "Hanukkah 5787 begins on Friday, December 4, 2026, at sundown, and runs until Saturday night, December 12. The first candle is lit on Friday evening."
 ---
 
-שמונה ערבים, אותה משפחה, אותן לביבות. חידון הוא הדרך הכי פשוטה להפוך עוד ערב הדלקה לערב שכולם מדברים עליו. החלק הראשון כאן הוא שאלות ידע על החג, עם תשובות. החלק השני הוא החלק שבאמת מצחיק: שאלות על המשפחה שלכם.
+Eight evenings, the same family, the same latkes. A quiz is the simplest way to turn one more candle lighting into an evening everyone talks about. The first part here is knowledge questions about the holiday, with answers. The second part is the one that's really funny: questions about your own family.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## מתי חנוכה 2026, ומתי כדאי לעשות את החידון?
+## When is Hanukkah 2026, and when should you hold the quiz?
 
-חנוכה מתחיל ביום שישי, 4 בדצמבר 2026, עם השקיעה, ונמשך שמונה ימים. הערב הכי טוב לחידון הוא ערב שבו כל המשפחה המורחבת נפגשת, בדרך כלל שישי או מוצאי שבת.
+Hanukkah begins on Friday, December 4, 2026, at sundown, and lasts eight days. The best evening for a quiz is one when the whole extended family gets together, usually Friday or Saturday night.
 
-לפי [לוח השנה של hebcal לחנוכה 2026](https://www.hebcal.com/holidays/chanukah-2026), החג נמשך מכ״ה בכסלו עד ב׳ בטבת תשפ״ז, כלומר עד 12 בדצמבר. השנה הנר הראשון נדלק בערב שבת, ככה שהערב הראשון כבר מגיע עם ארוחה משפחתית. זה הזמן המושלם לחידון.
+According to the [hebcal calendar for Hanukkah 2026](https://www.hebcal.com/holidays/chanukah-2026), the holiday runs from the 25th of Kislev to the 2nd of Tevet 5787, which means until December 12. This year the first candle is lit on Friday evening, so the first night already comes with a family dinner. It's the perfect time for a quiz.
 
-## איך מריצים חידון חנוכה משפחתי ב-15 דקות?
+## How do you run a family Hanukkah quiz in 15 minutes?
 
-בוחרים מנחה אחד, מחלקים לקבוצות מעורבות בגילאים, ומערבבים שאלות ידע עם שאלות על המשפחה. ניקוד גלוי ופרס קטן הופכים את זה לתחרות אמיתית.
+Choose one host, split into teams of mixed ages, and mix knowledge questions with questions about the family. A visible score and a small prize turn it into a real competition.
 
-1. **בחרו מנחה.** מישהו אחד קורא את השאלות ושומר על הקצב. ילדים בני 10 עד 13 הם מנחים מעולים.
-2. **חלקו לקבוצות.** סבים עם נכדים, בני דודים מול הורים.
-3. **ערבבו סוגי שאלות.** שאלת ידע, שאלה על המשפחה, שאלה עם תמונה, וחוזר חלילה.
-4. **תנו ניקוד גלוי.** דף על השולחן, לוח על המקרר, או מסך.
-5. **שמרו פרס קטן.** הקבוצה המנצחת מדליקה את הנר הבא, או בוחרת ראשונה סופגניה.
+1. **Choose a host.** One person reads the questions and keeps the pace. Kids aged 10 to 13 make excellent hosts.
+2. **Split into teams.** Grandparents with grandchildren, cousins against parents.
+3. **Mix the question types.** A knowledge question, a question about the family, a question with a photo, and round again.
+4. **Keep the score visible.** A sheet on the table, a board on the fridge, or a screen.
+5. **Save a small prize.** The winning team lights the next candle, or gets first pick of the sufganiyot.
 
-## אילו שאלות מתאימות לאיזה גיל?
+## Which questions suit which age?
 
-ילדים צעירים צריכים שאלות קצרות עם תשובה של מילה אחת, ומבוגרים נהנים משאלות היסטוריה ופרטים שאף אחד לא זוכר. הטבלה עוזרת לבחור.
+Young kids need short questions with a one-word answer, and adults enjoy history questions and details nobody remembers. The table helps you choose.
 
-| קהל | סוג שאלות | דוגמה מהחידון |
+| Audience | Type of questions | Example from the quiz |
 |---|---|---|
-| ילדים בגן ובכיתות א׳ עד ג׳ | מנהגים, מספרים, תמונות | איך קוראים לנר שמדליק את כולם? |
-| ילדים בכיתות ד׳ עד ו׳ | סיפור החג ודמויות | מאיזה יישוב יצאו החשמונאים? |
-| נוער ומבוגרים | היסטוריה, מקורות, פרטים קטנים | סיפור חנוכה מופיע בתנ״ך? |
-| כל הגילאים ביחד | שאלות על המשפחה | מי אכל הכי הרבה סופגניות בשנה שעברה? |
+| Kids in kindergarten and first to third grade | Customs, numbers, pictures | What do you call the candle that lights all the others? |
+| Kids in fourth to sixth grade | The holiday story and its characters | Which town did the Hasmoneans come from? |
+| Teens and adults | History, sources, small details | Does the Hanukkah story appear in the Tanakh? |
+| All ages together | Questions about the family | Who ate the most sufganiyot last year? |
 
-## מה שואלים בחידון חנוכה לילדים, ומה התשובות?
+## What do you ask in a Hanukkah quiz for kids, and what are the answers?
 
-שואלים על מה שהילדים רואים ועושים בחג: הנרות, הסביבון, הסופגניות והשירים. אלה עשר שאלות שכל ילד מכיתה א׳ יכול לענות עליהן.
+You ask about what kids see and do during the holiday: the candles, the dreidel, the sufganiyot and the songs. These are ten questions any child from first grade can answer.
 
-1. **כמה ימים נמשך חנוכה?** שמונה.
-2. **איך קוראים לנר שבעזרתו מדליקים את שאר הנרות?** השמש.
-3. **מה כתוב על הסביבון בארץ ישראל?** נ, ג, ה, פ: נס גדול היה פה.
-4. **ומה כתוב על סביבון בחוץ לארץ?** נ, ג, ה, ש: נס גדול היה שם.
-5. **למה אוכלים בחנוכה מאכלים מטוגנים בשמן?** זכר לנס פך השמן, שהספיק לשמונה ימים.
-6. **מה שמו של היום השמיני של חנוכה?** "זאת חנוכה".
-7. **כמה נרות דולקים בלילה החמישי, כולל השמש?** שישה.
-8. **איך קוראים לכסף שנותנים לילדים בחנוכה?** דמי חנוכה.
-9. **מה עוד קוראים לחנוכה?** חג האורים.
-10. **מה השיר שנהוג לשיר מיד אחרי ההדלקה?** "מעוז צור".
+1. **How many days does Hanukkah last?** Eight.
+2. **What do you call the candle used to light the other candles?** The shamash.
+3. **What is written on a dreidel in Israel?** Nun, gimel, hei, pe: "Nes gadol haya po", a great miracle happened here.
+4. **And what is written on a dreidel outside Israel?** Nun, gimel, hei, shin: "Nes gadol haya sham", a great miracle happened there.
+5. **Why do we eat foods fried in oil on Hanukkah?** In memory of the miracle of the jug of oil, which lasted eight days.
+6. **What is the eighth day of Hanukkah called?** "Zot Hanukkah".
+7. **How many candles are burning on the fifth night, including the shamash?** Six.
+8. **What do you call the money given to children on Hanukkah?** Hanukkah gelt (dmei Hanukkah).
+9. **What else is Hanukkah called?** The Festival of Lights (Chag HaUrim).
+10. **Which song is traditionally sung right after candle lighting?** "Maoz Tzur".
 
-## אילו שאלות מתאימות לחידון חנוכה ברמה בינונית?
+## Which questions suit a medium-level Hanukkah quiz?
 
-שאלות על סיפור החג עצמו: מי היו החשמונאים, מאיפה באו ומה קרה במקדש. הן מתאימות לילדים גדולים ולכל מי שזוכר קצת מבית הספר.
+Questions about the holiday story itself: who the Hasmoneans were, where they came from and what happened in the Temple. They suit older kids and anyone who remembers a little from school.
 
-11. **באיזה תאריך עברי מתחיל חנוכה?** כ״ה בכסלו.
-12. **מה המילה "חנוכה" מזכירה?** את חנוכת המקדש, כשהמכבים טיהרו אותו והדליקו שוב את המנורה. ([עוד על מקור השם ומנהגי החג](https://lib.hebcal.co.il/holidays/chanukah.html))
-13. **מאיזה יישוב יצאה משפחת החשמונאים?** מודיעין.
-14. **מה היה שמו של אבי המשפחה?** מתתיהו.
-15. **כמה בנים היו למתתיהו?** חמישה: יוחנן, שמעון, יהודה, אלעזר ויונתן.
-16. **מה היה הכינוי של יהודה?** המכבי.
-17. **מי היה המלך שגזר את הגזירות על היהודים?** אנטיוכוס הרביעי, המכונה אפיפנס.
-18. **כמה נרות מדליקים בכל החג, בלי השמש?** 36.
-19. **וכמה עם השמש?** 44.
-20. **כמה ברכות מברכים בלילה הראשון?** שלוש: "להדליק נר של חנוכה", "שעשה ניסים" ו"שהחיינו".
+11. **On which Hebrew date does Hanukkah begin?** The 25th of Kislev.
+12. **What does the word "Hanukkah" recall?** The dedication (chanukah) of the Temple, when the Maccabees purified it and lit the menorah again. ([More on the origin of the name and the holiday's customs](https://lib.hebcal.co.il/holidays/chanukah.html))
+13. **Which town did the Hasmonean family come from?** Modi'in.
+14. **What was the name of the father of the family?** Mattathias (Matityahu).
+15. **How many sons did Mattathias have?** Five: Yochanan, Shimon, Yehuda, Elazar and Yonatan.
+16. **What was Yehuda's nickname?** The Maccabee.
+17. **Who was the king who issued the decrees against the Jews?** Antiochus IV, known as Epiphanes.
+18. **How many candles do you light over the whole holiday, not counting the shamash?** 36.
+19. **And how many with the shamash?** 44.
+20. **How many blessings are said on the first night?** Three: "Lehadlik ner shel Hanukkah", "She'asah nisim" and "Shehecheyanu".
 
-## אילו שאלות מתאימות לחידון חנוכה מאתגר למבוגרים?
+## Which questions suit a challenging Hanukkah quiz for adults?
 
-שאלות על המקורות והפרטים הקטנים: איפה הסיפור כתוב, מה קרה בקרבות ומי כתב את השירים. אלה השאלות שגורמות לסבא להתווכח עם הנכד שלמד את זה השבוע.
+Questions about the sources and the small details: where the story is written, what happened in the battles and who wrote the songs. These are the questions that get Grandpa arguing with the grandchild who learned it this week.
 
-21. **סיפור חנוכה מופיע בתנ״ך?** לא. סיפור המרד מסופר בספרי המקבים, שלא נכנסו לתנ״ך, ונס פך השמן מופיע לראשונה [בתלמוד, במסכת שבת, תחת השאלה "מאי חנוכה?"](https://www.sefaria.org.il/Shabbat.21b).
-22. **איזה מבין האחים נהרג כשהפיל של צבא המלך נפל עליו?** אלעזר. הסיפור מופיע [בספר מקבים א׳, פרק ו׳](https://bible.usccb.org/bible/1maccabees/6).
-23. **איזו תוספת אומרים בתפילה ובברכת המזון בחנוכה?** "על הניסים".
-24. **איזה ראש חודש חל תמיד בתוך חנוכה?** ראש חודש טבת.
-25. **מה ההבדל בין המנורה שבמקדש לחנוכייה?** במנורה שבעה קנים. בחנוכייה שמונה נרות ועוד שמש.
-26. **מה מופיע על סמל מדינת ישראל: מנורה או חנוכייה?** מנורה בת שבעה קנים.
-27. **מה היה מיוחד בפך השמן שנמצא במקדש?** הוא היה חתום בחותמו של הכהן הגדול, כלומר טהור.
-28. **מאיזה צד מוסיפים נר חדש ומאיזה מדליקים?** מוסיפים מימין, ומדליקים קודם את הנר החדש, משמאל לימין.
-29. **מי כתב את השיר "סביבון סוב סוב סוב"?** [לוין קיפניס](https://www.maariv.co.il/culture/literature/article-1036851), שכתב גם את "נר לי".
-30. **איזו גיבורה נקשרה לחנוכה, ובגללה יש מי שאוכלים מאכלי גבינה בחג?** יהודית.
+21. **Does the Hanukkah story appear in the Tanakh?** No. The story of the revolt is told in the Books of Maccabees, which were not included in the Tanakh, and the miracle of the jug of oil first appears [in the Talmud, in tractate Shabbat, under the question "Mai Hanukkah?" (What is Hanukkah?)](https://www.sefaria.org.il/Shabbat.21b).
+22. **Which of the brothers was killed when an elephant of the king's army fell on him?** Elazar. The story appears [in the First Book of Maccabees, chapter 6](https://bible.usccb.org/bible/1maccabees/6).
+23. **Which addition is said in the prayers and in Birkat Hamazon on Hanukkah?** "Al HaNisim".
+24. **Which Rosh Chodesh always falls during Hanukkah?** Rosh Chodesh Tevet.
+25. **What is the difference between the menorah in the Temple and a hanukkiah?** The menorah has seven branches. A hanukkiah has eight candles plus a shamash.
+26. **What appears on the emblem of the State of Israel: a menorah or a hanukkiah?** A seven-branched menorah.
+27. **What was special about the jug of oil found in the Temple?** It was sealed with the seal of the High Priest, meaning it was pure.
+28. **From which side do you add a new candle, and from which side do you light?** You add from the right, and light the new candle first, from left to right.
+29. **Who wrote the song "Sevivon Sov Sov Sov"?** [Levin Kipnis](https://www.maariv.co.il/culture/literature/article-1036851), who also wrote "Ner Li".
+30. **Which heroine became linked to Hanukkah, and is the reason some people eat cheese dishes on the holiday?** Judith (Yehudit).
 
-## איך עושים חידון חנוכה מצחיק על המשפחה?
+## How do you make a funny Hanukkah quiz about the family?
 
-אוספים מראש שאלה אחת מכל בן משפחה, על משהו שרק הוא יודע. ככה כל שאלה היא סיפור קטן, וכל השאר מנחשים.
+Collect one question in advance from every family member, about something only they know. That way every question is a little story, and everyone else guesses.
 
-כאן החידון מפסיק להיות "עוד חידון חנוכה מהאינטרנט" והופך למשהו שקורה רק אצלכם. הנה עשר שאלות שאפשר להעתיק ולמלא:
+This is where the quiz stops being "one more Hanukkah quiz from the internet" and becomes something that only happens at your home. Here are ten questions you can copy and fill in:
 
-31. מי במשפחה אכל הכי הרבה סופגניות בחנוכה שעבר?
-32. איזה נכד שרף פעם את המפית בזמן ההדלקה?
-33. מה סבתא תמיד אומרת כשהלביבות יוצאות מהמחבת?
-34. מי מבני הדודים מחזיק בשיא הסביבון הכי ארוך?
-35. באיזו שנה כל המשפחה נתקעה בפקק בדרך להדלקה, ולאן נסעתם?
-36. מי במשפחה שר את "מעוז צור" עם הכי הרבה מילים לא נכונות?
-37. מה הייתה מתנת החנוכה הכי מוזרה שמישהו כאן קיבל?
-38. מי מבני המשפחה מעדיף ריבה, ומי מוכן רק קרם?
-39. איזו תמונה ישנה זו? (הראו תמונה של אחד מבני המשפחה מגיל 5, ותנו לכולם לנחש)
-40. מה סבא היה עושה בחנוכה כשהוא היה בגיל של הנכדים?
+31. Who in the family ate the most sufganiyot last Hanukkah?
+32. Which grandchild once burned the napkin during candle lighting?
+33. What does Grandma always say when the latkes come out of the frying pan?
+34. Which of the cousins holds the record for the longest dreidel spin?
+35. In which year did the whole family get stuck in traffic on the way to candle lighting, and where were you driving to?
+36. Who in the family sings "Maoz Tzur" with the most wrong words?
+37. What was the strangest Hanukkah present anyone here ever got?
+38. Who in the family prefers jam, and who will only accept cream?
+39. Whose old photo is this? (Show a photo of one of the family at age 5, and let everyone guess)
+40. What did Grandpa do on Hanukkah when he was the grandchildren's age?
 
-> טיפ: את השאלות על המשפחה כדאי לאסוף מראש בוואטסאפ המשפחתי. ככה כל אחד מגיע עם תשובה שרק הוא יודע.
+> Tip: it's worth collecting the questions about the family in advance in the family WhatsApp group. That way everyone arrives with an answer only they know.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** ערב שישי, נר ראשון, 14 בני משפחה סביב השולחן והחידון על הטלוויזיה. על המסך עולה "מה סבתא תמיד אומרת כשהלביבות יוצאות מהמחבת?", כל הנכדים עונים "רק עוד אחת!", וסבתא עצמה בוחרת בתשובה אחרת. בני הדודים מובילים עד השאלה האחרונה, ואז סבא מזהה את תמונת הילדות של הדוד ומנצח.
+> **Example scenario (not a real event):** Friday evening, first candle, 14 family members around the table and the quiz on the TV. "What does Grandma always say when the latkes come out of the frying pan?" comes up on the screen, all the grandchildren answer "Just one more!", and Grandma herself picks a different answer. The cousins lead until the last question, and then Grandpa recognizes the uncle's childhood photo and wins.
 
-## איך הופכים את החידון למשחק אינטראקטיבי מהטלפון?
+## How do you turn the quiz into an interactive game from your phones?
 
-מקרינים את השאלות על הטלוויזיה, וכולם עונים מהטלפון שלהם. הניקוד מתעדכן על המסך, ואף אחד לא צריך לספור נקודות על דף.
+You show the questions on the TV, and everyone answers from their own phone. The score updates on the screen, and nobody has to count points on a sheet of paper.
 
-אם אתם מארחים הרבה אנשים, או שיש לכם אירוע משפחתי גדול בחנוכה (בר מצווה, יום הולדת עגול, מפגש של כל המשפחה המורחבת), ב-[טדאם!](/) אתם שולחים לנו סיפורים, שאלות ותמונות מהמשפחה, ואנחנו בונים מהם את המשחק. ביום האירוע המשחק רץ על הטלוויזיה או על המקרן, כולם סורקים קוד ועונים מהטלפון בלי אפליקציה, ומנחה מריץ את המשחק עד שמוכרזת הקבוצה שמכירה את המשפחה הכי טוב. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+If you're hosting a lot of people, or you have a big family event over Hanukkah (a bar mitzvah, a milestone birthday, a get-together of the whole extended family), at [Tadam!](/) you send us stories, questions and photos from the family, and we build the game out of them. On the day of the event the game runs on the TV or the projector, everyone scans a code and answers from their phone with no app, and a host runs the game until the team that knows the family best is announced. [Watch the demo](/#demo) to see what it looks like.
 
-עושים הרמת כוסית לחנוכה גם בעבודה? יש לנו [מדריך להרמת כוסית לחג במשרד](/blog/office-holiday-toast/). מתכננים בר מצווה? הנה [25 אטרקציות לבר מצווה](/blog/bar-mitzvah-attractions/). ואם אתם מארגנים ערב לצוות, קראו [רעיונות ליום גיבוש לעובדים](/blog/team-building-day-ideas/).
+Having a Hanukkah holiday toast at work too? We have a [guide to the office holiday toast](/blog/office-holiday-toast/). Planning a bar mitzvah? Here are [25 bar mitzvah attractions](/blog/bar-mitzvah-attractions/). And if you're organizing an evening for your team, read [ideas for a team-building day for employees](/blog/team-building-day-ideas/).

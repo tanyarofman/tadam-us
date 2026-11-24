@@ -1,6 +1,6 @@
 /**
- * Scenes 5 + 6 in one: "סורקים, משחקים, וכולם עונים ביחד" over the static site background,
- * then the scores change on the big screen, drumroll, the winner is... סבתא. A little confetti,
+ * Scenes 5 + 6 in one: "Scan, play, and everyone answers together" over the static site background,
+ * then the scores change on the big screen, drumroll, the winner is... Grandma. A little confetti,
  * and the headline turns into the payoff. Kept calm on purpose: soft moves, no shaking.
  */
 import { gsap } from "../../lib/scroll";
@@ -8,7 +8,7 @@ import { confettiBurst } from "../../lib/confetti";
 import { animateWords } from "../motion";
 import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
 
-// Player index order (rank 1..5) and scores at each step. Index 0 = סבתא (see copy.he.ts)
+// Player index order (rank 1..5) and scores at each step. Index 0 = Grandma (scene6.players in copy.en.ts)
 const ORDERS = [
   [1, 2, 3, 4, 0],
   [1, 2, 0, 3, 4],

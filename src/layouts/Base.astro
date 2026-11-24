@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { useCopy, otherLanguagePath, LOCALES } from "../content/copy";
+import { useCopy } from "../content/copy";
 const { copy: COPY, lang, dir, ogLocale } = useCopy(Astro.url);
 
 interface Props {
@@ -9,19 +9,10 @@ interface Props {
   noindex?: boolean;
   /** "article" on blog posts. */
   ogType?: "website" | "article";
-  /** True on pages that exist in both languages (home, privacy): adds hreflang links. */
-  bilingual?: boolean;
 }
-const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website", bilingual = false } = Astro.props;
+const { title = COPY.meta.title, description = COPY.meta.description, noindex = false, ogType = "website" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(lang === "en" ? "/brand/og-image-en-v1.jpg" : "/brand/og-image-v3.jpg", Astro.site);
-// hreflang: this page and its twin in the other language; Hebrew is the default for everyone else.
-const twin = new URL(otherLanguagePath(Astro.url), Astro.site);
-const alternates = bilingual
-  ? lang === "he"
-    ? [{ hreflang: LOCALES.he.hreflang, href: canonical }, { hreflang: LOCALES.en.hreflang, href: twin }, { hreflang: "x-default", href: canonical }]
-    : [{ hreflang: LOCALES.he.hreflang, href: twin }, { hreflang: LOCALES.en.hreflang, href: canonical }, { hreflang: "x-default", href: twin }]
-  : [];
+const ogImage = new URL("/brand/og-image-en-v1.jpg", Astro.site);
 ---
 
 <!doctype html>
@@ -32,7 +23,6 @@ const alternates = bilingual
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0A1A6B" />
     {/* Keep the square raster fallbacks and app icons; use the yellow ! SVG for browser tabs. */}
@@ -58,14 +48,14 @@ const alternates = bilingual
     <meta name="twitter:image" content={ogImage} />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
-    <link rel="preload" as="image" type="image/webp" href={lang === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp"} fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo-en.webp" fetchpriority="high" />
     <slot name="head" />
     <script is:inline>
       (function () {
         var d = document.documentElement;
         d.classList.remove("no-js");
         d.classList.add("js");
-        if (d.lang === "en" && document.fonts) {
+        if (document.fonts) {
           d.classList.add("fonts-loading");
           var settled = false;
           function reveal(ok) {

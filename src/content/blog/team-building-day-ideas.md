@@ -1,110 +1,110 @@
 ---
-title: "מה עושים ביום גיבוש לעובדים? רעיונות לצוות קטן, למשרד ולתקציב נמוך"
-seoTitle: "יום גיבוש לעובדים: רעיונות, תשלום ומס"
-description: "רעיונות ליום גיבוש לעובדים ולערב צוות, לצוות קטן, במשרד ובחורף. וגם: האם משלמים על יום גיבוש, האם חובה להגיע, ומה עם מס."
-targetKeyword: "יום גיבוש לעובדים"
-answer: "יום גיבוש טוב מתחיל במטרה: להכיר עובדים חדשים, לחגוג סוף פרויקט, או סתם לנשום. לצוות קטן מתאימות סדנאות ופעילויות אינטימיות, לצוות גדול משחקי משימות, ולצוות היברידי פעילויות שעובדות מהטלפון. הפעילויות שמחברות הכי מהר הן כאלה שבהן העובדים מגלים דברים חדשים זה על זה, למשל חידון שנבנה מהסיפורים של הצוות עצמו."
+title: "Team Building Activities: What Do You Do on a Team-Building Day? Ideas for a Small Team, the Office and a Low Budget"
+seoTitle: "Team Building Activities: Ideas, Pay and Tax in Israel"
+description: "Team-building day and team evening ideas for small teams, the office and winter. Plus: is it paid, do you have to attend, and what about tax in Israel?"
+targetKeyword: "team building activities"
+answer: "A good team-building day starts with a goal: getting to know new employees, celebrating the end of a project, or simply taking a breather. Workshops and intimate activities suit a small team, challenge games suit a large one, and activities that work from a phone suit a hybrid team. The activities that connect people fastest are the ones where employees discover new things about each other, for example a quiz built from the team's own stories."
 date: 2026-11-16
 updated: 2026-11-17
-category: "חברות וצוותים"
+category: "Companies and teams"
 faq:
-  - q: "כמה זמן מראש מתכננים יום גיבוש?"
-    a: "ארבעה עד שישה שבועות לפעילות במשרד, ושניים עד שלושה חודשים ליום מחוץ למשרד עם הסעות. באביב ובסתיו הספקים נתפסים מהר."
-  - q: "איך עושים יום גיבוש בתקציב נמוך?"
-    a: "נשארים במשרד או בפארק, מביאים אוכל מבחוץ, ומשקיעים בפעילות אחת טובה במקום בהסעה ובמתחם. משחק על הצוות, טורניר משחקי קופסה או פיקניק עם משימות מחברים יותר מהרבה ימי כיף יקרים."
-  - q: "מה עושים ביום גיבוש בחורף?"
-    a: "בוחרים פעילות בפנים: סדנת בישול, חדר בריחה, ערב טעימות או חידון על הצוות במשרד. אם בכל זאת יוצאים, כדאי לתכנן מקום מקורה למקרה של גשם."
-  - q: "מה עושים עם עובדים שעובדים מהבית?"
-    a: "בוחרים פעילות שעובדת גם מרחוק, כמו חידון שבו כולם עונים מהטלפון ורואים את אותו מסך. אפשר גם לשלוח ערכה הביתה לסדנה משותפת בזום."
+  - q: "How far in advance should you plan a team-building day?"
+    a: "Four to six weeks for an activity in the office, and two to three months for a day out of the office with transportation. In spring and autumn, vendors get booked quickly."
+  - q: "How do you run a team-building day on a low budget?"
+    a: "Stay in the office or go to a park, bring in food, and put the money into one good activity instead of transportation and a venue. A game about the team, a board game tournament or a picnic with challenges connects people more than many expensive fun days."
+  - q: "What do you do on a team-building day in winter?"
+    a: "Choose an indoor activity: a cooking workshop, an escape room, a tasting evening or a quiz about the team in the office. If you go out anyway, plan a covered spot in case it rains."
+  - q: "What do you do about employees who work from home?"
+    a: "Choose an activity that also works remotely, such as a quiz where everyone answers from their phone and sees the same screen. You can also send a kit to people's homes for a shared workshop on Zoom."
 ---
 
-"צריך לעשות יום גיבוש" היא אחת המשימות שהכי קל להעביר הלאה, ושהכי קשה לעשות טוב. אותו יום כיף שעבד לצוות של 60 אנשים יכול להיות מביך לצוות של שמונה, ומה שמרגש עובדים חדשים יכול לשעמם את מי שכבר עשה את המסלול הזה שלוש פעמים. הנה דרך פשוטה לבחור, רעיונות לפי סוג, ותשובות לשאלות שהכי הרבה אנשים מחפשים: תשלום, חובת הגעה ומס.
+"We need to do a team-building day" is one of the easiest tasks to pass along, and one of the hardest to do well. The same fun day that worked for a team of 60 can be awkward for a team of eight, and what excites new employees can bore someone who has already done that route three times. Here is a simple way to choose, team building activities by type, and answers to the questions people search for most: pay, mandatory attendance and tax.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## למה בכלל לעשות יום גיבוש?
+## Why have a team-building day at all?
 
-כי אנשים שיש להם חברים בעבודה מרוצים יותר ונשארים יותר. יום גיבוש טוב הוא אחת הדרכים הבודדות לייצר את החיבורים האלה בכוונה.
+Because people who have friends at work are more satisfied and stay longer. A good team-building day is one of the few ways to create those connections on purpose.
 
-[לפי סקרים של Gallup משנת 2022](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/), רק בערך 2 מכל 10 עובדים בארצות הברית אומרים שיש להם "חבר הכי טוב" בעבודה. בקרב מי שיש לו, 32% מרוצים מהעבודה, לעומת 15% בקרב מי שאין לו. אצל עובדים היברידיים המספר ירד מ-22% בשנת 2019 ל-17% בשנת 2022.
+[According to Gallup surveys from 2022](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/), only about 2 in 10 employees in the United States say they have a "best friend" at work. Among those who do, 32% are satisfied with their job, compared with 15% of those who do not. Among hybrid employees the figure fell from 22% in 2019 to 17% in 2022.
 
-## איך בוחרים פעילות לפי המטרה?
+## How do you choose an activity based on your goal?
 
-שואלים קודם מה רוצים שיקרה: שאנשים יכירו, שיחגגו, שיתחברו בין צוותים, או שינוחו. כל מטרה מובילה לסוג אחר של פעילות.
+First ask what you want to happen: for people to get to know each other, to celebrate, to connect across teams, or to rest. Each goal leads to a different kind of activity.
 
-| המטרה | מה עובד |
+| The goal | What works |
 |---|---|
-| להכיר עובדים חדשים | פעילויות שבהן אנשים מספרים על עצמם: חידון על הצוות, "שתי אמיתות ושקר אחד", ארוחה משותפת |
-| לחגוג סוף פרויקט או שנה | משהו כיפי ומפנק: סדנה, ארוחה טובה, ערב עם הפתעה |
-| לחבר בין צוותים שלא עובדים יחד | משימות בקבוצות מעורבות: משחק משימות, חדר בריחה, טורניר |
-| לנשום ולהתאוורר | טבע, ספא, יום בים, בלי משימות בכלל |
+| Getting to know new employees | Activities where people talk about themselves: a quiz about the team, "two truths and a lie", a shared meal |
+| Celebrating the end of a project or a year | Something fun and indulgent: a workshop, a good meal, an evening with a surprise |
+| Connecting teams that don't work together | Challenges in mixed groups: a challenge game, an escape room, a tournament |
+| Taking a breather | Nature, a spa, a day at the beach, with no tasks at all |
 
-## אילו פעילויות מתאימות ליום גיבוש מחוץ למשרד?
+## Which activities suit a team-building day out of the office?
 
-משחקי משימות, טבע, סדנאות אוכל וחדרי בריחה הם הבחירות הנפוצות. כדאי לערבב קבוצות, אחרת כל צוות מבלה עם עצמו.
+Challenge games, nature, food workshops and escape rooms are the common choices. Mix the groups, otherwise each team spends the day with itself.
 
-1. **משחק משימות בעיר.** קבוצות מעורבות, משימות צילום וחידות בדרך.
-2. **יום בטבע עם פיקניק.** הליכה קלה, ארוחה טובה, וזמן לדבר.
-3. **סדנת בישול.** כל קבוצה מכינה מנה, ובסוף כולם אוכלים ביחד.
-4. **חדר בריחה.** לצוותים של עד 30 אנשים, עם תחרות בין הקבוצות.
-5. **סיור קולינרי בשוק.** בתל אביב, בירושלים או בחיפה.
-6. **ספורט ימי.** קיאקים, סאפ, או יום בים. בעונה הנכונה.
-7. **התנדבות משותפת.** יום בחווה, בבנק מזון, או בשיפוץ מועדון.
+1. **A city challenge game.** Mixed groups, photo challenges and riddles along the way.
+2. **A day in nature with a picnic.** An easy walk, a good meal, and time to talk.
+3. **A cooking workshop.** Each group makes a dish, and at the end everyone eats together.
+4. **An escape room.** For teams of up to 30 people, with a competition between the groups.
+5. **A food tour of a shuk.** In Tel Aviv, Jerusalem or Haifa.
+6. **Water sports.** Kayaks, SUP, or a day at the beach. In the right season.
+7. **Volunteering together.** A day on a farm, at a food bank, or renovating a community club.
 
-## מה אפשר לעשות ביום גיבוש או בערב צוות במשרד?
+## What can you do for a team-building day or a team evening in the office?
 
-הרבה יותר ממה שנדמה: חידון על הצוות, משחקי קופסה, ארוחה משותפת או ערב טעימות. זו גם האפשרות הכי זולה, כי אין הסעות ואין מתחם.
+Far more than you might think: a quiz about the team, board games, a shared meal or a tasting evening. It is also the cheapest option, because there is no transportation and no venue.
 
-8. **חידון על הצוות.** העובדים שולחים מראש סיפורים, עובדות מצחיקות ותמונות, והכל הופך לחידון על המסך הגדול. מי טס הכי רחוק? של מי תמונת הילדות הזו?
-9. **טורניר משחקי קופסה.** פשוט, זול, ומתאים גם לאנשים שקטים.
-10. **ארוחת "מטבח הבית".** כל עובד מביא מנה מהבית של המשפחה שלו ומספר עליה.
-11. **ערב טעימות.** יין, בירות, גבינות או שוקולד, עם מדריך.
-12. **ערב טעויות מצחיקות.** כל אחד מספר על טעות מצחיקה שעשה בעבודה. בונה אמון, במיוחד כשהמנהלים מתחילים.
-13. **סדנת יצירה.** קרמיקה, טרריומים או ציור, שבה מדברים תוך כדי.
+8. **A quiz about the team.** Employees send in stories, funny facts and photos ahead of time, and it all becomes a quiz on the big screen. Who flew the farthest? Whose childhood photo is this?
+9. **A board game tournament.** Simple, cheap, and good for quiet people too.
+10. **A "home kitchen" meal.** Every employee brings a dish from their family's kitchen and tells the story behind it.
+11. **A tasting evening.** Wine, beer, cheese or chocolate, with a guide.
+12. **A funny mistakes evening.** Everyone tells a story about a funny mistake they made at work. It builds trust, especially when the managers go first.
+13. **A craft workshop.** Ceramics, terrariums or painting, where people talk while they work.
 
-## מה עושים ביום גיבוש לצוות קטן?
+## What do you do on a team-building day for a small team?
 
-לצוות של 5 עד 15 אנשים מתאימות פעילויות שבהן כולם מדברים, לא כאלה שדורשות כושר או כישרון. בצוות קטן אין איפה להתחבא, אז הכיף צריך להיות של כולם.
+For a team of 5 to 15 people, choose activities where everyone talks, not ones that need fitness or talent. In a small team there is nowhere to hide, so the fun has to be for everyone.
 
-- סדנת בישול או אפייה פרטית
-- ארוחה במסעדה עם משחק שולחן
-- חדר בריחה לקבוצה אחת
-- ערב חידון במשרד עם שאלות על הצוות
+- A private cooking or baking workshop
+- A meal at a restaurant with a table game
+- An escape room for one group
+- A quiz evening in the office with questions about the team
 
-## איך עושים גיבוש לצוות היברידי או מרוחק?
+## How do you do team building for a hybrid or remote team?
 
-בוחרים פעילות שעובדת מהטלפון, כך שמי שבמשרד ומי שבזום משחקים באותו משחק. מוסיפים משלוח קטן הביתה כדי שכולם ירגישו חלק.
+Choose an activity that works from a phone, so the people in the office and the people on Zoom play the same game. Add a small delivery to people's homes so everyone feels part of it.
 
-14. **חידון חי מהטלפון.** כולם רואים את אותו מסך, מי שבמשרד ומי שבזום, וכולם עונים מהטלפון.
-15. **ערכה שנשלחת הביתה.** ערכת קוקטיילים, אפייה או יצירה, וסדנה משותפת בזום.
-16. **"תראו לי את השולחן שלכם".** כל אחד מראה פריט אחד מהבית ומספר עליו.
+14. **A live quiz from the phone.** Everyone sees the same screen, in the office and on Zoom, and everyone answers from their phone.
+15. **A kit sent home.** A cocktail, baking or craft kit, and a shared workshop on Zoom.
+16. **"Show me your desk."** Everyone shows one item from home and tells its story.
 
-## האם יום גיבוש נחשב יום עבודה, ומשלמים עליו?
+## Does a team-building day count as a work day, and do you get paid for it?
 
-לפי הנחיית רשות המסים, יום גיבוש שהמעסיק מארגן נחשב יום עבודה, והעובדים ממשיכים לקבל עליו שכר מלא. זה גם אחד התנאים לכך שהעובדים לא יחויבו במס על האירוע.
+According to the Israel Tax Authority's guideline, a team-building day organized by the employer counts as a work day, and employees keep receiving full pay for it. That is also one of the conditions for employees not being taxed on the event.
 
-[ההנחיה של רשות המסים לגבי אירועי גיבוש](https://haifachamber.org.il/wp-content/uploads/2022/09/שווי_הטבה.pdf), שפורסמה באפריל 2018, קובעת כמה תנאים מצטברים: צורכי העבודה מצדיקים את האירוע, כל העובדים הרלוונטיים מוזמנים, ימי הגיבוש נחשבים ימי עבודה ומשולם עליהם שכר מלא, ואין להביא בני זוג או קרובי משפחה. ערב גיבוש אחרי שעות העבודה הוא שאלה אחרת, ואם הוא מוגדר חובה כדאי לבדוק מול יועץ שכר או עורך דין לדיני עבודה.
+[The Israel Tax Authority's guideline on team-building events](https://haifachamber.org.il/wp-content/uploads/2022/09/שווי_הטבה.pdf), published in April 2018, sets several cumulative conditions: the needs of the job justify the event, all the relevant employees are invited, the team-building days count as work days with full pay, and spouses or relatives may not come along. A team evening after work hours is a different question, and if it is defined as mandatory it is worth checking with a payroll consultant or an employment lawyer.
 
-## האם חובה להגיע ליום גיבוש?
+## Do you have to attend a team-building day?
 
-אין חוק שקובע במפורש שחובה להגיע. מכיוון שיום גיבוש מוגדר בדרך כלל כיום עבודה בשכר מלא, הרבה מעסיקים מתייחסים אליו כמו לכל יום עבודה.
+No law explicitly says you must attend. Because a team-building day is usually defined as a work day with full pay, many employers treat it like any other work day.
 
-בפועל, הדרך הכי טובה היא לא להגיע למצב של חובה בכלל: לבחור פעילות שאנשים רוצים להשתתף בה, לקבוע אותה בשעות העבודה, ולתת מענה למי שלא יכול (עובדים מהבית, הורים, מגבלות בריאות). אם יש מחלוקת עם מעסיק, כדאי להתייעץ עם עורך דין לדיני עבודה.
+In practice, the best approach is never to get to "mandatory" at all: choose an activity people want to take part in, schedule it during work hours, and offer a solution for those who cannot come (people working from home, parents, health limitations). If there is a dispute with an employer, consult an employment lawyer.
 
-## האם יום גיבוש חייב במס לעובדים?
+## Is a team-building day taxable for employees?
 
-לא, אם הוא עומד בתנאים של רשות המסים: יום עבודה בשכר מלא, בימי העבודה, בלי בני זוג. אם חלק מהפעילות נערך בסוף שבוע או בחופשה, העובדים יחויבו בשווי הטבה על כל הפעילות.
+No, if it meets the Tax Authority's conditions: a work day with full pay, on work days, without spouses. If part of the activity takes place on a weekend or during a vacation, employees will be charged a taxable benefit on the entire activity.
 
-[לפי סיכום ההנחיה](https://www.capitax.co.il/content/2/print/1784), בכל מקרה שלא עומד בכללים יש לזקוף לעובדים שווי הטבה, כלומר האירוע נחשב הכנסה שחייבת במס. חשוב לדעת שבפסק דין של [בית הדין האזורי לעבודה בתל אביב](https://www.capitax.co.il/Attachments/10162-11-20.pdf) צוין שההנחיה משקפת את עמדת רשות המסים ואינה דין מחייב. לשאלות על הכרה בהוצאה ועל מע״מ, פנו לרואה החשבון של החברה.
+[According to a summary of the guideline](https://www.capitax.co.il/content/2/print/1784), in any case that does not meet the rules, a taxable benefit (shovi hatava, שווי הטבה) must be attributed to the employees, meaning the event counts as taxable income. It is important to know that a ruling of the [Tel Aviv Regional Labor Court](https://www.capitax.co.il/Attachments/10162-11-20.pdf) noted that the guideline reflects the Tax Authority's position and is not binding law. For questions about deducting the expense and about VAT, talk to your company's accountant.
 
-> המידע כאן הוא סיכום כללי ואינו ייעוץ משפטי או מיסויי.
+> The information here is a general summary and is not legal or tax advice.
 
-## איך טדאם! מתאים ליום גיבוש?
+## How does Tadam! fit a team-building day?
 
-טדאם! הוא משחק טריוויה חי שנבנה מהסיפורים של העובדים, ורץ על המקרן כשכולם עונים מהטלפון. הוא עובד כפעילות פתיחה, כרגע שיא בערב צוות, או כפעילות שלמה במשרד.
+Tadam! is a live trivia game built from your employees' stories, running on the projector while everyone answers from their phone. It works as an opening activity, as the highlight of a team evening, or as a complete activity in the office.
 
-ב-[טדאם!](/) אתם אוספים מהצוות סיפורים ותמונות ושולחים לנו, אנחנו בונים מהם את המשחק, וכל שאלה עוברת את האישור שלכם לפני שהיא עולה למסך. ביום הגיבוש כולם סורקים קוד ועונים בלי אפליקציה, גם מי שמתחבר מהבית, ותוך כ-15 דקות כל החדר יודע על החברים לעבודה דברים שלא ידע קודם.
+With [Tadam!](/) you collect stories and photos from the team and send them to us, we build the game from them, and every question goes through your approval before it reaches the screen. On the team-building day everyone scans a code and answers without an app, including people joining from home, and within about 15 minutes the whole room knows things about their colleagues that it did not know before.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** צוות פיתוח של 12 אנשים, יום גיבוש בחורף שעבר למשרד בגלל גשם. במקום סדנה, 20 דקות של חידון על הצוות: של מי תמונת הילדות עם הגיטרה, ומי הפיל את השרת ביום הראשון שלו. עובדת שהצטרפה לפני חודש יוצאת מזה כשהיא יודעת את השמות של כולם, וגם את הכינויים.
+> **Example scenario (not a real event):** A development team of 12, a winter team-building day that moved to the office because of rain. Instead of a workshop, 20 minutes of a quiz about the team: whose childhood photo is the one with the guitar, and who took down the server on their first day. An employee who joined a month ago comes out of it knowing everyone's names, and their nicknames too.
 
-[צפו בדמו](/#demo), או דברו איתנו במסנג'ר (הכפתור למטה) על התאמה לחברה שלכם. עוד בנושא: [הרמת כוסית לחג במשרד](/blog/office-holiday-toast/), ולערב משפחתי בחנוכה: [חידון חנוכה עם תשובות](/blog/hanukkah-quiz/).
+[Watch the demo](/#demo), or talk to us on Messenger (the button below) about fitting it to your company. More on this: [a holiday toast at the office](/blog/office-holiday-toast/), and for a family evening on Hanukkah: [a Hanukkah quiz with answers](/blog/hanukkah-quiz/).

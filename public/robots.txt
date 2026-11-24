@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heytadam.com/sitemap-index.xml
+Sitemap: https://tadam-us.netlify.app/sitemap-index.xml

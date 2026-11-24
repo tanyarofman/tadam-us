@@ -193,7 +193,7 @@ export function init({ reduced }: { reduced: boolean }) {
       .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.08 })
       .to(screen, { filter: "brightness(0.4) saturate(0.5)", duration: 0.05 })
       .to(screen, { filter: "brightness(1) saturate(1)", duration: 0.12 })
-      // 3. "טדאם!" bursts in the middle of the screen
+      // 3. "Tadam!" bursts in the middle of the screen
       .to(burst, { opacity: 1, duration: 0.2 }, "<")
       .to(rays, { scale: 1.2, opacity: 0.5, rotate: 30, duration: mobile ? 0.45 : 0.9 })
       .to(tadam, { scale: 1, opacity: 1, rotate: -3, duration: 0.5, ease: "back.out(2.5)" }, "<0.1")

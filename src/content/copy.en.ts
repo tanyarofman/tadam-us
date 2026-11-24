@@ -1,7 +1,6 @@
 /**
- * All the landing page copy in English, for English speakers in Israel (`/en/`).
- * A translation of copy.he.ts: same keys, same order, same story. Change the Hebrew first, then mirror it here.
- * Rules: plain, warm English, "you" for the parents and organizers, no em-dashes.
+ * All the site copy (English, for the US and Europe). The Israeli Hebrew site is a separate repository (tadam-il).
+ * Rules: plain, warm American English, "you" for the organizers, no em-dashes.
  */
 
 export const COPY = {
@@ -12,17 +11,14 @@ export const COPY = {
     cta: "Let's create a game",
   },
   meta: {
-    title: "Tadam! A personal game show for your event",
+    title: "Tadam! Personalized Trivia Game Show for Parties and Events",
     description:
-      "Turn your stories, photos and personal details into a live trivia game show, with a host on the big screen and guests playing on their phones.",
+      "A live trivia game show built from your guests' stories. Your host on the big screen, everyone plays from their phone. For birthdays, weddings and teams.",
     ogAlt: "Tadam! A personal game show for your event",
   },
 
   nav: {
     skip: "Skip to content",
-    /** The link to the other language version of the same page. */
-    langSwitch: "עברית",
-    langSwitchLabel: "לגרסה בעברית",
   },
 
   hero: {
@@ -48,17 +44,17 @@ export const COPY = {
   eventsStrip: {
     label: "Events that Tadam! is a great fit for",
     items: [
-      "Birthdays",
-      "Class Reunions",
-      "Farewell Parties",
-      "Company Events",
+      "Milestone Birthdays",
+      "Rehearsal Dinners",
+      "Bridal Showers",
+      "Retirement Parties",
+      "Office Holiday Parties",
       "Anniversaries",
       "Weddings",
-      "Bachelor and Bachelorette Parties",
+      "Bachelorette Parties",
       "Bar and Bat Mitzvahs",
-      "Team-Building",
-      "Holiday Toasts",
-      "Family Events",
+      "Team Building",
+      "Family Reunions",
       "Sweet Sixteen",
     ],
   },
@@ -160,7 +156,8 @@ export const COPY = {
     title: "How much does it cost?",
     sub: "One clear price for a full game at your event. And if you want more, you can add it.",
     cardsLabel: "Price list",
-    currencyLabel: "shekels",
+    /** TODO (Tanya): prices are hidden (PRICING.showPrices) until set in USD. */
+    currencyLabel: "dollars",
     cards: {
       base: {
         name: "A personal game for your event",
@@ -199,7 +196,7 @@ export const COPY = {
           ],
           personalText: "Want a character that's only yours? We'll create it from scratch, with no copyright worries.",
           customTitle: "(you can create your own host too!)",
-          customSub: "You can also create an event host based on the aunt from America, the CEO or a beloved character",
+          customSub: "You can also create an event host based on your favorite aunt, the CEO or a beloved character",
         },
       },
     },
@@ -267,8 +264,8 @@ export const COPY = {
         a: "Only you and us. You send the materials directly to us, and every question and photo goes through your approval before it reaches the screen. Your content is never shared, never used for advertising and never used to train AI models.",
       },
       {
-        q: "Which events is it right for?",
-        a: "Any event: birthdays, bar and bat mitzvahs, weddings, holiday toasts, company events and team-building days, bachelor and bachelorette parties and family events. We tailor the stories and the questions to the guest of honor and to the crowd.",
+        q: "What events is a trivia game good for?",
+        a: "Any event where people know the guest of honor: birthdays and milestone birthdays, rehearsal dinners and weddings, bridal and couples showers, bachelorette parties, anniversaries, retirement parties, office holiday parties and team building, family reunions, bar and bat mitzvahs and sweet sixteens. We tailor the stories and the questions to the guest of honor and to the crowd.",
       },
     ],
   },
@@ -307,9 +304,9 @@ export const COPY = {
     headerNav: "Navigation",
     indexTitle: "The Tadam! blog | Event ideas, activities and quizzes",
     indexDescription:
-      "Ideas for bar and bat mitzvahs, birthdays, holidays, team-building days and company events. Activities that bring all the guests together, and quizzes ready to play.",
+      "Ideas for birthdays, weddings and showers, team events and holidays. Games that bring all the guests together, and trivia ready to play.",
     indexName: "The Tadam! blog",
-    indexLead: "Ideas for events everyone remembers: bar and bat mitzvahs, birthdays, holidays, team-building days and company events.",
+    indexLead: "Ideas for events everyone remembers: birthdays, weddings and showers, team events and holidays.",
     crumbs: "Breadcrumbs",
     updated: "Updated",
     answerAria: "The short answer",

@@ -1,172 +1,172 @@
 ---
-title: "שאלות היכרות ומשחקי היכרות: 80 שאלות ו-7 משחקים לצוות, לכיתה ולמשפחה"
-seoTitle: "שאלות היכרות: 80 שאלות ו-7 משחקי היכרות"
-description: "80 שאלות היכרות מוכנות: קלילות, מצחיקות, זה או זה ועמוקות, לילדים ולצוות בעבודה, ועוד 7 משחקי היכרות שעובדים עם כל קבוצה."
-targetKeyword: "שאלות היכרות"
-answer: "שאלות היכרות טובות הן שאלות פתוחות שקל לענות עליהן ואין להן תשובה נכונה, כמו \"מה המאכל שאתם מכינים הכי טוב?\". מתחילים בשאלות קלילות ומצחיקות, ורק אחר כך עוברים לשאלות אישיות יותר. כאן תמצאו 80 שאלות מוכנות לפי סוג ולפי קהל, ושבעה משחקי היכרות שהופכים אותן לפעילות של 10 עד 20 דקות."
+title: "Icebreakers: 80 Icebreaker Questions and 7 Icebreaker Games for Your Team, Class and Family"
+seoTitle: "Icebreakers: 80 Icebreaker Questions and 7 Games"
+description: "80 ready icebreaker questions: light, funny, this or that and deep, for kids and for teams at work, plus 7 icebreaker games that work with any group."
+targetKeyword: "icebreakers"
+answer: "Good icebreaker questions are open questions that are easy to answer and have no right answer, like \"What dish do you make best?\". Start with light and funny questions, and only then move on to more personal ones. Here you will find 80 ready questions by type and by audience, and seven icebreaker games that turn them into a 10 to 20 minute activity."
 date: 2026-11-22
-category: "חברות וצוותים"
+category: "Companies and teams"
 faq:
-  - q: "כמה שאלות היכרות צריך למפגש?"
-    a: "לסבב פתיחה מספיקה שאלה אחת שכולם עונים עליה. לפעילות של רבע שעה הכינו 10 עד 15 שאלות, ותנו לכל אחד לענות על שתיים או שלוש."
-  - q: "איך בוחרים שאלות היכרות שלא מביכות?"
-    a: "בוחרים שאלות שאפשר לענות עליהן במשפט אחד, ושכל תשובה עליהן טובה. נמנעים משאלות על זוגיות, כסף, מראה ודעות פוליטיות, ונותנים לכל אחד אפשרות לדלג."
-  - q: "מה זה בינגו היכרות?"
-    a: "לוח משבצות שבכל אחת מהן כתובה תכונה או חוויה, כמו \"מנגן בכלי\" או \"נולד בחו״ל\". המשתתפים מסתובבים ומחפשים אדם אחר לכל משבצת, והראשון שמשלים שורה מנצח."
-  - q: "אילו משחקי היכרות מתאימים לזום או לצוות מרוחק?"
-    a: "שתי אמיתות ושקר, שאלות זה או זה עם הצבעה, וחידון שבו כולם עונים מהטלפון ורואים את אותו מסך. כולם עובדים בלי לקום מהכיסא."
+  - q: "How many icebreaker questions do you need for a meeting?"
+    a: "For an opening round, one question that everyone answers is enough. For a 15-minute activity, prepare 10 to 15 questions and let each person answer two or three."
+  - q: "How do you choose icebreaker questions that aren't awkward?"
+    a: "Choose questions that can be answered in one sentence, where every answer is a good one. Avoid questions about relationships, money, appearance and political opinions, and give everyone the option to pass."
+  - q: "What is icebreaker bingo?"
+    a: "A grid of squares, each with a trait or an experience written in it, like \"plays an instrument\" or \"was born abroad\". Participants walk around looking for a different person for each square, and the first to complete a row wins."
+  - q: "Which icebreaker games work on Zoom or with a remote team?"
+    a: "Two truths and a lie, this or that questions with a vote, and a quiz where everyone answers from their phone and sees the same screen. All of them work without getting up from your chair."
 ---
 
-"בואו נעשה סבב היכרות" הוא משפט שגורם לחצי מהחדר להסתכל על הרצפה. הבעיה היא בדרך כלל השאלה. "ספרו קצת על עצמכם" היא שאלה שקשה לענות עליה, ו"מה המאכל שאתם מכינים הכי טוב?" היא שאלה שכולם רוצים לענות עליה. ריכזנו כאן 80 שאלות מהסוג השני, ושבעה משחקים שמשתמשים בהן.
+"Let's go around and introduce ourselves" is a sentence that makes half the room look at the floor. The problem is usually the question. "Tell us a bit about yourself" is hard to answer, and "What dish do you make best?" is a question everyone wants to answer. We have gathered 80 icebreaker questions of the second kind here, and seven icebreaker games that use them.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## מהן שאלות היכרות טובות?
+## What makes a good icebreaker question?
 
-שאלות היכרות טובות הן פתוחות, קלות לתשובה, ואין להן תשובה נכונה. הסדר חשוב: מתחילים בקליל, ומעמיקים בהדרגה.
+Good icebreaker questions are open, easy to answer, and have no right answer. The order matters: start light, and go deeper gradually.
 
-זה גם מה שמצא הפסיכולוג ארתור ארון במחקר מ-1997: זרים ששאלו זה את זה שאלות שנעשות אישיות יותר בהדרגה [הרגישו קרובים יותר מזרים שניהלו שיחת חולין](https://ggia.berkeley.edu/practice/36_questions_for_increasing_closeness). מהמחקר הזה הגיעה הרשימה המפורסמת של 36 השאלות. לא צריך 36 שאלות כדי לפתוח ישיבת צוות, אבל העיקרון עובד בכל קבוצה: קודם קל, אחר כך אישי.
+That is also what the psychologist Arthur Aron found in a 1997 study: strangers who asked each other questions that became gradually more personal [felt closer than strangers who made small talk](https://ggia.berkeley.edu/practice/36_questions_for_increasing_closeness). That study is where the famous list of 36 questions came from. You don't need 36 questions to open a team meeting, but the principle works in any group: easy first, personal later.
 
-## אילו שאלות היכרות קלילות מתאימות לכל קבוצה?
+## Which light icebreaker questions suit any group?
 
-שאלות על אוכל, הרגלים והעדפות, שכל אחד עונה עליהן במשפט אחד. הן מתאימות לסבב פתיחה, גם כשאנשים לא מכירים בכלל.
+Questions about food, habits and preferences that anyone can answer in one sentence. They suit an opening round, even when people don't know each other at all.
 
-1. מה המאכל שאתם מכינים הכי טוב?
-2. מה הדבר הראשון שאתם עושים בבוקר?
-3. איזו סדרה ראיתם יותר מפעם אחת?
-4. מה היעד הבא ברשימת הטיולים שלכם?
-5. מה השיר שתמיד מרים לכם את מצב הרוח?
-6. איפה גדלתם, ומה הכי אהבתם שם?
-7. מה התחביב שהייתם רוצים שיהיה לכם יותר זמן אליו?
-8. מה הייתם אוכלים לארוחה האחרונה שלכם?
-9. מה האפליקציה שאתם פותחים הכי הרבה?
-10. אתם אנשים של בוקר או של לילה?
-11. מה הספר או הפודקאסט האחרון שהמלצתם עליו למישהו?
-12. מה המקום האהוב עליכם בארץ?
-13. מה הייתם לומדים אם היה לכם חודש פנוי?
-14. איזו חיית מחמד יש לכם, או הייתם רוצים שתהיה?
-15. מה הדבר הקטן שעושה לכם את היום?
+1. What dish do you make best?
+2. What is the first thing you do in the morning?
+3. Which series have you watched more than once?
+4. What is the next destination on your travel list?
+5. Which song always lifts your mood?
+6. Where did you grow up, and what did you love most about it?
+7. Which hobby do you wish you had more time for?
+8. What would you eat for your last meal?
+9. Which app do you open the most?
+10. Are you a morning person or a night person?
+11. What is the last book or podcast you recommended to someone?
+12. What is your favorite place in Israel?
+13. What would you learn if you had a free month?
+14. What pet do you have, or wish you had?
+15. What is the small thing that makes your day?
 
-## אילו שאלות היכרות מצחיקות שוברות את הקרח?
+## Which funny icebreaker questions break the ice?
 
-שאלות דמיוניות או מוגזמות, שהתשובה עליהן מצחיקה גם כשהיא רצינית. הן טובות לקבוצה שכבר מכירה קצת, ולכל מפגש שצריך אנרגיה.
+Imaginary or exaggerated questions, where the answer is funny even when it is serious. They are good for a group that already knows each other a little, and for any gathering that needs energy.
 
-16. מה הכישרון הכי חסר תועלת שלכם?
-17. איזה מאכל אתם אוכלים בצורה שכולם אומרים שהיא לא נכונה?
-18. מה הדבר הכי מוזר שיש אצלכם בתיק עכשיו?
-19. אם הייתם חיה, איזו חיה הייתם, ומה היא הייתה אומרת עליכם?
-20. מה השיר שאתם יודעים בעל פה ומתביישים בזה?
-21. מה הייתם עושים אם הייתם בלתי נראים ליום אחד?
-22. איזו עבודה הייתם גרועים בה במיוחד?
-23. מה הוויכוח הכי מיותר שניצחתם בו?
-24. אם היה ערוץ טלוויזיה על החיים שלכם, איך היו קוראים לו?
-25. מה הדבר הכי ילדותי שאתם עדיין עושים?
-26. איזה ריח מחזיר אתכם מיד לילדות?
-27. מה הקנייה הכי מיותרת שעשיתם השנה?
-28. איזה חוק מצחיק הייתם מחוקקים אצלכם בבית?
-29. מה שם הקבוצה בוואטסאפ שהכי מביך אתכם?
-30. במה אתם בטוחים שאתם טובים, וכולם סביבכם חושבים אחרת?
+16. What is your most useless talent?
+17. Which food do you eat in a way everyone says is wrong?
+18. What is the strangest thing in your bag right now?
+19. If you were an animal, which animal would you be, and what would it say about you?
+20. Which song do you know by heart and feel embarrassed about?
+21. What would you do if you were invisible for a day?
+22. Which job would you be especially bad at?
+23. What is the most pointless argument you ever won?
+24. If there were a TV channel about your life, what would it be called?
+25. What is the most childish thing you still do?
+26. Which smell takes you straight back to childhood?
+27. What is the most unnecessary thing you bought this year?
+28. What funny law would you pass in your home?
+29. Which of your WhatsApp groups has the most embarrassing name?
+30. What are you sure you are good at, while everyone around you thinks otherwise?
 
-## אילו שאלות "זה או זה" מתאימות להיכרות?
+## Which "this or that" questions work as icebreakers?
 
-שאלות עם שתי אפשרויות בלבד, שעונים עליהן בשנייה. הן הכי קלות למי שלא אוהב לדבר מול קבוצה, ואפשר לשחק בהן בהצבעה או בעמידה בשני צדי החדר.
+Questions with only two options, answered in a second. They are the easiest for people who don't like speaking in front of a group, and you can play them with a vote or by standing on two sides of the room.
 
-31. ים או הרים?
-32. קפה או תה?
-33. מתוק או מלוח?
-34. חורף או קיץ?
-35. הודעה קולית או הודעה כתובה?
-36. לבשל או להזמין?
-37. סרט בבית או סרט בקולנוע?
-38. להגיע רבע שעה לפני או דקה אחרי?
-39. חופשה מתוכננת או ספונטנית?
-40. כלב או חתול?
-41. לקום מוקדם או ללכת לישון מאוחר?
-42. פיצה עם אננס: כן או לא?
-43. לעבוד מהבית או מהמשרד?
-44. מסיבה גדולה או ערב קטן עם חברים?
-45. לדעת את העתיד או לשנות דבר אחד בעבר?
+31. Beach or mountains?
+32. Coffee or tea?
+33. Sweet or salty?
+34. Winter or summer?
+35. Voice message or text message?
+36. Cook or order in?
+37. A movie at home or a movie at the cinema?
+38. Arrive fifteen minutes early or one minute late?
+39. A planned vacation or a spontaneous one?
+40. Dog or cat?
+41. Get up early or go to bed late?
+42. Pineapple on pizza: yes or no?
+43. Work from home or from the office?
+44. A big party or a small evening with friends?
+45. Know the future or change one thing in the past?
 
-## אילו שאלות היכרות עמוקות מתאימות אחרי שהקרח נשבר?
+## Which deep icebreaker questions work once the ice is broken?
 
-שאלות על רגעים, אנשים והחלטות, שמגלות מי האדם שמולכם. הן מתאימות לקבוצה קטנה, לזוגות או לחלק השני של המפגש.
+Questions about moments, people and decisions that reveal who the person in front of you is. They suit a small group, pairs, or the second half of the gathering.
 
-46. מה ההחלטה הכי טובה שקיבלתם בחיים?
-47. מי האדם שהכי השפיע עליכם, ואיך?
-48. מה העצה הכי טובה שקיבלתם?
-49. מה הדבר שאתם הכי גאים בו, ושכמעט אף אחד לא יודע עליו?
-50. מה הייתם אומרים לעצמכם בגיל 16?
-51. מה למדתם על עצמכם בשנה האחרונה?
-52. מה גורם לכם להרגיש בבית?
-53. איזה רגע בחיים הייתם רוצים לחיות שוב?
-54. מה הדבר שתמיד רציתם לנסות, ועוד לא העזתם?
-55. מה נחשב אצלכם יום מוצלח?
-56. על מה אתם יכולים לדבר שעות?
-57. מה הדבר שהכי מרגיע אתכם ביום קשה?
-58. מה המסורת המשפחתית שהכי חשובה לכם?
-59. במה שיניתם את דעתכם בשנים האחרונות?
-60. מה הייתם רוצים שיגידו עליכם ביום הולדת 80?
+46. What is the best decision you have made in your life?
+47. Who has influenced you the most, and how?
+48. What is the best advice you ever received?
+49. What are you most proud of that almost no one knows about?
+50. What would you say to your 16-year-old self?
+51. What have you learned about yourself in the past year?
+52. What makes you feel at home?
+53. Which moment in your life would you like to live again?
+54. What have you always wanted to try and haven't dared to yet?
+55. What counts as a good day for you?
+56. What can you talk about for hours?
+57. What calms you most on a hard day?
+58. Which family tradition matters most to you?
+59. What have you changed your mind about in recent years?
+60. What would you like people to say about you on your 80th birthday?
 
-## אילו שאלות היכרות מתאימות לילדים ולכיתה?
+## Which icebreaker questions suit kids and a classroom?
 
-שאלות קצרות על דברים שילדים אוהבים: משחקים, חיות, אוכל וחופש. הן מתאימות לתחילת שנה, לקייטנה ולפעולה ראשונה בתנועת הנוער.
+Short questions about things kids love: games, animals, food and vacation. They suit the start of the school year, summer camp and the first meeting of a youth movement group.
 
-61. מה המשחק שאתם הכי אוהבים בהפסקה?
-62. איזה כוח על הייתם בוחרים?
-63. מה הדבר הכי כיף שעשיתם בחופש?
-64. איזו חיה הייתם רוצים לגדל בבית?
-65. מה המאכל שהייתם אוכלים כל יום?
-66. מה אתם רוצים להיות כשתהיו גדולים?
-67. מה הדבר שאתם הכי טובים בו?
-68. אם הייתם ממציאים חג חדש, מה היו עושים בו?
-69. מה הספר, הסרט או המשחק האהוב עליכם?
-70. מה הדבר שהכי מצחיק אתכם?
+61. What is your favorite game to play at recess?
+62. Which superpower would you choose?
+63. What is the most fun thing you did on vacation?
+64. Which animal would you like to keep at home?
+65. Which food would you eat every day?
+66. What do you want to be when you grow up?
+67. What are you best at?
+68. If you invented a new holiday, what would people do on it?
+69. What is your favorite book, movie or game?
+70. What makes you laugh the most?
 
-## אילו שאלות היכרות מתאימות לצוות בעבודה?
+## Which icebreaker questions suit a team at work?
 
-שאלות שמחברות בין האדם לעבודה בלי להיכנס לחיים הפרטיים. הן מתאימות לפתיחת ישיבה, לקליטת עובדים חדשים ולתחילת יום גיבוש.
+Questions that connect the person to the work without getting into private life. They suit the start of a meeting, onboarding new employees and the beginning of a team-building day.
 
-71. מה העבודה הראשונה שלכם, ומה למדתם ממנה?
-72. מה הדבר שהכי עוזר לכם להתרכז?
-73. מה הכלי או הקיצור שאתם לא יכולים לעבוד בלעדיו?
-74. במה הייתם עובדים אם לא בתחום הזה?
-75. מה הדבר הכי מפתיע שלמדתם בתפקיד הזה?
-76. באיזו שעה ביום אתם הכי יעילים?
-77. מה הטעות שהכי למדתם ממנה?
-78. מי בצוות לימד אתכם משהו בזמן האחרון, ומה?
-79. מה הייתם רוצים שכולם ידעו על הדרך שבה אתם עובדים?
-80. מה הדבר הראשון שהייתם משנים במשרד?
+71. What was your first job, and what did you learn from it?
+72. What helps you concentrate the most?
+73. Which tool or shortcut can't you work without?
+74. What would you do for work if not this field?
+75. What is the most surprising thing you have learned in this role?
+76. What time of day are you most productive?
+77. Which mistake did you learn the most from?
+78. Who on the team taught you something recently, and what was it?
+79. What would you like everyone to know about the way you work?
+80. What is the first thing you would change in the office?
 
-לשאלות כמו 77 יש גם ערך מעשי. במחקר של פרופ׳ לי תומפסון מבית הספר לניהול קלוג, צוותים שסיפרו זה לזה סיפור מביך לפני סיעור מוחות [העלו יותר רעיונות מצוותים שסיפרו על הישג](https://insight.kellogg.northwestern.edu/article/boost-creativity-brainstorm-embarrassment). מתכננים יום שלם לצוות? הנה [רעיונות ליום גיבוש לעובדים](/blog/team-building-day-ideas/).
+Questions like number 77 also have practical value. In a study by Prof. Leigh Thompson of the Kellogg School of Management, teams that told each other an embarrassing story before brainstorming [came up with more ideas than teams that talked about an achievement](https://insight.kellogg.northwestern.edu/article/boost-creativity-brainstorm-embarrassment). Planning a whole day for the team? Here are [team-building day ideas](/blog/team-building-day-ideas/).
 
-## אילו משחקי היכרות עובדים עם קבוצה?
+## Which icebreaker games work with a group?
 
-המשחקים שעובדים הם אלה שנותנים לכל אחד תפקיד קטן ולא דורשים נאום. הטבלה מסכמת שבעה משחקים לפי גודל הקבוצה והזמן.
+The games that work are the ones that give everyone a small role and don't require a speech. The table sums up seven games by group size and time.
 
-| משחק | גודל קבוצה | זמן | מה צריך |
+| Game | Group size | Time | What you need |
 |---|---|---|---|
-| שתי אמיתות ושקר | 4 עד 15 | 10 עד 15 דקות | כלום |
-| בינגו היכרות | 10 עד 60 | 15 דקות | לוח מודפס ועט לכל אחד |
-| של מי העובדה? | 6 עד 30 | 15 דקות | פתקים וקופסה |
-| זה או זה בתנועה | 8 עד 100 | 5 עד 10 דקות | חדר עם מקום לזוז |
-| ראיון בזוגות | 6 עד 30 | 15 עד 20 דקות | שלוש שאלות מהרשימה |
-| כדור צמר | 6 עד 20 | 10 עד 15 דקות | כדור צמר |
-| חידון על הקבוצה | 10 ומעלה | 15 עד 20 דקות | מסך וטלפונים |
+| Two truths and a lie | 4 to 15 | 10 to 15 minutes | Nothing |
+| Icebreaker bingo | 10 to 60 | 15 minutes | A printed card and a pen for each person |
+| Whose fact is it? | 6 to 30 | 15 minutes | Slips of paper and a box |
+| This or that on the move | 8 to 100 | 5 to 10 minutes | A room with space to move |
+| Interview in pairs | 6 to 30 | 15 to 20 minutes | Three questions from the list |
+| Ball of yarn | 6 to 20 | 10 to 15 minutes | A ball of yarn |
+| A quiz about the group | 10 and up | 15 to 20 minutes | A screen and phones |
 
-1. **שתי אמיתות ושקר.** כל אחד אומר שלושה משפטים על עצמו, ושאר הקבוצה מנחשת מה השקר.
-2. **בינגו היכרות.** בכל משבצת תכונה או חוויה ("מדבר שלוש שפות", "רץ מרתון"), ומחפשים אדם אחר לכל משבצת.
-3. **של מי העובדה?** כל אחד כותב על פתק עובדה שלא יודעים עליו. המנחה מקריא, והקבוצה מנחשת של מי היא.
-4. **זה או זה בתנועה.** מקריאים שאלה מהרשימה, וכל אחד עומד בצד של התשובה שלו. מגלים מהר מי דומה למי.
-5. **ראיון בזוגות.** כל זוג מראיין זה את זה שלוש דקות, ואז כל אחד מציג את בן הזוג שלו לקבוצה.
-6. **כדור צמר.** מי שמחזיק בכדור עונה על שאלה, אוחז בקצה החוט וזורק את הכדור הלאה. בסוף נוצרת רשת שמחברת את כולם.
-7. **חידון על הקבוצה.** אוספים מראש עובדה מכל משתתף, ובונים מהן שאלות: "מי מאיתנו גר שנה ביפן?".
+1. **Two truths and a lie.** Everyone says three sentences about themselves, and the rest of the group guesses which one is the lie.
+2. **Icebreaker bingo.** Each square has a trait or an experience ("speaks three languages", "ran a marathon"), and you look for a different person for each square.
+3. **Whose fact is it?** Everyone writes on a slip of paper a fact people don't know about them. The facilitator reads it out, and the group guesses whose it is.
+4. **This or that on the move.** Read out a question from the list, and everyone stands on the side of their answer. You quickly find out who is like whom.
+5. **Interview in pairs.** Each pair interviews one another for three minutes, and then everyone introduces their partner to the group.
+6. **Ball of yarn.** Whoever holds the ball answers a question, holds on to the end of the yarn and throws the ball onward. By the end there is a web connecting everyone.
+7. **A quiz about the group.** Collect a fact from every participant ahead of time, and build questions from them: "Which of us lived in Japan for a year?".
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** ישיבת פתיחה של צוות חדש, תשעה אנשים שרובם לא עבדו יחד. במקום סבב שמות, כל אחד עונה על "מה העבודה הראשונה שלכם?". מתברר ששניים מהם מלצרו באותה שנה באותו רחוב, ומנהלת הצוות חילקה עיתונים על אופניים. בהפסקה כבר לא מדברים על העבודה.
+> **Example scenario (not a real event):** A kickoff meeting for a new team, nine people who mostly haven't worked together. Instead of a round of names, everyone answers "What was your first job?". It turns out two of them waited tables in the same year on the same street, and the team lead delivered newspapers by bike. By the break, nobody is talking about work anymore.
 
-## איך הופכים שאלות היכרות למשחק על מסך?
+## How do you turn icebreaker questions into a game on a screen?
 
-אוספים מראש תשובה אחת מכל משתתף, והופכים כל תשובה לשאלה שכל החדר מנחש. ככה גם מי שלא אוהב לדבר מול קבוצה משתתף, וכולם לומדים משהו על כולם.
+Collect one answer from every participant ahead of time, and turn each answer into a question the whole room guesses. That way even people who don't like speaking in front of a group take part, and everyone learns something about everyone.
 
-זה המשחק השביעי בטבלה, וזה מה שאנחנו עושים ב-[טדאם!](/). אתם אוספים מהצוות, מהכיתה או מהמשפחה סיפורים ותמונות ושולחים לנו, אנחנו בונים מהם את המשחק, וכל שאלה עוברת את האישור שלכם לפני שהיא עולה למסך. במפגש עצמו המשחק רץ על המסך הגדול, כולם סורקים קוד ועונים מהטלפון בלי אפליקציה, גם מי שמתחבר מהבית. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+That is the seventh game in the table, and it is what we do at [Tadam!](/). You collect stories and photos from your team, class or family and send them to us, we build the game from them, and every question goes through your approval before it reaches the screen. At the gathering itself the game runs on the big screen, and everyone scans a code and answers from their phone without an app, including people joining from home. [Watch the demo](/#demo) to see what it looks like.
 
-מחפשים משחק היכרות עם פתקים והפתעות? נסו [משימות ושאלות לחבילה עוברת](/blog/pass-the-parcel-tasks/).
+Looking for an icebreaker game with notes and surprises? Try [tasks and questions for pass the parcel](/blog/pass-the-parcel-tasks/).

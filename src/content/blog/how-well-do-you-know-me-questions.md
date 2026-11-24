@@ -180,4 +180,4 @@ Give one point for every right answer, and two points for the hard questions nea
 
 On paper, someone has to collect the sheets, mark them and add up the scores, usually while the party waits. That's fine for a table of ten and slow for a room of 60.
 
-In a live game, scoring is automatic. That's what [Tadam!](/) builds: you send us the stories, photos and answers about the guest of honor, and we turn them into a trivia game with a host on the big screen. Guests scan a code and answer from their phones with no app, the leaderboard updates after every question, and the winner is revealed at the end. [Watch the demo](/#demo) to see a full game.
+In a live game, scoring is automatic. That's what [Tadam!](/) is for: you type in the stories and answers about the guest of honor, add photos, pick a host, and review the questions of your trivia game on the big screen. Guests scan a code and answer from their phones with no app, the leaderboard updates after every question, and the winner is revealed at the end. [Watch the demo](/#demo) to see a full game.

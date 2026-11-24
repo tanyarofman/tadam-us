@@ -184,4 +184,4 @@ When moms and grandmas join, pick games built on memories and family stories rat
 
 Put the questions on a TV or projector, and let every guest answer from their phone at the same time. The screen shows the right answer and who's leading, so nobody has to keep score.
 
-That's what [Tadam!](/) does. You send us stories, photos and the groom's answers, and we build a personal trivia game about the bride with a host on the screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who knows the bride best. It works at a bachelorette party, a [bridal shower](/blog/bridal-shower-games/) or a rehearsal dinner. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) does. You type in stories and the groom's answers, add photos, pick a host, and review the questions of your personal trivia game about the bride. Guests scan a code and play from their phones with no app, and the leaderboard shows who knows the bride best. It works at a bachelorette party, a [bridal shower](/blog/bridal-shower-games/) or a rehearsal dinner. [Watch the demo](/#demo) to see a full game.

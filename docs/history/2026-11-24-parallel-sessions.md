@@ -34,11 +34,27 @@ Each one is told to:
 
 The DataForSEO round is still capped at $10, shared by all sessions; $2.91 was spent before they started. Each session reads the running total in `status.md` and asks Tanya before going over.
 
-## Mismatch to settle with Tanya
-- The local session (`2026-11-24-us-rewrites-and-launch-checks.md`) decided with Tanya that the seasonal rewrites can wait for next season. Its reason: a brand-new domain rarely ranks within days.
-- The rewrites session was opened later at Tanya's request and told to do the Hanukkah pair first, for December 4. Tanya can still say "wait" there.
-- **Bar and bat mitzvah** (`bar-mitzvah-attractions`) is still on the rewrite list in `status.md` but is in no session. Add it to the rewrites session, or open one for it.
+## How the open questions were settled (later on 24 Nov)
+- **Hanukkah, now or next year:**
+  - Tanya chose now. The rewrite session shipped the Hanukkah pair first: `hanukkah-games`, and `hanukkah-trivia`, which was renamed from `hanukkah-quiz` with a 301 redirect (PR #15).
+  - New Year's Eve, the office party and pass the parcel followed in PR #21, renamed to `new-years-eve-games` and `office-christmas-party-games`, both with 301 redirects.
+  - See `2026-11-24-seasonal-rewrites.md`.
+- **Christmas, now or next year:** Tanya chose this December. See `2026-11-24-wave4-holidays.md`.
+- **Bar and bat mitzvah:**
+  - Tanya dropped the rewrite and asked to hide the page.
+  - Another session had already done it on main (PRs #24 and #32): `draft: true` and a temporary 302 redirect to /blog/.
+  - This session's PR #30 did the same and was closed as a duplicate.
+  - No article links to the page; the pass the parcel rewrite removed the last link.
+  - Don't rewrite or republish it until Tanya asks.
+- **Search Console indexing:**
+  - A dedicated session, "Tadam US: Search Console indexing", now tracks the Request indexing list. PR #36 holds it in priority order.
+  - Use that list instead of the one above, which was written before the renames.
+
+## Lessons for parallel sessions
+- Before opening a PR for a shared decision (a page to hide, a status line), pull main and check whether another session already did it. PR #30 duplicated #24 and #32.
+- When a slug is renamed, the old address must get a 301, and indexing lists written earlier go stale.
 
 ## Open
 - The items under "Waiting for Tanya" in `docs/seo/status.md`.
-- Approve headings in the five sessions. The most time-sensitive questions are in the rewrites session (Hanukkah: now or next year) and wave 4 (Christmas: now or next year).
+- **Google Analytics 4:** the suggested task "Connect Google Analytics 4 to tadamevents.com" has not been started.
+- Wave 2 and wave 3 sessions: see their own records in `docs/history/`, and `status.md` for what is still waiting for headings or a merge.

@@ -140,4 +140,4 @@ Put their twenties on the screen: photos from every year, a few short videos fro
 
 Pick two or three speakers from different parts of their life, and let the game do the rest. It gives college friends, coworkers and family a reason to talk to each other, and the birthday person gets to react to every answer.
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the birthday person, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals who knows them best. [Watch the demo](/#demo), and for an older sibling or friend, see our [40th birthday party ideas](/blog/40th-birthday-party-ideas/).
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the birthday person, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals who knows them best. [Watch the demo](/#demo), and for an older sibling or friend, see our [40th birthday party ideas](/blog/40th-birthday-party-ideas/).

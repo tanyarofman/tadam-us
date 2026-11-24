@@ -25,7 +25,7 @@ Some games need no explanation. A circle, music, a parcel passing from hand to h
 
 Pass the parcel is a party game in which a prize wrapped in many layers goes around a circle while music plays. When the music stops, whoever is holding the parcel removes one layer, and you keep going until the last layer.
 
-In Hebrew the game is called chavila overet (חבילה עוברת), and it is known as a [classic British party game](https://en.wikipedia.org/wiki/Pass_the_parcel). In the original version, a small prize waits in every layer. In the version familiar in Israel, every layer holds a note with a task or a question, and the prize is saved for whoever opens the last layer.
+It is known as a [classic British party game](https://en.wikipedia.org/wiki/Pass_the_parcel). In the original version, a small prize waits in every layer. In the version on this page, every layer holds a note with a task or a question, and the prize is saved for whoever opens the last layer.
 
 ## How do you prepare a pass the parcel?
 
@@ -77,7 +77,7 @@ Short questions with no right answer, the kind every child can answer and that r
 18. What's the funniest thing that happened to you this year?
 19. Where would you fly tomorrow morning?
 20. Which animal is most like you, and why?
-21. What would you do with a million shekels?
+21. What would you do with a million dollars?
 22. Which school subject would you cancel, and which would you add?
 23. Which song do you sing in the shower?
 24. What's the first thing you do when you get home?
@@ -139,7 +139,7 @@ This is the upgrade that turns pass the parcel from a general activity into a ga
 
 > **Example scenario (not a real event):** A 40th birthday in the living room, 18 friends in a circle. The music stops at a friend from the army, and the note asks "Which hobby did Yuval start and drop after a week?". He answers "surfing", Yuval's wife corrects it to "pottery", and instead of the prize he gets a task: to give a half-minute speech about Yuval in an accent of his choice.
 
-Organizing a bachelorette party? We've gathered [bachelorette party games and tasks](/blog/bachelorette-party-games/), including questions about the bride. For a bat or bar mitzvah, here are another [25 attractions that guests remember](/blog/bar-mitzvah-attractions/).
+Organizing a bachelorette party? We've gathered [bachelorette party games and tasks](/blog/bachelorette-party-games/), including questions about the bride. And for a party game the whole room can play, try these [trivia questions for adults](/blog/general-knowledge-trivia-questions/).
 
 ## How do you play pass the parcel when there are a lot of guests?
 

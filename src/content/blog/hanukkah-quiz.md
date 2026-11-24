@@ -55,8 +55,8 @@ You ask about what kids see and do during the holiday: the candles, the dreidel,
 
 1. **How many days does Hanukkah last?** Eight.
 2. **What do you call the candle used to light the other candles?** The shamash.
-3. **What is written on a dreidel in Israel?** Nun, gimel, hei, pe: "Nes gadol haya po", a great miracle happened here.
-4. **And what is written on a dreidel outside Israel?** Nun, gimel, hei, shin: "Nes gadol haya sham", a great miracle happened there.
+3. **What is written on a dreidel?** Nun, gimel, hei, shin: "Nes gadol haya sham", a great miracle happened there.
+4. **In the dreidel game, what happens when you spin gimel?** You take the whole pot.
 5. **Why do we eat foods fried in oil on Hanukkah?** In memory of the miracle of the jug of oil, which lasted eight days.
 6. **What is the eighth day of Hanukkah called?** "Zot Hanukkah".
 7. **How many candles are burning on the fifth night, including the shamash?** Six.
@@ -68,8 +68,8 @@ You ask about what kids see and do during the holiday: the candles, the dreidel,
 
 Questions about the holiday story itself: who the Hasmoneans were, where they came from and what happened in the Temple. They suit older kids and anyone who remembers a little from school.
 
-11. **On which Hebrew date does Hanukkah begin?** The 25th of Kislev.
-12. **What does the word "Hanukkah" recall?** The dedication (chanukah) of the Temple, when the Maccabees purified it and lit the menorah again. ([More on the origin of the name and the holiday's customs](https://lib.hebcal.co.il/holidays/chanukah.html))
+11. **On which date in the Jewish calendar does Hanukkah begin?** The 25th of Kislev.
+12. **What does the word "Hanukkah" recall?** The dedication (chanukah) of the Temple, when the Maccabees purified it and lit the menorah again. ([More on the origin of the name and the holiday's customs](https://www.hebcal.com/holidays/chanukah))
 13. **Which town did the Hasmonean family come from?** Modi'in.
 14. **What was the name of the father of the family?** Mattathias (Matityahu).
 15. **How many sons did Mattathias have?** Five: Yochanan, Shimon, Yehuda, Elazar and Yonatan.
@@ -83,15 +83,15 @@ Questions about the holiday story itself: who the Hasmoneans were, where they ca
 
 Questions about the sources and the small details: where the story is written, what happened in the battles and who wrote the songs. These are the questions that get Grandpa arguing with the grandchild who learned it this week.
 
-21. **Does the Hanukkah story appear in the Tanakh?** No. The story of the revolt is told in the Books of Maccabees, which were not included in the Tanakh, and the miracle of the jug of oil first appears [in the Talmud, in tractate Shabbat, under the question "Mai Hanukkah?" (What is Hanukkah?)](https://www.sefaria.org.il/Shabbat.21b).
+21. **Does the Hanukkah story appear in the Tanakh?** No. The story of the revolt is told in the Books of Maccabees, which were not included in the Tanakh, and the miracle of the jug of oil first appears [in the Talmud, in tractate Shabbat, under the question "Mai Hanukkah?" (What is Hanukkah?)](https://www.sefaria.org/Shabbat.21b).
 22. **Which of the brothers was killed when an elephant of the king's army fell on him?** Elazar. The story appears [in the First Book of Maccabees, chapter 6](https://bible.usccb.org/bible/1maccabees/6).
 23. **Which addition is said in the prayers and in Birkat Hamazon on Hanukkah?** "Al HaNisim".
 24. **Which Rosh Chodesh always falls during Hanukkah?** Rosh Chodesh Tevet.
 25. **What is the difference between the menorah in the Temple and a hanukkiah?** The menorah has seven branches. A hanukkiah has eight candles plus a shamash.
-26. **What appears on the emblem of the State of Israel: a menorah or a hanukkiah?** A seven-branched menorah.
+26. **How many candles do you light on the last night of Hanukkah, counting the shamash?** Nine.
 27. **What was special about the jug of oil found in the Temple?** It was sealed with the seal of the High Priest, meaning it was pure.
 28. **From which side do you add a new candle, and from which side do you light?** You add from the right, and light the new candle first, from left to right.
-29. **Who wrote the song "Sevivon Sov Sov Sov"?** [Levin Kipnis](https://www.maariv.co.il/culture/literature/article-1036851), who also wrote "Ner Li".
+29. **Who wrote the song "Sevivon Sov Sov Sov"?** Levin Kipnis, who also wrote "Ner Li".
 30. **Which heroine became linked to Hanukkah, and is the reason some people eat cheese dishes on the holiday?** Judith (Yehudit).
 
 ## How do you make a funny Hanukkah quiz about the family?
@@ -121,4 +121,4 @@ You show the questions on the TV, and everyone answers from their own phone. The
 
 If you're hosting a lot of people, or you have a big family event over Hanukkah (a bar mitzvah, a milestone birthday, a get-together of the whole extended family), at [Tadam!](/) you send us stories, questions and photos from the family, and we build the game out of them. On the day of the event the game runs on the TV or the projector, everyone scans a code and answers from their phone with no app, and a host runs the game until the team that knows the family best is announced. [Watch the demo](/#demo) to see what it looks like.
 
-Having a Hanukkah holiday toast at work too? We have a [guide to the office holiday toast](/blog/office-holiday-toast/). Planning a bar mitzvah? Here are [25 bar mitzvah attractions](/blog/bar-mitzvah-attractions/). And if you're organizing an evening for your team, read [ideas for a team-building day for employees](/blog/team-building-activities-for-work/).
+Want more for the eight nights? Here are [15 Hanukkah games for the whole family](/blog/hanukkah-games/). And if you're organizing an evening for your team, read [ideas for a team-building day for employees](/blog/team-building-activities-for-work/).

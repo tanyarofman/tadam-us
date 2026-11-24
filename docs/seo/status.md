@@ -28,6 +28,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 2. **Existing articles:**
    - ~~Rewrite trivia, icebreakers, bachelorette and team building~~ Done 2026-11-24.
    - ~~Delete `hanukkah-riddles` and `tu-bishvat-quiz`~~ Done 2026-11-24.
+   - 2026-11-24: `office-holiday-toast`, `new-years-eve-at-home` and `bar-mitzvah-attractions` set to `draft: true` (302 to /blog/) because they were built around Israel. Un-draft each one when its US rewrite is done, and remove its redirect in `netlify.toml`.
    - Still to rewrite: office party (as office Christmas party games), New Year's Eve, hanukkah games (dreidel), hanukkah trivia, bar and bat mitzvah. The seasonal ones can wait for next season (October and November 2027); the questions for them are already in `data/questions-us-rewrites-2026-11-24.csv`.
    - Keep `pass-the-parcel-tasks` as a UK article.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.

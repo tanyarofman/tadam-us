@@ -5,6 +5,7 @@ description: "What to do on Sylvester or Novy God at home: 10 New Year's Eve gam
 targetKeyword: "New Year's Eve games"
 answer: "A good New Year's Eve at home is built from a meal, one or two games that sum up the year of the people in the room, and a countdown. Here you will find 10 games for Sylvester and Novy God, 30 year-in-review questions for family, friends and your team at work, and a ready plan for the evening, from dinner to midnight. This year the evening falls on Thursday, December 31, 2026."
 date: 2026-11-22
+draft: true
 category: "Holidays and family"
 faq:
   - q: "When is Sylvester 2026?"

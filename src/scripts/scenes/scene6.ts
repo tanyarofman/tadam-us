@@ -41,7 +41,7 @@ export function init({ reduced }: { reduced: boolean }) {
     return;
   }
 
-  const fmt = new Intl.NumberFormat("he-IL");
+  const fmt = new Intl.NumberFormat("en-US");
   const pitch = () => rows[1].offsetTop - rows[0].offsetTop;
   const scores = { p0: 0, p1: 0, p2: 0, p3: 0, p4: 0 };
   const renderScores = () =>

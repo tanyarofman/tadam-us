@@ -1,7 +1,7 @@
 ---
 /**
  * Site footer: brand + contact, the site links, the legal links, and the legal line Paddle asks for
- * ("© <year> <legal name>, <country>. Payments processed by Paddle.com.").
+ * ("© <year> <legal name>. Payments processed by Paddle.com.").
  */
 import { useCopy } from "../content/copy";
 import { SITE } from "../config/site";
@@ -41,7 +41,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container footer-bottom">
-    <p>© {year} {legal.legalName}, {legal.country}. {c.paddle}</p>
+    <p>© {year} {legal.legalName}. {c.paddle}</p>
   </div>
 </footer>
 

@@ -8,7 +8,7 @@ date: 2026-11-22
 category: "Holidays and family"
 faq:
   - q: "How do you play dreidel?"
-    a: "Every player puts a coin in the pot and spins in turn. On nun you take nothing, on gimel you take the whole pot, on hei you take half, and on pe or shin you add a coin to the pot."
+    a: "Every player puts a coin in the pot and spins in turn. On nun you take nothing, on gimel you take the whole pot, on hei you take half, and on shin you add a coin to the pot."
   - q: "Which games suit a Hanukkah party with a lot of guests?"
     a: "Hanukkah bingo, a team quiz and a dreidel tournament work even with 30 guests or more. Circle games, like pass the parcel, suit up to 20 players."
   - q: "Which Hanukkah games suit Zoom?"
@@ -49,7 +49,7 @@ Every player puts one coin in the pot, and spins the dreidel in turn. The letter
 
 1. **Hand out coins.** Ten to fifteen per player: chocolate coins, nuts or almonds.
 2. **Everyone puts a coin in the pot.** When the pot is empty, everyone puts in again.
-3. **Spin in turn.** Nun: nothing happens. Gimel: you take the whole pot. Hei: you take half the pot. Pe (or shin on a dreidel from outside Israel): you add a coin to the pot.
+3. **Spin in turn.** Nun: nothing happens. Gimel: you take the whole pot. Hei: you take half the pot. Shin: you add a coin to the pot.
 4. **Whoever runs out of coins is out.** The winner is the last one left, or whoever has the most when time is up.
 
 [These rules](https://en.wikipedia.org/wiki/Dreidel) come from Yiddish: nisht (nothing), gantz (everything), halb (half) and shtel arayn (put in). The dreidel itself is a Jewish version of a European gambling top, and the reading "a great miracle happened there" was attached to the letters later.

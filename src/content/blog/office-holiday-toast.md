@@ -5,6 +5,7 @@ description: "How to run a holiday toast at work (Hanukkah, Rosh Hashanah, Pesac
 targetKeyword: "holiday toast"
 answer: "A good office holiday toast lasts 30 to 45 minutes and has three parts: short opening remarks (up to 3 minutes), one activity that involves everyone, for example a quiz about the team's year, and food with time to talk. Most important: let people talk about themselves and the year that passed, not only listen to a speech."
 date: 2026-11-16
+draft: true
 updated: 2026-11-17
 category: "Companies and teams"
 faq:

@@ -2,11 +2,13 @@
 
 > Draft for lawyer review. Not legal advice. Fill every `[[PLACEHOLDER]]` before publishing at `tadamevents.com/terms`.
 
+> **No connection to Israel on the site (Tanya, 2026-11-24):** no country, street address, business type or Israeli law in the published text. The real business details go only in the private Paddle forms (`paddle-signup-guide.md`, `paddle-application.md`).
+
 **Last updated:** [[DATE]]
 
 ## 1. Who we are
 
-Tadam! ("Tadam", "we", "us") is operated by Tanya Rofman, a sole trader (Osek Murshe, עוסק מורשה) registered in Israel, at Ein Gedi 2/2, Tel Aviv 6203602, Israel. Contact: hey@tadamevents.com.
+Tadam! ("Tadam", "we", "us") is operated by Tanya Rofman, a sole trader. Contact: hey@tadamevents.com.
 
 These terms apply to your use of tadamevents.com and to every game you create or buy there (the "Service"). By creating a game or making a purchase, you agree to these terms.
 
@@ -64,8 +66,8 @@ We may update these terms. The version in force when you place an order applies 
 
 ## 12. Governing law
 
-These terms are governed by the laws of the State of Israel, and the courts of Tel Aviv, Israel have jurisdiction. If you are a consumer in the EU or UK, you also keep the protection of the mandatory laws of your country and may bring a claim in your local courts.
+If you are a consumer, you keep the protection of the mandatory consumer laws of the country where you live, and you may bring a claim in your local courts.
 
 ## 13. Contact
 
-Tanya Rofman, Ein Gedi 2/2, Tel Aviv 6203602, Israel, hey@tadamevents.com.
+Tanya Rofman, hey@tadamevents.com.

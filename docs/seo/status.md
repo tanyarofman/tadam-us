@@ -62,6 +62,9 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
   - [ ] `/blog/new-years-eve-games/` (PR #21)
   - [ ] `/blog/office-christmas-party-games/` (PR #21)
   - [ ] `/blog/pass-the-parcel-tasks/` (PR #21)
+  - [ ] `/blog/team-trivia-for-work/` (PR #20, live 2026-11-24)
+  - [ ] `/blog/virtual-team-building-activities/` (PR #20, live 2026-11-24)
+  - Not live yet, add when merged: `/blog/graduation-party-games/`, `/blog/50th-anniversary-party-ideas/`, `/blog/sweet-16-party-ideas/` (PR #25, March 2027); `/blog/family-reunion-games/`, `/blog/family-trivia-questions/` (PR #31, by early June 2027)
   - Never request the redirected old addresses (`hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.

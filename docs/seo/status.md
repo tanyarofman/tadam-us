@@ -87,7 +87,12 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
     - [ ] `/blog/christmas-quiz-questions/` (UK set, #26; seasonal, can move up)
     - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
     - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
-    - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
+    - [ ] `/blog/mr-and-mrs-quiz-questions/` (UK set, #29)
+    - [ ] `/blog/hen-party-games/` (UK set, #29)
+    - [ ] `/blog/thanksgiving-family-games/` (wave 4, #28; for next season, so last)
+    - [ ] `/blog/friendsgiving-games/` (wave 4, #28; for next season, so last)
+    - Add new articles here as their PRs merge.
+  - Never request deploy-preview addresses (`deploy-preview-<n>--tadam-us.netlify.app`): they are outside the Search Console property and Netlify serves them with `noindex`.
     - Wave 3, not live yet: `/blog/graduation-party-games/`, `/blog/50th-anniversary-party-ideas/`, `/blog/sweet-16-party-ideas/` (PR #25, merge in March 2027); `/blog/family-reunion-games/`, `/blog/family-trivia-questions/` (PR #31, by early June 2027).
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).

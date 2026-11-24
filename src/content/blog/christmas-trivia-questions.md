@@ -25,7 +25,7 @@ Christmas trivia works at any December gathering: a family dinner, a party with 
 
 Good Christmas trivia questions have one clear answer, teach the room something and mix easy with hard. Plan rounds of about 8 to 10 questions on different topics, so every guest has a round they're good at.
 
-The rounds below: history (1 to 10), traditions (11 to 20), carols (21 to 28), food (29 to 36), around the world (37 to 44), a hard round (45 to 52) and kids (53 to 60). For an hour of play, choose three or four rounds. If you need more general questions, add a few from our [100 trivia questions for adults](/blog/general-knowledge-trivia-questions/).
+The rounds below: history (1 to 10), traditions (11 to 20), carols (21 to 28), food (29 to 36), around the world (37 to 44), a hard round (45 to 52) and kids (53 to 60). For an hour of play, choose three or four rounds. If you need more, our [100 Christmas quiz questions](/blog/christmas-quiz-questions/) add British traditions, a funny round and a numbers round.
 
 ## What are some Christmas history trivia questions?
 

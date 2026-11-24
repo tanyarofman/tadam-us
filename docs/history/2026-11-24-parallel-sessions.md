@@ -37,7 +37,7 @@ The DataForSEO round is still capped at $10, shared by all sessions; $2.91 was s
 ## Mismatch to settle with Tanya
 - The local session (`2026-11-24-us-rewrites-and-launch-checks.md`) decided with Tanya that the seasonal rewrites can wait for next season. Its reason: a brand-new domain rarely ranks within days.
 - The rewrites session was opened later at Tanya's request and told to do the Hanukkah pair first, for December 4. Tanya can still say "wait" there.
-- **Bar and bat mitzvah** (`bar-mitzvah-attractions`) is still on the rewrite list in `status.md` but is in no session. Add it to the rewrites session, or open one for it.
+- **Bar and bat mitzvah:** Tanya decided to drop the rewrite for now. The page is hidden (`draft: true`, a 302 redirect to /blog/). `pass-the-parcel-tasks` still links to it; the link lands on /blog/ through the redirect until the rewrites session removes it.
 
 ## Open
 - The items under "Waiting for Tanya" in `docs/seo/status.md`.

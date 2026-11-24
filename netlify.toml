@@ -43,6 +43,12 @@
   to = "/blog/"
   status = 301
 
+# Hidden for now (draft: true), not deleted: a temporary redirect until the article is rewritten for the US.
+[[redirects]]
+  from = "/blog/bar-mitzvah-attractions"
+  to = "/blog/"
+  status = 302
+
 [[redirects]]
   from = "/blog/hanukkah-quiz"
   to = "/blog/hanukkah-trivia/"

@@ -6,6 +6,7 @@ targetKeyword: "bar mitzvah ideas"
 answer: "The most popular bar mitzvah attractions are photo stations (magnets, 360, selfie mirror), dance floor extras (drummers, LED accessories), food stations and short shows. The ones people remember most are about the bar or bat mitzvah kid and involve every age group, for example a live trivia game about the child that all the guests play from their phones."
 date: 2026-11-16
 updated: 2026-11-17
+draft: true
 category: "Bar and bat mitzvah"
 faq:
   - q: "How many attractions does a bar mitzvah need?"

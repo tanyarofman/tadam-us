@@ -24,8 +24,8 @@ Session record. Three other sessions worked in parallel: the Hanukkah, New Year'
 - The balance went from $39.82 to $39.35 while other sessions were also spending. The round total is about $3.60 of the approved $10.
 
 ## Open
-- Merge #23 soon, so it is live for December. Merge #28 any time before October 2027.
-- After both merge, link the Christmas articles from the Thanksgiving ones and back again. Also link `christmas-trivia-questions` from the office Christmas party and New Year's Eve rewrites.
+- Request indexing in Search Console for the two Christmas URLs. Merge #28 any time before October 2027.
+- **#23 merged** (Tanya), live on tadamevents.com. Cross-links added in #28: Thanksgiving to Christmas games for family, Friendsgiving to office Christmas party games, Christmas games for family to New Year's Eve games. `office-christmas-party-games` and `new-years-eve-games` are at 5 internal links, so a link from them to Christmas trivia would mean swapping one out (Tanya's call).
 - Rewrite the Tadam section of the older articles to the self-serve wording (separate PR).
 - Real stories from Christmas, Thanksgiving or Friendsgiving games, to replace the example scenarios.
 - A UK "Christmas quiz" version, if the UK set goes ahead.

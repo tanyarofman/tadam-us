@@ -79,7 +79,7 @@ At an office Friendsgiving, keep games short and safe for everyone: guess who br
 - **Fishbowl (17):** everyone writes three words on slips. Teams play three rounds with the same slips: describe the word, then one word only, then act it out.
 - **Gratitude toast (6):** each person thanks a coworker for one thing from this year.
 
-For quick openers before lunch, use our [icebreaker questions](/blog/icebreaker-questions/).
+Planning the December party at work too? See our [office Christmas party games](/blog/office-christmas-party-games/).
 
 ## What games can you play at a Friendsgiving dinner table?
 

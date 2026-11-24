@@ -134,7 +134,7 @@ The best Thanksgiving prizes come from the day itself: the wish from the wishbon
 - **20. Gold turkey trophy.** The overall winner keeps it for a year and brings it back next Thanksgiving.
 - **23. Family turkey trot.** A morning walk or run around the block before cooking starts. The winner chooses the first game of the day.
 
-Hosting a second dinner with friends this season? See our [Friendsgiving games](/blog/friendsgiving-games/).
+Hosting a second dinner with friends this season? See our [Friendsgiving games](/blog/friendsgiving-games/), and for the next family holiday, our [25 Christmas games for family](/blog/christmas-games-for-family/).
 
 ## How do you make a game about your own family?
 

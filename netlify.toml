@@ -62,6 +62,11 @@
   status = 302
 
 [[redirects]]
+  from = "/blog/hanukkah-quiz"
+  to = "/blog/hanukkah-trivia/"
+  status = 301
+
+[[redirects]]
   from = "/blog/team-building-day-ideas"
   to = "/blog/team-building-activities-for-work/"
   status = 301

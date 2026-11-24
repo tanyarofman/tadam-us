@@ -151,4 +151,4 @@ A few ways that keep the game a surprise:
 
 Show the questions on a screen, let every guest answer at the same moment from their phone, and let the scores add up on their own. Nobody waits for their turn, and the host doesn't spend the shower marking cards.
 
-That's what [Tadam!](/) builds. You send us the bride's stories, photos and answers, and we turn them into a live trivia game with a host on the big screen. Guests scan a code and answer from their phones with no app, the leaderboard updates after every question, and the screen reveals who knows the bride best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in the bride's stories and answers, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and answer from their phones with no app, the leaderboard updates after every question, and the screen reveals who knows the bride best. [Watch the demo](/#demo) to see a full game.

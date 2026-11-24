@@ -183,4 +183,4 @@ Before you book anything, ask the team what they'd enjoy. If an activity takes p
 
 A trivia game about your team turns facts about colleagues into questions everyone answers at the same time. It works because every answer is a small story about someone in the room.
 
-That's what [Tadam!](/) does. You send us stories, photos and fun facts about the team, and we build a personal trivia game with a host on the big screen. Everyone scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. It fits a quarterly meeting, a holiday party or a team day. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) does. You type in stories and fun facts about the team, add photos, pick a host, and review the questions of your personal trivia game on the big screen. Everyone scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. It fits a quarterly meeting, a holiday party or a team day. [Watch the demo](/#demo) to see a full game.

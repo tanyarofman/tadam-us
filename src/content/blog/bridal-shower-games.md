@@ -159,4 +159,4 @@ Some ideas:
 - **A tea party or brunch** with a long table and no agenda.
 - **A live game on the screen.** All the guests answer questions about the bride from their phones, and the screen shows who knows her best.
 
-That last one is what [Tadam!](/) does. You send us stories, photos and answers about the bride, and we build a personal trivia game with a host on the big screen. Guests scan a code and play from their phones with no app, and at the end the leaderboard reveals who knows the bride best. [Watch the demo](/#demo) to see a full game.
+That last one is what [Tadam!](/) does. You type in stories and answers about the bride, add photos, pick a host, and review the questions of your personal trivia game on the big screen. Guests scan a code and play from their phones with no app, and at the end the leaderboard reveals who knows the bride best. [Watch the demo](/#demo) to see a full game.

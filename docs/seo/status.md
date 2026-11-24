@@ -22,6 +22,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: Search Console verified for tadamevents.com (Domain property, DNS TXT record in Netlify DNS) and both sitemaps read successfully (22 pages). Bing Webmaster Tools added by import from Search Console; sitemap submitted.
 - 2026-11-24: DataForSEO questions for the 8 rewrite topics (`data/questions-us-rewrites-2026-11-24.csv`, 507 questions): $0.29 (balance $40.61 to $40.31). Total this round: $2.66 of the approved $10.
 - 2026-11-24: DataForSEO questions for wave 3 (virtual team building, family trivia, 50th anniversary, sweet 16 party ideas, trivia questions for work; `data/questions-us-wave3-2026-11-24.csv`, 281 questions): $0.18 (85 calls). Balance $40.03 before, $39.60 after (the wave 2 session was spending at the same time). Total this round, both sessions: about $3.37 of the approved $10.
+- 2026-11-24: wave 3, PR 1 (headings approved by Tanya): `team-trivia-for-work` and `virtual-team-building-activities`. The virtual article says honestly that remote play in Tadam isn't confirmed yet. Both have a labeled example scenario waiting for a real story.
 - 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
 
 ## Next

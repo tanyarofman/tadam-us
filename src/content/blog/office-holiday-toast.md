@@ -89,4 +89,4 @@ Tadam! builds a live trivia game from your team's stories, and everyone plays fr
 
 With [Tadam!](/) you send us your team's stories and photos, we build the game from them, and every question goes through your approval before it reaches the screen. At the toast the game runs on the big screen, everyone scans a code and answers from their phone, and within 15 minutes there is a winning team and a whole room laughing. [Watch the demo](/#demo).
 
-Looking for more ideas? Read [team-building day ideas](/blog/team-building-day-ideas/). And for candle lighting at home, here is a [family Hanukkah quiz with answers](/blog/hanukkah-quiz/).
+Looking for more ideas? Read [team-building day ideas](/blog/team-building-activities-for-work/). And for candle lighting at home, here is a [family Hanukkah quiz with answers](/blog/hanukkah-quiz/).

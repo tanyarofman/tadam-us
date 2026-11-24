@@ -27,7 +27,7 @@ The shoe game is a reception game in which the couple sits back to back, each ho
 
 Neither partner can see what the other raised, but the guests can. When both raise the same shoe, the room cheers. When they raise different shoes, the room laughs, and the couple turns around to find out why. [WeddingWire's guide to the shoe game](https://www.weddingwire.com/wedding-ideas/wedding-shoe-game) describes the same setup: the newlyweds answer without seeing each other's response.
 
-The shoe game is a cousin of the newlywed game, where partners answer questions about each other. If you want a longer quiz for a shower or rehearsal dinner, take a look at our [100 newlywed game questions](/blog/newlywed-game-questions/).
+The shoe game is a cousin of the newlywed game, where partners answer questions about each other. If you want a longer quiz for a shower or rehearsal dinner, take a look at our [100 newlywed game questions](/blog/newlywed-game-questions/). For the bachelorette party, see our [bachelorette party games](/blog/bachelorette-party-games/).
 
 ## How many questions should you ask in the shoe game?
 

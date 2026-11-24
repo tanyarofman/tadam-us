@@ -72,7 +72,7 @@ At home, choose a format your space can hold: a dinner party for a dozen, a back
 - **Backyard barbecue (1).** Easy for big groups and kids. Rent string lights and extra chairs.
 - **Potluck of favorite recipes (7).** Every guest brings a dish that reminds them of the birthday person, with a card explaining why.
 - **"40 reasons we love you" (13).** Guests write one reason each on a card before the party. Read some aloud and give all 40 in a box.
-- **Trivia night about the birthday person (9).** Questions about their life, answered by the guests. Start from our [100 how well do you know me questions](/blog/how-well-do-you-know-me-questions/).
+- **Trivia night about the birthday person (9).** Questions about their life, answered by the guests. Start from our [100 how well do you know me questions](/blog/how-well-do-you-know-me-questions/), and add a general round from our [100 trivia questions for adults](/blog/general-knowledge-trivia-questions/).
 - **Fire pit and s'mores (11).** For a small group that wants to talk late into the night.
 
 ## What are 40th birthday ideas for him and for her?

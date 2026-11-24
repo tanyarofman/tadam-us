@@ -22,6 +22,7 @@
   - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
   - **Website requirements 1 to 11 pass:** product description, $99 price, Terms (Paddle as merchant of record), Privacy, Refunds (14 days), legal name in the footer and on the legal pages, email contact only, self-serve wording, invented hosts.
   - **Blocking the review:** `/create` (every "Create yours" button) is a "Coming soon" page with no checkout yet (requirement 12), and the legal pages still need a lawyer's review.
+- **PR #48, status.md:** `docs/seo/status.md` has a "Paddle review status" section with the same status, a row pointing to the Paddle checklist in "Where things are", and a "Paddle review" item in "Waiting for Tanya", so every new session sees it.
 
 ## Open
 - **Governing law:** a lawyer may want a governing-law clause back. Any jurisdiction named must be the real one, so it's Tanya's call.

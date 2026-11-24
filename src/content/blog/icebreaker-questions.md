@@ -190,4 +190,4 @@ For longer activities, see our [30 team building activities for work](/blog/team
 
 Collect answers from the team in advance, turn them into "who said it" questions, and show them on a screen. Everyone guesses from their phone, and the reveal of each answer gets the room talking.
 
-That's what [Tadam!](/) does. You send us stories, photos and fun facts about the team, and we build a personal trivia game with a host on the big screen. Everyone plays from their phone with no app, and the leaderboard shows who knows the team best. For general questions to mix in, see our [100 trivia questions for adults](/blog/general-knowledge-trivia-questions/), or [watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) does. You type in stories and fun facts about the team, add photos, pick a host, and review the questions of your personal trivia game on the big screen. Everyone plays from their phone with no app, and the leaderboard shows who knows the team best. For general questions to mix in, see our [100 trivia questions for adults](/blog/general-knowledge-trivia-questions/), or [watch the demo](/#demo) to see a full game.

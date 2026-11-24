@@ -36,6 +36,14 @@ Rule: link only a source that was checked (by search or by reading it) and that 
 | [The Knot: 102 Wedding Shoe Game Questions](https://www.theknot.com/content/shoe-game-wedding-reception-game-questions) | The Knot's list has 102 questions (only the count is cited) | wedding-shoe-game-questions |
 | [The Knot: How Long Are Bridal Showers?](https://www.theknot.com/content/how-long-are-bridal-showers) | A planner quoted by The Knot calls three hours or less the typical sweet spot for a shower | bridal-shower-games |
 | [The Knot: Bridal shower host etiquette](https://www.theknot.com/content/bridal-shower-host-etiquette) | The maid of honor, bridal party or mother of the bride traditionally host, but it isn't a fixed rule; the bride herself shouldn't host a gift-giving event for herself | bridal-shower-games |
+| [Paperless Post: When to send out birthday party invitations](https://www.paperlesspost.com/blog/when-to-send-out-birthday-party-invites) | About four weeks ahead for a casual birthday party, about six for a formal one (Paperless Post's own recommendation; checked by web search, the site doesn't open from the sandbox) | 40th-birthday-party-ideas |
+| [Toastmasters: How to Give a Toast](https://www.toastmasters.org/resources/public-speaking-tips/how-to-give-a-toast) | Keep a toast short, two to three minutes (checked by web search) | 40th-birthday-party-ideas, 50th-birthday-party-ideas |
+| [History.com: The first Sony Walkman goes on sale](https://www.history.com/this-day-in-history/July-1/the-first-sony-walkman-goes-on-sale) | The first Walkman went on sale in Japan on July 1, 1979 (also IEEE Spectrum, Network World) | 50th-birthday-party-ideas |
+| [Britannica: Puzzle](https://www.britannica.com/topic/puzzle) | By 1980 the Rubik's Cube was marketed throughout the world. Britannica pages differ on 1974 vs 1977 for its first appearance, so the article gives only 1980 | 50th-birthday-party-ideas |
+| [Wikipedia: Super Bowl LXI](https://en.wikipedia.org/wiki/Super_Bowl_LXI) | The 2027 game is on February 14, 2027, at SoFi Stadium, Inglewood, California; first on Valentine's Day (also FOX LA, AOL). nfl.com doesn't open from the sandbox, so Tanya may want to confirm it there | super-bowl-party-games |
+| [Britannica: Touchdown](https://www.britannica.com/sports/touchdown) | A touchdown is 6 points; the field goal became worth 3 in 1909 and the touchdown 6 in 1912 (scoring values also in the official rulebook) | super-bowl-party-games |
+| [Britannica: Field goal](https://www.britannica.com/sports/field-goal) | A field goal is worth 3 points | super-bowl-party-games |
+| [Britannica: Safety](https://www.britannica.com/sports/safety-football-score) | A safety is worth 2 points | super-bowl-party-games |
 
 ## Removed for lack of a source
 - "Cold sparklers are safe indoors" (bar-mitzvah-attractions): replaced with "check with the venue first".

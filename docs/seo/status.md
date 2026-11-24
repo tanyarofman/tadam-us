@@ -87,6 +87,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
     - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
     - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
     - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
+    - Wave 3, not live yet: `/blog/graduation-party-games/`, `/blog/50th-anniversary-party-ideas/`, `/blog/sweet-16-party-ideas/` (PR #25, merge in March 2027); `/blog/family-reunion-games/`, `/blog/family-trivia-questions/` (PR #31, by early June 2027).
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.

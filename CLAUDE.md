@@ -1,27 +1,63 @@
-# טדאם! (tadam) landing page
+# Tadam! (tadam-us): the site for the US and Europe
 
-See README.md for how to run, switch themes and edit copy.
+Tadam is a personal live trivia game show for events: a game built from the stories of the people being celebrated, hosted on the big screen, played by every guest from their phone.
+
+This repository is the **English site for the US and Europe**. The Israeli Hebrew site is a separate repository, `tanyarofman/tadam-il` (heytadam.com). Never change that repository from here, and don't copy Israel-specific content (Hebrew holidays, Israeli events, ₪ prices) into this one.
+
+See README.md for how to run the site and where things live.
+
+## Status (November 2026)
+
+This repository started as a copy of the Israeli site. The plan, in order:
+
+1. This CLAUDE.md (done).
+2. Market research with DataForSEO for the US, UK and English-speaking Europe: `docs/seo/keyword-research-us-*.md`.
+3. Cite-Me AI-search review of the whole site: `docs/seo/site-review-us-*.md`.
+4. English only at the root: move `src/pages/en/*` to `/`, then delete the Hebrew pages, `copy.he.ts`, `src/content/blog/` (Hebrew) and RTL.
+5. A US blog: rewrite the universal articles, delete the Israel-only ones, and add new articles from the research plan.
+
+Until step 4 is done the code still contains the Hebrew site. Treat `/en/` and `src/content/blog-en/` as the source for this site.
 
 ## Workflow
 
 - Never commit directly to `main`. Do every change on a branch (`feat/…`, `fix/…`, `chore/…`) and open a pull request for review.
-- Merge only when Tanya asks. Netlify (site `heytadam`, linked to this repo) deploys `main` to production automatically on every merge; no manual deploy step. Check the deploy in the Netlify API (`/api/v1/sites/<id>/deploys`).
-- Every PR gets an automatic Netlify deploy preview (`deploy-preview-<number>--heytadam.netlify.app`) to share in the PR.
+- Merge only when Tanya asks. The Netlify project `tadam-us` (linked to this repository) deploys `main` to production automatically on every merge; there is no manual deploy step. Check deploys in the Netlify API (`/api/v1/sites/<id>/deploys`, site name `tadam-us`).
+- Every PR gets an automatic deploy preview (`deploy-preview-<number>--tadam-us.netlify.app`) to share in the PR.
+- **Domain:** not bought yet; the site is at https://tadam-us.netlify.app. The code still names heytadam.com (the Israeli domain) in `astro.config.mjs` (`site`), `public/robots.txt`, `src/config/site.ts` and `netlify.toml`. When Tanya has the domain, change all four in one PR and add the domain to the Netlify project.
 
-## Rules from the brief
+## Rules for the site
 
-- The site is Hebrew, RTL, parents addressed in plural (אתם), no em-dashes in copy.
-- English version (`/en/`, for English speakers in Israel): a straight translation of the Hebrew site, not a different story. Change `src/content/copy.he.ts` first, then mirror it in `src/content/copy.en.ts` (same keys; `npm run check` fails if they drift). A site for the US and Europe is a separate project, not this repo.
+- **Language:** American English (US spelling; UK and European readers accept it). Address readers as "you". Plain and warm, like the current `src/content/copy.en.ts`. No em-dashes or en-dashes in copy.
+- **Markets:** the US first, then the UK, Ireland and English-speaking Europe. Events, holidays, dates and examples come from these markets (birthdays and milestones, weddings and showers, companies and teams, holidays and family), not from Israel.
+- **Prices:** none on the site until Tanya sets them in USD/EUR (`src/config/pricing.ts`; prices are hidden today). Never in blog articles.
 - Never show real celebrities, athletes or recognizable characters; the host is always generic.
 - Ask before adding a paid service, changing the story order, or using an image of a real person.
+- Contact details, email and social links (`src/config/site.ts`) still point to the Israeli Facebook page and Messenger. Ask Tanya what the US site should use; don't invent accounts.
 
 ## Blog & SEO
 
-- Articles: one Markdown file each in `src/content/blog/`, schema in `src/content.config.ts`, template `src/components/pages/BlogArticle.astro`. `/llms.txt` is generated from them.
-- English articles (`/en/blog/`): a translation of each Hebrew article in `src/content/blog-en/`, same file name. Write the Hebrew article first, then translate it: same structure, same sources and links (internal links get the `/en` prefix), English category names from `src/content.config.ts`. Wordplay that only works in Hebrew is replaced with English wordplay of the same kind, keeping every count true. The scenario label in English is **"Example scenario (not a real event):"**. Titles in Title Case. Where a translated or transliterated term is not clear, add the Hebrew word in parentheses next to it. English search volume in Israel is small (see `docs/seo/status.md`); check it with `tools/seo/research.py volume` before choosing an English title.
-- Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). Plan and findings: `docs/seo/keyword-research-2026-11.md` (29-article plan) and `docs/seo/keyword-research-2026-11-22.md` (second round, new topics). How to write: `docs/seo/content-playbook.md`. Sources: `docs/seo/sources.md`.
-- Writing rules: every H2 is the question people search, followed by a 2-sentence answer; one table; 3 to 5 internal links (other articles, `/#demo`, `/`); 4 FAQ items in the frontmatter; `seoTitle` max 60 and `description` max 155 characters (the build enforces it); no prices in articles.
-- Link only sources you verified, inline on the phrase, never a sources list at the end. Log each one in `docs/seo/sources.md`.
-- Never invent first-hand experience or quotes. Ask Tanya for real stories. Until one exists, a short example scenario is allowed only as a quote block labeled **"תרחיש לדוגמה (לא אירוע אמיתי):"**, never presented as real. A hidden `[//]: # "להחליף בסיפור אמיתי..."` marker shows where the real story goes.
-- A weekly scheduled task ("Tadam weekly blog articles", Sundays 08:36 Israel time) researches and writes 2 new articles and opens a pull request; it never merges. Details and open items: `docs/seo/status.md`.
-- Keyword research: DataForSEO via `tools/seo/research.py` (the API login is a network secret in the cloud environment). Israel = `location_code 2376`; see `docs/seo/how-to-research.md`. Ask before spending more than a few dollars.
+- Articles: one Markdown file each, schema in `src/content.config.ts`, template `src/components/pages/BlogArticle.astro`. `/llms.txt` is generated from them. Until step 4 the English articles live in `src/content/blog-en/` and are served at `/en/blog/`.
+- Start here: `docs/seo/status.md` (what's done, what's waiting for Tanya, next articles). How to write: `docs/seo/content-playbook.md` (the Cite-Me method). Sources: `docs/seo/sources.md`. The Hebrew research files in `docs/seo/` describe the Israeli market and are history only.
+- Writing rules:
+  - Every H2 is the question people search, followed by a 2-sentence answer of at most 50 words.
+  - One table per article.
+  - 3 to 5 internal links (other articles, `/#demo`, `/`).
+  - 4 FAQ items in the frontmatter.
+  - `seoTitle` max 60 and `description` max 155 characters (the build enforces it).
+  - Titles in Title Case.
+  - No prices.
+- Sources: prefer US and UK authorities (.gov, .edu, established publications). Link only sources you verified, inline on the phrase, never as a sources list at the end. Log each one in `docs/seo/sources.md`.
+- Never invent first-hand experience or quotes. Ask Tanya for real stories. Until one exists, a short example scenario is allowed only as a quote block labeled **"Example scenario (not a real event):"**, never presented as real. A hidden `[//]: # "Replace with a real story..."` marker shows where the real story goes.
+- With Tanya in the conversation, show the headings (Cite-Me phase 2) before writing the draft.
+- Seasonal articles go live 4 to 8 weeks before the date (US calendar: Super Bowl, Valentine's Day, spring wedding and shower season, graduation, Mother's and Father's Day, July 4th, Halloween, Thanksgiving, the holiday season, New Year's Eve).
+
+## Keyword research
+
+- DataForSEO through `tools/seo/research.py` (the API login is a network secret for `api.dataforseo.com` in the cloud environment). See `docs/seo/how-to-research.md`.
+- Markets: US `location_code 2840` (main), UK 2826, Ireland 2372, Germany 2276, Netherlands 2528, all with `language_code "en"`.
+- Check the balance before and after (free call: `GET /v3/appendix/user_data`) and log the spend. Ask Tanya before spending more than $10 in one round.
+- Save raw data under `docs/seo/data/` with the date in the file name.
+
+## Not in this repository
+
+- The Israeli weekly blog task ("Tadam weekly blog articles") works on `tadam-il` only. A weekly task for this site doesn't exist yet; ask Tanya before creating one.

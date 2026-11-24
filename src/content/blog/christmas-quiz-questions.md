@@ -54,8 +54,8 @@ The best adult questions are about British Christmas traditions everyone half-kn
 1. Which London confectioner is credited with inventing the Christmas cracker? *Answer: Tom Smith*
 2. In which London square does a giant Norwegian Christmas tree stand every December? *Answer: Trafalgar Square*
 3. Which city sends London the Trafalgar Square Christmas tree every year? *Answer: Oslo*
-4. What is the last Sunday before Advent traditionally called? *Answer: Stir-up Sunday*
-5. What do families traditionally make on that Sunday? *Answer: The Christmas pudding*
+4. What is a Christingle made from? *Answer: An orange, a candle, a red ribbon and sweets on cocktail sticks*
+5. Which bone from the turkey do two people pull to make a wish? *Answer: The wishbone*
 6. What do many British children leave out for Father Christmas, along with a carrot for the reindeer? *Answer: A mince pie, often with a glass of sherry*
 7. Which sport traditionally has a full programme of matches on Boxing Day? *Answer: Football*
 8. What kind of show traditionally opens around Boxing Day, with the audience shouting "He's behind you"? *Answer: A pantomime*
@@ -146,7 +146,7 @@ Numbers questions make the best tie-breakers, because the closest answer wins ev
 67. How many pipers are piping? *Answer: Eleven*
 68. How many doors does a classic Advent calendar have? *Answer: 24*
 69. How many swans are a-swimming in The Twelve Days of Christmas? *Answer: Seven*
-70. How many points does a snowflake have? *Answer: Six*
+70. How many candles go on a Christingle? *Answer: One*
 71. How many Sundays are there in Advent? *Answer: Four*
 72. How many lords are a-leaping? *Answer: Ten*
 73. How tall is the Trafalgar Square tree, in metres, to the nearest ten? *Answer: About 20*

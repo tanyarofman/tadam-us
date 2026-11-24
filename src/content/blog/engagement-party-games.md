@@ -110,4 +110,4 @@ Collect stories from both sides before the party: how they met, the first trip, 
 
 Start from our [100 how well do you know me questions](/blog/how-well-do-you-know-me-questions/), adapted to the two of them.
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the couple, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side knows the couple best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the couple, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side knows the couple best. [Watch the demo](/#demo) to see a full game.

@@ -145,4 +145,4 @@ For more shower games that work with any crowd, see our [bridal shower games gue
 
 Collect stories, photos and answers from both parents-to-be before the shower, and turn them into a game every guest plays at once. Guests learn something new about the people they came to celebrate, and the parents get to react to every answer.
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the parents-to-be, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals who knows the new family best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the parents-to-be, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals who knows the new family best. [Watch the demo](/#demo) to see a full game.

@@ -1,0 +1,47 @@
+---
+/**
+ * Refund Policy. Source draft: docs/paddle/refund-policy.md (keep the two in sync).
+ * Paddle requires a window of at least 14 days, no "all sales final" wording and no exclusions.
+ */
+import LegalShell from "../components/pages/LegalShell.astro";
+import { SITE } from "../config/site";
+import { useCopy } from "../content/copy";
+const { copy: COPY } = useCopy(Astro.url);
+const l = COPY.legalPage;
+const mail = SITE.email;
+---
+
+<LegalShell title="Refund Policy" description="Not happy with your Tadam! game? Get a full refund within 14 days of purchase, for any reason." updatedLine={`Last updated: ${l.updated}`}>
+
+  <p class="lead">
+    We want you to love your game. If you're not happy, you can get a <strong>full refund within 14 days of
+    purchase</strong>, for any reason.
+  </p>
+
+  <section id="how">
+    <h2 class="display">How to ask for a refund</h2>
+    <ul>
+      <li>Reply to your order confirmation email from Paddle, or</li>
+      <li>Go to <a href="https://paddle.net" target="_blank" rel="noopener">paddle.net</a> and look up your order, or</li>
+      <li>Write to us at <a href={`mailto:${mail}`}>{mail}</a> with the email address you used to pay.</li>
+    </ul>
+  </section>
+
+  <section id="next">
+    <h2 class="display">What happens next</h2>
+    <p>
+      Our order process is conducted by our online reseller Paddle.com, the Merchant of Record for all our orders. Paddle
+      processes the refund to your original payment method. Refunds usually appear within 5 to 10 business days,
+      depending on your bank.
+    </p>
+    <p>When a refund is issued, your game link stops working.</p>
+  </section>
+
+  <section id="rights">
+    <h2 class="display">Your legal rights</h2>
+    <p>
+      This policy is in addition to any rights you have under the law of your country, including the right of withdrawal
+      for consumers in the EU and UK. See also our <a href="/terms">Terms of Service</a>.
+    </p>
+  </section>
+</LegalShell>

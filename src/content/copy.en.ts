@@ -271,14 +271,24 @@ export const COPY = {
   },
 
   footer: {
-    contact: "Talk to us",
-    contactMobile: "Contact",
-    facebook: "Tadam! on Facebook",
-    privacy: "Privacy policy",
-    privacyMobile: "Privacy",
-    blog: "Blog",
-    linksLabel: "Links",
-    copyright: "© Tadam!",
+    tagline: "A personal live trivia game show for your party.",
+    gameLabel: "Tadam!",
+    gameLinks: [
+      { label: "How it works", href: "/#scene-4" },
+      { label: "Our hosts", href: "/#hosts" },
+      { label: "Pricing", href: "/#pricing" },
+      { label: "FAQ", href: "/#faq" },
+      { label: "Blog", href: "/blog/" },
+    ],
+    legalLabel: "Legal",
+    legalLinks: [
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Refund Policy", href: "/refunds" },
+    ],
+    contactLabel: "Contact",
+    /** "© 2026 Tanya Rofman, Israel." is built from legalPage in Footer.astro. Paddle requires the legal name and this line. */
+    paddle: "Payments processed by Paddle.com.",
   },
 
   modal: {
@@ -289,10 +299,15 @@ export const COPY = {
     cta: "Let's get started",
   },
 
-  privacyPage: {
-    title: "Privacy policy",
-    body: "Your photos and stories stay yours. Only you and we see them, and every item goes through your approval before it reaches the screen.",
+  /** The legal pages (/terms, /privacy, /refunds). Their text is in src/pages/*.astro, from the drafts in docs/paddle/. */
+  legalPage: {
     back: "Back to the home page",
+    /** Exactly as on the Paddle account: Paddle checks that the site and the account show the same legal name. */
+    legalName: "Tanya Rofman",
+    country: "Israel",
+    /** Published on the legal pages (controller identity under the GDPR). The business number never goes on the site. */
+    address: "Ein Gedi 2/2, Tel Aviv 6203602, Israel",
+    updated: "November 24, 2026",
   },
 
   /** Blog pages (index, article frame). The articles themselves are Markdown in src/content/blog-en/. */

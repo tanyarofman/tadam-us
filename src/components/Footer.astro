@@ -1,95 +1,115 @@
 ---
-import { useCopy, localPath } from "../content/copy";
-import { SITE, contactLink } from "../config/site";
-const { copy: COPY, locale, home } = useCopy(Astro.url);
+/**
+ * Site footer: brand + contact, the site links, the legal links, and the legal line Paddle asks for
+ * ("© <year> <legal name>, <country>. Payments processed by Paddle.com.").
+ */
+import { useCopy } from "../content/copy";
+import { SITE } from "../config/site";
+const { copy: COPY, home } = useCopy(Astro.url);
 const c = COPY.footer;
+const legal = COPY.legalPage;
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <ul class="footer-social" role="list">
-      <li>
-        <a class="social-icon" href={SITE.facebookUrl} target="_blank" rel="noopener" aria-label={c.facebook} data-track="social_click" data-source="facebook">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"></path></svg>
-        </a>
-      </li>
-    </ul>
-    <nav class="footer-links" aria-label={c.linksLabel}>
-      <a href={contactLink("footer")} target="_blank" rel="noopener" data-track="cta_contact_click" data-source="footer"><span class="footer-desktop">{c.contact}</span><span class="footer-mobile">{c.contactMobile}</span></a>
-      <a href={localPath(locale, "/blog/")}>{c.blog}</a>
-      <a href={localPath(locale, "/privacy")}><span class="footer-desktop">{c.privacy}</span><span class="footer-mobile">{c.privacyMobile}</span></a>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href={home} class="footer-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" loading="lazy" /></a>
+      <p class="footer-tagline">{c.tagline}</p>
+    </div>
+
+    <nav class="footer-col" aria-labelledby="footer-game">
+      <h2 id="footer-game" class="footer-heading">{c.gameLabel}</h2>
+      <ul role="list">
+        {c.gameLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
     </nav>
-    <a class="footer-copy" href={home}><span class="footer-desktop">{c.copyright} {new Date().getFullYear()}</span><span class="footer-mobile">{c.copyright}</span></a>
+
+    <nav class="footer-col" aria-labelledby="footer-legal">
+      <h2 id="footer-legal" class="footer-heading">{c.legalLabel}</h2>
+      <ul role="list">
+        {c.legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="footer-col">
+      <h2 class="footer-heading">{c.contactLabel}</h2>
+      <ul role="list">
+        <li><a href={`mailto:${SITE.email}`} data-track="cta_contact_click" data-source="footer">{SITE.email}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {legal.legalName}, {legal.country}. {c.paddle}</p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    padding-block: 48px calc(48px + env(safe-area-inset-bottom));
+    padding-block: 56px calc(32px + env(safe-area-inset-bottom));
     border-top: 2px solid var(--surface-border);
     background: rgba(0, 0, 0, 0.2);
   }
-  .footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px 32px;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    gap: 32px 40px;
   }
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 24px;
+  .footer-logo img {
+    width: 130px;
+    height: auto;
   }
-  .footer-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 8px 0;
+  .footer-tagline {
+    margin: 12px 0 0;
+    max-width: 28ch;
     color: var(--text-muted);
-    text-underline-offset: 5px;
+    line-height: 1.5;
   }
-  .footer-links a:hover {
-    color: var(--text);
+  .footer-heading {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--game-yellow);
   }
-  .footer-social {
-    display: flex;
-    gap: 12px;
+  .footer-col ul {
     margin: 0;
     padding: 0;
     list-style: none;
   }
-  .social-icon {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    color: var(--text-muted);
-    transition: color 0.2s, transform 0.2s;
-  }
-  .social-icon:hover {
-    color: var(--game-yellow);
-    transform: translateY(-2px);
-  }
-  .social-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-  .footer-copy {
+  .footer-col a {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    min-height: 40px;
+    color: var(--text-muted);
+    text-underline-offset: 5px;
+    overflow-wrap: anywhere;
+  }
+  .footer-col a:hover {
+    color: var(--text);
+  }
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--surface-border);
+  }
+  .footer-bottom p {
+    margin: 0;
     color: var(--text-muted);
     font-size: var(--fs-small);
-    text-decoration: none;
   }
-  .footer-copy:hover {
-    color: var(--white);
-    text-decoration: underline;
+  @media (max-width: 860px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
   }
-  .footer-mobile { display: none; }
-  @media (max-width: 767px) {
-    .footer-desktop { display: none; }
-    .footer-mobile { display: inline; }
+  @media (max-width: 340px) {
+    .footer-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>

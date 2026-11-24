@@ -2,11 +2,13 @@
 
 > Draft for lawyer review. Not legal advice. Written for the EU and UK GDPR, US state privacy laws (such as California's CCPA/CPRA) and COPPA. Fill every `[[PLACEHOLDER]]` and the processor list (from Ilan) before publishing at `tadamevents.com/privacy`.
 
+> **No connection to Israel on the site (Tanya, 2026-11-24):** no country, street address, business type or Israeli law in the published text. The real business details go only in the private Paddle forms (`paddle-signup-guide.md`, `paddle-application.md`).
+
 **Last updated:** [[DATE]]
 
 ## 1. Who we are
 
-Tadam! is operated by Tanya Rofman, a sole trader (Osek Murshe, עוסק מורשה) registered in Israel, at Ein Gedi 2/2, Tel Aviv 6203602, Israel. We are the "controller" of the personal data described here. Contact us about privacy at hey@tadamevents.com.
+Tadam! is operated by Tanya Rofman, a sole trader. We are the "controller" of the personal data described here. Contact us about privacy at hey@tadamevents.com.
 
 ## 2. What we collect
 
@@ -52,12 +54,12 @@ We may also disclose data if the law requires it, or to protect our rights.
 
 ## 5. International transfers
 
-We are based in Israel, which the European Commission recognizes as providing an adequate level of data protection. Some providers process data in the US or elsewhere. Where data leaves the EU or UK, we rely on adequacy decisions, the EU-US Data Privacy Framework where the provider is certified, or Standard Contractual Clauses.
+We and some of our providers process data outside the EU and UK, including in the US. Where data leaves the EU or UK, we rely on adequacy decisions, the EU-US Data Privacy Framework where the provider is certified, or Standard Contractual Clauses.
 
 ## 6. How long we keep it
 
 - **Game content and the game itself:** 30 days from delivery, then deleted. You can ask us to delete it sooner.
-- **Order records:** as long as tax and accounting law requires (in Israel, generally 7 years). These records don't include your game content.
+- **Order records:** as long as tax and accounting law requires (generally up to 7 years). These records don't include your game content.
 - **Technical logs:** up to [[LOG RETENTION, e.g. 30 days]].
 
 ## 7. Children
@@ -94,4 +96,4 @@ We may update this policy. The date at the top shows the latest version. If a ch
 
 ## 12. Contact
 
-Tanya Rofman, Ein Gedi 2/2, Tel Aviv 6203602, Israel, hey@tadamevents.com.
+Tanya Rofman, hey@tadamevents.com.

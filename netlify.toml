@@ -43,7 +43,7 @@
   to = "/blog/"
   status = 301
 
-# Hidden until rewritten for the US (it was written for Israel). 302 so the URL can come back.
+# Hidden for now (Tanya's decision, 2026-11-24). 302 so the URL can come back.
 [[redirects]]
   from = "/blog/bar-mitzvah-attractions"
   to = "/blog/"

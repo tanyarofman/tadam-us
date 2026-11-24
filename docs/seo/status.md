@@ -41,8 +41,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
    - ~~Delete `hanukkah-riddles` and `tu-bishvat-quiz`~~ Done 2026-11-24.
    - ~~Hanukkah games (dreidel) and Hanukkah trivia~~ Done 2026-11-24 (PR 1 of the seasonal batch).
    - ~~Office party, New Year's Eve, pass the parcel (UK)~~ Done 2026-11-24 (seasonal PR 2).
-   - 2026-11-24: `bar-mitzvah-attractions` set to `draft: true` (302 to /blog/) because it was built around Israel (Tanya: no connection to Israel on this site). Un-draft it when its US rewrite is done, and remove its redirect in `netlify.toml`.
-   - Still to rewrite: bar and bat mitzvah.
+   - 2026-11-24: `bar-mitzvah-attractions` is hidden (`draft: true`, 302 to /blog/). **Tanya decided to hide the bar and bat mitzvah article for now.** Don't rewrite or republish it until she asks.
    - The Tadam sections that still said "send us your stories" or "we build it" (a conflict with the Paddle self-serve wording): 12 articles and one line in `bar-mitzvah-attractions` fixed in PR #17; New Year's Eve, the office party and pass the parcel are fixed in their rewrite PR.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
 4. ~~**Wave 2**~~ All 8 merged 2026-11-24 (#19, #22, #27). Next: cross-links between the wave 2 articles, and Request indexing for the 8 new URLs.

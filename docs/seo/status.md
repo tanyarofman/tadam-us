@@ -57,13 +57,38 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
-- **Request indexing in Search Console** (URL inspection, then Request indexing) once each rewrite is live on tadamevents.com. Tick each one off here when done:
-  - [ ] `/blog/hanukkah-games/` (PR #15, first: Hanukkah starts Dec 4)
-  - [ ] `/blog/hanukkah-trivia/` (PR #15)
-  - [ ] `/blog/new-years-eve-games/` (PR #21)
-  - [ ] `/blog/office-christmas-party-games/` (PR #21)
-  - [ ] `/blog/pass-the-parcel-tasks/` (PR #21)
-  - Never request the redirected old addresses (`hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`).
+- **Request indexing in Search Console** (URL inspection, then Request indexing). Google allows about 10 a day, and the quota ran out on 2026-11-24, so continue on the next days in this order. Tick each one off here when done. The session "Tadam US: Search Console indexing" keeps this list.
+  - **Already requested on 2026-11-24:** the home page, /blog/, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `bachelorette-party-games`, `bridal-shower-games`, `bridal-shower-trivia-questions`, `general-knowledge-trivia-questions` (per `docs/history/2026-11-24-parallel-sessions.md`).
+  - **Day 1 (seasonal, December first):**
+    - [ ] `/blog/hanukkah-games/` (Hanukkah starts Dec 4)
+    - [ ] `/blog/hanukkah-trivia/`
+    - [ ] `/blog/christmas-trivia-questions/`
+    - [ ] `/blog/christmas-games-for-family/`
+    - [ ] `/blog/office-christmas-party-games/`
+    - [ ] `/blog/new-years-eve-games/`
+    - [ ] `/blog/super-bowl-party-games/` (should be indexed by mid-December)
+    - [ ] `/blog/30th-birthday-ideas/` (peaks in January)
+    - [ ] `/blog/60th-birthday-party-ideas/` (peaks in January)
+    - [ ] `/blog/pass-the-parcel-tasks/`
+  - **Day 2 (year-round US articles):**
+    - [ ] `/blog/how-well-do-you-know-me-questions/`
+    - [ ] `/blog/icebreaker-questions/`
+    - [ ] `/blog/team-building-activities-for-work/`
+    - [ ] `/blog/newlywed-game-questions/`
+    - [ ] `/blog/wedding-shoe-game-questions/`
+    - [ ] `/blog/baby-shower-games/`
+    - [ ] `/blog/engagement-party-games/`
+    - [ ] `/blog/retirement-party-ideas/`
+    - [ ] `/blog/couples-shower-games/`
+    - [ ] `/blog/rehearsal-dinner-ideas/`
+  - **Day 3:**
+    - [ ] `/blog/wedding-reception-games/`
+    - [ ] `/blog/christmas-quiz-questions/` (UK set, #26; seasonal, can move up)
+    - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
+    - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
+    - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
+  - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
+  - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)

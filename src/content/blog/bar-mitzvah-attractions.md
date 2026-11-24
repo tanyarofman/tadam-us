@@ -109,4 +109,4 @@ No app and no stage needed, and older guests who aren't comfortable with phones 
 
 > **Example scenario (not a real event):** 180 guests, and the DJ stops the music after the first course. A photo of Yonatan at age 4 in a huge kova tembel (כובע טמבל, the classic Israeli bucket hat) comes up on the screen, with the question "Where was this photo taken?". The friends from class guess "at the beach", Grandma Ruti answers correctly ("on the trip to the Galilee!") and climbs to first place, and when she wins at the end, the whole class table stands up and applauds her.
 
-Want to see what it looks like? [Watch the demo](/#demo). Celebrating during Hanukkah? Try the [family Hanukkah quiz](/blog/hanukkah-quiz/) first. And looking for an idea for a work event? Here's a [guide to the office holiday toast](/blog/office-holiday-toast/).
+Want to see what it looks like? [Watch the demo](/#demo). Celebrating during Hanukkah? Try the [family Hanukkah trivia](/blog/hanukkah-trivia/) first. And looking for an idea for a work event? Here's a [guide to the office holiday toast](/blog/office-holiday-toast/).

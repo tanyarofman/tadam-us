@@ -1,135 +1,139 @@
 ---
 /**
- * Privacy policy (Hebrew). Written 2026-11-17 from how the product works today (lead form on Netlify Forms, Messenger,
- * materials sent for the game, the game itself on the game platform). Not legal advice: have a lawyer review it.
- * Lines marked TODO confirm are commitments the team still needs to confirm (they match the FAQ).
- * When adding analytics, ads pixels or cookies, update the "מידע טכני" and "ספקים" sections.
- * The English version is src/pages/en/privacy.astro: keep the two in sync.
+ * Privacy policy (English). A translation of src/pages/privacy.astro: keep the two in sync, the Hebrew is the source.
+ * Not legal advice: have a lawyer review it. Lines marked TODO confirm follow the same open items as the Hebrew page.
  */
 import PrivacyShell from "../components/pages/PrivacyShell.astro";
 import { SITE, contactLink } from "../config/site";
-const updated = "17 בנובמבר 2026";
+const updated = "November 17, 2026";
 ---
 
-<PrivacyShell description="איזה מידע טדאם! אוסף, למה, עם מי הוא משותף ומה הזכויות שלכם." updatedLine={`עודכן לאחרונה: ${updated}`}>
+<PrivacyShell description="What information Tadam! collects, why, who it is shared with and what your rights are." updatedLine={`Last updated: ${updated}`}>
 
   <p class="lead">
-    טדאם! מכינים משחקי טריוויה חיים לאירועים, מהסיפורים והתמונות שאתם שולחים לנו. המדיניות הזו מסבירה איזה מידע אנחנו
-    אוספים, למה אנחנו משתמשים בו, עם מי הוא משותף ומה הזכויות שלכם. התמונות והסיפורים שלכם נשארים שלכם.
+    Tadam! creates live trivia games for events, from the stories and photos you send us. This policy explains what
+    information we collect, what we use it for, who it is shared with and what your rights are. Your photos and stories
+    stay yours.
   </p>
 
-  <nav class="toc" aria-label="תוכן העניינים">
+  <nav class="toc" aria-label="Table of contents">
     <ol>
-      <li><a href="#collect">איזה מידע אנחנו אוספים</a></li>
-      <li><a href="#use">למה אנחנו משתמשים במידע</a></li>
-      <li><a href="#share">עם מי המידע משותף</a></li>
-      <li><a href="#others">מידע על אנשים אחרים וילדים</a></li>
-      <li><a href="#keep">כמה זמן אנחנו שומרים את המידע</a></li>
-      <li><a href="#rights">הזכויות שלכם</a></li>
-      <li><a href="#security">אבטחת מידע</a></li>
-      <li><a href="#changes">שינויים במדיניות</a></li>
-      <li><a href="#contact">יצירת קשר</a></li>
+      <li><a href="#collect">What information we collect</a></li>
+      <li><a href="#use">What we use the information for</a></li>
+      <li><a href="#share">Who the information is shared with</a></li>
+      <li><a href="#others">Information about other people and children</a></li>
+      <li><a href="#keep">How long we keep the information</a></li>
+      <li><a href="#rights">Your rights</a></li>
+      <li><a href="#security">Information security</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact us</a></li>
     </ol>
   </nav>
 
   <section id="collect">
-    <h2 class="display">1. איזה מידע אנחנו אוספים</h2>
+    <h2 class="display">1. What information we collect</h2>
     <ul>
-      <li><strong>כשאתם משאירים פרטים באתר:</strong> שם, מספר טלפון, סוג האירוע ומועד משוער, אם מילאתם אותו.</li>
-      <li><strong>כשאתם פונים אלינו במסנג'ר או במייל:</strong> השם ופרופיל הפייסבוק שלכם או כתובת המייל שלכם, ותוכן ההודעות.</li>
+      <li><strong>When you leave your details on the site:</strong> name, phone number, type of event and approximate date, if you filled it in.</li>
+      <li><strong>When you contact us on Messenger or by email:</strong> your name and Facebook profile or your email address, and the content of the messages.</li>
       <li>
-        <strong>החומרים למשחק:</strong> סיפורים, שאלות, תמונות ופרטים על החוגגים ועל האורחים, שאתם בוחרים לשלוח לנו כדי
-        שנבנה את המשחק.
+        <strong>The materials for the game:</strong> stories, questions, photos and details about the guests of honor and
+        the guests, which you choose to send us so we can build the game.
       </li>
       <li>
-        <strong>במהלך המשחק באירוע:</strong> אורחים מצטרפים מהטלפון בסריקת קוד, בוחרים שם תצוגה ועונים על השאלות. השם
-        והניקוד מופיעים על המסך ובטבלת המובילים.
+        <strong>During the game at the event:</strong> guests join from their phones by scanning a code, choose a display
+        name and answer the questions. The name and the score appear on the screen and on the leaderboard.
       </li>
       <li>
-        <strong>מידע טכני:</strong> כמו כל אתר, שרתי האחסון רושמים מידע טכני בסיסי (כמו כתובת IP וסוג הדפדפן) כדי להפעיל
-        את האתר ולשמור על האבטחה שלו. כרגע האתר לא משתמש בכלי פרסום או במעקב של צד שלישי.
+        <strong>Technical information:</strong> like any website, the hosting servers log basic technical information
+        (such as IP address and browser type) to run the site and keep it secure. At the moment the site does not use
+        advertising tools or third-party tracking.
       </li>
     </ul>
   </section>
 
   <section id="use">
-    <h2 class="display">2. למה אנחנו משתמשים במידע</h2>
+    <h2 class="display">2. What we use the information for</h2>
     <ul>
-      <li>כדי לחזור אליכם, לענות על שאלות ולתאם את האירוע.</li>
-      <li>כדי לבנות את המשחק שלכם ולהריץ אותו באירוע.</li>
-      <li>כדי לשפר את השירות ולשמור על אבטחת האתר.</li>
+      <li>To get back to you, answer questions and coordinate the event.</li>
+      <li>To build your game and run it at the event.</li>
+      <li>To improve the service and keep the site secure.</li>
     </ul>
-    {/* TODO confirm: the same commitments as the FAQ answer "מי רואה את התמונות והסיפורים?" */}
+    {/* TODO confirm: the same commitments as the FAQ answer "Who sees the photos and stories?" */}
     <p>
-      אנחנו לא מוכרים את המידע שלכם, לא משתמשים בתמונות ובסיפורים שלכם לפרסום בלי אישור מפורש מכם, ולא משתמשים בהם
-      לאימון מודלים של בינה מלאכותית.
+      We do not sell your information, we do not use your photos and stories for advertising without your explicit
+      approval, and we do not use them to train AI models.
     </p>
   </section>
 
   <section id="share">
-    <h2 class="display">3. עם מי המידע משותף</h2>
+    <h2 class="display">3. Who the information is shared with</h2>
     <p>
-      רק אתם ואנחנו רואים את החומרים שלכם לפני האירוע. באירוע עצמו, המשחק מוצג על המסך הגדול ובטלפונים של האורחים שמשחקים.
-      כדי לתת את השירות אנחנו נעזרים בספקים, שמקבלים רק את מה שנחוץ להם:
+      Only you and we see your materials before the event. At the event itself, the game is shown on the big screen and
+      on the phones of the guests who are playing. To provide the service we work with providers, who receive only what
+      they need:
     </p>
     <ul>
-      <li><strong>Netlify:</strong> אחסון האתר וקבלת הטפסים שאתם ממלאים בו.</li>
-      <li><strong>Meta (פייסבוק ומסנג'ר) ו-Google (Gmail):</strong> השיחות וההתכתבויות איתכם.</li>
-      <li><strong>פלטפורמת המשחק:</strong> השירות שבו המשחק נבנה ורץ באירוע, כולל השאלות והתמונות שבו.</li>
+      <li><strong>Netlify:</strong> hosting the site and receiving the forms you fill in on it.</li>
+      <li><strong>Meta (Facebook and Messenger) and Google (Gmail):</strong> our conversations and correspondence with you.</li>
+      <li><strong>The game platform:</strong> the service where the game is built and runs at the event, including the questions and photos in it.</li>
     </ul>
     <p>
-      חלק מהספקים שומרים מידע על שרתים מחוץ לישראל. נמסור מידע לגורם אחר רק אם החוק מחייב אותנו לעשות זאת.
+      Some of the providers store information on servers outside Israel. We will hand information to another party only
+      if the law requires us to.
     </p>
   </section>
 
   <section id="others">
-    <h2 class="display">4. מידע על אנשים אחרים וילדים</h2>
+    <h2 class="display">4. Information about other people and children</h2>
     <p>
-      המשחק בנוי מסיפורים ותמונות של החוגגים ושל אנשים שקרובים אליהם, לפעמים גם ילדים (למשל ביום הולדת או בבר ובת מצווה).
-      כששולחים לנו חומרים על אנשים אחרים, אתם מאשרים שמותר לכם לשתף אותם לצורך המשחק. אנחנו משתמשים בהם רק למשחק של האירוע
-      שלכם, וממליצים לא לשלוח מידע רגיש כמו מידע רפואי או מספרי זהות.
+      The game is built from stories and photos of the guests of honor and of people close to them, sometimes children
+      too (for example at a birthday or a bar or bat mitzvah). When you send us materials about other people, you
+      confirm that you are allowed to share them for the game. We use them only for the game of your event, and we
+      recommend not sending sensitive information such as medical information or ID numbers.
     </p>
   </section>
 
   <section id="keep">
-    <h2 class="display">5. כמה זמן אנחנו שומרים את המידע</h2>
+    <h2 class="display">5. How long we keep the information</h2>
     {/* TODO confirm: retention. No automatic-deletion promise until the real policy is decided. */}
     <p>
-      אנחנו שומרים את המידע כל עוד הוא נחוץ למטרות שבגללן נאסף, למשל כדי שהמשחק יישאר אצלכם כמזכרת אחרי האירוע. אפשר לבקש
-      מאיתנו בכל עת למחוק את החומרים ואת פרטי הקשר שלכם, ונטפל בבקשה בהקדם.
+      We keep the information for as long as it is needed for the purposes it was collected for, for example so the
+      game stays with you as a keepsake after the event. You can ask us at any time to delete your materials and your
+      contact details, and we will handle the request promptly.
     </p>
   </section>
 
   <section id="rights">
-    <h2 class="display">6. הזכויות שלכם</h2>
-    <p>לפי חוק הגנת הפרטיות, אתם יכולים:</p>
+    <h2 class="display">6. Your rights</h2>
+    <p>Under the Israeli Privacy Protection Law, you can:</p>
     <ul>
-      <li>לבקש לעיין במידע שיש לנו עליכם.</li>
-      <li>לבקש לתקן מידע שגוי או למחוק מידע.</li>
-      <li>לבקש שלא נפנה אליכם יותר.</li>
+      <li>Ask to see the information we hold about you.</li>
+      <li>Ask us to correct wrong information or to delete information.</li>
+      <li>Ask us not to contact you anymore.</li>
     </ul>
-    <p>כדי לממש את הזכויות, כתבו לנו לכתובת שבסוף העמוד.</p>
+    <p>To exercise these rights, write to us at the address at the end of this page.</p>
   </section>
 
   <section id="security">
-    <h2 class="display">7. אבטחת מידע</h2>
+    <h2 class="display">7. Information security</h2>
     <p>
-      אנחנו נוקטים אמצעים סבירים כדי לשמור על המידע שלכם, והגישה אליו מוגבלת למי שצריך אותו כדי לתת לכם את השירות. אין
-      שיטה שמבטיחה הגנה מלאה, ואם נגלה פגיעה במידע שלכם נעדכן אתכם.
+      We take reasonable measures to protect your information, and access to it is limited to those who need it to
+      provide you with the service. No method guarantees complete protection, and if we discover that your information
+      was compromised we will let you know.
     </p>
   </section>
 
   <section id="changes">
-    <h2 class="display">8. שינויים במדיניות</h2>
-    <p>אנחנו עשויים לעדכן את המדיניות מדי פעם. התאריך בראש העמוד מראה מתי עודכנה לאחרונה.</p>
+    <h2 class="display">8. Changes to this policy</h2>
+    <p>We may update this policy from time to time. The date at the top of the page shows when it was last updated.</p>
   </section>
 
   <section id="contact">
-    <h2 class="display">9. יצירת קשר</h2>
-    <p>שאלות, בקשות או הערות על הפרטיות שלכם? כתבו לנו:</p>
+    <h2 class="display">9. Contact us</h2>
+    <p>Questions, requests or comments about your privacy? Write to us:</p>
     <ul class="contact">
-      <li>מייל: <a href={`mailto:${SITE.email}`} dir="ltr">{SITE.email}</a></li>
-      <li>מסנג'ר: <a href={contactLink("privacy")} target="_blank" rel="noopener">דף הפייסבוק של טדאם!</a></li>
+      <li>Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li>Messenger: <a href={contactLink("privacy")} target="_blank" rel="noopener">the Tadam! Facebook page</a></li>
     </ul>
   </section>
 </PrivacyShell>

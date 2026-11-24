@@ -1,119 +1,119 @@
 ---
-title: "חידון טו בשבט עם תשובות: 36 שאלות למשפחה (לילדים, למבוגרים ועל המשפחה)"
-seoTitle: "חידון טו בשבט עם תשובות: 36 שאלות למשפחה"
-description: "חידון טו בשבט מוכן עם תשובות: שאלות לילדים, שאלות למבוגרים, שאלות על עצים ופירות ושאלות על המשפחה, ואיך מריצים אותו בסדר ט״ו בשבט."
-targetKeyword: "חידון טו בשבט"
-answer: "חידון ט״ו בשבט טוב משלב שאלות ידע על החג (מהם שבעת המינים, למה קוראים לו ראש השנה לאילנות, מי התחיל את מנהג הנטיעות) עם שאלות על המשפחה שלכם. כאן תמצאו 28 שאלות ידע עם תשובות, לילדים ולמבוגרים, ועוד 8 שאלות אישיות, ואת כל מה שצריך כדי להריץ את החידון ליד שולחן הפירות ב-15 דקות."
+title: "Tu BiShvat Quiz with Answers: 36 Questions for the Family (for Kids, for Adults and About Your Family)"
+seoTitle: "Tu BiShvat Quiz with Answers: 36 Family Questions"
+description: "A ready Tu BiShvat quiz with answers: questions for kids, for adults, about trees and fruit, and about your family, plus how to run it at the seder."
+targetKeyword: "Tu BiShvat quiz"
+answer: "A good Tu BiShvat quiz mixes knowledge questions about the holiday (what the Seven Species are, why it is called the New Year for Trees, who started the tree-planting custom) with questions about your own family. Here you will find 28 knowledge questions with answers, for kids and adults, plus 8 personal questions, and everything you need to run the quiz at the fruit table in 15 minutes."
 date: 2026-11-22
-category: "חגים ומשפחה"
+category: "Holidays and family"
 faq:
-  - q: "מתי ט״ו בשבט 2027?"
-    a: "ט״ו בשבט תשפ״ז חל בשבת, 23 בינואר 2027, ומתחיל ביום שישי 22 בינואר עם השקיעה. ערב החג יוצא השנה בליל שבת."
-  - q: "כמה שאלות צריך בחידון ט״ו בשבט משפחתי?"
-    a: "בין 15 ל-25 שאלות, שזה בערך 15 דקות. עדיף לערבב: חצי שאלות ידע על החג וחצי שאלות על המשפחה."
-  - q: "האם ט״ו בשבט מוזכר בתורה?"
-    a: "לא. התאריך מופיע לראשונה במשנה, במסכת ראש השנה, כראש השנה לאילן לפי בית הלל."
-  - q: "אפשר לשחק בחידון ט״ו בשבט מהטלפון?"
-    a: "כן. מקרינים את השאלות על הטלוויזיה וכולם עונים מהטלפון, ב-טדאם! למשל סורקים קוד ועונים בדפדפן בלי אפליקציה."
+  - q: "When is Tu BiShvat 2027?"
+    a: "Tu BiShvat 5787 falls on Saturday, January 23, 2027, and begins on Friday, January 22, at sunset. This year the eve of the holiday is Friday night."
+  - q: "How many questions does a family Tu BiShvat quiz need?"
+    a: "Between 15 and 25 questions, which is about 15 minutes. It is best to mix: half knowledge questions about the holiday and half questions about the family."
+  - q: "Is Tu BiShvat mentioned in the Torah?"
+    a: "No. The date first appears in the Mishnah, in tractate Rosh Hashanah, as the New Year for the tree according to Beit Hillel."
+  - q: "Can you play a Tu BiShvat quiz from your phone?"
+    a: "Yes. You show the questions on the TV and everyone answers from their phone. With Tadam!, for example, you scan a code and answer in the browser, with no app."
 ---
 
-צלחת פירות יבשים, כמה אגוזים, ומשפחה שלמה סביב השולחן. חידון הוא הדרך הכי פשוטה להפוך את ט״ו בשבט מעוד ארוחה לערב שמדברים עליו. החלק הראשון כאן הוא שאלות ידע על החג, עם תשובות. החלק השני הוא החלק שבאמת מצחיק: שאלות על המשפחה שלכם.
+A plate of dried fruit, a few nuts, and the whole family around the table. A quiz is the simplest way to turn Tu BiShvat from one more meal into an evening people talk about. The first part here is knowledge questions about the holiday, with answers. The second part is the one that is really funny: questions about your own family.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## מתי ט״ו בשבט 2027, ומתי כדאי לעשות את החידון?
+## When is Tu BiShvat 2027, and when is the best time for the quiz?
 
-ט״ו בשבט חל בשבת, 23 בינואר 2027, ומתחיל ביום שישי בערב. הזמן הכי טוב לחידון הוא ארוחת שישי, כשכל המשפחה כבר יושבת יחד.
+Tu BiShvat falls on Saturday, January 23, 2027, and begins on Friday evening. The best time for the quiz is Friday night dinner, when the whole family is already sitting together.
 
-לפי [לוח השנה של hebcal לט״ו בשבט 2027](https://www.hebcal.com/holidays/tu-bishvat-2027), החג חל בט״ו בשבט תשפ״ז. השנה ערב החג יוצא בליל שבת, ככה שסדר ט״ו בשבט מתחבר לארוחת שישי בלי לתאם עוד ערב. משפחות ששומרות שבת יכולות להדפיס את השאלות מראש ולשחק עם דף, ומשפחות שרוצות מסך יכולות לשחק במוצאי שבת.
+According to [the hebcal calendar for Tu BiShvat 2027](https://www.hebcal.com/holidays/tu-bishvat-2027), the holiday falls on the 15th of Shvat 5787. This year the eve of the holiday is Friday night, so a Tu BiShvat seder fits into Friday night dinner without scheduling another evening. Families who keep Shabbat can print the questions in advance and play from a page, and families who want a screen can play on Saturday night.
 
-## איך מריצים חידון ט״ו בשבט ליד שולחן הפירות?
+## How do you run a Tu BiShvat quiz at the fruit table?
 
-בוחרים מנחה, מחלקים לקבוצות מעורבות בגילאים, ומערבבים שאלות ידע עם שאלות על המשפחה. כל תשובה נכונה שווה פרי מהצלחת, והקבוצה המנצחת בוחרת ראשונה.
+Pick a host, split into teams of mixed ages, and mix knowledge questions with questions about the family. Every right answer earns a piece of fruit from the plate, and the winning team gets first pick.
 
-1. **בחרו מנחה.** מישהו אחד קורא את השאלות ושומר על הקצב. ילדים בני 10 עד 13 הם מנחים מעולים.
-2. **חלקו לקבוצות.** סבים עם נכדים, בני דודים מול הורים.
-3. **ערבבו סוגי שאלות.** שאלת ידע, שאלה על המשפחה, שאלת טעימה ("איזה פרי יבש זה?" בעיניים עצומות), וחוזר חלילה.
-4. **תנו ניקוד שרואים.** תמר או שקד על כל תשובה נכונה, ובסוף סופרים.
-5. **שלבו בסדר.** אם אתם עורכים סדר ט״ו בשבט, שאלו שתיים או שלוש שאלות בין כוס לכוס.
+1. **Pick a host.** One person reads the questions and keeps the pace. Kids aged 10 to 13 make great hosts.
+2. **Split into teams.** Grandparents with grandchildren, cousins against parents.
+3. **Mix the question types.** A knowledge question, a family question, a tasting question ("which dried fruit is this?" with eyes closed), and round again.
+4. **Keep score where everyone can see it.** A date or an almond for every right answer, and you count at the end.
+5. **Work it into the seder.** If you hold a Tu BiShvat seder, ask two or three questions between one cup and the next.
 
-## אילו שאלות מתאימות לאיזה גיל?
+## Which questions suit which age?
 
-ילדים צעירים צריכים שאלות קצרות עם תשובה של מילה אחת, ומבוגרים נהנים משאלות על מקורות והיסטוריה. הטבלה עוזרת לבחור.
+Young children need short questions with a one-word answer, and adults enjoy questions about sources and history. The table helps you choose.
 
-| קהל | סוג שאלות | דוגמה מהחידון |
+| Audience | Type of questions | Example from the quiz |
 |---|---|---|
-| ילדים בגן ובכיתות א׳ עד ג׳ | מנהגים, פירות, מספרים | מאיזה פרי עושים צימוקים? |
-| ילדים בכיתות ד׳ עד ו׳ | שבעת המינים, עצים וטבע | איך יודעים בן כמה עץ שנכרת? |
-| נוער ומבוגרים | מקורות, היסטוריה, מנהגי הסדר | מי הוביל נטיעה חגיגית בט״ו בשבט 1890? |
-| כל הגילאים ביחד | שאלות על המשפחה | מי במשפחה הצליח לייבש אפילו קקטוס? |
+| Kindergarten and grades 1 to 3 | Customs, fruit, numbers | Which fruit are raisins made from? |
+| Grades 4 to 6 | The Seven Species, trees and nature | How can you tell the age of a tree that was cut down? |
+| Teens and adults | Sources, history, seder customs | Who led a festive tree planting on Tu BiShvat 1890? |
+| All ages together | Questions about the family | Who in the family managed to dry out even a cactus? |
 
-## מה שואלים בחידון ט״ו בשבט לילדים, ומה התשובות?
+## What do you ask in a Tu BiShvat quiz for kids, and what are the answers?
 
-שואלים על מה שהילדים רואים ועושים בחג: הנטיעות, הפירות היבשים והשקדייה. אלה עשר שאלות שכל ילד מכיתה א׳ יכול לענות עליהן.
+You ask about what kids see and do on the holiday: the tree planting, the dried fruit and the almond tree. These are ten questions any first grader can answer.
 
-1. **באיזה חודש עברי חל ט״ו בשבט?** בחודש שבט.
-2. **מה פירוש "ט״ו"?** חמש עשרה. האות ט׳ שווה 9 והאות ו׳ שווה 6.
-3. **איך עוד קוראים לט״ו בשבט?** ראש השנה לאילנות, או חג האילנות.
-4. **מה נהוג לעשות בט״ו בשבט בישראל?** לנטוע עצים.
-5. **איזה עץ מתכסה בפריחה לבנה וורודה בסביבות ט״ו בשבט?** השקדייה.
-6. **מה נהוג לאכול בט״ו בשבט?** פירות, ובמיוחד פירות יבשים ופירות שהארץ התברכה בהם.
-7. **מאיזה פרי עושים צימוקים?** מענבים.
-8. **על איזה עץ גדלים תמרים?** על דקל.
-9. **מאיזה פרי עושים שמן זית?** מזיתים.
-10. **אילו שלושה דברים עץ צריך כדי לגדול?** מים, אור שמש ואדמה.
+1. **In which Hebrew month does Tu BiShvat fall?** In the month of Shvat.
+2. **What does "Tu" mean?** Fifteen. It is written with the Hebrew letters tet (ט), which equals 9, and vav (ו), which equals 6.
+3. **What else is Tu BiShvat called?** The New Year for Trees (Rosh Hashanah La'Ilanot), or the Festival of Trees.
+4. **What is the custom on Tu BiShvat in Israel?** Planting trees.
+5. **Which tree is covered in white and pink blossom around Tu BiShvat?** The almond tree (shkediya).
+6. **What is it customary to eat on Tu BiShvat?** Fruit, especially dried fruit and the fruits the Land of Israel is blessed with.
+7. **Which fruit are raisins made from?** Grapes.
+8. **What tree do dates grow on?** A palm tree.
+9. **Which fruit is olive oil made from?** Olives.
+10. **Which three things does a tree need in order to grow?** Water, sunlight and soil.
 
-## אילו שאלות מתאימות לחידון ט״ו בשבט למבוגרים?
+## Which questions suit a Tu BiShvat quiz for adults?
 
-שאלות על המקורות ועל ההיסטוריה של החג: איפה הוא מוזכר לראשונה, מי המציא את הסדר ומי התחיל לנטוע. אלה השאלות שגורמות לסבא להתווכח עם הנכדה שלמדה את זה השבוע.
+Questions about the sources and the history of the holiday: where it is first mentioned, who invented the seder and who started planting. These are the questions that get Grandpa arguing with the granddaughter who learned it this week.
 
-11. **מהם שבעת המינים?** חיטה, שעורה, גפן, תאנה, רימון, זית ותמר. הם מופיעים [בספר דברים, פרק ח׳, פסוק ח׳](https://he.wikisource.org/wiki/%D7%9E%22%D7%92_%D7%93%D7%91%D7%A8%D7%99%D7%9D_%D7%97_%D7%97).
-12. **בפסוק כתוב "דבש". לאיזה דבש הכוונה?** לפי הפירוש המקובל, לדבש תמרים ולא לדבש דבורים.
-13. **האם ט״ו בשבט מוזכר בתורה?** לא. הוא מופיע לראשונה [במשנה, בתחילת מסכת ראש השנה](https://he.wikisource.org/wiki/%D7%9E%D7%A9%D7%A0%D7%94_%D7%A8%D7%90%D7%A9_%D7%94%D7%A9%D7%A0%D7%94_%D7%90).
-14. **כמה ראשי שנים מונה המשנה?** ארבעה: א׳ בניסן, א׳ באלול, א׳ בתשרי וראש השנה לאילן.
-15. **מתי ראש השנה לאילן לפי בית שמאי?** בא׳ בשבט. בית הלל אמרו בט״ו בשבט, וכך נקבע.
-16. **מי התחיל את מנהג סדר ט״ו בשבט?** המנהג התגבש [אצל חכמי צפת במאה ה-17](https://www.hamichlol.org.il/%D7%A1%D7%93%D7%A8_%D7%98%22%D7%95_%D7%91%D7%A9%D7%91%D7%98), והתפרסם בחיבור "פרי עץ הדר".
-17. **כמה כוסות יין שותים בסדר ט״ו בשבט, ומה מיוחד בהן?** ארבע, והצבע מתחלף בהדרגה: מיין לבן בלבד ועד יין אדום בלבד.
-18. **מי הוביל את תלמידיו לנטיעה חגיגית בט״ו בשבט 1890?** המורה והסופר זאב יעבץ, בזכרון יעקב. לפי [חוברת של משרד החינוך על החג](https://meyda.education.gov.il/files/Mazkirut_Pedagogit/AgafMoreshet/halonot_tu_bishvat.pdf), מכאן התחיל מנהג הנטיעות.
-19. **איזה מוסד ישראלי חוגג יום הולדת בט״ו בשבט?** הכנסת. [הישיבה הראשונה שלה נערכה בט״ו בשבט תש״ט](https://pop.education.gov.il/tchumey_daat/moledet_hevra_ezrahut/yesodi/noseem_nilmadim/tu_shvat_yom_huledet_kneset/), 14 בפברואר 1949, בירושלים.
-20. **מי כתב את "השקדייה פורחת"?** את המילים כתב ישראל דושמן, ואת הלחן [מנשה רבינא](https://www.hamichlol.org.il/%D7%9E%D7%A0%D7%A9%D7%94_%D7%A8%D7%91%D7%99%D7%A0%D7%90).
-21. **איזה קטע משמיטים מהתפילה בט״ו בשבט?** את התחנון, כמו בימי שמחה אחרים.
-22. **כמה שנים לא אוכלים מפירות של עץ חדש?** שלוש שנים. המצווה נקראת ערלה, וט״ו בשבט קובע לאיזו שנה שייכים הפירות.
+11. **What are the Seven Species?** Wheat, barley, grapevine, fig, pomegranate, olive and date. They appear [in the Book of Deuteronomy, chapter 8, verse 8](https://he.wikisource.org/wiki/%D7%9E%22%D7%92_%D7%93%D7%91%D7%A8%D7%99%D7%9D_%D7%97_%D7%97).
+12. **The verse says "honey". Which honey does it mean?** According to the accepted interpretation, date honey and not bee honey.
+13. **Is Tu BiShvat mentioned in the Torah?** No. It first appears [in the Mishnah, at the start of tractate Rosh Hashanah](https://he.wikisource.org/wiki/%D7%9E%D7%A9%D7%A0%D7%94_%D7%A8%D7%90%D7%A9_%D7%94%D7%A9%D7%A0%D7%94_%D7%90).
+14. **How many new years does the Mishnah count?** Four: the 1st of Nisan, the 1st of Elul, the 1st of Tishrei and the New Year for the tree.
+15. **When is the New Year for the tree according to Beit Shammai?** On the 1st of Shvat. Beit Hillel said the 15th of Shvat, and that is what was decided.
+16. **Who started the custom of the Tu BiShvat seder?** The custom took shape [among the sages of Safed in the 17th century](https://www.hamichlol.org.il/%D7%A1%D7%93%D7%A8_%D7%98%22%D7%95_%D7%91%D7%A9%D7%91%D7%98), and became known through the work "Pri Etz Hadar".
+17. **How many cups of wine do you drink at a Tu BiShvat seder, and what is special about them?** Four, and the color changes gradually: from white wine only to red wine only.
+18. **Who led his students to a festive tree planting on Tu BiShvat 1890?** The teacher and writer Ze'ev Yavetz, in Zichron Yaakov. According to [a Ministry of Education booklet about the holiday](https://meyda.education.gov.il/files/Mazkirut_Pedagogit/AgafMoreshet/halonot_tu_bishvat.pdf), this is where the tree-planting custom began.
+19. **Which Israeli institution celebrates its birthday on Tu BiShvat?** The Knesset. [Its first sitting was held on Tu BiShvat 5709](https://pop.education.gov.il/tchumey_daat/moledet_hevra_ezrahut/yesodi/noseem_nilmadim/tu_shvat_yom_huledet_kneset/), February 14, 1949, in Jerusalem.
+20. **Who wrote the song "Hashkediya Porachat" ("The Almond Tree Is Blooming")?** The words were written by Israel Dushman, and the melody by [Menashe Ravina](https://www.hamichlol.org.il/%D7%9E%D7%A0%D7%A9%D7%94_%D7%A8%D7%91%D7%99%D7%A0%D7%90).
+21. **Which part of the prayers is left out on Tu BiShvat?** Tachanun, the prayers of supplication, as on other joyful days.
+22. **For how many years do you not eat the fruit of a new tree?** Three years. The commandment is called orlah, and Tu BiShvat determines which year the fruit belongs to.
 
-## אילו שאלות על עצים ופירות מתאימות לכל הגילאים?
+## Which questions about trees and fruit suit all ages?
 
-שאלות טבע קצרות, שגם ילד וגם סבתא יכולים לנחש. הן טובות במיוחד כשאלות טעימה, עם הפרי עצמו על השולחן.
+Short nature questions that both a child and a grandmother can guess. They work especially well as tasting questions, with the fruit itself on the table.
 
-23. **מהי דבלה?** תאנה מיובשת.
-24. **מאיזה פרי מכינים בדרך כלל לדר?** ממשמש.
-25. **איזה חלק של עץ החרוב אוכלים?** את התרמילים.
-26. **איך יודעים בן כמה עץ שנכרת?** סופרים את הטבעות בגזע.
-27. **איך קוראים לעץ שמשיר את העלים שלו בחורף?** עץ נשיר.
-28. **איזה עץ מגדל בלוטים?** האלון.
+23. **What is a dvela (דבלה)?** A dried fig.
+24. **Which fruit is leder (לדר, fruit leather) usually made from?** Apricot.
+25. **Which part of the carob tree do you eat?** The pods.
+26. **How can you tell the age of a tree that was cut down?** You count the rings in the trunk.
+27. **What do you call a tree that sheds its leaves in winter?** A deciduous tree.
+28. **Which tree grows acorns?** The oak.
 
-## איך עושים חידון ט״ו בשבט מצחיק על המשפחה?
+## How do you make a funny Tu BiShvat quiz about the family?
 
-אוספים מראש שאלה אחת מכל בן משפחה, על משהו שרק הוא יודע. ככה כל שאלה היא סיפור קטן, וכל השאר מנחשים.
+Collect one question from each family member in advance, about something only they know. That way every question is a little story, and everyone else guesses.
 
-כאן החידון מפסיק להיות "עוד חידון ט״ו בשבט מהאינטרנט" והופך למשהו שקורה רק אצלכם. הנה שמונה שאלות שאפשר להעתיק ולמלא:
+This is where the quiz stops being "one more Tu BiShvat quiz from the internet" and becomes something that happens only at your table. Here are eight questions you can copy and fill in:
 
-29. מי במשפחה אוכל את כל האגוזים ומשאיר לכולם את הצימוקים?
-30. איזה עץ גדל בחצר של הבית שבו סבא או סבתא גדלו?
-31. מי שתל פעם משהו ששרד הכי הרבה שנים, ומה זה היה?
-32. מי במשפחה הצליח לייבש אפילו קקטוס?
-33. על איזה פרי סבתא לא מוותרת בשום עונה?
-34. לאיזה טיול משפחתי בטבע כולם חוזרים בסיפורים עד היום?
-35. מי טיפס על עץ בילדות ולא הצליח לרדת לבד?
-36. של מי התמונה הזאת? (הראו תמונה ישנה של אחד מבני המשפחה בטיול או בנטיעות, ותנו לכולם לנחש)
+29. Who in the family eats all the nuts and leaves everyone the raisins?
+30. Which tree grew in the yard of the house where Grandpa or Grandma grew up?
+31. Who once planted something that survived the most years, and what was it?
+32. Who in the family managed to dry out even a cactus?
+33. Which fruit will Grandma not give up in any season?
+34. Which family trip in nature does everyone still tell stories about?
+35. Who climbed a tree as a child and could not get down alone?
+36. Whose photo is this? (Show an old photo of one of the family members on a hike or planting trees, and let everyone guess.)
 
-> טיפ: את השאלות על המשפחה כדאי לאסוף מראש בוואטסאפ המשפחתי. ככה כל אחד מגיע עם תשובה שרק הוא יודע.
+> Tip: it is best to collect the family questions in advance in the family WhatsApp group. That way everyone arrives with an answer only they know.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** ליל שבת, ט״ו בשבט, 12 בני משפחה סביב צלחת הפירות. השאלה "מי במשפחה הצליח לייבש אפילו קקטוס?" מקבלת שלוש תשובות שונות, ושלושתן מצביעות על אותה דודה. הנכדים מובילים עד השאלה האחרונה, ואז סבתא מזהה את עצמה בתמונה מנטיעות של כיתה ד׳ ולוקחת את התמר האחרון.
+> **Example scenario (not a real event):** Friday night, Tu BiShvat, 12 family members around the fruit plate. The question "Who in the family managed to dry out even a cactus?" gets three different answers, and all three point to the same aunt. The grandchildren lead until the last question, and then Grandma recognizes herself in a photo from a fourth-grade tree planting and takes the last date.
 
-## איך הופכים את החידון למשחק מהטלפון?
+## How do you turn the quiz into a game played from the phone?
 
-מקרינים את השאלות על הטלוויזיה, וכולם עונים מהטלפון שלהם. הניקוד מתעדכן על המסך, ואף אחד לא צריך לספור שקדים.
+You show the questions on the TV, and everyone answers from their own phone. The score updates on the screen, and nobody has to count almonds.
 
-אם יש לכם אירוע משפחתי גדול סביב החג (יום הולדת עגול, בר מצווה, מפגש של כל המשפחה המורחבת), ב-[טדאם!](/) אתם שולחים לנו סיפורים, שאלות ותמונות מהמשפחה, ואנחנו בונים מהם את המשחק. ביום האירוע המשחק רץ על הטלוויזיה או על המקרן, כולם סורקים קוד ועונים מהטלפון בלי אפליקציה, ומנחה מריץ את המשחק עד שמוכרזת הקבוצה שמכירה את המשפחה הכי טוב. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+If you have a big family event around the holiday (a milestone birthday, a bar mitzvah, a gathering of the whole extended family), at [Tadam!](/) you send us stories, questions and photos from the family, and we build the game from them. On the day of the event the game runs on the TV or the projector, everyone scans a code and answers from their phone with no app, and a host runs the game until the team that knows the family best is announced. [Watch the demo](/#demo) to see what it looks like.
 
-אהבתם את הפורמט? יש לנו גם [חידון חנוכה עם 40 שאלות](/blog/hanukkah-quiz/). מרימים כוסית לט״ו בשבט בעבודה? הנה [מדריך להרמת כוסית לחג במשרד](/blog/office-holiday-toast/). ואם אתם רוצים להמשיך את הערב, קחו [שאלות היכרות למשפחה ולחברים](/blog/icebreaker-questions/).
+Like the format? We also have a [Hanukkah quiz with 40 questions](/blog/hanukkah-quiz/). Raising a glass for Tu BiShvat at work? Here is a [guide to a holiday toast at the office](/blog/office-holiday-toast/). And if you want to keep the evening going, take our [icebreaker questions for family and friends](/blog/icebreaker-questions/).

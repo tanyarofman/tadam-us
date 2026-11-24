@@ -1,133 +1,133 @@
 ---
-title: "חידות לחנוכה עם תשובות: 45 חידות לילדים ולמבוגרים (מי אני, אימוג׳י, הוא והיא)"
-seoTitle: "חידות לחנוכה עם תשובות: 45 חידות לילדים ולמבוגרים"
-description: "45 חידות לחנוכה עם תשובות: חידות מי אני לילדים, חידות אימוג׳י, קפד ראשו, הוא והיא, חידות חשבון וחידות קשות למבוגרים."
-targetKeyword: "חידות לחנוכה"
-answer: "חידות לחנוכה הן שאלות שצריך לפצח ולא רק לדעת: חידות \"מי אני\" על הסביבון והסופגנייה, חידות אימוג׳י, חידות קפד ראשו והוא והיא, וחידות חשבון על הנרות. כאן תמצאו 45 חידות עם תשובות, מסודרות מהקל לקשה, לילדים מכיתה א׳ ועד למבוגרים שבטוחים שהם יודעים הכול על החג."
+title: "Hanukkah Riddles with Answers: 45 Riddles for Kids and Adults (Who Am I, Emoji, Sound-Alikes)"
+seoTitle: "Hanukkah Riddles with Answers: 45 for Kids and Adults"
+description: "45 Hanukkah riddles with answers: Who Am I riddles for kids, emoji riddles, behead-the-word, sound-alikes, math riddles and hard riddles for adults."
+targetKeyword: "Hanukkah riddles"
+answer: "Hanukkah riddles are questions you have to crack, not just know: \"Who am I\" riddles about the dreidel and the sufganiyah, emoji riddles, behead-the-word and sound-alike riddles, and math riddles about the candles. Here you'll find 45 riddles with answers, ordered from easy to hard, for kids from first grade up to adults who are sure they know everything about the holiday."
 date: 2026-11-22
-category: "חגים ומשפחה"
+category: "Holidays and family"
 faq:
-  - q: "מה ההבדל בין חידות לחנוכה לחידון חנוכה?"
-    a: "בחידון שואלים שאלות ידע, כמו כמה ימים נמשך החג. בחידה נותנים רמזים וצריך לפצח את התשובה, כמו \"יש לי רגל אחת וארבעה צדדים\"."
-  - q: "אילו חידות לחנוכה מתאימות לכיתה א׳?"
-    a: "חידות \"מי אני\" קצרות על דברים שהילדים רואים בחג: סביבון, חנוכייה, סופגנייה ולביבה. מקריאים אותן בקול, כי לא כל הילדים קוראים עדיין."
-  - q: "כמה חידות צריך לערב הדלקה משפחתי?"
-    a: "עשר עד חמש עשרה חידות מספיקות לרבע שעה. בחרו שתיים או שלוש מכל סוג, כדי שלכל גיל יהיה רגע לנצח."
-  - q: "מתי חנוכה 2026?"
-    a: "חנוכה תשפ״ז מתחיל ביום שישי, 4 בדצמבר 2026, עם השקיעה, ונמשך עד מוצאי שבת 12 בדצמבר. הנר הראשון נדלק ביום שישי בערב."
+  - q: "What is the difference between Hanukkah riddles and a Hanukkah quiz?"
+    a: "A quiz asks knowledge questions, like how many days the holiday lasts. A riddle gives clues and you have to crack the answer, like \"I have one leg and four sides\"."
+  - q: "Which Hanukkah riddles suit first graders?"
+    a: "Short \"Who am I\" riddles about things kids see during the holiday: a dreidel, a hanukkiah, a sufganiyah and a latke. Read them out loud, because not all the kids can read yet."
+  - q: "How many riddles do you need for a family candle lighting evening?"
+    a: "Ten to fifteen riddles are enough for a quarter of an hour. Pick two or three of each type, so every age gets a moment to win."
+  - q: "When is Hanukkah 2026?"
+    a: "Hanukkah 5787 begins on Friday, December 4, 2026, at sundown, and runs until Saturday night, December 12. The first candle is lit on Friday evening."
 ---
 
-חידון בודק מה אתם יודעים. חידה בודקת כמה מהר אתם חושבים. בגלל זה חידות עובדות כל כך טוב בערב הדלקה: ילד בכיתה ב׳ יכול לפצח חידה לפני דוד שלו, ושניהם ייהנו מזה. ריכזנו כאן 45 חידות לחנוכה, מהקל לקשה, וכולן עם תשובות.
+A quiz tests what you know. A riddle tests how fast you think. That's why riddles work so well on a candle lighting evening: a second grader can crack one before his uncle does, and both of them will enjoy it. We've gathered 45 Hanukkah riddles here, from easy to hard, all with answers.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## מה ההבדל בין חידות לחנוכה לחידון חנוכה?
+## What is the difference between Hanukkah riddles and a Hanukkah quiz?
 
-בחידון שואלים שאלות ידע שיש להן תשובה אחת שצריך לזכור. בחידה נותנים רמזים, משחק מילים או תרגיל, וצריך לפצח.
+A quiz asks knowledge questions with one answer you have to remember. A riddle gives you clues, wordplay or a small puzzle, and you have to crack it.
 
-אם אתם מחפשים שאלות ידע על החג, יש לנו [חידון חנוכה עם 40 שאלות ותשובות](/blog/hanukkah-quiz/). הכי טוב לשלב: שאלת ידע, חידה, שאלה על המשפחה. השנה יש לכם שמונה ערבים לנסות, כי [חנוכה מתחיל ביום שישי, 4 בדצמבר 2026](https://www.hebcal.com/holidays/chanukah-2026), עם השקיעה.
+If you're looking for knowledge questions about the holiday, we have a [Hanukkah quiz with 40 questions and answers](/blog/hanukkah-quiz/). The best approach is to mix: a knowledge question, a riddle, a question about the family. This year you have eight evenings to try, because [Hanukkah begins on Friday, December 4, 2026](https://www.hebcal.com/holidays/chanukah-2026), at sundown.
 
-## אילו סוגי חידות מתאימים לאיזה גיל?
+## Which types of riddles suit which age?
 
-לילדים צעירים מתאימות חידות "מי אני" וחידות אימוג׳י, ולגדולים חידות מילים וחשבון. הטבלה עוזרת לבחור.
+Younger kids do best with "Who am I" riddles and emoji riddles, and older ones with word and math riddles. The table helps you choose.
 
-| סוג החידה | מתאים ל | דוגמה |
+| Type of riddle | Suits | Example |
 |---|---|---|
-| מי אני | גן עד כיתה ג׳ | יש לי רגל אחת וארבעה צדדים |
-| חידות אימוג׳י | כיתה ב׳ ומעלה | 🥔🍳 |
-| קפד ראשו | כיתה ג׳ ומעלה | מנורה בלי האות הראשונה |
-| הוא והיא | כיתה ד׳ ומעלה | הוא נוזל במחבת, היא לא רזה |
-| חידות חשבון | כיתה ב׳ ומעלה | כמה נרות מדליקים בכל החג? |
-| חידות קשות | נוער ומבוגרים | מה נמצא במרכז חנוכה? |
+| Who am I | Kindergarten to third grade | I have one leg and four sides |
+| Emoji riddles | Second grade and up | 🥔🍳 |
+| Behead the word | Third grade and up | Spin without its first letter |
+| Sound-alikes | Fourth grade and up | One is the number of nights, the other is what you did to the sufganiyah |
+| Math riddles | Second grade and up | How many candles do you light over the whole holiday? |
+| Hard riddles | Teens and adults | What's in the middle of every latke? |
 
-## אילו חידות "מי אני" מתאימות לילדים?
+## Which "Who am I" riddles suit kids?
 
-חידות קצרות על הדברים שילדים רואים, אוכלים ומסובבים בחג. מקריאים רמז אחרי רמז, ומי שיודע קופץ.
+Short "Who am I" riddles (מי אני) about the things kids see, eat and spin during the holiday. Read one clue after another, and whoever knows jumps in.
 
-1. **יש לי רגל אחת וארבעה צדדים. אני מסתובב ומסתובב, עד שאני נופל.** סביבון.
-2. **אני עומד גבוה מכולם ומדליק את כולם, ואותי אף אחד לא סופר.** השמש.
-3. **אני עגולה ומתוקה. יש לי ריבה בבטן ואבקת סוכר על הראש.** סופגנייה.
-4. **נולדתי מתפוח אדמה, נכנסתי למחבת, ויצאתי זהובה.** לביבה.
-5. **אני קטן וחתום. הייתי אמור להספיק ליום אחד, והספקתי לשמונה.** פך השמן.
-6. **יש לי שמונה קנים ועוד אחד, ובכל ערב אני מאירה קצת יותר.** חנוכייה.
-7. **אני עגול ועטוף בזהב, ובפנים אני שוקולד.** מטבע שוקולד, דמי חנוכה.
-8. **אנחנו חמישה אחים ממודיעין, ואבא שלנו התחיל את המרד.** המכבים, בני מתתיהו.
-9. **אני חודש בלוח העברי, והחג מתחיל בכ״ה בי.** כסלו.
-10. **אני החודש שבו החג נגמר.** טבת.
-11. **אני גדול וכבד, יש לי חדק, והשתתפתי בקרב נגד המכבים.** פיל. הסיפור מופיע [בספר מקבים א׳, פרק ו׳](https://bible.usccb.org/bible/1maccabees/6).
-12. **אני נדלק בכל ערב, ובכל ערב יש לי עוד חבר.** נר חנוכה.
+1. **I have one leg and four sides. I spin and spin, until I fall.** A dreidel (sevivon, סביבון).
+2. **I stand taller than all the others and light them all, and nobody counts me.** The shamash (שמש), the helper candle.
+3. **I'm round and sweet. I have jam in my belly and powdered sugar on my head.** A sufganiyah (סופגנייה), a Hanukkah doughnut.
+4. **I was born from a potato, went into the frying pan, and came out golden.** A latke (levivah, לביבה).
+5. **I'm small and sealed. I was supposed to last one day, and I lasted eight.** The jug of oil.
+6. **I have eight branches plus one, and every evening I shine a little brighter.** A hanukkiah (חנוכייה).
+7. **I'm round and wrapped in gold, and inside I'm chocolate.** A chocolate coin, Hanukkah gelt.
+8. **We are five brothers from Modi'in, and our father started the revolt.** The Maccabees, the sons of Mattathias.
+9. **I'm a month in the Hebrew calendar, and the holiday begins on my 25th day.** Kislev.
+10. **I'm the month in which the holiday ends.** Tevet.
+11. **I'm big and heavy, I have a trunk, and I took part in a battle against the Maccabees.** An elephant. The story appears [in the First Book of Maccabees, chapter 6](https://bible.usccb.org/bible/1maccabees/6).
+12. **I'm lit every evening, and every evening I have one more friend.** A Hanukkah candle.
 
-## אילו חידות אימוג׳י יש לחנוכה?
+## Which emoji riddles are there for Hanukkah?
 
-חידות בציורים שכל אחת מהן מסתירה מילה, מנהג או שיר של החג. מציגים אותן על מסך או שולחים בוואטסאפ המשפחתי, והראשון שעונה מנצח.
+Picture riddles, each hiding a word, a custom or a song of the holiday. Show them on a screen or send them to the family WhatsApp group, and the first to answer wins.
 
-13. **🍩🍓** סופגנייה עם ריבה.
-14. **🥔🍳** לביבה.
-15. **🏺🫒8️⃣** נס פך השמן.
-16. **🌀🎶🌀** "סביבון סוב סוב סוב".
-17. **🪙🍫** מטבעות שוקולד, דמי חנוכה.
-18. **🕯️☀️** השמש, הנר שמדליק את האחרים.
-19. **🌑👋💡** "באנו חושך לגרש".
-20. **🕎🪟** חנוכייה בחלון.
-21. **👨5️⃣👦** מתתיהו וחמשת בניו.
-22. **🐘⚔️** הקרב שבו אלעזר נלחם בפיל.
+13. **🍩🍓** A sufganiyah with jam.
+14. **🥔🍳** A latke.
+15. **🏺🫒8️⃣** The miracle of the jug of oil.
+16. **🙋🤏🌀** "I Have a Little Dreidel".
+17. **🪙🍫** Chocolate coins, Hanukkah gelt.
+18. **🕯️➡️🕯️🕯️🕯️** The shamash, the candle that lights the others.
+19. **🎉💡** The Festival of Lights.
+20. **🕎🪟** A hanukkiah in the window.
+21. **👨5️⃣👦** Mattathias and his five sons.
+22. **🐘⚔️** The battle in which Elazar fought the elephant.
 
-## מהן חידות קפד ראשו לחנוכה?
+## What are behead-the-word riddles for Hanukkah?
 
-בחידת קפד ראשו מורידים את האות הראשונה של מילה, ומקבלים מילה חדשה. צריך לפצח את שתיהן.
+In a behead-the-word riddle (קפד ראשו) you take the first letter off a word and get a new word. You have to crack both.
 
-23. **אני עומדת במקדש עם שבעה קנים. קפד ראשי, ואאיר לכם את החדר בחשמל.** מנורה, נורה.
-24. **אני בוער בתוך הנר. קפד ראשי, ואהיה חוט מברזל.** פתיל, תיל.
-25. **אני הנוזל שהספיק לשמונה ימים. קפד ראשי, ואהיה האוכל שירד מהשמיים במדבר.** שמן, מן.
-26. **אותי הילדים מקבלים בחנוכה. קפד ראשי, ואהיה מילת שאלה.** דמי (חנוכה), מי.
+23. **I'm what the candles do in the window. Behead me, and I'm the opposite of high.** Glow, low.
+24. **I'm what you do to a dreidel. Behead me, and I'm small and sharp and hold a note on the board.** Spin, pin.
+25. **I'm what the frying pan gives the latkes. Behead me, and I'm what you do to them next.** Heat, eat.
+26. **I'm how the hanukkiah looks on the eighth night. Behead me, and I'm the opposite of left.** Bright, right.
 
-## מהן חידות "הוא והיא" לחנוכה?
+## What are sound-alike riddles for Hanukkah?
 
-בחידת הוא והיא יש שתי הגדרות: אחת למילה בזכר, ואחת למילה שנשמעת כמו צורת הנקבה שלה ופירושה שונה לגמרי. מי שמוצא את הזוג מנצח.
+A sound-alike riddle (the English cousin of הוא והיא riddles) has two clues: one for a word, and one for a word that sounds exactly the same but is spelled differently and means something else entirely. Whoever finds the pair wins.
 
-27. **הוא: נוזל שמטגנים בו לביבות. היא: לא רזה.** שמן, שמנה.
-28. **הוא: דבר פלא שקרה בימים ההם. היא: ברחה.** נס, נסה.
-29. **הוא: יום של שמחה. היא: הסתובבה במעגל.** חג, חגה.
-30. **הוא: מזג האוויר בערב ההדלקה. היא: התרחשה.** קר, קרה.
-31. **הוא: לביבה שיצאה עכשיו מהמחבת. היא: השמש.** חם, חמה.
-32. **הוא: מזמר "מעוז צור". היא: אחת מארבע האימהות.** שר, שרה.
+27. **One: the number of nights of Hanukkah. The other: what you did to the last sufganiyah.** Eight, ate.
+28. **One: what the miracle was. The other: what you do to the potatoes for latkes.** Great, grate.
+29. **One: the white powder that goes into sufganiyah dough. The other: grows in the garden.** Flour, flower.
+30. **One: when the candles are lit. The other: a fighter in shining armor.** Night, knight.
+31. **One: Mattathias had five of these. The other: shines in the sky by day.** Son, sun.
+32. **One: what you did in the dreidel game. The other: the number of candles on the first night, without the shamash.** Won, one.
 
-## אילו חידות חשבון מתאימות לחנוכה?
+## Which math riddles suit Hanukkah?
 
-חידות שהנרות, הלביבות והסביבון הם המספרים שלהן. הן מתאימות לכיתות ב׳ עד ו׳, וגם למבוגרים שרוצים לבדוק שהם עדיין יודעים חשבון.
+Riddles where the candles, the latkes and the dreidel are the numbers. They suit second to sixth grade, and also adults who want to check they can still do arithmetic.
 
-33. **כמה נרות מדליקים בכל החג, כולל השמש?** 44. בלילה הראשון שניים, בשני שלושה, וכך הלאה עד תשעה.
-34. **במשפחה יש שש חנוכיות. כמה נרות דולקים אצלם בלילה השלישי, כולל השמשים?** 24. ארבעה נרות בכל חנוכייה.
-35. **סבתא טיגנה 36 לביבות לתשעה אנשים, וכל אחד אכל אותו מספר. כמה לביבות אכל כל אחד?** ארבע.
-36. **בקופה של הסביבון יש 12 מטבעות. נועה מקבלת ה׳ ולוקחת חצי, ואז יואב מקבל ה׳ ולוקח חצי. כמה מטבעות נשארו?** שלושה.
-37. **באיזה לילה מדליקים בדיוק חצי ממספר הנרות של הלילה האחרון, בלי השמש?** בלילה הרביעי.
-38. **משפחה מדליקה רק בלילות האי זוגיים. כמה נרות היא תדליק בכל החג, בלי השמש?** 16. אחד ועוד שלושה ועוד חמישה ועוד שבעה.
+33. **How many candles do you light over the whole holiday, including the shamash?** 44. Two on the first night, three on the second, and so on up to nine.
+34. **A family has six hanukkiot. How many candles are burning at their home on the third night, including the shamash candles?** 24. Four candles on each hanukkiah.
+35. **Grandma fried 36 latkes for nine people, and everyone ate the same number. How many latkes did each person eat?** Four.
+36. **There are 12 coins in the dreidel pot. Noa lands on hei and takes half, then Yoav lands on hei and takes half. How many coins are left?** Three.
+37. **On which night do you light exactly half the number of candles of the last night, not counting the shamash?** The fourth night.
+38. **A family lights only on the odd-numbered nights. How many candles will it light over the whole holiday, not counting the shamash?** 16. One plus three plus five plus seven.
 
-## אילו חידות קשות מתאימות למבוגרים?
+## Which hard riddles suit adults?
 
-חידות שנשענות על משחקי מילים ועל פרטים קטנים של החג. הן נשמעות פשוטות, ובגלל זה הן עובדות.
+Riddles that lean on wordplay and on small details of the holiday. They sound simple, and that's why they work.
 
-39. **מה נמצא במרכז חנוכה?** האות ו׳.
-40. **מניחים אותי אחרון ומדליקים אותי ראשון. מי אני?** הנר החדש של אותו ערב.
-41. **יש עליי ארבע אותיות ואף מילה, ובכל זאת אני מספר סיפור שלם.** סביבון.
-42. **בארץ יש עליי פ׳, ובחוץ לארץ ש׳. מה ההבדל בין שתי המילים?** פה ושם: "נס גדול היה פה" או "נס גדול היה שם".
-43. **איזה חג נמשך תמיד על פני שני חודשים?** חנוכה, שמתחיל בכסלו ונגמר בטבת.
-44. **ככל שאני בוער אני מתקצר, ובכל זאת בכל ערב יש ממני יותר. מי אני?** נרות החנוכה.
-45. **איך אפשר לקרוא את שם החג כשתי מילים שמספרות מתי נחו?** חנו כ״ה: חנו בכ״ה בכסלו.
+39. **What's in the middle of every latke?** The letter T.
+40. **I'm placed last and lit first. Who am I?** The new candle of that evening.
+41. **I have four letters on me and not a single word, and still I tell a whole story.** A dreidel.
+42. **In Israel I carry a pe, and abroad a shin. What's the difference between the two words?** Po (פה) and sham (שם), here and there: "Nes gadol haya po" (נס גדול היה פה, a great miracle happened here) or "Nes gadol haya sham" (נס גדול היה שם, a great miracle happened there).
+43. **Which holiday always stretches across two months?** Hanukkah, which begins in Kislev and ends in Tevet.
+44. **The longer I burn the shorter I get, and still every evening there are more of me. Who am I?** The Hanukkah candles.
+45. **The more candles you light, the less of me there is. What am I?** Darkness.
 
-לחידה 41 יש המשך מפתיע: הסביבון הוא [גרסה יהודית של סביבון הימורים אירופי](https://en.wikipedia.org/wiki/Dreidel), והאותיות שעליו סימנו במקור את חוקי המשחק ביידיש. את נס פך השמן עצמו תמצאו [בתלמוד, במסכת שבת](https://www.sefaria.org.il/Shabbat.21b).
+Riddle 41 has a surprising sequel: the dreidel is a [Jewish version of a European gambling top](https://en.wikipedia.org/wiki/Dreidel), and the letters on it originally marked the rules of the game in Yiddish. The miracle of the jug of oil itself can be found [in the Talmud, in tractate Shabbat](https://www.sefaria.org.il/Shabbat.21b).
 
-## איך הופכים חידות לחנוכה למשחק בערב ההדלקה?
+## How do you turn Hanukkah riddles into a game on candle lighting night?
 
-מחלקים לקבוצות מעורבות בגילאים, ושואלים חידה אחת מכל סוג בכל סבב. ככה בכל סבב יש חידה שהילדים מנצחים בה וחידה שהמבוגרים מנצחים בה.
+Split into teams of mixed ages, and ask one riddle of each type in every round. That way every round has a riddle the kids win and a riddle the adults win.
 
-1. **בחרו 12 חידות.** שתיים מכל סוג, מהקל לקשה.
-2. **תנו לילד להקריא.** מי שמקריא לא משתתף בסבב, ומתחלפים.
-3. **קבעו זמן.** חצי דקה לחידה, ואז רמז.
-4. **סיימו בחידה אישית.** "מי אני" על אחד מבני המשפחה: "אני אוכל רק סופגניות בלי ריבה, ואני תמיד מאחר להדלקה".
+1. **Pick 12 riddles.** Two of each type, from easy to hard.
+2. **Let a kid read them out.** Whoever reads doesn't play that round, and you take turns.
+3. **Set a time limit.** Half a minute per riddle, then a hint.
+4. **End with a personal riddle.** A "Who am I" about one of the family: "I only eat sufganiyot without jam, and I'm always late for candle lighting".
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** נר שלישי, עשרה בני משפחה בסלון. דוד שבטוח שהוא יודע הכול נתקע על "מה נמצא במרכז חנוכה?", והנכדה בת השמונה עונה "ו׳!" לפני שהוא מסיים לנסח תשובה על המקדש. את החידה האישית על סבא, זה שתמיד מאחר להדלקה, כולם פותרים תוך שנייה, כולל סבא.
+> **Example scenario (not a real event):** Third candle, ten family members in the living room. An uncle who is sure he knows everything gets stuck on "What's in the middle of every latke?", and the eight-year-old granddaughter answers "T!" before he finishes putting together an answer about potatoes. The personal riddle about Grandpa, the one who is always late for candle lighting, is solved by everyone within a second, Grandpa included.
 
-החידה האישית היא בדרך כלל הרגע שהכי זוכרים. אם יש לכם בחנוכה אירוע משפחתי גדול, ב-[טדאם!](/) אתם שולחים לנו סיפורים, שאלות ותמונות מהמשפחה, ואנחנו בונים מהם משחק טריוויה חי. המשחק רץ על הטלוויזיה או על המקרן, כולם סורקים קוד ועונים מהטלפון בלי אפליקציה, ומנחה מריץ אותו עד שמוכרזת הקבוצה המנצחת. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+The personal riddle is usually the moment people remember most. If you have a big family event over Hanukkah, at [Tadam!](/) you send us stories, questions and photos from the family, and we build a live trivia game out of them. The game runs on the TV or the projector, everyone scans a code and answers from their phone with no app, and a host runs it until the winning team is announced. [Watch the demo](/#demo) to see what it looks like.
 
-רוצים עוד רעיונות לערב? הנה [15 משחקים לחנוכה](/blog/hanukkah-games/), כולל בינגו וטורניר סביבונים.
+Want more ideas for the evening? Here are [15 Hanukkah games](/blog/hanukkah-games/), including bingo and a dreidel tournament.

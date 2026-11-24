@@ -1,49 +1,51 @@
 /**
- * /llms.txt: a plain summary of טדאם! for AI assistants (ChatGPT, Gemini, Perplexity...),
- * with links to every blog article. Regenerated on each build.
+ * /llms.txt: a plain summary of Tadam! for AI assistants (ChatGPT, Gemini, Perplexity, Claude...),
+ * with links to every blog article. Regenerated on each build from copy.en.ts and the blog.
  */
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { COPY } from "../content/copy.he";
+import { COPY } from "../content/copy.en";
+import { PRICING, fillPrices } from "../config/pricing";
 
 export const GET: APIRoute = async ({ site }) => {
   const abs = (path: string) => new URL(path, site).href;
   const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
     (a, b) => b.data.date.getTime() - a.data.date.getTime(),
   );
-  const postsEn = (await getCollection("blogEn", (p) => !p.data.draft)).sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-  );
-  const faq = COPY.faq.items.map((f) => `- ${f.q} ${f.a}`).join("\n");
+  const isPrice = (it: object) => "pricesOnly" in it && it.pricesOnly === true;
+  const faq = [
+    ...(PRICING.showPrices ? COPY.pricing.faq.filter(isPrice) : []),
+    ...COPY.faq.items,
+    ...COPY.pricing.faq.filter((it) => !isPrice(it)),
+  ]
+    .map((f) => `- ${f.q} ${fillPrices(f.a)}`)
+    .join("\n");
 
-  const body = `# טדאם! (Tadam)
+  const body = `# Tadam!
 
-> טדאם! הוא משחק טריוויה חי ומותאם אישית לאירועים בישראל. המשחק נבנה מהסיפורים, השאלות והתמונות של המשפחה, החברים או הצוות, רץ על המסך הגדול באירוע, וכל האורחים עונים מהטלפון בלי להוריד אפליקציה. משחק טיפוסי לוקח 10 עד 15 דקות.
+> Tadam! is a personalized live trivia game show for events. We build the questions from your stories, photos and inside jokes, a host runs the game on the big screen, and every guest plays from their phone, with no app to download. A game takes about 10 to 15 minutes.
 
-Tadam is a personalized live trivia game for events in Israel (Hebrew). Family, friends or colleagues send stories, questions and photos through a link, the organizers prepare the content, and Tadam turns them into a hosted game shown on the venue screen. Guests scan a QR code and answer from their phones in the browser.
+Organizers tell us about the event and the guest of honor, send stories and photos (friends and family can contribute too), and approve every question. Tadam turns them into a hosted game show on the venue screen or TV. Guests scan a QR code and answer in their phone's browser; a live leaderboard shows who knows the guest of honor best, and the winner is revealed at the end.
 
-## למי זה מתאים
+## Who it's for
 - ${COPY.eventsStrip.items.join(", ")}
-- אירועי חברה וצוותים: ימי גיבוש, ערבי צוות, הרמות כוסית לחג, פרידה מעובד, קליטת עובדים חדשים
-- מפגשי משפחה, פגישות מחזור, מסיבות סיום
+- Companies and teams: office holiday parties, team building, offsites, farewell and retirement parties, welcoming new hires
+- Families and friends: birthdays, showers, anniversaries, reunions and holiday gatherings
 
-## איך זה עובד
+## How it works
 ${COPY.scene4.steps.map((s, i) => `${i + 1}. ${s.title} ${s.text}`).join("\n")}
 
-## שאלות נפוצות
+## Frequently asked questions
 ${faq}
 
-## דפים
-- [דף הבית](${abs("/")}): הסבר, דמו ומחירון
-- [English version](${abs("/en/")}): the same page in English, for English speakers in Israel
-- [הבלוג](${abs("/blog/")}): רעיונות לאירועים, אטרקציות וחידונים
-- [The blog in English](${abs("/en/blog/")}): the same articles, translated
+## Pages
+- [Home](${abs("/")}): what Tadam is, how it works, the hosts and the FAQ
+- [Demo video](${abs("/#demo")}): a recording of a real game
+- [Playable demo](${abs("/tom-demo")}): open it on a computer and join from your phone
+- [Blog](${abs("/blog/")}): party ideas, games and trivia for birthdays, weddings and showers, teams and holidays
 
-## מאמרים
+## Articles
 ${posts.map((p) => `- [${p.data.title}](${abs(`/blog/${p.id}/`)}): ${p.data.answer}`).join("\n")}
-
-## Articles in English
-${postsEn.map((p) => `- [${p.data.title}](${abs(`/en/blog/${p.id}/`)}): ${p.data.answer}`).join("\n")}
 `;
 
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

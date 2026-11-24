@@ -1,154 +1,154 @@
 ---
-title: "משחקים ומשימות למסיבת רווקות: 12 משחקים ו-40 שאלות ומשימות מוכנות"
-seoTitle: "משחקים למסיבת רווקות: 12 משחקים ו-40 משימות"
-description: "12 משחקים למסיבת רווקות, 25 שאלות לחידון על הכלה ועל החתן ו-15 משימות מוכנות. מתאים גם למסיבה בבית וגם כשאמא וסבתא מגיעות."
-targetKeyword: "משחקים למסיבת רווקות"
-answer: "המשחקים שהכי עובדים במסיבת רווקות הם אלה שעוסקים בכלה עצמה: חידון \"כמה אתן מכירות את הכלה\", \"מה החתן ענה\" עם תשובות שהוקלטו מראש, וחבילה עוברת עם משימות. כאן תמצאו 12 משחקים, 25 שאלות מוכנות על הכלה ועל החתן ו-15 משימות, שמתאימים גם למסיבה בבית וגם כשאמא וסבתא ברשימת המוזמנות."
+title: "Bachelorette Party Games and Tasks: 12 Games and 40 Ready-Made Questions and Tasks"
+seoTitle: "Bachelorette Party Games: 12 Games and 40 Tasks"
+description: "12 bachelorette party games, 25 quiz questions about the bride and groom and 15 ready-made tasks. Works at home, and when Mom and Grandma are coming too."
+targetKeyword: "bachelorette party games"
+answer: "The games that work best at a bachelorette party are the ones about the bride herself: a \"How well do you know the bride\" quiz, \"What did the groom say\" with answers recorded in advance, and pass the parcel with tasks. Here you'll find 12 games, 25 ready-made questions about the bride and groom and 15 tasks, all suitable for a party at home and for a guest list that includes Mom and Grandma."
 date: 2026-11-22
-category: "חתונות ואירועים"
+category: "Weddings and events"
 faq:
-  - q: "מתי עושים מסיבת רווקות?"
-    a: "כדאי לקבוע אותה שבועיים עד חודש לפני החתונה. בשבוע האחרון הכלה עסוקה ועייפה, ועדיף להשאיר אותו פנוי."
-  - q: "כמה משחקים צריך במסיבת רווקות?"
-    a: "שניים או שלושה מספיקים: משחק פתיחה קליל, משחק מרכזי על הכלה, ומשהו שנשאר לה למזכרת. יותר מזה הופך את הערב לסדר יום."
-  - q: "אילו משחקים מתאימים למסיבת רווקות בבית?"
-    a: "חידון על הכלה, \"מה החתן ענה\", חבילה עוברת ותמונות ילדות. כולם עובדים בסלון, בלי ציוד מיוחד ובלי מנחה מבחוץ."
-  - q: "מה עושים כשהמוזמנות לא מכירות זו את זו?"
-    a: "פותחים במשחק היכרות קצר, כמו \"מאיפה אני מכירה את הכלה\" או שתי אמיתות ושקר. אחרי עשר דקות החברות מהצבא והחברות מהעבודה כבר צוחקות על אותם סיפורים."
+  - q: "When do you hold a bachelorette party?"
+    a: "Schedule it two weeks to a month before the wedding. In the last week the bride is busy and tired, and it's better to leave it free."
+  - q: "How many games does a bachelorette party need?"
+    a: "Two or three are enough: a light opening game, a main game about the bride, and something she gets to keep. More than that turns the evening into an agenda."
+  - q: "Which games suit a bachelorette party at home?"
+    a: "A quiz about the bride, \"What did the groom say\", pass the parcel and childhood photos. All of them work in a living room, with no special equipment and no outside host."
+  - q: "What do you do when the guests don't know each other?"
+    a: "Open with a short get-to-know-you game, like \"How I know the bride\" or two truths and a lie. Ten minutes in, the army friends and the work friends are already laughing at the same stories."
 ---
 
-הזמנתם מקום, סגרתם תאריך, ויש קבוצת וואטסאפ עם שם סודי. עכשיו נשארה השאלה מה באמת עושים שם. ערב רווקות טוב צריך בסך הכול שלושה דברים: אוכל, זמן לדבר, ומשחק אחד שכולו על הכלה. ריכזנו כאן 12 משחקים, ואת כל השאלות והמשימות שצריך בשבילם.
+You've booked a place, set a date, and there's a WhatsApp group with a secret name. Now the question is what you actually do there. A good bachelorette evening needs three things in all: food, time to talk, and one game that is entirely about the bride. We've gathered 12 games here, along with all the questions and tasks you need for them.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## מה עושים במסיבת רווקות?
+## What do you do at a bachelorette party?
 
-מסיבת רווקות בנויה בדרך כלל מארוחה או פעילות משותפת, ומחלק של משחקים שמוקדש לכלה. מה שזוכרים אחר כך הוא בדרך כלל החלק השני.
+A bachelorette party is usually built from a meal or a shared activity, plus a games part dedicated to the bride. What people remember afterward is usually the second part.
 
-הפעילות יכולה להיות סדנה, יום ספא, ערב בבית או סוף שבוע בצימר. המשחקים הם מה שמחבר בין המוזמנות, שלרוב מגיעות מתקופות שונות בחיים של הכלה: חברות ילדות, חברות מהצבא, חברות מהעבודה ומשפחה. משחק על הכלה נותן לכולן נושא משותף.
+The activity can be a workshop, a spa day, an evening at home or a weekend in a tzimmer (צימר, a guest cabin). The games are what connect the guests, who usually come from different periods of the bride's life: childhood friends, army friends, work friends and family. A game about the bride gives everyone something in common.
 
-## מתי עושים מסיבת רווקות ואיך מארגנים אותה?
+## When do you hold a bachelorette party, and how do you organize it?
 
-קובעים תאריך שבועיים עד חודש לפני החתונה, ומתחילים לארגן כחודשיים מראש. מארגנת אחת או שתיים מרכזות הכול, בתיאום עם הכלה או בהפתעה.
+Set a date two weeks to a month before the wedding, and start organizing about two months ahead. One or two organizers handle everything, either together with the bride or as a surprise.
 
-1. **רשימת מוזמנות.** גם במסיבת הפתעה, בדקו את הרשימה עם מישהו שמכיר את הכלה היטב.
-2. **תאריך.** סגרו אותו קודם עם הכלה או עם החתן, ורק אז עם כל השאר.
-3. **תקציב.** הסכימו מראש על סכום שנוח לכל המוזמנות, ועל מי משלם על הכלה.
-4. **מקום ופעילות.** בית, מסעדה, סדנה או לינה. בחרו לפי מה שהכלה אוהבת, ולא לפי מה שמצטלם טוב.
-5. **משחקים.** בחרו שניים או שלושה, ואספו את החומרים שבוע מראש: תשובות מהחתן, תמונות ילדות, פתקים.
+1. **Guest list.** Even for a surprise party, check the list with someone who knows the bride well.
+2. **Date.** Lock it in with the bride or the groom first, and only then with everyone else.
+3. **Budget.** Agree in advance on an amount that's comfortable for all the guests, and on who pays for the bride.
+4. **Place and activity.** A home, a restaurant, a workshop or an overnight stay. Choose by what the bride loves, not by what photographs well.
+5. **Games.** Pick two or three, and collect the material a week ahead: answers from the groom, childhood photos, notes.
 
-## אילו משחקים מתאימים למסיבת רווקות?
+## Which games suit a bachelorette party?
 
-משחקים שעוסקים בכלה ובזוג, שכל המוזמנות יכולות להשתתף בהם בלי להכיר זו את זו. הטבלה מסכמת 12 משחקים ומה צריך להכין לכל אחד.
+Games about the bride and the couple, which all the guests can join without knowing each other. The table sums up 12 games and what to prepare for each one.
 
-| משחק | מה מכינים מראש | מתאים במיוחד ל |
+| Game | What to prepare in advance | Especially good for |
 |---|---|---|
-| 1. כמה אתן מכירות את הכלה | 15 שאלות ותשובות מהכלה | כל מסיבה |
-| 2. מה החתן ענה | סרטון או הקלטה של החתן | כל מסיבה |
-| 3. חבילה עוברת | חבילה עם פתקי משימות | קבוצה של עד 20 |
-| 4. משימות צילום | רשימת משימות לכל קבוצה | מסיבה בחוץ או בעיר |
-| 5. של מי הזיכרון? | פתק מכל מוזמנת | קבוצה שלא מכירה |
-| 6. שתי אמיתות ושקר על הכלה | כלום | פתיחת הערב |
-| 7. תמונות ילדות | תמונות מהמשפחה | כשאמא וסבתא מגיעות |
-| 8. בינגו כלה | לוחות עם משפטים של הכלה | ארוחה ארוכה |
-| 9. נחשו את השיר | פלייליסט של הזוג | נסיעה או ערב בבית |
-| 10. שמלת כלה מנייר טואלט | כמה גלילים | קבוצה עם אנרגיה |
-| 11. עצות לחיי הנישואין | כרטיסים ועטים | סוף הערב |
-| 12. קפסולת זמן | מעטפות וקופסה | מזכרת לכלה |
+| 1. How well do you know the bride | 15 questions and the bride's answers | Any party |
+| 2. What did the groom say | A video or recording of the groom | Any party |
+| 3. Pass the parcel | A parcel with task notes | A group of up to 20 |
+| 4. Photo challenges | A list of challenges for each team | A party outdoors or in the city |
+| 5. Whose memory is it? | A note from each guest | A group that doesn't know each other |
+| 6. Two truths and a lie about the bride | Nothing | Opening the evening |
+| 7. Childhood photos | Photos from the family | When Mom and Grandma are coming |
+| 8. Bride bingo | Cards with the bride's phrases | A long meal |
+| 9. Name that tune | The couple's playlist | A car ride or an evening at home |
+| 10. Toilet paper wedding dress | A few rolls | A group with energy |
+| 11. Advice for married life | Cards and pens | The end of the evening |
+| 12. Time capsule | Envelopes and a box | A keepsake for the bride |
 
-**1. כמה אתן מכירות את הכלה.** המארגנת שואלת, כל אחת כותבת תשובה, והכלה חושפת את התשובה הנכונה. מי שצברה הכי הרבה נקודות מקבלת תואר "החברה הכי טובה", לפחות עד החתונה.
+**1. How well do you know the bride.** The organizer asks, everyone writes down an answer, and the bride reveals the right one. Whoever collects the most points gets the title "best friend", at least until the wedding.
 
-**2. מה החתן ענה.** מצלמים את החתן מראש עונה על שאלות, והכלה מנחשת מה הוא ענה לפני שמראים את הסרטון. הפורמט מוכר מ[שעשועון הטלוויזיה האמריקאי The Newlywed Game](https://en.wikipedia.org/wiki/The_Newlywed_Game), שעלה לשידור ב-1966 ובדק כמה בני זוג טריים מכירים זה את זה.
+**2. What did the groom say.** Film the groom in advance answering questions, and the bride guesses what he said before you play the video. The format is familiar from [the American TV game show The Newlywed Game](https://en.wikipedia.org/wiki/The_Newlywed_Game), which first aired in 1966 and tested how well newly married couples knew each other.
 
-**3. חבילה עוברת.** פרס לכלה באמצע, ובכל שכבה משימה או שאלה. איך מכינים את החבילה ועוד עשרות פתקים תמצאו במדריך [משימות ושאלות לחבילה עוברת](/blog/pass-the-parcel-tasks/).
+**3. Pass the parcel.** A prize for the bride in the middle, and a task or question in every layer. You'll find how to prepare the parcel, and dozens more notes, in our guide to [pass the parcel tasks and questions](/blog/pass-the-parcel-tasks/).
 
-**4. משימות צילום.** מתחלקים לקבוצות, וכל קבוצה צריכה לחזור עם תמונות לפי רשימה: עם מישהו בשם של החתן, עם משהו כחול, עם זוג שנשוי 30 שנה ומוכן לתת עצה.
+**4. Photo challenges.** Split into teams, and each team has to come back with photos from a list: with someone who has the groom's name, with something blue, with a couple who have been married 30 years and are willing to give a piece of advice.
 
-**5. של מי הזיכרון?** כל מוזמנת כותבת על פתק זיכרון עם הכלה, בלי שם. הכלה מקריאה ומנחשת מי כתבה.
+**5. Whose memory is it?** Each guest writes a memory with the bride on a note, without a name. The bride reads them out and guesses who wrote each one.
 
-**6. שתי אמיתות ושקר על הכלה.** כל אחת מספרת שלושה סיפורים על הכלה, ושאר החדר מנחש איזה מהם לא קרה.
+**6. Two truths and a lie about the bride.** Each guest tells three stories about the bride, and the rest of the room guesses which one never happened.
 
-**7. תמונות ילדות.** מקרינים או מעבירים תמונות ישנות של הכלה, ומנחשים בת כמה היא ואיפה זה צולם. אמא וסבתא מנצחות כאן בקלות, וזה בדיוק העניין.
+**7. Childhood photos.** Project or pass around old photos of the bride, and guess how old she is and where the photo was taken. Mom and Grandma win this one easily, and that's exactly the point.
 
-**8. בינגו כלה.** בכל משבצת משפט שהכלה אומרת הרבה, או דבר שהיא עושה. מסמנים במהלך הערב, והראשונה שמשלימה שורה צועקת בינגו.
+**8. Bride bingo.** Every square has a phrase the bride says a lot, or something she does. You mark squares during the evening, and the first to complete a row shouts bingo.
 
-**9. נחשו את השיר.** משמיעים שנייה או שתיים מהשירים של הזוג: השיר מהדייט הראשון, השיר שהיא שרה באוטו, שיר הכניסה לחופה אם כבר נבחר.
+**9. Name that tune.** Play a second or two of the couple's songs: the song from the first date, the song she sings in the car, the song for walking to the chuppah if it's already been chosen.
 
-**10. שמלת כלה מנייר טואלט.** קבוצות מעצבות שמלה על אחת המשתתפות בתוך חמש דקות, והכלה בוחרת מנצחת.
+**10. Toilet paper wedding dress.** Teams design a dress on one of the participants in five minutes, and the bride picks a winner.
 
-**11. עצות לחיי הנישואין.** כל אחת כותבת עצה אחת רצינית ואחת מצחיקה. הכלה מקריאה בקול ושומרת את הכרטיסים.
+**11. Advice for married life.** Everyone writes one serious piece of advice and one funny one. The bride reads them aloud and keeps the cards.
 
-**12. קפסולת זמן.** כל מוזמנת כותבת לכלה מכתב קצר שייפתח ביום הנישואין הראשון.
+**12. Time capsule.** Each guest writes the bride a short letter to be opened on the first wedding anniversary.
 
-## אילו שאלות שואלים בחידון "כמה אתן מכירות את הכלה"?
+## What questions do you ask in a "How well do you know the bride" quiz?
 
-שאלות על ההרגלים, הטעם והסיפורים של הכלה, שיש להן תשובה אחת ברורה. את התשובות מקבלים מהכלה עצמה, רגע לפני המשחק או בהודעה מראש.
+Questions about the bride's habits, tastes and stories, each with one clear answer. You get the answers from the bride herself, right before the game or by message in advance.
 
-1. מה ההזמנה הקבועה שלה בבית קפה?
-2. מה היא רצתה להיות כשהייתה ילדה?
-3. מה השיר שהיא שרה הכי חזק באוטו?
-4. מה היה הכינוי שלה בילדות?
-5. ממה היא הכי מפחדת?
-6. איזו סדרה היא ראתה הכי הרבה פעמים?
-7. מה הדבר הראשון שהיא עושה בבוקר?
-8. לאן היה הטיול הכי טוב שלה?
-9. מה המאכל שהיא לא מוכנה לטעום?
-10. מה התחביב שהיא התחילה ונטשה?
-11. מה המשפט שהיא אומרת הכי הרבה?
-12. באיזו שעה היא הולכת לישון כשאף אחד לא מסתכל?
-13. מה הדבר שהיא תמיד שוכחת בבית?
-14. מה הייתה העבודה הראשונה שלה?
-15. מה היא תיקח איתה לאי בודד?
+1. What's her regular order at a café?
+2. What did she want to be when she was a child?
+3. Which song does she sing loudest in the car?
+4. What was her childhood nickname?
+5. What is she most afraid of?
+6. Which series has she watched the most times?
+7. What's the first thing she does in the morning?
+8. Where was her best trip ever?
+9. Which food does she refuse to taste?
+10. Which hobby did she start and then drop?
+11. What's the phrase she says most often?
+12. What time does she go to sleep when nobody's watching?
+13. What does she always forget at home?
+14. What was her first job?
+15. What would she take with her to a desert island?
 
-## אילו שאלות שואלים את החתן מראש?
+## What questions do you ask the groom in advance?
 
-שאלות על הזוג, שהחתן עונה עליהן בסרטון קצר והכלה מנחשת את התשובה שלו. עשר שאלות מספיקות לרבע שעה של צחוק.
+Questions about the couple, which the groom answers in a short video while the bride guesses his answer. Ten questions are enough for fifteen minutes of laughter.
 
-16. איפה נפגשתם בפעם הראשונה, ומה היא לבשה?
-17. מי אמר ראשון "אני אוהב אותך"?
-18. מה הדבר שהיא עושה שהכי מצחיק אותך?
-19. מה ההרגל שלה שלקח לך הכי הרבה זמן להתרגל אליו?
-20. מה המנה שהיא מכינה הכי טוב?
-21. מי מכם נוהג יותר טוב? (ומה היא תענה?)
-22. מה היה הדייט הכי טוב שלכם?
-23. איך היא שמורה אצלך בטלפון?
-24. מה הדבר הראשון שחשבת כשראית אותה?
-25. מה היא תעשה ראשון בבוקר שאחרי החתונה?
+16. Where did you two first meet, and what was she wearing?
+17. Who said "I love you" first?
+18. What does she do that makes you laugh the most?
+19. Which habit of hers took you the longest to get used to?
+20. Which dish does she make best?
+21. Which of you is the better driver? (And what will she say?)
+22. What was your best date?
+23. How is she saved in your phone?
+24. What was the first thing you thought when you saw her?
+25. What's the first thing she'll do on the morning after the wedding?
 
-## אילו משימות מתאימות למסיבת רווקות?
+## Which tasks suit a bachelorette party?
 
-משימות קצרות ומצחיקות, שלא מביכות את הכלה מול אמא שלה. הן מתאימות לחבילה עוברת, לכרטיסי משימות על השולחן או למשימות צילום.
+Short, funny tasks that don't embarrass the bride in front of her mother. They suit pass the parcel, task cards on the table or photo challenges.
 
-26. הרימו כוסית לכלה בחרוזים.
-27. ספרו על הפעם הראשונה שפגשתם את הכלה.
-28. חקו את הכלה מדברת בטלפון עם אמא שלה.
-29. הציגו בלי מילים איך החתן הציע נישואין.
-30. שירו לכלה שורה משיר אהבה, בהקדשה אישית.
-31. תנו לכלה עצה אחת לזוגיות, רצינית לגמרי.
-32. הראו את התמונה הכי ישנה שיש לכם עם הכלה.
-33. צלמו סלפי עם כל מי שלא הכרתם עד הערב.
-34. נחשו מה הכלה תזמין לשתות, לפני שהיא מזמינה.
-35. המציאו לזוג שם משותף, כמו לזוג מפורסם.
-36. ספרו בחצי דקה איך לדעתכם ייראה הזוג בעוד 50 שנה.
-37. כתבו לכלה פתק לפתוח בבוקר החתונה.
-38. ארגנו תמונה קבוצתית שבה כולן עושות את הפרצוף של הכלה.
-39. ספרו סוד קטן על הכלה שמותר לספר.
-40. למדו את כולן צעד ריקוד אחד לחתונה.
+26. Raise a toast to the bride in rhyme.
+27. Tell everyone about the first time you met the bride.
+28. Imitate the bride talking on the phone with her mother.
+29. Act out, without words, how the groom proposed.
+30. Sing the bride a line from a love song, with a personal dedication.
+31. Give the bride one piece of relationship advice, completely serious.
+32. Show the oldest photo you have with the bride.
+33. Take a selfie with everyone you hadn't met before tonight.
+34. Guess what the bride will order to drink, before she orders.
+35. Invent a joint name for the couple, like a celebrity couple has.
+36. Describe in half a minute what you think the couple will look like 50 years from now.
+37. Write the bride a note to open on the morning of the wedding.
+38. Organize a group photo in which everyone makes the bride's signature face.
+39. Share a small secret about the bride that you're allowed to tell.
+40. Teach everyone one dance move for the wedding.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** 14 מוזמנות בסלון, ביניהן אמא של הכלה ושתי דודות. על המסך עולה השאלה "איך היא שמורה אצלך בטלפון?", הכלה בטוחה שהתשובה היא השם שלה, ואז החתן עונה בסרטון "הבוסית". החברות מהצבא מובילות כל הערב, עד שסבתא מזהה את תמונת הגן וסוגרת את הפער.
+> **Example scenario (not a real event):** 14 guests in the living room, among them the bride's mother and two aunts. The question "How is she saved in your phone?" comes up on the screen, the bride is sure the answer is her name, and then the groom answers in the video: "The Boss". The army friends lead all evening, until Grandma recognizes the kindergarten photo and closes the gap.
 
-## אילו משחקים מתאימים כשאמא וסבתא מגיעות, או במסיבה משותפת עם החתן?
+## Which games work when Mom and Grandma are coming, or at a joint party with the groom?
 
-בוחרים משחקים שנשענים על זיכרונות ועל ידע, ולא על מבוכה. תמונות ילדות, חידון על הכלה ועצות לחיי הנישואין עובדים בכל גיל.
+Choose games that rely on memories and knowledge, not on embarrassment. Childhood photos, a quiz about the bride and advice for married life work at any age.
 
-המבחן פשוט: האם הכלה תרצה שיצלמו את המשחק הזה וישלחו בקבוצה המשפחתית. אותם משחקים מתאימים גם למסיבות רווקות של כלות דתיות, ולכל כלה שמעדיפה ערב נקי ממבוכות.
+The test is simple: would the bride want this game filmed and sent to the family group chat? The same games also suit bachelorette parties for religious brides, and any bride who prefers an evening free of awkward moments.
 
-במסיבה משותפת לחתן ולכלה הופכים את החידון לתחרות. החברים של החתן מול החברות של הכלה, והשאלות על שניהם. מי מכיר את הזוג יותר טוב?
+At a joint party for the bride and groom, turn the quiz into a competition. The groom's friends against the bride's friends, with questions about both of them. Who knows the couple better?
 
-## איך הופכים את החידון על הכלה למשחק על מסך?
+## How do you turn the bride quiz into a game on a screen?
 
-מקרינים את השאלות על טלוויזיה או מקרן, וכל המוזמנות עונות מהטלפון. הניקוד מתעדכן על המסך, והמארגנת יכולה סוף סוף לשבת וליהנות.
+Show the questions on a TV or projector, and all the guests answer from their phones. The score updates on the screen, and the organizer can finally sit down and enjoy herself.
 
-ב-[טדאם!](/) אתם שולחים לנו סיפורים, תמונות ותשובות על הכלה ועל הזוג, ואנחנו בונים מהם משחק טריוויה חי. כל שאלה עוברת את האישור שלכם לפני שהיא עולה למסך. בערב עצמו כולן סורקות קוד ועונות מהטלפון בלי אפליקציה, ובסוף מוכרזת מי שמכירה את הכלה הכי טוב. אותו משחק עובד גם בחינה, בשבת חתן ובחתונה עצמה. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+At [Tadam!](/) you send us stories, photos and answers about the bride and the couple, and we build a live trivia game from them. Every question goes through your approval before it reaches the screen. On the evening itself everyone scans a code and answers from their phone with no app, and at the end we announce who knows the bride best. The same game also works at the henna, at the Shabbat Chatan and at the wedding itself. [Watch the demo](/#demo) to see what it looks like.
 
-רוצים לפתוח את הערב בסבב קצר? קחו כמה [שאלות היכרות מצחיקות](/blog/icebreaker-questions/).
+Want to open the evening with a short round? Take a few [funny icebreaker questions](/blog/icebreaker-questions/).

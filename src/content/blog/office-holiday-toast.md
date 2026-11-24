@@ -1,92 +1,92 @@
 ---
-title: "איך עושים הרמת כוסית לחג במשרד שאנשים באמת מחכים לה?"
-seoTitle: "הרמת כוסית לחג במשרד: מבנה, רעיונות וצ׳ק ליסט"
-description: "איך עושים הרמת כוסית לחג בעבודה (חנוכה, ראש השנה, פסח): מבנה של 30 דקות, 10 רעיונות לפעילות, טיפים לצוות היברידי וצ׳ק ליסט."
-targetKeyword: "הרמת כוסית לחג"
-answer: "הרמת כוסית טובה במשרד נמשכת 30 עד 45 דקות ובנויה משלושה חלקים: דברי פתיחה קצרים (עד 3 דקות), פעילות אחת שמערבת את כולם, למשל חידון על השנה של הצוות, ואוכל עם זמן לדבר. הכי חשוב: לתת לאנשים לדבר על עצמם ועל השנה שעברה, ולא רק להקשיב לנאום."
+title: "How Do You Run an Office Holiday Toast That People Actually Look Forward To?"
+seoTitle: "Office Holiday Toast: Structure, Ideas and Checklist"
+description: "How to run a holiday toast at work (Hanukkah, Rosh Hashanah, Pesach): a 30-minute structure, 10 activity ideas, tips for hybrid teams and a checklist."
+targetKeyword: "holiday toast"
+answer: "A good office holiday toast lasts 30 to 45 minutes and has three parts: short opening remarks (up to 3 minutes), one activity that involves everyone, for example a quiz about the team's year, and food with time to talk. Most important: let people talk about themselves and the year that passed, not only listen to a speech."
 date: 2026-11-16
 updated: 2026-11-17
-category: "חברות וצוותים"
+category: "Companies and teams"
 faq:
-  - q: "באיזו שעה כדאי לעשות הרמת כוסית בעבודה?"
-    a: "בסביבות 16:00 עד 17:00, לפני שהורים צריכים לצאת לאסוף ילדים. בחנוכה אפשר לחבר את זה להדלקת נרות מוקדמת, בשקיעה."
-  - q: "מה אומרים בדברי הפתיחה של הרמת כוסית?"
-    a: "תודה ספציפית על דבר אחד או שניים שקרו השנה, ציון של עובדים חדשים, ואיחול קצר לחג. שלוש דקות מקסימום, כי הרגע שזוכרים בדרך כלל הוא לא הנאום."
-  - q: "צריך אלכוהול בהרמת כוסית?"
-    a: "לא חייבים, אבל אם יש, תמיד הוסיפו אפשרויות בלי אלכוהול. חלק מהעובדים נוהגים, וחלק פשוט לא שותים."
-  - q: "כמה זמן מראש מתכננים הרמת כוסית לחג?"
-    a: "שלושה עד ארבעה שבועות לפני החג. זה מספיק כדי לקבוע תאריך שמתאים לכולם ולאסוף מהעובדים סיפורים ותמונות לפעילות."
+  - q: "What time of day is best for a holiday toast at work?"
+    a: "Around 4 to 5 p.m., before parents need to leave to pick up their kids. On Hanukkah you can combine it with an early candle lighting, at sunset."
+  - q: "What do you say in the opening remarks of a holiday toast?"
+    a: "A specific thank you for one or two things that happened this year, a mention of new employees, and a short holiday wish. Three minutes at most, because the moment people remember is usually not the speech."
+  - q: "Do you need alcohol at a holiday toast?"
+    a: "You don't have to, but if there is alcohol, always add non-alcoholic options. Some employees are driving, and some simply don't drink."
+  - q: "How far in advance should you plan a holiday toast?"
+    a: "Three to four weeks before the holiday. That is enough to set a date that works for everyone and to collect stories and photos from employees for the activity."
 ---
 
-כמעט בכל חברה בישראל יש הרמת כוסית לראש השנה, לפסח, ויותר ויותר גם לחנוכה. ברוב המקרים היא נראית אותו דבר: נאום, כוס יין, חטיפים, ותוך עשר דקות כולם חוזרים למחשב. זה לא חייב להיות ככה.
+Almost every company in Israel holds a holiday toast (haramat kosit, הרמת כוסית) for Rosh Hashanah, for Pesach, and more and more for Hanukkah too. Most of the time it looks the same: a speech, a glass of wine, snacks, and within ten minutes everyone is back at their computer. It doesn't have to be that way.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## כמה זמן צריכה להימשך הרמת כוסית לחג?
+## How long should a holiday toast last?
 
-30 דקות לחלק המרכזי, ואחר כך מי שרוצה נשאר לאכול ולדבר. יותר מזה בשעות העבודה, וחלק מהאנשים כבר מסתכלים על השעון.
+30 minutes for the main part, and after that whoever wants to can stay to eat and talk. Any longer during work hours, and some people are already looking at the clock.
 
-| זמן | מה קורה |
+| Time (minutes) | What happens |
 |---|---|
-| 0 עד 5 | כולם מתאספים, שתייה ביד, מוזיקה ברקע |
-| 5 עד 8 | דברי פתיחה קצרים מהמנהל או המנהלת |
-| 8 עד 25 | פעילות אחת שכולם משתתפים בה |
-| 25 עד 30 | הכרזת מנצחים, ברכה לחג, הרמת כוסית |
-| ואחר כך | אוכל וזמן לדבר |
+| 0 to 5 | Everyone gathers, drink in hand, music in the background |
+| 5 to 8 | Short opening remarks from the manager |
+| 8 to 25 | One activity that everyone takes part in |
+| 25 to 30 | Announcing the winners, a holiday greeting, raising a glass |
+| After that | Food and time to talk |
 
-הטעות הנפוצה היא להפוך את כל האירוע לנאומים. אנשים זוכרים את מה שהם עשו ביחד, לא את מה ששמעו.
+The common mistake is turning the whole event into speeches. People remember what they did together, not what they heard.
 
-## מה עושים בהרמת כוסית חוץ מנאום?
+## What do you do at a holiday toast besides a speech?
 
-בוחרים פעילות אחת שכולם יכולים להשתתף בה בלי כישרון מיוחד ובלי לעמוד מול כולם. הנה עשרה רעיונות, מהקל להפקה ועד למושקע.
+Choose one activity that everyone can join without any special talent and without standing up in front of everyone. Here are ten ideas, from the easiest to produce to the most involved.
 
-1. **חידון על השנה של הצוות.** מי הגיע ראשון למשרד הכי הרבה פעמים, איזה פרויקט קיבל שם קוד מצחיק, מי טס הכי רחוק בחופשה. השאלות נאספות מהעובדים עצמם.
-2. **"נחשו מי" עם תמונות ילדות.** כל עובד שולח תמונה מגיל 6, וכולם מנחשים. עובד במיוחד טוב עם צוותים חדשים.
-3. **הדלקת נרות משותפת (בחנוכה).** כל ערב צוות אחר מדליק, או שכל צוות מביא חנוכייה שהוא הכין.
-4. **פרסי "אוסקר" פנימיים.** קטגוריות מצחיקות שהעובדים מצביעים עליהן מראש: המייל הכי ארוך, הקפה הכי חזק, הבאג הכי מפורסם.
-5. **סדנת סופגניות או לביבות.** מתאים לצוותים קטנים, דורש מקום ותיאום.
-6. **קיר תודות.** כל אחד כותב פתק תודה לעמית ספציפי, ובסוף קוראים כמה בקול.
-7. **תחרות שולחנות חג.** בפסח, כל צוות מעצב פינה עם נושא.
-8. **"שנה במספרים".** מצגת קצרה של נתונים מצחיקים ואמיתיים: כמה כוסות קפה, כמה פגישות, כמה ימי הולדת.
-9. **ברכות מהבית.** לפני החג מבקשים מהמשפחות של העובדים לשלוח ברכה קצרה בווידאו. מרגש מאוד, ודורש תיאום.
-10. **מתנה עם סיפור.** במקום שובר, משהו שקשור לשנה שעברה של הצוות.
+1. **A quiz about the team's year.** Who arrived first at the office the most times, which project got a funny code name, who flew the farthest on vacation. The questions are collected from the employees themselves.
+2. **"Guess who" with childhood photos.** Every employee sends a photo from age 6, and everyone guesses. Works especially well with new teams.
+3. **Lighting candles together (on Hanukkah).** A different team lights each evening, or each team brings a hanukkiah it made.
+4. **Internal "Oscar" awards.** Funny categories that employees vote on ahead of time: the longest email, the strongest coffee, the most famous bug.
+5. **A sufganiyot or latkes workshop.** Suits small teams, and needs space and coordination.
+6. **A thank-you wall.** Everyone writes a thank-you note to a specific colleague, and at the end a few are read aloud.
+7. **A holiday table contest.** On Pesach, each team decorates a corner around a theme.
+8. **"The year in numbers."** A short presentation of funny, true figures: how many cups of coffee, how many meetings, how many birthdays.
+9. **Greetings from home.** Before the holiday, ask employees' families to send a short video greeting. Very moving, and it needs coordination.
+10. **A gift with a story.** Instead of a voucher, something connected to the team's past year.
 
-## למה חידון על הצוות עובד טוב יותר מחידון כללי?
+## Why does a quiz about the team work better than a general quiz?
 
-חידון כללי מרגיש כמו מבחן, וחידון על הצוות מרגיש כמו מסיבה. כל שאלה היא סיפור קטן על מישהו בחדר, וכל תשובה פותחת שיחה.
+A general quiz feels like a test, and a quiz about the team feels like a party. Every question is a small story about someone in the room, and every answer starts a conversation.
 
-זה לא רק כיף. [סקרים של Gallup משנת 2022](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/) מצאו שרק בערך 2 מכל 10 עובדים בארצות הברית אומרים שיש להם "חבר הכי טוב" בעבודה, ושבקרב מי שיש לו, 32% מרוצים מהעבודה לעומת 15% בקרב מי שאין לו. פעילות שבה אנשים מגלים דברים אחד על השני היא בדיוק הדרך ליצור את החיבורים האלה.
+It is not only fun. [Gallup surveys from 2022](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/) found that only about 2 in 10 employees in the United States say they have a "best friend" at work, and that among those who do, 32% are satisfied with their job compared with 15% of those who do not. An activity where people discover things about each other is exactly the way to create those connections.
 
-חידון על הצוות גם משתף אנשים שקטים. הם לא יעלו לנאום, אבל ישמחו לראות את הסיפור שלהם על המסך. כדי שזה יעבוד צריך לאסוף שאלות מראש מכמה שיותר אנשים, לסנן כל שאלה כדי שאף אחד לא יובך, ולהריץ את זה מהר, על מסך גדול, כשכולם עונים מהטלפון.
+A quiz about the team also brings in quiet people. They won't get up to give a speech, but they will be happy to see their story on the screen. To make it work you need to collect questions ahead of time from as many people as possible, screen every question so that nobody is embarrassed, and run it fast, on a big screen, with everyone answering from their phone.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** צוות של 35 עובדים, הרמת כוסית לחנוכה בחדר הישיבות, ושמונה עובדים מחוברים מהבית. השאלה "מי מהצוות ניסה להרכיב לבד את המקרר החדש במטבחון?" מקבלת את רוב הצחוקים, והעובד הכי שקט בצוות מתגלה כמי שטס הכי רחוק בחופשה. בסוף, דווקא הקבוצה של מי שעובד מהבית מנצחת.
+> **Example scenario (not a real event):** A team of 35 employees, a Hanukkah toast in the meeting room, and eight employees connected from home. The question "Who on the team tried to assemble the new kitchenette fridge on their own?" gets most of the laughs, and the quietest person on the team turns out to be the one who flew the farthest on vacation. In the end, it is the group of people working from home that wins.
 
-## איך משתפים עובדים שעובדים מהבית?
+## How do you include employees who work from home?
 
-בוחרים פעילות שעובדת מהטלפון, משתפים מסך בזום, ושולחים מראש משלוח קטן הביתה. ככה גם מי שבבית מרים כוסית באותו רגע.
+Choose an activity that works from a phone, share the screen on Zoom, and send a small delivery to their homes ahead of time. That way the people at home raise a glass at the same moment too.
 
-זה חשוב במיוחד בצוותים היברידיים. לפי [אותם נתוני Gallup](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/), עובדים היברידיים הם הקבוצה שהכי פחות סביר שיהיה לה חבר קרוב בעבודה: 17% בשנת 2022 לעומת 22% בשנת 2019.
+This matters especially in hybrid teams. According to [the same Gallup data](https://fortune.com/2022/08/24/work-bff-more-important-than-ever-declining/), hybrid employees are the group least likely to have a close friend at work: 17% in 2022 compared with 22% in 2019.
 
-- בחרו פעילות שעובדת מהטלפון, לא כזו שדורשת להיות פיזית בחדר.
-- שתפו מסך בזום, ודאגו שמי שבבית שומע את המנחה.
-- שלחו מראש משלוח קטן הביתה (סופגניה, בקבוק יין), כדי שגם הם ירימו כוסית.
+- Choose an activity that works from a phone, not one that requires being physically in the room.
+- Share the screen on Zoom, and make sure the people at home can hear the host.
+- Send a small delivery to their homes ahead of time (a sufganiya, a bottle of wine), so they can raise a glass too.
 
-## מה צריך להכין להרמת כוסית?
+## What do you need to prepare for a holiday toast?
 
-מסך, פעילות אחת ומי שמריץ אותה, אוכל עם אפשרויות בלי אלכוהול, ולינק לזום. הנה הרשימה המלאה.
+A screen, one activity and someone to run it, food with non-alcoholic options, and a Zoom link. Here is the full list.
 
-- [ ] תאריך ושעה שמתאימים להורים (לא אחרי 17:30)
-- [ ] מקום: חדר ישיבות גדול, לובי, או גג
-- [ ] מסך או מקרן, ורמקול
-- [ ] פעילות אחת מרכזית ומי מריץ אותה
-- [ ] אוכל ושתייה, כולל אפשרויות בלי אלכוהול
-- [ ] לינק לזום למי שבבית
-- [ ] מי אומר את דברי הפתיחה, ושלוש דקות מקסימום
+- [ ] A date and time that work for parents (not after 5:30 p.m.)
+- [ ] A place: a large meeting room, the lobby, or the roof
+- [ ] A screen or projector, and a speaker
+- [ ] One main activity and someone to run it
+- [ ] Food and drinks, including non-alcoholic options
+- [ ] A Zoom link for the people at home
+- [ ] Who gives the opening remarks, and three minutes at most
 
-## איך טדאם! עוזר בהרמת כוסית?
+## How does Tadam! help with a holiday toast?
 
-טדאם! בונה משחק טריוויה חי מהסיפורים של הצוות שלכם, וכולם משחקים מהטלפון, גם מהבית. ההכנה היא לאסוף מהצוות כמה סיפורים ותמונות ולשלוח לנו.
+Tadam! builds a live trivia game from your team's stories, and everyone plays from their phone, including from home. The preparation is collecting a few stories and photos from the team and sending them to us.
 
-ב-[טדאם!](/) אתם שולחים לנו את הסיפורים והתמונות של הצוות, אנחנו בונים מהם את המשחק, וכל שאלה עוברת את האישור שלכם לפני שהיא מגיעה למסך. בהרמת הכוסית המשחק רץ על המסך הגדול, כולם סורקים קוד ועונים מהטלפון, ותוך 15 דקות יש צוות מנצח וחדר שלם שצוחק. [צפו בדמו](/#demo).
+With [Tadam!](/) you send us your team's stories and photos, we build the game from them, and every question goes through your approval before it reaches the screen. At the toast the game runs on the big screen, everyone scans a code and answers from their phone, and within 15 minutes there is a winning team and a whole room laughing. [Watch the demo](/#demo).
 
-מחפשים עוד רעיונות? קראו [רעיונות ליום גיבוש לעובדים](/blog/team-building-day-ideas/). ולערב ההדלקה בבית, הנה [חידון חנוכה למשפחה עם תשובות](/blog/hanukkah-quiz/).
+Looking for more ideas? Read [team-building day ideas](/blog/team-building-day-ideas/). And for candle lighting at home, here is a [family Hanukkah quiz with answers](/blog/hanukkah-quiz/).

@@ -1,8 +1,5 @@
 ---
-/**
- * The blog article page, in the language of the URL: `/blog/<slug>/` (Hebrew, src/content/blog/)
- * and `/en/blog/<slug>/` (English, src/content/blog-en/). The pages only pick the article and pass it in.
- */
+/** The blog article page, `/blog/<slug>/` (articles in src/content/blog/). The page route only picks the article and passes it in. */
 import { render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import BlogHeader from "../blog/BlogHeader.astro";
@@ -10,15 +7,13 @@ import Footer from "../Footer.astro";
 import { contactLink } from "../../config/site";
 import { useCopy, localPath } from "../../content/copy";
 
-type Post = CollectionEntry<"blog"> | CollectionEntry<"blogEn">;
+type Post = CollectionEntry<"blog">;
 interface Props {
   post: Post;
   /** All published articles in this language (for "more from the blog"). */
   all: Post[];
-  /** The same article exists in the other language: adds hreflang and the language link. */
-  hasTwin: boolean;
 }
-const { post, all, hasTwin } = Astro.props;
+const { post, all } = Astro.props;
 const { copy, locale, home, dateLocale, langTag } = useCopy(Astro.url);
 const t = copy.blog;
 const blogHome = localPath(locale, "/blog/");
@@ -46,7 +41,7 @@ const jsonLd = [
     dateModified: (d.updated ?? d.date).toISOString(),
     mainEntityOfPage: url,
     url,
-    image: new URL("/brand/og-image-v3.jpg", Astro.site).href,
+    image: new URL("/brand/og-image-en-v1.jpg", Astro.site).href,
     keywords: d.targetKeyword,
     author: { "@type": "Organization", name: copy.brand, url: new URL(home, Astro.site).href },
     publisher: {
@@ -80,7 +75,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={pageTitle} description={d.description} ogType="article" bilingual={hasTwin}>
+<Base title={pageTitle} description={d.description} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <meta slot="head" property="article:published_time" content={d.date.toISOString()} />
   <BlogHeader />
@@ -175,7 +170,7 @@ const jsonLd = [
       )
     }
   </main>
-  <Footer bilingual={hasTwin} />
+  <Footer />
 </Base>
 
 <script>

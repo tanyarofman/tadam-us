@@ -1,195 +1,195 @@
 ---
-title: "100 שאלות טריוויה עם תשובות: חידון ידע כללי לפי נושאים, לילדים ולמבוגרים"
-seoTitle: "100 שאלות טריוויה עם תשובות: חידון ידע כללי"
-description: "100 שאלות טריוויה ידע כללי עם תשובות, לפי נושאים: ישראל, גיאוגרפיה, מדע, היסטוריה, גוף האדם, תרבות, ספורט, עברית ואוכל."
-targetKeyword: "שאלות טריוויה"
-answer: "כאן תמצאו 100 שאלות טריוויה ידע כללי עם תשובות, מחולקות לתשעה נושאים: ישראל, גיאוגרפיה, מדע וטבע, היסטוריה, גוף האדם, תרבות, ספורט ומשחקים, עברית ואוכל. לערב חידון בוחרים 20 עד 30 שאלות משלושה או ארבעה נושאים, מחלקים לקבוצות מעורבות, ומסיימים בסבב של שאלות אישיות על המשתתפים."
+title: "100 General Knowledge Questions and Answers: A Trivia Quiz by Topic, for Kids and Adults"
+seoTitle: "100 General Knowledge Questions and Answers: Trivia Quiz"
+description: "100 general knowledge trivia questions with answers, by topic: Israel, geography, science, history, the human body, culture, sports, Hebrew and food."
+targetKeyword: "general knowledge questions"
+answer: "Here you will find 100 general knowledge trivia questions with answers, divided into nine topics: Israel, geography, science and nature, history, the human body, culture, sports and games, Hebrew and food. For a quiz night, pick 20 to 30 questions from three or four topics, split into mixed teams, and finish with a round of personal questions about the players."
 date: 2026-11-22
-category: "טריוויה"
+category: "Trivia"
 faq:
-  - q: "כמה שאלות טריוויה צריך לערב חידון?"
-    a: "20 עד 30 שאלות מספיקות לחצי שעה עד 45 דקות. מחלקים אותן לשלושה או ארבעה סבבים של נושא אחד, עם הפסקה קצרה לספירת נקודות."
-  - q: "אילו שאלות טריוויה מתאימות לילדים?"
-    a: "שאלות עם תשובה של מילה אחת על בעלי חיים, גוף האדם, ישראל ואוכל. ברשימה כאן מתאימות לילדים במיוחד השאלות הראשונות בכל נושא."
-  - q: "איך מונעים חיפוש תשובות בטלפון?"
-    a: "קובעים זמן קצר לכל שאלה, עד 20 שניות, ומשחקים בקבוצות. אפשר גם להוסיף שאלות אישיות על המשתתפים, שאף מנוע חיפוש לא יודע לענות עליהן."
-  - q: "מה ההבדל בין טריוויה ידע כללי לטריוויה אישית?"
-    a: "בטריוויה ידע כללי שואלים על העולם, ובטריוויה אישית שואלים על האנשים שבחדר. באירוע משפחתי או בערב צוות, השאלות האישיות הן בדרך כלל אלה שזוכרים."
+  - q: "How many trivia questions do you need for a quiz night?"
+    a: "20 to 30 questions are enough for half an hour to 45 minutes. Divide them into three or four rounds of one topic each, with a short break to count points."
+  - q: "Which trivia questions suit kids?"
+    a: "Questions with a one-word answer about animals, the human body, Israel and food. In the list here, the first questions in each topic suit kids especially well."
+  - q: "How do you stop people looking up answers on their phones?"
+    a: "Set a short time for each question, up to 20 seconds, and play in teams. You can also add personal questions about the players, which no search engine knows how to answer."
+  - q: "What is the difference between general knowledge trivia and personal trivia?"
+    a: "General knowledge trivia asks about the world, and personal trivia asks about the people in the room. At a family event or a team evening, the personal questions are usually the ones people remember."
 ---
 
-שאלת טריוויה טובה היא שאלה שחצי מהחדר בטוח שהוא יודע את התשובה, והחצי השני בטוח בתשובה אחרת. ריכזנו כאן 100 שאלות כאלה, עם תשובות, מחולקות לפי נושאים. בכל נושא השאלות מסודרות מהקל לקשה, כך שאפשר לבחור לפי הקהל.
+A good trivia question is one where half the room is sure it knows the answer, and the other half is sure of a different answer. We have gathered 100 general knowledge questions like that here, with answers, divided by topic. Within each topic the questions run from easy to hard, so you can choose according to your crowd.
 
-[//]: # "להחליף בסיפור אמיתי מאירוע כשיהיה, ואז למחוק את התרחיש לדוגמה."
+[//]: # "Replace with a real story from an event when there is one, then delete the example scenario."
 
-## איך בונים ערב חידון מ-100 שאלות טריוויה?
+## How do you build a quiz night from 100 trivia questions?
 
-בוחרים 20 עד 30 שאלות משלושה או ארבעה נושאים, ומחלקים את המשתתפים לקבוצות מעורבות בגילאים. כל סבב עוסק בנושא אחד, ובין הסבבים סופרים נקודות.
+Pick 20 to 30 questions from three or four topics, and split the players into teams of mixed ages. Each round covers one topic, and you count points between rounds.
 
-הפורמט הזה מגיע מערבי החידון בפאבים באנגליה, שהפכו לתופעה אחרי ש[חברה בשם Burns and Porter ארגנה ב-1976 ליגות של קבוצות חידון](https://en.wikipedia.org/wiki/Pub_quiz) כדי למלא פאבים בערבים שקטים. מה שעבד שם עובד גם בסלון: קבוצות, סבבים קצרים ופרס סמלי. הטבלה עוזרת לבחור נושאים.
+This format comes from the pub quiz nights of England, which became a phenomenon after [a company called Burns and Porter organized leagues of quiz teams in 1976](https://en.wikipedia.org/wiki/Pub_quiz) to fill pubs on quiet evenings. What worked there works in the living room too: teams, short rounds and a token prize. The table helps you choose topics.
 
-| נושא | מספר שאלות | מתאים במיוחד ל |
+| Topic | Number of questions | Especially good for |
 |---|---|---|
-| ישראל | 15 | כל הגילאים |
-| גיאוגרפיה | 15 | נוער ומבוגרים |
-| מדע וטבע | 15 | ילדים ונוער |
-| היסטוריה | 10 | מבוגרים |
-| גוף האדם | 10 | ילדים ונוער |
-| תרבות, ספרות ומוזיקה | 10 | מבוגרים |
-| ספורט ומשחקים | 10 | כל הגילאים |
-| עברית ותנ״ך | 10 | כל הגילאים |
-| אוכל | 5 | כל הגילאים |
+| Israel | 15 | All ages |
+| Geography | 15 | Teens and adults |
+| Science and nature | 15 | Kids and teens |
+| History | 10 | Adults |
+| The human body | 10 | Kids and teens |
+| Culture, literature and music | 10 | Adults |
+| Sports and games | 10 | All ages |
+| Hebrew and the Tanakh | 10 | All ages |
+| Food | 5 | All ages |
 
-## אילו שאלות טריוויה על ישראל כדאי לשאול?
+## Which trivia questions about Israel are worth asking?
 
-שאלות על מקומות, סמלים ורגעים שכל מי שגדל בארץ פגש בבית הספר. הן פותחות טוב ערב חידון, כי לכולם יש סיכוי.
+Questions about places, symbols and moments that everyone who grew up in Israel met at school. They open a quiz night well, because everyone has a chance.
 
-1. **מהי עיר הבירה של ישראל?** ירושלים.
-2. **כמה חברי כנסת יש?** 120.
-3. **מהי העיר הדרומית ביותר בישראל?** אילת.
-4. **מהו האגם המתוק הגדול בישראל?** הכינרת.
-5. **איזה ים הוא הנמוך ביותר בעולם?** ים המלח. פני המים שלו נמצאים [כ-430 מטר מתחת לפני הים](https://www.britannica.com/place/Dead-Sea).
-6. **מהו ההר הגבוה ביותר בישראל?** החרמון.
-7. **מהו הנהר הארוך ביותר בישראל?** הירדן.
-8. **באיזה תאריך הוכרז על הקמת המדינה?** ב-14 במאי 1948, [ה׳ באייר תש״ח](https://he.wikisource.org/wiki/%D7%94%D7%9B%D7%A8%D7%96%D7%94_%D7%A2%D7%9C_%D7%94%D7%A7%D7%9E%D7%AA_%D7%9E%D7%93%D7%99%D7%A0%D7%AA_%D7%99%D7%A9%D7%A8%D7%90%D7%9C).
-9. **מי הכריז על הקמת המדינה?** דוד בן גוריון.
-10. **מי היה הנשיא הראשון של ישראל?** חיים ויצמן.
-11. **מה מופיע במרכז סמל המדינה?** מנורה בת שבעה קנים, ומצדדיה ענפי זית.
-12. **מי כתב את מילות "התקווה"?** נפתלי הרץ אימבר.
-13. **מהי הציפור הלאומית של ישראל?** הדוכיפת.
-14. **באיזו עיר נמצא הטכניון?** בחיפה.
-15. **מי כתב את הספר "אלטנוילנד"?** בנימין זאב הרצל.
+1. **What is the capital of Israel?** Jerusalem.
+2. **How many members does the Knesset have?** 120.
+3. **What is the southernmost city in Israel?** Eilat.
+4. **What is the largest freshwater lake in Israel?** The Kinneret (the Sea of Galilee).
+5. **Which sea is the lowest in the world?** The Dead Sea. Its surface lies [about 430 meters below sea level](https://www.britannica.com/place/Dead-Sea).
+6. **What is the highest mountain in Israel?** Mount Hermon.
+7. **What is the longest river in Israel?** The Jordan.
+8. **On what date was the establishment of the state declared?** On May 14, 1948, [the 5th of Iyar 5708](https://he.wikisource.org/wiki/%D7%94%D7%9B%D7%A8%D7%96%D7%94_%D7%A2%D7%9C_%D7%94%D7%A7%D7%9E%D7%AA_%D7%9E%D7%93%D7%99%D7%A0%D7%AA_%D7%99%D7%A9%D7%A8%D7%90%D7%9C).
+9. **Who declared the establishment of the state?** David Ben-Gurion.
+10. **Who was the first president of Israel?** Chaim Weizmann.
+11. **What appears at the center of the state emblem?** A seven-branched menorah, with olive branches on either side.
+12. **Who wrote the words of "Hatikvah"?** Naftali Herz Imber.
+13. **What is the national bird of Israel?** The hoopoe.
+14. **In which city is the Technion?** Haifa.
+15. **Who wrote the book "Altneuland"?** Theodor (Binyamin Ze'ev) Herzl.
 
-## אילו שאלות טריוויה בגיאוגרפיה מתאימות לחידון?
+## Which geography trivia questions suit a quiz?
 
-שאלות על בירות, יבשות ושיאים של כדור הארץ. הבירות הן המלכודת הקלאסית: כולם בטוחים שהעיר המפורסמת היא גם הבירה.
+Questions about capitals, continents and the records of planet Earth. Capitals are the classic trap: everyone is sure the famous city is also the capital.
 
-16. **כמה יבשות יש בעולם?** שבע.
-17. **מהי היבשת הגדולה בעולם?** אסיה.
-18. **מהו האוקיינוס הגדול בעולם?** האוקיינוס השקט.
-19. **מהו ההר הגבוה בעולם?** האוורסט.
-20. **באיזו עיר נמצא מגדל אייפל?** בפריז.
-21. **מהי בירת יפן?** טוקיו.
-22. **מהי המדינה הגדולה בעולם בשטחה?** רוסיה.
-23. **מהי המדינה הקטנה בעולם?** הוותיקן.
-24. **מהו המדבר החם הגדול בעולם?** הסהרה.
-25. **איזה נהר זורם דרך לונדון?** התמזה.
-26. **מהי המדינה הגדולה בדרום אמריקה?** ברזיל.
-27. **באיזו מדינה נמצא מאצ׳ו פיצ׳ו?** בפרו.
-28. **מהי בירת טורקיה?** אנקרה.
-29. **מהי בירת קנדה?** אוטווה.
-30. **מהי בירת אוסטרליה?** קנברה.
+16. **How many continents are there in the world?** Seven.
+17. **What is the largest continent in the world?** Asia.
+18. **What is the largest ocean in the world?** The Pacific Ocean.
+19. **What is the highest mountain in the world?** Everest.
+20. **In which city is the Eiffel Tower?** Paris.
+21. **What is the capital of Japan?** Tokyo.
+22. **What is the largest country in the world by area?** Russia.
+23. **What is the smallest country in the world?** Vatican City.
+24. **What is the largest hot desert in the world?** The Sahara.
+25. **Which river flows through London?** The Thames.
+26. **What is the largest country in South America?** Brazil.
+27. **In which country is Machu Picchu?** Peru.
+28. **What is the capital of Turkey?** Ankara.
+29. **What is the capital of Canada?** Ottawa.
+30. **What is the capital of Australia?** Canberra.
 
-## אילו שאלות טריוויה במדע ובטבע מתאימות לילדים ולמבוגרים?
+## Which science and nature trivia questions suit kids and adults?
 
-שאלות על בעלי חיים, חלל וחומרים, שרובן נלמדות בבית הספר היסודי ונשכחות עד גיל 30. ילדים מנצחים כאן לעיתים קרובות את ההורים.
+Questions about animals, space and materials, most of which are taught in elementary school and forgotten by age 30. Kids often beat their parents here.
 
-31. **כמה רגליים יש לעכביש?** שמונה.
-32. **מהו הכוכב הקרוב ביותר לכדור הארץ?** השמש.
-33. **כמה כוכבי לכת יש במערכת השמש?** שמונה.
-34. **מהו כוכב הלכת הגדול במערכת השמש?** צדק. לפי [נאס״א](https://science.nasa.gov/jupiter/), המסה שלו גדולה פי שניים ויותר מזו של כל שאר כוכבי הלכת יחד.
-35. **מהו כוכב הלכת הקרוב ביותר לשמש?** כוכב חמה.
-36. **מהו בעל החיים הגדול בעולם?** הלווייתן הכחול.
-37. **מהי החיה היבשתית המהירה בעולם?** הברדלס.
-38. **מהו היונק היחיד שמסוגל לעוף?** העטלף.
-39. **מהי הנוסחה הכימית של מים?** H₂O.
-40. **באיזו טמפרטורה מים רותחים בגובה פני הים?** ב-100 מעלות צלזיוס.
-41. **איזה גז צמחים קולטים מהאוויר?** פחמן דו חמצני.
-42. **כמה לבבות יש לתמנון?** שלושה.
-43. **איזו מתכת נוזלית בטמפרטורת החדר?** כספית.
-44. **מהו הסמל הכימי של זהב?** Au.
-45. **מי ניסח את חוקי התנועה ואת חוק הכבידה?** אייזק ניוטון.
+31. **How many legs does a spider have?** Eight.
+32. **What is the closest star to Earth?** The Sun.
+33. **How many planets are there in the solar system?** Eight.
+34. **What is the largest planet in the solar system?** Jupiter. According to [NASA](https://science.nasa.gov/jupiter/), it is more than twice as massive as all the other planets combined.
+35. **What is the closest planet to the Sun?** Mercury.
+36. **What is the largest animal in the world?** The blue whale.
+37. **What is the fastest land animal in the world?** The cheetah.
+38. **What is the only mammal capable of flight?** The bat.
+39. **What is the chemical formula of water?** H₂O.
+40. **At what temperature does water boil at sea level?** 100 degrees Celsius.
+41. **Which gas do plants absorb from the air?** Carbon dioxide.
+42. **How many hearts does an octopus have?** Three.
+43. **Which metal is liquid at room temperature?** Mercury.
+44. **What is the chemical symbol for gold?** Au.
+45. **Who formulated the laws of motion and the law of gravitation?** Isaac Newton.
 
-## אילו שאלות טריוויה בהיסטוריה כדאי לכלול?
+## Which history trivia questions are worth including?
 
-שאלות על אירועים והמצאות שכולם שמעו עליהם, עם תשובה של שם או שנה. שנים הן הכי קשות, ולכן כדאי לתת נקודה גם למי שטעה בשנה אחת.
+Questions about events and inventions everyone has heard of, with a name or a year as the answer. Years are the hardest, so it is worth giving a point to anyone who is off by one year too.
 
-46. **איזו אונייה טבעה במסע הבכורה שלה ב-1912?** הטיטניק.
-47. **מי צייר את המונה ליזה?** לאונרדו דה וינצ׳י.
-48. **מי היה האדם הראשון שצעד על הירח?** ניל ארמסטרונג.
-49. **באיזו שנה נחת האדם הראשון על הירח?** ב-1969.
-50. **באיזו שנה הסתיימה מלחמת העולם השנייה?** ב-1945.
-51. **איזו אימפריה בנתה את הקולוסיאום?** האימפריה הרומית.
-52. **באיזו שנה נפלה חומת ברלין?** ב-1989.
-53. **מי המציא את מכונת הדפוס במאה ה-15?** יוהאן גוטנברג.
-54. **מי גילה את הפניצילין?** אלכסנדר פלמינג.
-55. **באיזו עיר נערכו המשחקים האולימפיים המודרניים הראשונים, ב-1896?** באתונה.
+46. **Which ship sank on its maiden voyage in 1912?** The Titanic.
+47. **Who painted the Mona Lisa?** Leonardo da Vinci.
+48. **Who was the first person to walk on the Moon?** Neil Armstrong.
+49. **In what year did the first person land on the Moon?** 1969.
+50. **In what year did World War II end?** 1945.
+51. **Which empire built the Colosseum?** The Roman Empire.
+52. **In what year did the Berlin Wall fall?** 1989.
+53. **Who invented the printing press in the 15th century?** Johannes Gutenberg.
+54. **Who discovered penicillin?** Alexander Fleming.
+55. **In which city were the first modern Olympic Games held, in 1896?** Athens.
 
-## אילו שאלות טריוויה על גוף האדם מפתיעות את כולם?
+## Which trivia questions about the human body surprise everyone?
 
-שאלות על מספרים ושיאים בגוף, שהתשובות עליהן נשמעות לא הגיוניות ובכל זאת נכונות. הן מתאימות במיוחד לילדים ולנוער.
+Questions about numbers and records in the body, with answers that sound unreasonable and are true anyway. They suit kids and teens especially well.
 
-56. **איזה איבר מזרים את הדם בגוף?** הלב.
-57. **כמה חושים יש לאדם, לפי החלוקה המקובלת?** חמישה.
-58. **כמה שיניים יש לאדם בוגר, כולל שיני הבינה?** 32.
-59. **מהו האיבר הגדול ביותר בגוף?** העור.
-60. **אילו איברים מסננים את הדם ומייצרים שתן?** הכליות.
-61. **כמה עצמות יש בגוף של אדם בוגר?** 206.
-62. **מהי העצם הארוכה ביותר בגוף?** עצם הירך.
-63. **כמה מדורים יש בלב?** ארבעה: שתי עליות ושני חדרים.
-64. **איפה נמצאת העצם הקטנה ביותר בגוף?** באוזן התיכונה. קוראים לה ארכוף.
-65. **איזה סוג דם נחשב "תורם אוניברסלי"?** O שלילי.
+56. **Which organ pumps blood through the body?** The heart.
+57. **How many senses does a person have, by the usual count?** Five.
+58. **How many teeth does an adult have, including wisdom teeth?** 32.
+59. **What is the largest organ in the body?** The skin.
+60. **Which organs filter the blood and produce urine?** The kidneys.
+61. **How many bones are there in an adult's body?** 206.
+62. **What is the longest bone in the body?** The thigh bone (the femur).
+63. **How many chambers does the heart have?** Four: two atria and two ventricles.
+64. **Where is the smallest bone in the body?** In the middle ear. It is called the stapes, or stirrup.
+65. **Which blood type is considered the "universal donor"?** O negative.
 
-## אילו שאלות טריוויה בתרבות, בספרות ובמוזיקה מתאימות למבוגרים?
+## Which culture, literature and music trivia questions suit adults?
 
-שאלות על יצירות, יוצרים וכלי נגינה, ברמה של תשבץ סוף שבוע. הן מאזנות ערב שבו הילדים ניצחו בסבב המדע.
+Questions about works, their creators and musical instruments, at the level of a weekend crossword. They balance out an evening in which the kids won the science round.
 
-66. **כמה צבעים יש בקשת בענן, לפי המניין המקובל?** שבעה.
-67. **כמה מיתרים יש לכינור?** ארבעה.
-68. **באיזו עיר נמצא מוזיאון הלובר?** בפריז.
-69. **מי כתב את "רומיאו ויוליה"?** ויליאם שייקספיר.
-70. **מי כתב את "הנסיך הקטן"?** אנטואן דה סנט אכזופרי.
-71. **מי מכונה "המשורר הלאומי" של ישראל?** חיים נחמן ביאליק.
-72. **מי פיסל את פסל "דוד" שבפירנצה?** מיכלאנג׳לו.
-73. **מי הלחין את הסימפוניה התשיעית, עם "אודה לשמחה"?** בטהובן.
-74. **איזה סופר עברי זכה בפרס נובל לספרות ב-1966?** ש״י עגנון.
-75. **כמה קלידים יש בפסנתר רגיל?** 88.
+66. **How many colors are there in a rainbow, by the usual count?** Seven.
+67. **How many strings does a violin have?** Four.
+68. **In which city is the Louvre Museum?** Paris.
+69. **Who wrote "Romeo and Juliet"?** William Shakespeare.
+70. **Who wrote "The Little Prince"?** Antoine de Saint-Exupéry.
+71. **Who is known as Israel's "national poet"?** Hayim Nahman Bialik.
+72. **Who sculpted the statue of David in Florence?** Michelangelo.
+73. **Who composed the Ninth Symphony, with the "Ode to Joy"?** Beethoven.
+74. **Which Hebrew writer won the Nobel Prize in Literature in 1966?** S.Y. Agnon.
+75. **How many keys does a standard piano have?** 88.
 
-## אילו שאלות טריוויה בספורט ובמשחקים מתאימות לכל הגילאים?
+## Which sports and games trivia questions suit all ages?
 
-שאלות על חוקים ומספרים, ולא על שמות של שחקנים. ככה גם מי שלא עוקב אחרי ספורט יכול לענות.
+Questions about rules and numbers, not about players' names. That way people who do not follow sports can answer too.
 
-76. **כמה שחקנים יש לקבוצת כדורגל על המגרש?** 11.
-77. **כמה שחקנים יש לקבוצת כדורסל על המגרש?** חמישה.
-78. **כמה טבעות יש בסמל האולימפי?** חמש.
-79. **כל כמה שנים נערכת אולימפיאדת הקיץ?** כל ארבע שנים.
-80. **באיזה ענף ספורט מתחרים בווימבלדון?** בטניס.
-81. **כמה נקודות שווה סל מחוץ לקשת בכדורסל?** שלוש.
-82. **כמה משבצות יש בלוח שחמט?** 64.
-83. **איזה כלי בשחמט נע רק באלכסון?** הרץ.
-84. **כמה גומות יש במסלול גולף מלא?** 18.
-85. **מה אורכה של ריצת מרתון?** 42.195 קילומטרים.
+76. **How many players does a soccer team have on the field?** 11.
+77. **How many players does a basketball team have on the court?** Five.
+78. **How many rings are there in the Olympic symbol?** Five.
+79. **How often are the Summer Olympics held?** Every four years.
+80. **Which sport is played at Wimbledon?** Tennis.
+81. **How many points is a basket from beyond the arc worth in basketball?** Three.
+82. **How many squares are there on a chessboard?** 64.
+83. **Which chess piece moves only diagonally?** The bishop.
+84. **How many holes are there on a full golf course?** 18.
+85. **How long is a marathon?** 42.195 kilometers.
 
-## אילו שאלות טריוויה על עברית ותנ״ך כדאי לשאול?
+## Which trivia questions about Hebrew and the Tanakh are worth asking?
 
-שאלות על אותיות, מילים וספרים, שכל דובר עברית אמור לדעת ולא תמיד יודע. סבא וסבתא נוטים לנצח בסבב הזה.
+Questions about letters, words and books that anyone who went to school in Israel is supposed to know and does not always know. Grandpa and Grandma tend to win this round.
 
-86. **כמה אותיות יש באלף בית העברי?** 22.
-87. **מהי האות האחרונה באלף בית?** תי״ו.
-88. **מהו הספר הראשון בתורה?** בראשית.
-89. **כמה חומשים יש בתורה?** חמישה.
-90. **כמה אותיות סופיות יש בעברית?** חמש: ך, ם, ן, ף, ץ.
-91. **מי מכונה "מחיה השפה העברית"?** אליעזר בן יהודה.
-92. **איזה מוסד קובע מילים חדשות בעברית?** האקדמיה ללשון העברית.
-93. **מה שווה האות ק׳ בגימטרייה?** 100.
-94. **איך קוראים למילה שנקראת אותו דבר משני הכיוונים?** פלינדרום.
-95. **כמה ספרים יש בתנ״ך, לפי המניין המסורתי?** 24.
+86. **How many letters are there in the Hebrew alphabet?** 22.
+87. **What is the last letter of the Hebrew alphabet?** Tav.
+88. **What is the first book of the Torah?** Genesis (Bereshit).
+89. **How many books are there in the Torah?** Five.
+90. **How many final letters are there in Hebrew?** Five: final kaf, mem, nun, pe and tsadi (ך, ם, ן, ף, ץ).
+91. **Who is known as "the reviver of the Hebrew language"?** Eliezer Ben-Yehuda.
+92. **Which institution decides on new words in Hebrew?** The Academy of the Hebrew Language.
+93. **What is the value of the letter kuf (ק) in gematria?** 100.
+94. **What do you call a word that reads the same in both directions?** A palindrome.
+95. **How many books are there in the Tanakh, by the traditional count?** 24.
 
-## אילו שאלות טריוויה על אוכל סוגרות טוב את הערב?
+## Which food trivia questions close the evening well?
 
-שאלות קלילות על מה שיש בצלחת, שמתאימות לסבב האחרון, כשכולם כבר רעבים. חמש שאלות כאלה מספיקות כדי לסיים בחיוך.
+Light questions about what is on the plate, which suit the last round, when everyone is already hungry. Five questions like these are enough to end with a smile.
 
-96. **מאיזו מדינה הגיעה הפיצה?** מאיטליה.
-97. **מה המרכיב העיקרי בטחינה?** שומשום.
-98. **ממה מכינים חומוס?** מגרגירי חומוס.
-99. **מאיזה צמח מפיקים שוקולד?** מעץ הקקאו.
-100. **מהו התבלין היקר בעולם?** זעפרן.
+96. **Which country did pizza come from?** Italy.
+97. **What is the main ingredient in tahini?** Sesame.
+98. **What is hummus made from?** Chickpeas.
+99. **Which plant does chocolate come from?** The cacao tree.
+100. **What is the most expensive spice in the world?** Saffron.
 
-## איך הופכים שאלות טריוויה לחידון אישי?
+## How do you turn trivia questions into a personal quiz?
 
-מוסיפים לשאלות הידע סבב של שאלות על האנשים שבחדר: מי נולד איפה, של מי תמונת הילדות, מי עשה מה. אלה השאלות היחידות שאי אפשר למצוא בחיפוש, ואלה שכולם זוכרים למחרת.
+Add to the knowledge questions a round about the people in the room: who was born where, whose childhood photo this is, who did what. These are the only questions you cannot find with a search, and the ones everyone remembers the next day.
 
-> **תרחיש לדוגמה (לא אירוע אמיתי):** ערב חידון במשפחה, 16 משתתפים בארבע קבוצות. אחרי שלושה סבבים של ידע כללי התוצאה צמודה, ואז מגיע סבב אישי: "מי במשפחה נסע פעם לאילת באוטובוס הלא נכון?". שלוש קבוצות מנחשות את אותו דוד, והתשובה הנכונה היא סבתא.
+> **Example scenario (not a real event):** A family quiz night, 16 players in four teams. After three rounds of general knowledge the score is close, and then comes a personal round: "Who in the family once took the wrong bus to Eilat?". Three teams guess the same uncle, and the right answer is Grandma.
 
-זה מה שאנחנו עושים ב-[טדאם!](/). אתם שולחים לנו סיפורים, שאלות ותמונות על המשפחה, על חתן השמחה או על הצוות, ואנחנו בונים מהם משחק טריוויה חי. ביום האירוע המשחק רץ על הטלוויזיה או על המקרן, כולם סורקים קוד ועונים מהטלפון בלי אפליקציה, ומנחה מריץ את המשחק עד שמוכרזת הקבוצה המנצחת. [צפו בדמו](/#demo) כדי לראות איך זה נראה.
+That is what we do at [Tadam!](/). You send us stories, questions and photos about the family, the guest of honor or the team, and we build a live trivia game from them. On the day of the event the game runs on the TV or the projector, everyone scans a code and answers from their phone with no app, and a host runs the game until the winning team is announced. [Watch the demo](/#demo) to see what it looks like.
 
-מחפשים שאלות לפי אירוע? יש לנו [חידון חנוכה עם 40 שאלות](/blog/hanukkah-quiz/), [חידון ט״ו בשבט](/blog/tu-bishvat-quiz/), ו[80 שאלות היכרות](/blog/icebreaker-questions/) לפתיחת הערב.
+Looking for questions by occasion? We have a [Hanukkah quiz with 40 questions](/blog/hanukkah-quiz/), a [Tu BiShvat quiz](/blog/tu-bishvat-quiz/), and [80 icebreaker questions](/blog/icebreaker-questions/) to open the evening.

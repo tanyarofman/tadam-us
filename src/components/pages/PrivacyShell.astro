@@ -8,7 +8,7 @@ import Footer from "../Footer.astro";
 import { useCopy } from "../../content/copy";
 interface Props {
   description: string;
-  /** e.g. "עודכן לאחרונה: 17 בנובמבר 2026" */
+  /** e.g. "Last updated: November 17, 2026" */
   updatedLine: string;
 }
 const { description, updatedLine } = Astro.props;
@@ -16,7 +16,7 @@ const { copy: COPY, home } = useCopy(Astro.url);
 const c = COPY.privacyPage;
 ---
 
-<Base title={`${c.title} | ${COPY.brand}`} description={description} bilingual>
+<Base title={`${c.title} | ${COPY.brand}`} description={description}>
   <main class="container privacy">
     <a href={home} class="privacy-logo"><img src="/brand/tadam-logo-v4.webp" alt={COPY.brand} width="736" height="332" /></a>
     <h1 class="display privacy-title">{c.title}</h1>

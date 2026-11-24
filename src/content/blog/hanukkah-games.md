@@ -51,7 +51,7 @@ The four Hebrew letters stand for "Nes gadol haya sham," meaning "a great miracl
 | Hei | ה | Halb (half) | Take half |
 | Shin | ש | Shtel (put in) | Add one |
 
-Dreidels made in Israel have a pe instead of a shin, for "a great miracle happened here." If yours has a pe, play it the same way as shin. The [Wikipedia entry on the dreidel](https://en.wikipedia.org/wiki/Dreidel) lists the Yiddish words behind each letter.
+Some dreidels have a pe instead of a shin. If yours does, play it the same way as shin. The [Wikipedia entry on the dreidel](https://en.wikipedia.org/wiki/Dreidel) lists the Yiddish words behind each letter.
 
 ## How does the dreidel game end, and how do you win?
 

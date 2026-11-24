@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24 (Hanukkah rewrites).
+Last updated: 2026-11-24 (wave 2, PR 1).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -26,6 +26,10 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: wave 3, PR 3 (headings approved by Tanya): `family-reunion-games` and `family-trivia-questions`. Seasonal: merge by early June 2027 (family reunion searches peak in July). Tadam sections use the self-serve wording from PR #17. Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
 - 2026-11-24: Hanukkah rewrites for US families (headings approved by Tanya, PR 1 of the seasonal batch): `hanukkah-games` (now targets dreidel game, 5,400, and hanukkah games, 720) and `hanukkah-trivia` (renamed from `hanukkah-quiz`, 301 redirect; targets hanukkah trivia, 720). No DataForSEO spend: the questions came from `data/questions-us-rewrites-2026-11-24.csv`. New sources: Library of Congress (dreidel history), Sefaria English, Smithsonian (National Menorah), Brandeis (Thanksgivukkah). After merge: Request indexing for both URLs in Search Console. Hanukkah 2026 starts at sundown Fri Dec 4.
+- 2026-11-24: seasonal rewrites, PR 2 (headings approved by Tanya): `new-years-eve-games` (renamed from `new-years-eve-at-home`, 301; targets new years eve games 4,400 and new years eve at home ideas 390), `office-christmas-party-games` (renamed from `office-holiday-toast`, 301; targets office christmas party games 2,400 and holiday party ideas for work 720), and `pass-the-parcel-tasks` polished for UK readers (UK spelling, forfeits, the Hebrew name and the Shabbat FAQ removed). No DataForSEO spend. New sources: PLOS ONE (resolutions), Wikipedia (White Elephant), SHRM (inclusive holiday parties). After merge: Request indexing for the three URLs.
+
+- 2026-11-24: DataForSEO questions for 7 wave 2 topics run again by the wave 2 session (it hadn't seen the run above): $0.91 (balance $40.06 to $39.15). Merged with the earlier file, which adds retirement party ideas; `data/questions-us-wave2-2026-11-24.csv` now has 543 questions. Total this round: $3.82 of the approved $10.
+- 2026-11-24: wave 2, PR 1 (headings approved by Tanya): `30th-birthday-ideas` and `60th-birthday-party-ideas`, both peaking in January. (The self-serve wording fix this PR also carried was already merged in #17, so it was dropped on rebase.)
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -33,14 +37,22 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
    - ~~Rewrite trivia, icebreakers, bachelorette and team building~~ Done 2026-11-24.
    - ~~Delete `hanukkah-riddles` and `tu-bishvat-quiz`~~ Done 2026-11-24.
    - ~~Hanukkah games (dreidel) and Hanukkah trivia~~ Done 2026-11-24 (PR 1 of the seasonal batch).
-   - Still to rewrite: office party (as office Christmas party games), New Year's Eve, pass the parcel (UK polish), bar and bat mitzvah. PR 2 covers the first three.
+   - ~~Office party, New Year's Eve, pass the parcel (UK)~~ Done 2026-11-24 (seasonal PR 2).
+   - 2026-11-24: `bar-mitzvah-attractions` set to `draft: true` (302 to /blog/) because it was built around Israel (Tanya: no connection to Israel on this site). Un-draft it when its US rewrite is done, and remove its redirect in `netlify.toml`.
+   - Still to rewrite: bar and bat mitzvah.
    - The Tadam sections that still said "send us your stories" or "we build it" (a conflict with the Paddle self-serve wording): 12 articles and one line in `bar-mitzvah-attractions` fixed in PR #17; New Year's Eve, the office party and pass the parcel are fixed in their rewrite PR.
-   - Keep `pass-the-parcel-tasks` as a UK article.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
-4. **Wave 2** (couples shower, engagement party, rehearsal dinner, reception games, baby shower, 30th, 60th, retirement): show Tanya the headings before drafting.
+4. **Wave 2** (all 8 headings approved 2026-11-24): PR 1 30th and 60th (written). PR 2 couples shower, rehearsal dinner, reception games. PR 3 baby shower, engagement party, retirement.
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
+- **Request indexing in Search Console** (URL inspection, then Request indexing) once each rewrite is live on tadamevents.com. Tick each one off here when done:
+  - [ ] `/blog/hanukkah-games/` (PR #15, first: Hanukkah starts Dec 4)
+  - [ ] `/blog/hanukkah-trivia/` (PR #15)
+  - [ ] `/blog/new-years-eve-games/` (PR #21)
+  - [ ] `/blog/office-christmas-party-games/` (PR #21)
+  - [ ] `/blog/pass-the-parcel-tasks/` (PR #21)
+  - Never request the redirected old addresses (`hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)

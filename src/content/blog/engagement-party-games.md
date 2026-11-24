@@ -102,7 +102,7 @@ Small, shareable prizes work best: a bottle of wine, a box of chocolates, a cand
 - **Something to share.** Wine or chocolate the winners can open at the party.
 - **A wedding-themed prize.** The winner gets the first dance with the couple at the wedding, or a reserved seat at the rehearsal dinner.
 
-For more ideas for the parties to come, see our [bridal shower games guests actually enjoy](/blog/bridal-shower-games/).
+For the next party on the calendar, see our [couples shower games and ideas](/blog/couples-shower-games/).
 
 ## How do you make the engagement party about the couple's story?
 

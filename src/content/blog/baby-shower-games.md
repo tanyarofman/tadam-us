@@ -104,6 +104,8 @@ At a coed shower, choose games about the couple and team games guests can play f
 - **Diaper the baby (18).** Partners race to diaper a doll, one hand each.
 - **Who is more likely (29).** The couple answers with paddles, the room votes too.
 
+For more games that put both partners in the spotlight, see our [couples shower games](/blog/couples-shower-games/).
+
 ## How many games should you play at a baby shower?
 
 Two or three games are enough for most baby showers, plus one ongoing activity like a diaper raffle or advice cards. A shower usually lasts two to three hours, and guests also need time to eat, talk and watch the gifts.

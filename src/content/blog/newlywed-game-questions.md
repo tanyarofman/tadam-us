@@ -148,7 +148,7 @@ At a shower or a bachelorette, the partner who isn't there answers in advance, a
 84. Which of your friends does your partner like best? (Answer carefully.)
 85. What's the first thing your partner wants to do as a married couple?
 
-The bachelorette version can be a little bolder than the shower version, especially if the grandmothers aren't there. For the shower itself, see our list of [bridal shower games guests actually enjoy](/blog/bridal-shower-games/).
+The bachelorette version can be a little bolder than the shower version, especially if the grandmothers aren't there. For a full shower quiz that all the guests play, see our [75 bridal shower trivia questions](/blog/bridal-shower-trivia-questions/).
 
 ## What newlywed game questions work for a 25th or 50th anniversary?
 

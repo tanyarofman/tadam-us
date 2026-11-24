@@ -67,7 +67,7 @@ Here are all 25 games at a glance. Energy means how loud and active the game get
 
 For 15 guests or fewer, choose games that let people talk and tell stories. A quiz about the bride, two truths and a lie, and whose memory is it all work around one table.
 
-**1. How well do you know the bride.** The host asks questions about the bride, everyone writes an answer, and the bride reveals the right one. We have [100 ready-made "how well do you know me" questions](/blog/how-well-do-you-know-me-questions/) you can adapt.
+**1. How well do you know the bride.** The host asks questions about the bride, everyone writes an answer, and the bride reveals the right one. We have [75 ready-made bridal shower trivia questions](/blog/bridal-shower-trivia-questions/) for it.
 
 **2. What did the groom say.** Before the shower, ask the groom 10 to 15 questions about the bride and record his answers, on paper or on video. At the shower the bride guesses each answer before you reveal it.
 

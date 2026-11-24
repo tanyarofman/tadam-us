@@ -23,7 +23,7 @@ This repository started as a copy of the Israeli site. The plan, in order:
 - Never commit directly to `main`. Do every change on a branch (`feat/…`, `fix/…`, `chore/…`) and open a pull request for review.
 - Merge only when Tanya asks. The Netlify project `tadam-us` (linked to this repository) deploys `main` to production automatically on every merge; there is no manual deploy step. Check deploys in the Netlify API (`/api/v1/sites/<id>/deploys`, site name `tadam-us`).
 - Every PR gets an automatic deploy preview (`deploy-preview-<number>--tadam-us.netlify.app`) to share in the PR.
-- **Domain:** not bought yet (Tanya will buy a new name; heytadam.com stays with the Israeli site). The site is at https://tadam-us.netlify.app, set as `site` in `astro.config.mjs` and in `public/robots.txt`, and every page is sent with `X-Robots-Tag: noindex` (`netlify.toml`) so the unlaunched site stays out of search. When the domain exists, in one PR: change `site` and `robots.txt`, remove the noindex header, and update `src/config/site.ts` (contact and email still point to the Israeli heytadam page). Then add the domain to the Netlify project and set up Search Console.
+- **Domain:** https://tadamevents.com, in Netlify DNS and set as the Netlify project's custom domain. The address is in `astro.config.mjs` (`site`) and `public/robots.txt`. The public email hey@tadamevents.com forwards to Tanya's and Ilan's Gmail through Forward Email (MX and TXT records in the tadamevents.com DNS zone, copied from heytadam.com). The site is indexable: no `noindex`.
 
 ## Rules for the site
 

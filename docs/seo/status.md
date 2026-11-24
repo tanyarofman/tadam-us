@@ -18,6 +18,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: first research round ($2.37 of the approved $10), the site review, and the article plan.
 - 2026-11-24: wave 1, articles 1 to 4 written (PR #4, merged 2026-11-24): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: wave 1, articles 5 to 8 written (PR #5, merged 2026-11-24): `bridal-shower-trivia-questions`, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `super-bowl-party-games`. Articles 1 and 4 now link to the bridal shower trivia article. No new DataForSEO spend (still $2.37).
+- 2026-11-24: domain tadamevents.com live, `noindex` removed, canonical URLs and sitemap on the new domain; hey@tadamevents.com forwards like hey@heytadam.com.
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -30,7 +31,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 4. **Wave 2** (couples shower, engagement party, rehearsal dinner, reception games, baby shower, 30th, 60th, retirement): show Tanya the headings before drafting.
 
 ## Waiting for Tanya
-- **Domain:** to buy and add to the Netlify project `tadam-us`. Then change `site` in `astro.config.mjs`, `public/robots.txt`, `src/config/site.ts` and `netlify.toml`, verify the domain in Search Console, and submit the sitemap.
+- **Search Console:** add and verify tadamevents.com (a DNS TXT record in Netlify DNS works), then submit `https://tadamevents.com/sitemap-index.xml`. Also Bing Webmaster Tools. Needs Tanya's Google account.
 - **Contact route for the US:** an email address on the new domain, a separate social page, or the form only.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **Prices** in USD/EUR, or keep them hidden.

@@ -12,7 +12,8 @@ Usage (keywords: one per line in a text file, or given with --kw):
   python3 tools/seo/research.py suggestions --kw "בר מצווה" --out sug.csv
   python3 tools/seo/research.py serp        --kw "אטרקציות לבר מצווה" --out serp.csv
   python3 tools/seo/research.py questions   --kw "יום גיבוש לעובדים" --out q.csv
-  add --us for the US market (English) instead of Israel.
+  add --market us|uk|ie|de|nl for an English-language market instead of Israel (--us = --market us).
+  volume also returns the peak month and the last 12 months (seasonality).
 
 Rough costs (2026-11): volume $0.09 per call of up to 1,000 keywords; suggestions about $0.05
 per keyword; serp $0.002 per keyword; questions about $0.04 per keyword (1 SERP + 16 autocompletes).
@@ -24,11 +25,15 @@ import csv
 import json
 import os
 import sys
+import time
 import urllib.request
 from urllib.parse import urlparse
 
 API = "https://api.dataforseo.com/v3/"
 ISRAEL, USA = 2376, 2840
+# Markets: (location_code, language_code). Everything but Israel searches in English.
+MARKETS = {"il": (2376, "he"), "us": (2840, "en"), "uk": (2826, "en"), "ie": (2372, "en"),
+           "de": (2276, "en"), "nl": (2528, "en")}
 QUESTION_WORDS_HE = ["איך", "מה", "כמה", "למה", "מתי", "איפה", "האם", "אילו"]
 
 
@@ -39,8 +44,16 @@ def post(endpoint: str, task: dict) -> dict:
     login, password = os.environ.get("DATAFORSEO_LOGIN"), os.environ.get("DATAFORSEO_PASSWORD")
     if login and password:
         req.add_header("Authorization", "Basic " + base64.b64encode(f"{login}:{password}".encode()).decode())
-    with urllib.request.urlopen(req, timeout=180) as r:
-        data = json.load(r)
+    for attempt in range(3):  # retry dropped connections (the proxy sometimes closes a tunnel mid-request)
+        try:
+            with urllib.request.urlopen(req, timeout=180) as r:
+                data = json.load(r)
+            break
+        except (OSError, json.JSONDecodeError) as e:
+            if attempt == 2:
+                raise
+            print(f"{endpoint}: {e}, retrying", file=sys.stderr)
+            time.sleep(5 * (attempt + 1))
     t = data["tasks"][0]
     print(f"{endpoint}: {t['status_code']} {t['status_message']} cost ${t.get('cost')}", file=sys.stderr)
     if t["status_code"] == 40102:  # "No Search Results": a valid empty answer (common for autocomplete seeds)
@@ -51,11 +64,26 @@ def post(endpoint: str, task: dict) -> dict:
     return t
 
 
+def monthly(ms):
+    """Last 12 months, oldest first, as 'YYYY-MM:volume' pairs (seasonality)."""
+    ms = sorted(ms or [], key=lambda m: (m["year"], m["month"]))[-12:]
+    return " ".join(f"{m['year']}-{m['month']:02d}:{m.get('search_volume') or 0}" for m in ms)
+
+
+def peak(ms):
+    ms = [m for m in ms or [] if m.get("search_volume")]
+    if not ms:
+        return ""
+    m = max(ms, key=lambda m: m["search_volume"])
+    return f"{m['year']}-{m['month']:02d}"
+
+
 def volume(keywords, loc):
     # Google Ads volumes: no language_code (Hebrew is rejected here), location only.
     t = post("keywords_data/google_ads/search_volume/live", {"keywords": keywords, "location_code": loc})
     rows = [
-        {"keyword": r["keyword"], "volume": r.get("search_volume"), "competition": r.get("competition"), "cpc_usd": r.get("cpc")}
+        {"keyword": r["keyword"], "volume": r.get("search_volume"), "competition": r.get("competition"), "cpc_usd": r.get("cpc"),
+         "peak_month": peak(r.get("monthly_searches")), "monthly": monthly(r.get("monthly_searches"))}
         for r in t.get("result") or []
     ]
     return sorted(rows, key=lambda r: -(r["volume"] or 0))
@@ -134,7 +162,9 @@ def main():
     p.add_argument("command", choices=["volume", "suggestions", "serp", "questions"])
     p.add_argument("--file", help="text file, one keyword per line")
     p.add_argument("--kw", action="append", default=[], help="a keyword (repeatable)")
-    p.add_argument("--us", action="store_true", help="US market in English instead of Israel in Hebrew")
+    p.add_argument("--market", choices=sorted(MARKETS), default="il",
+                   help="il (Hebrew, default), us, uk, ie, de, nl (English)")
+    p.add_argument("--us", action="store_true", help="same as --market us (kept for old commands)")
     p.add_argument("--out", help="CSV output path (default: print to stdout)")
     a = p.parse_args()
 
@@ -143,7 +173,7 @@ def main():
         kws += [l.strip() for l in open(a.file, encoding="utf-8") if l.strip()]
     if not kws:
         p.error("give keywords with --kw or --file")
-    loc, lang = (USA, "en") if a.us else (ISRAEL, "he")
+    loc, lang = MARKETS["us" if a.us else a.market]
 
     rows = {"volume": lambda: volume(kws, loc), "suggestions": lambda: suggestions(kws, loc, lang),
             "serp": lambda: serp(kws, loc, lang), "questions": lambda: questions(kws, loc, lang)}[a.command]()

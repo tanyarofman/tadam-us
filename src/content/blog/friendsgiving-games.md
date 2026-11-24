@@ -52,9 +52,9 @@ Choose one game for the start of the night, one or two for the table and one tea
 
 ## Is Friendsgiving a thing?
 
-Yes. Friendsgiving is a Thanksgiving-style meal shared with friends instead of family, usually a potluck, and MWFACT
+Yes. Friendsgiving is a Thanksgiving-style meal shared with friends instead of family, usually a potluck, and Merriam-Webster [added the word to its dictionary in 2020](https://www.merriam-webster.com/wordplay/friendsgiving-meaning).
 
-Friendsgiving has no fixed date. Many groups meet on a weekend in November, before or after Thanksgiving, so nobody has to choose between friends and family. The host usually makes the turkey or the main dish, and everyone else brings a side, a dessert or drinks. Because there's no family tradition to follow, the group gets to invent its own, and games are the easiest one to start.
+The earliest recorded use of the word dates to 2007. Friendsgiving has no fixed date. Many groups meet on a weekend in November, before or after Thanksgiving, so nobody has to choose between friends and family. The host usually makes the turkey or the main dish, and everyone else brings a side, a dessert or drinks. Because there's no family tradition to follow, the group gets to invent its own, and games are the easiest one to start.
 
 ## What are funny Friendsgiving game ideas?
 

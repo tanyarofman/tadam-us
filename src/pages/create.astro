@@ -1,0 +1,55 @@
+---
+/**
+ * /create: the game creator (wizard + Paddle checkout). PLACEHOLDER until the English wizard is built here:
+ * replace this page with the wizard. noindex, so search engines don't keep the placeholder.
+ */
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+import { useCopy } from "../content/copy";
+import { SITE, demoUrl } from "../config/site";
+const { copy: COPY, home, locale } = useCopy(Astro.url);
+---
+
+<Base title={`Create Your Game | ${COPY.brand}`} description="Create a personal trivia game show for your party with Tadam!" noindex>
+  <main class="container create-soon">
+    <a href={home} class="create-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" /></a>
+    <h1 class="display create-title">The game creator opens soon.</h1>
+    <p>
+      We're putting the finishing touches on it. Meanwhile, play the demo to see what your guests will get, or write to
+      us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll let you know when it's ready.
+    </p>
+    <div class="create-actions">
+      <a class="btn btn-buzzer" href={`${demoUrl(locale)}?autostart=1`} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="create-soon">Play the demo</a>
+      <a class="create-link" href={home}>Back to the home page</a>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .create-soon {
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    min-height: 70vh;
+    padding-block: 56px 72px;
+    line-height: 1.7;
+  }
+  .create-soon p { margin: 0; }
+  .create-logo img { width: 150px; height: auto; }
+  .create-title {
+    margin: 8px 0 0;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    color: var(--game-yellow);
+    text-shadow: 0 4px 0 var(--purple-ink);
+  }
+  .create-soon p a,
+  .create-link {
+    color: var(--white);
+    text-decoration-color: var(--game-yellow);
+    text-underline-offset: 4px;
+  }
+  .create-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 12px; }
+</style>

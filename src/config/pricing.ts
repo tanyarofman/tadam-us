@@ -7,11 +7,11 @@
  */
 
 /**
- * The creation flow (wizard) behind every "Create yours" button.
- * TODO (Tanya, plan step A.4): today this is the Base44 wizard, where payment is still a simulation. Point it at the
- * English wizard with Paddle checkout when it exists. Never put a personal `?id=` link here.
+ * The creation flow (wizard) behind every "Create yours" button: it lives on tadamevents.com and ends in the Paddle
+ * checkout (Tanya, 2026-11-24: Base44 is not part of the flow). Until the wizard exists, /create is a placeholder
+ * (src/pages/create.astro) that the wizard replaces.
  */
-export const CREATE_URL = "https://tadam.base44.app/create";
+export const CREATE_URL = "/create";
 
 export const PRICING = {
   /** Shown next to the number. */

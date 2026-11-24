@@ -47,11 +47,18 @@ Rule: link only a source that was checked (by search or by reading it) and that 
 | [29 CFR 785.27 (Cornell LII)](https://www.law.cornell.edu/cfr/text/29/785.27) | Lectures, meetings and training count as work time unless all four criteria are met: outside regular hours, voluntary, not directly related to the job, no productive work (read directly 2026-11-24) | team-building-activities-for-work |
 | [Klein et al. 2009, "Does Team Building Work?" (UCF STARS record)](https://stars.library.ucf.edu/facultybib2000/1735) | Meta-analysis in Small Group Research 40(2): team building has a positive moderate effect across outcomes, strongest on affective and process outcomes (abstract read directly 2026-11-24) | team-building-activities-for-work |
 | [The Knot: Who hosts wedding events](https://www.theknot.com/content/who-hosts-wedding-events) | The maid or matron of honor and bridesmaids host the bachelorette party (checked by web search; The Knot blocks scripts) | bachelorette-party-games |
+| [NCES Digest 2021, Table 219.10](https://nces.ed.gov/programs/digest/d21/tables/dt21_219.10.asp) | Projected high school graduates 2026-27: 3,699,790, so "about 3.7 million" (an earlier edition projected 3,746,800; checked by web search 2026-11-24) | graduation-party-games |
+| [Emily Post: Hosting a Graduation Party](https://emilypost.com/advice/hosting-a-graduation-party) | Two formats: a 2 to 4 hour party with a set start time, or a drop-in open house; right after the ceremony or days or weeks later (checked by web search) | graduation-party-games |
+| [The Knot: 50th anniversary gifts](https://www.theknot.com/content/50-year-anniversary-gift-ideas) | Gold is the traditional and the modern 50th gift; yellow roses as a flower (checked by web search) | 50th-anniversary-party-ideas |
+| [Census Bureau release CB11-90](https://www.census.gov/newsroom/releases/archives/marital_status_living_arrangements/cb11-90.html) | About 6% of currently married couples had reached their 50th anniversary (2009 data, released 2011) | 50th-anniversary-party-ideas |
+| [BGSU NCFMR: Long-Term Marriages among Older U.S. Adults, 2022](https://www.bgsu.edu/ncfmr/resources/data/family-profiles/loo-long-term-marriages-among-older-us-adults-2022-fp-24-01.html) | 7.7% of all current marriages had reached 50 years (2022 ACS); 46.9% of married older adults were in marriages of 50+ years (checked by web search) | 50th-anniversary-party-ideas |
+| [AAP (HealthyChildren.org): A Parent's Guide to Teen Parties](https://www.healthychildren.org/English/ages-stages/teen/Pages/A-Parents-Guide-To-Teen-Parties.aspx) | A parent should be home during a teen party, with rules set beforehand; stay where you can see without getting in the way (checked by web search) | sweet-16-party-ideas |
 
 ## Removed for lack of a source
 - "Cold sparklers are safe indoors" (bar-mitzvah-attractions): replaced with "check with the venue first".
 
 ## Not answered by any source we found
+- Who hosts a 50th anniversary party: no etiquette authority found (Emily Post only has a podcast episode). The article says the children usually host and that there is no fixed rule, as common practice, without a source.
 - US team building article: whether an employer may require attendance is left to HR or an employment lawyer; the article cites only the federal rule on paid time (29 CFR 785.27), and notes that state rules can add to it.
 - Whether pass the parcel may be played on Shabbat: no ruling about the game itself was found (only general rulings on tearing wrappers). The article says so and suggests asking a rabbi.
 - When a bachelorette party is "usually" held: no authoritative source, so the article gives it as advice (two weeks to a month before the wedding), not as a fact.

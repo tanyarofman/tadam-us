@@ -23,6 +23,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: DataForSEO questions for the 8 rewrite topics (`data/questions-us-rewrites-2026-11-24.csv`, 507 questions): $0.29 (balance $40.61 to $40.31). Total this round: $2.66 of the approved $10.
 - 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
 - 2026-11-24: DataForSEO questions for the 7 wave 2 topics without saved data (`data/questions-us-wave2-2026-11-24.csv`, 451 questions: baby shower games, 30th birthday ideas, 60th birthday party ideas, wedding reception games, couples shower ideas, rehearsal dinner ideas, engagement party ideas): $0.25 (balance $40.31 to $40.06). Total this round: $2.91 of the approved $10. Wave 2 and wave 3 are written in their own sessions; use this file there.
+- 2026-11-24: wave 3, PR 2 (headings approved by Tanya): `graduation-party-games`, `50th-anniversary-party-ideas`, `sweet-16-party-ideas`. Seasonal: merge in March 2027 (sweet 16 peaks in March, graduation and the 50th anniversary in May). Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
 
 ## Next

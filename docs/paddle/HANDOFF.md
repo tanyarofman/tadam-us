@@ -49,7 +49,7 @@ The site is still the copy of the Israeli done-for-you story. Paddle's domain re
 | 6 | "Create a game" goes to `https://tadam.base44.app/create` (`CREATE_URL`) where payment is a simulation | The English wizard + Paddle checkout on tadamevents.com |
 | 7 | Privacy page is the Israeli one and still says "we do not use them to train AI models" (`src/pages/privacy.astro` ~64) | Replace with `privacy-policy.md` (it doesn't make that promise) |
 | 8 | No `/terms`, no `/refunds` | Add from the drafts, link in the footer |
-| 9 | Footer shows "© Tadam!" only | "© 2026 Tanya Rofman, Israel. Payments processed by Paddle.com" + legal links + email |
+| 9 | Footer shows "© Tadam!" only | "© 2026 Tanya Rofman. Payments processed by Paddle.com." + legal links + email (no country: Tanya, 2026-11-24) |
 
 (The Israeli site heytadam.com already got the softened AI wording, tadam-il PR #76, merged.)
 

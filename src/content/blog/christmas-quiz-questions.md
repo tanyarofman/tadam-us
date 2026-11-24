@@ -52,20 +52,20 @@ Here is a ready plan using the rounds below:
 The best adult questions are about British Christmas traditions everyone half-knows: crackers, Boxing Day, panto and Christmas pudding. Everyone has a guess, and the true story behind each answer gets a conversation going.
 
 1. Which London confectioner is credited with inventing the Christmas cracker? *Answer: Tom Smith*
-2. In what year was the first commercial Christmas card produced? *Answer: 1843*
+2. In which London square does a giant Norwegian Christmas tree stand every December? *Answer: Trafalgar Square*
 3. Which city sends London the Trafalgar Square Christmas tree every year? *Answer: Oslo*
 4. What is the last Sunday before Advent traditionally called? *Answer: Stir-up Sunday*
 5. What do families traditionally make on that Sunday? *Answer: The Christmas pudding*
-6. What did mince pies originally contain that they don't today? *Answer: Meat*
-7. What is 26 December called in the UK? *Answer: Boxing Day*
+6. What do many British children leave out for Father Christmas, along with a carrot for the reindeer? *Answer: A mince pie, often with a glass of sherry*
+7. Which sport traditionally has a full programme of matches on Boxing Day? *Answer: Football*
 8. What kind of show traditionally opens around Boxing Day, with the audience shouting "He's behind you"? *Answer: A pantomime*
 9. In a panto, which character is traditionally played by a man in a frock? *Answer: The dame*
 10. At what time is the monarch's Christmas message traditionally broadcast? *Answer: 3pm*
 11. What do you pour over a Christmas pudding before setting it alight? *Answer: Brandy*
 12. Which small silver coin was traditionally hidden in the Christmas pudding? *Answer: A sixpence*
-13. What is the feast on 6 January, which ends the Christmas season, called? *Answer: Epiphany*
+13. In Scotland, what do you call the first visitor to cross your threshold in the New Year? *Answer: The first-foot*
 14. Which plant hung at Christmas has white berries? *Answer: Mistletoe*
-15. Which carol was first sung in German as "Stille Nacht"? *Answer: Silent Night*
+15. Which carol asks for figgy pudding? *Answer: We Wish You a Merry Christmas*
 16. What is the old custom of going door to door singing and drinking to good health called? *Answer: Wassailing*
 17. What do the Scots call New Year's Eve? *Answer: Hogmanay*
 18. What do many families in Ireland put in the window on Christmas Eve? *Answer: A lit candle*
@@ -103,9 +103,9 @@ Food questions are the round everyone at the table can play, because the answers
 38. What is the other traditional name for Christmas pudding? *Answer: Plum pudding*
 39. Which fruit is usually missing from a plum pudding? *Answer: Plums*
 40. What is mincemeat made of today? *Answer: Dried fruit, suet and spices*
-41. Which Christmas bread comes from Milan? *Answer: Panettone*
-42. Which German Christmas loaf often has marzipan inside? *Answer: Stollen*
-43. What is the French name for a chocolate Yule log? *Answer: Bûche de Noël*
+41. What is a Christmas pudding traditionally steamed in? *Answer: A pudding basin*
+42. Which cheese is traditionally eaten with Christmas cake in Yorkshire? *Answer: Wensleydale*
+43. What box of chocolate bars do many British children unwrap on Christmas morning? *Answer: A selection box*
 44. What two layers go on top of a traditional Christmas cake? *Answer: Marzipan and icing*
 45. Which bird was the usual Christmas roast in England before turkey? *Answer: Goose*
 46. Which sauce made from bread, milk and onion is served with turkey? *Answer: Bread sauce*
@@ -114,23 +114,23 @@ Food questions are the round everyone at the table can play, because the answers
 49. Which red sauce goes with the turkey? *Answer: Cranberry sauce*
 50. Which biscuits are often shaped like little people? *Answer: Gingerbread men*
 
-Question 6 surprises most tables: [Historic UK explains](https://www.historic-uk.com/CultureUK/Mince-Pies/) that the mince pie began as a savoury pie, and the meat only disappeared around the late Victorian era.
+Mince pies have a surprising history too: [Historic UK explains](https://www.historic-uk.com/CultureUK/Mince-Pies/) that the mince pie began as a savoury pie, and the meat only disappeared around the late Victorian era.
 
 ## What are hard Christmas quiz questions?
 
 Hard questions reward the family history buff: dates, origins and the meaning behind traditions. Save them for the last round, or use them to break a tie.
 
 51. Which blue cheese, eaten at Christmas, can't legally be made in the village it is named after? *Answer: Stilton*
-52. Who commissioned the first commercial Christmas card? *Answer: Henry Cole, later the first director of the V&A*
+52. What is the Welsh carol service, traditionally held before dawn on Christmas morning, called? *Answer: Plygain*
 53. Since which year has Oslo sent London its Christmas tree? *Answer: 1947*
 54. In what year was the first royal Christmas broadcast on the radio? *Answer: 1932*
 55. Which prayer book gave Stir-up Sunday its name? *Answer: The Book of Common Prayer*
 56. What was a "Christmas box" originally? *Answer: A gift of money for servants and tradespeople*
 57. Which French sweet inspired the Christmas cracker? *Answer: The bonbon, wrapped in a twist of paper*
 58. In a traditional panto, who played the young hero, the principal boy? *Answer: A young woman*
-59. Which country calls its Christmas Eve gift of books Jólabókaflóð, the "Christmas book flood"? *Answer: Iceland*
+59. In which English county is the village of Stilton? *Answer: Cambridgeshire*
 60. Which kind of tree usually stands in Trafalgar Square at Christmas? *Answer: A Norway spruce*
-61. Which Latin word does "Noël" come from? *Answer: Natalis, meaning birth*
+61. Which song do Scots traditionally sing at midnight on Hogmanay? *Answer: Auld Lang Syne*
 62. The word "wassail" comes from an old greeting. What did it mean? *Answer: Be well, or good health*
 63. Which saint's feast day falls on 26 December? *Answer: St Stephen*
 64. In The Twelve Days of Christmas, what arrives on the eighth day? *Answer: Eight maids a-milking*
@@ -142,8 +142,8 @@ For the stories behind questions 53, 54 and 56: the [Mayor of London's office](h
 
 Numbers questions make the best tie-breakers, because the closest answer wins even when nobody is exactly right. They also suit a quick round where every team writes one number per question.
 
-66. How many gifts are given in total in The Twelve Days of Christmas? *Answer: 364*
-67. How many reindeer pull the sleigh in the 1823 poem "A Visit from St. Nicholas"? *Answer: Eight*
+66. How many calling birds are there in The Twelve Days of Christmas? *Answer: Four*
+67. How many pipers are piping? *Answer: Eleven*
 68. How many doors does a classic Advent calendar have? *Answer: 24*
 69. How many swans are a-swimming in The Twelve Days of Christmas? *Answer: Seven*
 70. How many points does a snowflake have? *Answer: Six*
@@ -151,7 +151,7 @@ Numbers questions make the best tie-breakers, because the closest answer wins ev
 72. How many lords are a-leaping? *Answer: Ten*
 73. How tall is the Trafalgar Square tree, in metres, to the nearest ten? *Answer: About 20*
 74. How many days after Christmas Day is New Year's Day? *Answer: Seven*
-75. On what date in December is St Lucia's Day celebrated in Sweden? *Answer: 13 December*
+75. How many drummers are drumming? *Answer: Twelve*
 
 ## What Christmas quiz questions work for kids and the whole family?
 
@@ -177,18 +177,18 @@ Kids' questions are about what they see at Christmas: crackers, decorations, Fat
 
 Around the world questions take the family on a quick trip: gifts on different dates, a witch in Italy and Christmas on the beach. They work well for teens who have learned about other countries at school.
 
-91. Which country celebrates Sinterklaas on 5 December? *Answer: The Netherlands*
-92. In Italy, which kind old witch brings presents on 6 January? *Answer: La Befana*
-93. In which country do many people spend Christmas Day on the beach, in summer? *Answer: Australia*
-94. Which Mexican tradition re-enacts Mary and Joseph's search for shelter from 16 to 24 December? *Answer: Las Posadas*
+91. In Ireland, what is 6 January also called, the day women traditionally get a rest? *Answer: Women's Christmas, or Nollaig na mBan*
+92. What is the hot spiced wine at German Christmas markets called? *Answer: Glühwein*
+93. On which date do many Orthodox Christians, for example in Serbia and Russia, celebrate Christmas? *Answer: 7 January*
+94. What is the big French Christmas Eve feast called? *Answer: Le Réveillon*
 95. In Catalonia, what log "delivers" sweets and small presents? *Answer: The tió de Nadal*
 96. In which country do families traditionally hide their brooms on Christmas Eve? *Answer: Norway*
 97. Which city in the Philippines is famous for its giant Christmas lanterns? *Answer: San Fernando*
 98. On which evening do families in Germany, Poland and Scandinavia usually open their presents? *Answer: Christmas Eve*
 99. In Poland, what is set at the Christmas Eve table for an unexpected guest? *Answer: An extra place*
-100. In Iceland, what do families traditionally read on Christmas Eve? *Answer: New books from the [Christmas book flood](https://www.visiticeland.com/article/book-flood)*
+100. In Japan, Christmas Eve is often celebrated as what kind of evening? *Answer: A romantic date night*
 
-> **Example scenario (not a real event):** Eleven people round the table after Christmas dinner, three teams. On question 66, Grandad's team writes 78, the teenagers write 364 and win, and then spend ten minutes proving it on a napkin. The kids' team takes the funny round on "Sandy Claws" alone.
+> **Example scenario (not a real event):** Eleven people round the table after Christmas dinner, three teams. On question 51, Grandad's team is certain Stilton is made in Stilton. The teenagers write the right answer and win, and Grandad asks for a recount. The kids' team takes the funny round on "Sandy Claws" alone.
 
 Want more questions for the same evening, or for a pub quiz with friends? Our [trivia questions for adults](/blog/general-knowledge-trivia-questions/) has 100 general knowledge questions with answers.
 
@@ -203,4 +203,4 @@ Good family round questions:
 - **Christmas past:** the year the turkey was burnt, or the present nobody wanted.
 - **Who said it:** read out a famous family quote and guess who said it.
 
-You can run this round on paper, or put it on the big screen with [Tadam!](/) You add the stories and photos, pick a host, and get a live trivia game about your family, with the host on the TV and every guest playing from their phone. Guests scan a code with no app to install, and the leaderboard shows which team knows the family best. [Watch the demo](/#demo) to see what a game looks like, and keep it in mind for [New Year's Eve at home](/blog/new-years-eve-at-home/) too.
+You can run this round on paper, or put it on the big screen with [Tadam!](/) You add the stories and photos, pick a host, and get a live trivia game about your family, with the host on the TV and every guest playing from their phone. Guests scan a code with no app to install, and the leaderboard shows which team knows the family best. [Watch the demo](/#demo) to see what a game looks like, and keep it in mind for [New Year's Eve games](/blog/new-years-eve-games/) too.

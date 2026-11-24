@@ -43,6 +43,27 @@
   to = "/blog/"
   status = 301
 
+# Hidden for now (Tanya's decision, 2026-11-24). 302 so the URL can come back.
+[[redirects]]
+  from = "/blog/bar-mitzvah-attractions"
+  to = "/blog/"
+  status = 302
+
+[[redirects]]
+  from = "/blog/hanukkah-quiz"
+  to = "/blog/hanukkah-trivia/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/new-years-eve-at-home"
+  to = "/blog/new-years-eve-games/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/office-holiday-toast"
+  to = "/blog/office-christmas-party-games/"
+  status = 301
+
 [[redirects]]
   from = "/blog/team-building-day-ideas"
   to = "/blog/team-building-activities-for-work/"

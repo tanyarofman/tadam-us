@@ -33,7 +33,7 @@ const avatarColors = ["var(--sun-yellow)", "var(--sky-cyan)", "var(--magenta)", 
                   {p.name.charAt(0)}
                 </span>
                 <span class="lb-name">{p.name}</span>
-                <span class="lb-score">{p.score.toLocaleString("he-IL")}</span>
+                <span class="lb-score">{p.score.toLocaleString("en-US")}</span>
                 {"winner" in p && p.winner && <svg class="lb-crown" viewBox="0 0 40 30" aria-hidden="true"><path d="M4 26 L2 6 L12 14 L20 2 L28 14 L38 6 L36 26 Z" fill="#F7D94A" stroke="#330768" stroke-width="3.5" stroke-linejoin="round" /></svg>}
               </li>
             ))

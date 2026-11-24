@@ -112,4 +112,4 @@ Collect stories from both families before the dinner, and turn them into a slide
 
 Start from our [100 newlywed game questions](/blog/newlywed-game-questions/), and save the louder games for the reception: see our [wedding reception games guests actually enjoy](/blog/wedding-reception-games/).
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the couple, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side of the family knows the couple best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the couple, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side of the family knows the couple best. [Watch the demo](/#demo) to see a full game.

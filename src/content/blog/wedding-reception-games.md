@@ -123,4 +123,4 @@ If the couple wants something quieter the night before, see our [rehearsal dinne
 
 Collect stories, photos and answers from both partners before the wedding, and turn them into a game every guest plays at once. A game that everyone plays together beats one that six volunteers play on stage.
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the couple, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, so the couple can stay at their table and enjoy it, and the leaderboard reveals who knows them best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the couple, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, so the couple can stay at their table and enjoy it, and the leaderboard reveals who knows them best. [Watch the demo](/#demo) to see a full game.

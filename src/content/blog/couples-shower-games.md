@@ -130,4 +130,4 @@ For more ideas that work at any shower, see our [bridal shower games guests actu
 
 Put their story on a screen: photos from the first date to the proposal, and a game in which every guest answers questions about the two of them. It gives both sides of the guest list something to laugh about together.
 
-That's what [Tadam!](/) is for. You add stories, photos and inside jokes about the couple, pick a host, and get a live trivia game with that host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side knows the couple best. [Watch the demo](/#demo) to see a full game.
+That's what [Tadam!](/) is for. You type in stories and inside jokes about the couple, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard reveals which side knows the couple best. [Watch the demo](/#demo) to see a full game.

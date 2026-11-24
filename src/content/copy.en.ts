@@ -1,5 +1,5 @@
 /**
- * All the site copy (English, for the US and Europe). The Israeli Hebrew site is a separate repository (tadam-il).
+ * All the site copy (English, for the US and Europe).
  * Rules: plain, warm American English, "you" for the organizers, no em-dashes.
  */
 
@@ -247,7 +247,7 @@ export const COPY = {
       { label: "Refund Policy", href: "/refunds" },
     ],
     contactLabel: "Contact",
-    /** "© 2026 Tanya Rofman, Israel." is built from legalPage in Footer.astro. Paddle requires the legal name and this line. */
+    /** "© 2026 Tanya Rofman." is built from legalPage in Footer.astro. Paddle requires the legal name and this line. */
     paddle: "Payments processed by Paddle.com.",
   },
 
@@ -263,10 +263,8 @@ export const COPY = {
   legalPage: {
     back: "Back to the home page",
     /** Exactly as on the Paddle account: Paddle checks that the site and the account show the same legal name. */
+    /** No country, street address or business number on this site (Tanya's decision, 2026-11-24): the US site has no connection to Israel. Contact is by email. */
     legalName: "Tanya Rofman",
-    country: "Israel",
-    /** Published on the legal pages (controller identity under the GDPR). The business number never goes on the site. */
-    address: "Ein Gedi 2/2, Tel Aviv 6203602, Israel",
     updated: "November 24, 2026",
   },
 

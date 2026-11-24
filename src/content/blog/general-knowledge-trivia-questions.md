@@ -201,4 +201,4 @@ Some ideas for a birthday, a retirement or a team party:
 
 For a full list, see our [100 how well do you know me questions](/blog/how-well-do-you-know-me-questions/). For a work crowd, open with one of our [icebreaker questions for work](/blog/icebreaker-questions/), or build a whole afternoon from our [30 team building activities](/blog/team-building-activities-for-work/).
 
-When you want a round like that on a big screen, [Tadam!](/) builds it for you. You send us stories, photos and answers about the guest of honor, and we create a personal trivia game with a host on the screen. Everyone plays from their phone with no app, and the leaderboard shows who knows them best. [Watch the demo](/#demo) to see a full game.
+When you want a round like that on a big screen, use [Tadam!](/). You type in stories and answers about the guest of honor, add photos, pick a host, and review the questions of your personal trivia game. Everyone plays from their phone with no app, and the leaderboard shows who knows them best. [Watch the demo](/#demo) to see a full game.

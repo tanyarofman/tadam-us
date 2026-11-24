@@ -34,7 +34,7 @@ const mail = SITE.email;
   <section id="who">
     <h2 class="display">1. Who we are</h2>
     <p>
-      Tadam! is operated by {l.legalName}, a sole trader (Osek Murshe) registered in Israel, at {l.address}. We are the
+      Tadam! is operated by {l.legalName}, a sole trader. We are the
       "controller" of the personal data described here. Contact us about privacy at <a href={`mailto:${mail}`}>{mail}</a>.
     </p>
   </section>
@@ -108,8 +108,7 @@ const mail = SITE.email;
   <section id="transfers">
     <h2 class="display">5. International transfers</h2>
     <p>
-      We are based in Israel, which the European Commission recognizes as providing an adequate level of data protection.
-      Some providers process data in the US or elsewhere. Where data leaves the EU or UK, we rely on adequacy decisions,
+      We and some of our providers process data outside the EU and UK, including in the US. Where data leaves the EU or UK, we rely on adequacy decisions,
       the EU-US Data Privacy Framework where the provider is certified, or Standard Contractual Clauses.
     </p>
   </section>
@@ -118,7 +117,7 @@ const mail = SITE.email;
     <h2 class="display">6. How long we keep it</h2>
     <ul>
       <li><strong>Game content and the game itself:</strong> 30 days from delivery, then deleted. You can ask us to delete it sooner.</li>
-      <li><strong>Order records:</strong> as long as tax and accounting law requires (in Israel, generally 7 years). These records don't include your game content.</li>
+      <li><strong>Order records:</strong> as long as tax and accounting law requires (generally up to 7 years). These records don't include your game content.</li>
       {/* TODO (Ilan): replace with the real log retention once known. */}
       <li><strong>Technical logs:</strong> kept by our hosting providers for a limited time to run and secure the Service, then deleted.</li>
     </ul>
@@ -182,7 +181,7 @@ const mail = SITE.email;
   <section id="contact">
     <h2 class="display">12. Contact</h2>
     <ul class="contact">
-      <li>{l.legalName}, {l.address}</li>
+      <li>{l.legalName}</li>
       <li>Email: <a href={`mailto:${mail}`}>{mail}</a></li>
     </ul>
   </section>

@@ -5,6 +5,7 @@ description: "25 bar and bat mitzvah ideas by type: photos, dance floor, food, s
 targetKeyword: "bar mitzvah ideas"
 answer: "The most popular bar mitzvah attractions are photo stations (magnets, 360, selfie mirror), dance floor extras (drummers, LED accessories), food stations and short shows. The ones people remember most are about the bar or bat mitzvah kid and involve every age group, for example a live trivia game about the child that all the guests play from their phones."
 date: 2026-11-16
+draft: true
 updated: 2026-11-17
 category: "Bar and bat mitzvah"
 faq:
@@ -88,7 +89,7 @@ A short show, up to 15 minutes, works better than a long one that competes with 
 
 These are the attractions people are still talking about a week later. What they have in common: they're about the bar or bat mitzvah kid, and all the guests take part instead of just watching.
 
-21. **A live trivia game about the bar mitzvah boy.** Questions and stories from family and friends, on the big screen. Everyone scans a code and answers from their phone, and Grandma competes with the friends from class over who knows him best. This is what we do at [Tadam!](/).
+21. **A live trivia game about the bar mitzvah boy.** Questions and stories from family and friends, on the big screen. Everyone scans a code and answers from their phone, and Grandma competes with the friends from class over who knows him best. This is what [Tadam!](/) is for.
 22. **Slideshow or video clip.** The classic way to tell your child's story. Keep it short, up to 5 minutes.
 23. **Mobile escape room.** A group game for the friends from class, good for a bar mitzvah in a small hall or at home.
 24. **Family karaoke.** Each generation picks one song.
@@ -109,4 +110,4 @@ No app and no stage needed, and older guests who aren't comfortable with phones 
 
 > **Example scenario (not a real event):** 180 guests, and the DJ stops the music after the first course. A photo of Yonatan at age 4 in a huge kova tembel (כובע טמבל, the classic Israeli bucket hat) comes up on the screen, with the question "Where was this photo taken?". The friends from class guess "at the beach", Grandma Ruti answers correctly ("on the trip to the Galilee!") and climbs to first place, and when she wins at the end, the whole class table stands up and applauds her.
 
-Want to see what it looks like? [Watch the demo](/#demo). Celebrating during Hanukkah? Try the [family Hanukkah quiz](/blog/hanukkah-quiz/) first. And looking for an idea for a work event? Here's a [guide to the office holiday toast](/blog/office-holiday-toast/).
+Want to see what it looks like? [Watch the demo](/#demo). Celebrating during Hanukkah? Try the [family Hanukkah trivia](/blog/hanukkah-trivia/) first. And looking for an idea for a work event? Here are [office Christmas party games](/blog/office-christmas-party-games/).

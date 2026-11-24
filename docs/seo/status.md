@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24 (Hanukkah rewrites).
+Last updated: 2026-11-24 (wave 2, PR 1).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -27,6 +27,9 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: Hanukkah rewrites for US families (headings approved by Tanya, PR 1 of the seasonal batch): `hanukkah-games` (now targets dreidel game, 5,400, and hanukkah games, 720) and `hanukkah-trivia` (renamed from `hanukkah-quiz`, 301 redirect; targets hanukkah trivia, 720). No DataForSEO spend: the questions came from `data/questions-us-rewrites-2026-11-24.csv`. New sources: Library of Congress (dreidel history), Sefaria English, Smithsonian (National Menorah), Brandeis (Thanksgivukkah). After merge: Request indexing for both URLs in Search Console. Hanukkah 2026 starts at sundown Fri Dec 4.
 - 2026-11-24: seasonal rewrites, PR 2 (headings approved by Tanya): `new-years-eve-games` (renamed from `new-years-eve-at-home`, 301; targets new years eve games 4,400 and new years eve at home ideas 390), `office-christmas-party-games` (renamed from `office-holiday-toast`, 301; targets office christmas party games 2,400 and holiday party ideas for work 720), and `pass-the-parcel-tasks` polished for UK readers (UK spelling, forfeits, the Hebrew name and the Shabbat FAQ removed). No DataForSEO spend. New sources: PLOS ONE (resolutions), Wikipedia (White Elephant), SHRM (inclusive holiday parties). After merge: Request indexing for the three URLs.
 
+- 2026-11-24: DataForSEO questions for 7 wave 2 topics run again by the wave 2 session (it hadn't seen the run above): $0.91 (balance $40.06 to $39.15). Merged with the earlier file, which adds retirement party ideas; `data/questions-us-wave2-2026-11-24.csv` now has 543 questions. Total this round: $3.82 of the approved $10.
+- 2026-11-24: wave 2, PR 1 (headings approved by Tanya): `30th-birthday-ideas` and `60th-birthday-party-ideas`, both peaking in January. (The self-serve wording fix this PR also carried was already merged in #17, so it was dropped on rebase.)
+
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
 2. **Existing articles:**
@@ -38,7 +41,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
    - Still to rewrite: bar and bat mitzvah.
    - The Tadam sections that still said "send us your stories" or "we build it" (a conflict with the Paddle self-serve wording): 12 articles and one line in `bar-mitzvah-attractions` fixed in PR #17; New Year's Eve, the office party and pass the parcel are fixed in their rewrite PR.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
-4. **Wave 2** (couples shower, engagement party, rehearsal dinner, reception games, baby shower, 30th, 60th, retirement): show Tanya the headings before drafting.
+4. **Wave 2** (all 8 headings approved 2026-11-24): PR 1 30th and 60th (written). PR 2 couples shower, rehearsal dinner, reception games. PR 3 baby shower, engagement party, retirement.
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)

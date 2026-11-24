@@ -144,4 +144,4 @@ In Microsoft Teams, the quizmaster [presents slides or a window from the Share b
 
 Collect stories, photos and facts from the team, turn them into questions, and play them on a big screen with a host and a live scoreboard. It takes more preparation than general trivia, but people remember it.
 
-That's what [Tadam!](/) does. You send stories, photos and inside jokes about the team, and they become a live trivia game with a host on the big screen, for the office party, the offsite or a farewell. Everyone in the room scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. [Watch the demo](/#demo) to see how a round looks.
+That's what [Tadam!](/) is for: you type in stories and inside jokes about the team, add photos, pick a host, and review the questions of your live trivia game on the big screen, for the office party, the offsite or a farewell. Everyone in the room scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. [Watch the demo](/#demo) to see how a round looks.

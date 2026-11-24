@@ -16,8 +16,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Done
 - 2026-11-24: first research round ($2.37 of the approved $10), the site review, and the article plan.
-- 2026-11-24: wave 1, articles 1 to 4 written (PR #4, not merged): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
-- 2026-11-24: wave 1, articles 5 to 8 written (PR #5, not merged): `bridal-shower-trivia-questions`, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `super-bowl-party-games`. Articles 1 and 4 now link to the bridal shower trivia article. No new DataForSEO spend (still $2.37).
+- 2026-11-24: wave 1, articles 1 to 4 written (PR #4, merged 2026-11-24): `newlywed-game-questions`, `wedding-shoe-game-questions`, `how-well-do-you-know-me-questions`, `bridal-shower-games`. Headings approved by Tanya. Questions came from the saved data (`questions-us-2026-11-24.csv`, `serp-us-2026-11-24.csv`), so no new DataForSEO spend. Each has a labeled example scenario waiting for a real story.
+- 2026-11-24: wave 1, articles 5 to 8 written (PR #5, merged 2026-11-24): `bridal-shower-trivia-questions`, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `super-bowl-party-games`. Articles 1 and 4 now link to the bridal shower trivia article. No new DataForSEO spend (still $2.37).
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -38,4 +38,5 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - **FAQ wording:** how to compare Tadam with Kahoot or Jackbox, whether remote guests can play, and how far ahead to order.
 - **A second demo** (a wedding or a 40th) to match the main US searches. Optional.
 - **Real stories** from events, to replace the labeled example scenarios.
+- **Demo video:** the home page hero shows "Play GTA VI" as an answer (a real game title). Consider re-recording that question.
 - **A weekly article task** for this site, like the Israeli one. Only if Tanya wants it.

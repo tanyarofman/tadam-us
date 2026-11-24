@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24 (UK set, wave 2 merged, wave 4 Christmas).
+Last updated: 2026-11-24 (UK set, wave 2 merged, wave 4 Christmas, Paddle review status).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -13,6 +13,15 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 | How to research | `how-to-research.md`, `tools/seo/research.py --market us` |
 | Verified sources | `sources.md` |
 | Session records (what was decided and why, by date) | `../history/` (start with `2026-11-24-us-site-setup.md`) |
+| Paddle review checklist (website and account) | `../paddle/paddle-checklist.md` |
+
+## Paddle review status (checked on the live site, 2026-11-24)
+- **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
+- **Website requirements 1 to 11 pass:** product description, $99 price, `/terms` (Paddle as merchant of record), `/privacy`, `/refunds` (14 days), the legal name in the footer and on the legal pages with no country or address, email contact only, self-serve wording in the site and the blog, invented hosts.
+- **Blocking the review:**
+  1. `/create` (every "Create yours" button) is a "Coming soon" page with no checkout yet (checklist requirement 12).
+  2. The legal pages still need a lawyer's review.
+- **Then:** open the live Paddle account and submit `tadamevents.com` for website approval (requirement 13). Details in `../paddle/paddle-checklist.md` and `../history/2026-11-24-remove-israel.md`.
 
 ## Done
 - 2026-11-24: first research round ($2.37 of the approved $10), the site review, and the article plan.
@@ -60,6 +69,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
+- **Paddle review:** the wizard and checkout at `/create`, and a lawyer's review of `/terms` and `/privacy`, before the live account and the website submission. See "Paddle review status" above.
 - **Request indexing in Search Console** (URL inspection, then Request indexing). Google allows about 10 a day, and the quota ran out on 2026-11-24, so continue on the next days in this order. Tick each one off here when done. The session "Tadam US: Search Console indexing" keeps this list.
   - **Already requested on 2026-11-24:** the home page, /blog/, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `bachelorette-party-games`, `bridal-shower-games`, `bridal-shower-trivia-questions`, `general-knowledge-trivia-questions` (per `docs/history/2026-11-24-parallel-sessions.md`).
   - **Day 1 (seasonal, December first):**

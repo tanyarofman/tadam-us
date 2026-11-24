@@ -150,7 +150,7 @@ The [twelve days of Christmas](https://www.britannica.com/topic/Twelve-Days-of-C
 11. Christmas trivia
 12. Who knows the family best
 
-Keep a scoreboard on the fridge and give the champion a crown made from wrapping paper.
+Keep a scoreboard on the fridge and give the champion a crown made from wrapping paper. If the tournament runs to December 31, finish with our [New Year's Eve games](/blog/new-years-eve-games/).
 
 ## How do you make a game about your own family?
 

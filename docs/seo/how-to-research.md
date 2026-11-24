@@ -32,3 +32,16 @@ SITE_ID=$(curl -sS "https://api.netlify.com/api/v1/sites?filter=all" | python3 -
 curl -sS -X POST "https://api.netlify.com/api/v1/sites/$SITE_ID/deploys?draft=true" -H "Content-Type: application/zip" --data-binary @dist.zip
 ```
 The response has `deploy_ssl_url`. Never deploy to production from a branch; merging to `main` deploys production automatically (see CLAUDE.md).
+
+## US and Europe (2026-11-24, this repository)
+`research.py` now takes `--market il|us|uk|ie|de|nl` (`--us` still works), and `volume` also returns the peak month and the last 12 months, so seasonality is visible. Requests that drop are retried up to 3 times.
+
+| Market | location_code | language_code |
+|---|---|---|
+| US (main) | 2840 | en |
+| UK | 2826 | en |
+| Ireland | 2372 | en |
+| Germany (English searches) | 2276 | en |
+| Netherlands (English searches) | 2528 | en |
+
+First round: `keyword-research-us-2026-11.md`, with the data in `data/*-us-2026-11-24.csv` and `data/volume-{uk,ie,de}-2026-11-24.csv`. It cost $2.37. Note: the `questions` command makes about 17 requests per topic, so 18 topics take more than 10 minutes. Run it in the background.

@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24 (US rewrites).
+Last updated: 2026-11-24 (wave 4 Christmas).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -24,6 +24,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
 - 2026-11-24: DataForSEO questions for the 7 wave 2 topics without saved data (`data/questions-us-wave2-2026-11-24.csv`, 451 questions: baby shower games, 30th birthday ideas, 60th birthday party ideas, wedding reception games, couples shower ideas, rehearsal dinner ideas, engagement party ideas): $0.25 (balance $40.31 to $40.06). Total this round: $2.91 of the approved $10. Wave 2 and wave 3 are written in their own sessions; use this file there.
 - 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
+- 2026-11-24: DataForSEO questions for 4 wave 4 topics without saved data (`data/questions-us-wave4-2026-11-24.csv`, 202 questions: christmas family games, christmas games for family, thanksgiving family games, friendsgiving games): $0.15. Balance read $39.82 before and $39.35 after; the difference includes other sessions running at the same time. Running total this round: about $3.60 of the approved $10 (read the balance again before the next round).
+- 2026-11-24: wave 4 Christmas articles, written fast for December 2026 at Tanya's request (headings approved): `christmas-trivia-questions` (60 questions, every answer checked; sources in `sources.md`) and `christmas-games-for-family` (25 games). PR 1 of wave 4. Thanksgiving and Friendsgiving follow in PR 2, for next season (live by early October 2027).
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).

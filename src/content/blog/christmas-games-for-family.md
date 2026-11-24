@@ -133,9 +133,9 @@ Count 5 seconds out loud or use a phone timer. Every right answer in time is a p
 
 ## What are the 12 games of Christmas?
 
-The 12 games of Christmas is a family tournament of 12 short games, one for each of the twelve days. Play them all in one evening, or one game a day from Christmas to January 5.
+The 12 games of Christmas is a family tournament of 12 short games, one for each of the twelve days. Play them all in one evening, or one game a day from Christmas to Epiphany on January 6.
 
-The [twelve days of Christmas](https://www.britannica.com/topic/Twelve-Days-of-Christmas) run from Christmas Day to the eve of Epiphany, so a game a day keeps the fun going through the school break. A good set of 12:
+The [twelve days of Christmas](https://www.britannica.com/topic/Twelve-Days-of-Christmas) start on Christmas Day and lead up to Epiphany on January 6, so a game a day keeps the fun going through the school break. A good set of 12:
 
 1. Candy cane hook race
 2. Cup tower

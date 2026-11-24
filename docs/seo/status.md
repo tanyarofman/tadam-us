@@ -86,7 +86,11 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
     - [ ] `/blog/christmas-quiz-questions/` (UK set, #26; seasonal, can move up)
     - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
     - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
-    - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
+    - [ ] `/blog/mr-and-mrs-quiz-questions/` (UK set, #29)
+    - [ ] `/blog/hen-party-games/` (UK set, #29)
+    - [ ] `/blog/thanksgiving-family-games/` (wave 4, #28; written for October 2027)
+    - [ ] `/blog/friendsgiving-games/` (wave 4, #28; written for October 2027)
+    - Add new articles here as their PRs merge (the rest of wave 3).
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.

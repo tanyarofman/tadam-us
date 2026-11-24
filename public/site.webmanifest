@@ -1,8 +1,8 @@
 {
-  "name": "טדאם!",
-  "short_name": "טדאם!",
-  "lang": "he",
-  "dir": "rtl",
+  "name": "Tadam!",
+  "short_name": "Tadam!",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "/",
   "display": "browser",
   "background_color": "#2E0760",

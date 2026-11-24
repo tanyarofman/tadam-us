@@ -25,6 +25,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: wave 3, PR 1 (headings approved by Tanya): `team-trivia-for-work` and `virtual-team-building-activities`. The virtual article says honestly that remote play in Tadam isn't confirmed yet. Both have a labeled example scenario waiting for a real story.
 - 2026-11-24: 4 year-round rewrites for the US (headings approved by Tanya): `team-building-activities-for-work` (renamed from `team-building-day-ideas`, 301 redirect), `general-knowledge-trivia-questions` (now "trivia questions for adults"), `bachelorette-party-games`, `icebreaker-questions`. Deleted `hanukkah-riddles` and `tu-bishvat-quiz` (301 to /blog/). Wave 1 articles now link to the rewrites.
 - 2026-11-24: DataForSEO questions for the 7 wave 2 topics without saved data (`data/questions-us-wave2-2026-11-24.csv`, 451 questions: baby shower games, 30th birthday ideas, 60th birthday party ideas, wedding reception games, couples shower ideas, rehearsal dinner ideas, engagement party ideas): $0.25 (balance $40.31 to $40.06). Total this round: $2.91 of the approved $10. Wave 2 and wave 3 are written in their own sessions; use this file there.
+- 2026-11-24: wave 3, PR 3 (headings approved by Tanya): `family-reunion-games` and `family-trivia-questions`. Merged 2026-11-24 at Tanya's request (the plan was early June 2027; family reunion searches peak in July). Tadam sections use the self-serve wording from PR #17. Each has a labeled example scenario waiting for a real story.
+- 2026-11-24: wave 3, PR 2 (headings approved by Tanya): `graduation-party-games`, `50th-anniversary-party-ideas`, `sweet-16-party-ideas`. Merged 2026-11-24 at Tanya's request (the plan was March 2027; sweet 16 peaks in March, graduation and the 50th anniversary in May). Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
 - 2026-11-24: wave 4, PR 2 (headings approved by Tanya): `thanksgiving-family-games` (25 games, 12 checked trivia questions) and `friendsgiving-games` (20 games). For next season: merge any time, but they matter from early October 2027. Questions from `data/questions-us-wave4-2026-11-24.csv` (no new spend in this PR). Cross-links: Thanksgiving links to Christmas games for family, Friendsgiving to office Christmas party games, and Christmas games for family to New Year's Eve games. `office-christmas-party-games` and `new-years-eve-games` already have 5 internal links, so they don't link to Christmas trivia yet.
 - 2026-11-24: `christmas-trivia-questions` (US) and `christmas-quiz-questions` (UK) link to each other, replacing each one's link to the general trivia article (both stay at 5 internal links).
@@ -89,11 +91,16 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
     - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
     - [ ] `/blog/mr-and-mrs-quiz-questions/` (UK set, #29)
     - [ ] `/blog/hen-party-games/` (UK set, #29)
+  - **Day 4:**
+    - [ ] `/blog/graduation-party-games/` (wave 3, #25, live 2026-11-24 at Tanya's request, earlier than the March plan)
+    - [ ] `/blog/50th-anniversary-party-ideas/` (wave 3, #25)
+    - [ ] `/blog/sweet-16-party-ideas/` (wave 3, #25)
+    - [ ] `/blog/family-reunion-games/` (wave 3, #31)
+    - [ ] `/blog/family-trivia-questions/` (wave 3, #31)
     - [ ] `/blog/thanksgiving-family-games/` (wave 4, #28; for next season, so last)
     - [ ] `/blog/friendsgiving-games/` (wave 4, #28; for next season, so last)
     - Add new articles here as their PRs merge.
   - Never request deploy-preview addresses (`deploy-preview-<n>--tadam-us.netlify.app`): they are outside the Search Console property and Netlify serves them with `noindex`.
-    - Wave 3, not live yet: `/blog/graduation-party-games/`, `/blog/50th-anniversary-party-ideas/`, `/blog/sweet-16-party-ideas/` (PR #25, merge in March 2027); `/blog/family-reunion-games/`, `/blog/family-trivia-questions/` (PR #31, by early June 2027).
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.

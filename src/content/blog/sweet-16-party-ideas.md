@@ -117,4 +117,4 @@ Whatever the plan, the American Academy of Pediatrics advises that [a parent sho
 
 Make it personal: collect messages, photos and stories from friends and family, and give the birthday teen a moment to hear them. Inside jokes and old photos are what guests remember.
 
-A game is a fun way to do it, because friends and relatives compete over who knows the birthday teen best. That's what [Tadam!](/) builds: you send stories, photos and inside jokes from 16 years, and they become a live trivia game with a host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who wins. [Watch the demo](/#demo) to see how it works.
+A game is a fun way to do it, because friends and relatives compete over who knows the birthday teen best. That's what [Tadam!](/) is for: you type in stories and inside jokes from 16 years, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who wins. [Watch the demo](/#demo) to see how it works.

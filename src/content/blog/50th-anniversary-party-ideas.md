@@ -111,4 +111,4 @@ The Census Bureau reported that [about 6 percent of currently married couples ha
 
 Make it about their story: collect memories from family and friends, show photos from every decade, and give the couple a moment to hear what they mean to everyone. Small personal touches matter more than the size of the party.
 
-A game is a lively way to share 50 years of stories, because every generation plays together. That's what [Tadam!](/) builds: you send stories, photos and inside jokes from five decades of marriage, and they become a live trivia game with a host on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who knows the couple best. [Watch the demo](/#demo) to see a round.
+A game is a lively way to share 50 years of stories, because every generation plays together. That's what [Tadam!](/) is for: you type in stories and inside jokes from five decades of marriage, add photos, pick a host, and review the questions of your live trivia game on the big screen. Guests scan a code and play from their phones with no app, and the leaderboard shows who knows the couple best. [Watch the demo](/#demo) to see a round.

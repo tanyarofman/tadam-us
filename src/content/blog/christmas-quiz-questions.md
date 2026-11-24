@@ -190,7 +190,7 @@ Around the world questions take the family on a quick trip: gifts on different d
 
 > **Example scenario (not a real event):** Eleven people round the table after Christmas dinner, three teams. On question 51, Grandad's team is certain Stilton is made in Stilton. The teenagers write the right answer and win, and Grandad asks for a recount. The kids' team takes the funny round on "Sandy Claws" alone.
 
-Want more questions for the same evening, or for a pub quiz with friends? Our [trivia questions for adults](/blog/general-knowledge-trivia-questions/) has 100 general knowledge questions with answers.
+Want more questions for the same evening? Our [60 Christmas trivia questions](/blog/christmas-trivia-questions/) cover carols, Christmas history and traditions from Mexico to Iceland, with answers.
 
 ## How do you make a quiz round about your own family?
 

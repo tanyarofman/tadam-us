@@ -27,6 +27,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: DataForSEO questions for the 7 wave 2 topics without saved data (`data/questions-us-wave2-2026-11-24.csv`, 451 questions: baby shower games, 30th birthday ideas, 60th birthday party ideas, wedding reception games, couples shower ideas, rehearsal dinner ideas, engagement party ideas): $0.25 (balance $40.31 to $40.06). Total this round: $2.91 of the approved $10. Wave 2 and wave 3 are written in their own sessions; use this file there.
 - 2026-11-24: wave 3, PR 2 (headings approved by Tanya): `graduation-party-games`, `50th-anniversary-party-ideas`, `sweet-16-party-ideas`. Seasonal: merge in March 2027 (sweet 16 peaks in March, graduation and the 50th anniversary in May). Each has a labeled example scenario waiting for a real story.
 - 2026-11-24: test email to hey@tadamevents.com arrived (Tanya).
+- 2026-11-24: wave 4, PR 2 (headings approved by Tanya): `thanksgiving-family-games` (25 games, 12 checked trivia questions) and `friendsgiving-games` (20 games). For next season: merge any time, but they matter from early October 2027. Questions from `data/questions-us-wave4-2026-11-24.csv` (no new spend in this PR). Cross-links: Thanksgiving links to Christmas games for family, Friendsgiving to office Christmas party games, and Christmas games for family to New Year's Eve games. `office-christmas-party-games` and `new-years-eve-games` already have 5 internal links, so they don't link to Christmas trivia yet.
+- 2026-11-24: `christmas-trivia-questions` (US) and `christmas-quiz-questions` (UK) link to each other, replacing each one's link to the general trivia article (both stay at 5 internal links).
 - 2026-11-24: DataForSEO questions for 4 wave 4 topics without saved data (`data/questions-us-wave4-2026-11-24.csv`, 202 questions: christmas family games, christmas games for family, thanksgiving family games, friendsgiving games): $0.15. Balance read $39.82 before and $39.35 after; the difference includes other sessions running at the same time. Running total this round: about $3.63 of the approved $10 by the balance ($2.37 before the rewrites, then $40.61 down to $39.35); the $3.82 below adds up the sessions' own estimates, which overlap. Read the balance again before the next round.
 - 2026-11-24: wave 4 Christmas articles, written fast for December 2026 at Tanya's request (headings approved): `christmas-trivia-questions` (60 questions, every answer checked; sources in `sources.md`) and `christmas-games-for-family` (25 games). PR 1 of wave 4. Thanksgiving and Friendsgiving follow in PR 2, for next season (live by early October 2027).
 - 2026-11-24: Hanukkah rewrites for US families (headings approved by Tanya, PR 1 of the seasonal batch): `hanukkah-games` (now targets dreidel game, 5,400, and hanukkah games, 720) and `hanukkah-trivia` (renamed from `hanukkah-quiz`, 301 redirect; targets hanukkah trivia, 720). No DataForSEO spend: the questions came from `data/questions-us-rewrites-2026-11-24.csv`. New sources: Library of Congress (dreidel history), Sefaria English, Smithsonian (National Menorah), Brandeis (Thanksgivukkah). After merge: Request indexing for both URLs in Search Console. Hanukkah 2026 starts at sundown Fri Dec 4.
@@ -40,6 +42,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: wave 2, PR 3 (headings approved by Tanya): `baby-shower-games`, `engagement-party-games`, `retirement-party-ideas`. No new DataForSEO spend. With PRs #19 and #22, all 8 wave 2 articles are written; see `../history/2026-11-24-wave2.md`.
 - 2026-11-24: DataForSEO for the UK set (UK `location_code 2826`, Ireland 2372): questions for "mr and mrs quiz questions", "mr and mrs quiz", "hen party games", "hen do games", "christmas quiz questions" and "christmas quiz"; SERPs for the first three; UK volumes for 37 keywords and Ireland volumes for 22. Files: `data/questions-uk-2026-11-24.csv`, `data/questions-uk-christmas-2026-11-24.csv`, `data/serp-uk-2026-11-24.csv`, `data/volume-uk-set-2026-11-24.csv`, `data/volume-ie-set-2026-11-24.csv`, `data/volume-uk-christmas-2026-11-24.csv`. Spend $0.82 (balance $39.80 to $38.98). Total this round, from the balance: about $3.99 of the approved $10.
 - 2026-11-24: UK set, article 1: `christmas-quiz-questions` (UK: christmas quiz 22,200, christmas quiz questions 14,800). Headings approved by Tanya. British spelling (Tanya's decision, now in CLAUDE.md). Deliberately different from the US Christmas trivia article (wave 4): British traditions, no film, music or character rounds. Should be live by early December 2026.
+- 2026-11-24: UK set, articles 2 and 3: `mr-and-mrs-quiz-questions` (UK 6,600, Ireland 590) and `hen-party-games` (hen party games and hen do games, UK 9,900 each). Headings approved by Tanya, British spelling. Questions from the UK research (`data/questions-uk-2026-11-24.csv`, logged with the Christmas quiz PR). Link swaps approved by Tanya: `newlywed-game-questions` now links to the Mr and Mrs article (instead of how-well-do-you-know-me), and `bachelorette-party-games` links to hen party games (instead of bridal-shower-games).
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -51,18 +54,44 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
    - 2026-11-24: `bar-mitzvah-attractions` is hidden (`draft: true`, 302 to /blog/). **Tanya decided to hide the bar and bat mitzvah article for now.** Don't rewrite or republish it until she asks.
    - The Tadam sections that still said "send us your stories" or "we build it" (a conflict with the Paddle self-serve wording): 12 articles and one line in `bar-mitzvah-attractions` fixed in PR #17; New Year's Eve, the office party and pass the parcel are fixed in their rewrite PR.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
-4. ~~**Wave 2**~~ All 8 merged 2026-11-24 (#19, #22, #27). Next: cross-links between the wave 2 articles, and Request indexing for the 8 new URLs.
-5. **UK set:** `christmas-quiz-questions` merged; `mr-and-mrs-quiz-questions` and `hen-party-games` in PR #29, with link swaps in `newlywed-game-questions` and `bachelorette-party-games`.
+4. ~~**Wave 2**~~ All 8 merged 2026-11-24 (#19, #22, #27). Cross-links added (#35). Next: Request indexing for the 8 new URLs.
+5. ~~**UK set**~~ All 3 merged 2026-11-24: `christmas-quiz-questions` (#26), `mr-and-mrs-quiz-questions` and `hen-party-games` (#29), with link swaps in `newlywed-game-questions` and `bachelorette-party-games`. Next: Request indexing for the 3 URLs, and real stories to replace the example scenarios.
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
-- **Request indexing in Search Console** (URL inspection, then Request indexing) once each rewrite is live on tadamevents.com. Tick each one off here when done:
-  - [ ] `/blog/hanukkah-games/` (PR #15, first: Hanukkah starts Dec 4)
-  - [ ] `/blog/hanukkah-trivia/` (PR #15)
-  - [ ] `/blog/new-years-eve-games/` (PR #21)
-  - [ ] `/blog/office-christmas-party-games/` (PR #21)
-  - [ ] `/blog/pass-the-parcel-tasks/` (PR #21)
-  - Never request the redirected old addresses (`hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`).
+- **Request indexing in Search Console** (URL inspection, then Request indexing). Google allows about 10 a day, and the quota ran out on 2026-11-24, so continue on the next days in this order. Tick each one off here when done. The session "Tadam US: Search Console indexing" keeps this list.
+  - **Already requested on 2026-11-24:** the home page, /blog/, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `bachelorette-party-games`, `bridal-shower-games`, `bridal-shower-trivia-questions`, `general-knowledge-trivia-questions` (per `docs/history/2026-11-24-parallel-sessions.md`).
+  - **Day 1 (seasonal, December first):**
+    - [ ] `/blog/hanukkah-games/` (Hanukkah starts Dec 4)
+    - [ ] `/blog/hanukkah-trivia/`
+    - [ ] `/blog/christmas-trivia-questions/`
+    - [ ] `/blog/christmas-games-for-family/`
+    - [ ] `/blog/office-christmas-party-games/`
+    - [ ] `/blog/new-years-eve-games/`
+    - [ ] `/blog/super-bowl-party-games/` (should be indexed by mid-December)
+    - [ ] `/blog/30th-birthday-ideas/` (peaks in January)
+    - [ ] `/blog/60th-birthday-party-ideas/` (peaks in January)
+    - [ ] `/blog/pass-the-parcel-tasks/`
+  - **Day 2 (year-round US articles):**
+    - [ ] `/blog/how-well-do-you-know-me-questions/`
+    - [ ] `/blog/icebreaker-questions/`
+    - [ ] `/blog/team-building-activities-for-work/`
+    - [ ] `/blog/newlywed-game-questions/`
+    - [ ] `/blog/wedding-shoe-game-questions/`
+    - [ ] `/blog/baby-shower-games/`
+    - [ ] `/blog/engagement-party-games/`
+    - [ ] `/blog/retirement-party-ideas/`
+    - [ ] `/blog/couples-shower-games/`
+    - [ ] `/blog/rehearsal-dinner-ideas/`
+  - **Day 3:**
+    - [ ] `/blog/wedding-reception-games/`
+    - [ ] `/blog/christmas-quiz-questions/` (UK set, #26; seasonal, can move up)
+    - [ ] `/blog/team-trivia-for-work/` (wave 3, #20)
+    - [ ] `/blog/virtual-team-building-activities/` (wave 3, #20)
+    - Add new articles here as their PRs merge (wave 3, wave 4 Thanksgiving and Friendsgiving, the UK set).
+    - Wave 3, not live yet: `/blog/graduation-party-games/`, `/blog/50th-anniversary-party-ideas/`, `/blog/sweet-16-party-ideas/` (PR #25, merge in March 2027); `/blog/family-reunion-games/`, `/blog/family-trivia-questions/` (PR #31, by early June 2027).
+  - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
+  - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** /create is a placeholder ("the game creator opens soon") until the English wizard is built on tadamevents.com, in its own session.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)

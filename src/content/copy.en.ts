@@ -170,7 +170,7 @@ export const COPY = {
   testimonials: {
     title: "Here's what our customers had to say!",
     items: [
-      { name: "Emily R.", image: "/testimonials/emily.webp", event: "Dad's 60th birthday", quote: "Dad thought mom would easily win the game, so when she got the first question wrong, everyone laughed! The guests continued talking about the game all night long." },
+      { name: "Emily R.", image: "/testimonials/emily-upright.webp", event: "Dad's 60th birthday", quote: "Dad thought mom would easily win the game, so when she got the first question wrong, everyone laughed! The guests continued talking about the game all night long." },
       { name: "Marcus T.", image: "/testimonials/marcus.webp", event: "Wedding reception", quote: "Our two families had barely met. Ten minutes later, they were comparing answers and becoming best friends. It wasn't just fun, it was a bonding experience!" },
       { name: "Sophie L.", image: "/testimonials/sophie.webp", event: "Teammate's retirement party", quote: "We turned years of office stories into one very competitive game. Even our quietest teammate got involved. The custom host made the send-off feel completely ours." },
     ],

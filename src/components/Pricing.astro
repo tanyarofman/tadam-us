@@ -48,49 +48,49 @@ const [titleBefore, titleAfter] = c.title.split(c.highlight);
 </script>
 
 <style>
-  .pricing-pin { min-height: 100svh; padding-block: clamp(72px, 10vh, 110px) clamp(48px, 7vh, 80px); }
-  .pricing-inner { max-width: 1200px; text-align: center; }
+  .pricing-pin { min-height: 100svh; padding-block: clamp(72px, 10vh, 110px) clamp(80px, 12vh, 128px); }
+  .pricing-inner { max-width: 1120px; text-align: center; }
   .pricing-title { font-size: var(--fs-story-title); text-shadow: 0 4px 0 var(--purple-ink); }
   .pricing-sub { margin: 22px auto 44px; max-width: 48ch; color: var(--text-muted); }
-  .packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; text-align: left; }
-  .package { --accent: #00cdea; display: flex; flex-direction: column; padding: clamp(28px, 3vw, 38px) clamp(26px, 3vw, 32px) 42px; border: 2px solid #ffffff50; border-radius: 12px 36px 12px 36px; background: linear-gradient(145deg, #073d95, #082563); box-shadow: 0 16px 48px #020c5026; color: #d1def9; }
-  .package-vip { --accent: var(--game-yellow); border-color: var(--game-yellow); background: linear-gradient(145deg, #1b4385, #0a245d); color: var(--white); }
+  .packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; text-align: left; }
+  .package { --accent: #00cdea; --price-color: #05DBFB; display: flex; flex-direction: column; padding: clamp(24px, 2.6vw, 32px) clamp(24px, 2.6vw, 28px) 34px; border: 2px solid #ffffff50; border-radius: 12px 36px 12px 36px; background: linear-gradient(145deg, #073d95, #082563); box-shadow: 0 16px 48px #020c5026; color: #C7D5EF; }
+  .package-vip { --accent: var(--game-yellow); --price-color: #FBCE02; border-color: var(--game-yellow); background: linear-gradient(145deg, #1b4385, #0a245d); color: #FFF9C5; }
   .package-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-  .package-heading h3 { display: grid; place-items: center; flex-shrink: 0; min-width: 124px; min-height: 50px; padding: 6px 24px; border-radius: 99px; background: var(--accent); color: var(--pill-ink); font-size: 1.75rem; line-height: 1; text-transform: uppercase; }
+  .package-heading h3 { display: grid; place-items: center; flex-shrink: 0; min-width: 112px; min-height: 44px; padding: 6px 22px; border-radius: 99px; background: var(--accent); color: var(--pill-ink); font-size: 1.6rem; line-height: 1; text-transform: uppercase; }
   .price { display: flex; align-items: baseline; gap: 10px; margin: 8px 0 0; font-family: var(--font-display); white-space: nowrap; }
-  .price-num { font-size: clamp(4.5rem, 6.8vw, 5.4rem); line-height: 1; font-weight: 700; color: var(--accent); }
-  .price-per { font-size: 1.4rem; }
-  .one-time { margin-top: 10px; font-size: 1.65rem; line-height: 1.2; }
-  .package-features { padding: 32px 0 42px; margin: 36px 0 0; border-top: 2px solid #ffffff2b; list-style: none; display: grid; gap: 10px; font-size: 1.55rem; line-height: 1.25; }
-  .package-features li { position: relative; padding-left: 30px; }
+  .price-num { font-size: clamp(4.1rem, 6.1vw, 4.8rem); line-height: 1; font-weight: 700; color: var(--price-color); }
+  .price-per { font-size: 1.3rem; }
+  .one-time { margin-top: 8px; font-size: 1.5rem; line-height: 1.2; }
+  .package-features { padding: 28px 0 32px; margin: 28px 0 0; border-top: 2px solid #ffffff2b; list-style: none; display: grid; gap: 8px; font-size: 1.4rem; line-height: 1.25; }
+  .package-features li { position: relative; padding-left: 36px; }
   .package-features li::before { content: "✓"; position: absolute; left: 0; top: -.12em; font-size: 1.2em; font-weight: 700; }
-  .pricing-cta { --btn-bg: var(--accent); min-width: 195px; min-height: 50px; align-self: flex-start; margin-top: auto; padding: 8px 30px 10px; font-size: 1.65rem; text-transform: uppercase; box-shadow: none; }
+  .pricing-cta { --btn-bg: var(--accent); min-width: 176px; min-height: 46px; align-self: flex-start; margin-top: auto; padding: 8px 26px 10px; font-size: 1.5rem; text-transform: uppercase; box-shadow: none; }
   @media (max-width: 900px) and (min-width: 651px) {
     .packages { gap: 22px; }
     .package { padding-inline: 24px; }
     .package-heading { gap: 8px; }
     .package-heading h3 { min-width: 90px; padding-inline: 16px; font-size: 1.5rem; }
     .price { gap: 6px; }
-    .price-num { font-size: 4rem; }
+    .price-num { font-size: 3.7rem; }
     .price-per { font-size: 1.2rem; }
-    .one-time { font-size: 1.45rem; }
-    .package-features { font-size: 1.4rem; }
+    .one-time { font-size: 1.35rem; }
+    .package-features { font-size: 1.3rem; }
   }
   @media (max-width: 650px) {
-    .packages { grid-template-columns: 1fr; gap: 24px; max-width: 480px; margin-inline: auto; }
+    .packages { grid-template-columns: 1fr; gap: 24px; max-width: 448px; margin-inline: auto; }
     .pricing-sub { margin-bottom: 30px; }
-    .package { padding: 28px 24px 32px; }
-    .package-heading h3 { min-width: 100px; min-height: 44px; padding-inline: 20px; font-size: 1.6rem; }
-    .price-num { font-size: 4.5rem; }
-    .price-per { font-size: 1.25rem; }
-    .one-time { font-size: 1.5rem; }
-    .package-features { margin-top: 28px; padding-block: 28px 34px; font-size: 1.45rem; }
+    .package { padding: 24px 22px 28px; }
+    .package-heading h3 { min-width: 94px; min-height: 44px; padding-inline: 18px; font-size: 1.5rem; }
+    .price-num { font-size: 4.1rem; }
+    .price-per { font-size: 1.2rem; }
+    .one-time { font-size: 1.4rem; }
+    .package-features { margin-top: 24px; padding-block: 24px 28px; font-size: 1.35rem; }
   }
   @media (max-width: 360px) {
     .package { padding-inline: 20px; }
     .package-heading { gap: 8px; }
     .package-heading h3 { min-width: 84px; padding-inline: 12px; }
     .price { gap: 6px; }
-    .price-num { font-size: 4rem; }
+    .price-num { font-size: 3.7rem; }
   }
 </style>

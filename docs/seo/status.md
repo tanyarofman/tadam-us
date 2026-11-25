@@ -18,7 +18,9 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 ## Homepage update prepared on 2026-11-25
 
 Basic/VIP packages, consent-based custom hosts, revised delivery/editing copy, fictional
-demo cards and labeled sample testimonials are prepared in a review branch. Details:
+demo cards and temporary sample testimonials are prepared in PR #54. The follow-up adds
+new supplied demo images, generated persona portraits, an earlier demo section and a
+pricing design based on Ilan's mockup. Details:
 `../history/2026-11-25-homepage-packages-demos.md`. The historical live-site checks below
 predate this update; `/create` remains the existing coming-soon page.
 

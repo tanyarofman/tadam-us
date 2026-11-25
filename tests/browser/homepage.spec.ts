@@ -56,7 +56,7 @@ test('direct pricing hash, demo destinations, assets, FAQ and testimonial order'
   await arrived(page, '#demos');
   const demos = page.locator('.demo-card');
   await expect(demos).toHaveCount(3);
-  const urls = ['friends-demo', 'harry-potter-demo', 'the-simpsons-demo'];
+  const urls = ['friends-demo', 'stranger-things-demo', 'the-simpsons-demo'];
   for (let i = 0; i < 3; i++) {
     await expect(demos.nth(i)).toHaveAttribute('href', `https://tadamevents.com/${urls[i]}`);
     await expect(demos.nth(i)).toHaveAttribute('target', '_blank');
@@ -69,7 +69,17 @@ test('direct pricing hash, demo destinations, assets, FAQ and testimonial order'
   const order = await page.locator('main > section[id]').evaluateAll(els => els.map(el => el.id));
   expect(order.indexOf('testimonials')).toBe(order.indexOf('faq') + 1);
   expect(order.indexOf('closing')).toBe(order.indexOf('testimonials') + 1);
-  await expect(page.locator('#testimonials-note')).toContainText('fictional');
+  await expect(page.locator('#testimonials-note')).toHaveCount(0);
+  await expect(page.locator('#demos-title .phrase-highlight')).toHaveText('live demo');
+  await expect(page.locator('#pricing-title .phrase-highlight')).toHaveText('whole show');
+  await expect(page.locator('#pricing').getByRole('link', { name: 'Refund Policy' })).toHaveCount(0);
+  await expect(page.locator('.site-footer').getByRole('link', { name: 'Refund Policy' })).toHaveAttribute('href', '/refunds');
+  await expect(page.locator('.hero-nav a').first()).toHaveText('Live Demos');
+  expect(await page.locator('#demos').evaluate(el => !!(el.compareDocumentPosition(document.querySelector('#scene-3')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+  for (const portrait of await page.locator('.testimonial .avatar').all()) {
+    await portrait.scrollIntoViewIfNeeded();
+    await expect.poll(() => portrait.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  }
   await page.locator('.site-footer').getByRole('link', { name: 'FAQ', exact: true }).click();
   await arrived(page, '#faq');
   await page.getByText('Can we see an example first?', { exact: true }).click();
@@ -85,4 +95,21 @@ test('reduced motion leaves every step readable on a direct link', async ({ page
   await arrived(page, '#scene-4');
   await revealed(page, '#scene-4 .step-card');
   await expect(page.locator('.mobile-sticky-scene')).toHaveCount(0);
+});
+
+
+test('live demos stay in view for a reading pause before the next scene', async ({ page }) => {
+  await page.goto('/#demos');
+  await ready(page);
+  await arrived(page, '#demos');
+  const start = await page.locator('#demos').evaluate(el => {
+    const pin = el.querySelector('[data-scroll-pause]') as HTMLElement;
+    return el.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(pin).top) + 30;
+  });
+  await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start);
+  const pinnedTop = await page.locator('.demos-pin').evaluate(el => el.getBoundingClientRect().top);
+  await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start + 120);
+  await expect.poll(() => page.locator('.demos-pin').evaluate(el => el.getBoundingClientRect().top)).toBeCloseTo(pinnedTop, 0);
+  await expect(page.locator('#demos .demo-card').last()).toBeInViewport();
+  expect(await page.locator('#demos').evaluate(el => parseFloat(getComputedStyle(el, '::after').height) / innerHeight)).toBeGreaterThanOrEqual(0.49);
 });

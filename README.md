@@ -51,11 +51,11 @@ Open decisions (contact route, prices in USD, About facts) are marked `TODO (Tan
 
 ```
 Scene 0  Hero (TV + phone loops)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts, scripts/synced-preview.ts
+Live demos                   src/components/LiveDemos.astro
 Scene 3  Event photo → logo → demo  Scene3Reveal.astro                   scripts/scenes/scene3.ts
 Scene 4  How it's built       Scene4HowItWorks.astro                      scripts/scenes/scene4.ts
 Scene 6  Leaderboard + winner  Scene6Payoff.astro                          scripts/scenes/scene6.ts
 Hosts                        src/components/Hosts.astro
-Live demos                   src/components/LiveDemos.astro
 Basic + VIP packages         src/components/Pricing.astro
 Scene 7  CTA                  Scene7Cta.astro                             scripts/scenes/scene7.ts
 FAQ, Testimonials, ClosingCta, Footer, DemoModal  src/components/

@@ -72,11 +72,11 @@ function boot() {
     init: (options: { reduced: boolean }) => m.init(id, options),
   }));
   const loading = Promise.all([
+    pause("demos"),
     import("./scenes/scene3"),
     import("./scenes/scene4"),
     import("./scenes/scene6"),
     pause("hosts"),
-    pause("demos"),
     pause("pricing"),
     pause("scene-7"),
     import("./scenes/scene7"),

@@ -31,6 +31,7 @@ export const COPY = {
     ctaSecondary: "Watch the demo",
     loading: "Loading",
     nav: [
+      { label: "Live Demos", href: "#demos" },
       { label: "How it Works", href: "#scene-4" },
       { label: "Our Hosts", href: "#hosts" },
       { label: "Pricing", href: "#pricing" },
@@ -140,38 +141,38 @@ export const COPY = {
    * Paddle's website review needs the price visible without signing in.
    */
   pricing: {
-    title: "Your event. Your kind of show.",
+    title: "One price, the whole show.",
+    highlight: "whole show",
     perGame: "per game",
     oneTime: "One-time payment, no subscription",
     currencyLabel: "US dollars",
-    sub: "Two ways to make it personal. One unforgettable party.",
+    sub: "Everything you need for a full game at your event.",
     packages: {
-      basic: { tagline: "A personal game. A ready-made star.", host: "Pick a host from our cast of characters" },
-      vip: { tagline: "Your own host. An even bigger show.", host: "Create your own custom host" },
+      basic: { host: "Pick a host from our cast of characters" },
+      vip: { host: "Create your own custom host" },
     },
     cta: "Start Now",
-    refundPolicy: "Refund Policy",
   },
 
   demos: {
     title: "Pick an event below to play a live demo",
+    highlight: "live demo",
     sub: "Fictional events. Real game-show fun. Jump in and try it for yourself.",
     cta: "Play demo",
     newTab: "opens in a new tab",
     items: [
       { title: "Monica and Chandler Wedding", event: "Wedding", image: "/demo/events/friends-wedding.webp", alt: "Monica and Chandler celebrating their wedding", href: "https://tadamevents.com/friends-demo" },
-      { title: "Harry Potter 16th Birthday", event: "Birthday", image: "/demo/events/harry-potter-birthday.webp", alt: "Harry Potter seated in the Hogwarts Great Hall", href: "https://tadamevents.com/harry-potter-demo" },
-      { title: "Homer Simpson’s Retirement Party", event: "Retirement", image: "/demo/events/homer-retirement.webp", alt: "Homer Simpson celebrating beside a cake", href: "https://tadamevents.com/the-simpsons-demo" },
+      { title: "Eleven's 18th Birthday", event: "Birthday", image: "/demo/events/eleven-birthday.webp", alt: "Eleven against a red stormy sky", href: "https://tadamevents.com/stranger-things-demo" },
+      { title: "Homer's Retirement Party", event: "Retirement", image: "/demo/events/homer-retirement.webp", alt: "Homer Simpson sitting in a wheelchair", href: "https://tadamevents.com/the-simpsons-demo" },
     ],
   },
 
   testimonials: {
     title: "Here's what our customers had to say!",
-    placeholder: "Sample testimonials with fictional names and events. Real stories coming soon.",
     items: [
-      { name: "Emily R.", initials: "ER", event: "Her dad's 60th birthday", quote: "Dad thought he knew every story we were going to tell. The first question proved him wrong. Watching the whole family race to answer was the best part of the night." },
-      { name: "Marcus T.", initials: "MT", event: "His wedding reception", quote: "Our two families had barely met. Ten minutes later, they were comparing answers and laughing about our first date. It gave everyone something to talk about." },
-      { name: "Sophie L.", initials: "SL", event: "A teammate's retirement party", quote: "We turned years of office stories into one very competitive game. Even our quietest teammate got involved. The custom host made the send-off feel completely ours." },
+      { name: "Emily R.", image: "/testimonials/emily.webp", event: "Dad's 60th birthday", quote: "Dad thought mom would easily win the game, so when she got the first question wrong, everyone laughed! The guests continued talking about the game all night long." },
+      { name: "Marcus T.", image: "/testimonials/marcus.webp", event: "Wedding reception", quote: "Our two families had barely met. Ten minutes later, they were comparing answers and becoming best friends. It wasn't just fun, it was a bonding experience!" },
+      { name: "Sophie L.", image: "/testimonials/sophie.webp", event: "Teammate's retirement party", quote: "We turned years of office stories into one very competitive game. Even our quietest teammate got involved. The custom host made the send-off feel completely ours." },
     ],
   },
 

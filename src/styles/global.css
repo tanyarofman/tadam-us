@@ -337,6 +337,10 @@ p {
   pointer-events: none;
 }
 
+h2[tabindex="-1"]:focus { outline: none; }
+.phrase-highlight { display: inline-block; position: relative; z-index: 0; white-space: nowrap; }
+.phrase-highlight::after { inset-inline: -0.04em; bottom: -0.12em; height: 0.22em; z-index: -1; }
+
 /* ---------- English (LTR): story headings keep the Hebrew line counts ----------
    English runs longer than Hebrew, so these headings get the full width and a slightly smaller size.
    The screens and cards under them are positioned for a two-line heading. */

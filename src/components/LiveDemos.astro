@@ -2,12 +2,13 @@
 import { useCopy } from "../content/copy";
 const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.demos;
+const [titleBefore, titleAfter] = c.title.split(c.highlight);
 ---
 
 <section class="scene live-demos" id="demos" aria-labelledby="demos-title">
-  <div class="demos-pin" data-scroll-pause="start">
+  <div class="demos-pin" data-scroll-pause>
     <div class="container">
-      <h2 id="demos-title" class="display h-scene demos-title reveal">{c.title}</h2>
+      <h2 id="demos-title" class="display h-scene demos-title reveal">{titleBefore}<span class="phrase-highlight swoosh">{c.highlight}</span>{titleAfter}</h2>
       <p class="lead demos-sub reveal">{c.sub}</p>
       <div class="demo-cards">
         {c.items.map((demo, i) => (
@@ -30,6 +31,7 @@ const c = COPY.demos;
 </section>
 
 <style>
+  .live-demos[data-scroll-hold]::after { height: 90svh; }
   .demos-pin { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(72px, 10vh, 110px); }
   .demos-title { font-size: var(--fs-story-title); max-width: 22ch; margin-inline: auto; text-align: center; }
   .demos-sub { text-align: center; margin: 22px auto 44px; color: var(--text-muted); max-width: 52ch; }
@@ -45,6 +47,9 @@ const c = COPY.demos;
   .demo-link { display: flex; justify-content: space-between; gap: 16px; color: var(--game-yellow); margin-top: auto; font-size: 1.3rem; font-weight: 700; }
   .demo-card:hover { border-color: var(--game-yellow); }
   .demo-card:hover img { transform: scale(1.05); }
+  @media (max-width: 767px), (orientation: landscape) and (max-height: 500px) {
+    .live-demos[data-scroll-hold]::after { height: 50svh; }
+  }
   @media (max-width: 760px) {
     .demo-cards { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
     .demo-info h3 { font-size: 2rem; }

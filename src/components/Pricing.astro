@@ -13,21 +13,21 @@ const [titleBefore, titleAfter] = c.title.split(c.highlight);
       <p class="lead pricing-sub reveal">{c.sub}</p>
       <div class="packages">
         {PACKAGES.map((tier) => (
-          <article class:list={["package reveal", { "package-vip": tier.id === "vip" }]} aria-labelledby={`package-${tier.id}`}>
-            <div class="package-heading">
-              <p class="price"><span class="price-num">{PRICING.currency}{tier.price}</span><span class="price-per">{c.perGame}</span></p>
-              <h3 id={`package-${tier.id}`} class="display">{tier.name}</h3>
-            </div>
-            <p class="one-time">{c.oneTime}</p>
-            <ul class="package-features" role="list">
-              <li>{c.packages[tier.id].host}</li>
-              <li>{tier.questions} questions + real-time leaderboard</li>
-              <li>Up to {tier.participants} concurrent participants</li>
-              <li>{tier.edits} question edits</li>
-              <li>Game link works for {tier.linkDays} days</li>
-            </ul>
-            <a class="btn pricing-cta" href={CREATE_URL} data-track="cta_create_click" data-source={`pricing-${tier.id}`} aria-label={`${c.cta} with ${tier.name}`}>
-              {c.cta}
+          <article aria-labelledby={`package-${tier.id}`}>
+            <a class:list={["package reveal", { "package-vip": tier.id === "vip" }]} href={CREATE_URL} data-track="cta_create_click" data-source={`pricing-${tier.id}`} aria-label={`${c.cta} with ${tier.name}`}>
+              <div class="package-heading">
+                <p class="price"><span class="price-num">{PRICING.currency}{tier.price}</span><span class="price-per">{c.perGame}</span></p>
+                <h3 id={`package-${tier.id}`} class="display">{tier.name}</h3>
+              </div>
+              <p class="one-time">{c.oneTime}</p>
+              <ul class="package-features" role="list">
+                <li>{c.packages[tier.id].host}</li>
+                <li>{tier.questions} questions + real-time leaderboard</li>
+                <li>Up to {tier.participants} concurrent participants</li>
+                <li>{tier.edits} question edits</li>
+                <li>Game link works for {tier.linkDays} days</li>
+              </ul>
+              <span class="btn pricing-cta">{c.cta}</span>
             </a>
           </article>
         ))}
@@ -53,7 +53,8 @@ const [titleBefore, titleAfter] = c.title.split(c.highlight);
   .pricing-title { font-size: var(--fs-story-title); text-shadow: 0 4px 0 var(--purple-ink); }
   .pricing-sub { margin: 22px auto 44px; max-width: 48ch; color: var(--text-muted); }
   .packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; text-align: left; }
-  .package { --accent: #00cdea; --price-color: #05DBFB; display: flex; flex-direction: column; padding: clamp(24px, 2.6vw, 32px) clamp(24px, 2.6vw, 28px) 34px; border: 2px solid #ffffff50; border-radius: 12px 36px 12px 36px; background: linear-gradient(145deg, #073d95, #082563); box-shadow: 0 16px 48px #020c5026; color: #C7D5EF; }
+  .package { --accent: #00cdea; --price-color: #05DBFB; height: 100%; text-decoration: none; display: flex; flex-direction: column; padding: clamp(24px, 2.6vw, 32px) clamp(24px, 2.6vw, 28px) 34px; border: 2px solid #ffffff50; border-radius: 12px 36px 12px 36px; background: linear-gradient(145deg, #073d95, #082563); box-shadow: 0 16px 48px #020c5026; color: #C7D5EF; }
+  .package:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
   .package-vip { --accent: var(--game-yellow); --price-color: #FBCE02; border-color: var(--game-yellow); background: linear-gradient(145deg, #1b4385, #0a245d); color: #FFF9C5; }
   .package-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
   .package-heading h3 { display: grid; place-items: center; flex-shrink: 0; min-width: 112px; min-height: 44px; padding: 6px 22px; border-radius: 99px; background: var(--accent); color: var(--pill-ink); font-size: 1.6rem; line-height: 1; text-transform: uppercase; }

@@ -79,6 +79,7 @@ function boot() {
     import("./scenes/scene7"),
     pause("faq"),
     pause("testimonials"),
+    pause("closing"),
   ]);
   let scenes: Promise<void> | undefined;
   const start = () => {

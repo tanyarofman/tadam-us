@@ -36,8 +36,8 @@ test('header and footer anchors open the full steps and both packages', async ({
   await expect(page.locator('.package')).toHaveCount(2);
   await expect(page.getByRole('article', { name: 'Basic' })).toContainText('$59');
   await expect(page.getByRole('article', { name: 'VIP' })).toContainText('$99');
-  for (const button of await page.locator('.pricing-cta').all()) await expect(button).toHaveAttribute('href', '/create');
-  await page.getByRole('link', { name: 'Start Now with Basic' }).click();
+  for (const card of await page.locator('.package').all()) await expect(card).toHaveAttribute('href', '/create');
+  await page.getByRole('link', { name: 'Start Now with Basic' }).locator('.price-num').click();
   await expect(page).toHaveURL(/\/create\/?$/);
   // Also cover links arriving from a secondary page, after delayed scene initialization.
   await page.locator('.site-footer').getByRole('link', { name: /How it works/i }).click();
@@ -95,21 +95,33 @@ test('reduced motion leaves every step readable on a direct link', async ({ page
   await arrived(page, '#scene-4');
   await revealed(page, '#scene-4 .step-card');
   await expect(page.locator('.mobile-sticky-scene')).toHaveCount(0);
+  await expect(page.locator('#closing')).not.toHaveAttribute('data-scroll-hold', '');
 });
 
 
-test('live demos stay in view for a reading pause before the next scene', async ({ page }) => {
+test('demo and closing sections pause before the next section', async ({ page }) => {
   await page.goto('/#demos');
   await ready(page);
   await arrived(page, '#demos');
-  const start = await page.locator('#demos').evaluate(el => {
-    const pin = el.querySelector('[data-scroll-pause]') as HTMLElement;
-    return el.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(pin).top) + 30;
-  });
-  await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start);
-  const pinnedTop = await page.locator('.demos-pin').evaluate(el => el.getBoundingClientRect().top);
-  await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start + 120);
-  await expect.poll(() => page.locator('.demos-pin').evaluate(el => el.getBoundingClientRect().top)).toBeCloseTo(pinnedTop, 0);
-  await expect(page.locator('#demos .demo-card').last()).toBeInViewport();
-  expect(await page.locator('#demos').evaluate(el => parseFloat(getComputedStyle(el, '::after').height) / innerHeight)).toBeGreaterThanOrEqual(0.49);
+  await expect(page.locator('#closing')).toHaveAttribute('data-scroll-hold', '');
+  for (const id of ['demos', 'closing']) {
+    const section = page.locator(`#${id}`);
+    const pin = section.locator('[data-scroll-pause]');
+    const start = await section.evaluate(el => {
+      const pin = el.querySelector('[data-scroll-pause]') as HTMLElement;
+      return el.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(pin).top) + 30;
+    });
+    await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start);
+    const pinnedTop = await pin.evaluate(el => el.getBoundingClientRect().top);
+    await page.evaluate(top => window.scrollTo({ top, behavior: 'instant' }), start + 120);
+    await expect.poll(() => pin.evaluate(el => el.getBoundingClientRect().top)).toBeCloseTo(pinnedTop, 0);
+    if (id === 'demos') {
+      await expect(section.locator('.demo-card').last()).toBeInViewport();
+      expect(await section.evaluate(el => parseFloat(getComputedStyle(el, '::after').height) / innerHeight)).toBeGreaterThanOrEqual(0.49);
+    } else {
+      await expect(section.getByRole('heading')).toBeInViewport();
+      await expect(section.getByRole('link', { name: 'Create yours' })).toBeInViewport();
+      expect(await page.locator('.site-footer').evaluate(el => el.getBoundingClientRect().top >= innerHeight)).toBe(true);
+    }
+  }
 });

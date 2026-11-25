@@ -13,7 +13,7 @@ Session record from the session "Google Analytics 4 to tadamevents.com" (the one
   - Elsewhere: analytics cookies on by default, no banner.
   - The banner shows when the browser's time zone is in Europe and no choice is stored (no geo lookup service). "Cookie settings" in the footer and on the privacy page reopens it for anyone. The choice is in `localStorage` (`tadam-consent`); "Decline" also deletes `_ga` cookies.
 - No paid consent service: the banner is our own (`src/components/ConsentBanner.astro`).
-- gtag.js loads async, only on tadamevents.com and deploy previews (previews send `debug_mode`, so they show in GA4 DebugView), never on the local dev server.
+- gtag.js loads async, only on tadamevents.com and deploy previews, never on the local dev server. Previews set `debug_mode`, but Tanya's preview visit did not show in DebugView (it did in Realtime), so use Realtime to check.
 
 ## Code
 - `src/components/Analytics.astro`: consent defaults, gtag config, async loader (in `<head>` via `Base.astro`).
@@ -29,9 +29,12 @@ Session record from the session "Google Analytics 4 to tadamevents.com" (the one
 - `npm run check` (0 errors) and `npm run build` pass.
 - Browser test with a Berlin time zone: banner shows, consent defaults queued, "Accept" sends the consent update, a footer click queues `cta_contact_click` with `placement: footer`. New York time zone: no banner. (googletagmanager.com is blocked in the cloud container, so the real requests are checked on the deploy preview and in GA4 Realtime.)
 
+- **Deploy preview (PR #53), checked by Tanya in GA4 Realtime:** 1 active user and the events `page_view`, `first_visit`, `scroll`, `pricing_view`, `cta_create_click`, `cta_how_it_works_click`. DebugView stayed empty.
+- **Merged on Tanya's request** (2026-11-25).
+
 ## Open (Tanya)
 - In GA4 Admin: data retention 14 months; Search Console link (needs an owner of the Search Console property); add Ilan as Administrator.
 - After the merge: open the site, check GA4 Reports > Realtime; mark key events (Admin > Events): `launch_list_submit` and `cta_create_click` suggested.
 - Optional: register `placement` as a custom dimension (Admin > Custom definitions, event scope) to see which button was clicked.
-- Optional: activate the "Developer traffic" data filter (Admin > Data filters) so deploy-preview visits are left out of reports.
+- Our own visits (Tanya, Ilan) are counted. Optional later: define internal traffic by IP (Admin > Data streams > Configure tag settings > Define internal traffic) and activate the filter.
 - The lawyer's review of `/privacy` now includes the analytics wording.

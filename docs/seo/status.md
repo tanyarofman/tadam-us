@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-24 (UK set, wave 2 merged, wave 4 Christmas, Paddle review status).
+Last updated: 2026-11-25 (Google Analytics 4 PR).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -53,6 +53,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 - 2026-11-24: DataForSEO for the UK set (UK `location_code 2826`, Ireland 2372): questions for "mr and mrs quiz questions", "mr and mrs quiz", "hen party games", "hen do games", "christmas quiz questions" and "christmas quiz"; SERPs for the first three; UK volumes for 37 keywords and Ireland volumes for 22. Files: `data/questions-uk-2026-11-24.csv`, `data/questions-uk-christmas-2026-11-24.csv`, `data/serp-uk-2026-11-24.csv`, `data/volume-uk-set-2026-11-24.csv`, `data/volume-ie-set-2026-11-24.csv`, `data/volume-uk-christmas-2026-11-24.csv`. Spend $0.82 (balance $39.80 to $38.98). Total this round, from the balance: about $3.99 of the approved $10.
 - 2026-11-24: UK set, article 1: `christmas-quiz-questions` (UK: christmas quiz 22,200, christmas quiz questions 14,800). Headings approved by Tanya. British spelling (Tanya's decision, now in CLAUDE.md). Deliberately different from the US Christmas trivia article (wave 4): British traditions, no film, music or character rounds. Should be live by early December 2026.
 - 2026-11-24: UK set, articles 2 and 3: `mr-and-mrs-quiz-questions` (UK 6,600, Ireland 590) and `hen-party-games` (hen party games and hen do games, UK 9,900 each). Headings approved by Tanya, British spelling. Questions from the UK research (`data/questions-uk-2026-11-24.csv`, logged with the Christmas quiz PR). Link swaps approved by Tanya: `newlywed-game-questions` now links to the Mr and Mrs article (instead of how-well-do-you-know-me), and `bachelorette-party-games` links to hen party games (instead of bridal-shower-games).
+- 2026-11-25: **Google Analytics 4** (PR open, not merged): GA account "Tadam", property tadamevents.com, Measurement ID `G-RNQE8BY438` (`src/config/site.ts`). Consent Mode v2, option A: a cookie banner for Europe only, ads off everywhere, "Cookie settings" in the footer. Site events (create, demo, contact clicks, FAQ, Coming soon signup) go to GA4. Privacy policy section 9 and its draft updated. See `../history/2026-11-25-google-analytics.md`.
 
 ## Next
 1. ~~**English only at the root,** plus the site review fixes that need no decision~~ Done in PR #3 (merged 2026-11-24).
@@ -69,6 +70,7 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
+- **Google Analytics:** merge the PR when the preview looks right. Then check GA4 Realtime, mark key events (`launch_list_submit`, `cta_create_click`), and confirm in GA4 Admin: data retention 14 months, Search Console linked, Ilan added. Details in `../history/2026-11-25-google-analytics.md`.
 - **Paddle review:** the wizard and checkout at `/create`, and a lawyer's review of `/terms` and `/privacy`, before the live account and the website submission. See "Paddle review status" above.
 - **Request indexing in Search Console** (URL inspection, then Request indexing). Google allows about 10 a day, and the quota ran out on 2026-11-24, so continue on the next days in this order. Tick each one off here when done. The session "Tadam US: Search Console indexing" keeps this list.
   - **Already requested on 2026-11-24:** the home page, /blog/, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `bachelorette-party-games`, `bridal-shower-games`, `bridal-shower-trivia-questions`, `general-knowledge-trivia-questions` (per `docs/history/2026-11-24-parallel-sessions.md`).

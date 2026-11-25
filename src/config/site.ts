@@ -7,6 +7,11 @@ export const SITE = {
    * MX mx1/mx2.forwardemail.net + TXT "forward-email=hey:..." + SPF) that delivers to Tanya's and Ilan's Gmail.
    */
   email: "hey@tadamevents.com",
+  /**
+   * Google Analytics 4: property "tadamevents.com" in the GA account "Tadam" (Tanya's Google account), web stream
+   * https://tadamevents.com. Not a secret. Loaded by src/components/Analytics.astro with Consent Mode (see that file).
+   */
+  ga4MeasurementId: "G-RNQE8BY438",
 };
 
 /** The playable demo game. */

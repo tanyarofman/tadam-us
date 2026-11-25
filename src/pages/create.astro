@@ -28,7 +28,6 @@ const { copy: COPY, home, locale } = useCopy(Astro.url);
       action="/create/?joined=1"
       data-netlify="true"
       netlify-honeypot="company"
-      data-track="launch_list_submit"
     >
       <input type="hidden" name="form-name" value="launch-list" />
       <p class="soon-hp" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off" /></label></p>
@@ -55,6 +54,7 @@ const { copy: COPY, home, locale } = useCopy(Astro.url);
 </Base>
 
 <script>
+  import { track } from "../lib/analytics";
   const form = document.querySelector<HTMLFormElement>(".soon-form");
   const done = document.querySelector<HTMLElement>(".soon-done");
   const error = form?.querySelector<HTMLElement>(".soon-error");
@@ -73,6 +73,7 @@ const { copy: COPY, home, locale } = useCopy(Astro.url);
       const res = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
       // Netlify Forms only exists on Netlify; on the local dev server the POST fails, so the mock shows success anyway.
       if (!res.ok && !["localhost", "127.0.0.1"].includes(location.hostname)) throw new Error(String(res.status));
+      track("launch_list_submit");
       showDone();
     } catch {
       if (error) error.hidden = false;

@@ -19,6 +19,7 @@ Tadam! is operated by Tanya Rofman, a sole trader. We are the "controller" of th
 | Game content | Stories, names, nicknames, details, photos and voice recordings about the guest of honor and other people | You, in the game creator |
 | Guest play data | The nickname a guest types to join, their answers and score | Guests, when they play. Guests don't need an account or email |
 | Technical data | IP address, browser type, pages visited, error logs | Automatically, when you use the site |
+| Usage data (Google Analytics) | Pages viewed, buttons clicked, approximate location (city or country), device and browser type, how you found the site | Automatically, through Google Analytics, subject to your cookie choice (see Cookies) |
 
 Game content often includes information about **other people, including children**, such as the guest of honor at a bar mitzvah or birthday. You may only upload it if you have their permission, or their parent's or guardian's permission for children (see our [Terms](/terms)). Please don't upload sensitive information such as health details, financial details or ID numbers.
 
@@ -29,6 +30,7 @@ Game content often includes information about **other people, including children
 | Creating, delivering and supporting your game | Performance of our contract with you |
 | Processing payments, taxes and refunds (through Paddle) | Contract and legal obligation |
 | Keeping the Service secure and fixing errors | Legitimate interests |
+| Measuring how visitors use the site, to improve it (Google Analytics) | Consent in the EU, the UK and Switzerland; elsewhere, our legitimate interests |
 | Sending service emails (your game link, receipts) | Contract |
 | Marketing emails, only if you opt in | Consent, which you can withdraw at any time |
 
@@ -44,6 +46,7 @@ We use service providers ("processors") that handle data only on our instruction
 |---|---|---|
 | Paddle.com | Payments, tax, refunds (Paddle is an independent controller for payment data) | UK / EU / US |
 | Netlify | Hosting the website | US |
+| Google (Google Analytics) | Measuring how visitors use the website | US |
 | Base44 (and the AI models it runs on) | Hosting the game creator and the games, drafting questions from your stories | US |
 | ElevenLabs | The host's synthetic voice reading your game's script | [[LOCATION, confirm with Ilan]] |
 | HeyGen | The host's video | US |
@@ -84,7 +87,15 @@ To use any right, write to hey@tadamevents.com. We reply within 30 days.
 
 ## 9. Cookies
 
-We use only the cookies and similar storage the site needs to work (for example, to keep your game draft while you create it). [[If analytics are added later: list them here and add a cookie banner for EU visitors.]]
+We use the cookies and similar storage the site needs to work (for example, to keep your game draft while you create it), and Google Analytics to understand how visitors use the site. We don't use advertising cookies, and we have turned off Google's advertising features and Google signals.
+
+| Cookie | Set by | What for | Kept for |
+|---|---|---|---|
+| `_ga`, `_ga_*` | Google Analytics | Telling visits apart and counting them, so we see which pages and buttons are used | Up to 2 years |
+
+**In the EU, the UK and Switzerland**, Google Analytics sets no cookies unless you click "Accept" on the cookie banner. Until then, and if you decline, Google receives only cookieless signals (for example, that a page was viewed) without an identifier for your device. **Elsewhere**, analytics cookies are on by default and you can turn them off at any time.
+
+To change your choice, use "Cookie settings" (in the footer of every page). Google Analytics data is kept for 14 months. You can also block cookies in your browser or install Google's [Google Analytics opt-out add-on](https://tools.google.com/dlpage/gaoptout).
 
 ## 10. Security
 

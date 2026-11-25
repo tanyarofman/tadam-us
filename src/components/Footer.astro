@@ -34,6 +34,7 @@ const year = new Date().getFullYear();
       <h2 id="footer-legal" class="footer-heading">{c.legalLabel}</h2>
       <ul role="list">
         {c.legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><button type="button" class="footer-link-btn" data-cookie-settings>{c.cookieSettings}</button></li>
       </ul>
     </nav>
 
@@ -91,8 +92,23 @@ const year = new Date().getFullYear();
     text-underline-offset: 5px;
     overflow-wrap: anywhere;
   }
-  .footer-col a:hover {
+  .footer-col a:hover,
+  .footer-link-btn:hover {
     color: var(--text);
+  }
+  /* "Cookie settings" opens the cookie banner, so it is a button styled like the links next to it. */
+  .footer-link-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-muted);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    cursor: pointer;
   }
   .footer-bottom {
     margin-top: 40px;

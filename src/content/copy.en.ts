@@ -280,6 +280,8 @@ export const COPY = {
       "Ideas for birthdays, weddings and showers, team events and holidays. Games that bring all the guests together, and trivia ready to play.",
     indexName: "The Tadam! blog",
     indexLead: "Ideas for events everyone remembers: birthdays, weddings and showers, team events and holidays.",
+    filterLabel: "Filter articles by category",
+    filterAll: "All",
     crumbs: "Breadcrumbs",
     updated: "Updated",
     answerAria: "The short answer",

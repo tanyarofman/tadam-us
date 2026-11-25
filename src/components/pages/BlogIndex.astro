@@ -12,6 +12,10 @@ const blogHome = localPath(locale, "/blog/");
 const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
+/** Categories that have at least one article, biggest first, with their counts. */
+const categoryCounts = [
+  ...posts.reduce((m, p) => m.set(p.data.category, (m.get(p.data.category) ?? 0) + 1), new Map<string, number>()),
+].sort((a, b) => b[1] - a[1]);
 const title = t.indexTitle;
 const description = t.indexDescription;
 const jsonLd = {
@@ -36,10 +40,22 @@ const jsonLd = {
   <main class="container blog-index">
     <h1 class="display h-scene">{t.name}</h1>
     <p class="lead">{t.indexLead}</p>
+    <div class="filters" role="group" aria-label={t.filterLabel} data-filters hidden>
+      <button type="button" class="chip" data-filter="" aria-pressed="true">
+        {t.filterAll} <span class="chip-count">{posts.length}</span>
+      </button>
+      {
+        categoryCounts.map(([cat, n]) => (
+          <button type="button" class="chip" data-filter={cat} aria-pressed="false">
+            {cat} <span class="chip-count">{n}</span>
+          </button>
+        ))
+      }
+    </div>
     <ul class="post-list">
       {
         posts.map((p) => (
-          <li>
+          <li data-category={p.data.category}>
             <a href={`${blogHome}${p.id}/`} class="post-card">
               <span class="post-cat">{p.data.category}</span>
               <h2 class="post-title display">{p.data.title}</h2>
@@ -55,6 +71,19 @@ const jsonLd = {
 
 <script>
   import "../../scripts/blog";
+
+  // Category filters: shown only when JavaScript runs; without it every article stays visible.
+  const bar = document.querySelector<HTMLElement>("[data-filters]");
+  if (bar) {
+    const chips = [...bar.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+    const items = [...document.querySelectorAll<HTMLElement>(".post-list > li")];
+    const apply = (cat: string) => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.filter === cat)));
+      items.forEach((li) => (li.hidden = !!cat && li.dataset.category !== cat));
+    };
+    chips.forEach((c) => c.addEventListener("click", () => apply(c.dataset.filter ?? "")));
+    bar.hidden = false;
+  }
 </script>
 
 <style>
@@ -66,9 +95,52 @@ const jsonLd = {
     margin-top: 14px;
     color: var(--text-muted);
   }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .filters[hidden] {
+    display: none;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 6px 14px 8px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .chip:hover {
+    border-color: var(--game-yellow);
+  }
+  .chip:focus-visible {
+    outline: 3px solid var(--sky-cyan);
+    outline-offset: 2px;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+    color: var(--ink);
+  }
+  .chip-count {
+    font-size: 0.85em;
+    opacity: 0.7;
+  }
+  .post-list li[hidden] {
+    display: none;
+  }
   .post-list {
     list-style: none;
-    margin: 40px 0 0;
+    margin: 24px 0 0;
     padding: 0;
     display: grid;
     gap: 18px;
@@ -85,13 +157,19 @@ const jsonLd = {
     height: 100%;
     padding: 22px 24px;
     border-radius: var(--radius-m);
-    background: var(--surface);
-    border: 2px solid var(--surface-border);
+    background: var(--pill-white);
+    border: 3px solid transparent;
+    box-shadow: 0 10px 30px rgba(3, 14, 63, 0.35);
     text-decoration: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s var(--ease-out);
   }
   .post-card:hover {
     border-color: var(--game-yellow);
+    transform: translateY(-3px);
+  }
+  .post-card:focus-visible {
+    outline: 3px solid var(--sky-cyan);
+    outline-offset: 3px;
   }
   .post-cat {
     justify-self: start;
@@ -105,10 +183,10 @@ const jsonLd = {
   .post-title {
     font-size: 1.7rem;
     line-height: 1.12;
-    color: var(--white);
+    color: var(--ink);
   }
   .post-desc {
-    color: var(--text-muted);
+    color: rgba(0, 23, 106, 0.72);
     font-size: 1.1rem;
   }
 </style>

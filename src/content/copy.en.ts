@@ -86,16 +86,16 @@ export const COPY = {
     headline: "Create your game in minutes.",
     steps: [
       {
-        title: "Tell us about the guest of honor.",
+        title: "Tell us about your event.",
         text: "Type the stories, nicknames and inside jokes, and add a few photos.",
       },
       {
         title: "Pick a host and a vibe.",
-        text: "Choose from our cast of ready-made hosts.",
+        text: "Choose from our cast of ready-made hosts or create your own.",
       },
       {
-        title: "Review, pay, play.",
-        text: "Edit the questions, pay, and get your private game link by email within {deliveryHours} hours.",
+        title: "Pay and play!",
+        text: "Get your private game link by email within {deliveryHours} hours and edit the questions if needed.",
       },
     ],
     mock: {
@@ -140,27 +140,42 @@ export const COPY = {
    * Paddle's website review needs the price visible without signing in.
    */
   pricing: {
-    title: "One price, the whole show.",
+    title: "Your event. Your kind of show.",
     perGame: "per game",
     oneTime: "One-time payment, no subscription",
     currencyLabel: "US dollars",
-    sub: "Everything you need for a full game at your party.",
-    /** The "what's included" tiles. icon: story | host | phone | trophy | build | gift */
-    included: [
-      { icon: "story", title: "A game made just for you", text: "Built from the stories, details and photos you add" },
-      { icon: "host", title: "A host on the big screen", text: "Pick a host and a voice from our cast of invented characters" },
-      { icon: "phone", title: "Every guest plays", text: "No app needed. Guests scan a code and play right from their phones" },
-      { icon: "trophy", title: "Leaderboard and a winner", text: "The scores are on screen all game long and the real winner is revealed at the end" },
-      { icon: "build", title: "You're in control", text: "Edit the questions before you pay. Your game link arrives by email within {deliveryHours} hours" },
-      { icon: "gift", title: "Full refund within {refundDays} days", text: "Your private game link works for {linkDays} days. Not happy? Get your money back" },
-    ],
-    cta: "Create yours",
-    /** Under the button. "{refundPolicy}" becomes a link to /refunds. */
-    note: "Outside the US you pay the equivalent in your currency. Taxes are calculated at checkout. Payments are processed by Paddle, our merchant of record. See our {refundPolicy}.",
-    refundPolicy: "refund policy",
+    sub: "Two ways to make it personal. One unforgettable party.",
+    packages: {
+      basic: { tagline: "A personal game. A ready-made star.", host: "Pick a host from our cast of characters" },
+      vip: { tagline: "Your own host. An even bigger show.", host: "Create your own custom host" },
+    },
+    cta: "Start Now",
+    refundPolicy: "Refund Policy",
   },
 
-  /** The hosts section. Hosts are invented characters only: never a host based on a real person. */
+  demos: {
+    title: "Pick an event below to play a live demo",
+    sub: "Fictional events. Real game-show fun. Jump in and try it for yourself.",
+    cta: "Play demo",
+    newTab: "opens in a new tab",
+    items: [
+      { title: "Monica and Chandler Wedding", event: "Wedding", image: "/demo/events/friends-wedding.webp", alt: "Monica and Chandler celebrating their wedding", href: "https://tadamevents.com/friends-demo" },
+      { title: "Harry Potter 16th Birthday", event: "Birthday", image: "/demo/events/harry-potter-birthday.webp", alt: "Harry Potter seated in the Hogwarts Great Hall", href: "https://tadamevents.com/harry-potter-demo" },
+      { title: "Homer Simpson’s Retirement Party", event: "Retirement", image: "/demo/events/homer-retirement.webp", alt: "Homer Simpson celebrating beside a cake", href: "https://tadamevents.com/the-simpsons-demo" },
+    ],
+  },
+
+  testimonials: {
+    title: "Here's what our customers had to say!",
+    placeholder: "Sample testimonials with fictional names and events. Real stories coming soon.",
+    items: [
+      { name: "Emily R.", initials: "ER", event: "Her dad's 60th birthday", quote: "Dad thought he knew every story we were going to tell. The first question proved him wrong. Watching the whole family race to answer was the best part of the night." },
+      { name: "Marcus T.", initials: "MT", event: "His wedding reception", quote: "Our two families had barely met. Ten minutes later, they were comparing answers and laughing about our first date. It gave everyone something to talk about." },
+      { name: "Sophie L.", initials: "SL", event: "A teammate's retirement party", quote: "We turned years of office stories into one very competitive game. Even our quietest teammate got involved. The custom host made the send-off feel completely ours." },
+    ],
+  },
+
+  /** Ready-made hosts; VIP also allows a custom host with the person's permission. */
   hosts: {
     titleLine1: "There's a host for",
     titleLine2: "every party.",
@@ -182,16 +197,16 @@ export const COPY = {
     items: [
       {
         q: "How much does it cost?",
-        a: "{base} per game, one-time, with no subscription. Outside the US you pay the equivalent in your currency, and taxes are calculated at checkout.",
+        a: "The basic package starts at {base} and the VIP package costs {vip}. It's a one-time purchase, with no subscription. Outside the US you pay the equivalent in your currency, and taxes are calculated at checkout.",
       },
       {
         q: "How does it work?",
-        a: "Tell us about the guest of honor, pick a host, review the questions and pay. Your game arrives by email as a private link. At the party, open the link on the big screen and guests join by scanning the code.",
+        a: "Tell us about your event and the guest of honor, then pick a host and we create the game. Your private game link arrives by email within {deliveryHours} hours, and you can edit the questions before you play. At the party, open the link on the big screen and guests join by scanning the code.",
       },
       {
         q: "Can we see an example first?",
-        a: "Of course. Tom's game shows you the host, the questions and the guests' experience. Open it on a computer and join from your phone with the code on the screen.",
-        link: { text: "Tom's game", href: "demo" },
+        a: "Of course. Here are 3 demos of fictional events that let you play the games, answer questions and try the guests' experience. In the real game, participants join from their phones by scanning the QR code on the screen.",
+        link: { text: "3 demos", href: "/#demos" },
       },
       {
         q: "How long does the game take?",
@@ -207,11 +222,11 @@ export const COPY = {
       },
       {
         q: "How long can we play it?",
-        a: "Your private link works for {linkDays} days from delivery. After that, the game and everything you uploaded are deleted.",
+        a: "Your private link works for {linkDays} days with Basic or {vipLinkDays} days with VIP, starting from delivery. After that, the game and everything you uploaded are deleted.",
       },
       {
         q: "Who sees our photos and stories?",
-        a: "Only you and the guests you share the game link with. We use your content only to make your game, never sell it, never use it for advertising, and delete it after {linkDays} days. See our privacy policy.",
+        a: "Only you and the guests you share the game link with. We use your content only to make your game, never sell it, never use it for advertising, and delete it after {linkDays} days with Basic or {vipLinkDays} days with VIP. See our privacy policy.",
         link: { text: "privacy policy", href: "/privacy" },
       },
       {
@@ -221,7 +236,7 @@ export const COPY = {
       },
       {
         q: "Can the host look or sound like someone we know?",
-        a: "No. All our hosts are invented characters. We don't create hosts that copy a real person's face or voice.",
+        a: "Yes. Choose from our cast of invented characters, or create a custom host from your own photos with VIP. To use a real person's face or voice, you must have their explicit permission first. For anyone under 18, get permission from their parent or legal guardian.",
       },
       {
         q: "What events is a trivia game good for?",
@@ -234,6 +249,7 @@ export const COPY = {
     tagline: "A personal live trivia game show for your party.",
     gameLabel: "Tadam!",
     gameLinks: [
+      { label: "Live Demos", href: "/#demos" },
       { label: "How it works", href: "/#scene-4" },
       { label: "Our hosts", href: "/#hosts" },
       { label: "Pricing", href: "/#pricing" },

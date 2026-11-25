@@ -14,7 +14,7 @@ const c = COPY.hero;
   <div class="hero-loading sr-only" role="status" aria-live="polite">{c.loading}</div>
   <header class="hero-header">
     <div class="hero-bar container hero-wide">
-      <a href="#top" class="hero-home" aria-label={COPY.brand}><LogoAssemble class="hero-logo" /></a>
+      <a href="#top" class="hero-home" aria-label={COPY.brand}><LogoAssemble class="hero-logo" navigation /></a>
       <nav class="hero-nav" aria-label={c.navLabel} data-hero-fade>
         <ul role="list">{c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}</ul>
       </nav>

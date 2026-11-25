@@ -13,7 +13,7 @@ const base = home.endsWith("/") ? home : `${home}/`;
 
 <header class="site-header">
   <div class="site-bar container hero-wide">
-    <a href={home} class="site-home" aria-label={COPY.brand}><img src="/brand/tadam-logo-en.webp" alt="" width="1000" height="394" /></a>
+    <a href={home} class="site-home" aria-label={COPY.brand}><img src="/brand/tadam-logo-navigation.webp" alt="" width="894" height="394" /></a>
     <nav class="site-nav" aria-label={c.navLabel}>
       <ul role="list">{c.nav.map((l) => <li><a href={`${base}${l.href}`}>{l.label}</a></li>)}</ul>
     </nav>

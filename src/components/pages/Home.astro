@@ -8,6 +8,8 @@ import Scene4HowItWorks from "../scenes/Scene4HowItWorks.astro";
 import Scene6Payoff from "../scenes/Scene6Payoff.astro";
 import Pricing from "../Pricing.astro";
 import Hosts from "../Hosts.astro";
+import LiveDemos from "../LiveDemos.astro";
+import Testimonials from "../Testimonials.astro";
 import Scene7Cta from "../scenes/Scene7Cta.astro";
 import Faq from "../Faq.astro";
 import Footer from "../Footer.astro";
@@ -16,7 +18,7 @@ import DemoModal from "../DemoModal.astro";
 import Preloader from "../Preloader.astro";
 import { useCopy } from "../../content/copy";
 import { SITE, demoMedia } from "../../config/site";
-import { PRICING, fillPrices } from "../../config/pricing";
+import { PACKAGES, PRICING, fillPrices } from "../../config/pricing";
 
 const { copy: COPY, locale, langTag } = useCopy(Astro.url);
 const media = demoMedia(locale);
@@ -52,12 +54,13 @@ const jsonLd = [
     provider: { "@id": `${home}#org` },
     areaServed: ["US", "GB", "IE", "EU"],
     url: home,
-    offers: {
+    offers: PACKAGES.map((tier) => ({
       "@type": "Offer",
-      price: PRICING.base,
+      name: tier.name,
+      price: tier.price,
       priceCurrency: PRICING.currencyCode,
       url: new URL("/#pricing", Astro.site).href,
-    },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -82,9 +85,11 @@ const jsonLd = [
     <Scene4HowItWorks />
     <Scene6Payoff />
     <Hosts />
+    <LiveDemos />
     <Pricing />
     <Scene7Cta />
     <Faq />
+    <Testimonials />
     <ClosingCta />
   </main>
   <Footer />

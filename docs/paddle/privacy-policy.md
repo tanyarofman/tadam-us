@@ -58,13 +58,13 @@ We and some of our providers process data outside the EU and UK, including in th
 
 ## 6. How long we keep it
 
-- **Game content and the game itself:** 30 days from delivery, then deleted. You can ask us to delete it sooner.
+- **Game content and the game itself:** 30 days with Basic or 120 days with VIP, from delivery, then deleted. You can ask us to delete it sooner.
 - **Order records:** as long as tax and accounting law requires (generally up to 7 years). These records don't include your game content.
 - **Technical logs:** up to [[LOG RETENTION, e.g. 30 days]].
 
 ## 7. Children
 
-The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an account. Information about children that a parent includes in a game is used only to make that game and is deleted after 30 days. If you believe a child has given us personal data directly, write to hey@tadamevents.com and we'll delete it.
+The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an account. Information about children that a parent includes in a game is used only to make that game and is deleted after 30 days with Basic or 120 days with VIP. If you believe a child has given us personal data directly, write to hey@tadamevents.com and we'll delete it.
 
 ## 8. Your rights
 

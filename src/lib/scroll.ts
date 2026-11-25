@@ -45,11 +45,17 @@ export function initScroll() {
 }
 
 /** `offset` in px past the target's top (e.g. deep into a pinned scene). */
-export function scrollToTarget(target: string | HTMLElement, offset = 0) {
+export function scrollToTarget(target: string | HTMLElement, offset = 0, immediate = false) {
   const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { duration: 1.6, offset });
-  else if (offset) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+  // Pin refreshes and native anchor/focus scrolling can happen before Lenis has
+  // received its scroll event. Resolve from the actual viewport, not its cached position.
+  const top = el.getBoundingClientRect().top + window.scrollY + offset;
+  if (lenis) {
+    if (immediate) lenis.resize();
+    lenis.scrollTo(top, { duration: 1.6, immediate });
+  }
+  else if (offset || immediate) window.scrollTo({ top, behavior: immediate || prefersReducedMotion() ? "auto" : "smooth" });
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 

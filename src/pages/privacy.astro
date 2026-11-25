@@ -5,6 +5,7 @@
  * TODO (Ilan) items are marked inline: the processor list and the AI-training opt-outs (docs/paddle/ai-vendors.md).
  */
 import LegalShell from "../components/pages/LegalShell.astro";
+import { PRICING } from "../config/pricing";
 import { SITE } from "../config/site";
 import { useCopy } from "../content/copy";
 const { copy: COPY } = useCopy(Astro.url);
@@ -12,7 +13,7 @@ const l = COPY.legalPage;
 const mail = SITE.email;
 ---
 
-<LegalShell title="Privacy Policy" description="What personal data Tadam! collects, why, who it is shared with, how long we keep it and what your rights are under the GDPR and US state laws." updatedLine={`Last updated: ${l.updated}`}>
+<LegalShell title="Privacy Policy" description="What personal data Tadam! collects, why, who it is shared with, how long we keep it and what your rights are under the GDPR and US state laws." updatedLine="Last updated: November 25, 2026">
 
   <nav class="toc" aria-label="Table of contents">
     <ol>
@@ -116,7 +117,7 @@ const mail = SITE.email;
   <section id="keep">
     <h2 class="display">6. How long we keep it</h2>
     <ul>
-      <li><strong>Game content and the game itself:</strong> 30 days from delivery, then deleted. You can ask us to delete it sooner.</li>
+      <li><strong>Game content and the game itself:</strong> {PRICING.linkDays} days with Basic or {PRICING.vipLinkDays} days with VIP, from delivery, then deleted. You can ask us to delete it sooner.</li>
       <li><strong>Order records:</strong> as long as tax and accounting law requires (generally up to 7 years). These records don't include your game content.</li>
       {/* TODO (Ilan): replace with the real log retention once known. */}
       <li><strong>Technical logs:</strong> kept by our hosting providers for a limited time to run and secure the Service, then deleted.</li>
@@ -129,7 +130,7 @@ const mail = SITE.email;
       The Service is for adults (18+) organizing events. We don't knowingly let children create games or give us their
       personal data directly. Children may play as guests by typing a nickname, without giving an email or creating an
       account. Information about children that a parent includes in a game is used only to make that game and is deleted
-      after 30 days. If you believe a child has given us personal data directly, write to
+      after {PRICING.linkDays} days with Basic or {PRICING.vipLinkDays} days with VIP. If you believe a child has given us personal data directly, write to
       {" "}<a href={`mailto:${mail}`}>{mail}</a> and we'll delete it.
     </p>
   </section>

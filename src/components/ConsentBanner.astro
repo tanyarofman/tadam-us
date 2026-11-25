@@ -1,0 +1,146 @@
+---
+/**
+ * The cookie banner (Europe only by default) and the site-wide click tracking. Logic and rules: Analytics.astro.
+ * Any element with [data-cookie-settings] reopens the banner (the footer link, the privacy page button).
+ */
+---
+
+<div class="consent" role="region" aria-label="Cookie choice" hidden>
+  <p class="consent-text">
+    May we use Google Analytics cookies to see how people use this site? It helps us make it better. No ads, ever.{" "}
+    <a href="/privacy#cookies">Privacy Policy</a>
+  </p>
+  <div class="consent-actions">
+    <button type="button" class="consent-btn consent-decline" data-consent="denied">Decline</button>
+    <button type="button" class="consent-btn consent-accept" data-consent="granted">Accept</button>
+  </div>
+</div>
+
+<script>
+  import { initClickTracking } from "../lib/analytics";
+
+  const KEY = "tadam-consent";
+  const banner = document.querySelector<HTMLElement>(".consent");
+
+  const stored = (): string | null => {
+    try {
+      return localStorage.getItem(KEY);
+    } catch {
+      return null;
+    }
+  };
+
+  /** Time zone as a stand-in for location (no request to a geo service). Errs toward showing the banner. */
+  const inEurope = () => {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    return tz.startsWith("Europe/") || /^Atlantic\/(Reykjavik|Canary|Madeira|Azores|Faroe)$|^Arctic\//.test(tz);
+  };
+
+  /** Remove GA cookies after a "Decline" (they exist only if analytics was allowed before). */
+  const clearGaCookies = () => {
+    const domain = location.hostname.replace(/^www\./, "");
+    for (const c of document.cookie.split(";")) {
+      const name = c.split("=")[0].trim();
+      if (name === "_ga" || name.startsWith("_ga_")) {
+        for (const d of ["", `; domain=${domain}`, `; domain=.${domain}`]) {
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
+        }
+      }
+    }
+  };
+
+  const choose = (value: "granted" | "denied") => {
+    try {
+      localStorage.setItem(KEY, value);
+    } catch {}
+    window.gtag?.("consent", "update", { analytics_storage: value });
+    if (value === "denied") clearGaCookies();
+    if (banner) banner.hidden = true;
+  };
+
+  banner?.querySelectorAll<HTMLButtonElement>("[data-consent]").forEach((b) =>
+    b.addEventListener("click", () => choose(b.dataset.consent as "granted" | "denied")),
+  );
+
+  document.addEventListener("click", (e) => {
+    const t = (e.target as HTMLElement).closest("[data-cookie-settings]");
+    if (!t || !banner) return;
+    e.preventDefault();
+    banner.hidden = false;
+    banner.querySelector<HTMLButtonElement>(".consent-accept")?.focus();
+  });
+
+  if (banner && !stored() && inEurope()) banner.hidden = false;
+
+  initClickTracking();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    width: min(680px, calc(100% - 32px));
+    display: flex;
+    align-items: center;
+    gap: 16px 20px;
+    padding: 16px 20px;
+    border-radius: var(--radius-m);
+    background: var(--stage-navy-deep);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    color: var(--text);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent-text {
+    margin: 0;
+    flex: 1;
+  }
+  .consent-text a {
+    color: var(--game-yellow);
+    text-underline-offset: 3px;
+    white-space: nowrap;
+  }
+  .consent-actions {
+    display: flex;
+    gap: 10px;
+    flex: none;
+  }
+  .consent-btn {
+    min-height: 44px;
+    padding: 8px 20px;
+    border: 0;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .consent-accept {
+    background: var(--game-yellow);
+    color: var(--pill-ink);
+  }
+  .consent-decline {
+    background: transparent;
+    color: var(--text);
+    box-shadow: 0 0 0 1px var(--surface-border) inset;
+  }
+  .consent-btn:hover {
+    filter: brightness(1.08);
+  }
+  @media (max-width: 560px) {
+    .consent {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .consent-btn {
+      flex: 1;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+/**
+ * Google Analytics 4 with Google Consent Mode v2 and a small cookie banner for Europe (Tanya's option A, 2026-11-25).
+ *
+ * - Ads are off everywhere: ad_storage, ad_user_data and ad_personalization are always denied, Google signals off.
+ * - EEA, UK and Switzerland: analytics cookies start denied (Google applies the region list by the visitor's IP).
+ *   Until a visitor accepts, GA4 gets cookieless pings only ("Advanced" Consent Mode).
+ * - Everywhere else: analytics cookies are on by default, no banner.
+ * - The banner shows when the browser's time zone is in Europe and no choice is stored yet. "Cookie settings" in the
+ *   footer and on the privacy page reopens it for anyone. The choice is kept in localStorage ("tadam-consent").
+ * - gtag.js loads async. It loads only on tadamevents.com and Netlify deploy previews (previews send debug_mode, so
+ *   they show in GA4 DebugView), never on the local dev server.
+ * Keep the privacy policy (src/pages/privacy.astro, section "Cookies") in sync with this file.
+ */
+import { SITE } from "../config/site";
+const id = SITE.ga4MeasurementId;
+---
+
+<script is:inline define:vars={{ id }}>
+  (function () {
+    var host = location.hostname;
+    var preview = /--tadam-us\.netlify\.app$/.test(host);
+    if (host !== "tadamevents.com" && host !== "www.tadamevents.com" && !preview) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    var gtag = window.gtag;
+    var europe = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"];
+    var off = { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" };
+    gtag("consent", "default", Object.assign({ analytics_storage: "granted" }, off));
+    gtag("consent", "default", Object.assign({ analytics_storage: "denied", region: europe }, off));
+    var choice = null;
+    try { choice = localStorage.getItem("tadam-consent"); } catch (e) {}
+    if (choice === "granted" || choice === "denied") gtag("consent", "update", { analytics_storage: choice });
+    gtag("set", "ads_data_redaction", true);
+    gtag("js", new Date());
+    gtag("config", id, { allow_google_signals: false, allow_ad_personalization_signals: false, debug_mode: preview || undefined });
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+    document.head.appendChild(s);
+  })();
+</script>

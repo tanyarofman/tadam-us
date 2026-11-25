@@ -263,6 +263,8 @@ export const COPY = {
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Refund Policy", href: "/refunds" },
     ],
+    /** Reopens the cookie banner (src/components/ConsentBanner.astro). */
+    cookieSettings: "Cookie settings",
     contactLabel: "Contact",
     /** "© 2026 Tanya Rofman." is built from legalPage in Footer.astro. Paddle requires the legal name and this line. */
     paddle: "Payments processed by Paddle.com.",
@@ -283,6 +285,8 @@ export const COPY = {
     /** No country, street address or business number on this site (Tanya's decision, 2026-11-24): the US site has no connection to Israel. Contact is by email. */
     legalName: "Tanya Rofman",
     updated: "November 24, 2026",
+    /** The privacy policy changed on its own date (Google Analytics added). */
+    privacyUpdated: "November 25, 2026",
   },
 
   /** Blog pages (index, article frame). The articles themselves are Markdown in src/content/blog-en/. */
@@ -297,6 +301,8 @@ export const COPY = {
       "Ideas for birthdays, weddings and showers, team events and holidays. Games that bring all the guests together, and trivia ready to play.",
     indexName: "The Tadam! blog",
     indexLead: "Ideas for events everyone remembers: birthdays, weddings and showers, team events and holidays.",
+    filterLabel: "Filter articles by category",
+    filterAll: "All",
     crumbs: "Breadcrumbs",
     updated: "Updated",
     answerAria: "The short answer",

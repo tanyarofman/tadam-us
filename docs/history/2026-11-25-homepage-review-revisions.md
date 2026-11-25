@@ -32,3 +32,8 @@ Follow-up to PR #54, requested by Ilan with Frame 29.png and 5.webp / 6.webp / 7
 - Visual review: desktop pricing/demos/header, mobile pricing/testimonials.
 
 Continues the existing PR and preview; production merge workflow is unchanged.
+
+Before publishing the updated preview, merged the current main branch into the PR
+branch to preserve the new analytics/consent UI, blog filters, IndexNow setup and
+demo routing. The only conflict was the privacy update-date line; retained the
+shared `privacyUpdated` value. All package retention wording remains intact.

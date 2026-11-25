@@ -2,7 +2,6 @@
  * Page bootstrap. Scenes are initialised in page order so ScrollTrigger pins stack correctly.
  */
 import { initScroll, scrollToTarget, ScrollTrigger, gsap, prefersReducedMotion } from "../lib/scroll";
-import { track, type TrackEvent } from "../lib/analytics";
 import { initReveals } from "./motion";
 import { initHero } from "./hero";
 import { initDemoModal } from "./demo-modal";
@@ -34,8 +33,6 @@ function initLinks() {
         : screens * window.innerHeight;
       scrollToTarget(a.dataset.scrollTo!, offset);
     }
-    const t = (e.target as HTMLElement).closest<HTMLElement>("[data-track]");
-    if (t) track(t.dataset.track as TrackEvent, { source: t.dataset.source });
   });
 }
 

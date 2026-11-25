@@ -13,7 +13,7 @@ const l = COPY.legalPage;
 const mail = SITE.email;
 ---
 
-<LegalShell title="Privacy Policy" description="What personal data Tadam! collects, why, who it is shared with, how long we keep it and what your rights are under the GDPR and US state laws." updatedLine="Last updated: November 25, 2026">
+<LegalShell title="Privacy Policy" description="What personal data Tadam! collects, why, who it is shared with, how long we keep it and what your rights are under the GDPR and US state laws." updatedLine={`Last updated: ${l.privacyUpdated}`}>
 
   <nav class="toc" aria-label="Table of contents">
     <ol>
@@ -52,6 +52,7 @@ const mail = SITE.email;
           <tr><td>Guest play data</td><td>The nickname a guest types to join, their answers and score</td><td>Guests, when they play. Guests don't need an account or email</td></tr>
           <tr><td>Messages to us</td><td>Your email address and what you write</td><td>You, when you email us</td></tr>
           <tr><td>Technical data</td><td>IP address, browser type, pages visited, error logs</td><td>Automatically, when you use the site</td></tr>
+          <tr><td>Usage data (Google Analytics)</td><td>Pages viewed, buttons clicked, approximate location (city or country), device and browser type, how you found the site</td><td>Automatically, through Google Analytics, subject to your cookie choice (see <a href="#cookies">Cookies</a>)</td></tr>
         </tbody>
       </table>
     </div>
@@ -72,6 +73,7 @@ const mail = SITE.email;
           <tr><td>Creating, delivering and supporting your game</td><td>Performance of our contract with you</td></tr>
           <tr><td>Processing payments, taxes and refunds (through Paddle)</td><td>Contract and legal obligation</td></tr>
           <tr><td>Keeping the Service secure and fixing errors</td><td>Legitimate interests</td></tr>
+          <tr><td>Measuring how visitors use the site, to improve it (Google Analytics)</td><td>Consent in the EU, the UK and Switzerland; elsewhere, our legitimate interests</td></tr>
           <tr><td>Sending service emails (your game link, receipts)</td><td>Contract</td></tr>
           <tr><td>Marketing emails, only if you opt in</td><td>Consent, which you can withdraw at any time</td></tr>
         </tbody>
@@ -95,6 +97,7 @@ const mail = SITE.email;
         <tbody>
           <tr><td>Paddle.com</td><td>Payments, tax, refunds (Paddle is an independent controller for payment data)</td><td>UK / EU / US</td></tr>
           <tr><td>Netlify</td><td>Hosting the website</td><td>US</td></tr>
+          <tr><td>Google (Google Analytics)</td><td>Measuring how visitors use the website</td><td>US</td></tr>
           <tr><td>Base44 (and the AI models it runs on)</td><td>Hosting the game creator and the games, drafting questions from your stories</td><td>US</td></tr>
           <tr><td>ElevenLabs</td><td>The host's synthetic voice reading your game's script</td><td>US</td></tr>
           <tr><td>HeyGen</td><td>The host's video</td><td>US</td></tr>
@@ -157,10 +160,30 @@ const mail = SITE.email;
   <section id="cookies">
     <h2 class="display">9. Cookies</h2>
     <p>
-      We use only the cookies and similar storage the site needs to work (for example, to keep your game draft while you
-      create it). We don't use advertising or analytics cookies.
+      We use the cookies and similar storage the site needs to work (for example, to keep your game draft while you
+      create it), and Google Analytics to understand how visitors use the site. We don't use advertising cookies, and we
+      have turned off Google's advertising features and Google signals.
     </p>
-    {/* If analytics are added later: list them here and add a cookie banner for EU visitors. */}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Cookie</th><th>Set by</th><th>What for</th><th>Kept for</th></tr></thead>
+        <tbody>
+          <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Google Analytics</td><td>Telling visits apart and counting them, so we see which pages and buttons are used</td><td>Up to 2 years</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>In the EU, the UK and Switzerland</strong>, Google Analytics sets no cookies unless you click "Accept" on
+      the cookie banner. Until then, and if you decline, Google receives only cookieless signals (for example, that a
+      page was viewed) without an identifier for your device. <strong>Elsewhere</strong>, analytics cookies are on by
+      default and you can turn them off at any time.
+    </p>
+    <p>
+      To change your choice, use <button type="button" class="link-btn" data-cookie-settings>Cookie settings</button>
+      (also in the footer of every page). Google Analytics data is kept for 14 months. You can also block cookies in
+      your browser or install Google's
+      {" "}<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out add-on</a>.
+    </p>
   </section>
 
   <section id="security">
@@ -187,3 +210,7 @@ const mail = SITE.email;
     </ul>
   </section>
 </LegalShell>
+
+<style>
+  .link-btn { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+</style>

@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import Analytics from "../components/Analytics.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 import { useCopy } from "../content/copy";
 const { copy: COPY, lang, dir, ogLocale } = useCopy(Astro.url);
 
@@ -49,6 +51,7 @@ const ogImage = new URL("/brand/og-image-en-v1.jpg", Astro.site);
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-regular-aaa.otf" crossorigin />
     <link rel="preload" as="font" type="font/otf" href="/fonts/almoni-tzar-bold-aaa.otf" crossorigin />
     <link rel="preload" as="image" type="image/webp" href="/brand/tadam-logo-en.webp" fetchpriority="high" />
+    <Analytics />
     <slot name="head" />
     <script is:inline>
       (function () {
@@ -77,5 +80,6 @@ const ogImage = new URL("/brand/og-image-en-v1.jpg", Astro.site);
   </head>
   <body>
     <slot />
+    <ConsentBanner />
   </body>
 </html>

@@ -161,9 +161,9 @@ export const COPY = {
     cta: "Play demo",
     newTab: "opens in a new tab",
     items: [
-      { title: "Monica and Chandler Wedding", event: "Wedding", image: "/demo/events/friends-wedding.webp", alt: "Monica and Chandler celebrating their wedding", href: "https://tadamevents.com/friends-demo" },
-      { title: "Eleven's 18th Birthday", event: "Birthday", image: "/demo/events/eleven-birthday.webp", alt: "Eleven against a red stormy sky", href: "https://tadamevents.com/stranger-things-demo" },
-      { title: "Homer's Retirement Party", event: "Retirement", image: "/demo/events/homer-retirement.webp", alt: "Homer Simpson sitting in a wheelchair", href: "https://tadamevents.com/the-simpsons-demo" },
+      { title: "Monica and Chandler Wedding", event: "Wedding", image: "/demo/events/friends-logo.webp", alt: "Friends logo", href: "https://tadamevents.com/friends-demo" },
+      { title: "Eleven's 18th Birthday", event: "Birthday", image: "/demo/events/stranger-things-logo.webp", alt: "Stranger Things logo", href: "https://tadamevents.com/stranger-things-demo" },
+      { title: "Homer's Retirement Party", event: "Retirement", image: "/demo/events/simpsons-logo.webp", alt: "The Simpsons logo", href: "https://tadamevents.com/the-simpsons-demo" },
     ],
   },
 

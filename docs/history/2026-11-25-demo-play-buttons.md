@@ -8,3 +8,9 @@ the clickable links. The shared style applies to all three cards at every viewpo
 
 Validation: production build and verification of the deployed preview CSS.
 Continues PR #54.
+
+## Direction correction, November 25
+
+Ilan clarified that the horizontal adjustment should be right, not left. The final
+right inset is 10px (8px less than the original 18px), undoing the prior leftward
+shift and moving right. Keep the 42px circle, 17px icon and 12px bottom inset.

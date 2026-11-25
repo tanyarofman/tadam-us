@@ -19,7 +19,7 @@ Session record. The wizard and the Paddle checkout will take a few more days (se
 - **Signups go to Netlify Forms** (form name `launch-list`), included in the Netlify account (free plan: 100 submissions a month). No paid service was added. A hidden field catches spam bots.
 - Signups save only on Netlify (deploy previews and production). On the local dev server, the page shows the thank-you message without saving anything.
 
-## Signup fix (2026-11-25)
+## Signup fix (2026-11-24 and 25)
 - Tanya's first real signup showed "Something went wrong". Cause: **form detection was off** for the Netlify project (`processing_settings.ignore_html_forms: true`, the default on new Netlify sites). Netlify didn't know the `launch-list` form, so it answered every POST with a 404.
 - Fix, with Tanya's OK: turned form detection on through the Netlify API and rebuilt production from main. Netlify then listed `launch-list` (fields `email` and `company`, the honeypot). No code change.
 - Tanya's next signup arrived under Forms > `launch-list`.

@@ -110,6 +110,12 @@
   force = true
 
 [[redirects]]
+  from = "/stranger-things-demo"
+  to = "https://tadam.base44.app/stranger-things-demo"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/host/*"
   to = "https://tadam.base44.app/host/:splat"
   status = 200

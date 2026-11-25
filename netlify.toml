@@ -102,6 +102,12 @@
   force = true
 
 [[redirects]]
+  from = "/the-simpsons-demo"
+  to = "https://tadam.base44.app/the-simpsons-demo"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/host/*"
   to = "https://tadam.base44.app/host/:splat"
   status = 200

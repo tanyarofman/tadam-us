@@ -2,8 +2,8 @@
  * Pricing + the link into the creation flow. One place for every number on the page.
  * Copy never contains a price: copy.en.ts uses {placeholders} (see `fillPrices`), the Pricing component reads the numbers.
  *
- * Set on 2026-11-23 (docs/paddle/HANDOFF.md): $99 per game, one-time. Paddle is the merchant of record and converts
- * to other currencies (EUR, GBP...) at checkout, and adds sales tax or VAT there.
+ * Basic and VIP are one-time purchases. Both enter the same creation flow;
+ * the choices in that flow determine the final package and checkout price.
  */
 
 /**
@@ -19,22 +19,31 @@ export const PRICING = {
   /** ISO code for structured data. */
   currencyCode: "USD",
   /** One personal game, one-time payment. */
-  base: 99,
+  base: 59,
+  vip: 99,
   /** Days to ask for a full refund (docs/paddle/refund-policy.md). */
   refundDays: 14,
   /** Days the game link works before the game and its content are deleted. */
   linkDays: 30,
+  vipLinkDays: 120,
   /** Hours from payment to delivery of the game link. */
   deliveryHours: 24,
 };
 
-/** "$99" for running text. */
+export const PACKAGES = [
+  { id: "basic", name: "Basic", price: PRICING.base, questions: 8, participants: 100, edits: 2, linkDays: PRICING.linkDays },
+  { id: "vip", name: "VIP", price: PRICING.vip, questions: 12, participants: 600, edits: 4, linkDays: PRICING.vipLinkDays },
+] as const;
+
+/** A USD price for running text. */
 export const money = (n: number) => `${PRICING.currency}${n}`;
 
 const tokens: Record<string, string> = {
   base: money(PRICING.base),
+  vip: money(PRICING.vip),
   refundDays: String(PRICING.refundDays),
   linkDays: String(PRICING.linkDays),
+  vipLinkDays: String(PRICING.vipLinkDays),
   deliveryHours: String(PRICING.deliveryHours),
 };
 

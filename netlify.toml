@@ -69,10 +69,12 @@
   to = "/blog/team-building-activities-for-work/"
   status = 301
 
-# Hebrew demos belong to heytadam.com; Friends and Simpsons to tadamevents.com.
+# Hebrew demos belong to heytadam.com; English demos to tadamevents.com.
 # Tom is available on both sites. Redirects preserve query strings (e.g. autostart).
 # Allowed demo frontends connect directly to the existing gameplay backend.
 # Keep the browser URL on this site, including host and phone join routes.
+# Request each demo's generated HTML explicitly. Base44's extensionless routes
+# return its Hebrew SPA shell, flashing that title before the game JavaScript loads.
 [[redirects]]
   from = "/cellcom-demo"
   to = "https://heytadam.com/cellcom-demo"
@@ -99,25 +101,25 @@
 
 [[redirects]]
   from = "/tom-demo"
-  to = "https://tadam.base44.app/tom-demo"
+  to = "https://tadam.base44.app/tom-demo/index.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/friends-demo"
-  to = "https://tadam.base44.app/friends-demo"
+  to = "https://tadam.base44.app/friends-demo/index.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/the-simpsons-demo"
-  to = "https://tadam.base44.app/the-simpsons-demo"
+  to = "https://tadam.base44.app/the-simpsons-demo/index.html"
   status = 200
   force = true
 
 [[redirects]]
   from = "/stranger-things-demo"
-  to = "https://tadam.base44.app/stranger-things-demo"
+  to = "https://tadam.base44.app/stranger-things-demo/index.html"
   status = 200
   force = true
 

@@ -20,13 +20,16 @@ const cols: [number, number][] = [
 import { useCopy } from "../content/copy";
 interface Props {
   class?: string;
+  /** Only the navigation header uses the alternate user-provided logo. */
+  navigation?: boolean;
 }
 const { copy, locale } = useCopy(Astro.url);
-const SRC = locale === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp";
-const { class: cls = "" } = Astro.props;
+const { class: cls = "", navigation = false } = Astro.props;
+const SRC = navigation ? "/brand/tadam-logo-navigation.webp" : locale === "en" ? "/brand/tadam-logo-en.webp" : "/brand/tadam-logo-v4.webp";
+const ratio = navigation ? "894 / 394" : "1000 / 394";
 ---
 
-<div class:list={["logo-assemble", cls]} style={locale === "en" ? "aspect-ratio: 1000 / 394" : undefined} role="img" aria-label={copy.brand} data-logo>
+<div class:list={["logo-assemble", cls]} style={locale === "en" ? `aspect-ratio: ${ratio}` : undefined} role="img" aria-label={copy.brand} data-logo>
   <img class="logo-full" src={SRC} alt="" width="736" height="332" decoding="async" />
   <img
     class="logo-piece piece-top"

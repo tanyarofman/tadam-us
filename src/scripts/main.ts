@@ -7,6 +7,7 @@ import { initHero } from "./hero";
 import { initDemoModal } from "./demo-modal";
 import { initSyncedPreview } from "./synced-preview";
 import { initMobilePreview } from "./mobile-preview";
+import { initSectionNavigation } from "./section-navigation";
 
 function initScrollProgress() {
   const bar = document.querySelector<HTMLElement>(".scroll-progress__bar");
@@ -21,7 +22,7 @@ function initScrollProgress() {
 function initLinks() {
   document.addEventListener("click", (e) => {
     const a = (e.target as HTMLElement).closest<HTMLElement>("[data-scroll-to]");
-    if (a) {
+    if (a && !e.defaultPrevented) {
       e.preventDefault();
       // data-scroll-offset: extra screens to scroll past the target (lands inside a pinned scene)
       const screens = prefersReducedMotion() ? 0 : Number(a.dataset.scrollOffset) || 0;
@@ -51,6 +52,9 @@ async function initScenes(loading: Promise<Array<{ init: (o: { reduced: boolean 
 
 function boot() {
   initScroll();
+  let navigationReady!: () => void;
+  const ready = new Promise<void>((resolve) => { navigationReady = resolve; });
+  initSectionNavigation(ready);
   initLinks();
   initDemoModal();
   initScrollProgress();
@@ -65,24 +69,25 @@ function boot() {
     init: (options: { reduced: boolean }) => m.init(id, options),
   }));
   const loading = Promise.all([
+    pause("demos"),
     import("./scenes/scene3"),
     import("./scenes/scene4"),
     import("./scenes/scene6"),
     pause("hosts"),
-    import("./included"),
+    pause("pricing"),
     pause("scene-7"),
     import("./scenes/scene7"),
     pause("faq"),
+    pause("testimonials"),
+    pause("closing"),
   ]);
-  let started = false;
+  let scenes: Promise<void> | undefined;
   const start = () => {
-    if (started) return;
-    started = true;
-    initScenes(loading);
+    return scenes ??= initScenes(loading);
   };
   initHero(() => {
     startPreview();
-    start();
+    void start().then(navigationReady);
   });
   // Safety net: if the visitor scrolls before the intro ends, set the scenes up right away.
   window.addEventListener("scroll", start, { once: true, passive: true });

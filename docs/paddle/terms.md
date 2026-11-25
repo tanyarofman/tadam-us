@@ -14,9 +14,9 @@ These terms apply to your use of tadamevents.com and to every game you create or
 
 ## 2. The Service
 
-Tadam is an online tool for creating a personalized trivia game show for a party or event. You provide stories, details and photos; the Service drafts questions, lets you choose a ready-made host and voice, and lets you review and edit the game. After payment, the finished game is delivered by email as a private link, usually within 24 hours. The game is played in a web browser: the host appears on a big screen and guests answer from their phones.
+Tadam is an online tool for creating a personalized trivia game show for a party or event. You provide stories, details and photos; the Service drafts questions, lets you choose a ready-made host and voice or create a custom host with VIP, and lets you review and edit the game. After payment, the finished game is delivered by email as a private link, usually within 24 hours. The game is played in a web browser: the host appears on a big screen and guests answer from their phones.
 
-Some parts of the game, such as draft questions, the host's voice and the host's video, are produced with the help of automated and AI tools. You can review and change the questions before you pay.
+Some parts of the game, such as draft questions, the host's voice and the host's video, are produced with the help of automated and AI tools. You can review the delivered game and use the question edits included in your package before you play.
 
 ## 3. Ordering and payment
 
@@ -39,7 +39,7 @@ You must be at least 18 years old to create a game or make a purchase. The Servi
 - **You keep ownership** of your content. You give us a limited licence to store, process and display it only to create, deliver and support your game, for as long as we keep it (see section 8).
 - **You have the right to use it.** You confirm that you have the permission of every person who appears in or is described in your content, and, for children, the permission of their parent or legal guardian.
 - **Nothing harmful.** Your content must not be unlawful, hateful, harassing, sexual, defamatory, or meant to humiliate anyone, and must not infringe anyone's rights.
-- **No impersonation.** You may not use the Service to recreate or imitate the face, voice or identity of any real person. All hosts are invented characters.
+- **Permission for custom hosts.** You must have a person's explicit permission before using their face or voice for a custom host. For anyone under 18, you must have their parent's or legal guardian's permission. Do not use a custom host to deceive others or impersonate someone without their permission.
 - We may refuse, edit out or remove content that breaks these rules, and may cancel the order with a full refund.
 
 ## 7. Your game
@@ -50,7 +50,7 @@ Anyone with the link can open the game. Share it only with people you trust.
 
 ## 8. How long we keep your game
 
-Your game link works for **30 days** from delivery. After 30 days, the game and your content are deleted and the link stops working. You can ask us to delete them earlier at any time by writing to hey@tadamevents.com. Details are in our [Privacy Policy](/privacy).
+Your game link works for **30 days with Basic or 120 days with VIP** from delivery. At the end of that period, the game and your content are deleted and the link stops working. You can ask us to delete them earlier at any time by writing to hey@tadamevents.com. Details are in our [Privacy Policy](/privacy).
 
 ## 9. Availability
 

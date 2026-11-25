@@ -14,7 +14,7 @@ const c = COPY.hero;
   <div class="hero-loading sr-only" role="status" aria-live="polite">{c.loading}</div>
   <header class="hero-header">
     <div class="hero-bar container hero-wide">
-      <a href="#top" class="hero-home" aria-label={COPY.brand}><LogoAssemble class="hero-logo" /></a>
+      <a href="#top" class="hero-home" aria-label={COPY.brand}><LogoAssemble class="hero-logo" navigation /></a>
       <nav class="hero-nav" aria-label={c.navLabel} data-hero-fade>
         <ul role="list">{c.nav.map((l) => <li><a href={l.href} data-scroll-to={l.href}>{l.label}</a></li>)}</ul>
       </nav>
@@ -76,7 +76,7 @@ const c = COPY.hero;
   .hero-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: clamp(14px, 2.4vh, 24px); }
   .hero-home { display: block; line-height: 0; }
   :global(.logo-assemble.hero-logo) { width: clamp(118px, 12vw, 172px); }
-  .hero-nav ul { display: flex; gap: clamp(18px, 3vw, 44px); margin: 0; padding: 0; list-style: none; }
+  .hero-nav ul { display: flex; gap: clamp(14px, 2.2vw, 32px); margin: 0; padding: 0; list-style: none; }
   .hero-nav a { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: var(--white); text-decoration: none; }
   .hero-nav a:hover { color: var(--game-yellow); }
   .hero-bar-action { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); }

@@ -33,6 +33,7 @@ defined by `--page-gradient` in `src/styles/tokens.css`.
 | Blog articles | `src/content/blog/` |
 | Privacy policy text | `src/pages/privacy.astro` |
 | Contact link (Messenger, heytadam Facebook page), Facebook page, public email hey@tadamevents.com (forwards to Tanya + Ilan via Forward Email DNS records in Netlify DNS) | `src/config/site.ts` |
+| Header/footer logo | `public/brand/tadam-logo-navigation.webp` (user-provided); other logos keep the original artwork |
 | Logo (PNG + WebP, v4) | `public/brand/`, regenerate with `python tools/key-logo.py` from `assets-src/tadam-logo-v4-green.jpg` |
 | Synchronized hero clips (~19s, no audio) | `public/demo/hero-screen-en-v2.mp4`, `public/demo/hero-phone-en-v2.mp4` and their posters, recorded from the Tom demo (`/tom-demo`). Paths: `demoMedia()` in `src/config/site.ts` |
 | Colors / type scale / theme | `src/styles/tokens.css` |
@@ -50,13 +51,14 @@ Open decisions (contact route, prices in USD, About facts) are marked `TODO (Tan
 
 ```
 Scene 0  Hero (TV + phone loops)  src/components/scenes/Scene0Hero.astro      scripts/hero.ts, scripts/synced-preview.ts
+Live demos                   src/components/LiveDemos.astro
 Scene 3  Event photo → logo → demo  Scene3Reveal.astro                   scripts/scenes/scene3.ts
 Scene 4  How it's built       Scene4HowItWorks.astro                      scripts/scenes/scene4.ts
 Scene 6  Leaderboard + winner  Scene6Payoff.astro                          scripts/scenes/scene6.ts
 Hosts                        src/components/Hosts.astro
-What's included              src/components/Pricing.astro
+Basic + VIP packages         src/components/Pricing.astro
 Scene 7  CTA                  Scene7Cta.astro                             scripts/scenes/scene7.ts
-Contact, FAQ, ClosingCta, Footer, DemoModal  src/components/
+FAQ, Testimonials, ClosingCta, Footer, DemoModal  src/components/
 Blog                          src/pages/blog/ (index + [slug]), src/components/blog/, /llms.txt from src/pages/llms.txt.ts
 Illustrations (SVG)           src/components/art/
 ```
@@ -86,3 +88,15 @@ Lighthouse mobile on the local production preview: about 80 to 88 (it varies run
 The local preview server adds about 0.5s of server response time, so re-check on the Netlify URL.
 LCP is the hero logo, which paints when the preloader finishes. That is the cost of the preloader;
 shorten `hero.ts` timings if needed.
+
+## Homepage regression checks
+
+`npm run check`, `npm run build`, and `npm test` run the type/build and media playback checks.
+With a local server on port 4327 (`npm run dev -- --port 4327`), run `npm run test:browser`
+for section navigation, pricing, demos, mobile layouts and reduced motion in Chromium, Firefox and WebKit.
+Set `TEST_URL` to test another local or preview server. Install test browsers with
+`npx playwright install chromium firefox webkit` when needed.
+
+Header/footer section links jump to readable content. In particular, How It Works
+settles into a three-card row on desktop and a full stack on mobile; normal scrolling
+before using a section link retains the original staged animation.

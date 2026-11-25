@@ -6,6 +6,7 @@
 import { gsap } from "../../lib/scroll";
 import { animateWords } from "../motion";
 import { mobileSceneQuery, sceneScroll } from "../scene-scroll";
+import { registerSectionReveal } from "../section-navigation";
 
 export function init({ reduced }: { reduced: boolean }) {
   const s = document.querySelector<HTMLElement>("[data-scene='4']");
@@ -24,6 +25,12 @@ export function init({ reduced }: { reduced: boolean }) {
   s.classList.add("is-pinned");
 
   const mm = gsap.matchMedia();
+  registerSectionReveal(s.id, () => {
+    // Anchor navigation is a request to read every step. On phones the scrubbed
+    // end state shows only step 3, so restore the full stacked layout instead.
+    mm.revert();
+    s.classList.remove("is-pinned");
+  });
   mm.add({ mobile: mobileSceneQuery, phone: "(max-width: 899px), (orientation: landscape) and (max-height: 500px)", wide: "(min-width: 900px) and (min-height: 501px)" }, (ctx) => {
     const phone = !!ctx.conditions?.phone;
     const mobile = !!ctx.conditions?.mobile;

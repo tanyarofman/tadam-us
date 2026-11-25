@@ -15,6 +15,15 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 | Session records (what was decided and why, by date) | `../history/` (start with `2026-11-24-us-site-setup.md`) |
 | Paddle review checklist (website and account) | `../paddle/paddle-checklist.md` |
 
+## Homepage update prepared on 2026-11-25
+
+Basic/VIP packages, consent-based custom hosts, revised delivery/editing copy, fictional
+demo cards and temporary sample testimonials are prepared in PR #54. The follow-up adds
+new supplied demo images, generated persona portraits, an earlier demo section and a
+pricing design based on Ilan's mockup. Details:
+`../history/2026-11-25-homepage-packages-demos.md`. The historical live-site checks below
+predate this update; `/create` remains the existing coming-soon page.
+
 ## Paddle review status (checked on the live site, 2026-11-24)
 - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
 - **Website requirements 1 to 11 pass:** product description, $99 price, `/terms` (Paddle as merchant of record), `/privacy`, `/refunds` (14 days), the legal name in the footer and on the legal pages with no country or address, email contact only, self-serve wording in the site and the blog, invented hosts.

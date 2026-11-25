@@ -1,0 +1,40 @@
+---
+import { useCopy } from "../content/copy";
+const { copy: COPY } = useCopy(Astro.url);
+const c = COPY.testimonials;
+const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
+---
+
+<section class="scene testimonials" id="testimonials" aria-labelledby="testimonials-title">
+  <div class="testimonials-pin" data-scroll-pause="start">
+    <div class="container">
+      <h2 id="testimonials-title" class="display h-scene testimonials-title reveal">{c.title}</h2>
+      <div class="testimonials-grid">
+        {c.items.map((person, i) => (
+          <figure class="testimonial reveal" style={`--accent:${accents[i]}`}>
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <blockquote><p>{person.quote}</p></blockquote>
+            <figcaption>
+              <img class="avatar" src={person.image} alt="" width="144" height="144" loading="lazy" decoding="async" />
+              <span><strong>{person.name}</strong><span class="event">{person.event}</span></span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-pin { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(72px, 10vh, 110px); }
+  .testimonials-title { max-width: 24ch; margin-inline: auto; font-size: var(--fs-story-title); text-align: center; }
+  .testimonials-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .testimonial { display: flex; flex-direction: column; margin: 0; padding: 22px 30px 30px; background: linear-gradient(150deg, #163883, #0a1d54); border: 2px solid var(--surface-border); border-top: 3px solid var(--accent); border-radius: 12px 32px 12px 32px; }
+  .quote-mark { height: 62px; color: var(--accent); font-size: 6rem; line-height: 1; font-family: Georgia, serif; }
+  blockquote { margin: 0 0 30px; font-size: 1.5rem; line-height: 1.45; }
+  figcaption { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--surface-border); }
+  .avatar { flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+  figcaption strong { display: block; font-size: 1.3rem; }
+  .event { display: block; color: var(--text-muted); font-size: 1.15rem; }
+  @media (max-width: 760px) { .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; } }
+</style>

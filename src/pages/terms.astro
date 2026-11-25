@@ -5,6 +5,7 @@
  * the Paddle account, Paddle named as merchant of record (section 3), and a link to the refund policy.
  */
 import LegalShell from "../components/pages/LegalShell.astro";
+import { PRICING } from "../config/pricing";
 import { SITE } from "../config/site";
 import { useCopy } from "../content/copy";
 const { copy: COPY } = useCopy(Astro.url);
@@ -12,7 +13,7 @@ const l = COPY.legalPage;
 const mail = SITE.email;
 ---
 
-<LegalShell title="Terms of Service" description="The terms for using tadamevents.com and buying a Tadam! game: payment through Paddle, refunds, your content and how long we keep it." updatedLine={`Last updated: ${l.updated}`}>
+<LegalShell title="Terms of Service" description="The terms for using tadamevents.com and buying a Tadam! game: payment through Paddle, refunds, your content and how long we keep it." updatedLine="Last updated: November 25, 2026">
 
   <nav class="toc" aria-label="Table of contents">
     <ol>
@@ -48,13 +49,13 @@ const mail = SITE.email;
     <h2 class="display">2. The Service</h2>
     <p>
       Tadam is an online tool for creating a personalized trivia game show for a party or event. You provide stories,
-      details and photos; the Service drafts questions, lets you choose a ready-made host and voice, and lets you review
+      details and photos; the Service drafts questions, lets you choose a ready-made host and voice or create a custom host with VIP, and lets you review
       and edit the game. After payment, the finished game is delivered by email as a private link, usually within 24
       hours. The game is played in a web browser: the host appears on a big screen and guests answer from their phones.
     </p>
     <p>
       Some parts of the game, such as draft questions, the host's voice and the host's video, are produced with the help
-      of automated and AI tools. You can review and change the questions before you pay.
+      of automated and AI tools. You can review the delivered game and use the question edits included in your package before you play.
     </p>
   </section>
 
@@ -102,8 +103,9 @@ const mail = SITE.email;
         meant to humiliate anyone, and must not infringe anyone's rights.
       </li>
       <li>
-        <strong>No impersonation.</strong> You may not use the Service to recreate or imitate the face, voice or identity
-        of any real person. All hosts are invented characters.
+        <strong>Permission for custom hosts.</strong> You must have a person's explicit permission before using their face
+        or voice for a custom host. For anyone under 18, you must have their parent's or legal guardian's permission.
+        Do not use a custom host to deceive others or impersonate someone without their permission.
       </li>
       <li>We may refuse, edit out or remove content that breaks these rules, and may cancel the order with a full refund.</li>
     </ul>
@@ -122,8 +124,8 @@ const mail = SITE.email;
   <section id="retention">
     <h2 class="display">8. How long we keep your game</h2>
     <p>
-      Your game link works for <strong>30 days</strong> from delivery. After 30 days, the game and your content are
-      deleted and the link stops working. You can ask us to delete them earlier at any time by writing to
+      Your game link works for <strong>{PRICING.linkDays} days with Basic or {PRICING.vipLinkDays} days with VIP</strong>
+      from delivery. At the end of that period, the game and your content are deleted and the link stops working. You can ask us to delete them earlier at any time by writing to
       {" "}<a href={`mailto:${mail}`}>{mail}</a>. Details are in our <a href="/privacy">Privacy Policy</a>.
     </p>
   </section>

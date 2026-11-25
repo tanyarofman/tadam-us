@@ -13,7 +13,7 @@ const base = home.endsWith("/") ? home : `${home}/`;
 
 <header class="site-header">
   <div class="site-bar container hero-wide">
-    <a href={home} class="site-home" aria-label={COPY.brand}><img src="/brand/tadam-logo-en.webp" alt="" width="1000" height="394" /></a>
+    <a href={home} class="site-home" aria-label={COPY.brand}><img src="/brand/tadam-logo-navigation.webp" alt="" width="894" height="394" /></a>
     <nav class="site-nav" aria-label={c.navLabel}>
       <ul role="list">{c.nav.map((l) => <li><a href={`${base}${l.href}`}>{l.label}</a></li>)}</ul>
     </nav>
@@ -27,7 +27,7 @@ const base = home.endsWith("/") ? home : `${home}/`;
   .site-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: clamp(14px, 2.4vh, 24px); }
   .site-home { display: block; line-height: 0; }
   .site-home img { width: clamp(118px, 12vw, 172px); height: auto; }
-  .site-nav ul { display: flex; gap: clamp(18px, 3vw, 44px); margin: 0; padding: 0; list-style: none; }
+  .site-nav ul { display: flex; gap: clamp(14px, 2.2vw, 32px); margin: 0; padding: 0; list-style: none; }
   .site-nav a { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: var(--white); text-decoration: none; }
   .site-nav a:hover { color: var(--game-yellow); }
   .site-cta { min-height: 52px; padding: 10px 28px 12px; font-size: 1.625rem; white-space: nowrap; }

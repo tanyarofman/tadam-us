@@ -1,0 +1,58 @@
+---
+import { useCopy } from "../content/copy";
+const { copy: COPY } = useCopy(Astro.url);
+const c = COPY.demos;
+const [titleBefore, titleAfter] = c.title.split(c.highlight);
+---
+
+<section class="scene live-demos" id="demos" aria-labelledby="demos-title">
+  <div class="demos-pin" data-scroll-pause>
+    <div class="container">
+      <h2 id="demos-title" class="display h-scene demos-title reveal">{titleBefore}<span class="phrase-highlight swoosh">{c.highlight}</span>{titleAfter}</h2>
+      <p class="lead demos-sub reveal">{c.sub}</p>
+      <div class="demo-cards">
+        {c.items.map((demo, i) => (
+          <a class="demo-card reveal" href={demo.href} target="_blank" rel="noopener noreferrer" data-track="demo_open_big_screen" data-source={`live-demo-${i + 1}`}>
+            <div class="demo-photo">
+              <img src={demo.image} alt={demo.alt} width="856" height="534" loading="lazy" decoding="async" />
+              <span class="demo-event">{demo.event}</span>
+              <span class="demo-play" aria-hidden="true">▶</span>
+            </div>
+            <div class="demo-info">
+              <h3 class="display">{demo.title}</h3>
+              <span class="demo-link">{c.cta}<span aria-hidden="true">↗</span></span>
+              <span class="sr-only">{c.newTab}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .live-demos[data-scroll-hold]::after { height: 90svh; }
+  .demos-pin { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(72px, 10vh, 110px); }
+  .demos-title { font-size: var(--fs-story-title); max-width: 22ch; margin-inline: auto; text-align: center; }
+  .demos-sub { text-align: center; margin: 22px auto 44px; color: var(--text-muted); max-width: 52ch; }
+  .demo-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .demo-card { display: flex; flex-direction: column; text-decoration: none; border-radius: 12px 32px 12px 32px; border: 2px solid var(--surface-border); overflow: hidden; background: linear-gradient(145deg, #173b92, #0b205f); }
+  .demo-photo { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+  .demo-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s var(--ease-out); }
+  .demo-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 45%, #07154888); }
+  .demo-event { position: absolute; top: 16px; left: 16px; z-index: 1; padding: 4px 14px; background: var(--game-yellow); border-radius: 99px; color: var(--ink); font-weight: 700; }
+  .demo-play { position: absolute; z-index: 1; bottom: 12px; right: 10px; width: 42px; height: 42px; font-size: 17px; display: grid; place-items: center; padding-left: 3px; border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: 0 6px 18px #00176a44; }
+  .demo-info { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 26px; }
+  .demo-info h3 { font-size: clamp(1.7rem, 2.4vw, 2.2rem); line-height: 1.12; }
+  .demo-link { display: flex; justify-content: space-between; gap: 16px; color: var(--game-yellow); margin-top: auto; font-size: 1.3rem; font-weight: 700; }
+  .demo-card:hover { border-color: var(--game-yellow); }
+  .demo-card:hover img { transform: scale(1.05); }
+  @media (max-width: 767px), (orientation: landscape) and (max-height: 500px) {
+    .live-demos[data-scroll-hold]::after { height: 50svh; }
+  }
+  @media (max-width: 760px) {
+    .demo-cards { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+    .demo-info h3 { font-size: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .demo-photo img { transition: none; } .demo-card:hover img { transform: none; } }
+</style>

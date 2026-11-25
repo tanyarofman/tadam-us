@@ -6,22 +6,27 @@ const c = COPY.closing;
 ---
 
 <section class="closing-cta" id="closing" aria-labelledby="closing-title">
-  <div class="container">
-    <h2 id="closing-title" class="display closing-title">
-      {c.title}
-      <span class="closing-burst" aria-hidden="true"><i></i><i></i><i></i></span>
-    </h2>
-    <a class="btn closing-button" href={CREATE_URL} data-track="cta_create_click" data-source="closing">
-      {c.cta}
-      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M38 24H10m10-10L10 24l10 10"></path></svg>
-    </a>
+  <div class="closing-pin" data-scroll-pause="start">
+    <div class="container">
+      <h2 id="closing-title" class="display closing-title">
+        {c.title}
+        <span class="closing-burst" aria-hidden="true"><i></i><i></i><i></i></span>
+      </h2>
+      <a class="btn closing-button" href={CREATE_URL} data-track="cta_create_click" data-source="closing">
+        {c.cta}
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M38 24H10m10-10L10 24l10 10"></path></svg>
+      </a>
+    </div>
   </div>
 </section>
 
 <style>
-  .closing-cta {
+  .closing-cta { text-align: center; }
+  .closing-pin {
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
     padding-block: 88px 216px;
-    text-align: center;
   }
   .closing-title {
     position: relative;
@@ -44,7 +49,7 @@ const c = COPY.closing;
   :global([dir="ltr"]) .closing-button svg { transform: scaleX(-1); }
   :global([dir="ltr"]) .closing-burst { left: auto; right: -38px; transform: scaleX(-1); }
   @media (max-width: 600px) {
-    .closing-cta { padding-block: 64px 176px; }
+    .closing-pin { padding-block: 64px 176px; }
     .closing-title { max-width: calc(100% - 28px); }
     .closing-burst { transform: scale(.7); transform-origin: right top; left: -29px; }
     :global([dir="ltr"]) .closing-burst { transform: scale(-.7, .7); transform-origin: left top; left: auto; right: -29px; }

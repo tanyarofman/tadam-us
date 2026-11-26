@@ -10,6 +10,7 @@ test("customer HTML email keeps the wording, escapes input and uses the PNG logo
   assert.match(html, /&lt;b&gt;Emma/);
   assert.doesNotMatch(html, /<b>Emma/);
   assert.match(html, /Your receipt comes separately from Paddle/);
+  assert.match(html, /PADDLE\.NET\* VELONOVA/);
   assert.match(html, /Just reply to this email/);
   assert.doesNotMatch(html, /[–—]/);
 });

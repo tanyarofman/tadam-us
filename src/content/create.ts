@@ -422,30 +422,36 @@ export const CREATE = {
   },
 
   order: {
-    title: "Everything is ready to order",
-    meta: "{event} · Host: {host} · Material for {n} questions",
-    metaPhotos: " · Photos: {n}",
+    kicker: "Last step: review and pay",
+    meta: "{event} · Host: {host} · {n} questions",
+    metaPhotos: " · {n} photos",
+    metaPhoto: " · 1 photo",
+    edit: "Edit",
     packageLegend: "Choose your package",
     /** One line per package; {questions}, {participants}, {edits}, {linkDays} come from PACKAGES in pricing.ts. */
-    packageLines: [
-      "Up to {questions} questions",
-      "Up to {participants} players",
-      "{edits} rounds of changes before the event",
-      "The game link works for {linkDays} days",
-    ],
-    vipExtra: "Want your own host? We set it up with you by email.",
-    includes: ["A personal game from your stories, with a host on the big screen", "Every guest plays from their phone"],
+    packageSpecs: "{questions} questions · {participants} players · {edits} rounds of edits · link works {linkDays} days",
+    vipBadge: "Your own host",
+    vipExtra: "We set up your own host with you by email.",
+    summaryTitle: "Your order",
+    item: "{name} game",
     priceLabel: "Total",
-    email: "Which email should we send the game to?",
-    consent: "The names and facts are correct, and I have permission to use the photos.",
-    cta: "Continue to payment",
+    email: "Send the game to",
+    emailHint: "Your game link and receipt go here.",
+    /** Short on purpose (Tanya, 2026-11-26): the facts, and permission for the photos only when there are photos. */
+    consent: "The facts are right, and I'm allowed to use these photos.",
+    consentNoPhotos: "The names and facts are right.",
+    cta: "Pay {price}",
     sending: "Sending the order...",
-    payNote: "You pay on a secure checkout by Paddle, our payment partner.",
-    errRequired: "Enter a valid email and tick the confirmation.",
+    payNote: "Secure checkout by Paddle",
+    terms: "Terms",
+    refunds: "Refunds",
+    errEmail: "Enter your email so we can send you the game.",
+    errConsent: "Tick the box to continue.",
     errSend: "We could not send the order. Everything you filled in is saved, try again in a moment.",
     errPay: "The payment window did not open. Your order is saved, try again in a moment.",
     photosMissing: "Some photos were not kept by the browser. Go back and choose them again, or continue without them.",
   },
+
 
   /** Shown only while the checkout is not configured (no Paddle keys on this deploy). */
   pay: {

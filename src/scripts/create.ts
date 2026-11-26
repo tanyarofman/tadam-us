@@ -13,7 +13,7 @@ interface Pkg {
   id: string;
   name: string;
   price: string;
-  lines: string[];
+  specs: string;
 }
 interface Data {
   events: EventTile[];
@@ -210,9 +210,11 @@ function init(root: HTMLElement, data: Data) {
   const bar = $<HTMLElement>("[data-bar]")!;
   const barNext = $<HTMLButtonElement>("[data-bar-next]")!;
   const pkg = () => data.packages.find((p) => p.id === state.pkg) || data.packages[0];
-  const orderLabel = () => `${c.order.cta} · ${pkg().price}`;
+  const orderLabel = () => fill(c.order.cta, { price: pkg().price });
   function renderBar(step: number) {
     bar.hidden = step === 0 || step === 6;
+    // on wide screens step 5 pays from the order summary, so the bar hides its button there (CSS reads this)
+    bar.dataset.step = String(step);
     $<HTMLElement>("[data-bar-meter]")!.hidden = step !== 3;
     barNext.dataset.next = String(step);
     barNext.setAttribute("aria-disabled", "false");
@@ -675,31 +677,64 @@ function init(root: HTMLElement, data: Data) {
   // ---------- 5: summary, contact, order ----------
   const orderForm = $<HTMLFormElement>("[data-order-form]")!;
   const orderErr = $<HTMLElement>("[data-order-err]")!;
-  const orderCta = barNext;
+  // two pay buttons with one job: the bottom bar's (phones) and the order summary's (wide screens)
+  const payBtns = [barNext, $<HTMLButtonElement>("[data-order-pay]")!];
+  const setPay = (text: string, busy = false) =>
+    payBtns.forEach((b) => {
+      b.textContent = text;
+      if (busy) b.setAttribute("aria-busy", "true");
+      else b.removeAttribute("aria-busy");
+    });
   const consentIn = $<HTMLInputElement>("[data-order-consent]")!;
+  const agreeRow = $<HTMLElement>("[data-agree]")!;
+  const consentErr = $<HTMLElement>("#o-consent-err")!;
   const emailIn = $<HTMLInputElement>("#o-email")!;
+  const emailErr = $<HTMLElement>("#o-email-err")!;
+  function setEmailErr(on: boolean) {
+    emailErr.hidden = !on;
+    if (on) emailIn.setAttribute("aria-invalid", "true");
+    else emailIn.removeAttribute("aria-invalid");
+    emailIn.setAttribute("aria-describedby", on ? "o-email-hint o-email-err" : "o-email-hint");
+  }
+  function setConsentErr(on: boolean) {
+    consentErr.hidden = !on;
+    agreeRow.classList.toggle("is-invalid", on);
+    if (on) consentIn.setAttribute("aria-describedby", "o-consent-err");
+    else consentIn.removeAttribute("aria-describedby");
+  }
   const missingPhotos = () => Object.keys(state.photos).filter((id) => !photoFiles.has(id)).length;
   const hostName = () => data.hosts.find((h) => h.id === state.host)?.name || "";
   function renderOrder() {
     $("[data-ticket-title]")!.textContent = state.title;
     $("[data-ticket-meta]")!.textContent =
       fill(c.order.meta, { event: event()?.label || "", host: hostName(), n: questionsReady() }) +
-      (photoFiles.size ? fill(c.order.metaPhotos, { n: photoFiles.size }) : "");
+      (photoFiles.size === 1 ? c.order.metaPhoto : photoFiles.size ? fill(c.order.metaPhotos, { n: photoFiles.size }) : "");
     $<HTMLElement>("[data-photos-missing]")!.hidden = missingPhotos() === 0;
+    // the agreement asks about photos only when photos travel with the order
+    $("[data-consent-text]")!.textContent = photoFiles.size ? c.order.consent : c.order.consentNoPhotos;
     emailIn.value = state.email;
     consentIn.checked = state.consent;
     orderErr.hidden = true;
+    setEmailErr(false);
+    setConsentErr(false);
     renderPkg();
   }
   function renderPkg() {
     $$<HTMLInputElement>("[data-pkg]").forEach((r) => (r.checked = r.value === pkg().id));
     $("[data-price]")!.textContent = pkg().price;
-    if (state.step === 5 && !sending) barNext.textContent = orderLabel();
+    $("[data-order-item]")!.textContent = fill(c.order.item, { name: pkg().name });
+    $("[data-order-item-price]")!.textContent = pkg().price;
+    if (state.step === 5 && !sending) setPay(orderLabel());
   }
   orderForm.addEventListener("input", (e) => {
     const el = e.target as HTMLInputElement;
-    if (el === emailIn) state.email = el.value;
-    else if (el === consentIn) state.consent = el.checked;
+    if (el === emailIn) {
+      state.email = el.value;
+      setEmailErr(false);
+    } else if (el === consentIn) {
+      state.consent = el.checked;
+      setConsentErr(false);
+    }
     else if (el.dataset.pkg !== undefined) {
       state.pkg = el.value;
       renderPkg();
@@ -777,17 +812,16 @@ function init(root: HTMLElement, data: Data) {
     e.preventDefault();
     if (sending) return;
     const badEmail = !emailIn.value.trim() || !emailIn.validity.valid;
-    if (badEmail) emailIn.setAttribute("aria-invalid", "true");
-    if (badEmail || !consentIn.checked) {
-      orderErr.textContent = c.order.errRequired;
-      orderErr.hidden = false;
+    const noConsent = !consentIn.checked;
+    setEmailErr(badEmail);
+    setConsentErr(noConsent);
+    if (badEmail || noConsent) {
       (badEmail ? emailIn : consentIn).focus();
       return;
     }
     sending = true;
     orderErr.hidden = true;
-    orderCta.setAttribute("aria-busy", "true");
-    orderCta.textContent = c.order.sending;
+    setPay(c.order.sending, true);
     // one id per draft, so pressing again after a closed checkout does not create a second order
     state.token ||= crypto.randomUUID();
     state.orderId ||= "TD-" + Date.now().toString(36).toUpperCase().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase();
@@ -839,8 +873,8 @@ function init(root: HTMLElement, data: Data) {
       orderErr.hidden = false;
     } finally {
       sending = false;
-      orderCta.removeAttribute("aria-busy");
-      if (state.step === 5) orderCta.textContent = orderLabel();
+      if (state.step === 5) setPay(orderLabel());
+      else payBtns.forEach((b) => b.removeAttribute("aria-busy"));
     }
   });
 

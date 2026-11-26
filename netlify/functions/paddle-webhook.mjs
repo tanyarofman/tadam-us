@@ -4,13 +4,14 @@
 // variable PADDLE_WEBHOOK_SECRET (one value for sandbox on deploy previews, one for live on production).
 //
 // What it does: checks Paddle's signature, finds the order by the id the checkout carried (customData.orderId),
-// marks it paid in Netlify Blobs, and submits it with its photos to the Netlify form "order", which emails the team.
+// marks it paid in Netlify Blobs, and emails it with its photos to the team through Resend (netlify/lib/notify.mjs).
 // Payment and order are matched automatically; nobody has to compare emails.
-// The Netlify form is public, so anyone could post a fake "paid" email to it: before building a game, check the
-// transaction id in the email against Paddle > Transactions (or the order's status in Netlify Blobs).
+// Before building a game, the transaction id in the email can be checked against Paddle > Transactions. (Needed when
+// the Netlify form fallback is used: that form is public, so anyone could post a fake "paid" order to it.)
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { getStore } from "@netlify/blobs";
 import { ORDER_FIELDS, ORDER_ID, ordersStore, packageOfPrice } from "../lib/orders.mjs";
+import { sendOrderEmail } from "../lib/notify.mjs";
 
 const EVENTS = new Set(["transaction.completed", "transaction.paid"]);
 /** Paddle signs each delivery with a timestamp; refuse old ones so a captured request cannot be replayed. */
@@ -76,19 +77,29 @@ export default async (req, context) => {
     paidAt: new Date().toISOString(),
   };
 
-  // One email to the team per paid order: submit it to the Netlify form "order" (registered in Flow.astro).
-  const fd = new FormData();
-  fd.append("form-name", "order");
-  for (const k of [...ORDER_FIELDS, "status", "paid", "transaction"]) fd.append(k, String(paid[k] ?? ""));
+  // One email to the team per paid order, with the photos attached. Resend when RESEND_API_KEY is set (netlify/lib/
+  // notify.mjs); otherwise the Netlify form "order" (registered in Flow.astro), which Netlify may file as spam.
+  const photos = [];
   for (const p of order.photos || []) {
-    const blob = await store.get(`${id}/${p.field}`, { type: "blob" });
-    if (blob) fd.append(p.field, new Blob([blob], { type: p.type }), p.name || `${p.field}.jpg`);
+    const bytes = await store.get(`${id}/${p.field}`, { type: "arrayBuffer" });
+    if (bytes) photos.push({ field: p.field, name: p.name || `${p.field}.jpg`, type: p.type, bytes });
   }
-  const origin = new URL(req.url).origin;
-  const res = await fetch(`${origin}/`, { method: "POST", body: fd });
-  if (!res.ok) {
-    console.error(`Paddle webhook: Netlify form post for ${id} failed with HTTP ${res.status}`);
-    return new Response("notify failed", { status: 502 }); // Paddle retries, and the order stays unpaid until then
+  if (process.env.RESEND_API_KEY) {
+    const sent = await sendOrderEmail(paid, photos);
+    if (!sent.ok) {
+      console.error(`Paddle webhook: Resend email for ${id} failed with HTTP ${sent.status}: ${sent.error}`);
+      return new Response("notify failed", { status: 502 }); // Paddle retries, and the order stays unpaid until then
+    }
+  } else {
+    const fd = new FormData();
+    fd.append("form-name", "order");
+    for (const k of [...ORDER_FIELDS, "status", "paid", "transaction"]) fd.append(k, String(paid[k] ?? ""));
+    for (const p of photos) fd.append(p.field, new Blob([p.bytes], { type: p.type }), p.name);
+    const res = await fetch(`${new URL(req.url).origin}/`, { method: "POST", body: fd });
+    if (!res.ok) {
+      console.error(`Paddle webhook: Netlify form post for ${id} failed with HTTP ${res.status}`);
+      return new Response("notify failed", { status: 502 });
+    }
   }
 
   await store.setJSON(`${id}/order.json`, paid);

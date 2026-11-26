@@ -31,8 +31,16 @@
 - The checkout footer says data is shared with "Velonova": in Paddle sandbox > Settings > Account settings the company legal name is Velonova (website velonova.io) and Paddle locks it ("Email sellers@paddle.com to request a change").
 - Not done by Claude: a payment with Paddle's test card on the preview (left to Tanya).
 
+## Paid-order email through Resend (later the same day)
+- Tanya chose **Resend** (free email-sending service) over the browser sending the Netlify form.
+- `netlify/lib/notify.mjs` emails each paid order to the team: summary fields, the full brief, photos attached, the customer's email as reply-to, and an Idempotency-Key per order so Paddle's retries send one email. Orders whose payment didn't match a package get "[CHECK]" in the subject.
+- `paddle-webhook.mjs` uses it when `RESEND_API_KEY` is set; without the key it falls back to the Netlify form "order" (spam-prone). If Resend fails, the webhook answers 502, the order stays unpaid and Paddle retries.
+- Tested locally against a stand-in Resend server: one email with the photo for a paid VIP order, the retry ignored, and Resend unreachable gave 502 with the order still awaiting payment.
+- Netlify environment variables: `RESEND_API_KEY` (needed), `ORDER_EMAIL_TO` (default hey@tadamevents.com), `ORDER_EMAIL_FROM` (default `Tadam! orders <orders@tadamevents.com>`, needs tadamevents.com verified in Resend > Domains; until then `onboarding@resend.dev`, which only delivers to the Resend account's own email).
+- Waiting for Tanya: create the Resend account and API key. Then the domain's DNS records go into the tadamevents.com zone in Netlify DNS.
+
 ## Open
-- **Paid-order email:** Netlify Forms flags server-sent orders as spam. Options: an email-sending service (for example Resend or Postmark, free tiers) with its key in Netlify, or the browser sends the form at order time (before payment). Tanya to choose.
+- **Resend setup:** account, API key in Netlify, tadamevents.com verified (DNS records). Then a real test payment on the preview.
 - Tanya: a test payment with Paddle's test card on the deploy preview.
 - Tanya: email sellers@paddle.com to change the company name (Velonova) before the live review, or open the live account under the right name.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).

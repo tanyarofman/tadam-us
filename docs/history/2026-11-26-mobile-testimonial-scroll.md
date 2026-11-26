@@ -16,9 +16,13 @@ Validation: production build and Astro check pass (one existing Person.astro
 hint). Ten focused browser checks pass across Chrome, Firefox, mobile Chrome
 and mobile WebKit: scroll replacement, reverse scrolling, release, 320px phones,
 landscape rotation, desktop resizing, direct links and reduced motion. The
-homepage and demo-popup regression checks also cover desktop Chrome and mobile
-WebKit. Visually reviewed the mobile cards in Chrome.
+14 homepage and demo-popup regression checks also pass on desktop Chrome and
+mobile WebKit. Visually reviewed the mobile cards in Chrome.
 
 This follows the homepage production changes authorized in this chat. Netlify
-production was previously blocked by exhausted team credits; preview deployment
-and the current production status are checked before reporting completion.
+production was previously blocked by exhausted team credits, but the dashboard
+now confirms production main@13685d0 was published on November 26. No billing
+changes were made in this session.
+
+PR: https://github.com/tanyarofman/tadam-us/pull/68
+Preview: https://deploy-preview-68--tadam-us.netlify.app/

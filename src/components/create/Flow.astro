@@ -18,7 +18,7 @@ const packages = PACKAGES.map((p) => ({
   id: p.id,
   name: p.name,
   price: money(p.price),
-  lines: c.order.packageLines.map((l) => fill(l, { questions: p.questions, participants: p.participants, edits: p.edits, linkDays: p.linkDays })),
+  specs: fill(c.order.packageSpecs, { questions: p.questions, participants: p.participants, edits: p.edits, linkDays: p.linkDays }),
 }));
 const from = money(Math.min(...PACKAGES.map((p) => p.price)));
 const logo = { src: "/brand/tadam-logo-en.webp", w: 1000, h: 394 };
@@ -124,49 +124,55 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </div>
     </section>
 
-    <!-- 5: the order on one screen: the game, the package, one email -->
+    <!-- 5: review and pay. Left: the game and the package. Right: the order summary with the email, the agreement
+         and the pay button together (pattern from Figma, Miro and Perplexity checkouts on Mobbin, 2026-11-26). -->
     <section class="in-step in-one in-pay" data-step="5" aria-labelledby="h5" hidden>
-      <form class="in-ticket" data-order-form novalidate>
-        <div class="in-ticket__head">
-          <span class="in-count">{c.order.title}</span>
-          <h2 class="in-ticket__game display" id="h5" tabindex="-1" data-ticket-title></h2>
-          <p class="in-ticket__meta" data-ticket-meta></p>
-        </div>
-        <div class="in-ticket__deal">
+      <form class="in-checkout" data-order-form novalidate>
+        <div class="in-checkout__main">
+          <p class="in-count">{c.order.kicker}</p>
+          <h2 class="in-checkout__game display" id="h5" tabindex="-1" data-ticket-title></h2>
+          <p class="in-recap"><span data-ticket-meta></span><button class="in-recap__edit" type="button" data-go="3">{c.order.edit}</button></p>
+          <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
           <fieldset class="in-pkgs">
             <legend class="in-pkgs__legend">{c.order.packageLegend}</legend>
             {
               packages.map((p) => (
                 <label class="in-pkg">
                   <input class="sr-only" type="radio" name="package" value={p.id} data-pkg />
-                  <span class="in-pkg__head">
-                    <strong>{p.name}</strong>
-                    <span class="display">{p.price}</span>
+                  <span class="in-pkg__radio" aria-hidden="true" />
+                  <span class="in-pkg__name">
+                    {p.name}
+                    {p.id === "vip" && <span class="in-pkg__badge">{c.order.vipBadge}</span>}
                   </span>
-                  <ul class="in-pkg__lines">
-                    {p.lines.map((l) => <li>{l}</li>)}
-                    {p.id === "vip" && <li class="in-pkg__extra">{c.order.vipExtra}</li>}
-                  </ul>
+                  <span class="in-pkg__price display">{p.price}</span>
+                  <span class="in-pkg__specs">{p.specs}</span>
+                  {p.id === "vip" && <span class="in-pkg__note">{c.order.vipExtra}</span>}
                 </label>
               ))
             }
           </fieldset>
-          <ul class="in-includes">
-            {c.order.includes.map((t) => <li>{t}</li>)}
-          </ul>
         </div>
-        <div class="in-ticket__side">
-          <p class="in-ticket__total"><span>{c.order.priceLabel}</span><strong class="display" data-price></strong></p>
+        <div class="in-checkout__panel">
+          <h3 class="in-checkout__h">{c.order.summaryTitle}</h3>
+          <p class="in-checkout__line"><span data-order-item></span><span data-order-item-price></span></p>
+          <p class="in-checkout__total"><span>{c.order.priceLabel}</span><strong class="display" data-price></strong></p>
           <div class="in-field">
             <label for="o-email">{c.order.email}</label>
-            <input id="o-email" class="in-input" type="email" autocomplete="email" maxlength="120" required placeholder={c.ui.emailPlaceholder} data-order="email" />
+            <input id="o-email" class="in-input" type="email" autocomplete="email" maxlength="120" required placeholder={c.ui.emailPlaceholder} aria-describedby="o-email-hint" data-order="email" />
+            <p class="in-help" id="o-email-hint">{c.order.emailHint}</p>
+            <p class="in-err" id="o-email-err" hidden>{c.order.errEmail}</p>
           </div>
-        </div>
-        <p class="in-err" data-photos-missing hidden>{c.order.photosMissing}</p>
-        <div class="in-ticket__foot">
-          <label class="in-agree"><input type="checkbox" data-order-consent /><span class="in-agree__box" aria-hidden="true"></span><span>{c.order.consent}</span></label>
+          <label class="in-agree" data-agree>
+            <input type="checkbox" data-order-consent />
+            <span class="in-agree__box" aria-hidden="true" />
+            <span data-consent-text>{c.order.consent}</span>
+          </label>
+          <p class="in-err" id="o-consent-err" hidden>{c.order.errConsent}</p>
+          <button class="btn btn-buzzer in-checkout__pay" type="submit" data-order-pay></button>
           <p class="in-err" role="alert" data-order-err hidden></p>
-          <p class="in-ticket__note"><span aria-hidden="true">🔒</span> {c.order.payNote}</p>
+          <p class="in-checkout__trust">
+            <span aria-hidden="true">🔒</span> {c.order.payNote} · <a href="/terms">{c.order.terms}</a> · <a href="/refunds">{c.order.refunds}</a>
+          </p>
         </div>
       </form>
     </section>
@@ -337,18 +343,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   }
   .in-how--plain li {
     align-items: center;
-  }
-  .in-includes {
-    margin: 8px 0 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 4px;
-  }
-  .in-includes li::before {
-    content: "✓ ";
-    color: var(--game-yellow);
-    font-weight: 700;
   }
   .in-order,
   .in-order__col {
@@ -809,89 +803,221 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   .in-bar .in-meter__text {
     margin: 0;
   }
-  /* 5: the order as a ticket that fits one screen */
+  /* 5: review and pay. Stacked on phones (packages, then the order summary); two columns from 1024px. */
   .in-pay {
-    max-width: 860px;
+    max-width: 1080px;
     padding-top: 12px;
   }
-  .in-ticket {
+  .in-checkout {
+    display: grid;
+    gap: 24px;
+    align-items: start;
+  }
+  .in-checkout__main {
     display: grid;
     gap: 14px;
-    background: var(--in-card);
-    border: 1px solid var(--in-line);
-    border-radius: 26px;
-    padding: 18px 20px;
+    min-width: 0;
   }
-  .in-ticket__head {
-    display: grid;
-    gap: 2px;
-  }
-  .in-ticket__game {
+  .in-checkout__main > .in-count {
     margin: 0;
-    color: var(--game-yellow);
-    font-size: clamp(1.4rem, 4.5vw, 1.9rem);
-    line-height: 1.15;
   }
-  .in-ticket__game:focus {
+  .in-checkout__game {
+    margin: -8px 0 0;
+    color: var(--game-yellow);
+    font-size: clamp(1.6rem, 4.4vw, 2.4rem);
+    line-height: 1.1;
+  }
+  .in-checkout__game:focus {
     outline: none;
   }
-  .in-ticket__meta {
+  /* what the game is, with a way back to change it */
+  .in-recap {
     margin: 0;
-    color: var(--text-muted);
-    font-size: var(--fs-small);
-  }
-  .in-ticket__deal {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
     align-items: center;
-    gap: 16px;
-    border-block: 2px dashed var(--in-line);
-    padding-block: 12px;
-  }
-  .in-ticket__deal .in-includes {
-    margin: 0;
-  }
-  .in-ticket__total {
-    margin: 0;
-    display: grid;
-    justify-items: end;
-    line-height: 1;
-  }
-  .in-ticket__total span {
-    font-size: var(--fs-small);
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-s);
+    background: rgba(255, 255, 255, 0.07);
     color: var(--text-muted);
-    margin-bottom: 6px;
+    font-size: var(--fs-small);
   }
-  .in-ticket__total strong {
-    font-size: clamp(2.4rem, 9vw, 3.4rem);
+  .in-recap__edit {
+    flex: none;
+    background: none;
+    border: 0;
+    padding: 6px 2px;
     color: var(--game-yellow);
-    white-space: nowrap;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
   }
-  .in-ticket__side {
-    display: grid;
-    gap: 14px;
-  }
-  .in-ticket__side .in-field {
+  /* Basic or VIP: one row each with a radio dot; the chosen one is outlined in yellow */
+  .in-pkgs {
     margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
     gap: 10px;
   }
-  .in-ticket__price {
-    display: none;
-    margin: 0;
-    line-height: 1;
-    color: var(--game-yellow);
-    font-size: clamp(3rem, 8vh, 4.4rem);
+  .in-pkgs__legend {
+    padding: 0;
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
   }
-  .in-ticket__foot {
+  .in-pkg {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 4px;
+    padding: 14px 18px;
+    border-radius: var(--radius-m);
+    border: 2px solid var(--in-line);
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .in-pkg:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  .in-pkg:has(input:checked) {
+    border-color: var(--game-yellow);
+    background: rgba(255, 214, 0, 0.08);
+  }
+  .in-pkg:has(input:focus-visible) {
+    outline: 3px solid var(--game-yellow);
+    outline-offset: 3px;
+  }
+  .in-pkg__radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    transition: border 0.15s;
+  }
+  .in-pkg:has(input:checked) .in-pkg__radio {
+    border: 7px solid var(--game-yellow);
+  }
+  .in-pkg__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+  }
+  .in-pkg__badge {
+    background: var(--game-yellow);
+    color: var(--stage-navy);
+    border-radius: 999px;
+    padding: 1px 10px 2px;
+    font-size: 0.95rem;
+  }
+  .in-pkg__price {
+    color: var(--game-yellow);
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .in-pkg__specs,
+  .in-pkg__note {
+    grid-column: 2 / -1;
+    font-size: var(--fs-small);
+    line-height: 1.35;
+  }
+  .in-pkg__specs {
+    color: var(--text-muted);
+  }
+  /* the order summary: total, email, agreement and pay button in one box */
+  .in-checkout__panel {
     display: grid;
     gap: 12px;
-    border-top: 2px dashed var(--in-line);
-    padding-top: 16px;
+    background: var(--in-card);
+    border: 1px solid var(--in-line);
+    border-radius: 22px;
+    padding: 20px 22px;
   }
-  .in-ticket__note {
+  .in-checkout__h {
     margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+  .in-checkout__line,
+  .in-checkout__total {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .in-checkout__line {
+    color: var(--text-muted);
+  }
+  .in-checkout__total {
+    align-items: baseline;
+    border-top: 1px solid var(--in-line);
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .in-checkout__total strong {
+    color: var(--game-yellow);
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+  .in-checkout__panel .in-field {
+    margin: 6px 0 0;
+    gap: 6px;
+  }
+  .in-checkout__panel .in-help,
+  .in-checkout__panel .in-err {
+    margin: 0;
+  }
+  .in-checkout__pay {
+    width: 100%;
+    min-height: 58px;
+  }
+  .in-checkout__pay[aria-busy="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .in-checkout__trust {
+    margin: 0;
+    text-align: center;
     font-size: var(--fs-small);
     color: var(--text-muted);
+  }
+  .in-checkout__trust a {
+    color: inherit;
+  }
+  /* Phones and tablets: the pay button lives in the bottom bar, so the panel does not repeat it.
+     From 1024px the panel's own button is the one, right under the agreement, and the bar keeps only "Back". */
+  .in-checkout__pay {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .in-checkout {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      column-gap: clamp(28px, 4vw, 56px);
+    }
+    .in-checkout__panel {
+      position: sticky;
+      top: 24px;
+      padding: 24px 26px;
+    }
+    .in-checkout__pay {
+      display: inline-flex;
+      justify-content: center;
+    }
+    .in-bar[data-step="5"] .in-bar__next {
+      display: none;
+    }
   }
   /* the agreement: a round tick instead of the browser's grey square */
   .in-agree {
@@ -934,6 +1060,19 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     outline: 3px solid var(--game-yellow);
     outline-offset: 3px;
   }
+  /* pressed "Pay" without ticking: the whole row is outlined so it is obvious what is missing */
+  .in-agree {
+    position: relative;
+    margin: 4px -10px 0;
+    padding: 8px 10px;
+    border-radius: var(--radius-s);
+    border: 2px solid transparent;
+    font-size: 1.08rem;
+  }
+  .in-agree.is-invalid {
+    border-color: #ff8fb8;
+    background: rgba(255, 143, 184, 0.1);
+  }
   /* every screen slides in a little, so a long flow feels like it is moving */
   .in-step:not([hidden]) > * {
     animation: in-rise 0.4s var(--ease-out) both;
@@ -946,11 +1085,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       opacity: 0;
       transform: translateY(12px);
     }
-  }
-  /* the order card comes out like a printed ticket */
-  .in-step:not([hidden]) > .in-ticket {
-    transform-origin: top;
-    animation: in-print 0.7s var(--ease-out) both;
   }
   @keyframes in-print {
     from {
@@ -1591,51 +1725,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-pair {
       grid-template-columns: 1fr 1fr;
     }
-    /* order card: the game and what is included on one side, the price and the email on the other,
-       and a quiet footer with the agreement and the secure-payment line */
-    .in-ticket {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-      column-gap: clamp(28px, 4vw, 56px);
-      row-gap: clamp(14px, 2.6vh, 26px);
-      padding: clamp(18px, 3.4vh, 36px) clamp(20px, 3vw, 40px);
-    }
-    .in-ticket__head,
-    .in-ticket__deal {
-      grid-column: 1;
-    }
-    .in-ticket__deal {
-      display: block;
-      border: 0;
-      padding: 0;
-    }
-    .in-ticket__deal .in-ticket__total {
-      display: none;
-    }
-    .in-ticket__side {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      align-self: center;
-    }
-    .in-ticket__price {
-      display: block;
-    }
-    .in-ticket > .in-err,
-    .in-ticket__foot {
-      grid-column: 1 / -1;
-    }
-    .in-ticket__foot {
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      column-gap: 24px;
-    }
-    .in-ticket__foot .in-err {
-      grid-column: 1 / -1;
-      grid-row: 2;
-    }
-    .in-ticket__note {
-      text-align: end;
-      max-width: 34ch;
-    }
     .in-hero {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       column-gap: 56px;
@@ -2061,29 +2150,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-one .in-textarea {
       min-height: 98px;
     }
-    .in-ticket {
-      padding: 14px 20px;
-      gap: 10px;
-    }
-    .in-ticket__deal {
-      padding-block: 8px;
-    }
-    .in-ticket__head .in-count {
-      display: none;
-    }
-    .in-ticket {
-      row-gap: 8px;
-      padding: 12px 22px;
-    }
-    .in-ticket__price {
-      font-size: 2.6rem;
-    }
-    .in-ticket__side {
-      gap: 8px;
-    }
-    .in-ticket__foot {
-      padding-top: 8px;
-    }
     .in-one .in-photo-list img,
     .in-one .in-photo-list .in-photo-again {
       min-height: 120px;
@@ -2132,30 +2198,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
   }
   /* normal-height windows: give every screen room to breathe */
   @media (min-height: 641px) {
-    /* the order card: a little bigger and airier */
-    .in-pay {
-      max-width: 980px;
-    }
-    .in-ticket {
-      row-gap: clamp(18px, 3.4vh, 34px);
-      padding: clamp(22px, 4.4vh, 48px) clamp(22px, 3.6vw, 52px);
-    }
-    .in-ticket__game {
-      font-size: clamp(1.6rem, 4.4vh, 2.3rem);
-    }
-    .in-ticket .in-includes {
-      gap: 10px;
-      font-size: 1.12rem;
-    }
-    .in-ticket__side {
-      gap: 20px;
-    }
-    .in-ticket__side .in-input {
-      min-height: 62px;
-    }
-    .in-ticket__foot {
-      padding-top: clamp(16px, 2.8vh, 26px);
-    }
     .in-one {
       gap: clamp(16px, 3vh, 30px);
     }
@@ -2269,103 +2311,6 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-step:not([hidden]) > * {
       transition: none;
       animation: none;
-    }
-  }
-  /* 5: Basic or VIP, two cards side by side; the chosen one is outlined in yellow */
-  .in-pkgs {
-    margin: 0 0 14px;
-    padding: 0;
-    border: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .in-pkgs__legend {
-    padding: 0;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
-  .in-pkg {
-    position: relative;
-    display: grid;
-    align-content: start;
-    gap: 8px;
-    padding: 12px 14px;
-    border-radius: var(--radius-m);
-    border: 2px solid var(--in-line);
-    background: rgba(255, 255, 255, 0.04);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, transform 0.15s;
-  }
-  .in-pkg:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-  .in-pkg:has(input:checked) {
-    border-color: var(--game-yellow);
-    background: rgba(255, 214, 0, 0.08);
-  }
-  .in-pkg:has(input:focus-visible) {
-    outline: 3px solid var(--game-yellow);
-    outline-offset: 3px;
-  }
-  .in-pkg__head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .in-pkg__head strong {
-    font-size: 1.15rem;
-  }
-  .in-pkg__head .display {
-    color: var(--game-yellow);
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-  .in-pkg__lines {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 2px;
-    font-size: var(--fs-small);
-    color: var(--text-muted);
-    line-height: 1.35;
-  }
-  .in-pkg__extra {
-    color: var(--white);
-  }
-  .in-ticket__side .in-ticket__total {
-    justify-items: start;
-  }
-  .in-ticket__deal {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  /* phones: the package cards carry the price and what is included, so the card drops the repeats */
-  @media (max-width: 719px) {
-    .in-ticket__game {
-      font-size: 1.45rem;
-    }
-    .in-ticket__deal > .in-includes,
-    .in-ticket__side .in-ticket__total {
-      display: none;
-    }
-    .in-pkgs {
-      margin-bottom: 0;
-    }
-    .in-pkg {
-      padding: 10px 12px;
-      gap: 6px;
-    }
-    .in-pkg__lines {
-      font-size: 0.92rem;
-      line-height: 1.25;
-      gap: 4px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .in-ticket__side .in-ticket__total strong {
-      font-size: clamp(3rem, 8vh, 4.4rem);
     }
   }
 

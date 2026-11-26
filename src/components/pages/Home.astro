@@ -19,6 +19,7 @@ import Preloader from "../Preloader.astro";
 import { useCopy } from "../../content/copy";
 import { SITE, demoMedia } from "../../config/site";
 import { PACKAGES, PRICING, fillPrices } from "../../config/pricing";
+import { REVIEW_SCALE, summarizeReviews } from "../../lib/reviews";
 
 const { copy: COPY, locale, langTag } = useCopy(Astro.url);
 const media = demoMedia(locale);
@@ -47,13 +48,32 @@ const jsonLd = [
   },
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Personalized trivia game show for events",
-    serviceType: "Event entertainment",
+    "@type": "Game",
+    "@id": `${home}#game`,
+    name: "Tadam! Personalized Trivia Game Show",
+    genre: "Trivia",
     description: COPY.meta.description,
-    provider: { "@id": `${home}#org` },
-    areaServed: ["US", "GB", "IE", "EU"],
+    publisher: { "@id": `${home}#org` },
+    inLanguage: langTag,
+    image: new URL(media.heroScreenPoster, Astro.site).href,
     url: home,
+    // These customers reviewed the Tadam trivia game. Game is a Google-supported
+    // review type; the visible cards and summary use the same submitted data.
+    aggregateRating: { "@type": "AggregateRating", ...summarizeReviews(COPY.testimonials.items) },
+    review: COPY.testimonials.items.map((person) => ({
+      "@type": "Review",
+      "@id": `${home}#testimonial-${person.id}`,
+      url: `${home}#testimonial-${person.id}`,
+      author: {
+        "@type": "Person",
+        name: person.name,
+        image: new URL(person.image, Astro.site).href,
+      },
+      reviewBody: person.quote,
+      datePublished: person.reviewDate,
+      reviewRating: { "@type": "Rating", ratingValue: person.rating, ...REVIEW_SCALE },
+      inLanguage: langTag,
+    })),
     offers: PACKAGES.map((tier) => ({
       "@type": "Offer",
       name: tier.name,

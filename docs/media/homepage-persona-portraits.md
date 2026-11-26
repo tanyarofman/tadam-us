@@ -1,5 +1,10 @@
 # Homepage persona portraits
 
+Historical record: these generated placeholders were replaced on 2026-11-26 by
+Ilan's supplied Elizabeth, Noah and Susan WebPs. The old exports are removed from
+the published assets and remain in Git history. Current image provenance is in
+`homepage-customer-testimonials.md`.
+
 Generated with the built-in imagegen tool on 2026-11-25, in `photorealistic-natural` mode. These are original fictional people for the temporary homepage personas, not photographs of real customers. Ilan requested natural everyday photographs and removal of the public sample notice. Names and quotes remain temporary content for later replacement; do not treat them as verified customer reviews or add review schema.
 
 Original PNGs remain in the Codex generated-images directory. The checked-in WebPs are resized exports for the 72px circular portraits.

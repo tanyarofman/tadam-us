@@ -19,8 +19,8 @@ export const PRICING = {
   /** ISO code for structured data. */
   currencyCode: "USD",
   /** One personal game, one-time payment. */
-  base: 59,
-  vip: 99,
+  base: 99,
+  vip: 149,
   /** Days to ask for a full refund (docs/paddle/refund-policy.md). */
   refundDays: 14,
   /** Days the game link works before the game and its content are deleted. */

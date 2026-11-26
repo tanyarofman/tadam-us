@@ -37,10 +37,11 @@
 - `paddle-webhook.mjs` uses it when `RESEND_API_KEY` is set; without the key it falls back to the Netlify form "order" (spam-prone). If Resend fails, the webhook answers 502, the order stays unpaid and Paddle retries.
 - Tested locally against a stand-in Resend server: one email with the photo for a paid VIP order, the retry ignored, and Resend unreachable gave 502 with the order still awaiting payment.
 - Netlify environment variables: `RESEND_API_KEY` (needed), `ORDER_EMAIL_TO` (default hey@tadamevents.com), `ORDER_EMAIL_FROM` (default `Tadam! orders <orders@tadamevents.com>`, needs tadamevents.com verified in Resend > Domains; until then `onboarding@resend.dev`, which only delivers to the Resend account's own email).
-- Waiting for Tanya: create the Resend account and API key. Then the domain's DNS records go into the tadamevents.com zone in Netlify DNS.
+- Tanya created the Resend account and added tadamevents.com (region North Virginia, us-east-1; receiving off, so the Forward Email MX records stay in charge of hey@). Claude added Resend's 4 records to the Netlify DNS zone: TXT `resend._domainkey` (DKIM), CNAME `send` and `rsend` (to `*.forge.rmta.net`), TXT `_dmarc` `v=DMARC1; p=none;`. Resend was verifying when the session record was written.
+- Waiting for Tanya: the API key (Sending access) in Netlify as `RESEND_API_KEY`.
 
 ## Open
-- **Resend setup:** account, API key in Netlify, tadamevents.com verified (DNS records). Then a real test payment on the preview.
+- **Resend setup:** API key in Netlify; confirm tadamevents.com shows Verified. Then a real test payment on the preview.
 - Tanya: a test payment with Paddle's test card on the deploy preview.
 - Tanya: email sellers@paddle.com to change the company name (Velonova) before the live review, or open the live account under the right name.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).

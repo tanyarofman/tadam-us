@@ -19,8 +19,13 @@
 - A signed fake Paddle webhook marked the order paid (VIP, 149.00 USD); a forged signature got 401; a repeat got "already paid"; another email cannot overwrite an order (409).
 - Not checked: a real Paddle sandbox payment and the Netlify form email (both need the deploy preview and the Paddle keys).
 
+## Paddle sandbox and security (later the same day)
+- The sandbox ids from the Paddle setup session (PR #63: token `test_...`, Basic and VIP price ids) are the defaults on deploy previews and local runs (`src/config/checkout.ts`). Production uses only Netlify environment variables, so tadamevents.com never takes sandbox payments.
+- Security review fixes: an order can be sent again only by the browser that made it (a random secret, stored hashed); the paid package comes only from a recognized Paddle price id (anything else is saved as `needs-review`); an order is never changed once Paddle reported a payment.
+- The Netlify form `order` is public, so a fake "paid" email is possible: **before building a game, check the transaction id in the email against Paddle > Transactions.**
+
 ## Open
-- Tanya: Paddle sandbox keys and webhook (see the PR), then a test payment on the deploy preview.
+- Tanya: a Paddle sandbox webhook destination for the preview and its secret in Netlify (`PADDLE_WEBHOOK_SECRET`, scope Deploy previews), then a test payment on the deploy preview.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).
 - On the phone, the order card scrolls about 200 px (the consent tick is below the fold).
 - After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.

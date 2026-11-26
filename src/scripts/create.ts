@@ -50,6 +50,8 @@ interface State {
   email: string;
   consent: boolean;
   orderId: string;
+  /** Random secret sent with the order: only this browser can send the same order again. Never shown. */
+  token: string;
 }
 
 const KEY = "tadam-create-v1";
@@ -84,6 +86,7 @@ function init(root: HTMLElement, data: Data) {
     email: "",
     consent: false,
     orderId: "",
+    token: "",
   });
 
   // /create/?new starts from a clean slate (the saved draft and the last order number are dropped)
@@ -762,6 +765,7 @@ function init(root: HTMLElement, data: Data) {
     orderCta.setAttribute("aria-busy", "true");
     orderCta.textContent = c.order.sending;
     // one id per draft, so pressing again after a closed checkout does not create a second order
+    state.token ||= crypto.randomUUID();
     state.orderId ||= "TD-" + Date.now().toString(36).toUpperCase().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase();
     save();
     try {
@@ -770,6 +774,7 @@ function init(root: HTMLElement, data: Data) {
       const fd = new FormData();
       const fields: Record<string, string> = {
         "order-id": state.orderId,
+        token: state.token,
         package: pkg().id,
         email: state.email.trim(),
         event: event()?.label || "",

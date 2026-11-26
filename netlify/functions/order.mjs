@@ -3,6 +3,7 @@
 // "orders-test" on deploy previews and local runs, under the order id. Status "awaiting-payment" until Paddle's
 // webhook (paddle-webhook.mjs) marks it paid and emails the team.
 // See the orders: Netlify > tadam-us > Blobs, or ask Claude to list them with the Netlify CLI.
+import { createHash } from "node:crypto";
 import { getStore } from "@netlify/blobs";
 import { ORDER_FIELDS, ORDER_ID, PACKAGES, ordersStore } from "../lib/orders.mjs";
 
@@ -29,6 +30,10 @@ export default async (req, context) => {
   if (!ORDER_ID.test(order["order-id"])) return json(400, { error: "order-id" });
   if (!EMAIL.test(order.email) || order.email.length > 120) return json(400, { error: "email" });
   if (!PACKAGES.includes(order.package)) return json(400, { error: "package" });
+  // A random secret made with the draft in the browser: only that browser can send the same order again.
+  const token = field("token");
+  if (!/^[A-Za-z0-9-]{20,64}$/.test(token)) return json(400, { error: "token" });
+  const tokenHash = createHash("sha256").update(token).digest("hex");
   try {
     JSON.parse(order["brief-json"]);
   } catch {
@@ -46,9 +51,9 @@ export default async (req, context) => {
   const store = getStore({ name: ordersStore(context), consistency: "strong" });
   const id = order["order-id"];
   const previous = await store.get(`${id}/order.json`, { type: "json" });
-  // The same draft may be sent again (the customer closed the checkout and pressed again): allow it, but never let
-  // someone else overwrite an order, and never change one that is already paid.
-  if (previous && (previous.status === "paid" || previous.email.toLowerCase() !== order.email.toLowerCase())) {
+  // The same draft may be sent again (the customer closed the checkout and pressed again): allow it only from the
+  // browser that made it (same secret token), and never change an order once Paddle reported a payment.
+  if (previous && (previous.status !== "awaiting-payment" || previous.tokenHash !== tokenHash)) {
     return json(409, { error: "exists" });
   }
 
@@ -60,6 +65,7 @@ export default async (req, context) => {
   await store.setJSON(`${id}/order.json`, {
     ...order,
     status: "awaiting-payment",
+    tokenHash,
     photos: photos.map(({ field, name, type }) => ({ field, name, type })),
     createdAt: previous?.createdAt ?? now,
     updatedAt: now,

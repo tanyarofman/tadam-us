@@ -6,9 +6,11 @@
 // What it does: checks Paddle's signature, finds the order by the id the checkout carried (customData.orderId),
 // marks it paid in Netlify Blobs, and submits it with its photos to the Netlify form "order", which emails the team.
 // Payment and order are matched automatically; nobody has to compare emails.
+// The Netlify form is public, so anyone could post a fake "paid" email to it: before building a game, check the
+// transaction id in the email against Paddle > Transactions (or the order's status in Netlify Blobs).
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { getStore } from "@netlify/blobs";
-import { ORDER_FIELDS, ORDER_ID, ordersStore } from "../lib/orders.mjs";
+import { ORDER_FIELDS, ORDER_ID, ordersStore, packageOfPrice } from "../lib/orders.mjs";
 
 const EVENTS = new Set(["transaction.completed", "transaction.paid"]);
 /** Paddle signs each delivery with a timestamp; refuse old ones so a captured request cannot be replayed. */
@@ -26,13 +28,6 @@ function verify(raw, header, secret) {
   const a = Buffer.from(expected, "hex");
   const b = Buffer.from(parts.h1, "hex");
   return a.length === b.length && timingSafeEqual(a, b);
-}
-
-/** Price id → package id, from the same variables the page uses (src/config/checkout.ts). */
-function packageOf(priceId) {
-  if (priceId && priceId === process.env.PUBLIC_PADDLE_PRICE_BASIC) return "basic";
-  if (priceId && priceId === process.env.PUBLIC_PADDLE_PRICE_VIP) return "vip";
-  return "";
 }
 
 const money = (minor, currency) => (minor ? `${(Number(minor) / 100).toFixed(2)} ${currency || ""}`.trim() : "");
@@ -63,14 +58,19 @@ export default async (req, context) => {
     console.error(`Paddle webhook: order ${id} (transaction ${tx.id}) not found`);
     return new Response("order not found", { status: 404 }); // Paddle retries; the order may still be saving
   }
-  if (order.status === "paid") return new Response("already paid", { status: 200 });
+  if (order.status !== "awaiting-payment") return new Response(`already ${order.status}`, { status: 200 });
 
   const totals = tx.details?.totals || {};
-  const paidPackage = packageOf(tx.items?.[0]?.price?.id) || order.package;
+  // The package comes only from what Paddle says was bought, never from what the browser sent. An unknown price
+  // (or a package different from the order) is flagged for a person to check instead of being treated as paid.
+  const priceId = tx.items?.[0]?.price?.id;
+  const paidPackage = packageOfPrice(priceId);
+  const ok = !!paidPackage && tx.items?.length === 1;
+  if (!ok) console.error(`Paddle webhook: order ${id}, transaction ${tx.id}: unexpected items`, tx.items);
   const paid = {
     ...order,
-    status: "paid",
-    package: paidPackage,
+    status: ok ? "paid" : "needs-review",
+    package: paidPackage || `unknown price ${priceId || "-"}`,
     paid: money(totals.grand_total, totals.currency_code || tx.currency_code),
     transaction: tx.id || "",
     paidAt: new Date().toISOString(),
@@ -92,7 +92,7 @@ export default async (req, context) => {
   }
 
   await store.setJSON(`${id}/order.json`, paid);
-  console.log(`Order ${id} paid (${paid.package}, ${paid.paid}, ${paid.transaction})`);
+  console.log(`Order ${id} ${paid.status} (${paid.package}, ${paid.paid}, ${paid.transaction})`);
   return new Response("ok", { status: 200 });
 };
 

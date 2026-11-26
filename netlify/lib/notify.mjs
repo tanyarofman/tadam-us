@@ -90,16 +90,28 @@ async function resendPost(key, body, idempotencyKey, env) {
 
 const PACKAGE_NAMES = { basic: "Basic", vip: "VIP" };
 
-/** "2027-01-20" → "January 20, 2027"; anything else is shown as it is. */
+// The customer email is sent from our own address, so text the customer typed is kept short and plain: anyone who
+// pays could otherwise use it to send a message (a link, extra lines) under the Tadam! name.
+
+/** "2027-01-20" → "January 20, 2027"; anything else is left out. */
 function longDate(v) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(v || ""))) return "";
   const d = new Date(`${v}T00:00:00Z`);
-  return Number.isNaN(d.getTime()) ? v : d.toLocaleDateString("en-US", { timeZone: "UTC", dateStyle: "long" });
+  return Number.isNaN(d.getTime()) ? "" : d.toLocaleDateString("en-US", { timeZone: "UTC", dateStyle: "long" });
+}
+
+/** The game title on one line, at most 80 characters, with no links or web addresses; "" if nothing usable is left. */
+function safeTitle(v) {
+  let t = String(v || "").replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]+/g, " ").replace(/\s+/g, " ").trim();
+  if (/(https?:|www\.|\b[a-z0-9-]+\.(com|net|org|io|co|ly|xyz|info|app|me|link)\b)/i.test(t)) return "";
+  if (t.length > 80) t = `${t.slice(0, 77).trimEnd()}...`;
+  return t;
 }
 
 /** Plain text, American English, no dashes as punctuation (site copy rules). */
 export function customerEmailText(order) {
-  const title = order["game-title"] ? `"${order["game-title"]}"` : "your game";
+  const clean = safeTitle(order["game-title"]);
+  const title = clean ? `"${clean}"` : "your game";
   const lines = [
     "Hi,",
     "",
@@ -108,7 +120,8 @@ export function customerEmailText(order) {
     `Order number: ${order["order-id"]}`,
   ];
   if (PACKAGE_NAMES[order.package]) lines.push(`Package: ${PACKAGE_NAMES[order.package]}`);
-  if (order["event-date"]) lines.push(`Event date: ${longDate(order["event-date"])}`);
+  const date = longDate(order["event-date"]);
+  if (date) lines.push(`Event date: ${date}`);
   lines.push(
     "",
     "What happens next",

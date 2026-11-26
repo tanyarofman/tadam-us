@@ -89,89 +89,86 @@ export function fill(text: string, vars: Record<string, string | number>): strin
  */
 const p = (id: string, label: string, hint: string, placeholder: string): Prompt => ({ id, label, hint, placeholder });
 
-/** Shared by several events. */
+/** Shared by the person events. */
 const NICKNAMES = (pre: string) =>
   p(`${pre}-nick`, "What do people call {name}?", "Nicknames at home, with friends or at work. Add who uses which one.", "For example: Mom calls him Benji, and his friends call him B");
-const FAVORITES = (pre: string) =>
-  p(`${pre}-favs`, "What are {name}'s favorite things right now?", "Pick two or three: a food, a show, a song, a game, a team. Not sure? Skip and come back.", "For example: mac and cheese, any racing show, and the same playlist on repeat");
-const HABIT = (pre: string) =>
-  p(`${pre}-habit`, "What does {name} always do or always say?", "A habit, a phrase, a routine. Small things make the best questions.", "For example: says \"five more minutes\" every morning, and always takes the window seat");
-const FUNNY = (pre: string) =>
-  p(`${pre}-funny`, "What funny story do people tell about {name}?", "A mishap, a trip, a moment everyone remembers. A few lines are enough.", "For example: on a road trip he insisted on navigating, and we ended up in the wrong state");
-const SURPRISE = (pre: string, who = "the guests") =>
-  p(`${pre}-surprise`, `What would surprise ${who} about {name}?`, "A hidden talent, an odd fear, an unexpected favorite.", "For example: he collects perfume bottles and can name every one");
 
-/** Birthday (any age): also the default for a person. */
+/** Birthday (any age): also the default for a person. About this birthday, past birthdays and this year. */
 const BIRTHDAY: Prompt[] = [
+  p("b-age", "How old is {name} turning?", "And one thing that is new at this age.", "For example: 9, and finally allowed to ride a bike to school"),
   NICKNAMES("b"),
-  FAVORITES("b"),
-  p("b-hobby", "What does {name} love doing in their free time?", "A sport, a hobby, a collection. Add one detail only close people know.", "For example: plays soccer twice a week and keeps every trophy on one shelf"),
-  p("b-people", "Who are the important people in {name}'s life?", "Family, a best friend, a pet. First names are enough, and only people who will be happy to be in the game.", "For example: his sister Maya (9), his brother Theo (5), and Toffee the hamster"),
-  HABIT("b"),
-  p("b-known", "What is {name} known for?", "What they are great at, or what everyone asks them for help with.", "For example: the family math genius, and the only one who can fix the TV"),
-  FUNNY("b"),
-  p("b-year", "What happened in {name}'s life this past year?", "Something new, a win, a change, a first time.", "For example: started a new school, joined a league, and learned to make pancakes"),
-  SURPRISE("b"),
+  p("b-cake", "What is {name}'s dream birthday cake or meal?", "The flavor, the dish or the place they ask for every year.", "For example: chocolate cake with sprinkles, and pancakes in bed"),
+  p("b-past", "Which past birthday does everyone remember?", "A party, a surprise, a gift, something that went wrong.", "For example: the 6th birthday, when the bounce house deflated with all the kids inside"),
+  p("b-gift", "What is the best gift {name} ever got?", "A toy, a trip, something homemade, and who gave it.", "For example: a telescope from Grandpa, still on the windowsill"),
+  p("b-favs", "What is {name} into right now?", "Pick two or three: a food, a show, a song, a game, a team. Not sure? Skip and come back.", "For example: mac and cheese, a racing show, and the same playlist on repeat"),
+  p("b-year", "What happened in {name}'s life since the last birthday?", "Something new, a win, a change, a first time.", "For example: started a new school, joined a league, and learned to make pancakes"),
+  p("b-wish", "What would {name} wish for when blowing out the candles?", "A dream, a trip, something they keep asking for. A good guess is fine.", "For example: a puppy, for the fifth year in a row"),
+  p("b-people", "Who will be at the party, and how do they know {name}?", "Family, friends, classmates. First names are enough, and only people who will be happy to be in the game.", "For example: cousins Mia and Leo, and his best friend from soccer, Sam"),
 ];
 
+/** Milestone birthday (30, 40, 50 and up): the decades of a life. */
 const MILESTONE: Prompt[] = [
-  NICKNAMES("m"),
-  p("m-roots", "Where did {name} grow up, and what were they like as a kid?", "A hometown, a childhood nickname, what they wanted to be.", "For example: grew up in Ohio, wanted to be an astronaut, and never took off her baseball cap"),
+  p("m-age", "Which milestone is it, and how does {name} feel about it?", "The number, and what they say about it.", "For example: her 50th. She says she is turning 39 again"),
+  p("m-roots", "Where did {name} grow up?", "A hometown, a street, what those years were like.", "For example: a small town in Ohio, on a street with nine kids her age"),
+  p("m-kid", "What was {name} like as a kid?", "A nickname, a favorite toy, what they wanted to be.", "For example: \"Sunny\", always in a baseball cap, and sure she would be an astronaut"),
+  p("m-twenty", "What was {name} like at 20?", "The music, the hair, the car, the first job.", "For example: big hair, a red car that broke down every week, and a job at the record store"),
   p("m-work", "What does {name} do, and how did they get there?", "Their job or calling, and one turn along the way.", "For example: a nurse for 20 years, after starting out in law school"),
   p("m-people", "Who are the important people in {name}'s life?", "Partner, kids, grandkids, best friends. First names are enough.", "For example: her husband Mark, the twins Amy and Jo, and her best friend since college, Lin"),
-  FAVORITES("m"),
-  HABIT("m"),
   p("m-decade", "What were the big moments of the last ten years?", "A move, a wedding, a new baby, a trip, a big change. Pick two or three.", "For example: moved to Denver, became a grandmother, and ran her first half marathon"),
-  FUNNY("m"),
-  SURPRISE("m"),
+  p("m-proud", "What is {name} proudest of?", "Their family, a moment at work, something they built or got through.", "For example: going back to school at 42 and finishing her degree"),
+  p("m-next", "What does {name} still want to do?", "A bucket list item, a trip, a hobby they keep talking about.", "For example: see the northern lights, and learn the piano"),
 ];
 
+/** Bar or bat mitzvah (about 12 or 13): growing up, the preparation and the family. */
 const MITZVAH: Prompt[] = [
   NICKNAMES("y"),
   p("y-family", "Who is in {name}'s family?", "Parents, siblings with their ages, grandparents, pets. First names are enough.", "For example: Dad Adam, his sister Maya (9), his brother Theo (5), and Toffee the hamster"),
-  FAVORITES("y"),
+  p("y-portion", "What is {name}'s Torah portion about?", "Its name, or one line about the story. Skip it if you are not sure.", "For example: Noah's ark, which is funny because his name is Noah"),
+  p("y-prep", "How did {name} prepare for this day?", "Lessons, practice, a tutor, who helped, what was hard.", "For example: practiced every night with Grandpa on video calls"),
+  p("y-project", "Did {name} do a mitzvah project or volunteer?", "A cause they care about, and what they did. Optional.", "For example: collected 200 books for the children's hospital"),
   p("y-hobby", "What does {name} do after school?", "Sports, a hobby, a game, a collection. Add one detail only close people know.", "For example: plays in a soccer league, and goes bowling with friends on Fridays"),
-  p("y-words", "Which three words describe {name}?", "Add a short example for one of them.", "For example: sensitive, responsible, funny. He always checks that everyone got home"),
-  p("y-together", "What does {name} love doing with family?", "Something they do with a parent, a sibling or a grandparent.", "For example: watches every Formula 1 race with Mom, and boxes with his little brother in the living room"),
-  HABIT("y"),
-  FUNNY("y"),
-  p("y-prep", "What is special about this day for {name}?", "The Torah portion, a project, how they prepared, what they are excited about. Optional.", "For example: practiced the portion every night with Grandpa on video calls"),
+  p("y-favs", "What is {name} into right now?", "A food, a show, a game, a team. Not sure? Ask them, or skip and come back.", "For example: mac and cheese, FIFA on the Xbox, and Formula 1 with Mom"),
+  p("y-growing", "How has {name} grown up this year?", "Taller than a parent? A new responsibility, a first.", "For example: taller than Mom, and now walks his little brother to school"),
+  p("y-funny", "What funny story does the family tell about {name}?", "From when they were little or from this year. A few lines are enough.", "For example: he is waiting for his last baby teeth to fall out so he can get braces"),
 ];
 
+/** Farewell or retirement: the years at work and what comes next. */
 const FAREWELL: Prompt[] = [
-  p("f-role", "What does {name} do, and for how long?", "The role, the team, the years. And how they started, if you know.", "For example: head of finance for 18 years, and started as an intern"),
+  p("f-role", "What does {name} do, and for how long?", "The role, the team, the years.", "For example: head of finance for 18 years"),
+  p("f-first", "How did {name} start out here?", "The first day, the first role, the first desk.", "For example: started as an intern in the basement office with no windows"),
   p("f-known", "What is {name} known for at work?", "What they are the best at, or what everyone comes to them for.", "For example: the only person who understands the old billing system"),
   p("f-habit", "What does {name} always do or say at work?", "A desk ritual, a line in every meeting, a mug nobody else may touch.", "For example: starts every meeting with \"quick question\", and it is never quick"),
   p("f-people", "Who does {name} work closest with?", "First names and what they do together. Only people who will be happy to be in the game.", "For example: lunch every day with Dana and Mike from sales"),
   p("f-moments", "Which work moments does everyone remember?", "A big project, a crisis they saved, a celebration.", "For example: the night before the big launch, when she ordered pizza for 40 people"),
   p("f-funny", "Which mishap can everyone laugh about today?", "Something that became a legend at work, without hurting anyone.", "For example: the client video call where his cat walked across the keyboard"),
-  p("f-outside", "What does {name} love outside work?", "Family, a hobby, a team, a place they keep going back to.", "For example: gardening, the grandkids, and every baseball game on TV"),
+  p("f-miss", "What will the team miss most about {name}?", "And what will {name} miss least.", "For example: her Friday cookies. She will not miss the 7 a.m. calls"),
   p("f-next", "What's next for {name}?", "A new job, a trip, a hobby they have waited for. Skip it if it is a secret.", "For example: a sailing trip, and finally learning Spanish"),
-  SURPRISE("f", "colleagues"),
 ];
 
+/** Bachelor or bachelorette party: the couple, the crew and the last nights out. */
 const BACHELOR: Prompt[] = [
   NICKNAMES("h"),
   p("h-partner", "Who is {name} marrying, and how did they meet?", "The partner's first name and the short version of the story.", "For example: Sam. They met in line for concert tickets that were already sold out"),
   p("h-proposal", "How did the proposal happen?", "Who asked, where, and one detail that went wrong or right.", "For example: on a hike, and the ring almost fell off the trail"),
   p("h-crew", "Who is coming to the party, and how does {name} know them?", "School, college, work, family. First names are enough.", "For example: college roommates Kate and Jo, and Lisa from the first job"),
-  FAVORITES("h"),
-  HABIT("h"),
   p("h-legend", "What is {name}'s most legendary night out?", "Keep it to something {name} will laugh about in front of everyone.", "For example: the karaoke night that ended with a standing ovation from strangers"),
-  FUNNY("h"),
-  p("h-future", "What is {name} looking forward to after the wedding?", "Plans, a dream trip, who will do the cooking.", "For example: getting a dog, and Sam doing all the cooking"),
+  p("h-dating", "What was {name}'s dating life like before?", "A first-date disaster, a type, a famous line. Keep it kind.", "For example: always picked the restaurant, and always got lost on the way"),
+  p("h-quirk", "What does {name} do that drives their partner crazy?", "A habit, a mess, a song they sing too often.", "For example: leaves one bite of everything in the fridge"),
+  p("h-planning", "How is the wedding planning going?", "Who plans what, the theme, the guest list debate.", "For example: Sam has a color-coded spreadsheet, and the guest list changed six times"),
+  p("h-future", "What is {name} looking forward to after the wedding?", "The honeymoon, a dog, who will do the cooking.", "For example: two weeks in Greece, and Sam doing all the cooking"),
 ];
 
+/** Bridal or baby shower: the news, the partner and what is coming. */
 const SHOWER: Prompt[] = [
   p("s-occasion", "What are we celebrating for {name}?", "The wedding or the baby, and roughly when.", "For example: a baby girl, due in March"),
   p("s-partner", "Who is {name}'s partner, and how did they meet?", "First name and the short version of the story.", "For example: Chris. They met at a friend's barbecue and argued about the music"),
-  p("s-family", "Who is in {name}'s family?", "Parents, siblings, the people closest to them. First names are enough.", "For example: her mom Ruth, her big brother Dan, and her best friend Mia"),
-  FAVORITES("s"),
-  HABIT("s"),
+  p("s-news", "How did {name} share the news?", "The engagement or the pregnancy: who heard first, and how they reacted.", "For example: she told her mom with a baby onesie hidden in a pizza box"),
+  p("s-family", "Who are the people closest to {name}?", "Parents, siblings, best friends. First names are enough.", "For example: her mom Ruth, her big brother Dan, and her best friend Mia"),
   p("s-kid", "What was {name} like as a kid?", "A childhood nickname, a favorite toy, a dream job.", "For example: \"Bunny\", never let go of her stuffed giraffe, and wanted to be a vet"),
-  FUNNY("s"),
+  p("s-guess", "What kind of parent or spouse will {name} be?", "The fun one, the organized one, the one who cries at every movie.", "For example: the one with a color-coded schedule and snacks for everyone"),
+  p("s-cravings", "What is {name} craving or dreaming about right now?", "Pregnancy cravings, or the wedding detail they cannot wait for.", "For example: pickles with ice cream, every night at 11"),
   p("s-plans", "What plans can you share?", "Baby names on the list, the nursery, the honeymoon, the wedding theme. Only what they are happy to share.", "For example: the nursery is jungle themed, and the honeymoon is in Portugal"),
-  SURPRISE("s"),
+  p("s-funny", "What funny moment happened along the way?", "From the pregnancy, the engagement or the planning.", "For example: she fell asleep at her own engagement dinner"),
 ];
 
 const WEDDING: Prompt[] = [

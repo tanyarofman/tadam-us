@@ -108,19 +108,20 @@ updates) was published on November 26.
 - **Paddle review:** the wizard and checkout at `/create`, and a lawyer's review of `/terms` and `/privacy`, before the live account and the website submission. See "Paddle review status" above.
 - **Request indexing in Search Console** (URL inspection, then Request indexing). Google allows about 10 a day, and the quota ran out on 2026-11-24 and again on 2026-11-25, so continue on the next days in this order. Since the sitemap was resubmitted on 2026-11-25, Google also finds these pages on its own; the requests only move them up the line. Bing has all 43 already (2026-11-25), so this list is for Google only. Tick each one off here when done. The session "Tadam US: Search Console indexing" keeps this list.
   - **Already requested on 2026-11-24:** the home page, /blog/, `40th-birthday-party-ideas`, `50th-birthday-party-ideas`, `bachelorette-party-games`, `bridal-shower-games`, `bridal-shower-trivia-questions`, `general-knowledge-trivia-questions` (per `docs/history/2026-11-24-parallel-sessions.md`).
+  - **2026-11-26:** Tanya requested 10 URLs (Day 1 except `hanukkah-trivia`, plus `how-well-do-you-know-me-questions`); quota ran out after that. Next: `hanukkah-trivia` first, then the rest of Day 2. Always list the remaining pages as full https://tadamevents.com links.
   - **Day 1 (seasonal, December first):**
-    - [ ] `/blog/hanukkah-games/` (Hanukkah starts Dec 4)
+    - [x] `/blog/hanukkah-games/` (requested 2026-11-26) (Hanukkah starts Dec 4)
     - [ ] `/blog/hanukkah-trivia/`
-    - [ ] `/blog/christmas-trivia-questions/`
-    - [ ] `/blog/christmas-games-for-family/`
-    - [ ] `/blog/office-christmas-party-games/`
-    - [ ] `/blog/new-years-eve-games/`
-    - [ ] `/blog/super-bowl-party-games/` (should be indexed by mid-December)
-    - [ ] `/blog/30th-birthday-ideas/` (peaks in January)
-    - [ ] `/blog/60th-birthday-party-ideas/` (peaks in January)
-    - [ ] `/blog/pass-the-parcel-tasks/`
+    - [x] `/blog/christmas-trivia-questions/` (requested 2026-11-26)
+    - [x] `/blog/christmas-games-for-family/` (requested 2026-11-26)
+    - [x] `/blog/office-christmas-party-games/` (requested 2026-11-26)
+    - [x] `/blog/new-years-eve-games/` (requested 2026-11-26)
+    - [x] `/blog/super-bowl-party-games/` (requested 2026-11-26) (should be indexed by mid-December)
+    - [x] `/blog/30th-birthday-ideas/` (requested 2026-11-26) (peaks in January)
+    - [x] `/blog/60th-birthday-party-ideas/` (requested 2026-11-26) (peaks in January)
+    - [x] `/blog/pass-the-parcel-tasks/` (requested 2026-11-26)
   - **Day 2 (year-round US articles):**
-    - [ ] `/blog/how-well-do-you-know-me-questions/`
+    - [x] `/blog/how-well-do-you-know-me-questions/` (requested 2026-11-26)
     - [ ] `/blog/icebreaker-questions/`
     - [ ] `/blog/team-building-activities-for-work/`
     - [ ] `/blog/newlywed-game-questions/`

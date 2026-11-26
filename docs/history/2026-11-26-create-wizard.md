@@ -24,8 +24,17 @@
 - Security review fixes: an order can be sent again only by the browser that made it (a random secret, stored hashed); the paid package comes only from a recognized Paddle price id (anything else is saved as `needs-review`); an order is never changed once Paddle reported a payment.
 - The Netlify form `order` is public, so a fake "paid" email is possible: **before building a game, check the transaction id in the email against Paddle > Transactions.**
 
+## Webhook set up and tested on the preview (later the same day)
+- Paddle sandbox > Notifications: destination "Tadam! /create wizard (deploy preview 64)" for `https://deploy-preview-64--tadam-us.netlify.app/api/paddle-webhook`, events `transaction.completed` and `transaction.paid`. Its secret is in Netlify as `PADDLE_WEBHOOK_SECRET`, scope Deploy previews only.
+- A signed test notification for order TD-XCG7CGY4E (VIP) was accepted: the order became paid (149.00 USD) and was submitted to the Netlify form `order`.
+- **Problem: Netlify's spam filter put that submission in Spam**, so no email went out. Submissions sent from a server are likely to be flagged every time. Two `launch-list` signups (25 and 26 Nov) are in Spam as well. The email channel for paid orders needs a decision (see Open).
+- The checkout footer says data is shared with "Velonova": in Paddle sandbox > Settings > Account settings the company legal name is Velonova (website velonova.io) and Paddle locks it ("Email sellers@paddle.com to request a change").
+- Not done by Claude: a payment with Paddle's test card on the preview (left to Tanya).
+
 ## Open
-- Tanya: a Paddle sandbox webhook destination for the preview and its secret in Netlify (`PADDLE_WEBHOOK_SECRET`, scope Deploy previews), then a test payment on the deploy preview.
+- **Paid-order email:** Netlify Forms flags server-sent orders as spam. Options: an email-sending service (for example Resend or Postmark, free tiers) with its key in Netlify, or the browser sends the form at order time (before payment). Tanya to choose.
+- Tanya: a test payment with Paddle's test card on the deploy preview.
+- Tanya: email sellers@paddle.com to change the company name (Velonova) before the live review, or open the live account under the right name.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).
 - On the phone, the order card scrolls about 200 px (the consent tick is below the fold).
 - After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.

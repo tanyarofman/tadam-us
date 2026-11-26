@@ -106,6 +106,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       <h2 class="display h-card" id="h3" tabindex="-1" data-story-title></h2>
       <p class="lead" data-story-lead></p>
       <div class="in-prompts" data-prompts></div>
+      <p class="in-tip" data-story-tip hidden></p>
 
       <p class="in-err in-need" data-more-need hidden>
         <span data-more-need-text></span>
@@ -113,22 +114,11 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </p>
     </section>
 
-    <!-- 4: when (optional), then who hosts: two short screens -->
+    <!-- 4: who hosts the game (one screen) -->
     <section class="in-step in-one" data-step="4" aria-labelledby="h4" hidden>
-      <h2 class="display h-card" id="h4" tabindex="-1" data-details-title></h2>
-      <p class="lead" data-details-lead></p>
-      <div class="in-pair" data-sub="0">
-        <div class="in-field">
-          <label for="d-date">{c.details.date}</label>
-          <input id="d-date" class="in-input" type="date" data-detail="date" />
-          <p class="in-err" role="alert" data-date-err hidden>{c.details.datePast}</p>
-        </div>
-        <div class="in-field">
-          <label for="d-guests">{c.details.guests}</label>
-          <input id="d-guests" class="in-input" type="number" inputmode="numeric" min="1" max="2000" data-detail="guests" />
-        </div>
-      </div>
-      <div class="in-hostwrap" data-sub="1">
+      <h2 class="display h-card" id="h4" tabindex="-1">{c.details.hostTitle}</h2>
+      <p class="lead">{c.details.hostLead}</p>
+      <div class="in-hostwrap">
         <div class="in-hosts" role="radiogroup" aria-labelledby="h4" data-hosts></div>
         <p class="in-hostline" data-host-line aria-live="polite"></p>
       </div>
@@ -727,6 +717,12 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     font-size: var(--fs-small);
     color: var(--game-yellow);
     font-weight: 700;
+  }
+  /* first question only: short answers are fine, skip and come back */
+  .in-tip {
+    margin: 14px 0 0;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
   }
   .in-one .in-prompts {
     display: block;

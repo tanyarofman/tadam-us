@@ -1,6 +1,6 @@
 /**
  * The game creator at /create. The draft lives in this browser (localStorage) until the order is sent.
- * Steps: 0 start, 1 event, 2 who, 3 stories, 4 date + host, 5 order card (package + email),
+ * Steps: 0 start, 1 event, 2 who, 3 stories, 4 host, 5 order card (package + email),
  * 6 "checkout not connected" (only on a deploy without Paddle keys).
  * Sending the order: POST /api/order (brief + photos, stored in Netlify Blobs), then the Paddle checkout opens
  * with the order id in its custom data, and Paddle returns the customer to /create/thanks/.
@@ -173,8 +173,8 @@ function init(root: HTMLElement, data: Data) {
   }
 
   // ---------- navigation ----------
-  /** Step 3: one screen per story question (the last one is "anything else?"). Step 4: date, then host. */
-  const subCount = (step: number) => (step === 3 ? shape().prompts.length : step === 4 ? 2 : 1);
+  /** Step 3: one screen per story question (the last one is "anything else?"). Every other step is one screen. */
+  const subCount = (step: number) => (step === 3 ? shape().prompts.length : 1);
   const need = () => Math.max(0, data.material.minPrompts - answeredPrompts().length);
   function show(step: number, sub = 0, push = true) {
     step = Math.max(0, Math.min(MAX_STEP, step));
@@ -217,7 +217,7 @@ function init(root: HTMLElement, data: Data) {
     barNext.dataset.next = String(step);
     barNext.setAttribute("aria-disabled", "false");
     barNext.hidden = step === 1 && !state.eventId;
-    barNext.textContent = step === 4 && state.sub === 1 ? c.details.cta : step === 5 ? orderLabel() : c.next;
+    barNext.textContent = step === 4 ? c.details.cta : step === 5 ? orderLabel() : c.next;
   }
   $<HTMLElement>("[data-bar-back]")!.addEventListener("click", backward);
 
@@ -242,13 +242,7 @@ function init(root: HTMLElement, data: Data) {
     if (step === 1) renderEvents();
     if (step === 2) renderWho();
     if (step === 3) renderStories();
-    if (step === 4) {
-      renderDetails();
-      renderHosts();
-      $$<HTMLElement>('[data-step="4"] [data-sub]').forEach((el) => (el.hidden = Number(el.dataset.sub) !== state.sub));
-      $("[data-details-title]")!.textContent = state.sub === 0 ? c.details.whenTitle : c.details.hostTitle;
-      $("[data-details-lead]")!.textContent = state.sub === 0 ? c.details.whenLead : c.details.hostLead;
-    }
+    if (step === 4) renderHosts();
     if (step === 5) renderOrder();
   }
 
@@ -366,6 +360,9 @@ function init(root: HTMLElement, data: Data) {
       : fill(c.more.count, { i: state.sub + 1, n: all.length - 1 });
     $("[data-story-title]")!.textContent = fill(cur.label, { name });
     $("[data-story-lead]")!.textContent = fill(cur.hint, { name });
+    const tip = $<HTMLElement>("[data-story-tip]")!;
+    tip.textContent = shape().storiesLead;
+    tip.hidden = state.sub !== 0;
     promptsEl.innerHTML = "";
     for (const p of hub ? [] : [cur]) {
       const answered = committed.has(p.id);
@@ -620,28 +617,6 @@ function init(root: HTMLElement, data: Data) {
       }, 1000);
     });
   }
-
-  // ---------- 4: details ----------
-  const pad = (n: number) => String(n).padStart(2, "0");
-  const now = new Date();
-  const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-  $<HTMLInputElement>("#d-date")!.min = today; // the calendar does not offer days that have passed
-  function renderDetails() {
-    $<HTMLElement>("[data-date-err]")!.hidden = true;
-    $$<HTMLInputElement>("[data-detail]").forEach((el) => {
-      const k = el.dataset.detail as keyof State["details"];
-      if (el.type === "radio") el.checked = state.details[k] === el.value;
-      else el.value = state.details[k];
-    });
-  }
-  root.addEventListener("input", (e) => {
-    const el = e.target as HTMLInputElement;
-    if (el.dataset?.detail) {
-      state.details[el.dataset.detail as keyof State["details"]] = el.value;
-      if (el.dataset.detail === "date") $<HTMLElement>("[data-date-err]")!.hidden = !(el.value && el.value < today);
-      save();
-    }
-  });
 
   // ---------- 4: host ----------
   function renderHosts() {
@@ -920,10 +895,6 @@ function init(root: HTMLElement, data: Data) {
       if (from === 3) {
         const id = shape().prompts[state.sub].id;
         if (isDone(id)) commit(id);
-      }
-      if (from === 4 && state.sub === 0 && state.details.date && state.details.date < today) {
-        $<HTMLElement>("[data-date-err]")!.hidden = false;
-        return;
       }
       if (from === 2 && !state.name.trim()) {
         nameIn.setAttribute("aria-invalid", "true");

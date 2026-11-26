@@ -56,3 +56,10 @@
 - On the phone, the order card scrolls about 200 px (the consent tick is below the fold).
 - After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.
 - Paddle live: only once Paddle approves the site; then set the production variables.
+
+## Later on 2026-11-26: questions per event, no date/guests screen, simpler thanks page (Tanya)
+
+- **The "When is the event? / How many guests?" screen is removed.** Step 4 is now only "Who hosts the game?". The order form still has `event-date` and `guests` fields; they are always empty now.
+- **Each event has its own questions:** 9 per event plus the closing "anything else?" (about 10 screens), in `src/content/create.ts` (BIRTHDAY, MILESTONE, MITZVAH, FAREWELL, BACHELOR, SHOWER, WEDDING, ANNIVERSARY, FAMILY, REUNION, TEAM, COMPANY). Written from what Tanya learned on a real intake call: the buyer could not remember some answers (a show's name, a funny story) and did not want to name friends. So: easy facts first and stories later, one plain question per screen with a short hint, first names only, and a line on the first question saying short answers are fine and they can skip and come back (the draft saves in the browser). The call itself was only a reference; no question was taken from it.
+- The group and office "how many people?" field on the name screen became "The occasion (optional)".
+- **Thanks page:** one centered card (Option A of three mockups): headline, a Paid / We build / You review tracker, one sentence, one button, and a footer row with the order number, email and a link to the blog.

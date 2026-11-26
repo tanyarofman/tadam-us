@@ -39,8 +39,12 @@ Mobile testimonials now replace one another while scrolling, using the same
 sticky scene approach as How it works. Desktop cards, review content, the visible
 rating summary and Game schema are preserved. Details:
 `../history/2026-11-26-mobile-testimonial-scroll.md`.
+Ilan subsequently supplied `tadam-tom-demo-16x9.mp4` as the replacement for both
+full demo players: the popup and scrolling section now share that 93-second
+1080p recording and its matching poster. Details:
+`../history/2026-11-26-tom-demo-recording.md`.
 Production deployments resumed after the earlier Netlify credit block. The
-Netlify dashboard confirms main@13685d0 (PR #67, including the earlier homepage
+Netlify dashboard confirms main@4963084 (PR #68, including the earlier homepage
 updates) was published on November 26.
 
 ## Paddle review status (checked on the live site, 2026-11-24)

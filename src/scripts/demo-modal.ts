@@ -10,17 +10,25 @@ export function initDemoModal() {
   if (!dialog) return;
   const video = dialog.querySelector<HTMLVideoElement>("[data-demo-video]")!;
   let lastFocus: HTMLElement | null = null;
+  let scrollPosition = { left: 0, top: 0 };
+  let playbackAttempt = 0;
 
-  const open = (source?: string) => {
-    lastFocus = document.activeElement as HTMLElement;
+  const open = (source?: string, trigger?: HTMLElement) => {
+    if (dialog.open) return;
+    // Safari does not necessarily focus a link when it is tapped.
+    lastFocus = trigger ?? document.activeElement as HTMLElement;
+    scrollPosition = { left: window.scrollX, top: window.scrollY };
+    lockScroll(true, "demo");
     dialog.showModal();
-    lockScroll(true);
     track("demo_modal_open", { source });
-    dialog.querySelector<HTMLElement>(".dm-close")?.focus();
+    dialog.querySelector<HTMLElement>("#demo-title")?.focus({ preventScroll: true });
     if (video.ended) video.currentTime = 0;
     video.muted = false;
+    const attempt = ++playbackAttempt;
     // no click before (e.g. a /#demo link): browsers block sound, so start muted; if even that is blocked, the poster stays
-    video.play().catch(() => {
+    video.play().catch((error: unknown) => {
+      // Closing while play() is pending must not restart audio or muted playback.
+      if (!dialog.open || attempt !== playbackAttempt || !(error instanceof DOMException) || error.name !== "NotAllowedError") return;
       video.muted = true;
       video.play().catch(() => {});
     });
@@ -31,10 +39,12 @@ export function initDemoModal() {
   };
 
   dialog.addEventListener("close", () => {
+    playbackAttempt++;
     video.pause();
-    lockScroll(false);
+    lastFocus?.focus({ preventScroll: true });
+    window.scrollTo({ ...scrollPosition, behavior: "instant" });
+    lockScroll(false, "demo");
     track("demo_modal_close");
-    lastFocus?.focus();
   });
 
   // click outside the panel = close
@@ -62,14 +72,15 @@ export function initDemoModal() {
   });
 
   document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const t = (e.target as HTMLElement).closest<HTMLElement>("[data-open-demo]");
     if (!t) return;
     e.preventDefault();
     if (t.classList.contains("big-buzzer")) {
       t.classList.add("is-pressed");
       window.setTimeout(() => t.classList.remove("is-pressed"), 220);
-      window.setTimeout(() => open(t.dataset.source), 200);
-    } else open(t.dataset.source);
+      window.setTimeout(() => open(t.dataset.source, t), 200);
+    } else open(t.dataset.source, t);
   });
 
   // Blog articles link to "/#demo" so readers land straight in the demo.

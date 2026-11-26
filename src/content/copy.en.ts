@@ -271,10 +271,9 @@ export const COPY = {
   },
 
   modal: {
-    title: "Come see a demo",
+    title: "Demo Video",
     close: "Close",
     videoLabel: "The Tadam! demo: a recording of the game for Tom's 13th birthday",
-    caption: "A recording of the game for Tom's 13th birthday: the host is on the big screen, and the guests answer from their phones.",
     cta: "Create yours",
   },
 

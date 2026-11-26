@@ -34,8 +34,8 @@ test('header and footer anchors open the full steps and both packages', async ({
   await arrived(page, '#pricing');
   await revealed(page, '#pricing .reveal');
   await expect(page.locator('.package')).toHaveCount(2);
-  await expect(page.getByRole('article', { name: 'Basic' })).toContainText('$59');
-  await expect(page.getByRole('article', { name: 'VIP' })).toContainText('$99');
+  await expect(page.getByRole('article', { name: 'Basic' })).toContainText('$99');
+  await expect(page.getByRole('article', { name: 'VIP' })).toContainText('$149');
   for (const card of await page.locator('.package').all()) await expect(card).toHaveAttribute('href', '/create');
   await page.getByRole('link', { name: 'Start Now with Basic' }).locator('.price-num').click();
   await expect(page).toHaveURL(/\/create\/?$/);

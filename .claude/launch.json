@@ -1,7 +1,38 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "tadam-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev", "--", "--port", "4321"], "port": 4321 },
-    { "name": "tadam-preview", "runtimeExecutable": "npm", "runtimeArgs": ["run", "preview", "--", "--port", "4322"], "port": 4322 }
+    {
+      "name": "tadam-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "4321"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "tadam-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4322"
+      ],
+      "port": 4322
+    },
+    {
+      "name": "tadam-netlify",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "set -a; [ -f .env ] && . ./.env; set +a; exec netlify dev --offline --functions netlify/functions --port 8888 --target-port 4323 --command 'npx astro dev --port 4323'"
+      ],
+      "port": 8888
+    }
   ]
 }

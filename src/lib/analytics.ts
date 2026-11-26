@@ -15,7 +15,16 @@ export type TrackEvent =
   | "faq_open"
   | "blog_demo_click"
   | "blog_contact_click"
-  | "launch_list_submit";
+  | "launch_list_submit"
+  /* the game creator at /create */
+  | "create_start"
+  | "create_step"
+  | "create_prompt_answered"
+  | "create_order_submit"
+  | "create_order_error"
+  | "create_checkout_open"
+  | "create_checkout_error"
+  | "create_paid";
 
 type Gtag = (...args: unknown[]) => void;
 

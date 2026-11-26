@@ -8,8 +8,7 @@
 
 /**
  * The creation flow (wizard) behind every "Create yours" button: it lives on tadamevents.com and ends in the Paddle
- * checkout (Tanya, 2026-11-24: Base44 is not part of the flow). Until the wizard exists, /create is a placeholder
- * (src/pages/create.astro) that the wizard replaces.
+ * checkout (Tanya, 2026-11-24: Base44 is not part of the flow). The wizard: src/components/create/Flow.astro.
  */
 export const CREATE_URL = "/create";
 

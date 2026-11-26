@@ -1,0 +1,220 @@
+---
+/**
+ * /create/thanks/: where the Paddle checkout returns the customer after a successful payment.
+ * One centered card: headline, a 3-step tracker (paid is done), one sentence, one button, and a quiet footer row
+ * with the order number, email and a link to the blog. Shows the order number saved by /create in this browser
+ * (or ?order= from the return address) and clears the draft so a new game starts clean.
+ * The payment itself is confirmed by Paddle's webhook (netlify/functions/paddle-webhook.mjs), not by this page.
+ */
+import Base from "../../layouts/Base.astro";
+import { CREATE as c } from "../../content/create";
+import { emailLink } from "../../config/site";
+
+const t = c.thanks;
+const logo = { src: "/brand/tadam-logo-en.webp", w: 1000, h: 394 };
+const confetti = Array.from({ length: 18 }, (_, i) => i);
+---
+
+<Base title={t.metaTitle} description={t.lead} noindex>
+  <div class="confetti" aria-hidden="true">
+    {confetti.map((i) => <i style={`--x:${(i * 53) % 100}%;--d:${(i % 6) * 0.35}s;--h:${[52, 320, 190, 0][i % 4]};--r:${(i % 5) * 40}deg`} />)}
+  </div>
+  <main class="thanks">
+    <a href="/" class="thanks__logo" aria-label={c.ui.home}>
+      <img src={logo.src} alt={c.ui.brand} width={logo.w} height={logo.h} />
+    </a>
+
+    <div class="thanks__card">
+      <h1 class="display">{t.title}</h1>
+      <ol class="thanks__track" aria-label={t.stepsLabel}>
+        {
+          t.steps.map((s, i) => (
+            <li class:list={{ done: i === 0 }} aria-current={i === 1 ? "step" : undefined}>
+              <span class="thanks__n" aria-hidden="true">{i === 0 ? "✓" : i + 1}</span>
+              {s}
+            </li>
+          ))
+        }
+      </ol>
+      <p class="thanks__lead">{t.lead}</p>
+      <a class="btn btn-buzzer" href="/"><span class="btn-dot" aria-hidden="true"></span>{t.home}</a>
+      <p class="thanks__foot">
+        <span class="thanks__order" data-order-box hidden>{t.orderNo} <span data-order-id></span></span>
+        <a href={emailLink()}>{t.contact}</a>
+        <a href="/blog/">{t.ideas} →</a>
+      </p>
+    </div>
+  </main>
+  <script>
+    let order: { id?: string } = {};
+    try {
+      order = JSON.parse(localStorage.getItem("tadam-order") || "{}");
+      if (order.id) localStorage.removeItem("tadam-create-v1");
+    } catch {
+      /* blocked storage: the page still confirms the payment */
+    }
+    const fromUrl = new URLSearchParams(location.search).get("order");
+    if (fromUrl && /^TD-[A-Z0-9]{4,16}$/.test(fromUrl)) order.id = fromUrl;
+    const box = document.querySelector<HTMLElement>("[data-order-box]");
+    const el = document.querySelector<HTMLElement>("[data-order-id]");
+    if (order.id && box && el) {
+      el.textContent = order.id;
+      box.hidden = false;
+    }
+  </script>
+</Base>
+
+<style>
+  [hidden] {
+    display: none !important;
+  }
+  /* One centered card, like the home page hero: a big headline with air around it and one clear button. */
+  .thanks {
+    position: relative;
+    min-height: 100svh;
+    padding: clamp(14px, 3vh, 32px) var(--gutter) clamp(24px, 6vh, 64px);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    justify-items: center;
+  }
+  .thanks__logo img {
+    width: clamp(88px, 12vh, 124px);
+    height: auto;
+  }
+  .thanks__card {
+    align-self: center;
+    max-width: 760px;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+  .thanks h1 {
+    margin: 0;
+    max-width: 12ch;
+    color: var(--game-yellow);
+    font-size: clamp(2.6rem, 10vh, 5rem);
+    line-height: 1.02;
+    text-shadow: 0 4px 30px rgba(255, 230, 0, 0.25);
+  }
+  .thanks__track {
+    list-style: none;
+    margin: clamp(24px, 5vh, 44px) 0 clamp(18px, 3.4vh, 28px);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .thanks__track li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  /* the line between steps: yellow out of the finished step, white between the rest */
+  .thanks__track li + li::before {
+    content: "";
+    width: clamp(20px, 5vw, 56px);
+    height: 2px;
+    margin-inline: clamp(8px, 1.6vw, 14px);
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .thanks__track li.done + li::before {
+    background: linear-gradient(90deg, var(--game-yellow), rgba(255, 255, 255, 0.35));
+  }
+  .thanks__n {
+    width: 34px;
+    height: 34px;
+    flex: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    font-size: 1rem;
+  }
+  .thanks__track .done {
+    color: var(--game-yellow);
+  }
+  .thanks__track .done .thanks__n {
+    background: var(--game-yellow);
+    border-color: var(--game-yellow);
+    color: var(--stage-navy);
+  }
+  .thanks__lead {
+    margin: 0 0 clamp(24px, 4.5vh, 36px);
+    max-width: 34ch;
+    font-size: var(--fs-lead);
+    line-height: 1.35;
+    color: var(--text-muted);
+  }
+  .thanks__foot {
+    margin: clamp(18px, 3.4vh, 26px) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px 22px;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .thanks__order {
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .thanks__foot a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--game-yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+  .thanks__foot a:hover {
+    color: var(--game-yellow);
+  }
+  .confetti {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .confetti i {
+    position: absolute;
+    top: -20px;
+    left: var(--x);
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    background: hsl(var(--h) 100% 60%);
+    animation: fall 3.2s var(--d) ease-in both;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(calc(var(--r) + 540deg));
+      opacity: 0.2;
+    }
+  }
+  @media (max-width: 520px) {
+    .thanks h1 {
+      font-size: clamp(2.3rem, 11vw, 3rem);
+    }
+    .thanks__track {
+      font-size: 1rem;
+    }
+    .thanks__track li {
+      gap: 6px;
+    }
+    .thanks__n {
+      width: 28px;
+      height: 28px;
+      font-size: 0.85rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .confetti {
+      display: none;
+    }
+  }
+</style>

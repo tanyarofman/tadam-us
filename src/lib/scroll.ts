@@ -59,9 +59,13 @@ export function scrollToTarget(target: string | HTMLElement, offset = 0, immedia
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
-export function lockScroll(locked: boolean) {
-  if (lenis) locked ? lenis.stop() : lenis.start();
-  document.documentElement.style.overflow = locked ? "hidden" : "";
+const scrollLocks = new Set<string>();
+
+export function lockScroll(locked: boolean, owner = "page") {
+  locked ? scrollLocks.add(owner) : scrollLocks.delete(owner);
+  const isLocked = scrollLocks.size > 0;
+  if (lenis) isLocked ? lenis.stop() : lenis.start();
+  document.documentElement.style.overflow = isLocked ? "hidden" : "";
 }
 
 export { gsap, ScrollTrigger };

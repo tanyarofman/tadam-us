@@ -1,7 +1,7 @@
 ---
 /**
- * Demo modal: the full recording of a real game (Eyal's birthday, Tom's on /en/) with sound, and a "Create yours" CTA under it.
- * Opened by any [data-open-demo] (the buzzer and the demo button at the end of the page, and /#demo links).
+ * Full game recording with sound and a "Create yours" CTA.
+ * Opened by [data-open-demo] triggers and /#demo links.
  */
 import { useCopy } from "../content/copy";
 import { demoMedia } from "../config/site";
@@ -13,10 +13,10 @@ const c = COPY.modal;
 
 <dialog class="demo-modal" id="demo-modal" aria-labelledby="demo-title">
   <div class="dm-panel">
+    <h2 id="demo-title" class="display dm-title" tabindex="-1" autofocus>{c.title}</h2>
     <button type="button" class="dm-close" data-close aria-label={c.close}>
       <span aria-hidden="true">✕</span>
     </button>
-    <h2 id="demo-title" class="display dm-title">{c.title}</h2>
 
     <div class="dm-tv">
       <video
@@ -33,7 +33,6 @@ const c = COPY.modal;
         <source src={media.demo} type="video/mp4" />
       </video>
     </div>
-    <p class="dm-caption">{c.caption}</p>
 
     <a class="btn btn-buzzer dm-cta" href={CREATE_URL} data-track="cta_create_click" data-source="demo-modal">
       <span class="btn-dot" aria-hidden="true"></span>
@@ -121,11 +120,6 @@ const c = COPY.modal;
     height: auto;
     aspect-ratio: 16 / 9;
     background: #0b0f24;
-  }
-  .dm-caption {
-    margin: 0;
-    font-size: var(--fs-small);
-    color: var(--text-muted);
   }
   .dm-cta {
     min-width: min(320px, 100%);

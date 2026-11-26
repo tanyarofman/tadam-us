@@ -27,7 +27,16 @@ preview's expected X-Robots-Tag: noindex prevents preview indexing.
 Result: https://search.google.com/test/rich-results/result?id=gO-2g8lUTp3UbbTr4G709A
 
 This is the requested display follow-up to the production release authorized in
-this chat, delivered through PR #65 and Netlify's automatic main deploy.
+this chat, merged through PR #65 (5268359948317f4fb2ce665aa60dad212eafe609).
+
+Production is **blocked**, not published: Netlify skipped main@5268359 because
+the team has exhausted its billing-cycle credits. The currently published main
+is 092ebee. Netlify still serves existing sites using operational credits, which
+cannot fund production deploys. The connected leibov@gmail.com account has
+read-only billing access; a team owner must add credits or upgrade, then retry
+the skipped deploy. No billing changes were made. Preview #65 is working and
+contains the requested update. This release blocker is recorded alongside the
+follow-up demo popup work; production still needs a deploy after credits resume.
 
 Sources checked:
 - https://developers.google.com/search/docs/appearance/structured-data/review-snippet

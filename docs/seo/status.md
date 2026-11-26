@@ -31,6 +31,13 @@ Game is supported for Google review snippets; display is not guaranteed. Details
 `../history/2026-11-26-pricing-and-testimonials.md`. The historical live-site checks
 below predate these updates; `/create` remains the existing coming-soon page.
 
+The next homepage revision makes "Watch the demo" open Tom's English recording
+in the existing popup with sound, title "Demo Video", no caption, and scroll
+restoration on close. The scrolling demo is unchanged. Details:
+`../history/2026-11-26-watch-demo-popup.md`.
+Production deploys are currently blocked by Netlify team credit exhaustion;
+main@092ebee remains live until a team owner restores credits and deploys resume.
+
 ## Paddle review status (checked on the live site, 2026-11-24)
 - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
 - **Website requirements 1 to 11 pass:** product description, $99 price, `/terms` (Paddle as merchant of record), `/privacy`, `/refunds` (14 days), the legal name in the footer and on the legal pages with no country or address, email contact only, self-serve wording in the site and the blog, invented hosts.

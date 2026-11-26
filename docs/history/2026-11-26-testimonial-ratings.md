@@ -17,7 +17,13 @@ and links to the Organization as publisher; the Organization itself is not rated
 No claim is made that Google will necessarily display stars.
 
 This supersedes the text-only Service schema limitations in the earlier November
-26 record. Continues PR #61, which remains a deploy preview until approved to merge.
+26 record. Continues PR #61.
+
+Ilan explicitly requested merging this PR to production on November 26. The
+authorized release includes Basic $99 / VIP $149, the supplied customer photos
+and quotes, ratings and dates, and the Google-validated Game review schema.
+Merging to main triggers Netlify's automatic production deploy; verify the live
+homepage and production indexability once it publishes.
 
 Build and Astro checks pass (zero errors/warnings, one pre-existing hint). The
 built HTML and JSON-LD were checked for matching rating scales, all three dates,

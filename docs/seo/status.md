@@ -18,8 +18,8 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 ## Homepage updates, November 25 and 26, 2026
 
 PR #54 was merged and published on November 25: Basic/VIP packages, custom hosts,
-revised copy, demo cards, testimonials, navigation and scroll effects. PR #61
-prepares the November 26 follow-up: Basic $99 / VIP $149, and Ilan's supplied
+revised copy, demo cards, testimonials, navigation and scroll effects. Ilan approved
+PR #61 for production on November 26: Basic $99 / VIP $149, and his supplied
 customer quotes and portraits for Elizabeth W., Noah H. and Susan O. The customer
 testimonials replace the fictional samples and include the supplied 5/5 ratings,
 review dates and publication permission. Game review schema describes the actual

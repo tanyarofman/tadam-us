@@ -38,10 +38,12 @@
 - Tested locally against a stand-in Resend server: one email with the photo for a paid VIP order, the retry ignored, and Resend unreachable gave 502 with the order still awaiting payment.
 - Netlify environment variables: `RESEND_API_KEY` (needed), `ORDER_EMAIL_TO` (default hey@tadamevents.com), `ORDER_EMAIL_FROM` (default `Tadam! orders <orders@tadamevents.com>`, needs tadamevents.com verified in Resend > Domains; until then `onboarding@resend.dev`, which only delivers to the Resend account's own email).
 - Tanya created the Resend account and added tadamevents.com (region North Virginia, us-east-1; receiving off, so the Forward Email MX records stay in charge of hey@). Claude added Resend's 4 records to the Netlify DNS zone: TXT `resend._domainkey` (DKIM), CNAME `send` and `rsend` (to `*.forge.rmta.net`), TXT `_dmarc` `v=DMARC1; p=none;`. Resend was verifying when the session record was written.
-- Waiting for Tanya: the API key (Sending access) in Netlify as `RESEND_API_KEY`.
+- Tanya put the API key in Netlify as `RESEND_API_KEY` (secret, Functions, Production and Deploy Previews); Resend verified the domain.
+- **End-to-end test passed:** Tanya paid on the preview with Paddle's test card (Basic, $99). Order TD-XJD2JTIO9 became paid with transaction txn_01m8bxnv8k555vzke58ey2catb, and Resend shows "New order TD-XJD2JTIO9: basic 99.00 USD" delivered to hey@tadamevents.com.
+- The Paddle checkout let the buyer change the quantity. The sandbox Basic and VIP prices are now limited to quantity 1 (min 1, max 1), and the webhook sends any quantity other than 1 to "needs-review". **Do the same on the live prices.**
 
 ## Open
-- **Resend setup:** API key in Netlify; confirm tadamevents.com shows Verified. Then a real test payment on the preview.
+- **Live Paddle prices:** set quantity min 1 and max 1 when creating them.
 - Tanya: a test payment with Paddle's test card on the deploy preview.
 - Tanya: email sellers@paddle.com to change the company name (Velonova) before the live review, or open the live account under the right name.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).

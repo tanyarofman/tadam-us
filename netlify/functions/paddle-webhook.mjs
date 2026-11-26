@@ -66,7 +66,8 @@ export default async (req, context) => {
   // (or a package different from the order) is flagged for a person to check instead of being treated as paid.
   const priceId = tx.items?.[0]?.price?.id;
   const paidPackage = packageOfPrice(priceId);
-  const ok = !!paidPackage && tx.items?.length === 1;
+  // Exactly one game: a quantity above 1 (if the checkout ever allows it) goes to a person to check.
+  const ok = !!paidPackage && tx.items?.length === 1 && Number(tx.items[0].quantity ?? 1) === 1;
   if (!ok) console.error(`Paddle webhook: order ${id}, transaction ${tx.id}: unexpected items`, tx.items);
   const paid = {
     ...order,

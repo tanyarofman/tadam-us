@@ -11,7 +11,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { getStore } from "@netlify/blobs";
 import { ORDER_FIELDS, ORDER_ID, ordersStore, packageOfPrice } from "../lib/orders.mjs";
-import { sendOrderEmail } from "../lib/notify.mjs";
+import { sendCustomerEmail, sendOrderEmail } from "../lib/notify.mjs";
 
 const EVENTS = new Set(["transaction.completed", "transaction.paid"]);
 /** Paddle signs each delivery with a timestamp; refuse old ones so a captured request cannot be replayed. */
@@ -104,6 +104,13 @@ export default async (req, context) => {
   }
 
   await store.setJSON(`${id}/order.json`, paid);
+
+  // The customer's confirmation. Best effort: the order is already paid and the team has it, so a failure here is
+  // only logged (a retry by Paddle would stop at "already paid" anyway).
+  if (process.env.RESEND_API_KEY) {
+    const conf = await sendCustomerEmail(paid);
+    if (!conf.ok) console.error(`Paddle webhook: confirmation to the customer for ${id} failed (${conf.status}): ${conf.error}`);
+  }
   console.log(`Order ${id} ${paid.status} (${paid.package}, ${paid.paid}, ${paid.transaction})`);
   return new Response("ok", { status: 200 });
 };

@@ -42,6 +42,12 @@
 - **End-to-end test passed:** Tanya paid on the preview with Paddle's test card (Basic, $99). Order TD-XJD2JTIO9 became paid with transaction txn_01m8bxnv8k555vzke58ey2catb, and Resend shows "New order TD-XJD2JTIO9: basic 99.00 USD" delivered to hey@tadamevents.com.
 - The Paddle checkout let the buyer change the quantity. The sandbox Basic and VIP prices are now limited to quantity 1 (min 1, max 1), and the webhook sends any quantity other than 1 to "needs-review". **Do the same on the live prices.**
 
+## Customer confirmation email and cleanup (later the same day)
+- Each paid order now also sends the customer a confirmation through Resend ("Your Tadam! game is on its way (order TD-...)"), from `Tadam! <hey@tadamevents.com>`, replies to hey@. Copy matches the thanks page: order number, package, event date, the two next steps, Paddle sends the receipt; no prices, no delivery time. Best effort: a failure is logged and the order stays paid. Optional env var `CUSTOMER_EMAIL_FROM`.
+- Tested locally against the stand-in Resend server: team email (with photo) and customer email both sent once; Paddle's retry sent nothing.
+- Deleted the 3 test submissions in Netlify Forms at Tanya's request (her 2 launch-list signups and Claude's test order). Both forms are empty.
+- The team's order email landed in Gmail spam (new domain). Tanya and Ilan: "Not spam" plus a Gmail filter for orders@tadamevents.com. The customer email may also land in spam at first.
+
 ## Open
 - **Live Paddle prices:** set quantity min 1 and max 1 when creating them.
 - Tanya: a test payment with Paddle's test card on the deploy preview.

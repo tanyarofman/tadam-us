@@ -12,11 +12,13 @@ test('Watch the demo plays Tom with sound and closes at the same position', asyn
   const modal = page.locator('#demo-modal');
   const video = modal.locator('video');
   await expect(modal).toBeVisible();
-  await expect(modal.locator('source')).toHaveAttribute('src', '/demo/tadam-demo-en.mp4');
+  await expect(modal.locator('source')).toHaveAttribute('src', '/demo/tadam-tom-demo-16x9.mp4');
   await expect(modal.getByRole('heading', { name: 'Demo Video' })).toBeFocused();
   await expect(modal.getByRole('button', { name: 'Close', exact: true })).toHaveCSS('outline-style', 'none');
   await expect(modal.locator('.dm-caption')).toHaveCount(0);
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && !v.muted && v.currentTime > 0)).toBe(true);
+  expect(await video.evaluate((v: HTMLVideoElement) => [v.videoWidth, v.videoHeight])).toEqual([1920, 1080]);
+  expect(await video.evaluate((v: HTMLVideoElement) => v.duration)).toBeCloseTo(93.266, 1);
   expect(await page.evaluate(() => location.href)).toBe(before.url);
   expect(Math.abs(await page.evaluate(() => scrollY) - before.y)).toBeLessThan(2);
 
@@ -26,10 +28,17 @@ test('Watch the demo plays Tom with sound and closes at the same position', asyn
   await expect.poll(async () => Math.abs(await page.evaluate(() => scrollY) - before.y)).toBeLessThan(2);
   await expect(trigger).toBeFocused();
 
-  // Opening the popup must not change the separate, muted scrolling demo.
+  // The separate scrolling player loads the same recording and still starts muted.
   const inline = page.locator('#scene-3 .s3-vid');
-  await expect(inline.locator('source')).toHaveAttribute('src', '/demo/tadam-demo-en.mp4');
+  await expect(inline.locator('source')).toHaveAttribute('src', '/demo/tadam-tom-demo-16x9.mp4');
   expect(await inline.evaluate((v: HTMLVideoElement) => v.muted)).toBe(true);
+  await page.locator('#scene-3').evaluate(section => {
+    const pin = section.querySelector('.scene-pin') as HTMLElement;
+    scrollTo({ top: section.getBoundingClientRect().top + scrollY + (section.clientHeight - pin.offsetHeight) * 0.92, behavior: 'instant' });
+  });
+  await expect.poll(() => inline.evaluate((v: HTMLVideoElement) => !v.paused && v.muted && v.currentTime > 0)).toBe(true);
+  expect(await inline.evaluate((v: HTMLVideoElement) => [v.videoWidth, v.videoHeight])).toEqual([1920, 1080]);
+  expect(await inline.evaluate((v: HTMLVideoElement) => v.duration)).toBeCloseTo(93.266, 1);
 });
 
 test('direct demo links keep the page locked through the intro and support keyboard closing', async ({ page }) => {

@@ -26,8 +26,8 @@ export const demoMedia = (_locale: "en" = "en") => ({
   heroScreenPoster: "/demo/hero-screen-en-poster.jpg",
   heroPhone: "/demo/hero-phone-en-v2.mp4",
   heroPhonePoster: "/demo/hero-phone-en-poster.jpg",
-  demo: "/demo/tadam-demo-en.mp4",
-  demoPoster: "/demo/tadam-demo-en-poster.webp",
+  demo: "/demo/tadam-tom-demo-16x9.mp4",
+  demoPoster: "/demo/tadam-tom-demo-16x9-poster.jpg",
 });
 
 /** mailto: link for the contact links (footer, blog articles, legal pages). */

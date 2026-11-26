@@ -35,7 +35,7 @@ You need three things:
 |---|---|---|---|
 | **Setup time** | About an hour: print cards, write the answer key | Two to three hours: build slides with photos | Depends on the tool: send the questions and answers |
 | **Scoring** | Swap cards and mark, then add up | The host counts answers by hand | Automatic, with live scores |
-| **Remote guests** | Only if you mail or email cards ahead | Yes, by sharing the screen on a video call | Ask the tool you use before the shower |
+| **Remote guests** | Only if you mail or email cards ahead | Yes, by sharing the screen on a video call | Yes with Tadam: share the screen on a video call and they answer on their phones |
 
 Run it after the meal, while guests are still seated. If you have more games planned, our list of [25 bridal shower games guests actually enjoy](/blog/bridal-shower-games/) helps you choose what goes before and after.
 

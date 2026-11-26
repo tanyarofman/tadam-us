@@ -218,6 +218,14 @@ export const COPY = {
         a: "A TV or projector connected to a computer, an internet connection and a few minutes of everyone's attention. Guests scan the code on the screen and play in their phone's browser, with nothing to download.",
       },
       {
+        q: "Can guests who aren't at the party play?",
+        a: "Yes. Share the big screen on your video call (Zoom, Google Meet or Microsoft Teams), and guests at home join from their phones with the code on the screen or the game link, just like everyone in the room. They answer the same questions and appear on the same leaderboard.",
+      },
+      {
+        q: "How is Tadam different from Kahoot or Jackbox?",
+        a: "With Kahoot you build the quiz yourself, and someone has to run it: after each answer, a parent or the organizer usually steps in to tell the story behind it. In Tadam, the host on the screen does that for you. It asks each question, and once everyone has answered, it tells the story behind it, so nobody has to host and you get to enjoy the party too. Jackbox sells packs of party games with the same content for everyone, while Tadam is one game made from your guest of honor's stories and photos.",
+      },
+      {
         q: "How soon do we get the game?",
         a: "Within {deliveryHours} hours of payment. Create it at least two days before the party to be safe.",
       },

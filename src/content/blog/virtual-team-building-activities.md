@@ -124,6 +124,6 @@ A few rules that keep it working:
 
 ## Where does a live trivia game fit for remote and hybrid teams?
 
-A live trivia game about the team fits best when people are in the same room, like an offsite, a holiday party or a team day at the office. For a hybrid team, those days are the moments everyone remembers.
+A live trivia game about the team works in one room, on a video call or both at once, like an offsite, a holiday party or a team day with half the team at home. For a hybrid team, it puts everyone in the same game.
 
-[Tadam!](/) is for that kind of game: you type in stories and inside jokes about the team, add photos, pick a host, and review the questions of your live trivia game on the big screen. Everyone in the room scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. We haven't confirmed yet whether people outside the room can join the same game, so for now Tadam is for the days the team gets together. If you need a fully remote option, write to us at hey@tadamevents.com and ask before you plan.
+[Tadam!](/) is for that kind of game: you type in stories and inside jokes about the team, add photos, pick a host, and review the questions of your live trivia game on the big screen. Everyone in the room scans a code and plays from their phone with no app, and the leaderboard shows who knows the team best. People outside the room join the same game: share the big screen on your Zoom, Google Meet or Microsoft Teams call, and they play from their phones like everyone else.

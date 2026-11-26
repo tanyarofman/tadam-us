@@ -151,7 +151,6 @@ updates) was published on November 26.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** built on 2026-11-26 (branch `feat/create-wizard`, see `../history/2026-11-26-create-wizard.md`): English wizard ported from the tadam-il draft, Basic or VIP on the order card, orders in Netlify Blobs, Paddle checkout with automatic order matching. Waiting for Tanya: review on the deploy preview, Paddle sandbox keys, and the final events, hosts and questions.
 - **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
-- **FAQ wording:** whether remote guests can play, and how to compare Tadam with Kahoot or Jackbox. (How far ahead to order is answered since PR #13: the game arrives within 24 hours.)
 - **A second demo** (a wedding or a 40th) to match the main US searches. Optional.
 - **Real stories** from events, to replace the labeled example scenarios.
 - **Demo video:** the home page hero shows "Play GTA VI" as an answer (a real game title). Consider re-recording that question.

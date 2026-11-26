@@ -17,7 +17,7 @@ Changed today: no country or address on the site (Tanya's decision, see `docs/hi
 |---|---|---|---|
 | 1 | Site is live on HTTPS (not "coming soon") | Netlify project `tadam-us` on `tadamevents.com`, HTTPS on | **Done.** The home page is the self-serve site (PR #13). Only `/create` says "Coming soon" (see row 12) |
 | 2 | Clear description of the product | Home page: hero, How it works, What's included | **Done** (PR #13) |
-| 3 | Prices visible without logging in | Home page: "$99 per game, one-time, with no subscription" | **Done** (PR #13) |
+| 3 | Prices visible without logging in | Home page: Basic $99 and VIP $149, one-time, no subscription | **Done** (PR #13) |
 | 4 | Terms of Service, public, linked in the footer | `/terms` | **Done** (PR #12), lawyer review still to do |
 | 5 | Terms name Paddle as the merchant of record | `/terms` section 3 | **Done** (PR #12) |
 | 6 | Legal business name in the terms and footer, **exactly** as on the Paddle account | `/terms`, `/privacy`, footer: "© 2026 Tanya Rofman. Payments processed by Paddle.com." | **Done** (PR #12, footer without country since PR #24) |
@@ -26,7 +26,7 @@ Changed today: no country or address on the site (Tanya's decision, see `docs/hi
 | 9 | Support contact on the site | Footer + legal pages: hey@tadamevents.com (forward is live) | **Done.** No Messenger or Facebook link left on the home page |
 | 10 | The product fits Paddle (software, not a standalone human service) | Self-serve wording on the home page and in the blog; no "we build it for you" | **Done** (PRs #13, #17, #21) |
 | 11 | No impersonation of real people (deepfakes, voice cloning) | Ready-made / invented hosts only, `/terms` section 6 | **Done** (PR #12) |
-| 12 | The wizard and checkout pages use the same story (self-serve, 30 days, $99) | English wizard (Tanya), at `/create` | **To do.** `/create` is a "Coming soon" page for now |
+| 12 | The wizard and checkout pages use the same story (self-serve, Basic $99 / VIP $149, 30 or 120 days) | English wizard (Tanya), at `/create` | **To do.** `/create` is a "Coming soon" page for now |
 | 13 | Checkout domain submitted in Paddle: Checkout > Website approval | `tadamevents.com` | **To do,** after rows 12 and the live account |
 
 ## Account requirements

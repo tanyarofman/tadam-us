@@ -11,7 +11,7 @@ Plan step B.1 and B.2 from `docs/paddle/HANDOFF.md`, done by Claude in Tanya's b
 - Default payment link: https://tadamevents.com/create
 
 ## Why these prices
-The site moved to two packages (Basic and VIP). Open PR #61 sets them to $99 and $149; `main` still says $59 and $99. The sandbox follows #61. Sandbox prices are easy to change.
+The site moved to two packages. Tanya confirmed on 2026-11-26: **Basic $99, VIP $149** (on the site since PR #61). The single "$99 per game" in the older `docs/paddle/` drafts was updated to match.
 
 ## Open
 - The sandbox account is named "Velonova" and already had velonova.io approved: it's Tanya's other business. The default payment link is account-wide. For the live account, decide which legal name sells Tadam (the site says Tanya Rofman).

@@ -18,9 +18,9 @@ export const PADDLE = {
   sandbox: {
     clientToken: "test_1cdab59c87fd6e5f38edf3d019d",
     prices: {
-      /** $99, one-time. Must match PRICING.base in pricing.ts (main says $59 until PR #61 lands). */
+      /** $99, one-time. Must match PRICING.base in pricing.ts. */
       basic: "pri_01m8bgmwct32162zqxk7q9s3bv",
-      /** $149, one-time. Must match PRICING.vip (main says $99 until PR #61 lands). */
+      /** $149, one-time. Must match PRICING.vip in pricing.ts. */
       vip: "pri_01m8bgkrvfe70qyd87hvg93cf8",
     },
   },

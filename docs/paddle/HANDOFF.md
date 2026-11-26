@@ -12,7 +12,7 @@ Written 2026-11-24 for the next session. **Work happens in `tanyarofman/tadam-us
 | Seller | Tanya Rofman, עוסק מורשה (Israeli VAT-registered sole trader), business number 312896764, Ein Gedi 2/2, Tel Aviv 6203602, Israel. The number goes only in Paddle forms, never on public pages |
 | Site | `https://tadamevents.com` (repo `tadam-us`, Netlify `tadam-us`). heytadam.com stays the Israeli site |
 | Buying flow | **Self-serve**: "Create yours", English wizard (Tanya ports it from the Hebrew wizard), Paddle checkout on tadamevents.com, the game arrives by email as a private link |
-| Price | **$99 per game**, one-time. Other currencies: Paddle's automatic conversion |
+| Price | Two packages, one-time: **Basic $99, VIP $149** (Tanya, 2026-11-26; was a single $99 price). Other currencies: Paddle's automatic conversion |
 | Delivery | Within **24 hours** of payment |
 | Refunds | Full refund within **14 days** of purchase, no questions, no exclusions |
 | Retention | Game content and the game link kept **30 days**, then deleted |
@@ -62,7 +62,7 @@ The site is still the copy of the Israeli done-for-you story. Paddle's domain re
 4. "Create yours" points to the wizard route (placeholder page until the wizard exists, or the wizard itself).
 
 **B. Paddle sandbox (Tanya + Claude)**
-1. Tanya opens a sandbox account (sandbox-vendors.paddle.com) and creates the product "Tadam! personal game", one-time $99.
+1. Tanya opens a sandbox account (sandbox-vendors.paddle.com); the products "Tadam! Basic game" ($99) and "Tadam! VIP game" ($149), one-time (done 2026-11-26, IDs in `src/config/paddle.ts`).
 2. Tanya creates a client-side token and a webhook destination; Claude tells her exactly where. Secret keys never go in chat or code: use Netlify environment variables (or a network secret).
 3. Claude adds Paddle.js overlay checkout (`Paddle.Initialize({ token })`, `Paddle.Checkout.open({ items: [{ priceId }], customer: { email }, customData: { gameId } })`) at the end of the wizard.
 4. Webhook endpoint (Netlify Function, or Supabase): verify the `Paddle-Signature`, handle `transaction.completed` (mark the game paid, hand it to production in Base44) and refund/adjustment events (disable the game link).
@@ -79,7 +79,7 @@ The site is still the copy of the Israeli done-for-you story. Paddle's domain re
 ## 5. Open items and risks
 
 - **Ilan:** opt out of AI training at HeyGen (support) and Base44 (setting or plan), ask ElevenLabs about training and retention, confirm what data each service gets, sign DPAs, make sure 30-day deletion also deletes files at the vendors. Details: `ai-vendors.md`.
-- **Wizard:** the English wizard must match the site (self-serve, $99, 24 h, 30 days, invented hosts only). It needs a real "after payment" screen.
+- **Wizard:** the English wizard must match the site (self-serve, Basic $99 / VIP $149, 24 h, 30 days Basic / 120 days VIP). It needs a real "after payment" screen.
 - **Paddle may treat it as a human service** (the team reviews the game before delivery): keep self-serve wording and the honest 24-hour promise.
 - **Generative AI scrutiny:** describe it as a party game, stock voices and hosts, no real-person likeness (`paddle-application.md`).
 - **Children's data:** buyers 18+, consent clause, 30-day deletion; lawyer review.

@@ -22,9 +22,11 @@ permission to publish the quotes, first names with last-name initials, and photo
 | Noah H. | "I rate it 5 out of 5" | 5/5 | 2026-10-09 |
 | Susan O. | "Yes, 5 stars, love it" | 5/5 | 2026-09-14 |
 
-Cards show five stars and the corresponding review date. The visible summary is
-5/5 from these three reviews, calculated from the same data as aggregateRating.
-Each Review includes its supplied rating, scale and date. The reviewed entity is
+At Ilan's request, cards show five stars without dates. The visible summary below
+the cards is 5/5 from these three reviews, calculated from the same data as
+aggregateRating. Each Review includes its supplied rating and scale; optional
+datePublished is omitted to match the cards. Supplied dates are retained above
+and in the source content for provenance. The reviewed entity is
 the actual Tadam trivia Game, a Google-supported review type. Its Organization
 publisher has no ratings attached. Google decides whether to display rich results.
 

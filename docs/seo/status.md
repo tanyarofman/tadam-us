@@ -24,7 +24,10 @@ customer quotes and portraits for Elizabeth W., Noah H. and Susan O. The custome
 testimonials replace the fictional samples and include the supplied 5/5 ratings,
 review dates and publication permission. Game review schema describes the actual
 Tadam trivia game and matches the visible cards and 5/5 average across these three
-reviews. Game is supported for Google review snippets; display is not guaranteed. Details:
+reviews. The follow-up display revision removes dates from the cards and optional
+review markup and moves the existing 5/5 summary below the cards. See
+`../history/2026-11-26-testimonial-display.md`.
+Game is supported for Google review snippets; display is not guaranteed. Details:
 `../history/2026-11-26-pricing-and-testimonials.md`. The historical live-site checks
 below predate these updates; `/create` remains the existing coming-soon page.
 

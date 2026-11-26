@@ -70,7 +70,7 @@ const jsonLd = [
         image: new URL(person.image, Astro.site).href,
       },
       reviewBody: person.quote,
-      datePublished: person.reviewDate,
+      // Optional review dates are omitted to match the date-free cards.
       reviewRating: { "@type": "Rating", ratingValue: person.rating, ...REVIEW_SCALE },
       inLanguage: langTag,
     })),

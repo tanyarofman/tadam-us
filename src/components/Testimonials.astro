@@ -4,7 +4,6 @@ import { REVIEW_SCALE, summarizeReviews } from "../lib/reviews";
 const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.testimonials;
 const ratingSummary = summarizeReviews(c.items);
-const reviewDate = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
 ---
 
@@ -12,7 +11,6 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
   <div class="testimonials-pin" data-scroll-pause="start">
     <div class="container">
       <h2 id="testimonials-title" class="display h-scene testimonials-title reveal">{c.title}</h2>
-      <p class="rating-summary reveal">{ratingSummary.ratingValue}/{ratingSummary.bestRating} from these {ratingSummary.reviewCount} customer reviews</p>
       <div class="testimonials-grid">
         {c.items.map((person, i) => (
           <figure id={`testimonial-${person.id}`} class="testimonial reveal" style={`--accent:${accents[i]}`}>
@@ -25,11 +23,12 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
             <blockquote><p>{person.quote}</p></blockquote>
             <figcaption>
               <img class="avatar" src={person.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
-              <span><strong>{person.name}</strong><span class="event">{person.event}</span><time datetime={person.reviewDate}>{reviewDate.format(new Date(`${person.reviewDate}T00:00:00Z`))}</time></span>
+              <span><strong>{person.name}</strong><span class="event">{person.event}</span></span>
             </figcaption>
           </figure>
         ))}
       </div>
+      <p class="rating-summary reveal">{ratingSummary.ratingValue}/{ratingSummary.bestRating} from these {ratingSummary.reviewCount} customer reviews</p>
     </div>
   </div>
 </section>
@@ -37,7 +36,7 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
 <style>
   .testimonials-pin { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(72px, 10vh, 110px); }
   .testimonials-title { max-width: 24ch; margin-inline: auto; font-size: var(--fs-story-title); text-align: center; }
-  .rating-summary { margin: 14px 0 0; color: var(--text-muted); font-size: 1.3rem; text-align: center; }
+  .rating-summary { margin: 24px 0 0; color: var(--text-muted); font-size: 1.3rem; text-align: center; }
   .testimonials-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .testimonial { display: flex; flex-direction: column; margin: 0; padding: 22px 30px 30px; background: linear-gradient(150deg, #163883, #0a1d54); border: 2px solid var(--surface-border); border-top: 3px solid var(--accent); border-radius: 12px 32px 12px 32px; }
   .testimonial-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -48,6 +47,5 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
   .avatar { flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
   figcaption strong { display: block; font-size: 1.3rem; }
   .event { display: block; color: var(--text-muted); font-size: 1.15rem; }
-  time { display: block; margin-top: 4px; color: var(--text-muted); font-size: 1rem; }
   @media (max-width: 760px) { .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; } }
 </style>

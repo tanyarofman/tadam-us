@@ -126,7 +126,7 @@ export function customerEmailText(order) {
     "",
     "What happens next",
     "1. We build your game from the stories and photos you sent.",
-    "2. The game arrives by email, and you can ask for changes before the event.",
+    "2. The game arrives by email within 72 hours, and you can ask for changes before the event.",
     "",
     "Your receipt comes separately from Paddle, our payment provider.",
     "",

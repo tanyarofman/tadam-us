@@ -21,6 +21,14 @@ Built HTML confirms the summary follows all three cards, dates are absent, and
 all three individual ratings plus the 5/5 aggregate are retained. Visual review
 confirms the date-free cards and summary fit within the paused desktop section.
 
+Google's Rich Results Test on deploy preview #65 detects four valid review-snippet
+items and one valid Organization after removing dates. Page fetch succeeds; the
+preview's expected X-Robots-Tag: noindex prevents preview indexing.
+Result: https://search.google.com/test/rich-results/result?id=gO-2g8lUTp3UbbTr4G709A
+
+This is the requested display follow-up to the production release authorized in
+this chat, delivered through PR #65 and Netlify's automatic main deploy.
+
 Sources checked:
 - https://developers.google.com/search/docs/appearance/structured-data/review-snippet
 - https://developers.google.com/search/docs/appearance/structured-data/sd-policies

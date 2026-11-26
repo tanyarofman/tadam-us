@@ -14,7 +14,7 @@ Tanya has one legal entity, **Tanya Rofman** (sole trader), with the brand/displ
 
 ## Open
 - **Legal name:** Account settings show legal name "Velonova" and website velonova.io, locked in the dashboard. Tanya emails sellers@paddle.com to set legal name Tanya Rofman, display name Velonova, and asks whether card statements can show the product name (buyers of Tadam! may not recognize "Velonova").
-- **Verification** (Get started, step 04): submitted by Tanya on 26 Nov 2026 (she entered her personal details and ID herself, legal name Tanya Rofman). Waiting for Paddle's answer.
-- **Website approval:** tadamevents.com submitted in live on 26 Nov 2026, status "In review". The lawyer review of the legal pages is still open; if Paddle or the lawyer asks for changes, update `/terms`, `/privacy`, `/refunds`.
+- **Verification** (Get started, step 04): submitted by Tanya on 26 Nov 2026 (she entered her personal details and ID herself, legal name Tanya Rofman). **Verified** the same day.
+- **Website approval:** tadamevents.com submitted in live on 26 Nov 2026, **approved** the same day for checkout and Apple Pay. The lawyer review of the legal pages is still open; if Paddle or the lawyer asks for changes, update `/terms`, `/privacy`, `/refunds`.
 - **Get started step 02:** its AI prompt is a generic 3-tier subscription template; not applicable (Tadam has two one-time prices, checkout code already uses `src/config/paddle.ts`).
-- **Live client-side token** (Developer Tools → Authentication), then switch `environment` to `production` after approval.
+- **Live client-side token** created ("tadamevents.com") and added to `src/config/paddle.ts`. Next: switch `environment` to `production`, reopen /create, and run one real purchase, when Tanya says so.

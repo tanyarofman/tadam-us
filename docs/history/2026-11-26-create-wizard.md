@@ -54,7 +54,7 @@
 - Tanya: email sellers@paddle.com to change the company name (Velonova) before the live review, or open the live account under the right name.
 - Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).
 - On the phone, the order card scrolls about 200 px (the consent tick is below the fold).
-- After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.
+- ~~After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.~~ Dropped by Tanya on 26 Nov 2026: there are no real signups to email.
 - Paddle live: only once Paddle approves the site; then set the production variables.
 
 ## Later on 2026-11-26: questions per event, no date/guests screen, simpler thanks page (Tanya)

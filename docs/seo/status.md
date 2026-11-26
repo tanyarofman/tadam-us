@@ -100,7 +100,7 @@ updates) was published on November 26.
    - The Tadam sections that still said "send us your stories" or "we build it" (a conflict with the Paddle self-serve wording): 12 articles and one line in `bar-mitzvah-attractions` fixed in PR #17; New Year's Eve, the office party and pass the parcel are fixed in their rewrite PR.
 3. **Wave 1 of new articles (January 2027):** all 8 written, in two PRs (1 to 4, then 5 to 8). Seasonal timing: Super Bowl party games should be live by mid-December 2026 to early January 2027 (the game is on Feb 14, 2027); the 40th and 50th birthday articles peak in January.
 4. ~~**Wave 2**~~ All 8 merged 2026-11-24 (#19, #22, #27). Cross-links added (#35). Next: Request indexing for the 8 new URLs.
-5. ~~**UK set**~~ All 3 merged 2026-11-24: `christmas-quiz-questions` (#26), `mr-and-mrs-quiz-questions` and `hen-party-games` (#29), with link swaps in `newlywed-game-questions` and `bachelorette-party-games`. Next: Request indexing for the 3 URLs, and real stories to replace the example scenarios.
+5. ~~**UK set**~~ All 3 merged 2026-11-24: `christmas-quiz-questions` (#26), `mr-and-mrs-quiz-questions` and `hen-party-games` (#29), with link swaps in `newlywed-game-questions` and `bachelorette-party-games`. Next: Request indexing for the 3 URLs.
 
 ## Waiting for Tanya
 (Settled on 2026-11-24 and removed from this list: the contact route, now "Create yours" to /create and hey@tadamevents.com (PR #13); prices, $99 per game (PR #13); the privacy, terms and refund pages (PR #12); the test email.)
@@ -150,8 +150,6 @@ updates) was published on November 26.
   - Optional, after the list above: request the 6 already-requested articles again, since their Tadam paragraph changed in PR #17 and PR #24 removed Israel references. Google recrawls on its own, so this can wait.
   - Never request redirected or hidden addresses: `hanukkah-quiz`, `new-years-eve-at-home`, `office-holiday-toast`, `team-building-day-ideas`, `hanukkah-riddles`, `tu-bishvat-quiz`, `bar-mitzvah-attractions` (hidden).
 - **The wizard at /create:** built on 2026-11-26 (branch `feat/create-wizard`, see `../history/2026-11-26-create-wizard.md`): English wizard ported from the tadam-il draft, Basic or VIP on the order card, orders in Netlify Blobs, Paddle checkout with automatic order matching. Waiting for Tanya: review on the deploy preview, Paddle sandbox keys, and the final events, hosts and questions.
-- **About facts:** who is behind Tadam, where you are, and how many games have been played. Real facts only.
 - **A second demo** (a wedding or a 40th) to match the main US searches. Optional.
-- **Real stories** from events, to replace the labeled example scenarios.
 - **Demo video:** the home page hero shows "Play GTA VI" as an answer (a real game title). Consider re-recording that question.
 - **A weekly article task** for this site, like the Israeli one. Only if Tanya wants it.

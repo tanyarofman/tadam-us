@@ -1,0 +1,27 @@
+# 2026-11-26: the game creator (wizard) at /create
+
+## What was decided (Tanya)
+- The English order wizard from the tadam-il draft (branch `claude/stoic-albattani-id4pku`, PR 59 there, `docs/order-flow-handoff.md`) is taken into this site. The draft stays unmerged in tadam-il; never merge or close it.
+- **Orders:** a Netlify function stores each order and its photos (Netlify Blobs), the Paddle checkout opens with the order id, and Paddle's webhook marks the order paid. No matching by email by hand.
+- **Packages:** same screens as the draft; Basic or VIP is chosen on the order card. Prices and limits come from `PACKAGES` in `src/config/pricing.ts`.
+- **Address:** `/create` (replaces the Coming soon page); thank-you page `/create/thanks/`.
+
+## What was built (branch `feat/create-wizard`)
+- Screens and styles: `src/components/create/Flow.astro`, `Thanks.astro`. Logic: `src/scripts/create.ts`.
+- Lists Tanya will change: `EVENTS`, `HOSTS`, `SHAPES` and `CREATE.more.extra` in `src/content/create.ts`. Host photos: `public/create/hosts/`.
+- `POST /api/order` (`netlify/functions/order.mjs`): validates and stores the order in Blobs store `orders` (production) or `orders-test` (previews, local).
+- `POST /api/paddle-webhook` (`netlify/functions/paddle-webhook.mjs`): checks Paddle's signature, marks the order paid, and submits it with photos to the Netlify form `order`, so the team gets one email per **paid** order.
+- Paddle keys come from Netlify environment variables (`src/config/checkout.ts`). Without them the wizard saves the order and shows a placeholder screen instead of the checkout.
+- Changes from the draft: English only; no Hebrew labels in the order summary (it is in English); placeholder host names (Ethan, Goldie, Nora, Lily, Ray) instead of the Hebrew game's names; the Menachem host left out; the henna party replaced by "Bridal or baby shower"; Israeli examples in the question hints replaced; analytics events renamed `create_*`.
+
+## Checked (local Netlify dev server, 1470x800 and 390x844)
+- Whole flow to the thank-you page; no sideways scroll; switching Free story / Four options does not move the screen; a photo is attached, shrunk in the browser and stored with the order; a past date is refused; fewer than 3 answers is refused; an empty email/consent is refused.
+- A signed fake Paddle webhook marked the order paid (VIP, 149.00 USD); a forged signature got 401; a repeat got "already paid"; another email cannot overwrite an order (409).
+- Not checked: a real Paddle sandbox payment and the Netlify form email (both need the deploy preview and the Paddle keys).
+
+## Open
+- Tanya: Paddle sandbox keys and webhook (see the PR), then a test payment on the deploy preview.
+- Tanya: final events, host names and descriptions, questions. English-speaking hosts are still to be made (the photos are the Hebrew game's hosts).
+- On the phone, the order card scrolls about 200 px (the consent tick is below the fold).
+- After merge: the Coming soon signups (Netlify Forms > launch-list) should be emailed that the creator is open.
+- Paddle live: only once Paddle approves the site; then set the production variables.

@@ -141,7 +141,7 @@ export const COPY = {
    * Paddle's website review needs the price visible without signing in.
    */
   pricing: {
-    title: "One price, the whole show.",
+    title: "Pick a package, get the whole show.",
     highlight: "whole show",
     perGame: "per game",
     oneTime: "One-time payment, no subscription",
@@ -198,7 +198,7 @@ export const COPY = {
     items: [
       {
         q: "How much does it cost?",
-        a: "The basic package starts at {base} and the VIP package costs {vip}. It's a one-time purchase, with no subscription. Outside the US you pay the equivalent in your currency, and taxes are calculated at checkout.",
+        a: "The Basic package costs {base} and the VIP package costs {vip}. It's a one-time purchase, with no subscription. Outside the US you pay the equivalent in your currency, and taxes are calculated at checkout.",
       },
       {
         q: "How does it work?",

@@ -23,7 +23,7 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## Pricing
 
-> $99 per game, one-time (the equivalent in euros and other local currencies, converted by Paddle at checkout). No subscription.
+> Two packages, one-time: Basic $99 and VIP $149 (the equivalent in euros and other local currencies, converted by Paddle at checkout). No subscription.
 
 ## Refund policy
 
@@ -31,7 +31,7 @@ Answers for the Paddle signup, business verification and domain approval forms. 
 
 ## Expected volume
 
-> We are launching in the US and Europe. First 12 months: about 20 to 50 orders per month, average order $99.
+> We are launching in the US and Europe. First 12 months: about 20 to 50 orders per month, average order between $99 and $149.
 
 ## If asked about heytadam.com (our Israeli site)
 

@@ -2,7 +2,7 @@
 
 ## A sale
 
-1. A buyer pays **$99** on tadamevents.com. The charge is made by **Paddle** (the merchant of record), not by Tanya's business.
+1. A buyer pays **$99 (Basic) or $149 (VIP)** on tadamevents.com. The charge is made by **Paddle** (the merchant of record), not by Tanya's business.
 2. Paddle adds sales tax or VAT where required (that part goes to the tax authorities, not to us), and deducts its fee: about **5% + $0.50** per sale. Check the current rate in your Paddle account.
 3. The rest goes to Tanya's **Paddle balance**. On a $99 sale that's roughly $93.55.
 

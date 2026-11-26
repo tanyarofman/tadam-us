@@ -55,7 +55,7 @@ Birthdays · Bar and Bat Mitzvahs · Sweet Sixteen · Weddings · Anniversaries 
 
 - **Headline:** One price, the whole show.
 - **Price card:**
-  - **$99** per game. In Europe you pay the same price in euros, converted at checkout. Taxes are calculated at checkout.
+  - (Superseded 2026-11-26: two packages, Basic $99 and VIP $149; see `src/config/pricing.ts`.) **$99** per game. In Europe you pay the same price in euros, converted at checkout. Taxes are calculated at checkout.
   - A game built from your stories and photos
   - Your choice of host and voice
   - Every guest plays from their phone, no app needed

@@ -36,7 +36,7 @@ Steps:
    - Option A: a **USD account at your Israeli bank**. Ask the bank for the details for incoming USD wires (IBAN, SWIFT).
    - Option B: **Payoneer**. In Payoneer, check "Receive" → "Receiving accounts" for USD details, and ask Payoneer whether it accepts payments from Paddle.
 6. **Tax details:** Paddle may ask for tax information, for example a W-8BEN form that confirms you're not a US taxpayer. Fill in what it asks, and check with your accountant if unsure.
-7. Create the product in the live account: **"Tadam! personal game", one-time price $99 USD**. Paddle shows other currencies automatically.
+7. Create the products in the live account, as in the sandbox: **"Tadam! Basic game", one-time $99 USD** and **"Tadam! VIP game", one-time $149 USD**. Paddle shows other currencies automatically.
 
 ## 3. After approval
 

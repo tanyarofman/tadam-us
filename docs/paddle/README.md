@@ -11,7 +11,7 @@ Decisions (Tanya, 2026-11-23):
 | Site | `tadamevents.com` (new domain, not bought yet), its own repo and Netlify site. heytadam.com stays as it is: the Hebrew site and /en for English speakers in Israel |
 | Payments | Paddle (merchant of record). Seller: Tanya's עוסק מורשה |
 | Buying flow | Self-serve on tadamevents.com: "Create yours", the English wizard, Paddle checkout, the game arrives as a private link |
-| Price | $99 per game. Other currencies (EUR etc.) are the equivalent, converted by Paddle at checkout |
+| Price | Basic $99, VIP $149, one-time (updated 2026-11-26). Other currencies (EUR etc.) are the equivalent, converted by Paddle at checkout |
 | Refunds | Full refund within 14 days of purchase, no questions asked |
 | Hosts | Ready-made or invented characters only. Never a host based on a real person |
 | Data | Content and the game link kept for 30 days, then deleted |

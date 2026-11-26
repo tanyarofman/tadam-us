@@ -18,9 +18,9 @@ export const GET: APIRoute = async ({ site }) => {
 
   const body = `# Tadam!
 
-> Tadam! is a personalized live trivia game show for events. You create it online in minutes from your stories, photos and inside jokes, a host runs the game on the big screen, and every guest plays from their phone, with no app to download. A game takes about 10 to 15 minutes. It costs ${fillPrices("{base}")} per game, one-time.
+> Tadam! is a personalized live trivia game show for events. You create it online in minutes from your stories, photos and inside jokes, a host runs the game on the big screen, and every guest plays from their phone, with no app to download. A game takes about 10 to 15 minutes. It costs ${fillPrices("{base}")} for the Basic package or ${fillPrices("{vip}")} for VIP, one-time.
 
-Organizers tell the game creator about the guest of honor, add stories and photos, pick a ready-made host, and review and edit the drafted questions. After payment (processed by Paddle, the merchant of record), the game arrives by email as a private link within ${PRICING.deliveryHours} hours and works for ${PRICING.linkDays} days. Guests scan a QR code and answer in their phone's browser; a live leaderboard shows who knows the guest of honor best, and the winner is revealed at the end. Full refund within ${PRICING.refundDays} days of purchase.
+Organizers tell the game creator about the guest of honor, add stories and photos, pick a ready-made host, and review and edit the drafted questions. After payment (processed by Paddle, the merchant of record), the game arrives by email as a private link within ${PRICING.deliveryHours} hours and works for ${PRICING.linkDays} days (Basic) or ${PRICING.vipLinkDays} days (VIP). Guests scan a QR code and answer in their phone's browser; a live leaderboard shows who knows the guest of honor best, and the winner is revealed at the end. Full refund within ${PRICING.refundDays} days of purchase.
 
 ## Who it's for
 - ${COPY.eventsStrip.items.join(", ")}

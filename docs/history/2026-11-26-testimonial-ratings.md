@@ -24,6 +24,16 @@ built HTML and JSON-LD were checked for matching rating scales, all three dates,
 the calculated 5/5 average and review count, preserved $99/$149 offers, and no
 ratings attached to the Organization.
 
+Deployed preview verification: desktop and mobile browser checks passed. The
+Google Rich Results Test detected **4 valid review-snippet items** for the Tadam
+game (the three reviews and the aggregate rating), plus one valid Organization.
+The URL-level indexing restriction was the expected Netlify preview
+`X-Robots-Tag: noindex` header; page fetch succeeded. Keep preview noindex intact
+and recheck the production URL after publication.
+
+Google test result:
+https://search.google.com/test/rich-results/result/r%2Freview-snippet?id=JBMSrlNQY0HW_CW_6Z2bSA
+
 Sources checked:
 - https://schema.org/Game
 - https://schema.org/AggregateRating

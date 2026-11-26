@@ -186,6 +186,7 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
       </div>
       <div class="in-bar__row">
         <button class="in-bar__back" type="button" data-bar-back>{c.back}</button>
+        <button class="in-bar__skip" type="button" data-bar-skip hidden>{c.more.skip}</button>
         <button class="btn btn-buzzer in-bar__next" type="button" data-bar-next>{c.next}</button>
       </div>
     </footer>
@@ -2366,5 +2367,137 @@ const data = { events: EVENTS, shapes: SHAPES, hosts: HOSTS, material: MATERIAL,
     .in-ticket__side .in-ticket__total strong {
       font-size: clamp(3rem, 8vh, 4.4rem);
     }
+  }
+
+  /* ---------- the story question screen (Option A, 2026-11-26): one big question, one white answer box with
+     the mic and photo as small icons inside it, a quiet link for multiple choice, Skip as a text link ---------- */
+  .in-step[data-step="3"] {
+    row-gap: 12px;
+  }
+  .in-step[data-step="3"] .h-card {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    line-height: 1.05;
+  }
+  .in-step[data-step="3"] > .lead {
+    margin: 0 0 8px;
+  }
+  .in-answer {
+    border-radius: 22px;
+    background: var(--pill-white);
+    box-shadow: 0 10px 30px rgba(0, 0, 40, 0.3);
+    outline: 3px solid transparent;
+    transition: outline-color 0.15s;
+  }
+  .in-answer:focus-within {
+    outline-color: var(--game-yellow);
+  }
+  .in-answer .in-textarea {
+    display: block;
+    min-height: clamp(130px, 22vh, 200px);
+    padding: 16px 18px 6px;
+    border: 0;
+    border-radius: 22px 22px 0 0;
+    background: transparent;
+    outline: none;
+    resize: none;
+    font-size: 1.15rem;
+  }
+  .in-answer .in-rec {
+    margin: 12px 12px 0;
+  }
+  .in-answer__tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 12px;
+  }
+  .in-answer__hint {
+    margin-inline-start: auto;
+    font-size: 0.9rem;
+    color: #7a83a6;
+  }
+  .in-step[data-step="3"] .in-tool {
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    padding: 0;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(0, 22, 112, 0.08);
+    color: var(--stage-navy);
+    font-size: 1.15rem;
+    cursor: pointer;
+  }
+  .in-step[data-step="3"] .in-tool[hidden] {
+    display: none;
+  }
+  .in-step[data-step="3"] .in-tool:hover,
+  .in-step[data-step="3"] .in-tool:focus-within,
+  .in-step[data-step="3"] .in-tool:focus-visible {
+    background: var(--game-yellow);
+  }
+  .in-step[data-step="3"] .in-mic[aria-pressed="true"] {
+    background: var(--buzzer-red);
+    color: #fff;
+  }
+  .in-answer .in-attached img {
+    width: 44px;
+    height: 44px;
+  }
+  .in-step[data-step="3"] .in-prompt__row {
+    margin-top: 12px;
+  }
+  .in-step[data-step="3"] .in-prompt__row .in-tool {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  .in-step[data-step="3"] .in-rec__heard:empty {
+    display: none;
+  }
+  .in-switch {
+    justify-self: start;
+    margin: 0;
+    padding: 6px 0;
+    background: none;
+    border: 0;
+    color: #fff;
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--game-yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+  .in-switch:hover {
+    color: var(--game-yellow);
+  }
+  /* Skip is a quiet text link; Continue stays grey until this screen has an answer */
+  .in-bar__skip {
+    margin-inline-start: auto;
+    background: none;
+    border: 0;
+    padding: 12px 8px;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .in-bar__skip:hover {
+    color: #fff;
+  }
+  .in-bar__skip[hidden] {
+    display: none;
+  }
+  .in-bar__next[aria-disabled="true"] {
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+    cursor: default;
+    transform: none;
   }
 </style>

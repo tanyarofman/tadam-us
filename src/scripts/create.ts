@@ -216,10 +216,13 @@ function init(root: HTMLElement, data: Data) {
     $<HTMLElement>("[data-bar-meter]")!.hidden = step !== 3;
     barNext.dataset.next = String(step);
     barNext.setAttribute("aria-disabled", "false");
+    barSkip.hidden = true;
     barNext.hidden = step === 1 && !state.eventId;
     barNext.textContent = step === 4 ? c.details.cta : step === 5 ? orderLabel() : c.next;
   }
   $<HTMLElement>("[data-bar-back]")!.addEventListener("click", backward);
+  const barSkip = $<HTMLButtonElement>("[data-bar-skip]")!;
+  barSkip.addEventListener("click", forward);
 
   function renderProgress(step: number) {
     const nav = $("[data-progress]");
@@ -344,6 +347,9 @@ function init(root: HTMLElement, data: Data) {
       if (mark) mark.textContent = committed.has(id) ? "✓ " + c.stories.answered : "";
     }
   }
+  // voice input (Web Speech API): the mic button is hidden where the browser does not support it
+  type Rec = { lang: string; interimResults: boolean; continuous: boolean; start(): void; stop(): void; onresult: ((e: any) => void) | null; onerror: ((e: any) => void) | null; onend: (() => void) | null };
+  const SR = ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition) as (new () => Rec) | undefined;
   function renderStories() {
     if (!committedInit) {
       shape().prompts.forEach((p) => hasText(p.id) && committed.add(p.id));
@@ -376,13 +382,12 @@ function init(root: HTMLElement, data: Data) {
       const cv = state.choices[p.id] || { q: "", answers: ["", "", "", ""], correct: -1 };
       // the suggested question is only a grey hint: an older draft that stored it as text shows it as a hint too
       const typedQ = cv.q.trim() === label ? "" : cv.q;
+      const photoLabel = photoFiles.has(p.id) ? c.stories.photoReplace : state.photos[p.id] ? c.stories.photosAgain : c.stories.photoAttach;
+      const attach = `<label class="in-tool in-attach" title="${esc(photoLabel)}"><span aria-hidden="true">📷</span><span class="sr-only">${esc(photoLabel)}</span><input type="file" accept="image/*" class="sr-only" data-attach="${p.id}" /></label>
+            ${photoFiles.has(p.id) ? `<span class="in-attached"><img src="${photoFiles.get(p.id)!.url}" alt="" /><button type="button" data-attach-remove="${p.id}" aria-label="${c.stories.photoRemove}">✕</button></span>` : ""}`;
       box.innerHTML = `
         <span class="in-prompt__mark" hidden></span>
         <div class="in-prompt__body" id="pb-${p.id}" ${open ? "" : "hidden"}>
-          <div class="in-chips" role="radiogroup" aria-label="${esc(label)}">
-            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="free" data-pmode="${p.id}" ${choice ? "" : "checked"} /><span>${c.stories.modeFree}</span></label>
-            <label class="in-chip"><input type="radio" name="pm-${p.id}" value="choice" data-pmode="${p.id}" ${choice ? "checked" : ""} /><span>${c.stories.modeChoice}</span></label>
-          </div>
           ${
             choice
               ? `<label class="in-help" for="cq-${p.id}">${c.stories.choiceQuestion}</label>
@@ -393,23 +398,27 @@ function init(root: HTMLElement, data: Data) {
                      (k) => `<div class="in-own-row"><input class="in-input" type="text" maxlength="60" value="${esc(cv.answers[k] || "")}" data-cans="${p.id}:${k}" aria-label="${c.stories.answer} ${k + 1}" placeholder="${c.stories.answer} ${k + 1}" />
                        <label class="in-own-correct"><input type="radio" name="pcor-${p.id}" value="${k}" data-ccor="${p.id}" ${cv.correct === k ? "checked" : ""} /><span>${c.stories.correctShort}</span></label></div>`,
                    )
-                   .join("")}</div>`
-              : `<div class="in-rec" data-rec="${p.id}" role="status" hidden>
-            <span class="in-rec__dot" aria-hidden="true"></span>
-            <span>${c.stories.recording}</span>
-            <span class="in-rec__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="in-rec__time" data-mic-time="${p.id}">0:00</span>
-          </div>
-          <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>`
+                   .join("")}</div>
+                 <div class="in-prompt__row">${attach}</div>`
+              : `<div class="in-answer">
+            <div class="in-rec" data-rec="${p.id}" role="status" hidden>
+              <span class="in-rec__dot" aria-hidden="true"></span>
+              <span>${c.stories.recording}</span>
+              <span class="in-rec__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="in-rec__time" data-mic-time="${p.id}">0:00</span>
+            </div>
+            <textarea class="in-textarea" id="pt-${p.id}" placeholder="${esc(p.placeholder)}" aria-label="${esc(label)}">${esc(state.answers[p.id] || "")}</textarea>
+            <div class="in-answer__tools">
+              <button type="button" class="in-tool in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>
+              ${attach}
+              <span class="in-answer__hint">${SR ? c.stories.toolsHint : c.stories.photoAttach}</span>
+            </div>
+          </div>`
           }
-          <div class="in-prompt__row">
-            ${choice ? "" : `<button type="button" class="in-mic" aria-pressed="false" data-mic="${p.id}" hidden></button>`}
-            <label class="in-attach"><span aria-hidden="true">📷</span><span>${photoFiles.has(p.id) ? c.stories.photoReplace : state.photos[p.id] ? c.stories.photosAgain : c.stories.photoAttach}</span><input type="file" accept="image/*" class="sr-only" data-attach="${p.id}" /></label>
-            ${photoFiles.has(p.id) ? `<span class="in-attached"><img src="${photoFiles.get(p.id)!.url}" alt="" /><button type="button" data-attach-remove="${p.id}" aria-label="${c.stories.photoRemove}">✕</button></span>` : ""}
-          </div>
           <p class="in-err" role="alert" data-attach-err hidden></p>
           ${choice ? "" : `<p class="in-rec__heard" data-mic-heard="${p.id}" aria-live="polite"></p>
           <p class="in-err" role="alert" data-mic-err="${p.id}" hidden></p>`}
+          <button type="button" class="in-switch" data-pswitch="${p.id}" data-to="${choice ? "free" : "choice"}">${choice ? c.stories.toFree : c.stories.toChoice}</button>
         </div>`;
       promptsEl.append(box);
       if (!choice) setupMic(box, p.id);
@@ -460,6 +469,18 @@ function init(root: HTMLElement, data: Data) {
     (await createImageBitmap(file)).close();
     return file;
   }
+  // "make it a multiple-choice question" / "write it as a story instead"
+  promptsEl.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>("[data-pswitch]");
+    if (!b) return;
+    const id = b.dataset.pswitch!;
+    state.modes[id] = b.dataset.to as "free" | "choice";
+    if (b.dataset.to === "choice") ensureChoice(id);
+    commit(id);
+    renderStories();
+    save();
+    promptsEl.querySelector<HTMLElement>("textarea, [data-cq]")?.focus();
+  });
   promptsEl.addEventListener("click", (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>("[data-attach-remove]");
     if (!b) return;
@@ -529,16 +550,18 @@ function init(root: HTMLElement, data: Data) {
     const meterBar = $<HTMLElement>("[data-meter-bar]");
     if (meterBar) meterBar.style.width = `${(ready / t) * 100}%`;
     if (state.step !== 3) return;
-    // "next" when this screen has something, "skip" when it is empty
+    // the meter shows once there is something to count; "continue" lights up once this screen has an answer
+    $<HTMLElement>("[data-bar-meter]")!.hidden = ready === 0;
     const id = shape().prompts[state.sub].id;
-    barNext.textContent = isDone(id) || !!state.photos[id] ? c.next : c.more.skip;
+    const has = isDone(id) || !!state.photos[id];
+    barNext.textContent = c.next;
+    barNext.setAttribute("aria-disabled", String(!has));
+    barSkip.hidden = has;
     if (id === c.more.extra.id) $("[data-story-count]")!.textContent = fill(c.more.unlocked, { n: ready, name: subjectName() });
     if (need() === 0) $<HTMLElement>("[data-more-need]")!.hidden = true;
   }
 
   // voice input (Web Speech API). Hidden where the browser does not support it.
-  type Rec = { lang: string; interimResults: boolean; continuous: boolean; start(): void; stop(): void; onresult: ((e: any) => void) | null; onerror: ((e: any) => void) | null; onend: (() => void) | null };
-  const SR = ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition) as (new () => Rec) | undefined;
   let activeRec: Rec | null = null;
   function setupMic(box: HTMLElement, id: string) {
     const btn = box.querySelector<HTMLButtonElement>(`[data-mic="${id}"]`)!;
@@ -547,7 +570,11 @@ function init(root: HTMLElement, data: Data) {
     const heardEl = box.querySelector<HTMLElement>(`[data-mic-heard="${id}"]`)!;
     const errEl = box.querySelector<HTMLElement>(`[data-mic-err="${id}"]`)!;
     const ta = box.querySelector<HTMLTextAreaElement>("textarea")!;
-    btn.textContent = "🎤 " + c.stories.mic;
+    const idle = () => {
+      btn.textContent = "🎤";
+      btn.setAttribute("aria-label", c.stories.mic);
+    };
+    idle();
     if (!SR) return; // stays hidden, typing is always possible
     btn.hidden = false;
     let timer = 0;
@@ -588,7 +615,7 @@ function init(root: HTMLElement, data: Data) {
       rec.onend = () => {
         window.clearInterval(timer);
         btn.setAttribute("aria-pressed", "false");
-        btn.textContent = "🎤 " + c.stories.mic;
+        idle();
         recEl.hidden = true;
         heardEl.textContent = "";
         ta.removeAttribute("data-recording");
@@ -607,7 +634,8 @@ function init(root: HTMLElement, data: Data) {
       }
       activeRec = rec;
       btn.setAttribute("aria-pressed", "true");
-      btn.textContent = "■ " + c.stories.micStop;
+      btn.textContent = "■";
+      btn.setAttribute("aria-label", c.stories.micStop);
       recEl.hidden = false;
       ta.dataset.recording = "true";
       timeEl.textContent = "0:00";

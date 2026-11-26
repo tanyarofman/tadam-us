@@ -35,6 +35,10 @@ The next homepage revision makes "Watch the demo" open Tom's English recording
 in the existing popup with sound, title "Demo Video", no caption, and scroll
 restoration on close. The scrolling demo is unchanged. Details:
 `../history/2026-11-26-watch-demo-popup.md`.
+Mobile testimonials now replace one another while scrolling, using the same
+sticky scene approach as How it works. Desktop cards, review content, the visible
+rating summary and Game schema are preserved. Details:
+`../history/2026-11-26-mobile-testimonial-scroll.md`.
 Production deploys are currently blocked by Netlify team credit exhaustion;
 main@092ebee remains live until a team owner restores credits and deploys resume.
 

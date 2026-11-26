@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 async function ready(page: Page) {
   await expect(page.locator('[data-preloader]')).toHaveCount(0);
-  await expect(page.locator('#testimonials')).toHaveAttribute('data-scroll-hold', '');
+  await expect(page.locator('#closing')).toHaveAttribute('data-scroll-hold', '');
 }
 async function arrived(page: Page, selector: string) {
   await expect.poll(async () => Math.abs((await page.locator(selector).boundingBox())!.y), { timeout: 10_000 }).toBeLessThan(2);

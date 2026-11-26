@@ -1,6 +1,6 @@
 # Blog and SEO status (US and Europe site)
 
-Last updated: 2026-11-25 (Google Analytics 4 PR).
+Last updated: 2026-11-26 (pricing and customer testimonials).
 
 This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli blog history and its plans are in `tadam-il` (and in this repository's git history). The older Hebrew research files in `docs/seo/` (`keyword-research-2026-11*.md`, `keywords-il.csv` and the `-il` data files) describe the Israeli market and are kept only for reference.
 
@@ -15,14 +15,17 @@ This repository started on 2026-11-24 as a copy of the Israeli site. The Israeli
 | Session records (what was decided and why, by date) | `../history/` (start with `2026-11-24-us-site-setup.md`) |
 | Paddle review checklist (website and account) | `../paddle/paddle-checklist.md` |
 
-## Homepage update prepared on 2026-11-25
+## Homepage updates, November 25 and 26, 2026
 
-Basic/VIP packages, consent-based custom hosts, revised delivery/editing copy, fictional
-demo cards and temporary sample testimonials are prepared in PR #54. The follow-up adds
-new supplied demo images, generated persona portraits, an earlier demo section and a
-pricing design based on Ilan's mockup. Details:
-`../history/2026-11-25-homepage-packages-demos.md`. The historical live-site checks below
-predate this update; `/create` remains the existing coming-soon page.
+PR #54 was merged and published on November 25: Basic/VIP packages, custom hosts,
+revised copy, demo cards, testimonials, navigation and scroll effects. PR #61
+prepares the November 26 follow-up: Basic $99 / VIP $149, and Ilan's supplied
+customer quotes and portraits for Elizabeth W., Noah H. and Susan O. The customer
+testimonials replace the fictional samples and have text-only Service review
+schema matching the visible cards. No ratings are invented, and this markup is
+not eligible for Google's review-star rich results. Details:
+`../history/2026-11-26-pricing-and-testimonials.md`. The historical live-site checks
+below predate these updates; `/create` remains the existing coming-soon page.
 
 ## Paddle review status (checked on the live site, 2026-11-24)
 - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.

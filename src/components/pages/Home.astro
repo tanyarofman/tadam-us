@@ -48,12 +48,28 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${home}#service`,
     name: "Personalized trivia game show for events",
     serviceType: "Event entertainment",
     description: COPY.meta.description,
     provider: { "@id": `${home}#org` },
     areaServed: ["US", "GB", "IE", "EU"],
     url: home,
+    // Customer-supplied text reviews, from the same content as the visible cards.
+    // No numeric ratings were supplied. Service reviews describe the testimonials
+    // in Schema.org but are not eligible for Google's review-star rich results.
+    review: COPY.testimonials.items.map((person) => ({
+      "@type": "Review",
+      "@id": `${home}#testimonial-${person.id}`,
+      url: `${home}#testimonial-${person.id}`,
+      author: {
+        "@type": "Person",
+        name: person.name,
+        image: new URL(person.image, Astro.site).href,
+      },
+      reviewBody: person.quote,
+      inLanguage: langTag,
+    })),
     offers: PACKAGES.map((tier) => ({
       "@type": "Offer",
       name: tier.name,

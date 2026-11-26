@@ -11,11 +11,11 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
       <h2 id="testimonials-title" class="display h-scene testimonials-title reveal">{c.title}</h2>
       <div class="testimonials-grid">
         {c.items.map((person, i) => (
-          <figure class="testimonial reveal" style={`--accent:${accents[i]}`}>
+          <figure id={`testimonial-${person.id}`} class="testimonial reveal" style={`--accent:${accents[i]}`}>
             <span class="quote-mark" aria-hidden="true">“</span>
             <blockquote><p>{person.quote}</p></blockquote>
             <figcaption>
-              <img class="avatar" src={person.image} alt="" width="144" height="144" loading="lazy" decoding="async" />
+              <img class="avatar" src={person.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
               <span><strong>{person.name}</strong><span class="event">{person.event}</span></span>
             </figcaption>
           </figure>

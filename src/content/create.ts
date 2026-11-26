@@ -321,16 +321,13 @@ export const CREATE = {
   thanks: {
     metaTitle: "Payment Received | Tadam!",
     title: "Yes! Your game is on its way",
-    lead: "We received your payment and your order.",
-    orderNo: "Order number",
-    next: [
-      { t: "A receipt by email", d: "Paddle sends it to you right away." },
-      { t: "We build", d: "From the stories and photos you sent." },
-      { t: "You review", d: "The game arrives by email, and you can ask for changes before the event." },
-    ],
-    ideasTitle: "Meanwhile, ideas for your event",
-    ideasAll: "All articles",
+    lead: "Your receipt is in your inbox. We'll email you the game, and you can ask for changes before the event.",
+    /** The tracker under the headline: the first step is done. */
+    steps: ["Paid", "We build", "You review"],
+    stepsLabel: "Order progress",
+    orderNo: "Order",
+    ideas: "Ideas for your event",
     home: "Back to the site",
-    contact: "Have a question? Email us",
+    contact: "Questions? Email us",
   },
 };

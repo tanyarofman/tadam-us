@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Watch the demo plays Tom with sound and closes at the same position', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('[data-preloader]')).toHaveCount(0);
-  await expect(page.locator('#testimonials')).toHaveAttribute('data-scroll-hold', '');
+  await expect(page.locator('#closing')).toHaveAttribute('data-scroll-hold', '');
   const trigger = page.getByRole('link', { name: 'Watch the demo', exact: true });
   await trigger.evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
   const before = await page.evaluate(() => ({ y: scrollY, url: location.href }));
@@ -37,7 +37,7 @@ test('direct demo links keep the page locked through the intro and support keybo
   const modal = page.locator('#demo-modal');
   await expect(modal).toBeVisible();
   await expect(page.locator('[data-preloader]')).toHaveCount(0);
-  await expect(page.locator('#testimonials')).toHaveAttribute('data-scroll-hold', '');
+  await expect(page.locator('#closing')).toHaveAttribute('data-scroll-hold', '');
   await expect(page.locator('html')).toHaveCSS('overflow-y', 'hidden');
   await expect(modal.getByRole('heading', { name: 'Demo Video' })).toBeFocused();
   await page.keyboard.press('Tab');

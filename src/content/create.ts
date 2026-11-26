@@ -457,7 +457,7 @@ export const CREATE = {
   thanks: {
     metaTitle: "Payment Received | Tadam!",
     title: "Yes! Your game is on its way",
-    lead: "Your receipt is in your inbox. We'll email you the game, and you can ask for changes before the event.",
+    lead: "Your receipt is in your inbox. We'll email you the game within 72 hours, and you can ask for changes before the event.",
     /** The tracker under the headline: the first step is done. */
     steps: ["Paid", "We build", "You review"],
     stepsLabel: "Order progress",

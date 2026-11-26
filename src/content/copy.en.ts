@@ -223,7 +223,7 @@ export const COPY = {
       },
       {
         q: "How is Tadam different from Kahoot or Jackbox?",
-        a: "Kahoot is a quiz platform where you build the quiz yourself, and Jackbox sells packs of party games with the same content for everyone. Tadam is one game made for your event: the questions come from your guest of honor's stories and photos, a host runs it on the big screen, and guests play from their phones with nothing to download.",
+        a: "With Kahoot you build the quiz yourself, and someone has to run it: after each answer, a parent or the organizer usually steps in to tell the story behind it. In Tadam, the host on the screen does that for you. It asks each question, and once everyone has answered, it tells the story behind it, so nobody has to host and you get to enjoy the party too. Jackbox sells packs of party games with the same content for everyone, while Tadam is one game made from your guest of honor's stories and photos.",
       },
       {
         q: "How soon do we get the game?",

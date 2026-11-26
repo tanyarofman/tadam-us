@@ -37,6 +37,13 @@ Production publishing remains blocked by Netlify team credits; rechecked the
 Netlify deploys page during this work. The live site is still main@092ebee and
 the previous main@5268359 deployment was skipped. No billing changes were made.
 
+PR #66: https://github.com/tanyarofman/tadam-us/pull/66
+Preview: https://deploy-preview-66--tadam-us.netlify.app/
+Verified the deployed preview opens the renamed popup with Tom's recording and
+returns focus to Watch the demo on close. This is part of the production
+follow-up authorized in this chat; Netlify must resume deployments before the
+merged changes can appear on the live domain.
+
 References:
 - https://developer.chrome.com/blog/autoplay/
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog

@@ -128,7 +128,7 @@ export function customerEmailText(order) {
     "1. We build your game from the stories and photos you sent.",
     "2. The game arrives by email within 72 hours, and you can ask for changes before the event.",
     "",
-    "Your receipt comes separately from Paddle, our payment provider.",
+    "Your receipt comes separately from Paddle, our payment provider. On your card statement, the charge shows as PADDLE.NET* VELONOVA.",
     "",
     "Remembered another story, or have a question? Just reply to this email.",
     "",
@@ -170,7 +170,7 @@ export function customerEmailHtml(order) {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f1f4ff;border-radius:12px;"><tr><td style="padding:18px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${detail}</table></td></tr></table>
 <h2 style="margin:30px 0 14px;font:bold 22px/1.2 ${FONT};color:#00176a;">What happens next</h2>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${step(1, "We build your game from the stories and photos you sent.")}${step(2, "The game arrives by email, and you can ask for changes before the event.")}</table>
-<p style="margin:10px 0 0;font:15px/1.5 ${FONT};color:#5a6aa8;">Your receipt comes separately from Paddle, our payment provider.</p>
+<p style="margin:10px 0 0;font:15px/1.5 ${FONT};color:#5a6aa8;">Your receipt comes separately from Paddle, our payment provider. On your card statement, the charge shows as <strong>PADDLE.NET* VELONOVA</strong>.</p>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;border-top:1px solid #e3e8fb;"><tr><td style="padding-top:24px;font:17px/1.5 ${FONT};color:#00176a;">Remembered another story, or have a question? <strong>Just reply to this email.</strong></td></tr></table>
 <p style="margin:24px 0 0;font:bold 17px/1.5 ${FONT};color:#00176a;">The Tadam! team</p>
 </td></tr>

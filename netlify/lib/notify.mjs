@@ -9,6 +9,8 @@
 //                        tadamevents.com is verified in Resend > Domains. Before that, use
 //                        "Tadam! orders <onboarding@resend.dev>" with ORDER_EMAIL_TO set to the Resend account's own email.
 
+const EXT = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
+
 const LABELS = {
   "order-id": "Order",
   status: "Status",
@@ -58,7 +60,10 @@ export async function sendOrderEmail(order, photos = [], env = process.env) {
     reply_to: order.email || undefined,
     subject: `${flag}New order ${order["order-id"]}: ${order.package} ${order.paid || ""}`.trim(),
     text: orderEmailText(order),
-    attachments: photos.map((p) => ({ filename: p.name, content: Buffer.from(p.bytes).toString("base64") })),
+    // Only types order.mjs checked from the file's bytes, under a fixed name: never the customer's file name.
+    attachments: photos
+      .filter((p) => EXT[p.type])
+      .map((p) => ({ filename: `${p.field}.${EXT[p.type]}`, content: Buffer.from(p.bytes).toString("base64"), content_type: p.type })),
   };
   let res;
   try {

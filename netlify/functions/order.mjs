@@ -12,6 +12,16 @@ const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
 const MAX_TEXT = 60_000;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** The real image type from the file's first bytes; the browser's name and type are not trusted. */
+function sniffImage(b) {
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "image/jpeg";
+  if (b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) return "image/png";
+  if (String.fromCharCode(...b.slice(0, 4)) === "RIFF" && String.fromCharCode(...b.slice(8, 12)) === "WEBP") return "image/webp";
+  if (String.fromCharCode(...b.slice(0, 4)) === "GIF8") return "image/gif";
+  return "";
+}
+const EXT = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
+
 const json = (status, body) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
@@ -44,8 +54,12 @@ export default async (req, context) => {
   for (let i = 1; i <= MAX_PHOTOS; i++) {
     const f = form.get(`photo-${i}`);
     if (!f || typeof f === "string") continue;
-    if (!f.type.startsWith("image/") || f.size > MAX_PHOTO_BYTES) return json(400, { error: `photo-${i}` });
-    photos.push({ field: `photo-${i}`, name: f.name.slice(0, 120), type: f.type, file: f });
+    if (f.size > MAX_PHOTO_BYTES) return json(400, { error: `photo-${i}` });
+    const bytes = new Uint8Array(await f.arrayBuffer());
+    const type = sniffImage(bytes);
+    if (!type) return json(400, { error: `photo-${i}` });
+    // Saved under a fixed name with the checked type, so an email attachment can't pose as another kind of file.
+    photos.push({ field: `photo-${i}`, name: `photo-${i}.${EXT[type]}`, type, bytes });
   }
 
   const store = getStore({ name: ordersStore(context), consistency: "strong" });
@@ -60,7 +74,7 @@ export default async (req, context) => {
   const now = new Date().toISOString();
   for (const old of previous?.photos ?? []) await store.delete(`${id}/${old.field}`);
   for (const p of photos) {
-    await store.set(`${id}/${p.field}`, await p.file.arrayBuffer(), { metadata: { name: p.name, type: p.type } });
+    await store.set(`${id}/${p.field}`, p.bytes, { metadata: { name: p.name, type: p.type } });
   }
   await store.setJSON(`${id}/order.json`, {
     ...order,

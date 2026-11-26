@@ -1,7 +1,10 @@
 ---
 import { useCopy } from "../content/copy";
+import { REVIEW_SCALE, summarizeReviews } from "../lib/reviews";
 const { copy: COPY } = useCopy(Astro.url);
 const c = COPY.testimonials;
+const ratingSummary = summarizeReviews(c.items);
+const reviewDate = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
 ---
 
@@ -9,14 +12,20 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
   <div class="testimonials-pin" data-scroll-pause="start">
     <div class="container">
       <h2 id="testimonials-title" class="display h-scene testimonials-title reveal">{c.title}</h2>
+      <p class="rating-summary reveal">{ratingSummary.ratingValue}/{ratingSummary.bestRating} from these {ratingSummary.reviewCount} customer reviews</p>
       <div class="testimonials-grid">
         {c.items.map((person, i) => (
-          <figure class="testimonial reveal" style={`--accent:${accents[i]}`}>
-            <span class="quote-mark" aria-hidden="true">“</span>
+          <figure id={`testimonial-${person.id}`} class="testimonial reveal" style={`--accent:${accents[i]}`}>
+            <div class="testimonial-heading">
+              <span class="quote-mark" aria-hidden="true">“</span>
+              <span class="review-rating" role="img" aria-label={`${person.rating} out of ${REVIEW_SCALE.bestRating} stars`}>
+                <span aria-hidden="true">{"★".repeat(person.rating)}{"☆".repeat(REVIEW_SCALE.bestRating - person.rating)}</span>
+              </span>
+            </div>
             <blockquote><p>{person.quote}</p></blockquote>
             <figcaption>
-              <img class="avatar" src={person.image} alt="" width="144" height="144" loading="lazy" decoding="async" />
-              <span><strong>{person.name}</strong><span class="event">{person.event}</span></span>
+              <img class="avatar" src={person.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
+              <span><strong>{person.name}</strong><span class="event">{person.event}</span><time datetime={person.reviewDate}>{reviewDate.format(new Date(`${person.reviewDate}T00:00:00Z`))}</time></span>
             </figcaption>
           </figure>
         ))}
@@ -28,13 +37,17 @@ const accents = ["var(--sky-cyan)", "var(--game-yellow)", "#ff90cf"];
 <style>
   .testimonials-pin { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(72px, 10vh, 110px); }
   .testimonials-title { max-width: 24ch; margin-inline: auto; font-size: var(--fs-story-title); text-align: center; }
-  .testimonials-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .rating-summary { margin: 14px 0 0; color: var(--text-muted); font-size: 1.3rem; text-align: center; }
+  .testimonials-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .testimonial { display: flex; flex-direction: column; margin: 0; padding: 22px 30px 30px; background: linear-gradient(150deg, #163883, #0a1d54); border: 2px solid var(--surface-border); border-top: 3px solid var(--accent); border-radius: 12px 32px 12px 32px; }
+  .testimonial-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .review-rating { color: var(--game-yellow); font-family: Arial, sans-serif; font-size: 1.25rem; letter-spacing: 0.12em; white-space: nowrap; }
   .quote-mark { height: 62px; color: var(--accent); font-size: 6rem; line-height: 1; font-family: Georgia, serif; }
   blockquote { margin: 0 0 30px; font-size: 1.5rem; line-height: 1.45; }
   figcaption { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--surface-border); }
   .avatar { flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
   figcaption strong { display: block; font-size: 1.3rem; }
   .event { display: block; color: var(--text-muted); font-size: 1.15rem; }
+  time { display: block; margin-top: 4px; color: var(--text-muted); font-size: 1rem; }
   @media (max-width: 760px) { .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; } }
 </style>

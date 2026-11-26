@@ -1,5 +1,9 @@
 # Pricing and testimonial schema, November 26, 2026
 
+Follow-up: Ilan subsequently supplied ratings, dates and permission. See
+`2026-11-26-testimonial-ratings.md` for the final Game review schema, which
+supersedes the text-only Service schema described in this earlier record.
+
 Ilan requested changing Basic from $59 to $99 and VIP from $99 to $149.
 Updated the shared pricing configuration, which supplies the package cards,
 visible FAQ answer, FAQ JSON-LD and Service offers. Package features and the

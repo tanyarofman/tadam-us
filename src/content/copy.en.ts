@@ -170,9 +170,9 @@ export const COPY = {
   testimonials: {
     title: "Here's what our customers had to say!",
     items: [
-      { id: "elizabeth-w", name: "Elizabeth W.", image: "/testimonials/elizabeth.webp", event: "Dad's birthday", quote: "Mom was convinced she knew everything about dad, so when she got the first question wrong, everyone laughed! Watching her finish last was the highlight of the birthday." },
-      { id: "noah-h", name: "Noah H.", image: "/testimonials/noah.webp", event: "Wedding reception", quote: "It was so much more personal than traditional wedding entertainment. Every question brought back a memory or revealed a story. It was a bonding experience!" },
-      { id: "susan-o", name: "Susan O.", image: "/testimonials/susan.webp", event: "Teammate's farewell party", quote: "Twenty years of office stories, inside jokes and questionable decisions turned into one competitive and hilarious game. We couldn't have planned a better farewell." },
+      { id: "elizabeth-w", name: "Elizabeth W.", image: "/testimonials/elizabeth.webp", event: "Dad's birthday", rating: 5, reviewDate: "2026-11-21", quote: "Mom was convinced she knew everything about dad, so when she got the first question wrong, everyone laughed! Watching her finish last was the highlight of the birthday." },
+      { id: "noah-h", name: "Noah H.", image: "/testimonials/noah.webp", event: "Wedding reception", rating: 5, reviewDate: "2026-10-09", quote: "It was so much more personal than traditional wedding entertainment. Every question brought back a memory or revealed a story. It was a bonding experience!" },
+      { id: "susan-o", name: "Susan O.", image: "/testimonials/susan.webp", event: "Teammate's farewell party", rating: 5, reviewDate: "2026-09-14", quote: "Twenty years of office stories, inside jokes and questionable decisions turned into one competitive and hilarious game. We couldn't have planned a better farewell." },
     ],
   },
 

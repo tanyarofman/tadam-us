@@ -21,9 +21,10 @@ PR #54 was merged and published on November 25: Basic/VIP packages, custom hosts
 revised copy, demo cards, testimonials, navigation and scroll effects. PR #61
 prepares the November 26 follow-up: Basic $99 / VIP $149, and Ilan's supplied
 customer quotes and portraits for Elizabeth W., Noah H. and Susan O. The customer
-testimonials replace the fictional samples and have text-only Service review
-schema matching the visible cards. No ratings are invented, and this markup is
-not eligible for Google's review-star rich results. Details:
+testimonials replace the fictional samples and include the supplied 5/5 ratings,
+review dates and publication permission. Game review schema describes the actual
+Tadam trivia game and matches the visible cards and 5/5 average across these three
+reviews. Game is supported for Google review snippets; display is not guaranteed. Details:
 `../history/2026-11-26-pricing-and-testimonials.md`. The historical live-site checks
 below predate these updates; `/create` remains the existing coming-soon page.
 

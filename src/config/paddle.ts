@@ -8,7 +8,10 @@
  * - tadamevents.com is approved for checkout; default payment link https://tadamevents.com/create
  * - Products: "Tadam! Basic game" (pro_01m8bgj9fv6exae3vk09mq5wwg), "Tadam! VIP game" (pro_01m8bgjtq9ant473hng71veqmh),
  *   tax category "Standard digital goods", one-time prices in USD (Paddle converts other currencies at checkout).
- * When the live account is approved, add its token and price IDs under `live` and switch `environment`.
+ * Live account (vendors.paddle.com, seller 484499, created as Velonova; legal name to be changed to Tanya Rofman):
+ * products created 2026-11-26 with the same names, tax category and one-time USD prices:
+ * "Tadam! Basic game" (pro_01m8by800afwep4hcd02fsmrj9), "Tadam! VIP game" (pro_01m8by8fq6706f4r1p38de2rjw).
+ * Still needed before switching `environment`: verification, tadamevents.com website approval, a live client-side token.
  */
 
 export type PaddleEnvironment = "sandbox" | "production";
@@ -26,7 +29,10 @@ export const PADDLE = {
   },
   live: {
     clientToken: "",
-    prices: { basic: "", vip: "" },
+    prices: {
+      basic: "pri_01m8by9ch4gja0q23j26jx3yna",
+      vip: "pri_01m8byaf1safm15kd58hwaqwvq",
+    },
   },
 };
 

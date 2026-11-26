@@ -433,17 +433,36 @@ function init(root: HTMLElement, data: Data) {
       }
     };
     if (!state.photos[id] && Object.keys(state.photos).length >= data.material.maxPhotos) return fail(c.stories.photoMax);
-    void createImageBitmap(f).then(
-      (bmp) => {
-        bmp.close();
-        photoFiles.set(id, { file: f, url: URL.createObjectURL(f) });
-        state.photos[id] = f.name;
+    void readablePhoto(f, () => fail(c.stories.photoConverting)).then(
+      (file) => {
+        photoFiles.set(id, { file, url: URL.createObjectURL(file) });
+        state.photos[id] = file.name;
         renderStories();
         save();
       },
       () => fail(c.stories.photosBad),
     );
   });
+  /**
+   * A photo the browser can draw. iPhone photos are often HEIC, which only Safari opens: those are converted to JPG
+   * in the browser first (the converter, about 1 MB, is downloaded only when such a photo is picked).
+   */
+  async function readablePhoto(f: File, onConverting: () => void): Promise<File> {
+    try {
+      (await createImageBitmap(f)).close();
+      return f;
+    } catch {
+      /* not drawable here: maybe HEIC */
+    }
+    const looksHeic = /^image\/hei[cf]/i.test(f.type) || /\.hei[cf]$/i.test(f.name);
+    const { heicTo, isHeic } = await import("heic-to");
+    if (!looksHeic && !(await isHeic(f))) throw new Error("unreadable");
+    onConverting();
+    const jpg = await heicTo({ blob: f, type: "image/jpeg", quality: 0.85 });
+    const file = new File([jpg], f.name.replace(/\.[^.]*$/, "") + ".jpg", { type: "image/jpeg" });
+    (await createImageBitmap(file)).close();
+    return file;
+  }
   promptsEl.addEventListener("click", (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>("[data-attach-remove]");
     if (!b) return;
@@ -743,9 +762,11 @@ function init(root: HTMLElement, data: Data) {
       cv.height = Math.round(bmp.height * k);
       cv.getContext("2d")!.drawImage(bmp, 0, 0, cv.width, cv.height);
       const blob = await new Promise<Blob | null>((res) => cv.toBlob(res, "image/jpeg", 0.82));
-      return blob && blob.size < file.size ? blob : file;
+      // The server accepts only JPEG, PNG, WebP and GIF: keep the original only if it is one of those and smaller.
+      const keep = /^image\/(jpeg|png|webp|gif)$/.test(file.type) && (!blob || file.size <= blob.size);
+      return keep || !blob ? file : blob;
     } catch {
-      return file; // a format the browser cannot draw: send it as it is
+      return file;
     }
   }
   let sending = false;

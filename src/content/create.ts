@@ -258,6 +258,7 @@ export const CREATE = {
     photoRemove: "Remove the photo",
     photoMax: "You can attach up to 5 photos in total.",
     photosBad: "We could not open this photo. Try a JPG or PNG.",
+    photoConverting: "Preparing your photo...",
   },
 
   more: {

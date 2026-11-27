@@ -1,63 +1,337 @@
 ---
 /**
- * The site's own 404 page. Without it, `astro preview` shows Astro's built-in fallback (a <pre> with the full
- * path that overflows phones) and Netlify shows its generic page. Netlify serves dist/404.html for unknown URLs.
+ * The site's own 404 page. Netlify serves dist/404.html for unknown URLs.
+ * It is a tiny round of the game: "Question 404" with four answers and a countdown, then the main goal of the page,
+ * the "Create my game" button into the creation flow (CREATE_URL), with the price, refund window and real reviews
+ * next to it so a lost visitor can buy from here. Without JavaScript the answers do nothing and the CTA still works.
  */
 import Base from "../layouts/Base.astro";
 import Footer from "../components/Footer.astro";
 import { useCopy } from "../content/copy";
-const { copy: COPY, home } = useCopy(Astro.url);
+import { CREATE_URL, PRICING, money } from "../config/pricing";
+import { demoUrl } from "../config/site";
+const { copy: COPY, home, locale } = useCopy(Astro.url);
+
+const answers = [
+  { letter: "A", text: "It went to get snacks" },
+  { letter: "B", text: "It's hiding from the host" },
+  { letter: "C", text: "The link has a typo" },
+  { letter: "D", text: "It's busy becoming your game show", correct: true },
+];
+
+const reviews = COPY.testimonials.items;
+const avg = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
+const avgLabel = Number.isInteger(avg) ? String(avg) : avg.toFixed(1);
 ---
 
-<Base title={`Page Not Found | ${COPY.brand}`} description="This page doesn't exist. Head back to the Tadam! home page or read the blog." noindex>
-  <main class="container not-found">
-    <a href={home} class="not-found-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" /></a>
-    <h1 class="display not-found-title">Oops, wrong answer!</h1>
-    <p>We couldn't find this page. It may have moved, or the link may have a typo.</p>
-    <div class="not-found-actions">
-      <a class="btn btn-buzzer" href={home}>Back to the home page</a>
-      <a class="not-found-link" href="/blog/">Read the blog</a>
+<Base title={`Page Not Found | ${COPY.brand}`} description="This page doesn't exist. Create your own Tadam! game show or head back to the home page." noindex>
+  <main class="container nf">
+    <a href={home} class="nf-logo"><img src="/brand/tadam-logo-en.webp" alt={COPY.brand} width="1000" height="394" /></a>
+
+    <div class="nf-grid">
+      <section class="nf-quiz" data-quiz aria-labelledby="nf-title">
+        <p class="nf-chip"><span>Question</span> <strong>404</strong></p>
+        <h1 id="nf-title" class="display nf-title">Where did this page go?</h1>
+        <div class="nf-timer" aria-hidden="true"><span data-timer></span></div>
+        <ul class="nf-answers" role="list">
+          {answers.map((a) => (
+            <li>
+              <button type="button" class="nf-answer" data-answer data-correct={a.correct ? "" : undefined}>
+                <span class="nf-letter" aria-hidden="true">{a.letter}</span>
+                <span class="nf-text">{a.text}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <p class="nf-result" data-result aria-live="polite"></p>
+        <span class="nf-points" data-points aria-hidden="true">+1,000</span>
+      </section>
+
+      <section class="nf-cta" data-cta aria-labelledby="nf-cta-title">
+        <h2 id="nf-cta-title" class="display nf-cta-title">Make the next question about <em>your</em> people.</h2>
+        <p class="nf-cta-sub">Your stories, photos and inside jokes become a live trivia game show, with a host on the big screen and every guest playing from their phone.</p>
+        <a class="btn btn-buzzer nf-cta-btn" href={CREATE_URL} data-track="cta_create_click" data-source="404">
+          <span class="btn-dot" aria-hidden="true"></span>
+          Create my game
+        </a>
+        <ul class="nf-assure" role="list">
+          <li>From {money(PRICING.base)}, one-time payment</li>
+          <li>Full refund within {PRICING.refundDays} days</li>
+          <li>Game link in {PRICING.deliveryHours} hours</li>
+        </ul>
+        <div class="nf-proof">
+          <div class="nf-faces" aria-hidden="true">
+            {reviews.map((r) => <img src={r.image} alt="" width="44" height="44" loading="lazy" />)}
+          </div>
+          <p><span class="nf-stars" aria-hidden="true">★★★★★</span> Rated {avgLabel}/5 by our customers</p>
+        </div>
+        <p class="nf-more">
+          <a href={demoUrl(locale)} target="_blank" rel="noopener" data-track="demo_open_big_screen" data-source="404">Play a live demo first</a>
+          <span aria-hidden="true">·</span>
+          <a href={home}>Home page</a>
+          <span aria-hidden="true">·</span>
+          <a href="/blog/">Blog</a>
+        </p>
+      </section>
     </div>
   </main>
   <Footer />
 </Base>
 
+<script>
+  const quiz = document.querySelector<HTMLElement>("[data-quiz]");
+  const cta = document.querySelector<HTMLElement>("[data-cta]");
+  if (quiz && cta) {
+    const buttons = [...quiz.querySelectorAll<HTMLButtonElement>("[data-answer]")];
+    const result = quiz.querySelector<HTMLElement>("[data-result]")!;
+    const timer = quiz.querySelector<HTMLElement>("[data-timer]")!;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let done = false;
+
+    const reveal = (picked: HTMLButtonElement | null) => {
+      if (done) return;
+      done = true;
+      quiz.classList.add("is-revealed");
+      const right = picked?.hasAttribute("data-correct") ?? false;
+      for (const b of buttons) {
+        b.disabled = true;
+        if (b.hasAttribute("data-correct")) b.classList.add("is-correct");
+        else if (b === picked) b.classList.add("is-wrong");
+      }
+      if (right) quiz.classList.add("is-right");
+      result.textContent = right
+        ? "Correct! +1,000 points. Now let's build the real thing."
+        : picked
+          ? "So close! The answer is D. Your game show is one click away."
+          : "Time's up! The answer is D. Your game show is one click away.";
+      cta.classList.add("is-lit");
+      if (!reduce && matchMedia("(max-width: 900px)").matches) {
+        setTimeout(() => cta.scrollIntoView({ behavior: "smooth", block: "center" }), 900);
+      }
+    };
+
+    for (const b of buttons) b.addEventListener("click", () => reveal(b));
+    if (!reduce) {
+      quiz.classList.add("is-timed");
+      timer.addEventListener("animationend", () => reveal(null), { once: true });
+    }
+  }
+</script>
+
 <style>
-  .not-found {
-    max-width: 780px;
+  .nf {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vh, 32px);
+    padding-block: 40px 80px;
+    min-height: 80vh;
+  }
+  .nf-logo img { width: 130px; height: auto; }
+
+  .nf-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+
+  /* ---------- The question ---------- */
+  .nf-quiz { position: relative; display: flex; flex-direction: column; gap: 18px; }
+  .nf-chip {
+    align-self: flex-start;
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+    padding: 6px 16px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nf-chip strong { color: var(--game-yellow); font-size: 1.5rem; }
+  .nf-title {
+    font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+    line-height: 1.05;
+    color: var(--game-yellow);
+    text-shadow: 0 4px 0 var(--purple-ink);
+    text-wrap: balance;
+  }
+  .nf-timer {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    visibility: hidden;
+  }
+  .nf-timer span {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--answer-wrong), var(--game-yellow) 35%);
+    transform-origin: left;
+  }
+  .is-timed .nf-timer { visibility: visible; }
+  .is-timed .nf-timer span { animation: nf-countdown 20s linear forwards; }
+  .is-revealed .nf-timer span { animation-play-state: paused; }
+  @keyframes nf-countdown { to { transform: scaleX(0); } }
+
+  .nf-answers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .nf-answer {
+    width: 100%;
+    height: 100%;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px 10px 10px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--pill-white);
+    color: var(--pill-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.1;
+    text-align: start;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 10, 80, 0.4);
+    transition: transform 0.15s var(--ease-out), background 0.25s, opacity 0.3s, box-shadow 0.25s;
+  }
+  .nf-answer:hover:not(:disabled) { transform: translateY(-3px); background: #fffbe0; }
+  .nf-answer:active:not(:disabled) { transform: translateY(1px) scale(0.98); }
+  .nf-letter {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--stage-blue);
+    color: var(--white);
+    font-size: 1.4rem;
+  }
+  .nf-answer:disabled { cursor: default; }
+  .is-revealed .nf-answer:not(.is-correct):not(.is-wrong) { opacity: 0.45; }
+  .nf-answer.is-correct {
+    background: var(--answer-correct);
+    color: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.85), 0 10px 30px rgba(52, 199, 89, 0.5);
+    animation: nf-pop 0.5s var(--ease-out);
+  }
+  .nf-answer.is-correct .nf-letter { background: var(--white); color: #1d8a3c; }
+  .nf-answer.is-wrong { background: var(--answer-wrong); color: var(--pill-ink); animation: nf-shake 0.4s; }
+  @keyframes nf-pop { 40% { transform: scale(1.06); } }
+  @keyframes nf-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+  .nf-result {
+    min-height: 1.6em;
+    font-family: var(--font-display);
+    font-size: var(--fs-lead);
+    color: var(--white);
+  }
+  .nf-points {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--answer-correct);
+    text-shadow: 0 3px 0 var(--stage-navy);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .is-right .nf-points { animation: nf-points 1.6s var(--ease-out) forwards; }
+  @keyframes nf-points {
+    0% { opacity: 0; transform: translateY(20px) scale(0.6); }
+    25% { opacity: 1; transform: translateY(0) scale(1.1); }
+    70% { opacity: 1; transform: translateY(-10px) scale(1); }
+    100% { opacity: 0; transform: translateY(-30px); }
+  }
+
+  /* ---------- The offer ---------- */
+  .nf-cta {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 22px;
-    min-height: 70vh;
-    padding-block: 56px 72px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
+    gap: 18px;
+    padding: clamp(24px, 3.5vw, 40px);
+    border-radius: var(--radius-m);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22) inset, 0 24px 60px rgba(0, 8, 60, 0.45);
+    transition: box-shadow 0.4s, transform 0.4s var(--ease-out);
   }
-  .not-found p {
+  .nf-cta.is-lit {
+    box-shadow: 0 0 0 3px var(--game-yellow) inset, 0 24px 70px rgba(255, 230, 0, 0.25);
+  }
+  .nf-cta.is-lit .nf-cta-btn { animation: nf-pulse 1.4s ease-in-out 3; }
+  @keyframes nf-pulse { 50% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(255, 230, 0, 0.25), 0 6px 22px rgba(0, 10, 80, 0.45); } }
+
+  .nf-cta-title {
+    font-size: clamp(2rem, 3.8vw, 2.9rem);
+    line-height: 1.08;
+    color: var(--white);
+    text-wrap: balance;
+  }
+  .nf-cta-title em { font-style: normal; color: var(--game-yellow); }
+  .nf-cta-sub { line-height: 1.55; opacity: 0.92; }
+  .nf-cta-btn { min-height: 64px; padding-inline: 40px; font-size: clamp(1.5rem, 3vw, 1.8rem); }
+  .nf-assure {
+    list-style: none;
     margin: 0;
-  }
-  .not-found-logo img {
-    width: 150px;
-    max-width: 100%;
-    height: auto;
-  }
-  .not-found-title {
-    margin: 8px 0 0;
-    font-size: clamp(2.2rem, 6vw, 3.6rem);
-    color: var(--game-yellow);
-    text-shadow: 0 4px 0 var(--purple-ink);
-  }
-  .not-found-actions {
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 16px 24px;
-    margin-top: 12px;
+    gap: 6px 18px;
+    font-size: var(--fs-small);
   }
-  .not-found-link {
+  .nf-assure li::before { content: "✓"; margin-inline-end: 6px; color: var(--answer-correct); font-weight: 700; }
+  .nf-proof { display: flex; align-items: center; gap: 12px; font-size: var(--fs-small); }
+  .nf-faces { display: flex; }
+  .nf-faces img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--stage-blue);
+  }
+  .nf-faces img + img { margin-inline-start: -12px; }
+  .nf-stars { color: var(--game-yellow); letter-spacing: 1px; margin-inline-end: 4px; }
+  .nf-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-size: var(--fs-small);
+  }
+  .nf-more a {
     color: var(--white);
     text-decoration-color: var(--game-yellow);
     text-underline-offset: 4px;
+  }
+  .nf-more a:first-child { font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .nf-grid { grid-template-columns: 1fr; }
+    .nf { padding-top: 28px; }
+  }
+  @media (max-width: 560px) {
+    .nf-answer { font-size: 1.1rem; min-height: 58px; padding-inline-end: 12px; gap: 8px; }
+    .nf-letter { width: 34px; height: 34px; font-size: 1.15rem; }
+    .nf-cta-btn { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nf-answer, .nf-cta, .nf-cta-btn { animation: none !important; transition: none; }
+    .is-right .nf-points { animation: none; }
   }
 </style>

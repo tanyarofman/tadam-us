@@ -76,6 +76,18 @@
 # Request each demo's generated HTML explicitly. Base44's extensionless routes
 # return its Hebrew SPA shell, flashing that title before the game JavaScript loads.
 [[redirects]]
+  from = "/fauda-demo"
+  to = "https://heytadam.com/fauda-demo"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/fauda-demo/"
+  to = "https://heytadam.com/fauda-demo"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/cellcom-demo"
   to = "https://heytadam.com/cellcom-demo"
   status = 302

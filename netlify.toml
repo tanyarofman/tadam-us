@@ -23,6 +23,18 @@
 
 # The site used to have an English copy under /en/; it is English-only at the root now.
 [[redirects]]
+  from = "/eretz-nehederet-demo"
+  to = "https://heytadam.com/eretz-nehederet-demo"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/eretz-nehederet-demo/"
+  to = "https://heytadam.com/eretz-nehederet-demo"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/en"
   to = "/"
   status = 301

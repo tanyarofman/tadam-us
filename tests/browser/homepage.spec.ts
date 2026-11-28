@@ -38,8 +38,10 @@ test('header and footer anchors open the full steps and both packages', async ({
   await expect(page.getByRole('article', { name: 'VIP' })).toContainText('$149');
   for (const card of await page.locator('.package').all()) await expect(card).toHaveAttribute('href', '/create');
   await page.getByRole('link', { name: 'Start Now with Basic' }).locator('.price-num').click();
-  await expect(page).toHaveURL(/\/create\/?$/);
+  await expect(page).toHaveURL(/\/create\/?(?:#.*)?$/);
   // Also cover links arriving from a secondary page, after delayed scene initialization.
+  // The creation wizard has its own navigation; legal pages retain the site footer.
+  await page.goto('/refunds');
   await page.locator('.site-footer').getByRole('link', { name: /How it works/i }).click();
   await ready(page);
   await arrived(page, '#scene-4');

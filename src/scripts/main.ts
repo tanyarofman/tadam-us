@@ -68,17 +68,21 @@ function boot() {
   const pause = (id: string) => holds.then((m) => ({
     init: (options: { reduced: boolean }) => m.init(id, options),
   }));
+  const cards = import("./card-sequence");
+  const sequence = (id: string) => cards.then((m) => ({
+    init: (options: { reduced: boolean }) => m.init(id, options),
+  }));
   const loading = Promise.all([
-    pause("demos"),
+    sequence("demos"),
     import("./scenes/scene3"),
     import("./scenes/scene4"),
     import("./scenes/scene6"),
     pause("hosts"),
-    pause("pricing"),
+    sequence("pricing"),
     pause("scene-7"),
     import("./scenes/scene7"),
     pause("faq"),
-    import("./testimonials"),
+    sequence("testimonials"),
     pause("closing"),
   ]);
   let scenes: Promise<void> | undefined;

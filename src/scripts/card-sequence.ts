@@ -3,17 +3,23 @@ import { mobileSceneQuery, sceneScroll } from "./scene-scroll";
 import { init as initHold } from "./section-holds";
 import { registerSectionReveal } from "./section-navigation";
 
-/** On phones, each review gets the same stage before the next one replaces it. */
-export function init({ reduced }: { reduced: boolean }) {
+/** On phones, cards share a sticky stage and replace one another as you scroll. */
+export function init(id: string, { reduced }: { reduced: boolean }) {
   if (reduced) return;
-  const section = document.getElementById("testimonials");
-  const pin = section?.querySelector<HTMLElement>(".testimonials-pin");
-  const cards = section?.querySelectorAll<HTMLElement>(".testimonial");
+  const section = document.getElementById(id);
+  const pin = section?.querySelector<HTMLElement>("[data-scroll-pause]");
+  const cards = section?.querySelectorAll<HTMLElement>("[data-sequence-card]");
   if (!section || !pin || !cards?.length) return;
 
   const mm = gsap.matchMedia();
   // Direct section links retain the complete reading layout, like How it works.
-  registerSectionReveal(section.id, () => mm.revert());
+  let revealed = false;
+  registerSectionReveal(section.id, () => {
+    if (revealed) return;
+    revealed = true;
+    mm.revert();
+    initHold(section.id, { reduced });
+  });
   mm.add({ mobile: mobileSceneQuery, all: "all" }, (context) => {
     if (!context.conditions?.mobile) return initHold(section.id, { reduced });
 
@@ -22,7 +28,7 @@ export function init({ reduced }: { reduced: boolean }) {
     gsap.set(cards[0], { autoAlpha: 1, rotateY: 0 });
 
     const timeline = gsap.timeline({
-      scrollTrigger: sceneScroll(section, pin, true, 2.6, 0.18),
+      scrollTrigger: sceneScroll(section, pin, true, cards.length === 2 ? 1.8 : 2.6, 0.18),
     });
     cards.forEach((card, index) => {
       if (index > 0) {
@@ -30,7 +36,7 @@ export function init({ reduced }: { reduced: boolean }) {
           .to(cards[index - 1], { autoAlpha: 0, scale: 0.9, y: -20, duration: 0.35, ease: "power1.in" })
           .to(card, { autoAlpha: 1, rotateY: 0, duration: 0.6, ease: "back.out(1.2)" }, "<0.15");
       }
-      // A reading pause for every quote, including the last one before release.
+      // A reading pause for every card, including the last one before release.
       timeline.to({}, { duration: 1.2 });
     });
 

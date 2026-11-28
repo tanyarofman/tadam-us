@@ -47,6 +47,11 @@ Production deployments resumed after the earlier Netlify credit block. The
 Netlify dashboard confirms main@4963084 (PR #68, including the earlier homepage
 updates) was published on November 26.
 
+On November 28, Ilan requested the same mobile scroll replacement for the live
+demo and pricing cards, plus vertically centered testimonials, and authorized
+production release. Review content and schema are unchanged. Details:
+`../history/2026-11-28-mobile-card-sequences.md`.
+
 ## Paddle review status (checked on the live site, 2026-11-24)
 - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.
 - **Website requirements 1 to 11 pass:** product description, $99 price, `/terms` (Paddle as merchant of record), `/privacy`, `/refunds` (14 days), the legal name in the footer and on the legal pages with no country or address, email contact only, self-serve wording in the site and the blog, invented hosts.

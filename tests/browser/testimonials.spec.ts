@@ -36,6 +36,11 @@ test('mobile reviews replace each other while pinned, reverse and release', asyn
   await expect(page.locator('#testimonials')).toHaveClass(/is-replacing/);
   await scrollReview(page, 0.1);
   await reviewIsActive(page, 0);
+  const centerOffset = await page.locator('.testimonials-pin > .container').evaluate(el => {
+    const box = el.getBoundingClientRect();
+    return Math.abs(box.top + box.height / 2 - innerHeight / 2);
+  });
+  expect(centerOffset).toBeLessThan(2);
   const top = (await page.locator('.testimonials-pin').boundingBox())!.y;
   await scrollReview(page, 0.5);
   await reviewIsActive(page, 1);

@@ -51,6 +51,9 @@ On November 28, Ilan requested the same mobile scroll replacement for the live
 demo and pricing cards, plus vertically centered testimonials, and authorized
 production release. Review content and schema are unchanged. Details:
 `../history/2026-11-28-mobile-card-sequences.md`.
+The follow-up demo image fix makes the artwork fill its card in mobile Safari
+when the image height is capped. Details:
+`../history/2026-11-28-demo-image-fill.md`.
 
 ## Paddle review status (checked on the live site, 2026-11-24)
 - **Not submitted to Paddle yet.** There is no record of a sandbox or live account, or of a domain submission.

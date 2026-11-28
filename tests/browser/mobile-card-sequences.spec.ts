@@ -56,7 +56,7 @@ test('small phones and landscape show the full demo or package including its CTA
   test.skip(!isMobile, 'Small mobile layouts');
   await page.setViewportSize({ width: 320, height: 568 });
   await ready(page);
-  for (const size of [{ width: 320, height: 568 }, { width: 844, height: 390 }]) {
+  for (const size of [{ width: 320, height: 568 }, { width: 375, height: 650 }, { width: 844, height: 390 }]) {
     await page.setViewportSize(size);
     // Allow ScrollTrigger's debounced resize to update the preceding scenes.
     await expect.poll(() => page.locator('#demos > [data-scroll-pause]').evaluate(el => el.clientHeight)).toBeLessThan(size.height + 10);
@@ -64,6 +64,16 @@ test('small phones and landscape show the full demo or package including its CTA
       for (const [index, progress] of stops.entries()) {
         await scrollCard(page, id, progress);
         await activeCard(page, id, selector, index);
+        if (id === 'demos') {
+          const media = await page.locator('.demo-card').nth(index).evaluate(card => {
+            const photo = card.querySelector('.demo-photo') as HTMLElement;
+            const image = photo.querySelector('img')!;
+            return { card: card.clientWidth, photo: photo.clientWidth, image: image.clientWidth, photoHeight: photo.clientHeight, imageHeight: image.clientHeight };
+          });
+          expect(Math.abs(media.photo - (size.width < size.height ? media.card : media.card / 2))).toBeLessThan(2);
+          expect(Math.abs(media.image - media.photo)).toBeLessThan(2);
+          expect(Math.abs(media.imageHeight - media.photoHeight)).toBeLessThan(2);
+        }
       }
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
